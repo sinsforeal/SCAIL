@@ -1,0 +1,37 @@
+# tools\retrievals_test.py  (314 lines)
+
+DOCSTRING:
+One fetch about the world, claimed once and read by both characters.
+
+    python tools/retrievals_test.py --store   # the store alone: no App, no save, no call
+    python tools/retrievals_test.py           # and both characters, built on copies
+
+`--store` is what `tools/smoke.py` runs: it builds a store in a temp file and
+checks the thing the whole design rests on -- that a second asker gets the row
+the first one paid for, that two askers at the same moment produce one fetch,
+and that a fetch which found nothing leaves neither a row nor a claim.
+
+The whole run also builds the two characters on COPIES of their saves, with
+`sensors.retrievals_db` pointed at a temp file, and checks that a page one of
+them stores is read by the other without a fetch, and that the one-off pass
+that hands the machine what each save already holds did its work. Every model
+call on those Apps is refused (`harness.refuse_model`), so nothing here spends.
+
+DEFS:
+def check(ok, what, detail): 
+class Counter: A fetch that says how many times it actually ran.
+    __init__(text, delay, answer): 
+    __call__(): 
+def store_checks(tmp): 
+def temp_config(src, tmp, retrievals_db): A copy of a character's config with the machine's store pointed at a temp file, so a test never writes into the live one.
+def app_checks(tmp): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: recaps_shared_once
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

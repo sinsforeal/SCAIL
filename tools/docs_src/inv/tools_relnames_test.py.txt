@@ -1,0 +1,31 @@
+# tools\relnames_test.py  (146 lines)
+
+DOCSTRING:
+The state model's relationship moves land on the right person, whatever
+name it wrote them under.
+
+The state role is shown the exchange it has just read, and in that transcript
+everybody is named as the record names them (香芝玲奈, 古賀海斗). It keys its
+relationship deltas the same way. Her meters are keyed by the roster handle
+(`Rena-chan`, `Kaito`), and `State._match_person` used to resolve a name by
+lowercasing it and stripping `-chan`, which matched the handle and nothing
+else. Every move under a Japanese name was dropped with no log line.
+
+This runs against a copy of the live save and the real `data/cast.json`, so
+the names it tries are the names the model actually sees.
+
+    python tools/relnames_test.py
+
+DEFS:
+def old_match(relationships, name): What `_match_person` did before 2026-09-01, kept here so the test says what it is guarding against rather than only that it passes.
+def every_name(cast): Every string the record could call each person by, from the data: the roster key, the Japanese name, the reading, the display name, the explicit aliases, and what everyone else's `calls` entries use.
+def main(): 
+
+CONFIG SECTIONS: character.cast_file, state.relationship_daily_budget
+KV READ: 
+KV WRITE: rel_delta_spent
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

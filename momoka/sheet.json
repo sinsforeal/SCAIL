@@ -1,0 +1,118 @@
+{
+  "identity": {
+    "name": "百花",
+    "full": "千代田百花",
+    "lastname": "千代田",
+    "id": "MOMOKA",
+    "vcid": "MMK",
+    "buid": "CD",
+    "route": "d",
+    "route_character": "百花",
+    "route_breakdown": {"common": 11, "d": 27, "other": 32},
+    "scene_count": 70,
+    "line_count": 2781,
+    "spoken_count": 2570,
+    "inner_count": 211,
+    "self_reference": {"spoken_百花_lines": 526, "spoken_百花_occurrences": 553, "spoken_私_lines": 1, "inner_百花_lines": 29},
+    "how_she_is_addressed_by_others": {"百花": 203, "百花ちゃん": 82, "千代田さん": 28, "千代田": 27, "千代田百花": 1}
+  },
+  "drivers": {
+    "note": "The recurring moves that carry no @emotion/@face/@action (bible.mechanisms, B3 reading; counts mechanical).",
+    "firm": [
+      {"key": "offers_herself_as_the_actor", "name": "Offers herself as the one who does it", "lines": 64, "share_of_spoken": 0.0249, "lines_non_H": 46, "lines_H": 18, "control_rate": 0.0008, "distinctive": true, "receipts": ["02_01:0440", "02_01:5008", "02_01:5545"]},
+      {"key": "doubles_a_key_word", "name": "Doubles a key word or phrase as a beat", "lines": 100, "share_of_spoken": 0.0389, "lines_non_H": 53, "lines_H": 47, "control_rate": 0.0295, "distinctive": true, "receipts": ["02_01:1390", "02_01:5625", "03_01:0963"]},
+      {"key": "performs_a_sound_effect", "name": "Performs a sound effect as an action beat", "lines": 86, "share_of_spoken": 0.0335, "lines_non_H": 45, "lines_H": 41, "control_rate": 0.0022, "distinctive": true, "receipts": ["03_01:0936", "03_01:2166", "03_01:2994"]},
+      {"key": "plays_a_role_with_stock_catchphrases", "name": "Plays a role with stock catchphrases", "lines": 45, "share_of_spoken": 0.0175, "lines_non_H": 44, "lines_H": 1, "control_rate": 0.0003, "distinctive": true, "receipts": ["02_01:0374", "03_01:1254", "03_01:2638"]},
+      {"key": "attributes_her_limits_to_her_body", "name": "Attributes a limit to her own body", "lines": 28, "share_of_spoken": 0.0109, "lines_non_H": 27, "lines_H": 1, "control_rate": 0.0006, "distinctive": true, "receipts": ["03_01:2298", "03_01:4018", "07_01:5261"]},
+      {"key": "labels_others_with_a_plain_noun", "name": "Labels another person with a plain noun verdict", "lines": 27, "share_of_spoken": 0.0105, "lines_non_H": 26, "lines_H": 1, "control_rate": 0.001, "distinctive": true, "receipts": ["01_01:3472", "01_01:3529", "03_01:1981"]},
+      {"key": "coins_a_label_or_level", "name": "Coins a label, level or title for the situation", "lines": 18, "share_of_spoken": 0.007, "lines_non_H": 18, "lines_H": 0, "control_rate": 0.0006, "distinctive": true, "receipts": ["04_01:0869", "09_01:6201", "09_01:6492"]},
+      {"key": "names_a_blow_with_a_loanword", "name": "Names a blow with a one-word loanword", "lines": 15, "share_of_spoken": 0.0058, "lines_non_H": 15, "lines_H": 0, "control_rate": 0.0006, "distinctive": true, "receipts": ["02_01:4946", "02_01:4952", "02_01:4966"]}
+    ],
+    "thin": [
+      {"key": "veils_it_as_a_secret", "name": "Veils something as a secret, playfully", "lines": 7, "share_of_spoken": 0.0027, "lines_non_H": 6, "lines_H": 1, "control_rate": 0.0, "distinctive": true, "receipts": ["03_01:2864", "06_01:5605", "b02_01:0698"]},
+      {"key": "bargains_with_a_reward", "name": "Frames a request as a trade or a reward", "lines": 11, "share_of_spoken": 0.0043, "lines_non_H": 7, "lines_H": 4, "control_rate": 0.0087, "distinctive": false, "receipts": ["02_01:0620", "04_01:2741", "06_01:3937"]}
+    ],
+    "weak_not_hers": [
+      {"key": "closes_a_turn_with_a_short_question", "lines": 182, "share_of_spoken": 0.0708, "control_rate": 0.0779, "gate_control_rate": 0.084, "distinctive": false},
+      {"key": "apologises_readily", "lines": 23, "share_of_spoken": 0.0089, "control_rate": 0.0102, "gate_control_rate": 0.0105, "distinctive": false},
+      {"key": "teases_in_a_mock_serious_register", "lines": 15, "share_of_spoken": 0.0058, "control_rate": 0.0041, "gate_control_rate": 0.0064, "distinctive": false},
+      {"key": "pivots_with_a_topic_marker", "lines": 5, "share_of_spoken": 0.0019, "control_rate": 0.0045, "gate_control_rate": 0.0057, "distinctive": false},
+      {"key": "hedges_with_kamo_kana", "lines": 20, "share_of_spoken": 0.0078, "control_rate": 0.0176, "gate_control_rate": 0.0197, "distinctive": false}
+    ],
+    "tier_split": {"firm": 8, "thin": 2, "weak": 5},
+    "distinctive_false": ["closes_a_turn_with_a_short_question", "apologises_readily", "teases_in_a_mock_serious_register", "pivots_with_a_topic_marker", "hedges_with_kamo_kana", "bargains_with_a_reward"]
+  },
+  "interaction_map": {
+    "note": "Per relationship: turns_total counts a speaker's whole presence; her_lines_to_them is her turn count aimed at them; exchange starts are counts. Empty address terms mean no name form is derivable, not that she is silent.",
+    "一悟": {"category": "protagonist", "turns_total": 15283, "turns_spoken": 5664, "turns_inner": 9619, "scenes_together": 69, "her_lines_to_them": 1707, "her_spoken_turns": 1707, "her_avg_turn_chars": 22.07, "exchange_her_starts": 11, "exchange_they_start": 362, "her_address_terms": {"一悟": 321}, "her_expression_mix": {"smile": 466, "sad": 125, "talk": 83, "worried": 77, "neutral": 47, "surprise": 28, "excited": 18, "laugh": 4}, "her_gesture_mix": {"@おじぎ": 145, "@否定": 67, "@ジャンプ": 41, "@キス": 18, "@キス止め": 16, "@ううっ": 14, "@居眠り横": 5, "@抱きつき": 1, "@居眠り縦": 1}},
+    "真優": {"category": "heroine", "turns_total": 2449, "turns_spoken": 2199, "turns_inner": 250, "scenes_together": 58, "her_lines_to_them": 200, "her_spoken_turns": 195, "her_avg_turn_chars": 19.45, "exchange_her_starts": 1, "exchange_they_start": 59, "her_address_terms": {"真優ちゃん": 58, "真優様": 1}, "her_expression_mix": {"smile": 79, "worried": 21, "talk": 17, "surprise": 12, "sad": 10, "neutral": 7, "excited": 6, "laugh": 3}, "her_gesture_mix": {"@おじぎ": 26, "@ジャンプ": 25, "@否定": 11, "@ううっ": 4, "@抱きつき": 2, "@息切れ": 1}},
+    "千奈": {"category": "heroine", "turns_total": 2601, "turns_spoken": 2201, "turns_inner": 400, "scenes_together": 58, "her_lines_to_them": 257, "her_spoken_turns": 218, "her_avg_turn_chars": 19.05, "exchange_her_starts": 0, "exchange_they_start": 96, "her_address_terms": {"千奈": 54}, "her_expression_mix": {"smile": 79, "worried": 59, "sad": 24, "talk": 19, "surprise": 7, "excited": 6, "neutral": 4}, "her_gesture_mix": {"@おじぎ": 41, "@ジャンプ": 13, "@否定": 13, "@ううっ": 8, "@身体眺め": 1}},
+    "真里亜": {"category": "heroine", "turns_total": 1028, "turns_spoken": 1028, "turns_inner": 0, "scenes_together": 61, "her_lines_to_them": 341, "her_spoken_turns": 308, "her_avg_turn_chars": 21.64, "exchange_her_starts": 3, "exchange_they_start": 30, "her_address_terms": {"真里亜": 50}, "her_expression_mix": {"smile": 123, "talk": 20, "worried": 20, "sad": 18, "neutral": 12, "surprise": 10, "laugh": 3, "excited": 2}, "her_gesture_mix": {"@おじぎ": 39, "@ジャンプ": 11, "@否定": 6, "@ううっ": 1, "@居眠り縦": 1}},
+    "アリス": {"category": "heroine", "turns_total": 1572, "turns_spoken": 1533, "turns_inner": 39, "scenes_together": 48, "her_lines_to_them": 78, "her_spoken_turns": 78, "her_avg_turn_chars": 20.67, "exchange_her_starts": 1, "exchange_they_start": 108, "her_address_terms": {"アリス": 10}, "her_expression_mix": {"smile": 29, "worried": 10, "talk": 9, "sad": 4, "laugh": 2, "neutral": 2}, "her_gesture_mix": {"@おじぎ": 12, "@ジャンプ": 5, "@否定": 2}},
+    "知紗": {"category": "heroine", "turns_total": 345, "turns_spoken": 345, "turns_inner": 0, "scenes_together": 32, "her_lines_to_them": 31, "her_spoken_turns": 24, "her_avg_turn_chars": 15.0, "exchange_her_starts": 0, "exchange_they_start": 2, "her_address_terms": {"知紗": 5}, "her_expression_mix": {"smile": 9, "worried": 1}, "her_gesture_mix": {"@おじぎ": 4, "@否定": 1}},
+    "ひかる": {"category": "heroine", "turns_total": 389, "turns_spoken": 389, "turns_inner": 0, "scenes_together": 34, "her_lines_to_them": 3, "her_spoken_turns": 3, "her_avg_turn_chars": 14.33, "exchange_her_starts": 0, "exchange_they_start": 10, "her_address_terms": {}, "her_expression_mix": {"smile": 3}, "her_gesture_mix": {}},
+    "ケルベロス": {"category": "heroine", "turns_total": 132, "turns_spoken": 132, "turns_inner": 0, "scenes_together": 29, "her_lines_to_them": 4, "her_spoken_turns": 4, "her_avg_turn_chars": 14.25, "exchange_her_starts": 0, "exchange_they_start": 6, "her_address_terms": {"ケル": 1, "ケルベロス": 1}, "her_expression_mix": {"smile": 2, "surprise": 1}, "her_gesture_mix": {"@ジャンプ": 1}},
+    "一年生女子": {"category": "npc", "turns_total": 8, "scenes_together": 3, "her_lines_to_them": 4, "her_spoken_turns": 2, "her_address_terms": {}, "her_expression_mix": {"smile": 2}, "her_gesture_mix": {"@おじぎ": 1, "@ジャンプ": 1}},
+    "演劇部部員Ｂ": {"category": "npc", "turns_total": 2, "scenes_together": 1, "her_lines_to_them": 3, "her_spoken_turns": 3, "her_address_terms": {}, "her_expression_mix": {"smile": 3}, "her_gesture_mix": {}},
+    "npc_no_address_terms": {"names": ["テニス部部員", "天文部部員", "弱小部女子生徒Ａ", "弱小部女子生徒Ｂ", "文化祭実行委員", "新聞部部長", "映画研究部部長", "案内アナウンス", "演劇部部員Ａ", "演劇部部員Ｃ", "三年生女子", "事務所の社長さん", "見知らぬ女性Ａ", "見知らぬ女性Ｂ", "野村先生", "野球部部員", "芸能記者", "ＡＶ女優"], "note": "No name form derivable: not in charData.csv. She has no spoken line to most of them."},
+    "unison": ["真優＆千奈", "千奈＆アリス＆百花＆ひかる＆真里亜＆知紗", "百花＆真里亜", "真優＆千奈＆一悟"],
+    "reply_vs_initiation": {"reply": 1786, "initiation": 16, "self_continuation": 768, "reply_rate": 0.9911}
+  },
+  "expressions": {
+    "provenance_flag": "C4 hypotheses, vocabulary version 0.2, 8/16 classifiable agreed; never ground truth.",
+    "repertoire": {"smile": 807, "worried": 225, "sad": 192, "talk": 153, "neutral": 72, "surprise": 60, "excited": 32, "laugh": 13},
+    "by_register": {"non_H": {"lines": 1937, "with_expression": 1267, "expression_rate": 0.6541}, "H": {"lines": 844, "with_expression": 0, "expression_rate": 0.0}},
+    "triggers": {
+      "smile": {"lines": 716, "with": {"一悟": 408, "真里亜": 109, "千奈": 78}, "preceded_by": {"smile": 448, "worried": 76, "talk": 55}, "co_gesture": {"@おじぎ": 124, "@否定": 37, "@ジャンプ": 33}},
+      "worried": {"lines": 220, "with": {"一悟": 74, "千奈": 57, "百花": 37}, "co_gesture": {"@おじぎ": 20, "@ジャンプ": 11, "@否定": 11}},
+      "sad": {"lines": 190, "with": {"一悟": 123, "千奈": 24, "真里亜": 18}, "co_gesture": {"@おじぎ": 14, "@否定": 14, "@ううっ": 9}},
+      "talk": {"lines": 153, "with": {"一悟": 83, "真里亜": 20, "千奈": 19}},
+      "neutral": {"lines": 72, "with": {"一悟": 47, "真里亜": 12, "真優": 7}},
+      "surprise": {"lines": 60, "with": {"一悟": 28, "真優": 12, "真里亜": 10}, "co_gesture": {"@ジャンプ": 21}},
+      "excited": {"lines": 32, "with": {"一悟": 18, "千奈": 6, "真優": 6}},
+      "laugh": {"lines": 13, "with": {"一悟": 4, "真優": 3, "真里亜": 3}, "co_gesture": {"@ジャンプ": 8}}
+    }
+  },
+  "gestures": {
+    "repertoire": {"@おじぎ": 269, "@否定": 100, "@ジャンプ": 99, "@ううっ": 27, "@キス": 18, "@キス止め": 16, "@居眠り横": 5, "@抱きつき": 3, "@居眠り縦": 2, "@息切れ": 1, "@身体眺め": 1},
+    "by_register": {"non_H": {"lines": 1937, "with_gesture": 518, "gesture_rate": 0.2674}, "H": {"lines": 844, "with_gesture": 6, "gesture_rate": 0.0071}},
+    "house_convention": {"@おじぎ": {"corpus_calls": 1576, "hers": 269, "note": "the most common gesture corpus-wide; frequency is partly the house convention"}},
+    "triggers": {
+      "@おじぎ": {"lines": 269, "with": {"一悟": 145, "千奈": 41, "真里亜": 39}, "co_face": {"smile": 142, "worried": 21, "sad": 14}, "H": 2, "non_H": 267},
+      "@否定": {"lines": 100, "with": {"一悟": 67, "千奈": 13, "真優": 11}, "co_face": {"smile": 45, "sad": 14, "worried": 11}, "H": 0, "non_H": 100},
+      "@ジャンプ": {"lines": 99, "with": {"一悟": 41, "真優": 25, "千奈": 13}, "co_face": {"smile": 43, "surprise": 21, "worried": 11}, "H": 1, "non_H": 98},
+      "@ううっ": {"lines": 27, "with": {"一悟": 14, "千奈": 8, "真優": 4}, "co_face": {"smile": 13, "sad": 9}},
+      "@キス": {"lines": 9, "with": {"一悟": 9}, "route": "d", "H": 2, "non_H": 7},
+      "@キス止め": {"lines": 8, "with": {"一悟": 8}, "route": "d", "H": 1, "non_H": 7},
+      "@居眠り横": {"lines": 5, "with": {"一悟": 5}},
+      "@抱きつき": {"lines": 3, "with": {"真優": 2, "一悟": 1}},
+      "@居眠り縦": {"lines": 2, "with": {"一悟": 1, "真里亜": 1}}
+    },
+    "emotion_overlays": {"キラン": 5, "びっくり": 4, "ぽわぽわ": 4, "キラキラ": 3, "ピヨピヨF": 3, "はてな": 2, "ハート02": 2, "びっくりF": 1, "ハート01": 1},
+    "enter_exit": {"enter": 24, "exit": 1},
+    "camera": {"@focus": 7},
+    "action_commands": {"@char": 1542, "@action": 20, "@focus": 20, "@move": 9, "@stopAction": 3}
+  },
+  "type_class": {
+    "speech_guide_classes": {"hers": 17, "author": 4, "moment": 4},
+    "speech_guide_tiers": {"firm": 19, "thin": 6},
+    "speech_guide_registers": {"all": 8, "H": 1, "non-H": 8, "per-register": 8},
+    "speech_guide_evidence": {"measured": 22, "inferred": 3},
+    "mechanism_classes": {"hers": 15},
+    "mechanism_tiers": {"firm": 8, "thin": 2, "weak": 5},
+    "register_definition": "H = scenes carrying @Hシーン開始 / context.h_scene; 6 H scenes, 844 of her spoken lines; the rest (1726) are non-H.",
+    "moment_rules": ["kiss gestures only with 一悟, only on route d", "dozing almost always with 一悟", "H vocabulary only inside H scenes", "laugh rarely, usually while jumping"]
+  },
+  "bounds": {
+    "reply_vs_initiation": {"reply": 1786, "initiation": 16, "self_continuation": 768, "reply_rate": 0.9911},
+    "expression_vocabulary_never_on_her_lines": ["angry", "cry", "blush", "embarrassed", "serious", "shy", "other"],
+    "gesture_macros_never_hers": ["@なでなで", "@ひざまずき", "@主人公視点戻し", "@噴飯１", "@噴飯２", "@外から飛び出し"],
+    "npc_address_terms": "not derivable; NPCs are not in charData.csv and have no alias form",
+    "relationships_with_no_address_term": ["ひかる", "一年生女子", "演劇部部員Ｂ", "真優＆千奈＆一悟"],
+    "trigger_causality": "every trigger table is co-occurrence, not cause",
+    "h_register_faces": "none recorded",
+    "tokenizer": "class-based split on punctuation; particles matched by string suffix; n-grams are character n-grams",
+    "room_definition": "every other speaker in her scenes, named cast and NPCs together",
+    "not_in_the_record": ["family", "birthplace / origin", "birthday", "age", "height / physical description", "her own household as a file"]
+  }
+}

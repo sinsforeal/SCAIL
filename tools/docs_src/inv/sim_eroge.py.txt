@@ -1,0 +1,66 @@
+# sim\eroge.py  (263 lines)
+
+DOCSTRING:
+What he is reading in a visual novel, as one thing she knows about.
+
+The reader (`sensors/eroge_monitor.py`) hands over the Japanese lines his text
+hooker caught while he read them. This decides when to look, pays for one
+account of them, keeps the account and nothing else, and hands the words to
+each program's own table so that how she comes to know it is never said here.
+
+**The account is made on demand, at two moments, and never on a timer** (his
+call, 2026-09-04): when a message of his has arrived and her reply is about to
+be built, and when she has decided to write first and the reply is about to be
+built. Those are the only moments the answer is worth anything, and a game
+left open in the background between them costs nothing.
+
+**Three rules decide what it is written from**, all three his:
+
+  * the lines from where his current stretch of READING began -- a cursor, not
+    a timer. A pause of an hour does not move it. A skip run moves it past the
+    skipped lines, which are never summarised, because text he held the button
+    through is not text he read. The window overflowing past
+    `eroge.max_raw_chars` moves it too, which is also what catches a hooked
+    menu or a line storm;
+  * a floor of `eroge.min_new_lines` new lines before a call is worth making.
+    Under it the last account stands;
+  * one account of the stretch, and never the lines. **The raw text goes into
+    one call and is dropped.** Nothing in the record can be quoted back
+    afterwards, because nothing of it is kept: not in the save, not in a log.
+
+The account's own instruction is the content gate and there is no other. An
+explicit stretch comes out as one clause naming it as an intimate scene and
+nothing further -- which is the same compression the module applies to
+everything, applied where the compression happens to be total. That is a
+prompt (`prompts/eroge_digest.txt`), not a filter, and it is the only place
+the decision lives.
+
+store: kv `eroge_cursor` (where his reading began and how far it has got), kv
+`eroge_last` (the account, with what it was written from), kv `eroge_day` (the
+day's accounts, which the compile turns into one fact about him and then
+forgets). The game's CARD is not in her save at all: it is the same card
+whoever looks it up, so it is the machine's (`machine/retrievals.py`, kind
+`vn_card`) and one fetch serves both characters.
+
+spec: PROJECT.md §12.14
+
+DEFS:
+class Eroge: 
+    __init__(config, store, clock): 
+    playing(): The game in front of him this minute, or None.
+    look(reason): One account of what he has been reading, if there is one to make.  Called at the two moments a reply is about to be written. Returns the account it left standing, or None.
+    _ask(np, rl, reason): One call on the cheap model. The lines go in and are dropped: they are not written to the save, and the only place they are ever seen again is the model call log, which is the record of what was paid for.
+    current(): The account she is holding, while he is still in the game it is about. It is about what is in front of him; once he has stopped it is the day's record's business, not the situation's.
+    glance_lines(t): (text, kind, pin) for her situation, in her program's words.  Pinned, like the episode he is watching: what he is doing this minute and what is happening in it is not a line that competes for room.
+    _know_the_game(np): The card, once per game, under every name he might type: the title, the developer, and each of the cast with the reading he set.
+    _keep_for_the_day(row, np): The day's accounts, for the compile. The sitting's own bounds go with each one so the fact can say how long he was at it; the raw lines do not, because they are nowhere.
+def day_fact(store, date_str, max_chars): The day's reading as one fact about him, or "".  How long he was at it is the sittings' own bounds summed, not a count of accounts: an evening is several accounts of one sitting.
+
+CONFIG SECTIONS: character, eroge, eroge.card_max_chars, eroge.enabled, prompt_text
+KV READ: eroge_cursor, eroge_day, eroge_last
+KV WRITE: eroge_cursor, eroge_day, eroge_last
+TABLES: 
+LOG TAGS: eroge
+PROMPTS: eroge_digest
+LLM ROLES: eroge_digest
+OPS COMMANDS: 

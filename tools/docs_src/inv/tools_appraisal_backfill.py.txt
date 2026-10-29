@@ -1,0 +1,33 @@
+# tools\appraisal_backfill.py  (101 lines)
+
+DOCSTRING:
+Score the messages she has already had.
+
+The affection review (sim/appraisal.py) only ever reads forward from the last
+cycle, so on a save with history behind it the levels start empty and her
+warmth runs on the structural causes alone until enough of a conversation
+happens. That is not what her having known him for months should feel like.
+
+This walks his messages over the last `--hours` (the review's own keep window
+by default, since anything older is dropped as soon as it is written) in
+batches, scores each batch with the exchange around it for context, and writes
+the levels straight into the store. It uses `Appraisal.score`, which is the
+same call the cycle makes, so nothing here is a second implementation. It does
+not touch the cycle's clock or its daily count.
+
+    python tools/appraisal_backfill.py [--hours 96] [--batch 8] [--db path]
+                                       [--dry] [--yes]
+
+Stop the bot first, or run it with --db against a copy.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

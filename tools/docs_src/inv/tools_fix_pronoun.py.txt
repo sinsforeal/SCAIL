@@ -1,0 +1,35 @@
+# tools\fix_pronoun.py  (102 lines)
+
+DOCSTRING:
+One line where Tomoe called herself 俺.
+
+    ……てか、パパ。明日の朝、8時45分に出るって、俺も行くの？
+
+俺 is a boy's word. She is fifteen and a girl, and nothing was governing her
+first person until `prompts/style_ja.md` named it, so a call reached for the
+masculine form in a sentence addressed to her father. It sits in `cast_chat`,
+which is read back into her own prompt every call, so it teaches the next one.
+
+Per speaker, because the same word is CORRECT for other people in her life:
+Kaito is eleven and says 俺 four times, Kenji is her father and says it once,
+and both are right. Only Tomoe's own first person is wrong -- and not even all
+of hers: 「『手洗ってこないと唐揚げは俺が食べる』ってことだ」is her quoting
+Kaito inside 「」, which is how anybody reports what a boy said.
+
+Idempotent. Backs the save up first.
+
+    python tools/fix_pronoun.py [--db data/world.db] [--dry]
+
+DEFS:
+def _quoted_spans(s): Where somebody else's words are, so a pronoun inside them is theirs.
+def offenders(chat): Every turn of HERS with a boy's first person, and whether it is inside a quotation (which makes it somebody else's word, correctly reported).
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

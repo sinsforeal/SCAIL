@@ -1,0 +1,40 @@
+# tools\ja_backfill.py  (207 lines)
+
+DOCSTRING:
+Put her old record back into Japanese.
+
+Her world is Japanese; the English gloss is not written any more. What is left
+is history: every turn from 2026-08-20 to 08-23 was written before the channel
+had a language underneath (152 of them, English only), and every `gist` ever
+stored is English because the field only just became Japanese. The app renders
+both, so her threads still showed English.
+
+Marking them was not enough -- his call. They are TRANSLATED here rather than
+dropped: the English is a faithful record of what was said, so the Japanese is
+a restoration of the words, not an invention of events.
+
+Register is the same as `tomoe/prompts/cast_turn.txt` describes and is passed to the
+call per speaker: the girls are Tokyo JK, standard, no dialect and never
+Kansai; mom and dad speak like adults; Kaito is eleven; Tomoe is standard Tokyo
+on purpose with Hakata-ben only where she slips.
+
+    python tools/ja_backfill.py [--db path] [--dry] [--limit N]
+
+One call per exchange that needs turns, and the gists in batches. Idempotent:
+a turn that already has `ja` and a gist already in Japanese are skipped, so it
+can be re-run after an interruption. Backs the save up first.
+
+DEFS:
+def _is_ja(s): Mostly Japanese, not merely containing a Japanese character. A kaomoji is enough to make an English line look Japanese to a plain `any()` -- "no no let's look together!! (＞人＜;)" passed that test and was moved across as i
+def turns_call(llm, rec): The Japanese for one exchange's English-only turns.
+def gist_call(llm, gists): A batch of English gists, in Japanese.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: cast_turn
+OPS COMMANDS: 

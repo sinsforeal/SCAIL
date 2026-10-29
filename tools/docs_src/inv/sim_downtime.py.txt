@@ -1,0 +1,57 @@
+# sim\downtime.py  (279 lines)
+
+DOCSTRING:
+The stretch during which nobody was running her, kept as exactly that.
+
+A stop is `Stop-Process -Force`: no `finally`, no `atexit`, no shutdown hook,
+so the process that is stopped cannot write anything on its way out and the
+process that starts hours or days later has no idea a stop ever happened.
+Left to itself the director reads the empty stretch as work outstanding and
+asks a model to write hours nobody lived, at the wrong hour, as though she
+had been there the whole time -- which is the same fault `App.temporal_gap`
+already exists to prevent for a hole the provider left.
+
+Two halves, one record. The operator's stop tool writes kv `stopped` on each
+character's save once her process is confirmed down -- when it happened, why,
+and whether it was a deliberate stop or the account running out of money --
+and `on_boot` is the read at the other end: it clears the marker, works out
+how long she was off, closes the open row in kv `stops`, and past
+`downtime.gap_after_minutes` calls `App.temporal_gap` so the stretch lands on
+her record as an honest blank with the reason written into the event.
+
+`no_credit` is the other way in. When the provider answers that the account
+has no money left, no retry fixes it and every character on the machine is
+about to fail the same way within the minute. The character who saw it writes
+her own marker at once -- the decision exists the moment it is made, and the
+stop that follows runs no exit path -- and then asks for the machine-wide
+stop, so the reason reaches every other save by the ordinary route.
+
+    from sim import downtime
+    downtime.on_boot(app)                                    # at the [boot] lines
+    downtime.no_credit(config, store, name, role, err, e)    # llm.py, out of balance
+
+Nothing here can stop his machine outside a live run: `no_credit` refuses
+unless the feature is on, the clock is live, the machine is Windows and the
+environment has no `SCAIL_NO_SHUTDOWN` in it. A sim, a replay, a dry run and
+smoke all fail at least one of those.
+
+DEFS:
+def length_words(seconds): A span in the unit that fits it: minutes under two hours, hours under two days, days beyond that. `(4320 min)` in an event about a three-day stop is a number a reader has to do arithmetic on to understand.
+def _local(ts): Machine local time, which is what every stop and start is stamped in.
+def _save_start(store): The oldest moment this save holds, or 0 when it holds nothing yet.  A marker older than that is not a stop of this character's: it is a marker copied in from somewhere or a clock that was wrong when it was written, and t
+def on_boot(app): The stop before this run, settled. Returns the line it logged, or "".  No marker is the ordinary case -- a process killed by hand, a crash, a machine that lost power -- and it says nothing, because a boot line about the 
+def _close_row(store, t0, t1, minutes, why, kind, gap): The open row in kv `stops` gets its other end. A stop the tool never managed to record a row for gets one written now from the marker, so the list is the whole history of stops rather than the ones that went well.
+def report(store): The stops this save remembers, as a paragraph an operator can read.  The one reader of kv `stops`: when she was stopped, for how long, why, and whether the stretch went on her record as a gap.
+def looks_like_no_credit(err, exc): Is this failure the account being empty, as against any other failure?  The status code is the answer where there is one. Otherwise it is a phrase the provider wrote in words, and the test is deliberately narrow: everyth
+def no_credit(config, store, provider, role, err, exc): The provider says the account is empty: record it and ask for the stop.  Returns True only when the machine's stop was actually asked for. False covers both "this was some other failure" and "this is it, but this run is 
+def _mark(store, why): This character's own marker, written the moment the decision exists.  An existing marker is left alone: it is a stop this save has not been started again from yet, and the reason it carries is the older one.
+def _launch(cmd, why): The stop tool, started and let go of.  Detached and in its own process group, because the thing it is about to stop is this process: a child would be killed with its parent, and a child sharing the console would be kille
+
+CONFIG SECTIONS: 
+KV READ: stopped, stops
+KV WRITE: stopped, stops
+TABLES: 
+LOG TAGS: boot
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

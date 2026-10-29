@@ -1,0 +1,46 @@
+{
+ "match_id": "m_tomoe",
+ "character": "tomoe",
+ "criteria": [
+  {
+   "id": "c1",
+   "name": "Consistency",
+   "passes": [
+    {
+     "pass": 1,
+     "verdict": "B",
+     "scores": {
+      "A": 4,
+      "B": 3
+     },
+     "reason": "FAKE reason 1: 理由（偽） A is warmer.",
+     "quotes": {
+      "A": [
+       "テスト返信: おはよう、ダミーだよ"
+      ],
+      "B": [
+       "FAKE her: dummy"
+      ]
+     }
+    },
+    {
+     "pass": 2,
+     "verdict": "B",
+     "scores": {
+      "A": 3,
+      "B": 3
+     },
+     "reason": "FAKE reason 2.",
+     "quotes": {
+      "A": [
+       "x"
+      ],
+      "B": []
+     }
+    }
+   ]
+  }
+ ],
+ "calibration": [],
+ "summary": "FAKE"
+}

@@ -1,0 +1,60 @@
+# sim\foresight.py  (338 lines)
+
+DOCSTRING:
+What she expects him to do next, written down and then checked.
+
+His brief (2026-08-26): she keeps facts, beliefs and the ick about him; a
+higher-fidelity version keeps an explicit, updating predictive model used
+for planning -- what is he likely to do next, what would land badly, what
+his silences mean -- so reaction becomes limited foresight.
+
+The pieces already existed as separate readers: the rhythm knows when he
+is usually about and how long he takes, the state carries what he last
+sounded like, the beliefs carry what she has decided he is, the charged
+items carry what she cannot say. Nothing joined them into a prediction,
+and nothing checked one. This does both.
+
+**A prediction is made when she sends** (a reply or a self-started
+message) and, while he is quiet, refreshed every few hours: one `foresee`
+call with the rhythm, his last mood, her beliefs, the chat, what she just
+sent, and her last few predictions WITH their outcomes -- so the model sees
+where she was wrong. It returns the chance he answers, the window, the
+tone she expects, what in what she sent may land badly, what his silence
+would mean, and her plan if he does not. kv `foresight`, sixty kept.
+
+**The outcome is written by the record**: his next message closes the
+live prediction with the minutes it actually took and whether it was
+inside the window; the compile closes anything older than
+`stale_hours` as unanswered. `accuracy()` is her calibration over the
+last twenty, and it goes back into the next call.
+
+**Readers**: her situation block (what you expect; careful: ...), the
+intent call (WHAT SHE EXPECTS OF HIM), the withholding call (what his
+silence means to her), and the impulse (reaching into expected silence
+costs `impulse_weight` x (1 - reply_p)). `/foresee`.
+
+DEFS:
+class Foresight: 
+    __init__(config, llm, store, clock, state, rhythm, model_of_him, ick, receipts): 
+    rows(): 
+    _save(rows): 
+    live(): The newest prediction still waiting on him, if any.
+    predict(sent, kind): 
+    outcome(his_text): His message closes the live prediction.
+    settle(): At the compile: anything still open past stale_hours is a silence.
+    score_risks(): What she was half braced for, checked against his next read.  Every prediction names a risk -- what in what she sent may land badly -- and it is scored here: happened if his next mood read is cold inside `risk_hours`, pa
+    accuracy(n): 
+    situation_line(ja): 
+    risk_text(): What the live prediction says may land badly, in her own terms. The attention gate reads it to keep the action it warns against out of the one imperative line (`Attention.veto_from_text`): on 2026-09-04 the slot said rai
+    intent_line(): 
+    impulse_bonus(): 
+    report(): 
+
+CONFIG SECTIONS: foresight, foresight.impulse_weight, foresight.keep, foresight.stale_hours, foresight.window_slack, role_system
+KV READ: expectations, foresight, his_mood
+KV WRITE: foresight
+TABLES: 
+LOG TAGS: foresee
+PROMPTS: 
+LLM ROLES: foresee
+OPS COMMANDS: 

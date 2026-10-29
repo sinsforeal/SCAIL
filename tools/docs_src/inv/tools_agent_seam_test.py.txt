@@ -1,0 +1,62 @@
+# tools\agent_seam_test.py  (468 lines)
+
+DOCSTRING:
+A cast member who runs as her own process speaks for herself.
+
+    python tools/agent_seam_test.py          # exit 1 on any failure; run by smoke
+
+Builds the first character on a COPY of her save with every model call
+answered by a recorder that spends nothing and a hub that lives in this
+process, marks one cast row in the COPY's cast file as running herself, and
+drives the two paths her words used to come out of:
+
+  the exchange -- at her turn nothing is written for her, the room asks her
+  and waits, her turn arriving late is appended where it lands and reaches
+  the record and the shared world's rooms table with her as the speaker, and
+  at the deadline the room says so and goes on without her;
+
+  the beat -- the plan still puts her there, no words are written for her,
+  the moment goes to her mailbox and the beat waits for what comes back. One
+  case goes through the PLANNER rather than putting a beat in the store by
+  hand, because the planner deleted every beat it wrote for her for two days:
+  the writer refuses her words, correctly, and the line under it dropped every
+  beat that had none.
+
+And a silence: when the room asks and she would say nothing, that answer goes
+back as an answer, so the room settles at once instead of sitting out its
+deadline, and neither record gains an empty turn.
+
+It also proves the two things that are easy to lose. **The unmarked case is
+byte for byte what it was**: the same speaker's prompt, rendered with the mark
+on somebody else's row and without it, is the same bytes. And **a room is a
+thing you can join and leave**: a turn goes to the members who were in the
+room when it was said, and to nobody who joined after it or left before it.
+
+Nothing is started, nothing live is opened for writing, and the live cast file
+is never marked.
+
+DEFS:
+def _fixture_people(config): (the one who runs herself, her hub id, one other person in the room).  Two people on her roster who are neither her, nor him, nor family: a family row is not in the group chat, and the group is what the seam is driven th
+def check(ok, what, detail): 
+class Recorder: Every model call, recorded and answered from a canned reply. Attached
+    __init__(app): 
+    call(role, messages): 
+    call_json(role, messages): 
+    count(role, since): 
+class Hub: The hub, in this process. `peer_send` is what leaves; `deliver` is what
+    __init__(): 
+    peer_send(to, text, room): 
+    peer_updates(after): 
+    deliver(frm, text, room, ts): 
+    last(to): 
+def marked_cast(app, tmp, mark): A copy of the cast file beside the scratch save, with one row marked as running her own process. The live `data/cast.json` is never touched.
+def main(): 
+
+CONFIG SECTIONS: character.cast_file, exchange.agent_turn_deadline_seconds, json
+KV READ: cast_pockets, peer_rooms
+KV WRITE: cast_beats, cast_beats_prev, cast_pockets, exchange_live
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

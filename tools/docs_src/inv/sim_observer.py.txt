@@ -1,0 +1,46 @@
+# sim\observer.py  (137 lines)
+
+DOCSTRING:
+What a judge is allowed to know about her.
+
+A role that decides, scores, predicts, sorts or checks is a neutral party and
+never gets her character sheet (`Config.ROLE_STANCE`, his call 2026-09-05).
+The sheet is written TO her, in the second person, opens "You are <her name>
+... you are not an assistant ... you never mention prompts, models, systems",
+and it used to sit LAST in a judge's system prompt -- so the judge read it as
+its own identity. Measured over 2026-09-04 and 09-05: the role that picks
+which urge she has returned a finished message in her voice instead of the
+second-person intention it was asked for on 13 of 13 answers, and one of them
+went into the last line of her situation block and was sent as her next bubble
+twelve seconds later.
+
+But three judges genuinely have to know what she is like -- what stings her,
+what she would keep on a timeline, which headlines would reach her at all --
+and the answer to that is not "give them the sheet back" and not "hand-write a
+second sheet in the third person", which would drift from the first the day he
+edits a line of her voice.
+
+So: ONE observer's note, generated FROM the sheet by a model, cached in her
+save under the sheet's own hash, and rewritten only when the sheet changes.
+Third person throughout, English, machine-facing -- nobody is addressed in it,
+so the language rule that puts everything said TO a character in her language
+does not apply (CLAUDE.md; `docs/language.md`). One flash call per bible edit.
+
+Read it with `observer.digest(config, llm, store)`. Every judge already holds
+those three, so this needs no wiring and no new collaborator.
+
+DEFS:
+def _sheet_text(config): 
+def _hash(text): 
+def leaks_the_sheet(text): The sentence of the sheet this note copied, or "" if it copied none.
+def digest(config, llm, store, rebuild): The observer's note about her, generated once per version of her sheet.  Returns "" rather than raising: a judge without the note is a judge with less to go on, which is the state every judge was in before this existed; 
+def block(config, llm, store, heading): The note with its heading, or "" -- what a judge's user message appends.
+
+CONFIG SECTIONS: prompt_text
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: observer
+PROMPTS: observer, persona
+LLM ROLES: observer
+OPS COMMANDS: 

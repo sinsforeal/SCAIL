@@ -1,0 +1,42 @@
+# tools\migrate_check.py  (160 lines)
+
+DOCSTRING:
+What the first character's primitives would be if computed from her record.
+
+The nine numbers are live for the second character and off for the first, whose
+relationship is still the hand-written meters in `data/cast.json` -- closeness
+62, standing 55, tension 15, none of which any event earned. `docs/primitives.md`
+§6 says the honest way to switch her over is to compute them from the record she
+already has and look at where the computed value disagrees with the seeded one,
+because the record contains the events and the seed contains somebody's guess.
+
+This is that computation. It replays her whole history through the same
+functions production uses -- his message moves attention and the ledger, a look
+at his machine moves what she has seen of him, a kept promise moves the ledger
+back, time decays and accrues -- and prints the nine numbers and every
+derivation beside the meters they would replace.
+
+**It reads a COPY of the save and never the save**, asks no model, changes
+nothing, and is safe to run while the bot is up.
+
+    python tools/migrate_check.py
+    python tools/migrate_check.py --db data/world.db --verbose
+
+DEFS:
+class _Clock: A clock that walks the record instead of the wall, so decay and accrual
+    __init__(ts): 
+    now_ts(): 
+class _Store: The primitives store, in memory. Nothing here touches the save.
+    __init__(): 
+    get(k, default): 
+    set(k, v): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

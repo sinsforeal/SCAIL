@@ -1,0 +1,97 @@
+# talkapp\server.py  (1205 lines)
+
+DOCSTRING:
+TALKAPP: the messenger she lives in, served to his phone.
+
+A standalone hub process (like the MAL daemon): aiohttp on localhost, fronted
+by `tailscale serve` for HTTPS on the tailnet, never the public internet. The
+bot connects with channels/talkapp_bot.py, which implements the same surface
+as TelegramInterface -- the seam the LINE experiment proved ("nine methods on
+self.tg, and a second channel needed no other change in the app").
+
+What this buys that Telegram refuses:
+- her 既読, shown to him at the exact moment `store.mark_read` fires -- her
+  schedule becomes visible, which was the whole LINE prize;
+- his reads as real events (app focused + bubble on screen) instead of
+  receipts.py inferring them from a window title;
+- a typing indicator driven by her compose delays, so the start-stop-retype
+  behaviour compose_factor models is something he can watch;
+- the group chat as she sees it (delivered beats only), with a clearly
+  marked backstage toggle for the rest;
+- room for more than one girl: everything is keyed by character.
+
+The hub keeps its own message log (data/talkapp/state.json) -- that is the
+CHANNEL's record, the way Telegram's servers hold the chat; the bot's save
+file stays the simulation's truth. Voice notes are copied into
+data/talkapp/media and served from there.
+
+DEFS:
+def _now(): 
+class Hub: 
+    __init__(config): 
+    _load(): 
+    _save(): 
+    _char(cid): 
+    _next_id(): 
+    _init_push(): 
+    _push_out(title, body, char): Notify the phone when no client has the page visible.  A skipped push is gone forever (there is no retry), so every attempt and every skip lands one line in data/talkapp/push.log -- "not reliable" was undiagnosable from 
+    _push_send(subs, title, body, char): 
+    _push_log(verdict, title, detail): 
+    broadcast(event): 
+    _authed(request): 
+    h_index(request): 
+    h_static(request): 
+    h_sw(request): The service worker, served at the root. A worker may not control a scope above its own path, so /app/sw.js with scope '/' throws -- Chrome names the scope rule, Firefox just says 'The operation is insecure', and push was
+    h_preview(request): A card for a link in the chat: title, a line, an image, the site. An X status goes through fxtwitter's JSON (x.com serves nothing to a plain fetch); anything else is the page's OpenGraph tags. Cached an hour; a failed lo
+    _preview_card(url): 
+    h_ver(request): The client compares this on every foreground and reloads itself when the page on disk is newer than the one it is running.
+    h_app(request): Installed against served, so nobody has to ask.
+    _dl_name(asked, fallback): The name a saved file lands under: what the phone asked for, cut down to what every filesystem and every download manager accepts.
+    h_media(request): 
+    h_avatar(request): Profile icon by name: a file dropped in data/talkapp/avatars/ (tomoe.png, him.jpg, Rena-chan.png, group.png). 404 falls back to the letter circle in the client.  The record names people in Japanese now (香芝玲奈), and the fi
+    h_reaction_img(request): 
+    h_file(request): A text file the bot left for the ops view (`/context full`).
+    h_vapid(request): 
+    h_subscribe(request): 
+    h_push_test(request): Fire a test push at every subscription, so 'did it work' is a tap rather than waiting for her next message.
+    h_chars(request): 
+    h_history(request): 
+    h_ws(request): 
+    _phone_event(ev, ws): 
+    _trim(c): 
+    h_bot_register(request): 
+    h_bot_updates(request): 
+    h_bot_peer_send(request): `{char: <sender>, to: <recipient>, text}` -- one character writing to another. The row goes into the RECIPIENT's mailbox with the sender on it. `known` false means nothing has ever registered under that id: nobody is the
+    h_bot_peer(request): What another character has said to this one since `after`. The cursor is the polling bot's, like /bot/updates, so this never clears the mailbox.
+    h_bot_send(request): 
+    h_scenery_img(request): A harvested image, for the ops view only (keyed like everything else).
+    h_bot_photo(request): A photo of hers: copied into media, a row of kind `photo`.
+    h_bot_sticker(request): A reaction of hers as a sticker in the chat (sim/reactions.py): a frame of her from the episodes, kind `sticker`, not a message she wrote. `ts` may be in the past (the backfill); the row is inserted where its time falls.
+    h_bot_voice(request): 
+    h_bot_typing(request): 
+    h_bot_edit(request): 
+    h_bot_delete(request): 
+    h_bot_reads(request): His view-based reads of her messages, for the adapter to stamp.
+    h_bot_state(request): The bot's periodic sync: her reads of his messages (既読), the group chat as she sees it, one presence line.
+    h_ops(request): The bot's latest ops payload and the command log, for the app.
+    h_ops_cmd(request): A slash command from the app's ops view, queued for the bot. It never touches the chat log.
+    _queue(c, text): A command for her bot, on the same queue the ops bar uses. The hub answers none of this itself: it has no model, no key and no copy of the prompt a redraw has to be made from.
+    h_bot_swipes(request): Her bot's answers for one of her messages, and which one is sitting.  Trimmed to the messages still in the log, or the candidates of something that scrolled out of it would sit here for ever.
+    h_swipe(request): He tapped swipe on one of her messages: draw that reply again.  Queued for her bot, like a line he taps to hear. The answer is drawn from the prompt frozen when she sent it, which only her save has.
+    h_sit(request): He picked one of the answers: from here on the conversation goes on from that one. The write is her bot's -- her own record first, the hub's copy after it.
+    h_model(request): The model her voice is written on, picked in the chat header.  Checked against what her bot said it will accept, so a stale page cannot queue a name that provider has no slug for.
+    h_speak(request): He tapped a line and wants to hear it.  Queued for her bot rather than answered here: the hub has no voice and no key, and the character's own config is what says which voice she has. A line she has spoken before comes b
+    h_bot_speak(request): 
+    h_bot_ops(request): 
+    h_bot_ops_result(request): 
+    h_health(request): 
+def main(): 
+
+CONFIG SECTIONS: json, talkapp, talkapp.host, talkapp.log_keep, talkapp.notify_burst_seconds, talkapp.port, talkapp.push_enabled, talkapp.token, talkapp.typing_seconds
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

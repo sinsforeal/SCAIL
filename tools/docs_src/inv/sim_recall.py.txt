@@ -1,0 +1,36 @@
+# sim\recall.py  (797 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def kana_forms(word): The katakana and hiragana a romaji word would be written in, or an empty set when it is not romaji at all.  Strict: every letter has to belong to a syllable, so "neko" converts and "smoking" and "difference" do not, whic
+def cross_script(text, anime_kb, store, limit): The other script's words for the titles this cue names: the tokens to add to a word search so a cue in one language can reach a record written in the other.  Three local sources, in order of authority, and no network -- 
+def moment_cue(store, scene, his_text): The moment as one cue text: what he just wrote, her own last line, and the scene she is in (where, with whom, what is happening).  One owner, because the deliberate search of the record and the persona's recall of a fade
+def older_messages(store, clock, text, before_ts, limit, scan, min_overlap, common_share): The few messages older than `before_ts` that `text` is reaching for, found by word overlap alone -- no model call.  The continuity checker is shown the last handful of messages and nothing else, so a true quotation of an
+class Recall: 
+    __init__(config, llm, store, clock, self_memory): 
+    busy(): 
+    start(text, extra): `text` is his message; `extra` the rest of the moment (her own last line, where she is), which widens the search and never the trigger.
+    take(): 
+    _verbatim_from(): Where the thread's verbatim span actually starts, as a timestamp.  This search is for what is NOT already in front of her word for word, so the boundary has to be the one the thread used and not a second number that happ
+    _event_weight(row, now): How much an event of her day is worth to a search of the record.  The same forgetting curve the other stores get, on HER OWN life's half-lives (`self_memory.half_life_days`) rather than the shorter scale a fact about som
+    events_wanted(config): (the salience to search from, how many rows to read), or (0, 0) when the events are not a source for this character.  One owner for the two numbers, because three readers ask -- the word search, the meaning search and th
+    _events(words, window, from_date, now): The salient events a cue reaches, as search rows. The label is `<date> #<id>`, and the meaning search gives the same row the same label, or one row would be scored twice under two names.
+    _search(text, extra): 
+    _semantic(cue, scored, window, from_date, cue_words): Adds the cosine of the cue to the word scores of every pool whose rows have a stable identity to embed -- the cards, the compiled days, what she knows about him and her own memories -- and a row the words missed joins on
+    _run(text, hits, cue): The flag round the work (`sim/inflight.py`): one paid call on a daemon thread, with nothing on disk to say it had begun.
+    _remember(text, hits, cue): 
+    _grounded(memory, cite, his_text, refs): (the excerpt this memory is grounded in, why it is not).  Two tests, and both are about the RECORD rather than about the words:  * the answer has to cite one of the excerpts it was handed, by its   number or by its own d
+    _subject(his_text): The words of his message distinctive enough to name a thing.  The same furniture rule `older_messages` uses, over the compiled days and her own record rather than over the messages: a word in more than `recall.subject_co
+    already_in_thread(rec, refs): Is the line she just remembered a retelling of a conversation the thread is bringing back word for word?  Two retrievals answer one cue over one record. `sim/thread.py` puts a whole exchange from past the verbatim cut ba
+    situation_line(rec, config): `config` says which language she is addressed in; without one the line stays English, which is what every non-prompt caller wants.
+
+CONFIG SECTIONS: embed, recall, recall.keep, recall.max_excerpts, recall.wait_seconds, role_system, self_memory.half_life_days, thread.verbatim_hours
+KV READ: known_things, recall_counts, recalls, thread_window
+KV WRITE: recalls
+TABLES: 
+LOG TAGS: recall
+PROMPTS: 
+LLM ROLES: recall
+OPS COMMANDS: 

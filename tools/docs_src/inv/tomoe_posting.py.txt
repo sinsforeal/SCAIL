@@ -1,0 +1,28 @@
+# tomoe\posting.py  (356 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Posting: 
+    __init__(config, llm, store, clock, state, curation, diet): 
+    mode(): 
+    why_not(scene): The gate's verdict as a sentence, for `/x status` and the log. The call site logged only the yes, so 18 hours of silence looked like a fault and was a cap spent early.
+    may_post(scene, roll): 
+    held(): The post she wanted and has not written yet, or None.
+    roll_inputs(): What the roll read, kept with the hold: the record should say what she was feeling when she wanted to post, not what she feels when it finally goes out.
+    hold(scene, why): She wants to post and cannot right now. Written to the save the moment it exists, because a stop is a force-stop: the impulse is a decision and it survives the process. The gap is NOT spent -- she has not opened the comp
+    lapsed(h): Why the hold is no longer worth acting on, in words, or ''. An impulse keeps for `hold_max_minutes` of her time; her date turning over ends the day it belonged to.
+    drop(h, why): 
+    resume(scene, busy): The next quiet tick: the post she is holding goes out. No second roll -- the impulse already happened -- but every gate that is not the dice is asked again through the one owner (`may_post(roll=False)`: posting on, her p
+    boot_hold(): At boot, before the first tick. A hold that has gone stale is cleared here rather than at whatever hour she next has her phone, and one still worth acting on says so, because a standing hold and no hold at all look ident
+    write(scene, reason, mode): One call: the post in her voice, or skip. Returns the text or ''.  `mode` is passed in when a held yes is taken up, so she writes the kind of thing she wanted to post when the impulse landed rather than the kind the hour
+
+CONFIG SECTIONS: character, curation.max_posts_per_, curation.post_max_chars, posting, prompt_text, read_text, sensor_view, social.enabled
+KV READ: x_engagement_recent, x_last_noticed, x_last_noticed_ts, x_post_held, x_post_last_mode
+KV WRITE: x_post_held, x_post_last_mode
+TABLES: 
+LOG TAGS: x
+PROMPTS: persona, x_post
+LLM ROLES: x_post
+OPS COMMANDS: 

@@ -1,0 +1,41 @@
+# sensors\chrome_reaper.py  (230 lines)
+
+DOCSTRING:
+Kill the Chrome left behind by a scraper that died without cleaning up.
+
+`driver.quit()` in a `finally` covers a clean exit and a Ctrl-C. It does not
+cover the two ways these processes actually end: the console window being
+closed, and a force-kill. Neither runs Python's exit path at all, so chromedriver
+and its Chrome survive with the profile still locked, and the next start either
+fails on the lock or leaves a second tree behind. The MAL daemon's Chrome had
+been up since 2026-08-20 across several restarts of everything around it.
+
+So the rule is: **reap on the way in, not only on the way out.** Whatever
+happened to the last run, a start owns its profile.
+
+**Matched on the exact `--user-data-dir` value, never a substring.** This
+matters more than it looks: `C:\ChromeProfile` is another program's profile
+and a prefix of `C:\ChromeProfileMAL` and `C:\ChromeProfileTomoe`, so a substring
+match would kill another program's Chrome. Compare normalised full paths for
+equality or do not kill.
+
+Chrome's renderers do not carry the flag, and chromedriver carries a port
+instead, so a match is an anchor: the whole tree above and below it goes.
+
+DEFS:
+def _profile_of(cmdline): The exact profile a process was launched against, or ''.
+def _norm(path): 
+def find(profile): Every process tree bound to this profile. Returns a list of psutil.Process roots, highest ancestor first.
+def kill(profile, log, keep): Kill every tree on `profile`. `keep` is pids the caller still owns.  Returns how many processes were killed.
+def _unlock(profile, log): A killed Chrome leaves its singleton files behind and the next start refuses the profile. They are safe to remove once nothing is holding it.
+def reap_orphans(profile, log): Only the trees nobody owns any more.  `kill()` takes the profile off everybody, which is the right rule where one scraper owns its profile alone. `ChromeProfileTomoe` is not that: the bot's scenery harvest, her X look and 
+def install_exit_handler(profile, log, keep): Reap on the way out as well, for the exits Python does see.  `atexit` covers a normal return and an unhandled exception. SIGTERM and SIGBREAK cover a `taskkill` without /F and the console close button on Windows. Nothing
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

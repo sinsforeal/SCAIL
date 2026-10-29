@@ -1,0 +1,75 @@
+# store.py  (525 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Store: 
+    __init__(path): 
+    _init(): 
+    get(key, default): 
+    set(key, value): 
+    today_count(key, date): A per-day counter kept in kv as {date: n}: today's number.
+    bump_today(key, date, n): Add `n` to today's count under `key` and drop the days before it. Nineteen modules kept this dict by hand, each pruning its own way; the shape is the same for all of them: today's count is what a cap reads, and yesterday
+    add_scene(ts, date, hm, scene, raw): 
+    recent_scenes(n): 
+    scenes_for_date(date): 
+    last_scene(): 
+    add_event(ts, date, kind, text, salience): 
+    events_for_date(date): 
+    salient_events(min_salience, before_ts, limit): The events worth remembering, newest first, older than `before_ts`.  The deliberate search reads these because some things are in no other store: the only row in the first character's save that holds the title of the ani
+    recent_events(n): 
+    add_state(ts, date, gauges, reasons): 
+    state_for_date(date): 
+    save_schedule(date, ts, blocks, notes): 
+    get_schedule(date): 
+    save_day(date, ts, narrative, summary, user_facts): 
+    get_day(date): 
+    recent_days(n): 
+    add_message(ts, date, role, text, self_started, delivered_ts, read_ts, tg_id): 
+    mark_read(msg_id, ts): 
+    retire_window(t0, t1, keep_event_kinds): Rows the bot itself wrote inside (t0, t1] -- scenes, events (the world's kinds kept: a train delay happened whether or not she was written), state_log, self_memories -- so a replay (scail.py --replay) can write the stret
+    gauges_at(ts): The last gauge snapshot at or before ts: (its ts, the dict).
+    count_window(table, t0, t1, where): 
+    unread_user_messages(): 
+    all_messages(): Every message, oldest first. Used by sim/derive.py to work the relationship out of the record rather than being told it.
+    message_by_id(mid): 
+    message_by_tg_id(tg_id): The row behind the channel's own id. The app knows hub ids and the record knows its own -- 141 in the store was 1813 on the hub -- so anything coming from a screen has to be resolved rather than guessed.
+    update_message(mid, text): Her side of the record, corrected by hand. Her history and his Telegram diverged in four places on 2026-08-20 and there was no way to put either back.
+    delete_message(mid): 
+    message_span(): (how many messages there are, the first date, the last date). The continuity checker is told this so it knows the conversation it is shown is an excerpt of a long record rather than the whole of it.
+    recent_messages(n): 
+    messages_since(ts): Every message from `ts` on, oldest first. The thread's window is a span of time, not a count: a count drops the oldest message every time a new one lands, and the recap of that day changes with it.
+    messages_for_date(date): 
+    last_message(role): 
+    unmark_read(mid): Put a message of his back in the unread queue: the reply was lost.
+    count_self_started(date, gap_seconds): How many times she opened a conversation today. With gap_seconds set, bubbles sent closer together than that are one time she spoke rather than several, which is what the caps in impulse actually mean.
+    add_reply_prompt(msg_id, char, ts, model, messages, params, msg_ids, text, reconstructed): Written the moment the first bubble of the reply has a row, never held until the burst ends: a stop is `Stop-Process -Force`, and a prompt kept in a local is a prompt lost.  `reconstructed` is 1 when the array was rebuil
+    reply_prompt(msg_id): 
+    reply_prompt_for(msg_id): The frozen prompt whose burst this row belongs to. One reply is one prompt and one to three message rows, and he may ask for a swipe on any of them.
+    extend_reply_prompt(msg_id, extra_id): The next bubble of the same burst got a row.
+    reply_prompt_ids(n): 
+    add_swipe(msg_id, n, model, text, voice_path, ts, prompt_tokens, completion_tokens, cached_tokens, cost): A paid answer, written the moment it exists.
+    swipes_for(msg_id): 
+    next_swipe_n(msg_id): 
+    sit_swipe(msg_id, n): Which candidate the conversation continues from. The record of the choice; the rewrite of her rows is the caller's.
+    add_digest(ts, date, text, from_ts, to_ts): 
+    recent_digests(n): 
+    digests_for_date(date): 
+    add_thread(text, ts, date, people): 
+    update_thread(tid, ts, status, text, resolved_date): 
+    delete_thread(tid): 
+    threads_by_status(status, n): 
+    all_threads(n): 
+    add_user_fact(ts, fact): 
+    user_facts(): 
+    replace_user_facts(ts, facts): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: days, digests, events, kv, messages, reply_prompts, scenes, schedules, state_log, swipes, threads, user_facts
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

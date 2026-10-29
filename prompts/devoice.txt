@@ -1,0 +1,1 @@
+The prompt for this role is built in tools/devoice.py, which rewrites text already in the save into her register without changing anything that happened. This file exists because every role must name a prompt file.

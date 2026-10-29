@@ -1,0 +1,31 @@
+# world\calendar.py  (206 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Calendar: 
+    __init__(config): 
+    _read(path, empty): 
+    _reload_local(): Events discovered from the wards' own feeds (tools/local_events.py).  Read off disk whenever the file changes, so a fetch that runs while she is awake reaches her without a restart, and kept separate from the hand-writte
+    _d(s): 
+    _in(date, item): 
+    holiday(date): 
+    term(date): 
+    school_break(date): 
+    events(date, lookahead_days, limit): What is on, soonest and shortest first.  Ranking is not decoration. The discovered half of the calendar carries month-long exhibitions beside one-night festivals, and a thing that runs for 31 days is true on every one of
+    _norm(cls, s): 
+    entry(date, title): The event running on this date whose title is this one, or None.  The title is compared with spacing and brackets taken out, and a shorter one that is the head of a longer one matches: the list a planner is shown holds n
+    outing_on(date, words): The entry on this date that one of these words makes a public event (`world.outing_words`), or None. One place asks the calendar what is on; the gate and the promise binding both read it.
+    is_school_day(date): 
+    describe(date): 
+    school_day_template(): 
+
+CONFIG SECTIONS: character.existence, world, world.calendar_describe_limit, world.event_lookahead_days, world.holidays_file, world.school_calendar_file
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

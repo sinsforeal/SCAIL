@@ -1,0 +1,47 @@
+# sim\coherence.py  (237 lines)
+
+DOCSTRING:
+The day read as a story, flag only.
+
+`tools/absurd.py` measures the parts: a gate nobody reaches, a person who
+repeats herself, a place that is not on the map. Nothing read the record
+as one story, and the seams that break the illusion live between the
+parts: she tells him she cannot go to her brother's match, tells her
+brother she is coming and, in the same breath, apologises for having
+slept through it; she thanks a friend for a notebook no exchange
+mentions; she puts the same three titles to him twice, three minutes
+apart. Each is structurally valid and visible to anybody who reads the
+day, and the only reader was him.
+
+Once a day at the compile (`review`), the `coherence` role is handed the
+day's record -- the ledger, the scenes, the events, his chat, every
+exchange with her own people -- and names the seams: a CONTRADICTION (two
+incompatible things she said, or a thing the ledger or a scene refutes),
+an INVENTED thing (an object, event or person with no source anywhere in
+the record), a REPEAT (the same thing said again as new). Code keeps them
+(kv `coherence_flags`), logs each as `[coherence] FLAG`, and changes
+nothing: the record is what happened, and a seam is a signal about a
+prompt or a mechanism, never a reason to rewrite her. `/coherence [date]`
+runs it by hand and shows the last readings; `/absurd` SEAMS reads them
+back for the last `coherence.absurd_days`.
+
+DEFS:
+class Coherence: 
+    __init__(config, llm, store, clock, ledger): 
+    rows(): 
+    _save(rows): 
+    record(date_str): The whole day as text, every part of it the machine holds, so a seam between two parts is visible to one reader.
+    _days_before(date_str): The compiled summaries of the previous `coherence.context_days`. Without them both readers of 2026-09-01 called 「rena couldn't come. i went alone」 a contradiction: it was about the festival two days earlier, whose photos
+    _compiled(date_str): The compile's own output for the date: the narrative, the summary, the facts about him it wrote, the memories it kept. The reader judges them against the record they were written from, so a day that was remembered wrong 
+    review(date_str): One call over the day; the seams it names are kept and logged. Returns the seams kept (a list), or None when the answer did not parse -- a caller never stores a raw answer as data.
+    recent(days): 
+    report(days): 
+
+CONFIG SECTIONS: character, coherence, prompt_text
+KV READ: coherence_flags
+KV WRITE: coherence_flags
+TABLES: 
+LOG TAGS: coherence
+PROMPTS: coherence
+LLM ROLES: coherence
+OPS COMMANDS: 

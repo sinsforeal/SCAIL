@@ -1,0 +1,54 @@
+# tools\world_test.py  (343 lines)
+
+DOCSTRING:
+The world file, written by the character who owns it and read by another.
+
+Everything a character knows about the world she lives in is in her own save,
+so a second process running one of the people beside her would plan a day the
+first process never had. `world/shared.py` is the copy that crosses the
+boundary. What has to be true of it is three things, and this drives all three
+through the code that runs live rather than through the store's own writers:
+
+1. the plan writes who is where, and who these people are;
+2. the day's one truth writes a line the day has settled, as it accepts it;
+3. an exchange writes a turn the moment it is stamped.
+
+Then a SECOND `Config` -- the other character's config file, copied so nothing
+of hers is touched, pointed at the same world as a reader rather than as the
+owner -- opens the same file through a `mode=ro` URI and reads every row back.
+
+And the partition (docs/shared-world.md §2): that second character writes the
+rows about HERSELF and only those -- her own day's windows land, a row about
+somebody else and a row in any other table are refused, the world goes on
+saying who keeps it -- and the owner's planner then prefers her rows for a
+window and falls back to its own draw of her week where she wrote nothing.
+The owner's own rows are proved unchanged against a copy of the live world
+file, taken through sqlite so the copy is not a torn image and never written.
+
+The first character is built on a copy of her save with the model stubbed and
+the network refused, and the world directory is pointed at a temp directory,
+so this spends nothing and touches neither live save nor the live world.
+
+    python tools/world_test.py
+
+DEFS:
+def ok(label, cond, detail): 
+class Canned: `LLM.call_json`, answered from a table instead of from a provider.
+    __init__(answers): 
+    install(app): 
+    _refuse(): 
+    _call(role, messages): 
+def point_at(app, tmp, owner): Send this App's world writes to a temp directory, and rebuild the three wires that carry them. The config object is the one the App holds, so the modules read the same switch the runtime would have handed them.
+def reader_config(tmp): The other character's config, copied, pointed at the same world as a reader. Her file is copied because `Config` writes the merged defaults back to the path it was given, and nothing of hers is his harness's to rewrite.
+def live_copy(tmp): The live world file as a read-only INPUT: copied through sqlite's own backup so the copy is whole (a file copy of a database being written is a torn image), into the temp directory. Nothing here writes to either.
+def overlaps(a, b): Do these two windows of a day cover any of the same time?
+def main(): 
+
+CONFIG SECTIONS: json, world.shared_dir, world_shared.enabled, world_shared.id, world_shared.owner
+KV READ: 
+KV WRITE: exchange_live
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

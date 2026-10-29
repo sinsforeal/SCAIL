@@ -1,0 +1,92 @@
+# tomoe\cast.py  (2425 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def tomoe_sheet(config): Her own line of her cast file: kanji, reading, what she calls people.  The key is the program's word for "her own line". A character with a cast file of her own (`own_cast_file`) has her line there, under `self`; the wor
+def name_aliases(config, name): Every form one person's name takes in her Japanese, plus the roster name itself. Her own writing is Japanese now, so anything matching a person by name across the two -- an open goal against a promise, say -- has to know
+def wrong_pronoun(who, ja): Is this person using somebody else's first person? Per speaker, because the same word is right for two of them: Kaito is eleven and Kenji is her father and 俺 is theirs. Only Tomoe reaching for it is wrong, and only outsi
+def person_sheet(config, key): That person's own character sheet, `prompts/cast/<key>.md`, or "".  Each of them is an agent, so each of them has what she has: a document written in the second person that says who they are, what they want, what they do
+def voice_line(config, name): How this one person sounds, from data/cast.json. The three girls were all "casual JK register" and nothing else, so the content of a turn was theirs and the VOICE was one bucket: Rena decides in the same words Aya hedges
+def calls_line(r, config): ' — 香芝玲奈 (かしば れな); calls 古賀朋絵 とも, 米山日南子 ひな' from a sheet, or '' when the sheet has none. A LINE group of fifteen-year-olds does not use full names; the models get the actual words.  The `calls` map is keyed by roster han
+def _absolute_days(text, date_str): A relative day word with its date beside it. A settled line is carried into the next day's planning, where 'tomorrow' means a different day: 'festival meeting tomorrow at 姫' written on the 30th became the 1st when the 31
+class CastEngine: 
+    __init__(config, llm, store, clock, state, records, calendar, arcs): 
+    merge_sheets(): Stance / rhythm fields from data/cast.json join the live relationships dict (kv) without touching meters or the compile's situation lines.
+    draws(date_str): Per-person numbers for the day: mood, attention (for Tomoe), friction, 0-100, a seeded random walk from yesterday with mild reversion.
+    write_lives(date_str): One line per person of what THEIR day was, from their beats and exchanges and arcs, kept and shown back to the beat writer and to each speaker. Before this a friend had a sheet, a drawn mood and today's beats: no yesterd
+    _about_her(text): Does this line have the character in it? Her names, from the roster, never a literal: a recast would leave a literal behind.
+    _carry_streak(prev): How many days in a row this person's carry has been about her.
+    _carry_ask(prev, her_name): The line the prompt gets when the carry has stopped moving.
+    _carry_kept(name, prev, carry): The carry as stored: dropped when it is about her again past the cap. Dropped and said in the log, never rewritten -- a carry written here would be the machine deciding what somebody is thinking about.
+    _bring_up_ask(): The one extra key on an answer this call already makes.  A group chat is told it is mostly made of concrete things and then handed the day's plan and each other, so it settles the plan again. These are the concrete thing
+    _fill_pocket(name, date_str, row, bring_up): Tomorrow's handful of concrete things for one person.  Written at the compile, for the day about to start, the same way the carry is: the day's own record of them, whatever they wrote it holds, one thing going round that
+    life_brief(name, n): That person's last few days, for their own speaker call and the beat writer: what they are continuing.
+    lives_brief(n): 
+    lives_report(): 
+    _reads_world(): She is in this world and does not keep it (`Config.world_reader`).  One writer per world (docs/shared-world.md), and the day's plan is a write: who is where, who is absent, who reaches for whom. A second process drawing 
+    _her(): The record's name for the character this process runs -- the planner and the speakers say "her" with it. It was the first character's name in a literal, so a promoted character's planner wrote its beats toward the girl w
+    _people(): The relationships this process may plan, speak and write lives for: every one of them for the character who keeps her world; for a reader, the people in her own cast file (`roster.is_own`). The world's people stay in her
+    _own_thread(row): Is this thread one her own circle may be told about?  Everything, for the character who keeps her world. For a reader, a thread that names somebody outside her own circle is about people her own people have never met: th
+    _own_lines(lines): `lines` (a list, or one block of text) with every line naming somebody outside her own circle dropped. Byte for byte what it was given for the character who keeps her world: there is nobody outside her circle there, and 
+    _say_reads_world(what): Said once per kind of thing withheld, per process: the gates below are asked on every pass and a line each would be a line a minute.
+    world_where(date_str): {record name: [(place, from_hm, to_hm, reach)]} out of the world file, for a reader. Empty until the owner has planned the day.
+    their_own_where(date_str): {record name: [(place, from, to, reach)]} of what somebody in this world has written about HERSELF -- a character who runs her own process and whose own day planner knows where she actually is.  This process draws every 
+    _own_window(name, date_str): What this person has written about herself today, or [].
+    _covered(windows, lo, hi): Is this window one she has already said where she is in?
+    plans(date_str): Each person's day: the fixtures their week has on this weekday, school if it is a school day, and a twist drawn with `twist_p` -- the thing that makes the day not the timetable. Seeded by the date, so every writer agrees
+    available(name, ts): 0..1: how reachable this person's phone is right now, from their plan. In class or at a fixture that says `reach: none` it is 0.15, a glance 0.5, otherwise 1. A twist that darkens the phone is 0.
+    _reach_p(reach, hm): What one row's `reach` is worth as a phone. Lunch is the one window inside a school day, the same 12:35-13:20 the owner's own reader uses.
+    _world_available(name, date_str, hm): 0..1 from the world's rows, for a reader.
+    _where_bit(place, lo, hi, reach): One window of somebody's day as a line reads it: where, when, and the phone beside it.
+    _world_line(name, date_str): One person's day as the world file has it, in the shape `plan_line` returns: place and hours, with the phone beside it.
+    plan_line(name, date_str): 
+    plans_brief(date_str, own_only): Where everybody is today, one line each.  `own_only` is for the call that plans HER OWN circle's day: those people are not at her school and have never met the world's, and handing that planner the whereabouts of the gir
+    free_after_school(date_str): Who is free with the group after school today, for her schedule writer: the people, or the reason each is not.
+    draws_brief(date_str): 
+    beats_for(date_str): 
+    _key_of(who): The roster key for a name in any of its forms. One table (`sim/roster.py`); the sheet is the whole of why this call exists.
+    photo_ja(desc, caption): 
+    settled_line(rec): What the day has fixed, as the planner wrote it (kv cast_beats `settled`), yesterday's carried behind it. One line each; empty when the plan has none. Filtered through the same gate the ledger reads it by, so the speaker
+    _backed(lines, date_str, carried): The settled lines the world still holds, on the day being planned.  Two ways a line stops being true and nothing used to notice either. Its day arrives and passes -- "carry it unless a beat today changes it" has no way t
+    dates_ahead(d0, limit): What is actually on, with the day or the span of each: the only list a plan for an outing may take a date and a title from.  A one-night matsuri and an exhibition that runs all month are both here and they are not the sa
+    event_of(item, date_str, what): The calendar binding a planned outing names, written as it goes into the line: "" when it names none, None when it names one the calendar has not got on that date (logged, and the caller drops the line). The title stored
+    _settled_from(data, date_str): The day's settled facts as lines, each carrying the calendar entry it names. An outing the planner cannot name an entry for is refused here, where the line is written, rather than after everybody has spent six days getti
+    _speak_beat(b, date_str, earlier, rec): One beat, in that person's own words. Her sheet is the system prompt and the role is only the contract, the way the bible is Tomoe's and `cast_turn` is the contract for her friends' replies.
+    _group_morning(date_str): The earliest thing anybody in the group has to be at tomorrow, in minutes past midnight, or None when nobody has anything.  A chat does not decide its own bedtime in a vacuum: if they all have school, or a club fixture, 
+    _late_window(date_str): When the group chat dies tonight: a different time every night, never on the hour or the half hour.  Drawn in code because the sleep model reads it (`Health._chat_alive`) and a prompt asking a model to write aimless late
+    _after_last_light(hm, last_hm): Is this time in the dead part of the night -- after the chat was over, before the group is up again?  The window ENDS at the wake hour rather than a fixed six hours: after a night that ran to 02:13, six hours reached 08:
+    _is_late(hm, last_hm, has_late): Is this time inside tonight's late stretch (`late_from_hm` -> last_hm, across midnight)? Nothing is, on a night with no late stretch.
+    _fill_late(clean, date_str, last_hm, tail, has_late): Guarantee the late stretch is not empty, and that enough of the day is about nothing. Logged loudly either way -- if this fires every day the planner is not honouring the instruction and that is the thing to fix, not thi
+    _apply_absences(absent, beats, schedule, date_str): The planner said who cannot be where her schedule puts them. Take them out of the blocks' `with` for that window (the director reads the schedule, and on 08-29 it walked her home from the festival with a Rena the cast ha
+    plan_day(schedule, date_str, force): One call: the social script for the day, from the cast sheets, their draws, her schedule, arcs and threads. Stored as kv cast_beats.
+    day_to_world(date_str): Who these people are and where the day has each of them, into the world file (`world/shared.py`). Written beside the plan rather than read out of the save later: a second process in the same world has to see the day this
+    own_day_to_world(schedule, date_str): Where SHE is today, into the world file, for a character who lives in a world somebody else keeps.  The owner's planner draws her day from her row's week on the world's roster, and until this was written that draw was al
+    presence_beat(scene): Somebody she is physically WITH says something, unplanned.  The planner writes a day in advance, so being sat across a table from Aya for two hours produced one four-minute conversation at 09:10 and nothing else, while a
+    group_silent_minutes(): How long the group chat has held nothing, on her clock. -1 when there is no group message in the record to measure from.  Nothing else in the mechanism knows this number. The day's beats are placed once, when the plan is
+    _quiet_pull(rec, now_hm): A group beat later today comes forward when the room has been silent too long. Off unless `cast.quiet_pull_enabled`.  The plan is a good day's shape and a bad day's pacing: it cannot know that the 12:41 conversation died
+    due(): Beats whose time has come and that were not delivered yet. Marks them done.  A character who is in this world and does not keep it delivers none. The gate on the planning side has been here since the rule landed, so no n
+    _still_on(b): Is the thing this beat is about still a thing that is happening.
+    hold(beats): Beats put back: not delivered, due again on the next pass.
+    _rooms(): 
+    _beat_id(date_str, b): 
+    _add_beat(date_str, b): One unplanned beat into today's record, so the machinery that tracks a beat across passes can see it. False when there is no record for the day yet or the record already holds a beat for that person at that minute.
+    _beat_mark(date_str, b): Set fields on the stored copy of a beat. The dict `due()` handed out is a decoded copy; the record is what the next pass reads.
+    _beat_room(b): 
+    _room_turns_today(room, kind, date_str, limit): What has already been said in this room today, from the record, so somebody asked for a line at 12:35 is not answering out of nothing.
+    _agent_beats(beats): The beats this process may deliver on this pass.  A beat whose speaker runs her own process carries no words: the plan put her there and said what she is reaching about, and she says it. At the beat's own time the moment
+    deliver(beats): Beats become events (kind cast) and the extra_events the director must reflect.
+    save_beat(b, why): A beat nobody answered is still something that was said.  Every beat is a model call in that person's own voice, and its words lived in kv `cast_beats` -- overwritten by tomorrow's plan, with one day of grace in `cast_be
+    roll_over(date_str): At a new day: yesterday's beats are kept as 'prev' for continuity.
+    week_bias(): Share of salient events this week that were about him, so the showrunner can lean the next week toward her own people.
+    beats_brief(): 
+
+CONFIG SECTIONS: cast, cast.late_from_hm, character, character.cast_file, character.name, exchange, exchange.keep, exchange.sleep_wake_hm, prompt_text, world
+KV READ: cast_beats, cast_beats_prev, cast_chat, cast_days, cast_life, cast_plans, cast_quiet_pulls, commitments, exchange_live, presence_beats
+KV WRITE: cast_beats, cast_beats_prev, cast_chat, cast_days, cast_life, cast_plans, presence_beats
+TABLES: 
+LOG TAGS: cast, cast_mechanisms, pocket, room, shared world
+PROMPTS: cast_beat, cast_day, cast_life
+LLM ROLES: cast_beat, cast_day, cast_life
+OPS COMMANDS: 

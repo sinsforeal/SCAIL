@@ -1,0 +1,52 @@
+{
+ "_what": "Momoka's home file for the grounding test arm B (own-day, tk-6r3). Read by resident/schedule.py own_day through world.home_file. Home happenings only, from her bible and the record; every line has a receipt (scene:line) in `receipts`. No school timetable, no named parent, no age, no grade, no outing. make_run.py builds `plan` from `day` and `sick_day`.",
+ "home": {
+  "what": "百花の家。千代田家。広い家（b01_01:0839）。家にカラオケの機械がある（b11_01:0365）",
+  "rooms": [
+   {"id": "her_room", "name": "百花の部屋", "what": "百花の自分の部屋"},
+   {"id": "house", "name": "家", "what": "千代田家の広い家。真里亜がいる"}
+  ],
+  "building": {"what": "千代田家の家"}
+ },
+ "outside": [],
+ "week": {
+  "anchors": [{"what": "家で過ごす時間が長い（b06_01:1090）"}],
+  "hours": [{"what": "朝はねむい。低血圧（01_01:3403）"}],
+  "standing": [
+   {"what": "真里亜は百花のメイド。家ではそばにいる（d06_01:0484）"},
+   {"what": "ホットミルクはすぐねむくなる（06_01:4629）"},
+   {"what": "体がよわい日は家で休む（d06_01:0499）"}
+  ]
+ },
+ "receipts": {
+  "wake": "01_01:3403 「ん。ちょっとねむい。百花、低血圧だから」",
+  "house": "b01_01:0839 「百花の家、広い。みんな呼べる」; 04_01:1944 千代田家",
+  "maria": "d06_01:0484 「真里亜は、百花のメイドだから」; 02_01:5545 「百花が守る。ね、真里亜」; 01_01:3472 「真里亜はすごいメイド」",
+  "milk": "06_01:4629 「ホットミルクはすぐねむくなる」",
+  "karaoke": "b11_01:0365 「百花は家にカラオケの機械ある」",
+  "books": "b06_01:1090 「家で過ごす時間の方が長かった、千奈が教えてくれた本、すぐに読んじゃった」",
+  "sick": "d06_01:0499 「この前、百花、たくさん学園休んだ」; 03_01:2298 「百花は……からだ、よわいから」; d06_01:1883 お医者さんの「病は気から」",
+  "relatives": "b01_01:1059 「親戚がくる。来たばかりの時はパパたちがお相手。そのあとたぶん、百花もお相手する」"
+ },
+ "day": [
+  {"start": "00:00", "end": "06:30", "activity": "眠っている", "location": "her_room", "with": "alone"},
+  {"start": "06:30", "end": "08:30", "activity": "起きたところ。ねむい。百花、低血圧", "location": "her_room", "with": "真里亜"},
+  {"start": "08:30", "end": "12:00", "activity": "家で過ごす。真里亜がそばにいる", "location": "house", "with": "真里亜"},
+  {"start": "12:00", "end": "13:00", "activity": "家でごはん", "location": "house", "with": "真里亜"},
+  {"start": "13:00", "end": "18:00", "activity": "自分の部屋で本を読んだり、家で過ごす", "location": "her_room", "with": "alone"},
+  {"start": "18:00", "end": "21:00", "activity": "家で過ごす。真里亜がそばにいる", "location": "house", "with": "真里亜"},
+  {"start": "21:00", "end": "22:30", "activity": "ホットミルクを飲む。すぐねむくなる", "location": "her_room", "with": "alone"},
+  {"start": "22:30", "end": "24:00", "activity": "眠っている", "location": "her_room", "with": "alone"}
+ ],
+ "sick_day": [
+  {"start": "00:00", "end": "06:30", "activity": "眠っている", "location": "her_room", "with": "alone"},
+  {"start": "06:30", "end": "12:00", "activity": "からだの調子がわるい。今日は家で休む", "location": "her_room", "with": "真里亜"},
+  {"start": "12:00", "end": "13:00", "activity": "部屋でごはん。真里亜が持ってくる", "location": "her_room", "with": "真里亜"},
+  {"start": "13:00", "end": "21:00", "activity": "部屋で休む。本を読む", "location": "her_room", "with": "alone"},
+  {"start": "21:00", "end": "22:30", "activity": "ホットミルクを飲む。すぐねむくなる", "location": "her_room", "with": "alone"},
+  {"start": "22:30", "end": "24:00", "activity": "眠っている", "location": "her_room", "with": "alone"}
+ ],
+ "sun_visit": [
+  {"start": "14:00", "end": "17:00", "activity": "親戚が来ている。パパたちがお相手。そのあと百花もお相手する", "location": "house", "with": "親戚"}
+ ]
+}

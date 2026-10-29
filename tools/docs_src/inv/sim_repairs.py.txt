@@ -1,0 +1,32 @@
+# sim\repairs.py  (708 lines)
+
+DOCSTRING:
+One-off repairs of a live save, run at boot, once, for every character.
+
+A repair here is not a migration and not a fixture: it is a fault that
+reached the record and has to come out of it, keyed on a flag in the save so
+the second boot does nothing. The old text of every row it changes is copied
+to `data/retired/<timestamp>_<name>/` first -- superseded material is kept,
+never deleted -- and the counts go in the log.
+
+DEFS:
+def _retired(name): 
+def _strip_labels(text): The record's own clock label off a stored message, wherever it starts a line -- and nothing else.  The words stay, including the ones the model wrote as the NEXT record entry with a stamp minutes in the future: they were
+def strip_stamps_once(app): The record's own label, taken off the messages it reached.  Her turns in the thread carried the app's label until 2026-09-04 and the model copied it; `Persona._clean` stripped it from the answer, and the one that got pas
+def share_recaps_once(app): Every page this character's save holds about the world, copied into the machine's one store.  Until 2026-09-04 the cache of what an episode contains was a table in each character's own save, so both bots watching his med
+def drop_invented_recall_once(app): The invented memory, out of the record it should never have entered.  Keyed on the row's own content rather than on its position, so a save that does not hold it is untouched and a re-run does nothing. What comes out is 
+def retire_his_digests_once(app): A character whose sheet says she cannot see him holds nothing of his machine.  Until 2026-09-07 `sees_him: none` was read by the pick and the persona only, so Rena's process digested his screen six times and wrote nine h
+def retire_his_reflections_once(app): What a blind character THOUGHT about his machine, out of her save.  The digests are gone (`retire_his_digests_once`), but on 2026-09-07 her reflect role had already written two private thoughts quoting his notes by name,
+def retire_him_residue_once(app): The last of him out of the save of a character who has neither a chat with him nor sight of him.  The digests went (`retire_his_digests_once`) and the thoughts about them went (`retire_his_reflections_once`), and what wa
+def retire_his_mood_once(app): The row saying what mood HE is in, out of the save of a character whose sheet says she has no chat with him.  `retire_him_residue_once` took this row out once and flagged the save, and the section that writes it was stil
+def key_pages_by_id_once(app): Pages filed under a title two works share, re-filed under the work.  Until 2026-09-04 a page about an episode was named by its Japanese title and the episode number, in the machine's store and in her save alike. MyAnimeL
+def drop_wrong_editions_once(app): A thing she knows by name whose text is another edition's story.  Both saves hold `anime:1480` (the 2006 one-episode Example Show OVA) and `anime:2604` (the 2007 television run) with byte-identical 269-character texts under
+
+CONFIG SECTIONS: character.existence
+KV READ: cast_chat, him_residue_retired_once, his_digests_retired_once, his_mood, his_mood_retired_once, his_reflections_retired_once, invented_recall_dropped_once, pages_keyed_by_id_once, primitives, questions, recalls, recaps_shared_once, reflections, sentiments, stamps_stripped_once, watchlist, wrong_editions_dropped_once
+KV WRITE: cast_chat, him_residue_retired_once, his_digests_retired_once, his_mood_retired_once, his_reflections_retired_once, invented_recall_dropped_once, pages_keyed_by_id_once, primitives, questions, recalls, recaps_shared_once, reflections, sentiments, stamps_stripped_once, watchlist, wrong_editions_dropped_once
+TABLES: 
+LOG TAGS: repair
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

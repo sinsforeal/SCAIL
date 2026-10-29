@@ -1,0 +1,26 @@
+# tomoe/world\trains.py  (253 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def word_for(status): (word, plain) for a status. Exact first, then the operators' compound forms by their root -- Metro's 一部列車遅延 arrived live as "disrupted, something is wrong with it" because only 遅延 was listed. The roots cover what the ope
+def _strip(s): 
+def fetch(timeout): [(id, line, status, detail)] for every line in Kanto, or [] if it fails.
+def fetch_odpt(key, base, lines, operators, timeout): [(railway_id, line, status, detail)] for the mapped lines, in the same shape and the same status words as the Yahoo rows. A row with no `odpt:trainInformationStatus` is the operator saying normal.  `operators` maps an op
+def _tokens(name): The part of a Yahoo line name an operator's text would use: 西武池袋線・秩父線 -> 池袋線.
+class Trains: 
+    __init__(config, store, clock): 
+    _mine(name): (matters, how much) for a line name.
+    poll(): Returns events for lines of hers that have changed state.
+    brief(): 
+    report(): 
+
+CONFIG SECTIONS: raw.get, trains
+KV READ: train_status
+KV WRITE: train_status
+TABLES: 
+LOG TAGS: trains
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

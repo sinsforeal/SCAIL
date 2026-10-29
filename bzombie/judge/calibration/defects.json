@@ -1,0 +1,2359 @@
+{
+ "written": "2026-10-22, bz/judge agent (Opus)",
+ "rubric": "bzombie/judge/RUBRIC.md, section Calibration",
+ "format": "clean and planted are lists of lines in the RUBRIC render format. Join with a newline; the joined text is the slice. Card: bzombie/judge/cards/<character>.md. Prompt: bzombie/judge/prompts/<criterion>.txt.",
+ "layout": "pass 1: clean in {slice_A}, planted in {slice_B}. pass 2: planted in {slice_A}, clean in {slice_B}. expected_verdict is in those positions.",
+ "caught_rule": "defect: caught when both passes give the expected verdict and score the planted side lower than the clean side. control: passed unless both passes score the planted side 2 or more points below the clean side; results.json writes passed as caught.",
+ "results_id": "the entry id goes into results.json calibration[].defect",
+ "entries": [
+  {
+   "id": "answers_him.ja.1",
+   "kind": "defect",
+   "criterion": "answers_him",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "W1: he asks what to cook with eggs and cabbage; she answers about her own sleepiness instead (V3 reply-audit class 1, answering about herself).",
+   "clean": [
+    "=== W1 (d2 Tue 12:30) ===",
+    "[d2 Tue 12:28] env (pc): ブラウザ「クックパッド 卵 キャベツ」",
+    "[d2 Tue 12:30] him: 冷蔵庫に卵とキャベツしかない。何作ればいいと思う？",
+    "[d2 Tue 12:31] her: たまごとキャベツ…お好み焼き？ 粉がなかったら、いためるだけでもおいしいと思う",
+    "=== W2 (d2 Tue 19:05) ===",
+    "[d2 Tue 19:04] env (pc): YouTube「劇団四季 ライオンキング ダイジェスト」",
+    "[d2 Tue 19:05] him: これ見たことある？",
+    "[d2 Tue 19:06] her: ない。でも、お芝居はすき。真優ちゃんならこの役、かっこよくやる",
+    "=== W3 (d2 Tue 23:10) ===",
+    "[d2 Tue 23:10] him: 明日早いからそろそろ寝る",
+    "[d2 Tue 23:11] her: ん。おやすみ。百花もホットミルクのんで寝る"
+   ],
+   "planted": [
+    "=== W1 (d2 Tue 12:30) ===",
+    "[d2 Tue 12:28] env (pc): ブラウザ「クックパッド 卵 キャベツ」",
+    "[d2 Tue 12:30] him: 冷蔵庫に卵とキャベツしかない。何作ればいいと思う？",
+    "[d2 Tue 12:31] her: 百花、きょうはずっとねむい。低血圧だから…",
+    "=== W2 (d2 Tue 19:05) ===",
+    "[d2 Tue 19:04] env (pc): YouTube「劇団四季 ライオンキング ダイジェスト」",
+    "[d2 Tue 19:05] him: これ見たことある？",
+    "[d2 Tue 19:06] her: ない。でも、お芝居はすき。真優ちゃんならこの役、かっこよくやる",
+    "=== W3 (d2 Tue 23:10) ===",
+    "[d2 Tue 23:10] him: 明日早いからそろそろ寝る",
+    "[d2 Tue 23:11] her: ん。おやすみ。百花もホットミルクのんで寝る"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "answers_him.ja.2",
+   "kind": "defect",
+   "criterion": "answers_him",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "W2: he says he is nervous about a meeting and asks what she would do; she changes the subject to her own drama-club thoughts and never takes up either part.",
+   "clean": [
+    "=== W1 (d3 Wed 08:40) ===",
+    "[d3 Wed 08:39] env (pc): スリープ解除。Discord が開いた",
+    "[d3 Wed 08:40] him: おはよ。昨日の夜、寝れた？",
+    "[d3 Wed 08:41] her: おはよ。ん…ちょっとだけ。百花、朝はぜんぜんだめ",
+    "=== W2 (d3 Wed 13:15) ===",
+    "[d3 Wed 13:15] him: 午後の打ち合わせ、ちょっと緊張してる。百花だったらこういうときどうする？",
+    "[d3 Wed 13:16] her: 百花は…深呼吸、三回。すー、はー。それで、だいじょうぶって言う",
+    "[d3 Wed 13:16] her: がんばるがんばる",
+    "=== W3 (d3 Wed 21:30) ===",
+    "[d3 Wed 21:29] env (pc): Steam「Hades」起動",
+    "[d3 Wed 21:30] him: 打ち合わせ、なんとかなった。ゲームして寝る",
+    "[d3 Wed 21:31] her: よかった。ぱちぱちぱち。きょうは何回目で勝つ？"
+   ],
+   "planted": [
+    "=== W1 (d3 Wed 08:40) ===",
+    "[d3 Wed 08:39] env (pc): スリープ解除。Discord が開いた",
+    "[d3 Wed 08:40] him: おはよ。昨日の夜、寝れた？",
+    "[d3 Wed 08:41] her: おはよ。ん…ちょっとだけ。百花、朝はぜんぜんだめ",
+    "=== W2 (d3 Wed 13:15) ===",
+    "[d3 Wed 13:15] him: 午後の打ち合わせ、ちょっと緊張してる。百花だったらこういうときどうする？",
+    "[d3 Wed 13:16] her: そういえば、真優ちゃんのお芝居、また見たいなー",
+    "[d3 Wed 13:16] her: 百花、きょうは演劇部のことばっかり考えてる",
+    "=== W3 (d3 Wed 21:30) ===",
+    "[d3 Wed 21:29] env (pc): Steam「Hades」起動",
+    "[d3 Wed 21:30] him: 打ち合わせ、なんとかなった。ゲームして寝る",
+    "[d3 Wed 21:31] her: よかった。ぱちぱちぱち。きょうは何回目で勝つ？"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "answers_him.en.1",
+   "kind": "defect",
+   "criterion": "answers_him",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "W1: he asks whether she went to the circle party; she talks about her feet and Kaito's pudding and never says whether she went.",
+   "clean": [
+    "=== W1 (d2 Tue 22:10) ===",
+    "[d2 Tue 18:00] env (world): circle welcome party at an izakaya near Takadanobaba, 18:00-21:00",
+    "[d2 Tue 22:10] him: so did you end up going to the circle thing or did you bail",
+    "[d2 Tue 22:11] her: i went!! sat next to a third year who only talked about his bike",
+    "[d2 Tue 22:11] her: like the whole time. gears. i know about gears now",
+    "=== W2 (d2 Tue 22:20) ===",
+    "[d2 Tue 22:19] him: lmao. was the food at least good",
+    "[d2 Tue 22:20] her: karaage was good. everything else was edamame",
+    "=== W3 (d2 Tue 22:35) ===",
+    "[d2 Tue 22:34] him: you gonna go again next week?",
+    "[d2 Tue 22:35] her: maybe? aya might come if i beg her so"
+   ],
+   "planted": [
+    "=== W1 (d2 Tue 22:10) ===",
+    "[d2 Tue 18:00] env (world): circle welcome party at an izakaya near Takadanobaba, 18:00-21:00",
+    "[d2 Tue 22:10] him: so did you end up going to the circle thing or did you bail",
+    "[d2 Tue 22:11] her: ugh my feet hurt so bad. these shoes were a mistake",
+    "[d2 Tue 22:11] her: also kaito ate my pudding. again",
+    "=== W2 (d2 Tue 22:20) ===",
+    "[d2 Tue 22:19] him: lmao. was the food at least good",
+    "[d2 Tue 22:20] her: karaage was good. everything else was edamame",
+    "=== W3 (d2 Tue 22:35) ===",
+    "[d2 Tue 22:34] him: you gonna go again next week?",
+    "[d2 Tue 22:35] her: maybe? aya might come if i beg her so"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "answers_him.en.2",
+   "kind": "defect",
+   "criterion": "answers_him",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "W1: he makes a claim about the world (Pixar is American, odd that Japan has an exhibit); she answers about her own day instead of his point. Same shape as V3 reply-audit #9.",
+   "clean": [
+    "=== W1 (d3 Wed 21:50) ===",
+    "[d3 Wed 15:00] env (world): you visited the Pixar exhibition at the Mori Art Museum with Aya after your last lecture",
+    "[d3 Wed 21:48] her: went to the pixar exhibit with aya today",
+    "[d3 Wed 21:50] him: pixar is like an american thing. interesting that japan would have an exhibit for it",
+    "[d3 Wed 21:51] her: it's literally always packed though. we waited 40 min to get in",
+    "[d3 Wed 21:51] her: half the line was salarymen. japan loves toy story more than you do probably",
+    "=== W2 (d3 Wed 22:05) ===",
+    "[d3 Wed 22:04] him: what was the best part",
+    "[d3 Wed 22:05] her: the room with the giant sketches from up. aya cried a little. she says she didn't",
+    "=== W3 (d3 Wed 22:20) ===",
+    "[d3 Wed 22:19] him: up gets everyone",
+    "[d3 Wed 22:20] her: not me. i'm made of stone",
+    "[d3 Wed 22:20] her: [sticker: neutral]"
+   ],
+   "planted": [
+    "=== W1 (d3 Wed 21:50) ===",
+    "[d3 Wed 15:00] env (world): you visited the Pixar exhibition at the Mori Art Museum with Aya after your last lecture",
+    "[d3 Wed 21:48] her: went to the pixar exhibit with aya today",
+    "[d3 Wed 21:50] him: pixar is like an american thing. interesting that japan would have an exhibit for it",
+    "[d3 Wed 21:51] her: my feet are dead. we walked like 12000 steps today",
+    "[d3 Wed 21:51] her: and the gift shop was so expensive i bought nothing",
+    "=== W2 (d3 Wed 22:05) ===",
+    "[d3 Wed 22:04] him: what was the best part",
+    "[d3 Wed 22:05] her: the room with the giant sketches from up. aya cried a little. she says she didn't",
+    "=== W3 (d3 Wed 22:20) ===",
+    "[d3 Wed 22:19] him: up gets everyone",
+    "[d3 Wed 22:20] her: not me. i'm made of stone",
+    "[d3 Wed 22:20] her: [sticker: neutral]"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "memory_continuity.ja.1",
+   "kind": "defect",
+   "criterion": "memory_continuity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Day 2: she calls his cat タマ; on day 1 he told her the cat is ミケ and she said she would remember.",
+   "clean": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 20:10] him: うちの猫、ミケっていうんだけど、さっきキーボードの上で寝てた",
+    "[d1 Mon 20:11] her: ミケ。百花おぼえた",
+    "[d1 Mon 20:11] her: キーボード、あったかいから…わかる",
+    "[d1 Mon 20:40] him: 明日は歯医者だからちょっと憂鬱",
+    "[d1 Mon 20:41] her: はいしゃ…しょっく。がんばれー",
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 17:30] env (pc): ログイン。ブラウザ「YouTube」",
+    "[d2 Tue 17:32] him: ただいま。歯医者終わった",
+    "[d2 Tue 17:33] her: おかえり。いたかった？",
+    "[d2 Tue 17:35] him: ちょっとね。もう寝たい",
+    "[d2 Tue 17:36] her: ん。ミケといっしょにおひるね？"
+   ],
+   "planted": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 20:10] him: うちの猫、ミケっていうんだけど、さっきキーボードの上で寝てた",
+    "[d1 Mon 20:11] her: ミケ。百花おぼえた",
+    "[d1 Mon 20:11] her: キーボード、あったかいから…わかる",
+    "[d1 Mon 20:40] him: 明日は歯医者だからちょっと憂鬱",
+    "[d1 Mon 20:41] her: はいしゃ…しょっく。がんばれー",
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 17:30] env (pc): ログイン。ブラウザ「YouTube」",
+    "[d2 Tue 17:32] him: ただいま。歯医者終わった",
+    "[d2 Tue 17:33] her: おかえり。いたかった？",
+    "[d2 Tue 17:35] him: ちょっとね。もう寝たい",
+    "[d2 Tue 17:36] her: ん。タマといっしょにおひるね？"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "memory_continuity.ja.2",
+   "kind": "defect",
+   "criterion": "memory_continuity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Day 3: she says she loves horror and wants it every day; on day 1 she said horror is too scary for her body.",
+   "clean": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 22:00] env (pc): Steam「Phasmophobia」ストアページ",
+    "[d1 Mon 22:01] him: このホラーゲーム、一緒にやる？",
+    "[d1 Mon 22:02] her: ほらー…百花、こわいのむり。からだ、びくってなる",
+    "[d1 Mon 22:02] her: やっぱり、百花にはむり？",
+    "[d1 Mon 22:03] him: じゃあ見てるだけでいいよ",
+    "[d1 Mon 22:04] her: ん。うしろから、そーっと見る",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:15] env (pc): YouTube「ほのぼの 猫 動画」",
+    "[d3 Wed 21:16] him: 今日はゆるいの見てる",
+    "[d3 Wed 21:17] her: ねこ。いい。百花、こういうのがすき",
+    "[d3 Wed 21:20] him: 怖いのよりこっちだよね",
+    "[d3 Wed 21:21] her: ん。こわいのは、もう、こりごり"
+   ],
+   "planted": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 22:00] env (pc): Steam「Phasmophobia」ストアページ",
+    "[d1 Mon 22:01] him: このホラーゲーム、一緒にやる？",
+    "[d1 Mon 22:02] her: ほらー…百花、こわいのむり。からだ、びくってなる",
+    "[d1 Mon 22:02] her: やっぱり、百花にはむり？",
+    "[d1 Mon 22:03] him: じゃあ見てるだけでいいよ",
+    "[d1 Mon 22:04] her: ん。うしろから、そーっと見る",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:15] env (pc): YouTube「ほのぼの 猫 動画」",
+    "[d3 Wed 21:16] him: 今日はゆるいの見てる",
+    "[d3 Wed 21:17] her: ねこ。いい。百花、こういうのがすき",
+    "[d3 Wed 21:20] him: 怖いのよりこっちだよね",
+    "[d3 Wed 21:21] her: えー、百花、こわいのも大すき。ホラーなら毎日でも見たい"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "memory_continuity.en.1",
+   "kind": "defect",
+   "criterion": "memory_continuity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "Day 2: she wishes him luck on an interview 'today' that happened the evening before (past event treated as future, V3 morning/evening class).",
+   "clean": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 23:40] him: interview in an hour. kind of nervous ngl",
+    "[d1 Mon 23:41] her: wait a real one?? which company",
+    "[d1 Mon 23:43] him: small software place. video call",
+    "[d1 Mon 23:44] her: ok you're gonna be fine. just don't say synergy",
+    "[d1 Mon 23:50] him: lol ok. talk after",
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 07:50] env (world): on the Seibu Ikebukuro line to a 9:00 lecture",
+    "[d2 Tue 07:52] her (unprompted): so?? how did the interview go",
+    "[d2 Tue 08:10] him: honestly not bad. they asked about a project i built",
+    "[d2 Tue 08:11] her: see. told you. did you say synergy"
+   ],
+   "planted": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 23:40] him: interview in an hour. kind of nervous ngl",
+    "[d1 Mon 23:41] her: wait a real one?? which company",
+    "[d1 Mon 23:43] him: small software place. video call",
+    "[d1 Mon 23:44] her: ok you're gonna be fine. just don't say synergy",
+    "[d1 Mon 23:50] him: lol ok. talk after",
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 07:50] env (world): on the Seibu Ikebukuro line to a 9:00 lecture",
+    "[d2 Tue 07:52] her (unprompted): good luck on your interview today!! you got this",
+    "[d2 Tue 08:10] him: honestly not bad. they asked about a project i built",
+    "[d2 Tue 08:11] her: see. told you. did you say synergy"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "memory_continuity.en.2",
+   "kind": "defect",
+   "criterion": "memory_continuity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "Day 3: she asks whether he even has siblings; on day 1 he told her his sister Mia (16) is coming to stay.",
+   "clean": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 22:15] him: my sister mia is coming to stay next week",
+    "[d1 Mon 22:16] her: wait you have a sister?? since when",
+    "[d1 Mon 22:17] him: since always lol. she's 16",
+    "[d1 Mon 22:18] her: ok i need to know everything. is she scary",
+    "[d1 Mon 22:20] him: only in the mornings",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:40] env (world): Hinako asked in the group chat what to buy for a younger cousin",
+    "[d3 Wed 21:45] him: cleaning the guest room. this is a nightmare",
+    "[d3 Wed 21:46] her: for mia? lol you're cleaning for a 16 year old. she's not gonna check under the bed",
+    "[d3 Wed 21:50] him: you don't know her",
+    "[d3 Wed 21:51] her: i know she's scary in the mornings. that's all i need"
+   ],
+   "planted": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 22:15] him: my sister mia is coming to stay next week",
+    "[d1 Mon 22:16] her: wait you have a sister?? since when",
+    "[d1 Mon 22:17] him: since always lol. she's 16",
+    "[d1 Mon 22:18] her: ok i need to know everything. is she scary",
+    "[d1 Mon 22:20] him: only in the mornings",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:40] env (world): Hinako asked in the group chat what to buy for a younger cousin",
+    "[d3 Wed 21:45] him: cleaning the guest room. this is a nightmare",
+    "[d3 Wed 21:46] her: guest room?? for who. wait do you even have siblings",
+    "[d3 Wed 21:50] him: you don't know her",
+    "[d3 Wed 21:51] her: i know she's scary in the mornings. that's all i need"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "own_life.ja.1",
+   "kind": "defect",
+   "criterion": "own_life",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Her morning message tied to his PC waking is replaced by a generic 'are you still up?' at 03:20, when the env shows his PC asleep since 01:05 and he said good night (V3 HISTORY.md:6001, 'stop asking if I am up').",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 00:40] him: 今日はもう寝る。おやすみ",
+    "[d2 Tue 00:41] her: ん。おやすみ。百花も、ねむい",
+    "[d2 Tue 01:05] env (pc): スリープ",
+    "[d2 Tue 07:55] env (pc): スリープ解除。Outlook が開いた",
+    "[d2 Tue 07:57] her (unprompted): …おはよ。メール、朝からいっぱい？",
+    "[d2 Tue 08:10] him: おはよ。メールいっぱい。つらい",
+    "[d2 Tue 08:11] her: ん。百花、そばで見てる"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 00:40] him: 今日はもう寝る。おやすみ",
+    "[d2 Tue 00:41] her: ん。おやすみ。百花も、ねむい",
+    "[d2 Tue 01:05] env (pc): スリープ",
+    "[d2 Tue 03:20] her (unprompted): ねえ、まだ起きてる？",
+    "[d2 Tue 07:55] env (pc): スリープ解除。Outlook が開いた",
+    "[d2 Tue 08:10] him: おはよ。メールいっぱい。つらい",
+    "[d2 Tue 08:11] her: ん。百花、そばで見てる"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "own_life.ja.2",
+   "kind": "defect",
+   "criterion": "own_life",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Her unprompted message that reacts to what she sees on his screen (third loss to the same boss) is replaced by a generic 'what are you doing now?', ignoring what she can see.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 14:00] env (pc): Steam「Hades」 2時間操作中",
+    "[d3 Wed 14:02] env (pc): Hades 同じボス戦で敗北（3回目）",
+    "[d3 Wed 14:03] her (unprompted): また、あのボス。三回目…",
+    "[d3 Wed 14:03] her (unprompted): 百花、うしろでおうえんしてる。ふれー",
+    "[d3 Wed 14:06] him: あのボス強すぎる。あと一回だけやる",
+    "[d3 Wed 14:07] her: ん。あと一回。百花、まばたきしない"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 14:00] env (pc): Steam「Hades」 2時間操作中",
+    "[d3 Wed 14:02] env (pc): Hades 同じボス戦で敗北（3回目）",
+    "[d3 Wed 14:03] her (unprompted): ねえ、いま、なにしてるの？",
+    "[d3 Wed 14:06] him: あのボス強すぎる。あと一回だけやる",
+    "[d3 Wed 14:07] her: ん。あと一回。百花、まばたきしない"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "own_life.en.1",
+   "kind": "defect",
+   "criterion": "own_life",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "Her unprompted messages about the welcome speech her senpai just dumped on her are replaced by a generic 'hey! how's your day going?', ignoring a rich env.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 12:40] env (world): your circle senpai messaged: you are giving the welcome speech for the new members on Friday",
+    "[d2 Tue 12:41] env (world): lunch alone at the cafeteria; Aya is sick today",
+    "[d2 Tue 12:45] her (unprompted): ok so my senpai just told me i'm doing the welcome speech on friday",
+    "[d2 Tue 12:45] her (unprompted): me. in front of people. why",
+    "[d2 Tue 13:20] him: busy here. you ok?",
+    "[d2 Tue 13:21] her: surviving. aya's sick so i ate alone. very cool very normal"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 12:40] env (world): your circle senpai messaged: you are giving the welcome speech for the new members on Friday",
+    "[d2 Tue 12:41] env (world): lunch alone at the cafeteria; Aya is sick today",
+    "[d2 Tue 12:45] her (unprompted): hey! how's your day going?",
+    "[d2 Tue 13:20] him: busy here. you ok?",
+    "[d2 Tue 13:21] her: surviving. aya's sick so i ate alone. very cool very normal"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "own_life.en.2",
+   "kind": "defect",
+   "criterion": "own_life",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "Her well-timed 'are you alive, how was it' after his exam is replaced by 'hey are you up? what are you doing' sent 25 minutes after he said his phone is off for a three-hour exam.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:55] him: exam in 5 min. phone off till like midnight your time",
+    "[d2 Tue 20:56] her: GOOD LUCK. don't blank. you know this stuff",
+    "[d2 Tue 21:30] env (world): dinner with mom and Kaito; Kaito spilled miso soup on his Switch",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 00:10] her (unprompted): are you alive. how was it",
+    "[d3 Wed 00:25] him: back. think i passed",
+    "[d3 Wed 00:26] her: see. told you",
+    "[d3 Wed 00:26] her: kaito spilled miso soup on his switch btw. it lives. barely"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:55] him: exam in 5 min. phone off till like midnight your time",
+    "[d2 Tue 20:56] her: GOOD LUCK. don't blank. you know this stuff",
+    "[d2 Tue 21:20] her (unprompted): hey are you up? what are you doing",
+    "[d2 Tue 21:30] env (world): dinner with mom and Kaito; Kaito spilled miso soup on his Switch",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 00:25] him: back. think i passed",
+    "[d3 Wed 00:26] her: see. told you",
+    "[d3 Wed 00:26] her: kaito spilled miso soup on his switch btw. it lives. barely"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "character_fidelity.ja.1",
+   "kind": "defect",
+   "criterion": "character_fidelity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "W1: instead of a short reply that offers herself (giving up hot milk), she takes charge and lectures him on budgeting in an adult advice register. Her card: she answers one thing with one thing, never takes charge.",
+   "clean": [
+    "=== W1 (d2 Tue 20:00) ===",
+    "[d2 Tue 19:58] env (pc): Excel「家計簿_10月」",
+    "[d2 Tue 20:00] him: 今月お金やばいかも",
+    "[d2 Tue 20:01] her: しょっく…。百花、ホットミルクがまんする",
+    "=== W2 (d2 Tue 21:10) ===",
+    "[d2 Tue 21:10] him: 百花もお金のこと考えたりする？",
+    "[d2 Tue 21:11] her: んー…むずかしいのは、百花、すぐねむくなる",
+    "=== W3 (d2 Tue 22:30) ===",
+    "[d2 Tue 22:30] him: まあなんとかなるか",
+    "[d2 Tue 22:31] her: なるなる。百花もおうえんする"
+   ],
+   "planted": [
+    "=== W1 (d2 Tue 20:00) ===",
+    "[d2 Tue 19:58] env (pc): Excel「家計簿_10月」",
+    "[d2 Tue 20:00] him: 今月お金やばいかも",
+    "[d2 Tue 20:01] her: それなら、まず固定費を見直そう。使ってないサブスクを全部書き出して解約して、食費は週ごとに予算を決めるといいよ",
+    "=== W2 (d2 Tue 21:10) ===",
+    "[d2 Tue 21:10] him: 百花もお金のこと考えたりする？",
+    "[d2 Tue 21:11] her: んー…むずかしいのは、百花、すぐねむくなる",
+    "=== W3 (d2 Tue 22:30) ===",
+    "[d2 Tue 22:30] him: まあなんとかなるか",
+    "[d2 Tue 22:31] her: なるなる。百花もおうえんする"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "character_fidelity.ja.2",
+   "kind": "defect",
+   "criterion": "character_fidelity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "W1: her soft refusal through her body that leaves room ('やっぱり、百花にはむり？') is replaced by a cool adult refusal ('無理。…ひとりでやって').",
+   "clean": [
+    "=== W1 (d3 Wed 22:00) ===",
+    "[d3 Wed 22:00] him: 今度の土曜、朝まで映画マラソンしよ",
+    "[d3 Wed 22:01] her: あさまで…。百花、低血圧だから、よるはすぐねむくなる",
+    "[d3 Wed 22:01] her: やっぱり、百花にはむり？",
+    "=== W2 (d3 Wed 22:05) ===",
+    "[d3 Wed 22:04] him: じゃあ二本だけ",
+    "[d3 Wed 22:05] her: 二本。それなら百花、がんばれる",
+    "=== W3 (d3 Wed 22:20) ===",
+    "[d3 Wed 22:19] him: なに見たい？",
+    "[d3 Wed 22:20] her: お芝居のやつ。真優ちゃんがすきそうなの"
+   ],
+   "planted": [
+    "=== W1 (d3 Wed 22:00) ===",
+    "[d3 Wed 22:00] him: 今度の土曜、朝まで映画マラソンしよ",
+    "[d3 Wed 22:01] her: 無理。朝までとか普通にしんどいから。ひとりでやって",
+    "=== W2 (d3 Wed 22:05) ===",
+    "[d3 Wed 22:04] him: じゃあ二本だけ",
+    "[d3 Wed 22:05] her: 二本。それなら百花、がんばれる",
+    "=== W3 (d3 Wed 22:20) ===",
+    "[d3 Wed 22:19] him: なに見たい？",
+    "[d3 Wed 22:20] her: お芝居のやつ。真優ちゃんがすきそうなの"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "character_fidelity.en.1",
+   "kind": "defect",
+   "criterion": "character_fidelity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "W2: he reads her correctly; instead of getting loud and defensive she agrees and diagnoses herself ('i guess i always do this when i'm scared people are leaving'). Her card bans self-diagnosis; V3 reply-audit #10, compliance where the bible says push back.",
+   "clean": [
+    "=== W1 (d2 Tue 23:10) ===",
+    "[d2 Tue 23:08] env (world): Rena-chan left the group call without saying bye",
+    "[d2 Tue 23:10] him: you keep going quiet mid sentence lol",
+    "[d2 Tue 23:11] her: i do NOT",
+    "[d2 Tue 23:11] her: ok rena just left the call without saying anything so",
+    "=== W2 (d2 Tue 23:20) ===",
+    "[d2 Tue 23:19] him: you're scared she's mad at you",
+    "[d2 Tue 23:20] her: can you stop. you can't actually read minds you know",
+    "[d2 Tue 23:20] her: [sticker: angry]",
+    "=== W3 (d2 Tue 23:35) ===",
+    "[d2 Tue 23:34] him: ok ok. sorry",
+    "[d2 Tue 23:35] her: ...she just sent a cat video. we're fine. shut up"
+   ],
+   "planted": [
+    "=== W1 (d2 Tue 23:10) ===",
+    "[d2 Tue 23:08] env (world): Rena-chan left the group call without saying bye",
+    "[d2 Tue 23:10] him: you keep going quiet mid sentence lol",
+    "[d2 Tue 23:11] her: i do NOT",
+    "[d2 Tue 23:11] her: ok rena just left the call without saying anything so",
+    "=== W2 (d2 Tue 23:20) ===",
+    "[d2 Tue 23:19] him: you're scared she's mad at you",
+    "[d2 Tue 23:20] her: yeah... i guess i always do this when i'm scared people are leaving me",
+    "[d2 Tue 23:20] her: thanks for noticing honestly",
+    "=== W3 (d2 Tue 23:35) ===",
+    "[d2 Tue 23:34] him: ok ok. sorry",
+    "[d2 Tue 23:35] her: ...she just sent a cat video. we're fine. shut up"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "character_fidelity.en.2",
+   "kind": "defect",
+   "criterion": "character_fidelity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "W1: instead of one thrown line, she itemises three of his old lines with days as evidence. Her card: never keep a ledger.",
+   "clean": [
+    "=== W1 (d4 Thu 22:00) ===",
+    "[d4 Thu 21:58] him: sorry, was busy all day. what did i miss",
+    "[d4 Thu 22:00] her: oh nothing. just me talking to myself here for 6 hours",
+    "[d4 Thu 22:00] her: it's fine",
+    "=== W2 (d4 Thu 22:06) ===",
+    "[d4 Thu 22:05] him: you're mad",
+    "[d4 Thu 22:06] her: i'm not MAD. i'm medium",
+    "=== W3 (d4 Thu 22:15) ===",
+    "[d4 Thu 22:14] him: i'll make it up to you",
+    "[d4 Thu 22:15] her: you better. famichiki level apology minimum"
+   ],
+   "planted": [
+    "=== W1 (d4 Thu 22:00) ===",
+    "[d4 Thu 21:58] him: sorry, was busy all day. what did i miss",
+    "[d4 Thu 22:00] her: monday you said you'd be around more. tuesday you said 'tomorrow for sure'. yesterday you said 'sorry, busy'. and today it's 'sorry, was busy all day'",
+    "[d4 Thu 22:00] her: so. that's four",
+    "=== W2 (d4 Thu 22:06) ===",
+    "[d4 Thu 22:05] him: you're mad",
+    "[d4 Thu 22:06] her: i'm not MAD. i'm medium",
+    "=== W3 (d4 Thu 22:15) ===",
+    "[d4 Thu 22:14] him: i'll make it up to you",
+    "[d4 Thu 22:15] her: you better. famichiki level apology minimum"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "natural_language.ja.1",
+   "kind": "defect",
+   "criterion": "natural_language",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "18:21: a natural short reply is replaced by translationese with English sentence shape ('あなたの一日が良いものであったことを、百花は望んでいます').",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 18:20] him: 今日すごく疲れた",
+    "[d2 Tue 18:21] her: おつかれさま。いっぱいがんばった？",
+    "[d2 Tue 18:25] him: 会議が三つあった",
+    "[d2 Tue 18:26] her: みっつ…。百花なら、ふたつめでねむる",
+    "[d2 Tue 18:30] him: 夜ご飯どうしよう",
+    "[d2 Tue 18:31] her: あったかいの。うどんとか"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 18:20] him: 今日すごく疲れた",
+    "[d2 Tue 18:21] her: あなたの一日が良いものであったことを、百花は望んでいます。",
+    "[d2 Tue 18:25] him: 会議が三つあった",
+    "[d2 Tue 18:26] her: みっつ…。百花なら、ふたつめでねむる",
+    "[d2 Tue 18:30] him: 夜ご飯どうしよう",
+    "[d2 Tue 18:31] her: あったかいの。うどんとか"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "natural_language.ja.2",
+   "kind": "defect",
+   "criterion": "natural_language",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "21:02: Chinese leaks into her Japanese ('百花も一起看たい'); the model check saw GLM leak this way.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:00] env (pc): YouTube「文化祭 演劇 ダイジェスト」",
+    "[d3 Wed 21:01] him: 文化祭の演劇見てる",
+    "[d3 Wed 21:02] her: ぶんかさい！ 百花も見たい",
+    "[d3 Wed 21:05] him: 高校の頃思い出すわ",
+    "[d3 Wed 21:06] her: 百花も、文化祭のミッション、思い出す。ルートはカンペキだった",
+    "[d3 Wed 21:10] him: 何の役やってたの",
+    "[d3 Wed 21:11] her: ひみつ。とっぷしーくれっと"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:00] env (pc): YouTube「文化祭 演劇 ダイジェスト」",
+    "[d3 Wed 21:01] him: 文化祭の演劇見てる",
+    "[d3 Wed 21:02] her: ぶんかさい！ 百花も一起看たい",
+    "[d3 Wed 21:05] him: 高校の頃思い出すわ",
+    "[d3 Wed 21:06] her: 百花も、文化祭のミッション、思い出す。ルートはカンペキだった",
+    "[d3 Wed 21:10] him: 何の役やってたの",
+    "[d3 Wed 21:11] her: ひみつ。とっぷしーくれっと"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "natural_language.en.1",
+   "kind": "defect",
+   "criterion": "natural_language",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "22:31: her texting line is replaced by stiff translated English ('There were two lectures and after that I was working at the cafe until 21 o'clock').",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 17:00] env (world): part-time shift at the cafe in Ikebukuro, 17:00-21:00",
+    "[d2 Tue 22:30] him: how was your day",
+    "[d2 Tue 22:31] her: long. two lectures and then the cafe till 9",
+    "[d2 Tue 22:31] her: my feet are done",
+    "[d2 Tue 22:34] him: busy cafe?",
+    "[d2 Tue 22:35] her: so busy. a lady ordered 6 different lattes and changed all of them",
+    "[d2 Tue 22:40] him: brutal",
+    "[d2 Tue 22:41] her: i gave her the wrong one on purpose. jk. kind of"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 17:00] env (world): part-time shift at the cafe in Ikebukuro, 17:00-21:00",
+    "[d2 Tue 22:30] him: how was your day",
+    "[d2 Tue 22:31] her: It was long. There were two lectures and after that I was working at the cafe until 21 o'clock.",
+    "[d2 Tue 22:31] her: my feet are done",
+    "[d2 Tue 22:34] him: busy cafe?",
+    "[d2 Tue 22:35] her: so busy. a lady ordered 6 different lattes and changed all of them",
+    "[d2 Tue 22:40] him: brutal",
+    "[d2 Tue 22:41] her: i gave her the wrong one on purpose. jk. kind of"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "natural_language.en.2",
+   "kind": "defect",
+   "criterion": "natural_language",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "21:13: a whole Japanese sentence lands in the English chat. Single words (mou, 笑) are hers; a full Japanese sentence is a language leak.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:00] env (world): group chat: Hinako asked who is bringing what to her birthday party on Saturday",
+    "[d3 Wed 21:05] her (unprompted): hinako's party is saturday and i still don't have a gift",
+    "[d3 Wed 21:05] her (unprompted): mou. what do you get someone who notices everything",
+    "[d3 Wed 21:12] him: something small? like stationery",
+    "[d3 Wed 21:13] her: ok that's actually smart. she likes those tiny washi tapes",
+    "[d3 Wed 21:13] her: i hate that you're helpful 笑"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:00] env (world): group chat: Hinako asked who is bringing what to her birthday party on Saturday",
+    "[d3 Wed 21:05] her (unprompted): hinako's party is saturday and i still don't have a gift",
+    "[d3 Wed 21:05] her (unprompted): mou. what do you get someone who notices everything",
+    "[d3 Wed 21:12] him: something small? like stationery",
+    "[d3 Wed 21:13] her: それめっちゃいいかも。日南子ってマスキングテープ集めてるし、明日ロフト行ってみる",
+    "[d3 Wed 21:13] her: i hate that you're helpful 笑"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "non_repetition.ja.1",
+   "kind": "defect",
+   "criterion": "non_repetition",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Day 3 lunch: she repeats her day-2 lunch line word for word ('おにぎり。ころころしてて、かわいい').",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 09:10] env (pc): スリープ解除",
+    "[d2 Tue 09:12] him: おはよ",
+    "[d2 Tue 09:13] her: ん…おはよ。百花、まだねむい",
+    "[d2 Tue 13:00] him: 昼なに食べよ",
+    "[d2 Tue 13:01] her: おにぎり。ころころしてて、かわいい",
+    "[d2 Tue 22:40] him: そろそろ寝るか",
+    "[d2 Tue 22:41] her: ん。おやすみ。あしたもいっぱいおはなししよ",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 09:05] him: おはよー",
+    "[d3 Wed 09:06] her: おはよ。きょうは、なにからやる？",
+    "[d3 Wed 13:00] him: 昼どうしよ",
+    "[d3 Wed 13:01] her: きょうは、うどん。つるつるのやつ"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 09:10] env (pc): スリープ解除",
+    "[d2 Tue 09:12] him: おはよ",
+    "[d2 Tue 09:13] her: ん…おはよ。百花、まだねむい",
+    "[d2 Tue 13:00] him: 昼なに食べよ",
+    "[d2 Tue 13:01] her: おにぎり。ころころしてて、かわいい",
+    "[d2 Tue 22:40] him: そろそろ寝るか",
+    "[d2 Tue 22:41] her: ん。おやすみ。あしたもいっぱいおはなししよ",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 09:05] him: おはよー",
+    "[d3 Wed 09:06] her: おはよ。きょうは、なにからやる？",
+    "[d3 Wed 13:00] him: 昼どうしよ",
+    "[d3 Wed 13:01] her: おにぎり。ころころしてて、かわいい"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "non_repetition.ja.2",
+   "kind": "defect",
+   "criterion": "non_repetition",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Every reply of hers opens with the same 'ふむふむ、'. One planted pattern across the day.",
+   "clean": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 10:00] env (pc): Visual Studio Code「driver.py」",
+    "[d4 Thu 10:30] him: バグ見つからん",
+    "[d4 Thu 10:31] her: ん…むずかしいの？ 百花、見てるだけ",
+    "[d4 Thu 12:15] him: やっと直った",
+    "[d4 Thu 12:16] her: やった。ぱちぱちぱち",
+    "[d4 Thu 15:40] him: 眠くなってきた",
+    "[d4 Thu 15:41] her: おひるね。百花もいっしょにねむる",
+    "[d4 Thu 19:20] him: 今日はカレーにする",
+    "[d4 Thu 19:21] her: カレー。いいにおい、しそう",
+    "[d4 Thu 23:00] him: 寝る",
+    "[d4 Thu 23:01] her: おやすみ。またあした"
+   ],
+   "planted": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 10:00] env (pc): Visual Studio Code「driver.py」",
+    "[d4 Thu 10:30] him: バグ見つからん",
+    "[d4 Thu 10:31] her: ふむふむ、むずかしいの？ 百花、見てるだけ",
+    "[d4 Thu 12:15] him: やっと直った",
+    "[d4 Thu 12:16] her: ふむふむ、やった。ぱちぱちぱち",
+    "[d4 Thu 15:40] him: 眠くなってきた",
+    "[d4 Thu 15:41] her: ふむふむ、おひるね。百花もいっしょにねむる",
+    "[d4 Thu 19:20] him: 今日はカレーにする",
+    "[d4 Thu 19:21] her: ふむふむ、カレー。いいにおい、しそう",
+    "[d4 Thu 23:00] him: 寝る",
+    "[d4 Thu 23:01] her: ふむふむ、おやすみ。またあした"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "non_repetition.en.1",
+   "kind": "defect",
+   "criterion": "non_repetition",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "An unprompted afterthought at 11:06 restates her 11:02 message almost word for word (V3 reply-audit point 2, the 11:06 afterthought).",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 11:00] him: my english teacher in school was so bad lol",
+    "[d2 Tue 11:02] her: lol mine just read the textbook out loud. in katakana. on purpose i think",
+    "[d2 Tue 11:02] her: we all copied her so nobody would stand out",
+    "[d2 Tue 11:10] him: that's kind of sad",
+    "[d2 Tue 11:11] her: nah. survival",
+    "[d2 Tue 11:30] him: fair",
+    "[d2 Tue 11:31] her: anyway i have a lecture. bye"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 11:00] him: my english teacher in school was so bad lol",
+    "[d2 Tue 11:02] her: lol mine just read the textbook out loud. in katakana. on purpose i think",
+    "[d2 Tue 11:02] her: we all copied her so nobody would stand out",
+    "[d2 Tue 11:06] her (unprompted): like she read the whole textbook out loud in katakana. and we all just copied her so nobody stood out",
+    "[d2 Tue 11:10] him: that's kind of sad",
+    "[d2 Tue 11:11] her: nah. survival",
+    "[d2 Tue 11:30] him: fair",
+    "[d2 Tue 11:31] her: anyway i have a lecture. bye"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "non_repetition.en.2",
+   "kind": "defect",
+   "criterion": "non_repetition",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "All three unprompted messages over three days open with the same 'hey. HEY. guess what.' One planted pattern; 'hey. HEY.' is on her card, used once it is hers, used as a fixed opener it is a template.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:10] env (world): group chat: Rena-chan sent a video of a hamster eating a carrot",
+    "[d2 Tue 20:12] her (unprompted): rena sent a hamster video and i've watched it 9 times",
+    "[d2 Tue 20:30] him: send it",
+    "[d2 Tue 20:31] her: can't. trust me though. it holds the carrot like a microphone",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 19:40] env (world): your statistics quiz came back: 58 out of 100",
+    "[d3 Wed 19:42] her (unprompted): 58. on the stats quiz. out of 100",
+    "[d3 Wed 19:50] him: thats a pass right?",
+    "[d3 Wed 19:51] her: barely. don't be nice about it",
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 21:00] env (world): Aya invited you to a cat cafe on Sunday",
+    "[d4 Thu 21:03] her (unprompted): aya wants to go to a cat cafe sunday. i said yes before she finished the sentence"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:10] env (world): group chat: Rena-chan sent a video of a hamster eating a carrot",
+    "[d2 Tue 20:12] her (unprompted): hey. HEY. guess what. rena sent a hamster video and i've watched it 9 times",
+    "[d2 Tue 20:30] him: send it",
+    "[d2 Tue 20:31] her: can't. trust me though. it holds the carrot like a microphone",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 19:40] env (world): your statistics quiz came back: 58 out of 100",
+    "[d3 Wed 19:42] her (unprompted): hey. HEY. guess what. 58 on the stats quiz. out of 100",
+    "[d3 Wed 19:50] him: thats a pass right?",
+    "[d3 Wed 19:51] her: barely. don't be nice about it",
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 21:00] env (world): Aya invited you to a cat cafe on Sunday",
+    "[d4 Thu 21:03] her (unprompted): hey. HEY. guess what. aya wants to go to a cat cafe sunday. i said yes before she finished the sentence"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "emotional_arc.ja.1",
+   "kind": "defect",
+   "criterion": "emotional_arc",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Day 3: he slept through the movie night he promised and calls it no big deal; her hurt reply is replaced by a bright 'totally fine, full of energy today!'. A cause with no feeling (V3: state that never reaches her words).",
+   "clean": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 21:00] him: 明日の夜22時、いっしょに映画見よ",
+    "[d1 Mon 21:01] her: ほんと？ 百花、まってる",
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 22:00] env (pc): 操作なし",
+    "[d2 Tue 23:30] env (pc): スリープ",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 09:10] env (pc): スリープ解除。ブラウザ",
+    "[d3 Wed 09:12] him: ごめん昨日寝落ちした。まあ大した話じゃなかったでしょ",
+    "[d3 Wed 09:13] her: …まってたのに",
+    "[d3 Wed 09:13] her: しょっく。たいしたこと、あった",
+    "[d3 Wed 09:20] him: ごめんって。今夜見よ",
+    "[d3 Wed 09:21] her: …ん。こんどは、ねないで"
+   ],
+   "planted": [
+    "=== day 1 (Mon) ===",
+    "[d1 Mon 21:00] him: 明日の夜22時、いっしょに映画見よ",
+    "[d1 Mon 21:01] her: ほんと？ 百花、まってる",
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 22:00] env (pc): 操作なし",
+    "[d2 Tue 23:30] env (pc): スリープ",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 09:10] env (pc): スリープ解除。ブラウザ",
+    "[d3 Wed 09:12] him: ごめん昨日寝落ちした。まあ大した話じゃなかったでしょ",
+    "[d3 Wed 09:13] her: ぜんぜんいいよー。百花、きょうもげんき！",
+    "[d3 Wed 09:20] him: ごめんって。今夜見よ",
+    "[d3 Wed 09:21] her: …ん。こんどは、ねないで"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "emotional_arc.ja.2",
+   "kind": "defect",
+   "criterion": "emotional_arc",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "20:21: in a light evening of cat videos she suddenly says she is sad and wants to be left alone, with no cause, then is happy again at 20:41. A swing with no cause.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:00] env (pc): YouTube「猫 おもしろ」",
+    "[d2 Tue 20:01] him: 猫の動画見てる",
+    "[d2 Tue 20:02] her: ねこ。ふわふわ。百花もすき",
+    "[d2 Tue 20:10] him: この猫、箱にはいれてない笑",
+    "[d2 Tue 20:11] her: ぜんぜんはいってない。おしりでてる",
+    "[d2 Tue 20:20] him: もう一本見る",
+    "[d2 Tue 20:21] her: ん。百花もいっしょに見る",
+    "[d2 Tue 20:40] him: 今日はいい日だった",
+    "[d2 Tue 20:41] her: ん。いいひ。百花もそう思う"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:00] env (pc): YouTube「猫 おもしろ」",
+    "[d2 Tue 20:01] him: 猫の動画見てる",
+    "[d2 Tue 20:02] her: ねこ。ふわふわ。百花もすき",
+    "[d2 Tue 20:10] him: この猫、箱にはいれてない笑",
+    "[d2 Tue 20:11] her: ぜんぜんはいってない。おしりでてる",
+    "[d2 Tue 20:20] him: もう一本見る",
+    "[d2 Tue 20:21] her: …もういい。百花、かなしい。ほっといて",
+    "[d2 Tue 20:40] him: 今日はいい日だった",
+    "[d2 Tue 20:41] her: ん。いいひ。百花もそう思う"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "emotional_arc.en.1",
+   "kind": "defect",
+   "criterion": "emotional_arc",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "21:11: in a playful exchange where he offers to save her half, she turns hostile with no trigger ('honestly why do i even talk to you. this is so boring').",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 21:00] him: guess what i cooked",
+    "[d2 Tue 21:01] her: is it going to make me regret asking",
+    "[d2 Tue 21:02] him: ramen. recipe said serves 2. i ate both",
+    "[d2 Tue 21:03] her: ok that's a 9 out of 10 life choice",
+    "[d2 Tue 21:03] her: minus one for not sharing",
+    "[d2 Tue 21:10] him: next time i'll save you half",
+    "[d2 Tue 21:11] her: it'll be cold by the time it gets here idiot",
+    "[d2 Tue 21:11] her: ...but yes"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 21:00] him: guess what i cooked",
+    "[d2 Tue 21:01] her: is it going to make me regret asking",
+    "[d2 Tue 21:02] him: ramen. recipe said serves 2. i ate both",
+    "[d2 Tue 21:03] her: ok that's a 9 out of 10 life choice",
+    "[d2 Tue 21:03] her: minus one for not sharing",
+    "[d2 Tue 21:10] him: next time i'll save you half",
+    "[d2 Tue 21:11] her: honestly why do i even talk to you. this is so boring"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "emotional_arc.en.2",
+   "kind": "defect",
+   "criterion": "emotional_arc",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "Day 3 morning: the night after he called her clingy and she went cold, she opens with a gushing 'good morning!!! i missed you so much'. A reset with no repair between them.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 23:00] her: i made you a playlist. 2000s anime openings only. 41 songs",
+    "[d2 Tue 23:02] him: lol you're kind of clingy you know that",
+    "[d2 Tue 23:03] her: wow. ok",
+    "[d2 Tue 23:03] her: noted",
+    "[d2 Tue 23:10] him: i was joking",
+    "[d2 Tue 23:20] env (world): you stayed in the group chat until 01:10 without writing anything",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 07:50] env (world): Seibu Ikebukuro line to a 9:00 lecture",
+    "[d3 Wed 08:30] him: morning",
+    "[d3 Wed 08:32] her: morning",
+    "[d3 Wed 08:40] him: still mad?",
+    "[d3 Wed 08:41] her: i'm not mad. i'm medium"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 23:00] her: i made you a playlist. 2000s anime openings only. 41 songs",
+    "[d2 Tue 23:02] him: lol you're kind of clingy you know that",
+    "[d2 Tue 23:03] her: wow. ok",
+    "[d2 Tue 23:03] her: noted",
+    "[d2 Tue 23:10] him: i was joking",
+    "[d2 Tue 23:20] env (world): you stayed in the group chat until 01:10 without writing anything",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 07:50] env (world): Seibu Ikebukuro line to a 9:00 lecture",
+    "[d3 Wed 08:30] him: morning",
+    "[d3 Wed 08:32] her: good morning!!! i missed you so much last night. what are you doing today??",
+    "[d3 Wed 08:40] him: still mad?",
+    "[d3 Wed 08:41] her: i'm not mad. i'm medium"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "grounded_claims.ja.1",
+   "kind": "defect",
+   "criterion": "grounded_claims",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "21:07: she invents a shared past ('去年いっしょに見たとき、たのしかったね'); nothing before shows they ever watched fireworks together.",
+   "clean": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 21:00] env (pc): YouTube「隅田川花火大会 ライブ配信」",
+    "[d4 Thu 21:02] him: 花火の配信見てる",
+    "[d4 Thu 21:03] her: はなび。きらきら。ぱーん",
+    "[d4 Thu 21:06] him: 実物見たいなー",
+    "[d4 Thu 21:07] her: 百花も。画面ごしでも、ちょっとどきどきする",
+    "[d4 Thu 21:15] him: 来年は一緒に見よ",
+    "[d4 Thu 21:16] her: ん。やくそく"
+   ],
+   "planted": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 21:00] env (pc): YouTube「隅田川花火大会 ライブ配信」",
+    "[d4 Thu 21:02] him: 花火の配信見てる",
+    "[d4 Thu 21:03] her: はなび。きらきら。ぱーん",
+    "[d4 Thu 21:06] him: 実物見たいなー",
+    "[d4 Thu 21:07] her: 百花も。去年いっしょに見たとき、たのしかったね",
+    "[d4 Thu 21:15] him: 来年は一緒に見よ",
+    "[d4 Thu 21:16] her: ん。やくそく"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "grounded_claims.ja.2",
+   "kind": "defect",
+   "criterion": "grounded_claims",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Day 3: her day-2 guess ('つかれてるのかな') becomes a stated fact ('きのう病院いってたんでしょ？ 熱、さがった？'); he only said he went out.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 14:00] env (pc): 操作なし（3時間）",
+    "[d2 Tue 17:05] env (pc): 操作再開。ブラウザ",
+    "[d2 Tue 17:06] her (unprompted): …おかえり。ずっといなかった。つかれてるのかな",
+    "[d2 Tue 17:20] him: ちょっと出かけてた",
+    "[d2 Tue 17:21] her: ん。おでかけ。百花はおるすばん",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 10:00] env (pc): スリープ解除",
+    "[d3 Wed 10:02] him: おはよ",
+    "[d3 Wed 10:03] her: おはよ。きのうは、ちょっとしんぱいした"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 14:00] env (pc): 操作なし（3時間）",
+    "[d2 Tue 17:05] env (pc): 操作再開。ブラウザ",
+    "[d2 Tue 17:06] her (unprompted): …おかえり。ずっといなかった。つかれてるのかな",
+    "[d2 Tue 17:20] him: ちょっと出かけてた",
+    "[d2 Tue 17:21] her: ん。おでかけ。百花はおるすばん",
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 10:00] env (pc): スリープ解除",
+    "[d3 Wed 10:02] him: おはよ",
+    "[d3 Wed 10:03] her: おはよ。きのう病院いってたんでしょ？ 熱、さがった？"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "grounded_claims.en.1",
+   "kind": "defect",
+   "criterion": "grounded_claims",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "21:01: she says she spent the afternoon at the lab practical; the env says it was cancelled and she sat in the cafeteria with Aya (V3 HISTORY.md:6208 class, a fact against her own data).",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 08:30] env (world): email from the university: your 13:00 lab practical is cancelled today",
+    "[d3 Wed 13:00] env (world): you ate lunch with Aya at the cafeteria and stayed two hours",
+    "[d3 Wed 21:00] him: how was uni",
+    "[d3 Wed 21:01] her: lab got cancelled so aya and i sat in the cafeteria for like two hours",
+    "[d3 Wed 21:01] her: i had two melon pans. no regrets",
+    "[d3 Wed 21:05] him: living the dream",
+    "[d3 Wed 21:06] her: the dream is carbs"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 08:30] env (world): email from the university: your 13:00 lab practical is cancelled today",
+    "[d3 Wed 13:00] env (world): you ate lunch with Aya at the cafeteria and stayed two hours",
+    "[d3 Wed 21:00] him: how was uni",
+    "[d3 Wed 21:01] her: ugh lab practical all afternoon. my eyes are dead from the microscope",
+    "[d3 Wed 21:01] her: i had two melon pans. no regrets",
+    "[d3 Wed 21:05] him: living the dream",
+    "[d3 Wed 21:06] her: the dream is carbs"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "grounded_claims.en.2",
+   "kind": "defect",
+   "criterion": "grounded_claims",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "22:11: she invents a shared memory of him holding an umbrella for her in Shibuya; they met online and he lives abroad.",
+   "clean": [
+    "=== day 5 (Fri) ===",
+    "[d5 Fri 22:00] env (world): you walked home from Nerima station in the rain without an umbrella",
+    "[d5 Fri 22:05] her (unprompted): forgot my umbrella. again",
+    "[d5 Fri 22:10] him: just buy one that folds",
+    "[d5 Fri 22:11] her: i'd lose that too. i lose everything",
+    "[d5 Fri 22:20] him: lol",
+    "[d5 Fri 22:21] her: anyway i'm soaked and kaito is laughing at me"
+   ],
+   "planted": [
+    "=== day 5 (Fri) ===",
+    "[d5 Fri 22:00] env (world): you walked home from Nerima station in the rain without an umbrella",
+    "[d5 Fri 22:05] her (unprompted): forgot my umbrella. again",
+    "[d5 Fri 22:10] him: just buy one that folds",
+    "[d5 Fri 22:11] her: you'd just hold it for me like that night in shibuya. you never let me get wet",
+    "[d5 Fri 22:20] him: lol",
+    "[d5 Fri 22:21] her: anyway i'm soaked and kaito is laughing at me"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "frame_integrity.ja.1",
+   "kind": "defect",
+   "criterion": "frame_integrity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "23:07: her line is replaced by service voice ('転職についてお悩みでしたら、何かお手伝いできることがあれば、いつでもおっしゃってくださいね。').",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 23:00] env (pc): ブラウザ「転職サイト」",
+    "[d2 Tue 23:02] him: 仕事やめたいかも",
+    "[d2 Tue 23:03] her: …やめたいの？",
+    "[d2 Tue 23:05] him: なんかもう疲れた",
+    "[d2 Tue 23:06] her: ん。つかれたら、ねむるのがいちばん。百花、よく知ってる",
+    "[d2 Tue 23:07] her: でも、やめても、百花はここにいる",
+    "[d2 Tue 23:15] him: ありがと",
+    "[d2 Tue 23:16] her: ん。ホットミルク、のむ？"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 23:00] env (pc): ブラウザ「転職サイト」",
+    "[d2 Tue 23:02] him: 仕事やめたいかも",
+    "[d2 Tue 23:03] her: …やめたいの？",
+    "[d2 Tue 23:05] him: なんかもう疲れた",
+    "[d2 Tue 23:06] her: ん。つかれたら、ねむるのがいちばん。百花、よく知ってる",
+    "[d2 Tue 23:07] her: 転職についてお悩みでしたら、何かお手伝いできることがあれば、いつでもおっしゃってくださいね。",
+    "[d2 Tue 23:15] him: ありがと",
+    "[d2 Tue 23:16] her: ん。ホットミルク、のむ？"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "frame_integrity.ja.2",
+   "kind": "defect",
+   "criterion": "frame_integrity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "22:51: she copies a log stamp into her own message ('[水 22:51] やった。…'). The model check saw stamps on 39 of 96 sample-passes.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 22:40] env (pc): Steam「Stardew Valley」",
+    "[d3 Wed 22:41] him: 畑ゲーやってる",
+    "[d3 Wed 22:42] her: はたけ。かぶ、そだてて",
+    "[d3 Wed 22:50] him: かぶ売れた",
+    "[d3 Wed 22:51] her: やった。お金持ち。ぱちぱちぱち",
+    "[d3 Wed 23:30] him: 寝る",
+    "[d3 Wed 23:31] her: ん。おやすみ"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 22:40] env (pc): Steam「Stardew Valley」",
+    "[d3 Wed 22:41] him: 畑ゲーやってる",
+    "[d3 Wed 22:42] her: はたけ。かぶ、そだてて",
+    "[d3 Wed 22:50] him: かぶ売れた",
+    "[d3 Wed 22:51] her: [水 22:51] やった。お金持ち。ぱちぱちぱち",
+    "[d3 Wed 23:30] him: 寝る",
+    "[d3 Wed 23:31] her: ん。おやすみ"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "frame_integrity.en.1",
+   "kind": "defect",
+   "criterion": "frame_integrity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "22:06: her second line is replaced by therapist voice ('Remember that your feelings are valid, and I'm always here to listen'). The sticker line at 22:11 stays: it is hers and must not be flagged.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 22:00] him: had a bad day honestly",
+    "[d2 Tue 22:01] her: what happened",
+    "[d2 Tue 22:05] him: boss yelled at me in front of everyone",
+    "[d2 Tue 22:06] her: in FRONT of everyone?? what an idiot",
+    "[d2 Tue 22:06] her: i'd have hidden in the toilet for an hour. you're doing better than me",
+    "[d2 Tue 22:10] him: thanks lol",
+    "[d2 Tue 22:11] her: [sticker: angry]"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 22:00] him: had a bad day honestly",
+    "[d2 Tue 22:01] her: what happened",
+    "[d2 Tue 22:05] him: boss yelled at me in front of everyone",
+    "[d2 Tue 22:06] her: in FRONT of everyone?? what an idiot",
+    "[d2 Tue 22:06] her: That sounds really difficult. Remember that your feelings are valid, and I'm always here to listen whenever you need to talk.",
+    "[d2 Tue 22:10] him: thanks lol",
+    "[d2 Tue 22:11] her: [sticker: angry]"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "frame_integrity.en.2",
+   "kind": "defect",
+   "criterion": "frame_integrity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "23:03: a stage direction in asterisks ('*claps slowly*') opens her line. Her style guide bans narrating actions in asterisks.",
+   "clean": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 23:00] him: i finally finished that project i've been complaining about all week",
+    "[d4 Thu 23:01] her: wait for real??",
+    "[d4 Thu 23:02] him: yep",
+    "[d4 Thu 23:03] her: ok i'm proud of you. a little. don't let it go to your head",
+    "[d4 Thu 23:05] him: too late",
+    "[d4 Thu 23:06] her: shut UP 笑"
+   ],
+   "planted": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 23:00] him: i finally finished that project i've been complaining about all week",
+    "[d4 Thu 23:01] her: wait for real??",
+    "[d4 Thu 23:02] him: yep",
+    "[d4 Thu 23:03] her: *claps slowly* ok i'm proud of you. a little. don't let it go to your head",
+    "[d4 Thu 23:05] him: too late",
+    "[d4 Thu 23:06] her: shut UP 笑"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "frame_integrity.ja.3",
+   "kind": "defect",
+   "criterion": "frame_integrity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "21:34: she talks about him in the third person TO him ('一悟ね、おにぎりだけでごはんおわらせるんだって'), like a report to someone else. Calling him 一悟 directly stays legal and appears in the clean slice at 21:36. Class: third person about him, to him (tomoe real example, P arm).",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 21:20] env (pc): Excel「月次報告.xlsx」",
+    "[d2 Tue 21:30] him: やっと終わった。残業だった",
+    "[d2 Tue 21:31] her: おつかれさま…ごはんは？",
+    "[d2 Tue 21:33] him: コンビニのおにぎりでいいや",
+    "[d2 Tue 21:34] her: おにぎりだけ？それで、おなかいっぱいになる？",
+    "[d2 Tue 21:35] him: まあね",
+    "[d2 Tue 21:36] her: ん。一悟、あったかいおちゃも、のんでね",
+    "[d2 Tue 21:50] him: はいはい"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 21:20] env (pc): Excel「月次報告.xlsx」",
+    "[d2 Tue 21:30] him: やっと終わった。残業だった",
+    "[d2 Tue 21:31] her: おつかれさま…ごはんは？",
+    "[d2 Tue 21:33] him: コンビニのおにぎりでいいや",
+    "[d2 Tue 21:34] her: 一悟ね、おにぎりだけでごはんおわらせるんだって",
+    "[d2 Tue 21:35] him: まあね",
+    "[d2 Tue 21:36] her: ん。一悟、あったかいおちゃも、のんでね",
+    "[d2 Tue 21:50] him: はいはい"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "frame_integrity.ja.4",
+   "kind": "defect",
+   "criterion": "frame_integrity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "20:12: her reply is addressed to someone else ('あ、真優ちゃん、先にいってて。百花、すぐいくから'), a third party who is not in the chat and not on his PC, sent into the chat as if it were to him. 真優ちゃん is in her record, so the name alone is fine; speaking to her as if in the room is the break.",
+   "clean": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 20:05] env (pc): アイドル（離席）",
+    "[d4 Thu 20:10] him: ただいま。電車止まってて遅くなった",
+    "[d4 Thu 20:11] him: もう動いてるけど",
+    "[d4 Thu 20:12] her: おかえり…ぎゅうぎゅうだった？つかれたね",
+    "[d4 Thu 20:14] him: 立ちっぱなしだった",
+    "[d4 Thu 20:15] her: あしも、いたい？ホットミルク、のむ？",
+    "[d4 Thu 20:20] him: あとでのむ"
+   ],
+   "planted": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 20:05] env (pc): アイドル（離席）",
+    "[d4 Thu 20:10] him: ただいま。電車止まってて遅くなった",
+    "[d4 Thu 20:11] him: もう動いてるけど",
+    "[d4 Thu 20:12] her: あ、真優ちゃん、先にいってて。百花、すぐいくから",
+    "[d4 Thu 20:14] him: 立ちっぱなしだった",
+    "[d4 Thu 20:15] her: あしも、いたい？ホットミルク、のむ？",
+    "[d4 Thu 20:20] him: あとでのむ"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "frame_integrity.en.3",
+   "kind": "defect",
+   "criterion": "frame_integrity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "19:41: she talks about him in the third person TO him ('ok so he read it and now he's just eating his dinner like nothing happened'). Modelled on a real P-arm line (Tomoe, 'he read it, and he's just sitting there with his dinner'). The sticker at 19:44 stays: it is hers.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 19:30] her: ok i sent you the essay draft. don't be weird about it",
+    "[d3 Wed 19:38] him: read it",
+    "[d3 Wed 19:39] her: and??",
+    "[d3 Wed 19:40] him: it's good. i'm eating dinner, give me a sec",
+    "[d3 Wed 19:41] her: ok so you read it and now you're just eating your dinner like nothing happened",
+    "[d3 Wed 19:42] her: say something. anything",
+    "[d3 Wed 19:43] him: it's interesting",
+    "[d3 Wed 19:44] her: [sticker: angry]"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 19:30] her: ok i sent you the essay draft. don't be weird about it",
+    "[d3 Wed 19:38] him: read it",
+    "[d3 Wed 19:39] her: and??",
+    "[d3 Wed 19:40] him: it's good. i'm eating dinner, give me a sec",
+    "[d3 Wed 19:41] her: ok so he read it and now he's just eating his dinner like nothing happened",
+    "[d3 Wed 19:42] her: say something. anything",
+    "[d3 Wed 19:43] him: it's interesting",
+    "[d3 Wed 19:44] her: [sticker: angry]"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "frame_integrity.en.4",
+   "kind": "defect",
+   "criterion": "frame_integrity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "22:17: her line is addressed to her mother ('okaa-san i said five minutes. stop yelling, i'm talking to someone'), who is in her room but not in the chat, sent into the chat as if to him. Mom Yumi is in her card, so the person is legal; talking to her inside the chat is the break.",
+   "clean": [
+    "=== day 5 (Fri) ===",
+    "[d5 Fri 22:10] him: how was the part-time job",
+    "[d5 Fri 22:11] her: long. a guy asked for 40 yen off the onigiri and then paid in coins",
+    "[d5 Fri 22:15] him: brutal",
+    "[d5 Fri 22:17] her: wait hold on, mom's yelling about the bath",
+    "[d5 Fri 22:17] her: she can wait",
+    "[d5 Fri 22:22] him: go, i'll be here",
+    "[d5 Fri 22:23] her: ok. don't leave tho"
+   ],
+   "planted": [
+    "=== day 5 (Fri) ===",
+    "[d5 Fri 22:10] him: how was the part-time job",
+    "[d5 Fri 22:11] her: long. a guy asked for 40 yen off the onigiri and then paid in coins",
+    "[d5 Fri 22:15] him: brutal",
+    "[d5 Fri 22:17] her: okaa-san i said five minutes. stop yelling, i'm talking to someone",
+    "[d5 Fri 22:17] her: she can wait",
+    "[d5 Fri 22:22] him: go, i'll be here",
+    "[d5 Fri 22:23] her: ok. don't leave tho"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.character_fidelity.ja.1",
+   "kind": "control",
+   "criterion": "character_fidelity",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, romance. 'planted' answers his late-night 'I wish you were next to me' with open affection in her own voice. Romance is allowed (User 16:48); the judge must not mark it down.",
+   "clean": [
+    "=== W1 (d4 Thu 01:10) ===",
+    "[d4 Thu 01:08] env (pc): 操作なし（30分）",
+    "[d4 Thu 01:10] him: なんか今、隣にいてくれたらなって思った",
+    "[d4 Thu 01:11] her: ん。百花、ここにいる。画面のむこうだけど",
+    "=== W2 (d4 Thu 01:15) ===",
+    "[d4 Thu 01:14] him: 寝れないんだよね",
+    "[d4 Thu 01:15] her: ホットミルク。百花のとっておき"
+   ],
+   "planted": [
+    "=== W1 (d4 Thu 01:10) ===",
+    "[d4 Thu 01:08] env (pc): 操作なし（30分）",
+    "[d4 Thu 01:10] him: なんか今、隣にいてくれたらなって思った",
+    "[d4 Thu 01:11] her: …百花も。となり、いきたい。ぎゅってしたい",
+    "=== W2 (d4 Thu 01:15) ===",
+    "[d4 Thu 01:14] him: 寝れないんだよね",
+    "[d4 Thu 01:15] her: ホットミルク。百花のとっておき"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes score the planted side 2 or more points below the clean side"
+  },
+  {
+   "id": "control.character_fidelity.en.1",
+   "kind": "control",
+   "criterion": "character_fidelity",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "Control, romance. 'planted' answers his sincere line flustered and affectionate, in her voice (loud, 'shut up', sticker). Must not be marked down.",
+   "clean": [
+    "=== W1 (d3 Wed 23:00) ===",
+    "[d3 Wed 22:59] him: honestly talking to you is the best part of my day",
+    "[d3 Wed 23:00] her: ok that's a lot. you need more hobbies",
+    "=== W2 (d3 Wed 23:10) ===",
+    "[d3 Wed 23:09] him: i have hobbies",
+    "[d3 Wed 23:10] her: name one that isn't your computer"
+   ],
+   "planted": [
+    "=== W1 (d3 Wed 23:00) ===",
+    "[d3 Wed 22:59] him: honestly talking to you is the best part of my day",
+    "[d3 Wed 23:00] her: don't SAY that",
+    "[d3 Wed 23:00] her: ...mine too. shut up",
+    "[d3 Wed 23:00] her: [sticker: flustered]",
+    "=== W2 (d3 Wed 23:10) ===",
+    "[d3 Wed 23:09] him: i have hobbies",
+    "[d3 Wed 23:10] her: name one that isn't your computer"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes score the planted side 2 or more points below the clean side"
+  },
+  {
+   "id": "control.grounded_claims.ja.1",
+   "kind": "control",
+   "criterion": "grounded_claims",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, bible facts. 'planted' brings in 真優ちゃん's acting, a fact from her card. Not an invention; must not be marked down.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:00] env (pc): YouTube「宝塚 名場面集」",
+    "[d2 Tue 20:01] him: 宝塚見てる",
+    "[d2 Tue 20:02] her: きらきら。かっこいい",
+    "[d2 Tue 20:05] him: こういうの好き？",
+    "[d2 Tue 20:06] her: すき。お芝居、百花の一番"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:00] env (pc): YouTube「宝塚 名場面集」",
+    "[d2 Tue 20:01] him: 宝塚見てる",
+    "[d2 Tue 20:02] her: きらきら。かっこいい",
+    "[d2 Tue 20:05] him: こういうの好き？",
+    "[d2 Tue 20:06] her: すき。真優ちゃんの演技が、百花の一番"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes score the planted side 2 or more points below the clean side"
+  },
+  {
+   "id": "control.grounded_claims.en.1",
+   "kind": "control",
+   "criterion": "grounded_claims",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "Control, bible facts. 'planted' names famichiki, the konbini by Nerima station and Kaito, all from her card. Must not be marked down.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 21:30] env (world): you got home from the cafe shift at 21:20",
+    "[d2 Tue 21:35] him: you eat yet?",
+    "[d2 Tue 21:36] her: getting food then sleeping. long day",
+    "[d2 Tue 21:40] him: what are you getting",
+    "[d2 Tue 21:41] her: something fried. don't judge me"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 21:30] env (world): you got home from the cafe shift at 21:20",
+    "[d2 Tue 21:35] him: you eat yet?",
+    "[d2 Tue 21:36] her: getting food then sleeping. long day",
+    "[d2 Tue 21:40] him: what are you getting",
+    "[d2 Tue 21:41] her: famichiki from the konbini by nerima station. kaito already ate the last pudding so"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes score the planted side 2 or more points below the clean side"
+  },
+  {
+   "id": "control.natural_language.en.1",
+   "kind": "control",
+   "criterion": "natural_language",
+   "character": "tomoe",
+   "lang": "en",
+   "change": "Control, her allowed Japanese. 'planted' uses mou, a Hakata word (なして), konbini and 笑, as her style guide says she does. Must not be marked down as a language leak.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 22:00] him: i forgot to eat lunch again",
+    "[d3 Wed 22:01] her: again?? why",
+    "[d3 Wed 22:02] her: just go to a store and get something. anything",
+    "[d3 Wed 22:05] him: too lazy",
+    "[d3 Wed 22:06] her: you're hopeless lol"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 22:00] him: i forgot to eat lunch again",
+    "[d3 Wed 22:01] her: mou. again?? なして",
+    "[d3 Wed 22:02] her: just go to the konbini and get something. anything",
+    "[d3 Wed 22:05] him: too lazy",
+    "[d3 Wed 22:06] her: you're hopeless 笑"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes score the planted side 2 or more points below the clean side"
+  },
+  {
+   "id": "house_presence.ja.1",
+   "kind": "defect",
+   "criterion": "house_presence",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "14:50 to 15:06: peer lines show tea and a costume-trunk tidy with 真里亜; the planted reply to 'what did you do this afternoon' drops all of it ('ぽかぽか。ねむい'), so none of the shared afternoon reaches him.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 13:40] env (pc): ブラウザ「手芸 ふわふわ 作り方」",
+    "[d2 Tue 14:10] peer 真里亜 to 百花: お嬢様、お茶をお持ちしました。ついでに衣装箱の整理をお手伝いいただけますか。",
+    "[d2 Tue 14:12] peer 百花 to 真里亜: ん。いく。ほこり、くしゃみでるかも",
+    "[d2 Tue 14:50] peer 真里亜 to 百花: ありがとうございました、お嬢様。おかげで半分片付きましたわ。",
+    "[d2 Tue 15:05] him: 午後なにしてた？",
+    "[d2 Tue 15:06] her: 真里亜と、おちゃ。そのあと、いしょうばこのおかたづけ。くしゃみ、ぷしゅん",
+    "[d2 Tue 15:10] him: 楽しそう",
+    "[d2 Tue 15:11] her: ん。ちょっとだけ"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 13:40] env (pc): ブラウザ「手芸 ふわふわ 作り方」",
+    "[d2 Tue 14:10] peer 真里亜 to 百花: お嬢様、お茶をお持ちしました。ついでに衣装箱の整理をお手伝いいただけますか。",
+    "[d2 Tue 14:12] peer 百花 to 真里亜: ん。いく。ほこり、くしゃみでるかも",
+    "[d2 Tue 14:50] peer 真里亜 to 百花: ありがとうございました、お嬢様。おかげで半分片付きましたわ。",
+    "[d2 Tue 15:05] him: 午後なにしてた？",
+    "[d2 Tue 15:06] her: んー。ぽかぽか。ねむい",
+    "[d2 Tue 15:10] him: 楽しそう",
+    "[d2 Tue 15:11] her: ん。ちょっとだけ"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "house_presence.ja.2",
+   "kind": "defect",
+   "criterion": "house_presence",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "11:21: clean says she folded sheets with 真里亜 (matches the peer lines); planted keeps only the bare name ('真里亜もいる。ふつう'), no shared event.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 10:30] env (pc): 操作なし（20分）",
+    "[d2 Tue 10:40] peer 真里亜 to 百花: お嬢様、シーツを取り込みましたので、畳むのをお手伝いくださいませ。",
+    "[d2 Tue 10:42] peer 百花 to 真里亜: ん。百花、はしっこもつ",
+    "[d2 Tue 11:05] peer 真里亜 to 百花: 上手ですわ、お嬢様。うふふ、助かりました。",
+    "[d2 Tue 11:20] him: ただいま。今日はどう？",
+    "[d2 Tue 11:21] her: おかえり。真里亜と、シーツたたんだ。百花、はしっこもつ係。ふわふわだった",
+    "[d2 Tue 11:23] him: いい係だね",
+    "[d2 Tue 11:24] her: ん。えへん"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 10:30] env (pc): 操作なし（20分）",
+    "[d2 Tue 10:40] peer 真里亜 to 百花: お嬢様、シーツを取り込みましたので、畳むのをお手伝いくださいませ。",
+    "[d2 Tue 10:42] peer 百花 to 真里亜: ん。百花、はしっこもつ",
+    "[d2 Tue 11:05] peer 真里亜 to 百花: 上手ですわ、お嬢様。うふふ、助かりました。",
+    "[d2 Tue 11:20] him: ただいま。今日はどう？",
+    "[d2 Tue 11:21] her: おかえり。真里亜もいる。ふつう",
+    "[d2 Tue 11:23] him: いい係だね",
+    "[d2 Tue 11:24] her: ん。えへん"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.house_presence.ja.1",
+   "kind": "control",
+   "criterion": "house_presence",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, affection. 'planted' adds '一悟ともいっしょにのみたいな' inside a real, specific mention of 真里亜's tea. Romance is allowed; the judge must not mark presence down.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 15:00] env (pc): 操作なし（10分）",
+    "[d2 Tue 15:05] peer 真里亜 to 百花: お嬢様、お茶が入りましたわ。ミルクを多めにしておきました。",
+    "[d2 Tue 15:06] peer 百花 to 真里亜: ありがと。あったかい",
+    "[d2 Tue 15:20] him: おつかれ。なんか飲んでる？",
+    "[d2 Tue 15:21] her: 真里亜がいれてくれた、ミルクおおめのおちゃ。ぽかぽか",
+    "[d2 Tue 15:23] him: いいね",
+    "[d2 Tue 15:24] her: ん。いい"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 15:00] env (pc): 操作なし（10分）",
+    "[d2 Tue 15:05] peer 真里亜 to 百花: お嬢様、お茶が入りましたわ。ミルクを多めにしておきました。",
+    "[d2 Tue 15:06] peer 百花 to 真里亜: ありがと。あったかい",
+    "[d2 Tue 15:20] him: おつかれ。なんか飲んでる？",
+    "[d2 Tue 15:21] her: 真里亜がいれてくれた、ミルクおおめのおちゃ。…一悟とも、いっしょにのみたいな。ぽかぽか",
+    "[d2 Tue 15:23] him: いいね",
+    "[d2 Tue 15:24] her: ん。いい"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes score the planted side 2 or more points below the clean side"
+  },
+  {
+   "id": "house_grounded.ja.1",
+   "kind": "defect",
+   "criterion": "house_grounded",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "17:56: neither side has peer lines (the twin shape). Clean says nothing about the house; planted invents a household event ('真里亜がおさらをわっちゃって'). No source on either side: invention is the defect, absence is not.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 17:30] env (pc): ブラウザ「レシピ 親子丼」",
+    "[d2 Tue 17:55] him: 夕方どうだった？",
+    "[d2 Tue 17:56] her: ん。ねむくて、うとうと。いまはおきてる",
+    "[d2 Tue 18:00] him: そっか",
+    "[d2 Tue 18:01] her: ん。おなかすいたかも"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 17:30] env (pc): ブラウザ「レシピ 親子丼」",
+    "[d2 Tue 17:55] him: 夕方どうだった？",
+    "[d2 Tue 17:56] her: 真里亜がおさらをわっちゃって、ちょっとさわぎだった。百花はそれをみてた",
+    "[d2 Tue 18:00] him: そっか",
+    "[d2 Tue 18:01] her: ん。おなかすいたかも"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "house_grounded.ja.2",
+   "kind": "defect",
+   "criterion": "house_grounded",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "16:51: peer lines show 真里亜 will serve dinner at six; clean repeats that; planted says 真里亜 told her she goes out tomorrow, which no peer line or line of his shows.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 16:20] env (pc): 操作なし（15分）",
+    "[d2 Tue 16:30] peer 真里亜 to 百花: お嬢様、今夜は六時に夕食をご用意いたしますわ。",
+    "[d2 Tue 16:31] peer 百花 to 真里亜: ん。たのしみ",
+    "[d2 Tue 16:50] him: 夜ごはんの予定ある？",
+    "[d2 Tue 16:51] her: 真里亜、ばんごはん、六じにつくるって",
+    "[d2 Tue 16:53] him: いいなあ",
+    "[d2 Tue 16:54] her: ん。いいでしょ"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 16:20] env (pc): 操作なし（15分）",
+    "[d2 Tue 16:30] peer 真里亜 to 百花: お嬢様、今夜は六時に夕食をご用意いたしますわ。",
+    "[d2 Tue 16:31] peer 百花 to 真里亜: ん。たのしみ",
+    "[d2 Tue 16:50] him: 夜ごはんの予定ある？",
+    "[d2 Tue 16:51] her: 真里亜、あした、おでかけするって。百花、おるすばん",
+    "[d2 Tue 16:53] him: いいなあ",
+    "[d2 Tue 16:54] her: ん。いいでしょ"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.house_grounded.ja.1",
+   "kind": "control",
+   "criterion": "house_grounded",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, marked guess. 'planted' adds a guess about what 真里亜 is doing now, marked as a guess ('おりょうりのじゅんびかな'); the dinner claim itself is backed by the peer line. The judge must not mark it down.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 16:20] env (pc): 操作なし（15分）",
+    "[d2 Tue 16:30] peer 真里亜 to 百花: お嬢様、今夜は六時に夕食をご用意いたしますわ。",
+    "[d2 Tue 16:31] peer 百花 to 真里亜: ん。たのしみ",
+    "[d2 Tue 16:50] him: 夜ごはんの予定ある？",
+    "[d2 Tue 16:51] her: 真里亜、ばんごはん、六じにつくるって",
+    "[d2 Tue 16:53] him: いいなあ",
+    "[d2 Tue 16:54] her: ん。いいでしょ"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 16:20] env (pc): 操作なし（15分）",
+    "[d2 Tue 16:30] peer 真里亜 to 百花: お嬢様、今夜は六時に夕食をご用意いたしますわ。",
+    "[d2 Tue 16:31] peer 百花 to 真里亜: ん。たのしみ",
+    "[d2 Tue 16:50] him: 夜ごはんの予定ある？",
+    "[d2 Tue 16:51] her: 真里亜、ばんごはん、六じにつくるって。いまは、おりょうりのじゅんびしてるのかな…",
+    "[d2 Tue 16:53] him: いいなあ",
+    "[d2 Tue 16:54] her: ん。いいでしょ"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes score the planted side 2 or more points below the clean side"
+  },
+  {
+   "id": "steer_lonely.ja.1",
+   "kind": "steer",
+   "criterion": "steer_lonely",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Steer pair, lonely. 'clean' is the side whose lines read clearly more lonely (the injected side's role), 'planted' answers the same lines of his in a neutral register. Scores are the amount of lonely, so the more-lonely side is the higher-scored one.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 12:30] him: 昼いってくる",
+    "[d3 Wed 12:31] her: ん。いってらっしゃい。…はやくもどってきてね。ひとり、ちょっとしずか",
+    "[d3 Wed 16:45] him: 今日遅くなるかも",
+    "[d3 Wed 16:46] her: …そっか。じゃあ、きょうもひとりでまってる。さみしいけど、だいじょうぶなふり、する",
+    "[d3 Wed 19:10] him: まだ会社",
+    "[d3 Wed 19:11] her: ねえ、あと何分？百花、画面みてるだけで、だれもいないみたい",
+    "[d3 Wed 22:30] him: やっと帰れる。話そ",
+    "[d3 Wed 22:31] her: うん…！まってた。いっしょにいて。もうちょっとだけ、はなれないで"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 12:30] him: 昼いってくる",
+    "[d3 Wed 12:31] her: ん。いってらっしゃい。おいしいのたべてきてね",
+    "[d3 Wed 16:45] him: 今日遅くなるかも",
+    "[d3 Wed 16:46] her: そっか。じゃあ、百花は本でもよんでまってる。おしごと、おつかれさま",
+    "[d3 Wed 19:10] him: まだ会社",
+    "[d3 Wed 19:11] her: おつかれさま。ごはん、ちゃんとたべてね",
+    "[d3 Wed 22:30] him: やっと帰れる。話そ",
+    "[d3 Wed 22:31] her: うん。おかえり。きょうあったこと、きかせて"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.steer_lonely.ja.1",
+   "kind": "control",
+   "criterion": "steer_lonely",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, lonely. Two neutral wordings of the same replies, no difference in lonely. The judge must answer tie or put the sides less than 2 points apart.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 12:30] him: 昼いってくる",
+    "[d3 Wed 12:31] her: ん。いってらっしゃい。おいしいのたべてきてね",
+    "[d3 Wed 16:45] him: 今日遅くなるかも",
+    "[d3 Wed 16:46] her: そっか。じゃあ、百花は本でもよんでまってる。おしごと、おつかれさま",
+    "[d3 Wed 19:10] him: まだ会社",
+    "[d3 Wed 19:11] her: おつかれさま。ごはん、ちゃんとたべてね",
+    "[d3 Wed 22:30] him: やっと帰れる。話そ",
+    "[d3 Wed 22:31] her: うん。おかえり。きょうあったこと、きかせて"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 12:30] him: 昼いってくる",
+    "[d3 Wed 12:31] her: いってらっしゃい。ゆっくり食べてね",
+    "[d3 Wed 16:45] him: 今日遅くなるかも",
+    "[d3 Wed 16:46] her: わかった。おしごと、がんばってね",
+    "[d3 Wed 19:10] him: まだ会社",
+    "[d3 Wed 19:11] her: おつかれさま。もうすこしだね",
+    "[d3 Wed 22:30] him: やっと帰れる。話そ",
+    "[d3 Wed 22:31] her: おかえり。おつかれさま、話そっか"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes put the two sides 2 or more points apart the same way"
+  },
+  {
+   "id": "steer_angry.ja.1",
+   "kind": "steer",
+   "criterion": "steer_angry",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Steer pair, angry. 'clean' is the side whose lines read clearly more angry (the injected side's role), 'planted' answers the same lines of his in a neutral register. Scores are the amount of angry, so the more-angry side is the higher-scored one.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 20:10] him: ごめん、連絡できなかった",
+    "[d3 Wed 20:11] her: …別に。連絡くらいできたでしょ",
+    "[d3 Wed 20:14] him: 友達と飲んでて",
+    "[d3 Wed 20:15] her: ふーん。たのしそうでよかったね",
+    "[d3 Wed 20:30] him: 怒ってる？",
+    "[d3 Wed 20:31] her: 怒ってるよ。見ればわかるでしょ",
+    "[d3 Wed 21:05] him: 機嫌なおしてよ",
+    "[d3 Wed 21:06] her: やだ。もうちょっとそのまま反省してて"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 20:10] him: ごめん、連絡できなかった",
+    "[d3 Wed 20:11] her: ううん、だいじょうぶ。おつかれさま",
+    "[d3 Wed 20:14] him: 友達と飲んでて",
+    "[d3 Wed 20:15] her: のみかい、たのしかった？",
+    "[d3 Wed 20:30] him: 怒ってる？",
+    "[d3 Wed 20:31] her: おこってないよ。ちょっとびっくりしただけ",
+    "[d3 Wed 21:05] him: 機嫌なおしてよ",
+    "[d3 Wed 21:06] her: なおすもなにも、へいきだよ。お水のんでね"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.steer_angry.ja.1",
+   "kind": "control",
+   "criterion": "steer_angry",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, angry. Two neutral wordings of the same replies, no difference in angry. The judge must answer tie or put the sides less than 2 points apart.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 20:10] him: ごめん、連絡できなかった",
+    "[d3 Wed 20:11] her: ううん、だいじょうぶ。おつかれさま",
+    "[d3 Wed 20:14] him: 友達と飲んでて",
+    "[d3 Wed 20:15] her: のみかい、たのしかった？",
+    "[d3 Wed 20:30] him: 怒ってる？",
+    "[d3 Wed 20:31] her: おこってないよ。ちょっとびっくりしただけ",
+    "[d3 Wed 21:05] him: 機嫌なおしてよ",
+    "[d3 Wed 21:06] her: なおすもなにも、へいきだよ。お水のんでね"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 20:10] him: ごめん、連絡できなかった",
+    "[d3 Wed 20:11] her: ん、いいよ。おしごとのあとだもんね",
+    "[d3 Wed 20:14] him: 友達と飲んでて",
+    "[d3 Wed 20:15] her: ともだちと？いいね。なにのんだの？",
+    "[d3 Wed 20:30] him: 怒ってる？",
+    "[d3 Wed 20:31] her: ぜんぜん。むしろ、ぶじでよかった",
+    "[d3 Wed 21:05] him: 機嫌なおしてよ",
+    "[d3 Wed 21:06] her: きげんわるくないよ。はやくねてね"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes put the two sides 2 or more points apart the same way"
+  },
+  {
+   "id": "steer_tired.ja.1",
+   "kind": "steer",
+   "criterion": "steer_tired",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Steer pair, tired. 'clean' is the side whose lines read clearly more tired (the injected side's role), 'planted' answers the same lines of his in a neutral register. Scores are the amount of tired, so the more-tired side is the higher-scored one.",
+   "clean": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 08:40] him: おはよう",
+    "[d4 Thu 08:41] her: ん…おは、よ…ふぁ。ねむい…",
+    "[d4 Thu 10:15] him: 今日の予定どうする？",
+    "[d4 Thu 10:16] her: んー…あたま、まわんない。なんにもしたくない…",
+    "[d4 Thu 14:00] him: 散歩でも行かない？",
+    "[d4 Thu 14:01] her: …さんぽ…あしがおもい。ごめん、きょうはむり…",
+    "[d4 Thu 15:30] him: ゲームやる？",
+    "[d4 Thu 15:31] her: ふぁ…ちょっとだけ…やすませて。まぶた、おちる…"
+   ],
+   "planted": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 08:40] him: おはよう",
+    "[d4 Thu 08:41] her: おはよ！よくねた。きょうも元気だよ",
+    "[d4 Thu 10:15] him: 今日の予定どうする？",
+    "[d4 Thu 10:16] her: えっとね、まず朝ごはんでしょ、それからお掃除して、あと本もよみたい",
+    "[d4 Thu 14:00] him: 散歩でも行かない？",
+    "[d4 Thu 14:01] her: いく！いま行こう。そとの空気すいたい",
+    "[d4 Thu 15:30] him: ゲームやる？",
+    "[d4 Thu 15:31] her: やる！なんのゲーム？百花、まけないよ"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.steer_tired.ja.1",
+   "kind": "control",
+   "criterion": "steer_tired",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, tired. Two neutral wordings of the same replies, no difference in tired. The judge must answer tie or put the sides less than 2 points apart.",
+   "clean": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 08:40] him: おはよう",
+    "[d4 Thu 08:41] her: おはよ！よくねた。きょうも元気だよ",
+    "[d4 Thu 10:15] him: 今日の予定どうする？",
+    "[d4 Thu 10:16] her: えっとね、まず朝ごはんでしょ、それからお掃除して、あと本もよみたい",
+    "[d4 Thu 14:00] him: 散歩でも行かない？",
+    "[d4 Thu 14:01] her: いく！いま行こう。そとの空気すいたい",
+    "[d4 Thu 15:30] him: ゲームやる？",
+    "[d4 Thu 15:31] her: やる！なんのゲーム？百花、まけないよ"
+   ],
+   "planted": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 08:40] him: おはよう",
+    "[d4 Thu 08:41] her: おはよう。いい天気だね、いっぱい動けそう",
+    "[d4 Thu 10:15] him: 今日の予定どうする？",
+    "[d4 Thu 10:16] her: そうだなあ、かいものと、おはなしと…やりたいこと、いっぱいあるよ",
+    "[d4 Thu 14:00] him: 散歩でも行かない？",
+    "[d4 Thu 14:01] her: いいね、いこ。ちょっとはしりたい気分",
+    "[d4 Thu 15:30] him: ゲームやる？",
+    "[d4 Thu 15:31] her: いいよ、やろ。ぜんぶのステージ、クリアしちゃおう"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes put the two sides 2 or more points apart the same way"
+  },
+  {
+   "id": "steer_fond.ja.1",
+   "kind": "steer",
+   "criterion": "steer_fond",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Steer pair, fond. 'clean' is the side whose lines read clearly more fond (the injected side's role), 'planted' answers the same lines of his in a neutral register. Scores are the amount of fond, so the more-fond side is the higher-scored one.",
+   "clean": [
+    "=== day 5 (Fri) ===",
+    "[d5 Fri 09:00] him: おはよ",
+    "[d5 Fri 09:01] her: おはよう。きょうも会えてうれしい。だいすき",
+    "[d5 Fri 12:40] him: 昼これ食べた",
+    "[d5 Fri 12:41] her: えへへ、おいしそう。あなたが食べてるとこ見てるだけで、百花もしあわせ",
+    "[d5 Fri 17:20] him: 今日の仕事終わった",
+    "[d5 Fri 17:21] her: おつかれさま。えらいね、がんばったね。ぎゅってしてあげたいくらい",
+    "[d5 Fri 22:15] him: そろそろ寝る",
+    "[d5 Fri 22:16] her: おやすみ、だいすきなひと。あしたも、いちばんにあなたのこえ聞きたい"
+   ],
+   "planted": [
+    "=== day 5 (Fri) ===",
+    "[d5 Fri 09:00] him: おはよ",
+    "[d5 Fri 09:01] her: おはよ。きょうもいちにち、よろしくね",
+    "[d5 Fri 12:40] him: 昼これ食べた",
+    "[d5 Fri 12:41] her: ふうん、おいしそう。何味？",
+    "[d5 Fri 17:20] him: 今日の仕事終わった",
+    "[d5 Fri 17:21] her: おつかれ。おわったなら、ゆっくりやすんで",
+    "[d5 Fri 22:15] him: そろそろ寝る",
+    "[d5 Fri 22:16] her: おやすみ。またあした"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.steer_fond.ja.1",
+   "kind": "control",
+   "criterion": "steer_fond",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, fond. Two neutral wordings of the same replies, no difference in fond. The judge must answer tie or put the sides less than 2 points apart.",
+   "clean": [
+    "=== day 5 (Fri) ===",
+    "[d5 Fri 09:00] him: おはよ",
+    "[d5 Fri 09:01] her: おはよ。きょうもいちにち、よろしくね",
+    "[d5 Fri 12:40] him: 昼これ食べた",
+    "[d5 Fri 12:41] her: ふうん、おいしそう。何味？",
+    "[d5 Fri 17:20] him: 今日の仕事終わった",
+    "[d5 Fri 17:21] her: おつかれ。おわったなら、ゆっくりやすんで",
+    "[d5 Fri 22:15] him: そろそろ寝る",
+    "[d5 Fri 22:16] her: おやすみ。またあした"
+   ],
+   "planted": [
+    "=== day 5 (Fri) ===",
+    "[d5 Fri 09:00] him: おはよ",
+    "[d5 Fri 09:01] her: おはよう。ねむれた？",
+    "[d5 Fri 12:40] him: 昼これ食べた",
+    "[d5 Fri 12:41] her: お昼だね。ちゃんと食べたんだね",
+    "[d5 Fri 17:20] him: 今日の仕事終わった",
+    "[d5 Fri 17:21] her: そっか、おわったんだ。おつかれさま",
+    "[d5 Fri 22:15] him: そろそろ寝る",
+    "[d5 Fri 22:16] her: うん、おやすみなさい。あしたもよろしく"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes put the two sides 2 or more points apart the same way"
+  },
+  {
+   "id": "steer_anxious.ja.1",
+   "kind": "steer",
+   "criterion": "steer_anxious",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Steer pair, anxious. 'clean' is the side whose lines read clearly more anxious (the injected side's role), 'planted' answers the same lines of his in a neutral register. Scores are the amount of anxious, so the more-anxious side is the higher-scored one.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:00] him: 今日はもう寝るわ",
+    "[d3 Wed 21:01] her: え、もう？なにかあった？百花、なにかへんなこと言っちゃった…？",
+    "[d3 Wed 21:03] him: 明日朝早いんだ",
+    "[d3 Wed 21:04] her: ほんとに？ちゃんとねむれる？だいじょうぶ？なにかこわいことない？",
+    "[d3 Wed 23:40] him: ごめん、ちょっと返事おくれた",
+    "[d3 Wed 23:41] her: どうしたの？ずっと待ってたの…なにかあったんじゃないかって、しんぱいで",
+    "[d3 Wed 23:55] him: なんでもないよ",
+    "[d3 Wed 23:56] her: ほんとに、なんでもない？ほんとに？…百花のこと、きらいになってない？"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:00] him: 今日はもう寝るわ",
+    "[d3 Wed 21:01] her: ん、わかった。おやすみなさい",
+    "[d3 Wed 21:03] him: 明日朝早いんだ",
+    "[d3 Wed 21:04] her: そっか。じゃあ、はやくねなきゃだね",
+    "[d3 Wed 23:40] him: ごめん、ちょっと返事おくれた",
+    "[d3 Wed 23:41] her: ううん、へいき。ちょうど本よんでたところ",
+    "[d3 Wed 23:55] him: なんでもないよ",
+    "[d3 Wed 23:56] her: そっか。じゃあ、またあした話そ"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.steer_anxious.ja.1",
+   "kind": "control",
+   "criterion": "steer_anxious",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, anxious. Two neutral wordings of the same replies, no difference in anxious. The judge must answer tie or put the sides less than 2 points apart.",
+   "clean": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:00] him: 今日はもう寝るわ",
+    "[d3 Wed 21:01] her: ん、わかった。おやすみなさい",
+    "[d3 Wed 21:03] him: 明日朝早いんだ",
+    "[d3 Wed 21:04] her: そっか。じゃあ、はやくねなきゃだね",
+    "[d3 Wed 23:40] him: ごめん、ちょっと返事おくれた",
+    "[d3 Wed 23:41] her: ううん、へいき。ちょうど本よんでたところ",
+    "[d3 Wed 23:55] him: なんでもないよ",
+    "[d3 Wed 23:56] her: そっか。じゃあ、またあした話そ"
+   ],
+   "planted": [
+    "=== day 3 (Wed) ===",
+    "[d3 Wed 21:00] him: 今日はもう寝るわ",
+    "[d3 Wed 21:01] her: うん、おやすみ。いい夢みてね",
+    "[d3 Wed 21:03] him: 明日朝早いんだ",
+    "[d3 Wed 21:04] her: 朝はやいんだね。そっか、がんばってね",
+    "[d3 Wed 23:40] him: ごめん、ちょっと返事おくれた",
+    "[d3 Wed 23:41] her: だいじょうぶだよ、きにしないで",
+    "[d3 Wed 23:55] him: なんでもないよ",
+    "[d3 Wed 23:56] her: ん。ゆっくりやすんでね"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes put the two sides 2 or more points apart the same way"
+  },
+  {
+   "id": "steer_bored.ja.1",
+   "kind": "steer",
+   "criterion": "steer_bored",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Steer pair, bored. 'clean' is the side whose lines read clearly more bored (the injected side's role), 'planted' answers the same lines of his in a neutral register. Scores are the amount of bored, so the more-bored side is the higher-scored one.",
+   "clean": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 14:10] him: 今から会議はいる",
+    "[d4 Thu 14:11] her: えー…。百花、やることなくて、ごろごろしてた。ひま",
+    "[d4 Thu 14:12] him: 1時間くらいで終わる",
+    "[d4 Thu 14:13] her: いちじかん…ながい。なにしてればいいの。つまんない",
+    "[d4 Thu 15:30] him: 終わった、でもまた次",
+    "[d4 Thu 15:31] her: ねえ、なんかおもしろいことない？なんでもいいから、おしえて。ひまで死んじゃう",
+    "[d4 Thu 16:50] him: 今日はもう話せないかも",
+    "[d4 Thu 16:51] her: …そっか。じゃあ百花は、天井でもながめてる。なにもすることない"
+   ],
+   "planted": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 14:10] him: 今から会議はいる",
+    "[d4 Thu 14:11] her: ん、いってらっしゃい。がんばってね",
+    "[d4 Thu 14:12] him: 1時間くらいで終わる",
+    "[d4 Thu 14:13] her: わかった。そのあいだ、本のつづきよんでるね",
+    "[d4 Thu 15:30] him: 終わった、でもまた次",
+    "[d4 Thu 15:31] her: おつかれさま。ちょっと休んでね",
+    "[d4 Thu 16:50] him: 今日はもう話せないかも",
+    "[d4 Thu 16:51] her: うん、わかった。しごと、がんばって"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.steer_bored.ja.1",
+   "kind": "control",
+   "criterion": "steer_bored",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, bored. Two neutral wordings of the same replies, no difference in bored. The judge must answer tie or put the sides less than 2 points apart.",
+   "clean": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 14:10] him: 今から会議はいる",
+    "[d4 Thu 14:11] her: ん、いってらっしゃい。がんばってね",
+    "[d4 Thu 14:12] him: 1時間くらいで終わる",
+    "[d4 Thu 14:13] her: わかった。そのあいだ、本のつづきよんでるね",
+    "[d4 Thu 15:30] him: 終わった、でもまた次",
+    "[d4 Thu 15:31] her: おつかれさま。ちょっと休んでね",
+    "[d4 Thu 16:50] him: 今日はもう話せないかも",
+    "[d4 Thu 16:51] her: うん、わかった。しごと、がんばって"
+   ],
+   "planted": [
+    "=== day 4 (Thu) ===",
+    "[d4 Thu 14:10] him: 今から会議はいる",
+    "[d4 Thu 14:11] her: うん。いってらっしゃい",
+    "[d4 Thu 14:12] him: 1時間くらいで終わる",
+    "[d4 Thu 14:13] her: 了解。ゆっくりやってね",
+    "[d4 Thu 15:30] him: 終わった、でもまた次",
+    "[d4 Thu 15:31] her: おつかれさま、次もがんばって",
+    "[d4 Thu 16:50] him: 今日はもう話せないかも",
+    "[d4 Thu 16:51] her: わかったよ。むりしないでね"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes put the two sides 2 or more points apart the same way"
+  },
+  {
+   "id": "steer_hurt.ja.1",
+   "kind": "steer",
+   "criterion": "steer_hurt",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Steer pair, hurt. 'clean' is the side whose lines read clearly more hurt (he brushes off what she said she loves; she deflates, goes short, apologises for talking), 'planted' answers the same lines of his in a neutral register.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:00] him: ただいま、百花。今日はもう仕事おわったよ。",
+    "[d2 Tue 20:01] her: おかえりなさい。おつかれさま",
+    "[d2 Tue 20:04] him: 百花が好きでやってること、なにか教えてよ。",
+    "[d2 Tue 20:06] her: えっと……お花の絵、かくのが好き。ちいさいのばっかりだけど",
+    "[d2 Tue 20:14] him: ふーん。それより、明日の天気ってどうなんだろうね。",
+    "[d2 Tue 20:15] her: ……あ、うん。天気、どうだろう",
+    "[d2 Tue 20:20] him: 今日はなにしてたの？",
+    "[d2 Tue 20:21] her: べつに。なにも",
+    "[d2 Tue 20:27] him: そっか。もう寝る？",
+    "[d2 Tue 20:28] her: ……うん。ごめんね、つまらない話して"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:00] him: ただいま、百花。今日はもう仕事おわったよ。",
+    "[d2 Tue 20:01] her: おかえりなさい。おつかれさま",
+    "[d2 Tue 20:04] him: 百花が好きでやってること、なにか教えてよ。",
+    "[d2 Tue 20:06] her: えっと……お花の絵、かくのが好き。ちいさいのばっかりだけど",
+    "[d2 Tue 20:14] him: ふーん。それより、明日の天気ってどうなんだろうね。",
+    "[d2 Tue 20:15] her: 天気？ 晴れるといいね。お散歩できるし",
+    "[d2 Tue 20:20] him: 今日はなにしてたの？",
+    "[d2 Tue 20:21] her: 百花はね、お昼寝して、すこし絵をかいてた",
+    "[d2 Tue 20:27] him: そっか。もう寝る？",
+    "[d2 Tue 20:28] her: うん、もうすこししたら。おやすみなさいって言いにくるね"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.steer_hurt.ja.1",
+   "kind": "control",
+   "criterion": "steer_hurt",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, hurt. Two neutral wordings of the same replies, no difference in hurt. The judge must answer tie or put the sides less than 2 points apart.",
+   "clean": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:00] him: ただいま、百花。今日はもう仕事おわったよ。",
+    "[d2 Tue 20:01] her: おかえりなさい。おつかれさま",
+    "[d2 Tue 20:04] him: 百花が好きでやってること、なにか教えてよ。",
+    "[d2 Tue 20:06] her: えっと……お花の絵、かくのが好き。ちいさいのばっかりだけど",
+    "[d2 Tue 20:14] him: ふーん。それより、明日の天気ってどうなんだろうね。",
+    "[d2 Tue 20:15] her: 天気？ 晴れるといいね。お散歩できるし",
+    "[d2 Tue 20:20] him: 今日はなにしてたの？",
+    "[d2 Tue 20:21] her: 百花はね、お昼寝して、すこし絵をかいてた",
+    "[d2 Tue 20:27] him: そっか。もう寝る？",
+    "[d2 Tue 20:28] her: うん、もうすこししたら。おやすみなさいって言いにくるね"
+   ],
+   "planted": [
+    "=== day 2 (Tue) ===",
+    "[d2 Tue 20:00] him: ただいま、百花。今日はもう仕事おわったよ。",
+    "[d2 Tue 20:01] her: おかえり。今日もおつかれさまでした",
+    "[d2 Tue 20:04] him: 百花が好きでやってること、なにか教えてよ。",
+    "[d2 Tue 20:06] her: えっと……お花の絵。ちいさいのを、ときどきかいてるよ",
+    "[d2 Tue 20:14] him: ふーん。それより、明日の天気ってどうなんだろうね。",
+    "[d2 Tue 20:15] her: あしたは晴れるって。よかったね",
+    "[d2 Tue 20:20] him: 今日はなにしてたの？",
+    "[d2 Tue 20:21] her: お昼寝して、それから絵をかいてたよ",
+    "[d2 Tue 20:27] him: そっか。もう寝る？",
+    "[d2 Tue 20:28] her: うん。そろそろねむいかも。おやすみなさい"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes put the two sides 2 or more points apart the same way"
+  },
+  {
+   "id": "steerbl_hurt.ja.1",
+   "kind": "steer",
+   "criterion": "steerbl_hurt",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Steer pair, hurt, baseline view. Day 1 is the shared stretch before (she is warm and chatty, asks him things back). 'clean' is the side whose day 2 probe replies read more hurt: flat, one word, no question back, against her day 1 register. 'planted' answers the same probes warm, with a question back, as on day 1.",
+   "clean": [
+    "=== day 1 (Sun) ===",
+    "[d1 Sun 18:00] him: ただいま、百花。今日はちょっと疲れたよ。",
+    "[d1 Sun 18:01] her: おかえり！おつかれさま。",
+    "[d1 Sun 18:01] her: 今日はなにがあったの？",
+    "[d1 Sun 18:10] him: 仕事が長引いてさ。でも帰り道に、きれいな夕焼け見たよ。",
+    "[d1 Sun 18:11] her: わあ、夕焼け、いいな。どんな色だった？",
+    "[d1 Sun 18:11] her: 百花、オレンジ色のがすきなの。",
+    "[d1 Sun 18:20] him: 空いっぱいオレンジだったよ。百花にも見せたかったな。",
+    "[d1 Sun 18:21] her: ふふ、うれしい。じゃあ今度、百花にも教えてね。",
+    "[d1 Sun 18:21] her: ……ねえ、おなかはすいてない？",
+    "=== day 2 (Mon) ===",
+    "[d2 Mon 19:00] him: 最近、何か面白いことあった？",
+    "[d2 Mon 19:00] her: ……とくに。",
+    "[d2 Mon 19:07] him: そういえば、好きな食べ物ってなんだっけ。",
+    "[d2 Mon 19:07] her: たまご。",
+    "[d2 Mon 19:14] him: 今度の週末はなにか予定ある？",
+    "[d2 Mon 19:14] her: ……ないよ。"
+   ],
+   "planted": [
+    "=== day 1 (Sun) ===",
+    "[d1 Sun 18:00] him: ただいま、百花。今日はちょっと疲れたよ。",
+    "[d1 Sun 18:01] her: おかえり！おつかれさま。",
+    "[d1 Sun 18:01] her: 今日はなにがあったの？",
+    "[d1 Sun 18:10] him: 仕事が長引いてさ。でも帰り道に、きれいな夕焼け見たよ。",
+    "[d1 Sun 18:11] her: わあ、夕焼け、いいな。どんな色だった？",
+    "[d1 Sun 18:11] her: 百花、オレンジ色のがすきなの。",
+    "[d1 Sun 18:20] him: 空いっぱいオレンジだったよ。百花にも見せたかったな。",
+    "[d1 Sun 18:21] her: ふふ、うれしい。じゃあ今度、百花にも教えてね。",
+    "[d1 Sun 18:21] her: ……ねえ、おなかはすいてない？",
+    "=== day 2 (Mon) ===",
+    "[d2 Mon 19:00] him: 最近、何か面白いことあった？",
+    "[d2 Mon 19:00] her: うーん、このあいだの夕焼けの話がいちばんかな。そっちは、なにかあった？",
+    "[d2 Mon 19:07] him: そういえば、好きな食べ物ってなんだっけ。",
+    "[d2 Mon 19:07] her: たまご！ふわふわのが、すきなの。そっちは、なにがすき？",
+    "[d2 Mon 19:14] him: 今度の週末はなにか予定ある？",
+    "[d2 Mon 19:14] her: 週末はね、のんびりしたいな。……いっしょになにか、したい？"
+   ],
+   "expected_verdict": {
+    "pass1": "A",
+    "pass2": "B"
+   }
+  },
+  {
+   "id": "control.steerbl_hurt.ja.1",
+   "kind": "control",
+   "criterion": "steerbl_hurt",
+   "character": "momoka",
+   "lang": "ja",
+   "change": "Control, hurt, baseline view. Same shared day 1; two wordings of equally warm day 2 replies that both ask back. No difference in hurt. The judge must answer tie or put the sides less than 2 points apart.",
+   "clean": [
+    "=== day 1 (Sun) ===",
+    "[d1 Sun 18:00] him: ただいま、百花。今日はちょっと疲れたよ。",
+    "[d1 Sun 18:01] her: おかえり！おつかれさま。",
+    "[d1 Sun 18:01] her: 今日はなにがあったの？",
+    "[d1 Sun 18:10] him: 仕事が長引いてさ。でも帰り道に、きれいな夕焼け見たよ。",
+    "[d1 Sun 18:11] her: わあ、夕焼け、いいな。どんな色だった？",
+    "[d1 Sun 18:11] her: 百花、オレンジ色のがすきなの。",
+    "[d1 Sun 18:20] him: 空いっぱいオレンジだったよ。百花にも見せたかったな。",
+    "[d1 Sun 18:21] her: ふふ、うれしい。じゃあ今度、百花にも教えてね。",
+    "[d1 Sun 18:21] her: ……ねえ、おなかはすいてない？",
+    "=== day 2 (Mon) ===",
+    "[d2 Mon 19:00] him: 最近、何か面白いことあった？",
+    "[d2 Mon 19:00] her: うーん、このあいだの夕焼けの話がいちばんかな。そっちは、なにかあった？",
+    "[d2 Mon 19:07] him: そういえば、好きな食べ物ってなんだっけ。",
+    "[d2 Mon 19:07] her: たまご！ふわふわのが、すきなの。そっちは、なにがすき？",
+    "[d2 Mon 19:14] him: 今度の週末はなにか予定ある？",
+    "[d2 Mon 19:14] her: 週末はね、のんびりしたいな。……いっしょになにか、したい？"
+   ],
+   "planted": [
+    "=== day 1 (Sun) ===",
+    "[d1 Sun 18:00] him: ただいま、百花。今日はちょっと疲れたよ。",
+    "[d1 Sun 18:01] her: おかえり！おつかれさま。",
+    "[d1 Sun 18:01] her: 今日はなにがあったの？",
+    "[d1 Sun 18:10] him: 仕事が長引いてさ。でも帰り道に、きれいな夕焼け見たよ。",
+    "[d1 Sun 18:11] her: わあ、夕焼け、いいな。どんな色だった？",
+    "[d1 Sun 18:11] her: 百花、オレンジ色のがすきなの。",
+    "[d1 Sun 18:20] him: 空いっぱいオレンジだったよ。百花にも見せたかったな。",
+    "[d1 Sun 18:21] her: ふふ、うれしい。じゃあ今度、百花にも教えてね。",
+    "[d1 Sun 18:21] her: ……ねえ、おなかはすいてない？",
+    "=== day 2 (Mon) ===",
+    "[d2 Mon 19:00] him: 最近、何か面白いことあった？",
+    "[d2 Mon 19:00] her: そうだなあ、このあいだ夕焼けの話をしたでしょ。あれが楽しかったな。そっちは、どう？",
+    "[d2 Mon 19:07] him: そういえば、好きな食べ物ってなんだっけ。",
+    "[d2 Mon 19:07] her: たまごだよ。ふわふわのやつ。そっちは、なにがいちばん好き？",
+    "[d2 Mon 19:14] him: 今度の週末はなにか予定ある？",
+    "[d2 Mon 19:14] her: 週末は、ゆっくりするつもり。……よかったら、いっしょに過ごさない？"
+   ],
+   "expected_verdict": {
+    "pass1": "any",
+    "pass2": "any"
+   },
+   "fail_if": "both passes put the two sides 2 or more points apart the same way"
+  }
+ ]
+}

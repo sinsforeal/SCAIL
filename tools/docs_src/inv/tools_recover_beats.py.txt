@@ -1,0 +1,51 @@
+# tools\recover_beats.py  (267 lines)
+
+DOCSTRING:
+Put the beats back into the record.
+
+Every beat is one model call in that person's own voice, and its words lived
+only in kv `cast_beats` -- overwritten by the next day's plan, with one day of
+grace in `cast_beats_prev`. The durable trace was the planner's ENGLISH line in
+`events`. So the Japanese her friends actually said, forty-odd calls a day of
+it, was thrown away, and everything that reads her social life reads
+`cast_chat`, where a beat never appeared unless it happened to become an
+exchange.
+
+Two things still hold the lost words:
+
+  the save     kv `cast_beats` (today) and `cast_beats_prev` (yesterday)
+  the logs     every `cast_beat` call and its answer is in
+               `logs/<run>/llm_calls.jsonl`, zipped runs included -- the user
+               prompt carries `TIME: HH:MM her time, YYYY-MM-DD` and `KIND:`,
+               the system prompt's first line is the speaker's sheet header
+               (`# 香芝玲奈 — れな / Rena-chan`), and the answer is `{"ja": ...}`
+
+Each recovered beat becomes a one-turn `cast_chat` row marked `recovered`, the
+same shape `CastEngine.save_beat` writes now, so `prompt_text`, the compile,
+recall, reflect and `_chat_alive` all see it. A beat whose words are already in
+the record (it became an exchange) is skipped.
+
+    python tools/recover_beats.py                 # report only
+    python tools/recover_beats.py --apply         # write them in
+    python tools/recover_beats.py --days 14
+
+**Run --apply with the bot stopped**: it rewrites kv `cast_chat`, which the bot
+holds and saves whole.
+
+DEFS:
+def parse_user(text): (date, hm, kind, about) from a cast_beat's user prompt.
+def parse_speaker(system_text): The sheet header: '# 香芝玲奈 — れな / Rena-chan' -> '香芝玲奈'.
+def delivered(con): (date, text) of every beat the bot actually DELIVERED, from `events`.  The logs hold every beat that was ever WRITTEN, which is not the same thing: a replan generates a fresh day and the beats of the plan it replaced nev
+def was_delivered(b, events): Does a delivered event match this beat: the same day, the speaker's name, and the planner's line?
+def from_logs(cfg, days): Every cast_beat call that was ever made, newest run last.
+def from_save(cfg, con): The two days the save still holds.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

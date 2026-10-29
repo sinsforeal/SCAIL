@@ -1,0 +1,25 @@
+# tools\her_first_word.py  (77 lines)
+
+DOCSTRING:
+Her first words through the real stack.
+
+Not a stand-in. This boots the App with her config, so the prompt is the one
+`persona.system_for('him')` assembles -- her bible, her style, her beliefs, her
+self-beliefs, her roster, her primitives -- and calls the persona role the way
+the loop calls it. Everything the earlier generation test could not reach.
+
+A scratch database, console mode, no sensors: it never touches her save or his.
+
+    python tools/her_first_word.py "こんばんは。今日は疲れてる?"
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

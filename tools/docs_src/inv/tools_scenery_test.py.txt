@@ -1,0 +1,21 @@
+# tools\scenery_test.py  (236 lines)
+
+DOCSTRING:
+Borrowed eyes without the network or the models: discovery with a
+stubbed search and judge, harvest with a stubbed vision, the picker
+against her scene / season / hour / weather / lore, the offer gates,
+adoption and the lore line. On a copy of the save.
+
+    python tools/scenery_test.py
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: scenery_lore, x_action_queue
+KV WRITE: event_stances, scenery_accounts, scenery_last_run_ts, scenery_last_send_ts, scenery_send_counts
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

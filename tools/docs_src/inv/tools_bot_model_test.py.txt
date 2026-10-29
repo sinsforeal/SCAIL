@@ -1,0 +1,37 @@
+# tools\bot_model_test.py  (296 lines)
+
+DOCSTRING:
+The live bot's model test: the last N calls of every role in a run,
+replayed as sent on candidate providers, beside the official DeepSeek
+reply the bot actually used and a control written by hand.
+
+    python tools/bot_model_test.py extract logs/<run> [n]        -> data/model_test/<ts>/cases.jsonl
+    python tools/bot_model_test.py run <dir> gemini|coreweave|qwen [workers]
+    python tools/bot_model_test.py show <dir> <case> [tail]      the case as the bot sent it, for reading
+    python tools/bot_model_test.py report <dir>                  summary table + every answer side by side
+
+Running the bot and extracting a persona are different tasks (his
+words), so this is its own test: every case keeps the role's own
+temperature and thinking flag, no output limit, no fallback host. The
+reply written by hand goes to <dir>/fable/<case>.json as {"content": ...}.
+
+DEFS:
+def _config(): 
+def extract(run_dir, n): 
+def load(d): 
+def _vertex(): 
+def _gemini_body(case): 
+def _dump_raw(case, provider, attempt, d): 
+def call_case(provider, case, timeout, retries): 
+def run(d, provider, workers, timeout): 
+def show(d, cid, tail): 
+def report(d): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

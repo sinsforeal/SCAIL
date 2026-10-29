@@ -1,0 +1,43 @@
+# sim\lore_rooms.py  (118 lines)
+
+DOCSTRING:
+Her own record reaching her in the rooms with her own people.
+
+The retrieval itself is `sim/lore.py` and none of it is repeated here. What
+this module is, is the ONE way a room asks it: how the room's turns are split
+into the two sides the retrieval reads, and the one line that goes over the
+answer. Until 2026-09-06 only her reply to him asked at all
+(`persona/persona.py`), so a character whose life is in her record -- 81
+records and 320 cue phrases for the promoted one -- remembered none of it
+with her friends, in the rooms where most of her words are written.
+
+The split is the whole of it and it is `sim/lore.py`'s rule, not a new one.
+What the OTHERS have said since her last turn is the conversation reaching
+for something, and a record it names is reachable however often they name
+it. Her own recent turns name a record just as well -- she is often the one
+who raised the thing -- but they are also where she has just TOLD it, and a
+telling stays in the window for the next few turns, so her own side is the
+only one an already-offered record is held against (`lore.own_words_days`).
+Handing both sides in as one cue is what made the second character tell the
+same anecdote three turns running.
+
+A character with no record of her own has `Persona.lore` None and every
+function here returns nothing, so a room's assembly is byte-identical for
+her.
+
+DEFS:
+def window(config): How many of the room's turns the retrieval is asked over.  `lore.cue_exchanges` counts exchanges and a turn is half of one, the way her reply to him counts it. 0 means no window at all rather than no turns: a room with a
+def _said(turn): What was actually typed. Her rooms are Japanese and the gloss is the machine's, so the Japanese is the cue and the English beside it is not.
+def cue_echo(turns, is_self, back): (what the others are asking with, what she has said herself).  `is_self` is asked about a turn's `who` and is the caller's, because a room she owns names her one way and a room she was invited into names her another.
+def lines(persona, config, turns, is_self, context_text): The lines of her record this room reached for, tagged `lore` -- the same source her reply to him uses, so one weight and one entry in the attention table cover both rooms. Usually empty, which is the point.  Guarded: a r
+def preamble(config): The one line over the retrieved lines, in her language.  Every other line in a room's block is something happening now. Without a header a thing she has known for years reads as an event and she answers it; with the wron
+def place(kept, lore, config): `kept` with the preamble in front of the first retrieved line that survived the gate, or `kept` untouched when none did.
+
+CONFIG SECTIONS: lore, situation_block
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: lore
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

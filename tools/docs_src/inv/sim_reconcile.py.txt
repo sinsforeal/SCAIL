@@ -1,0 +1,69 @@
+# sim\reconcile.py  (442 lines)
+
+DOCSTRING:
+What the fiction said happened, against what the machine actually did.
+
+Every model in this project writes prose, and some of the things prose can say
+are things only code can do. The director wrote *"She finally sends him the
+message she's been drafting since the bath"* and no message ever left the
+process: no `messages` row, no `tg_id`, nothing delivered. The scene said she
+acted; the machine had not. That is not a director bug, it is a missing
+contract, and the same shape has now appeared four times -- the X post recorded
+before `curation.decide` returned, `approach.note()` charged before the bubbles
+existed, `hazards_seen` marked before delivery, and this.
+
+The rule underneath all four: **a record of an action must never exist without
+the action.** Two halves to enforcing it.
+
+The ordering half is discipline and lives at each call site: nothing is written
+down until the thing that decides whether it happens has returned. That is
+already fixed everywhere it was found.
+
+The other half is this module, and it is the one that generalises. Prose is
+free text and can assert anything, so it needs a check rather than an ordering.
+For every action she can take, this holds three things: the typed field that
+legitimately carries it (`spent`, `open_note`, `ate` -- the channels code
+already honours), a reader that answers whether it really happened in this
+window, and what to do when the prose claims it and neither is true.
+
+Code decides when (every tick that produced prose, cheap, gated); a model
+decides what (does this sentence assert this action, and what should it say
+instead). Nothing here rewrites state -- it only ever corrects the fiction down
+to what the machine actually did, or hands the action to the channel that can
+really perform it.
+
+Every violation is logged to kv `reconcile_log`, because the point is not only
+to correct a scene: it is to find out which call drifts, and how often, in a
+system where nobody would otherwise notice.
+
+DEFS:
+def claims_own_photo(text): Does this sentence say she has, took, owes or sent HIM a picture of her own -- or that he saw one? Deterministic, both languages, no model.
+def flag_own_photo(text, where, store, clock): Log it and keep a row; never touch the text. Returns True when flagged.
+def claims_inbound_contact(text): Does this event say the other person got in touch? Deterministic, both languages, no model.
+def inbound_since(store, since): Did a message from him actually arrive inside the window.
+def flag_restaged_contact(text, where, store, clock, window_minutes): Log it and keep a row; never remove the event. True when flagged.
+class Action: One thing she can do that leaves a real trace.
+    __init__(name, cue, channel, truth, policy, instead): 
+def _messages_since(app, since): 
+def _spend_since(app, since): Did money actually move inside this tick's window.  The money log carries date and hm, not a timestamp, so the window has to be rebuilt from the clock. Comparing the date alone -- which this did -- means one konbini run 
+def _note_since(app, since): 
+def _post_since(app, since): 
+def _about_somebody_else(config, text): Is this sentence about a cast member rather than about her? The reconcile actions are all about what SHE did -- sent, spent, posted, read -- and a beat's event line starts with the person who did it.
+def actions(her): 
+class Reconcile: 
+    __init__(config, store, llm, clock): 
+    _log(entries): 
+    check(app, scene, since_ts): Correct any event in `scene` that claims an action the machine did not perform. Mutates scene["events"] in place and returns the number of corrections. Never raises: a check that fails must not cost a tick.
+    _detect(app, scene, events, since_ts): The raw detector: returns the model's violation rows for these events. Shared by the first pass and by the check on its own output.
+    _check(app, scene, events, since_ts): 
+    _still_claims(app, scene, text, since_ts): Run one corrected sentence back through the detector. True means the rewrite is no better than what it replaced.
+    report(n): 
+
+CONFIG SECTIONS: character, prompt_text, reconcile.enabled, reconcile.log_keep
+KV READ: flags, reconcile_log
+KV WRITE: flags, reconcile_log
+TABLES: 
+LOG TAGS: reconcile
+PROMPTS: reconcile
+LLM ROLES: reconcile
+OPS COMMANDS: 

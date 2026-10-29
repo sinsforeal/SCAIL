@@ -1,0 +1,49 @@
+# tomoe/world\hazards.py  (1034 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _rung(name): 1 注意報, 2 警報, 3 特別警報, from JMA's own name for the thing.  Tested longest first: 大雨特別警報 also ends in 警報.
+def _get(url, timeout): 
+class Hazards: 
+    __init__(config, store, clock, weather): 
+    _here(points): The worst shaking at any observation point that is hers, and where.  Falls back to the broader `東京都２３区` area reading, which is what JMA publishes before the per-point detail arrives.
+    start(): 
+    _ws_loop(): 
+    stop(): 
+    backfill(): What has happened recently enough that she would still be talking about it. Not the whole history -- a quake last month is not news -- but a bad one last night is the first thing anyone says.
+    _ingest(ev, backfill): 
+    _age_hours(when): Two stamp formats reach this. The seismic relay writes `2026/09/08 22:45:02` with no zone and JMA's own bulletins write ISO with one; a warning read as the first returned 0.0 hours, so every warning looked like it had ju
+    _push(key, kind, text, salience, when, rank): `rank` lets a better report of the same event replace a worse one.  JMA sends a quake several times and the ward reading can differ between them -- the 08-23 Ibaraki quake came through as 4 in one report and 5-weak in an
+    _quake(ev, backfill): 
+    _remember_felt(when, here, hy, age): One she felt, too long ago to be news. It joins what the country has been dealing with, marked as hers rather than something on television.
+    _tsunami(ev, backfill): 
+    _eew(ev): 緊急地震速報. The alarm, before the shaking. Seconds, not minutes.
+    poll_weather(): 
+    _feed(url): One of the two developer feeds, or None if it has not changed.  JMA asks that the feeds are not hit hard. The poll interval already keeps well clear of that, and the server's own ETag and Last-Modified go back with the n
+    _her_bulletins(xml, area): Every warning bulletin for one prefecture in a feed, oldest first, and how far back the feed itself reaches.  The horizon is over EVERY entry, not only hers: it is what says whether the feed can still cover the time sinc
+    _poll_prefecture(): The warnings out over her own prefecture, and her own ward.  The short feed is read every poll. It is only insufficient in two cases, and it says so itself: her prefecture may be quiet enough not to have published inside
+    _fresh_enough(when): A bulletin is the answer to "is a warning up", at whatever hour it was written. After a hole in the process the newest one there is can be days old, and reading that as news would tell her about a storm the week has alre
+    _warnings(doc): The bulletin, cut down to where she actually is.  JMA nests four depths in it -- the prefecture (東京都), its subdivisions (東京地方), the groups of municipalities (２３区西部) and the municipalities themselves (練馬区) -- and `her_war
+    _typhoons(tc): Kept as context, never pushed as an event.  There are about twenty-five named storms in this basin every year and almost none of them do anything to Tokyo. The first version announced every one of them, which is how a sy
+    _weather_now(): What it is actually doing outside her window, from the forecast the director already uses. Local and real, rather than a storm on a map.
+    _bad_out(): Is the weather itself worth a word. mm of rain in the hour, from Open-Meteo, not from the existence of a cyclone.
+    national_refresh(): Major national events of the last weeks, as standing knowledge.  JMA's own `list.json` is the source rather than the realtime relay: it carries about a month of history in one file, which is what this needs and what a we
+    _national_weather(held): The storms the country has been dealing with, from JMA's bulletins.  The ground had this and the sky had nothing. On 2026-09-08 a line of storms put around 100mm of rain in one hour over Nagoya, the worst hour the city h
+    _weather_row(r): One storm as a line of her prompt, in both languages.  Both, because the row is stored and the two characters who read this code are addressed in different ones (`national_text`). The Japanese term stays inside the Engli
+    national_text(): For her prompt. Not her day -- what has been on the news.
+    push_external(e): Something from another watcher (the trains) that reaches her the same way. Keyed on its own text so a line that goes down and comes back is two events and a line that stays down is one.
+    wakes_her(): Is anything waiting bad enough to get a sleeping girl out of bed.  Live only. A backfilled event is something that already happened, and being woken at six in the evening by yesterday morning's earthquake is exactly the 
+    take(): Everything that has happened since the last look, and clears.
+    brief(): Only what is actually happening to her. A storm three days out over the Philippine Sea is not a thing she is having.
+    report(): 
+
+CONFIG SECTIONS: hazards, hazards.backfill_hours, hazards.fresh_hours, hazards.keep, hazards.national_in_prompt, hazards.national_keep, hazards.warning_from, hazards.warning_max_age_hours
+KV READ: hazards_national, hazards_ranks, hazards_seen
+KV WRITE: hazards_national, hazards_ranks, hazards_seen
+TABLES: 
+LOG TAGS: hazards
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,44 @@
+# tools\fix_cast_voice.py  (112 lines)
+
+DOCSTRING:
+Every line of the six that breaks their own sheet.
+
+Found by reading all 173 turns of Yumi, Kenji, Kaito, Rena, Aya and Hinako,
+then encoding what the read-through found as rules in `data/voice_rules.json`
+and letting the checker produce the list mechanically -- so this is the full
+set the spec knows about, not the subset I happened to notice.
+
+What was wrong, by kind:
+
+- **Yumi talking about herself in the third person.** 「スーパーの由美さんが言って
+  たんだけど」-- she IS Yumi and she works at that supermarket. The model lost
+  track of who was speaking and invented a colleague with her own name.
+- **Yumi calling herself ママ**, where this house says お母さん (Kaito's ママ was
+  the same error, fixed earlier).
+- **Name forms against `data/cast.json`.** Rena calls them とも / ひな / あや and
+  was using ともえ / ひなこ / トモエ; Yumi calls her 朋絵 and used トモエ; Aya calls
+  her れな and used レナ, and once referred to Hinako as 彼女, which a
+  fifteen-year-old does not do about a friend standing there.
+- **Western dialect from the Tokyo girls.** Hinako 言われたとる / やらん / 言わん /
+  来んの, Aya 気しかしん. Both sheets say 標準語、方言なし.
+- **First person against the sheet.** Hinako and Aya are pinned 私 and reached
+  for あたし.
+- **長距離の奴** for the long-distance man. 遠距離 is the relationship; 長距離 is
+  a coach or a race.
+
+Each rewrite keeps the sentence and changes only the word. Idempotent, backs
+the save up, prints every change.
+
+    python tools/fix_cast_voice.py [--db data/world.db] [--dry]
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

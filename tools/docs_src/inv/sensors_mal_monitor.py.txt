@@ -1,0 +1,31 @@
+# sensors\mal_monitor.py  (381 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _get(url, timeout): 
+def fetch_list_api(username, client_id): 
+def fetch_list(username): 
+def fetch_rss(username): 
+class MalMonitor: 
+    __init__(config): 
+    _load(): 
+    _save_state(): 
+    poll_episodes(): New per-episode watches from the mal_history DB (built by tools/mal_history.py) since the last look, as a digest line. Read-only; on first sight it just records the tip so the backfill is not dumped.
+    poll_notes(): Notes he has written or changed on an anime since the last look.  `tools/mal_history.py` writes `anime.notes` on every list sync, so the data was already arriving; nothing watched it. A note was a snapshot with no event 
+    refresh_list(force): 
+    poll(): Returns text describing new RSS activity since last poll, or ''.
+    search_list(term): Titles on his list matching the term, as lines she could read off the shelf.
+    shelf_summary(watching_max, completed_max, t): His list as she reads it. `t(english, japanese)` is the caller's wording picker (`sim.lang.say`): the same summary is put in front of HER, in the language she is addressed in, and in front of the continuity editor, which
+    latest_watching(n, t): The most recently touched 'watching' entries with progress and when: what she would have seen last.  `t` as in `shelf_summary`: this line goes into her situation block when anime is what they are talking about, so the wo
+    recap(start_date, end_date): Plain recap of list changes between two dates (inclusive), local time.
+
+CONFIG SECTIONS: mal_client_id, mal_enabled, mal_list_path, mal_list_refresh_hours, mal_poll_minutes, mal_state_path, mal_username
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

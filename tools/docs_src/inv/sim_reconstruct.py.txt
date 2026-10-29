@@ -1,0 +1,52 @@
+# sim\reconstruct.py  (276 lines)
+
+DOCSTRING:
+The prompt a reply was drawn from, rebuilt for a reply that kept none.
+
+A reply delivered before the freeze existed has no `reply_prompts` row, and
+the array it went out on cannot be recovered from the record -- only rebuilt.
+This is the rebuild, and it is the method `tools/regen_reply.py` already
+uses to answer an old message again: a consistent copy of the save through
+sqlite's backup API, the history and every timestamped table cut back to the
+moment of the message she was answering, the whole runtime built on that copy
+in console mode with no sensors, and the assembly run once with the model
+stubbed so it costs nothing. What the assembly produces is the array.
+
+The two callers:
+
+* `tools/regen_reply.py` imports the copy and the cut, so the two halves
+  cannot drift apart;
+* the runtime's redraw command runs this module as a CHILD PROCESS when the
+  message he tapped has no kept prompt. A child rather than a thread: the
+  runtime's log directory, its network watch and its one-per-save lock are
+  process-wide, and a second runtime built beside a live one inside the same
+  process would take all three over.
+
+    python -m sim.reconstruct --config <cfg> --db <save> --message-id <hers>
+                              --out <file.json>
+
+What comes back is not what she was given. It is the same assembly over the
+same record at the same minute, and the parts of it that are read out of the
+record -- her history, what she carries, her own words -- are the same bytes.
+The parts that were live at the time and are not kept per-minute are rebuilt
+from the nearest thing the record holds, so the row is marked as rebuilt and
+everything drawn from it says so.
+
+DEFS:
+def consistent_copy(src, dst): A coherent image of a save another process is writing to.  sqlite's own backup through a read-only connection: a plain file copy of an open database returns the on-disk image from before that process started writing, and
+def _cut_tables(con, ts): 
+def cut_to(con, message_id, unread_run): Cut an open copy back to the moment one of HIS messages arrived.  Every message after it deleted, that one marked unread, and every row newer than it removed from the tables that carry a time. Returns what was found, inc
+def cut_before(con, message_id): Cut an open copy back to the instant before SHE spoke.  For a message she started herself: there is nothing of his to answer, so the moment is her own row and her own row goes too.
+def answered_message(store, her_msg_id): The message of his that the reply at `her_msg_id` was answering: the newest user-role row before it.
+def _no_charge(app, answer): Every model call on this runtime answered from nothing, for free.  The assembly is what is wanted, not an answer: the array is kept as the call goes out (`Persona._draft`), so a stub that returns anything at all leaves t
+def rebuild(config_path, db_path, her_msg_id, say): The array one old reply would have gone out on, rebuilt.  `db_path` is read read-only and copied; it is never opened for writing and nothing here writes to it. The caller files the result.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

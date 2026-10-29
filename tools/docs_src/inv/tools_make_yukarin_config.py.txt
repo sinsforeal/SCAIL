@@ -1,0 +1,31 @@
+# tools\make_yukarin_config.py  (351 lines)
+
+DOCSTRING:
+Her own config, beside his, touching nothing of Tomoe's.
+
+The bot already supports this: `scail.py --config X --db Y`, and the singleton
+lock is keyed to the database path rather than being global, so a second bot
+sits beside the live one exactly as a dry run always could. The talkapp hub is
+already multi-character -- `h_bot_register` takes a `char` id and keeps a
+separate log per persona.
+
+What this writes is the difference between the two: which sheet, which save,
+which prompt files, which name. Everything else is the mechanism and is shared.
+
+Secrets are copied across from `config.json` in memory and never printed. Run
+it again after a DEFAULTS change and it re-merges without losing the overrides.
+
+    python tools/make_yukarin_config.py
+    python scail.py --config config_yukarin.json --db data/yukarin.db --console --no-sensors
+
+DEFS:
+def main(argv): `--out <path>` writes somewhere else and touches nothing of hers, which is how a regeneration is checked against her live config before it is allowed to replace it (`diff` of the two must be empty). `--fresh` ignores her
+
+CONFIG SECTIONS: json, py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

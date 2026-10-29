@@ -1,0 +1,51 @@
+# tools\neutral_replay.py  (447 lines)
+
+DOCSTRING:
+Re-run a day that already happened through two prompt trees and compare.
+
+The question is whether prompts written as mechanism plus a reference to the
+character sheet (`prompts_neutral/`) make the same girl behave the same way as
+prompts with her friends' names written into them (`prompts/`).
+
+The method is a held-input A/B rather than two simulations. Two simulated days
+diverge on their first coin flip and after that nothing they differ on can be
+attributed to the prompt. So the inputs are the real ones: every model call the
+live bot made on 2026-09-01 is in `logs/<run>/llm_calls.jsonl` with its whole
+message list and its answer. For a chosen role this script takes those recorded
+calls, keeps the user message byte for byte, swaps only the system prompt, and
+runs both sides several times.
+
+Several times is the point. A model at temperature 1.0 does not repeat itself,
+so a single pair proves nothing: the run-to-run spread inside one prompt tree
+has to be measured before a difference between the two trees can be called a
+difference at all. Every comparison below is a field's agreement across
+repetitions of the same prompt, set against its agreement across the two.
+
+Nothing here touches the live save, the live prompts or the running bot. The
+save is copied first and read only for the relationship meters; the neutral
+system prompt is assembled in memory by `tools/neutral.py`.
+
+    python tools/neutral_replay.py --estimate                  # what it would cost
+    python tools/neutral_replay.py --go --reps 3
+    python tools/neutral_replay.py --go --roles state,director --reps 3
+
+DEFS:
+def capture_schedule(db, date_str): The one role the record cannot supply. The day planner runs once at her midnight, and the run being replayed started after it, so there is no recorded call to hold the input steady with. It is rebuilt instead: the whole 
+def calls_of(role, log): 
+def spread(rows, n): n of them, spaced across the day rather than the first n, so a role is sampled at the times it was actually different (asleep, at school, alone with the phone) instead of at whatever happened first.
+def template(path): A regex that matches the rendered form of a prompt file, with each {{TOKEN}} as a capture group. The state prompt reaches the model with its gauge list and its delta schema already substituted by sim/state.py, so the onl
+def swap(recorded_system, role, neutral_text, char): The recorded system prompt with the original file's span replaced by the neutral one, resolved. Everything the caller wrapped around the file -- a speaker's sheet above it, a sticker list below it -- is left exactly wher
+def _get(d, path): 
+def features(role, answer): The comparable shape of one answer. None when it did not parse -- an unparseable answer is itself a result and is counted, never repaired.
+def agreement(runs, fields): Per field: how many distinct values a set of runs produced. 1 is unanimous.
+def main(): 
+def report(results, reps, out_dir): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

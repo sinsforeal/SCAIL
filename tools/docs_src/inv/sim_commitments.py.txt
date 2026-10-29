@@ -1,0 +1,67 @@
+# sim\commitments.py  (1194 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _at_home(scene): Where she lives, by the scene's own words. Somebody else's house ("Rena's house") and the way home ("walking home") are not it.
+def _drop_relative_day(text): The sentence without the relative day word. The date is beside it.  A possessive one owns the noun after it, and taking the word out on its own left the apostrophe behind: "go to tomorrow's festival" was stored as "go to
+def _mangled(text): Is this sentence missing a word it was built around.
+def _words(text): 
+def _same(a, b, threshold): 
+class Commitments: 
+    __init__(config, llm, store, clock, state, money, graph, self_memory): 
+    rows(): 
+    save(rows): 
+    open(): 
+    _her(): Her name, for the one-line record of a promise. It used to be the first character's given name written into the string, which put her in every other character's event ledger -- and the checker that exists to catch exactl
+    _key_of(who): The roster key, or None when nobody owns the name -- callers here branch on None, so an unknown name must not come back as itself.
+    _name_of(key): 
+    _present(rec): The roster keys of everybody who was in this exchange: the counterparty of a private room, every speaker in a group one. One walk, because `_bind` and `settle_sends_now` have to agree about who was there.
+    settle_sends_now(rec): A promise to send somebody something is closed the moment the chat carries it, not at the day's compile.  Sending the photograph used to create a fresh promise to send the photograph: the judge read the exchange, saw her
+    from_exchange(rec): After an exchange: did she commit to anything? One flash call names it; code decides whether it binds.
+    planner_lines(date_str): For the cast planner: what she has promised on this date and the next, by id, with the date written out. The planner writes a day that may not be today, so a relative word is the wrong word here.
+    pin_time(cid, hm, why): The plan gave a time to a promise that had none: from then on it is the promise's time, for the schedule, the director, the speakers and the settle alike.
+    from_chat(): After she has said something to him: did she promise him anything? Runs on the loop pass once her bubbles are in the store (delivery writes them as they go, so this waits for the batch to end). One call per burst of hers
+    _wake_needs_redrawing(r): A promise with a start time on a day whose night has already been drawn: drop that draw so it is drawn again with the alarm in it. The wake and the night are decided once per date and persisted, and a plan agreed after t
+    _outing(what, date): (the calendar entry this promise is about, why it is not one).  A promise to be somewhere public is a promise about a thing on the calendar, and it binds to that entry or it does not bind at all. Sixteen promises came du
+    _bind_him(item, rows): A promise to him binds with one of HIM_KINDS and a real date.
+    _bind(item, rec, rows): A commitment binds only with a cast counterparty and a real date.
+    _week_line(): The next seven days with their dates, because `clock.both()` carries a weekday and a time but no date, and a model asked to resolve 明日 without one invents a year.
+    _parse_when(s): 
+    _cancel(cid, rows): She called one off herself, in words, before the day. Honest, and cheaper than not turning up -- but not free.
+    settle(date): At the compile, from the record only. Once; never reversed.
+    _in_window(hm, r): 
+    _late(hm, r): Minutes past the hour she said. `attend_slack_minutes` is 90, so turning up at half past twelve for a nine o'clock settled KEPT and looked in the record exactly like arriving on time -- same regard, same pride, same "she
+    _place_ok(r, scenes): Does the promise name a place the day actually has, and does THIS scene stand in it? "bring a water bottle to the festival" was KEPT by standing next to Kaito in the kitchen at 08:45. The promise's own words are matched 
+    _check(r): 
+    _check_send(r): A promise to a person in her world to send them something.  The record is the chat itself: a message of HERS, in a room that person was in, carrying a picture or a video. Her saying she sent it does not count and must no
+    _check_him(r): From her messages to him on the day, in the window, nothing else.
+    _knew_late(r, date): The record of her having known, for this promise, or None.
+    _close(r, status, why, date, late): 
+    _move_edge(holder_name, d_regard, d_irritation): The counterparty's own edge to her, moved by code now; their next graph update rewrites the view from the witnessed event.
+    _when(r): 
+    _days(r): 
+    _rel_day(r): 
+    running_late(): Is she going to make it, and does she know?  The map has always known what a place costs to reach and nothing ever compared it to the clock, so she could stand at the genkan with a nine o'clock promise and no idea. Now t
+    late_line(): The lateness as she carries it -- what she believes, not the honest number, except once it is too big to believe around.
+    situation_line(ja): Persona: what she has promised, as she would carry it.
+    _age(r): 
+    _ago(r): 
+    director_line(): 
+    schedule_lines(): For the schedule (via Events.brief): windows the plan must keep.
+    morning_line(): 
+    brief_for(who): For this speaker's cast_turn: what Tomoe owes them, kept, or broke. Theirs to bring up.
+    owed_sends(who): What she has still to send this person: the `what` of each open one, for her own side of the chat. Only theirs, and only while it is still open -- a thing already sent is not in front of her again.
+    closed_brief(days): Promises that have stopped being owed, for the day's planner.  It is told to carry what yesterday settled "unless a beat today changes it", and nothing else ever tells it a thing is finished. So a line saying a promise i
+    _days_between(a, b): 
+    report(): 
+
+CONFIG SECTIONS: character, commitments, commitments.attend_slack_minutes, commitments.keep, commitments.max_days_ahead, prompt_text, self_memory.enabled
+KV READ: cast_chat, commit_him_last_ts, commitments, knew_late
+KV WRITE: commit_him_last_ts, commitments, knew_late
+TABLES: 
+LOG TAGS: commit, primitives
+PROMPTS: commit, commit_him
+LLM ROLES: commit, commit_him
+OPS COMMANDS: 

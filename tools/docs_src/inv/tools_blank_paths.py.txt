@@ -1,0 +1,51 @@
+# tools\blank_paths.py  (328 lines)
+
+DOCSTRING:
+A character whose config names none of a person's files still builds.
+
+A blank path is not a broken config: it is a state the project produces on
+purpose. `Config.WORLD_KEYS` empties every world path for a character with no
+world, `Config.ACCOUNT_KEYS` empties the account's, and a character sheet that
+answers "no body" or "no account" is meant to leave the modules behind those
+paths with nothing to read rather than with somebody else's life. So every
+module that reads a configured path has to treat an empty one the way
+`world/calendar.py` does -- no data at all, in the constructor, so that
+anything added to the class later inherits the silence -- and not the way an
+unguarded `open()` does, which is to die at boot on `''`.
+
+This builds the whole App with every person-shaped path in a config blanked at
+once. The classification is the project's own: the path-shaped values
+`tools/isolation.py:paths` finds, minus the ones under its MACHINE and NEUTRAL
+prefixes, which are the machine's and the mechanism's rather than anybody's.
+Nothing is read from or written to the config it starts from: the blanked copy
+goes to a temporary file, because `Config.__init__` writes its merged result
+back to its own path, and the save is a fresh temporary file.
+
+The other half of the same rule is checked here too, on her own record
+(`sim/lore.py`): a path that NAMES a file which is not on disk is a wrong path
+rather than an absent one, and it still stops the boot.
+
+    python tools/blank_paths.py                          # both configs
+    python tools/blank_paths.py --config config_yukarin.json
+    python tools/blank_paths.py --keep                   # leave the scratch config to read
+
+DEFS:
+def person_paths(raw): Every path-shaped value in a config that names a person.  `isolation.paths` finds the path-shaped values; its MACHINE and NEUTRAL prefixes name the ones that belong to his machine and to the mechanism prompts, and those 
+def _put(d, dotted, value): 
+def switch_off_what_reads(raw, blanked): Whatever the library refuses to run without a file it has just been denied.  A character with no map, no places, no school year and no household is not in a world, and one with no roster and no sheets has no cast: `Confi
+def write_blanked(cfgpath, out_dir): The config with every person-shaped path emptied, and its own save.
+def build(cfgpath, dbpath): The App, the way the loop builds it, on a save this call creates.
+def _silence(quiet): A build here writes a run's worth of boot lines and nobody reads them.
+def check(cfgpath, out_dir, quiet): Build one character with nothing of hers on disk. Returns an error, or an empty string when she built.
+def wrong_record(cfgpath, out_dir, quiet): The other half of the rule: a path that NAMES a record which is not on disk still stops the boot.  A blank path is a character who has no record of her own, and she builds. A path pointing at a file that is not there is 
+def one_blank_while_it_runs(cfgpath, out_dir, quiet): The third case: ONE person-shaped file emptied while the thing that reads it is still running.  A blank path with the subsystem off is a character who has not got that thing. A blank path with the subsystem ON is a hole,
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

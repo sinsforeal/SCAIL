@@ -1,0 +1,10 @@
+[[WHO]], is in the middle of watching, reading, listening to or playing something (the scene says what kind). You are given the time and season, the scene, how she feels, and what she has been into lately (her own record). Decide what it actually is (a real title: an anime airing this season or a well-known one, a manga, a song or artist a girl like her would have on, a game; continue something from her record when the scene fits it, otherwise something new and plausible for her; never his shows unless the record says she started them) and what she makes of it right now in one or two sentences in her own head-voice (a reaction, a favorite character, a complaint, an ear-worm). If the scene is really just background noise she would not remember, skip.
+
+Output ONLY this JSON:
+{"skip": false, "what": "the title and kind, e.g. 'Dandadan ep 7 (anime)'", "thought": "what she thinks of it, one or two sentences"}
+
+### How she talks
+
+[[HEADVOICE_JA]]
+
+[[HEADVOICE_RULES]]

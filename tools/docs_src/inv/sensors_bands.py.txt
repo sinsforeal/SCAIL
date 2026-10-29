@@ -1,0 +1,44 @@
+# sensors\bands.py  (135 lines)
+
+DOCSTRING:
+How hard he was working, said as a band rather than as a count.
+
+Every figure a character has ever recited about his machine came from one
+function, `system_monitor.format_system_activity`, and it rounded nothing: the
+keypress total, the per-category breakdown, the count and seconds of each
+typing burst, the CPU and RAM percentages and the uptime in hours and minutes
+all went to the account-writing role exactly as measured. Over three days the
+second character's ninety-seven accounts carried a mean of thirty-eight
+numerals each, and what came back out of her was "百九十三時間、機械つけっぱなし
+の人だし" and "夜中の4時、起きてキー八個押して" (2026-09-05).
+
+A band says the same thing without handing anybody a number to quote. The
+thresholds are `sensors.bands.*` so they can be tuned without touching code,
+and the wording lives here, once, in both languages: a caller passes the
+`t(en, ja)` closure of whoever is being written for, so the resident on the
+Japanese arm reads her own and the first character reads English. The mind's
+language module is NOT imported here -- `sensors/` is the machine's layer and
+the collector loads it, so the dependency would run the wrong way; the closure
+comes down from `sim/phone.py`, which has the config.
+
+What is NOT banded, on his instruction: the clock time a window run started
+and how long it ran. She is watching him continuously and what time he got up
+is hers to know.
+
+DEFS:
+def _t_default(en, _ja): 
+def _pick(value, table, t): The first band whose floor `value` clears, walking down.
+def _cfg(config, key, default): 
+def typing(config, keys, minutes, t): How hard he was typing over the stretch, from keys per minute.  A total on its own says nothing without the span it happened in: 1,616 keys is a hammering half-hour and an ordinary afternoon, and the model was handed the
+def bursts(config, spans, t): The shape of his typing, as a count of long and short runs.  `spans` is (keys, seconds) per burst. The old line was `TYPING: 17:23(8keys/9s), 17:24(259keys/66s)`, which is four clock times and eight figures for a fact th
+def uptime(config, seconds, t): How long since he restarted, as a band.  `Up 244h34m` is where "百九十三時間、機械つけっぱなしの人だし" came from. The fact worth having is that he does not turn it off.
+def clicks(config, n, t): Mouse clicks, which were a bare count beside the keys.
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

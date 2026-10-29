@@ -1,0 +1,65 @@
+# tools\festival_close.py  (353 lines)
+
+DOCSTRING:
+Close a plan the world never held, in a save that already believes it.
+
+The code that let this happen is fixed (`sim/ledger.py:outing_unbacked`, and
+its three readers: the day planner's carry, the promise settle, and the cast's
+own promises). This is the other half: a save written before the fix holds
+rows about a public event that was never on the calendar, and those rows go on
+speaking.
+
+The case it was written for. She went to a festival on 2026-08-29 -- two were
+on the ward calendar that day, and the scenes put her at the takoyaki stand
+outside Otsuka station with her brother at 19:04, walking home in the yukata
+at 20:25. The day plan's `settled` list is carried into the next day's
+planning, where "tomorrow" means a different day, and nothing between the two
+ever asked the calendar whether there WAS one. So the festival was tomorrow
+again on 2, 3 and 4 September; sixteen promises were made about it and every
+one of them came due and was recorded missed; and her own account announced it
+as tomorrow on four separate days.
+
+What this does, all of it against `sim/ledger.py:outing_unbacked` -- never
+against the word "festival" on its own, so a real one on the calendar is left
+alone:
+
+  - open promises she made (kv `commitments`) settle `moot`, the status the
+    code already has for an outing nobody could come to: no meters, no blame,
+    remembered as the thing that did not happen;
+  - their promises to her (kv `cast_bonds`) that are open or missed become
+    `moot`, which every reader already skips, so the room stops saying "they
+    said they would and did not" about a day that never came;
+  - the `bond` events that recorded those as broken are removed, because a
+    record line asserting a thing that did not happen is a fault and not
+    history. Every removed row is written out first.
+  - `cast_beats` / `cast_beats_prev` settled lines about it are dropped.
+
+Meters are NOT rolled back: the resentment and tension those missed promises
+added are hers now, and guessing them back out would be a second invention.
+They decay on their own (`sim/sentiment.py`).
+
+    python tools/festival_close.py --db data/world.db          # the bot must be stopped
+    python tools/festival_close.py --db data/copy.db --apply
+    python tools/festival_close.py --db data/world.db --apply
+
+Without --apply it says what it would do and writes nothing.
+
+DEFS:
+def bot_is_running(db_path): Is a live bot holding this save? A `.db` copied or written under a running process is the one thing that must not happen here.
+class Gate: `Ledger.outing_unbacked` without an App: the same words, the same
+    __init__(config): 
+    unbacked(text, date_str): 
+def kv_get(db, key, default): 
+def kv_set(db, key, value): 
+def close_festival(db, cfg, apply, log, retired_root): The repair over an open sqlite connection: her open promises about an outing the calendar has no such event for on that date go `moot`, their promises about one the same, the `bond` events that recorded them as broken ar
+def close_festival_tail(db, cfg, apply, log, retired_root): The rows the rule cannot see, named one by one. Her three open promises about the phantom and the three of theirs become `moot`; the rows are written out before they change. Idempotent: a row whose status or text has mov
+def main(): 
+
+CONFIG SECTIONS: json, world
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

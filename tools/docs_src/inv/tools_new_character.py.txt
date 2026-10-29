@@ -1,0 +1,65 @@
+# tools\new_character.py  (628 lines)
+
+DOCSTRING:
+A character is a bundle plus the library: compose her, then verify her.
+
+One directory per character, `characters/<key>/`, holding everything that is
+one person and nothing that is not -- who she is, where she lives, who is
+around her, what she believes, how she talks, which prompts she has rewritten,
+and the manifest that says what kind of thing she is and how she is run. The
+library holds everything that is the same for everybody. `docs/bundle.md` is
+the reference; `docs/character-layers-plan.md` is why.
+
+    python tools/new_character.py list
+    python tools/new_character.py compose <key> --diff   # write nothing, say what differs
+    python tools/new_character.py compose <key>          # config, prompts, register row, launcher, save
+    python tools/new_character.py verify <key>           # build her and fail on a leak
+    python tools/new_character.py verify --all
+
+**compose** writes, in this order: her config (from the library's defaults,
+the machine's settings, her manifest's overrides and her bundle's files); her
+prompt directory, as a copy of the bundle's; her row in the register; her
+launcher, staged as `<launcher>.next` because a running console reads a batch
+file by byte offset; and last her save, created only when the path does not
+exist and seeded by building her once with the model and the network refused,
+so the meters come from `sim/roster.py:meter_rows` and never from a clone.
+
+**verify** builds her whole App on a scratch save with the model and the
+network refused, renders her prompts, and fails on a surviving hole, a path
+that is neither hers nor the machine's nor the world's, another registered
+character's material in her prompts or in her seeded save, a roster that does
+not resolve her to herself, a missing world owner, a meter on somebody who is
+neither hers nor the owner nor him, or an existence answer that disagrees with
+her sheet.
+
+A secret is never written into a bundle. `characters/machine.json` names the
+keys that are pasted in once; compose keeps whatever the character's existing
+config already carries for each, and leaves a new character's empty with a
+line saying so.
+
+DEFS:
+def set_root(root): Where the bundles live. `--root` points the whole tool at a directory of scratch bundles, so a promotion can be composed and verified end to end without a byte of the live tree moving.
+def bundle_dir(key): 
+def load_json(path, default): 
+def keys_with_bundles(): Every registered character, and whether she has a bundle directory.  When `--root` points somewhere else, the bundles in that directory are the list instead: a scratch bundle is not in the operator's register and must no
+def _put(d, dotted, value): 
+def _dig(d, dotted): 
+def _flat(d, pre): 
+def compose_config(key, note): The config this bundle and the library make, as a tree.  Nothing is written and nothing is read out of the character's own config except the secrets, which a bundle must not carry.
+def _json_bytes(tree): 
+def diff_config(key, note): (same, lines) -- what the composed config says that the live one does not.
+def _copy_tree(src, dst, note): 
+def compose(key, write, note): 
+def _others_material(mine_cfg, my_key): Every name and place that belongs to another registered character and not to this one.  The check that reads a run's log for one character's material appearing in another's output already builds a character's own record 
+def verify(key, note): Build her on a scratch save and fail on any of the seven.
+def _collect(o, out): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: sentiments
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

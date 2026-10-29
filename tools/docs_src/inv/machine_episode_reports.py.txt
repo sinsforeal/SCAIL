@@ -1,0 +1,54 @@
+# machine\episode_reports.py  (489 lines)
+
+DOCSTRING:
+The readable view of what is known about an episode, on disk.
+
+One Markdown file per (work, episode) under `recap.episodes_report_dir`,
+written the moment an episode account lands, plus one index over all of them.
+It is the same material `sim/episode_account.py` puts in the machine's store --
+the account, the scenes in order, the sources it was merged from and how
+complete it came out -- laid out for somebody reading it rather than for a
+prompt.
+
+**It is the MACHINE's, not a character's** (`tools/isolation.py`). An episode
+of a television programme is the same episode whoever watched it: nothing here
+is anybody's reading of it, nothing here is dated to a character's clock, and
+one copy serves every character on the machine. What each of them made of the
+episode stays in her own save.
+
+Nothing in here fetches anything and nothing in here is a model call.
+
+spec: docs/recap.md section 3e
+
+DEFS:
+def slug(name, fallback): A directory name for a show. Latin letters where the title has them and the fallback otherwise, so a Japanese-only title still gets a directory a person can type.
+def show_dir(root, aid, title, ja): `<mal id>_<slug>` where the work has an id on his list, and the slug alone where it has not -- her own watchlist carries no ids, and an episode of a show she picked herself still gets a directory.
+def _bullets(head, rows): 
+def anchor_source(row): The source row for the episode's own dialogue, or None. `kind` is `transcript` and `note` carries the provenance the file was judged to be.
+def anchor_words(row): What the account is anchored on, in three words: whether the episode's own dialogue is behind it and where that dialogue came from.  The provenance is named rather than collapsed: a fan listening transcript and a broadca
+def anchor_file(row): The name of the file the dialogue came from, without its directory.
+def write_episode(root, row): One episode's page. `row` is what `sim/episode_account.py` stored. Returns the path written, or "".  Overwritten rather than versioned: this is a view of the store and the store is the record. The archive under `recap.ar
+def _page(row): 
+def write_index(root): `INDEX.md` over every episode page on disk: what is on file and how complete it is. Rebuilt whole, because it is a listing of a directory and reading the directory is cheaper than keeping a second record of it.
+def _index_row(path): The header facts of one episode page, read back off the page itself, so the index needs no store of its own.
+def write(root, row): One episode's page and the index over all of them, which is what a caller wants every time. Returns the episode's path.
+def read_row(root, aid, title, ja, ep): Whether a page exists for this episode, and what its header says. For a reader (the dossier) that wants to link to it.
+def dump_json(root, row): The same row beside the page, for a reader that wants the fields rather than the prose. The page is what a person opens; this is what a tool parses, and neither has to be re-derived from the other.
+def transcript_outcome(row): `sidecar` / `mirror` / `archive` / `whisper` / `miss` for one attempt.  The words say WHERE the file came from, which is the question the log exists to answer -- `provenance` says what kind of subtitle it is (broadcast, 
+def _dialogue_minutes(row): How far into the episode the last line runs, in minutes, or 0. The number that says whether a transcript covers the episode or its first ten minutes.
+def _file_words(src): A file name a person can read: the basename, and percent-escapes decoded. An archive's URL carries the Japanese episode title escaped, and one of them ran to 700 characters of `%E3%81%A1` in the table.
+def _transcript_line(row, by): 
+def _transcript_key(row): What makes two lines the same attempt: the show, the episode and the file. A second look that found the same file writes nothing; one that found a different file, or turned a miss into a hit, writes a line.
+def _split_log(have): The log's heading and its table rows, apart. The heading is everything down to and including the `|---|` rule; a row is any line under it that starts a table cell.
+def _line_order(line): A row's place in time: the stamp in its first cell, then the show and the episode so that two attempts recorded in the same minute keep a fixed order. The stamp is written `YYYY-MM-DD HH:MM`, which sorts as text.
+def note_transcript(path, row, by, also): Put one attempt in the readable log, and nothing when its line is already there. Returns the path when the file was written.  `also` is a table of earlier attempts to catch up with on the first write -- the rows a save a
+def _same_attempt(have, row): Is this exact attempt -- show, episode, where it came from, file -- already a line in the log.
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: episodes, subs
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,103 @@
+# tools\agent_rehearsal.py  (1183 lines)
+
+DOCSTRING:
+One day of a character who runs herself, beside the character who keeps her world.
+
+    python tools/agent_rehearsal.py rena
+    python tools/agent_rehearsal.py <key> --root <dir>   # a bundle nobody has registered
+    python tools/agent_rehearsal.py rena --step 20 --hours 24 --verbose
+
+**What it proves.** Two whole processes, in one process: the character who
+keeps the world and the character who only reads it, each built on a COPY of
+her own live save, sharing one COPY of the world file, with the hub living in
+this process and every model call answered from a canned reply that costs
+nothing. It then advances one clock that both of them read, from the start of
+her day to the end of it, calling the same day boundary, the same day planner,
+the same room code and the same mailbox poll the live loop calls, and asserts
+the runtime contract of the seam between them: a beat planned for her survives
+the planner and reaches her mailbox at its hour, a turn relayed to her is
+filed under whoever said it, a silence she chooses settles the wait at once,
+nothing her sheet switches off writes to her save, her gauges are the ones her
+config built, her prompt headings follow her sheet, her diary fires on her own
+day, and the world file gains rows under her id about nobody but her.
+
+Every fault it checks for is one that a structural check passed and a day of
+running found (`data/retired/20260907_203328_rena_audit/REPORT.md` and
+`data/retired/20260907_210559_rena_fixes/REPORT.md`). The three checks that
+ran before her first day -- `tools/new_character.py verify`,
+`tools/existence_matrix.py` and `tools/agent_seam_test.py` -- were all
+structural, on one process, on a scratch save, with the model stubbed. This is
+the behaviour check they had no room for.
+
+**What it cannot prove.** Nothing about voice, believability or pacing: every
+answer here is canned, so the words in the room are the recorder's and mean
+nothing. Nothing about what a paid model does with her prompt: the shape of
+an answer is asserted, never its content. Nothing about the network, the real
+hub process, the scheduled tasks or a restart. Nothing about a day that runs
+longer than one: a carry streak, a repeated opener or a room that goes stale
+over a week is the live audit's question (`tools/agent_audit.py`), not this
+one's. And nothing about the OWNER's own day beyond what the seam touches.
+
+Nothing live is opened for writing, nothing is started and nothing is killed.
+
+DEFS:
+def refuse_browser(): Every browser this process would start raises instead.  The Japanese knowledge base and the account both drive a real Chrome through a driver on this machine (`sim/recap.py`, `tomoe/social.py`), and a pass of the loop re
+def check(ok, what, detail): 
+def skip(what, why): A check this run could not exercise. Said out loud and counted, so a rehearsal that proved less than it looks like it proved says so.
+class Recorder: Every model call of one App, recorded and answered from a canned reply.
+    __init__(app, label, beats, ja): 
+    call(role, messages): 
+    call_tools(role, messages, tools): The tool-calling seam, answered with the one choice that is always offered and always safe: she does nothing with the phone.  Stubbed for the same reason as the other two. The client is what retries a failed call, with a
+    call_json(role, messages): 
+    count(role, since): 
+    _r_schedule(messages): 
+    _r_director(messages): 
+    _r_sleep(messages): 
+    _r_state(messages): 
+    _r_cast_day(messages): 
+    _r_cast_beat(messages): 
+    _r_cast_life(messages): 
+    _said_now(): 
+    _r_cast_turn(messages): 
+    _r_cast_reply(messages): 
+    _r_peer_reply(messages): 
+    _r_diary(messages): 
+    _r_pick(messages): 
+    _r_editor(messages): 
+    _r_timeline(messages): 
+    _r_reconcile(messages): 
+    _r_coherence(messages): 
+    _r_morning(messages): 
+    _r_bond(messages): 
+class Hub: The messenger hub, in this process, routing between two Apps.
+    __init__(): 
+    channel_for(frm): The two methods a character's process calls on its channel, bound to the character doing the calling: the hub knows who sent what.
+    deliver(frm, to, text, room, name): 
+    asks_to(who): 
+    answers_from(who): 
+def _bundle(root, key): 
+def _row_for(key, root): Her register row, or her manifest for a character nobody has registered. A bundle under `--root` is how a promotion is rehearsed before anybody puts a row in the operator's list.
+def _owner_of(world_id, root): The registered character who KEEPS that world. A world has one writer and any number of readers; the rehearsal is the two of them side by side, so a reader with no owner in the register has nothing to rehearse against.
+def _copy_world(world_id, dst_dir): 
+def _kv_snapshot(app): Every kv key and the bytes under it, plus a row count per table. The unit of "did this section write" is a key that appeared or changed.
+def _off_sections(config): The sections her sheet switches off: every row of `Config.REQUIRES` whose section carries an `enabled` flag that is false. Derived from HER config rather than from the property, so a section switched off by hand counts t
+def _pass(app): One turn of the loop, the parts a day on the seam goes through.  `App.run` is a `while True` with sleeps in it and no single-pass entry point, so the passes it makes are made here in its own order: the day boundary and t
+def rehearse(key, root, step_minutes, hours, start_hm, verbose): 
+def _phone_hours(her, date_str, after_hm, hours): (the hour to plant her beat at, the hour to plant the group beat at).  Both read off HER OWN plan for the day: the first two blocks after the rehearsal has started, inside the rehearsed stretch, that leave her phone free
+def _room_turns(her): Every turn in her record of a room somebody else keeps, as (room, speaker, words). The unit the relay checks work in.
+def assertions(owner, her, orow, row, hub, orec, hrec, before, after, world_id, her_key, her_rec_name, beat_hm, silence_driven, seen_before, verbose): 
+def _fork_headings(her): (the headings she carries, the headings she would carry if her sheet said she has a chat with him).  A heading only renders when its section has something to say, so the one section that carries a forked heading is given
+def _heads(her): The headings of what she carries, built fresh.  `carried_for` renders the sections of the LAST system-prompt build, so a render taken without building the system prompt first answers about the previous one and every fork
+def _world_rows(her, world_id, char_id): Every row in the world file carrying her id, read back, and whether it is about her. The partition (`world/shared.py`) says a character who does not keep the world writes only the rows about herself, in three tables; the
+def _leaks(her): Every registered character's name or place that her rendered prompt says. The same two readers `tools/character_leaks.py` and `tools/new_character.py verify` use, so the three cannot give three answers about one prompt.
+def _news_check(her, hrec): Whether a national story made relevant to her names a station or a line her own map does not give her. Her news picker wrote that she takes a line through a station her sheet puts her nowhere near, to a class on the othe
+def main(argv): 
+
+CONFIG SECTIONS: character.existence, character.name, diary, diary.enabled, state.gauges, world
+KV READ: cast_life, diary, gauges, peer_rooms, relationships, room_in, self_claims
+KV WRITE: self_claims
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: after_situation, every_pass, loop_pass
+OPS COMMANDS: 

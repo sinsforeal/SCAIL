@@ -1,0 +1,66 @@
+# sim\said_today.py  (257 lines)
+
+DOCSTRING:
+What she has already said to whom today, across conversations.
+
+The room already remembers what it has tried: a per-conversation list of the
+moves made in it (`sim/rooms.py moves_block`). That list dies with the room,
+which is exactly the wrong shape for the fault it was aimed at. On 2026-09-08
+one character told the same friend that Thursday at ten at the ticket gate was
+settled seven times, in six DIFFERENT rooms, and the per-room list saw at most
+one of them at a time. Another sent the same photograph six times over an
+evening across four rooms. Both of them then read the filter's deletion of the
+words as the conversation having gone nowhere, and opened another one.
+
+This is the memory that crosses rooms: one line per conversation she finished,
+under the name of the person she finished it with, thrown away at midnight. It
+costs no model call -- the summary each writing call already returns is the
+line -- and it has three readers:
+
+  * the call that writes her turn, so she can see she has already been to this
+    person with this today;
+  * the moment she is asked what she does with the phone (`sim/pick.py`), so
+    "message her again" is a choice made against what she has already said;
+  * the process of a member who writes her own turns, handed the same list in
+    the envelope beside the moves ledger, so both writers see one record.
+
+It also holds the one gate code keeps here: a person she went to and had
+nothing to say to leaves the list of people she may write to for a while
+(`exchange.reopen_after_nothing_minutes`). Code decides when she is asked and
+what she is allowed to do; she decides what she does.
+
+Every piece of its state is in the save, so two instances in one process are
+one thing seen twice -- the same property `sim/rooms.py` has, and the reason
+Peers builds its own rather than being handed one.
+
+Nobody is named here.
+
+DEFS:
+class SaidToday: 
+    __init__(config, store, clock): 
+    _row(): Today's row, empty on the first read of a new date. Reset on the first WRITE rather than here, so a reader on a new day sees nothing and never blanks a row the writer has not replaced yet.
+    _save(rec): 
+    _name(who): 
+    _find(rec, who): The key this person's lines are under, whatever form the caller used. The pick is handed a name the model wrote and a room is handed the record's own; both have to land on one entry.
+    note(who, gist, room): One line of what a conversation with this person came to.  Written where the conversation is FINISHED, from the record's own summary -- which is a summary of turns that survived the filter and of nothing else.
+    note_room(out, me_key): A finished room: one line under everybody she spoke to in it.  The counterparty of a private room, every other speaker of a group one -- because a thing said into the group has been said to each of them, which is the who
+    for_person(who, limit): 
+    people(): [(name, rows)] for everybody she has been to today.
+    block(who, limit): What she has already said to this person today, for the call that writes her turn. The same shape as the promise line beside it.
+    lines_for_pick(limit): One line per person she has been to today, for the moment she is asked what she does with the phone.
+    envelope_rows(who, limit): The same list, as data, for a member who writes her own turns in her own process (`sim/rooms.py`: it rides in the envelope beside the moves ledger).
+    block_from(rows, config, who): The block rendered from rows that came in an envelope, so the two writers read one wording.
+    cool(who, minutes, why): She went to this person and had nothing to say. Take her off the list of people the chooser may write to for a while.  Said once, when it is set. The model chooses inside the gates code keeps, and a person she has just o
+    cooled_until(who): When this person comes back onto the list, or 0.
+    cool_line(who): The one sentence the chooser is shown about it, or "".
+    cool_lines(): 
+    report(): 
+
+CONFIG SECTIONS: exchange
+KV READ: said_today
+KV WRITE: said_today
+TABLES: 
+LOG TAGS: pick
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

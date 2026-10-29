@@ -1,0 +1,54 @@
+# tools\seed_cast_memory.py  (185 lines)
+
+DOCSTRING:
+What she already knows about the six people in her life.
+
+Her memory of other people started empty and stayed nearly empty: 118 facts
+about him, and three about her mother, her father and her brother put together
+-- one each -- with nothing at all about the three girls she is in the group
+chat with every day. The compile was asked for such facts and told "most days
+have none", and it obliged nine days running.
+
+A person does not arrive at fifteen knowing nothing about her own family. This
+writes the floor: what she would already have, so the compile has something to
+add to instead of something to invent from.
+
+**The bound is what she could actually have observed**, and it is different for
+the two halves of her world:
+
+- Her family she has had all her life, so the facts go deep -- but only as
+  deep as a fifteen-year-old looks. She knows her mother gave up the clinic in
+  Kashii for the transfer; she does not know the figure her mother keeps under
+  the insurance wall. She knows her father leaves at seven; she does not know
+  he is no longer a section chief, because `data/cast.json` says he has not
+  said so, and a seed that contradicts the sheet is worse than no seed.
+- Her friends she met in **April**, when the transfer put her in a Tokyo high
+  school knowing nobody. That is one term and a summer -- five months. So what
+  she has of them is logistics and this term's incidents, not history: which
+  station, which club, who has a sister, what happened in the first week. And
+  it is uneven, the way it is in life: Aya (closeness 74) more than Rena (42),
+  Rena more than Hinako (34).
+
+Nothing is here that she has had no occasion to learn. Rena's and Aya's
+birthdays are absent because neither has come round since April; Hinako's is
+in because the sheet says the party is looming.
+
+`ts` is when she plausibly learned it and `last_seen` is now, which is the
+honest shape: a thing you still know is a thing you keep meeting. The fade
+(`Memory.score`, half-lives 5/14/35/120/400 days by weight) then leaves the
+structural facts standing for years and lets the small ones go.
+
+    python tools/seed_cast_memory.py              # what it would write
+    python tools/seed_cast_memory.py --apply      # write it, after a backup
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

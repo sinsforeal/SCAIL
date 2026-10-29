@@ -1,0 +1,22 @@
+# tools\dbcopy.py  (25 lines)
+
+DOCSTRING:
+A copy of a live save that is a save.
+
+Both live saves are in rollback-journal mode, so a file copy taken while a
+bot is mid-transaction is a torn image, and the write-ahead sidecars a copy
+would carry do not exist. SQLite's own backup reads a consistent snapshot
+through a read-only connection and never touches the source. Every harness
+that builds the App on a copy goes through this; `tools/smoke.py` too.
+
+DEFS:
+def copy_db(src, dst): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

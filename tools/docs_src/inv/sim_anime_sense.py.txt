@@ -1,0 +1,31 @@
+# sim\anime_sense.py  (428 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class AnimeSense: 
+    __init__(config, store, clock, memory, db_path): 
+    _con(): 
+    shelf(stale_days): {active:[...], cold:[...], finished_recent:[...], median_pace} from the DB.
+    anime_in_the_air(recent_messages, looked_up): Only when anime is what they are talking about: his recent messages mention it, name a show he is watching, or the lookup just resolved one. Otherwise his list stays out of her head -- she does not carry his watchlist in
+    _title_keys(title): The full title, its part before a colon, or any distinctive word of it ('example-show', 'patlabor', 'megami-sama'): people shorten.
+    mentioned(text): Did this text of hers touch his list -- an anime word or a shelf title? Clears the pending weekly hint as said.
+    nag_line(ja): The pending weekly hint, for the persona's him-block on every message she writes today. The share_hint path only ran when SHE started a message, and on 2026-08-29 the impulse said no all day while they were mid-conversat
+    charge_shown(): The hint held the one slot she reads: that is a showing. Being offered and buried at line 39 was not, which is why the count moved here from nag_line.
+    situation_line(ja): One line for her situation: what he is in the middle of right now.
+    shelf_check_due(date_str): 
+    shelf_check(date_str): What she would bring up this week, as a share_hint. Stored so the director and persona can see it for the day. Returns the hint or ''.
+    _declared_favorites(): His explicit MAL favorites from the `favorites` table (tools/mal_history.py favorites), names family-given. {} if not pulled yet.
+    _seiyuu_affinity(con_path, top, min_shows): Top seiyuu by affinity = log(hours) x score-lift x finish-rate, one show counted once per seiyuu (best role weight). Same maths as tools/mal_history.py `seiyuu`, kept small here.
+    habits_due(date_str): 
+    habits(date_str): Write what the analysis knows about how he watches into user_facts. Plain, sourced to 'his anime history'; a friend who has watched his list.
+
+CONFIG SECTIONS: anime_sense
+KV READ: anime_habits_date, anime_shelf_check_date, anime_shelf_checks, anime_shelf_hint_pending
+KV WRITE: anime_habits_date, anime_shelf_check_date, anime_shelf_checks, anime_shelf_hint_pending
+TABLES: 
+LOG TAGS: anime
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

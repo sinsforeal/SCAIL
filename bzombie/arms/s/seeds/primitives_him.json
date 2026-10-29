@@ -1,0 +1,17 @@
+{
+  "person_in_live_save": "him",
+  "extracted": "synthetic 2026-10-29",
+  "source": "synthetic: a bench save's own row with predictability raised to an admitted level; not from any real save",
+  "admitted_in_live": true,
+  "primitives": {
+    "attention_hers": 94.4,
+    "attention_his": 46.3,
+    "predictability_hers": 95.0,
+    "exposure_hers": 83.9,
+    "exposure_his": 9.6,
+    "reciprocity": -10.2,
+    "cost_of_loss": 0.13,
+    "threat": 3.8,
+    "threat_kinds": []
+  }
+}

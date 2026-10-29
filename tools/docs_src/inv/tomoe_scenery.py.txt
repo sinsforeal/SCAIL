@@ -1,0 +1,142 @@
+# tomoe\scenery.py  (1288 lines)
+
+DOCSTRING:
+Borrowed eyes: real photographs, from real Japanese people, sent as hers.
+
+His ask (2026-08-26): "real images. real locations. find twitter accounts
+to scrape, find suitable images and start making a database of real
+places and things, even if it's not exactly her Nerima or her bench. Find
+recent posts, follow accounts that regularly post, and the persona adopts
+their life, kind of -- surprise images from real Japanese people somewhat
+like her, that I would never have seen." Plus a management layer so the
+lore does not get messed up.
+
+**Collecting is stopped** (his call, 2026-09-08): `scenery.harvest` is
+false, so stages 1 and 2 below no longer run on their own clock and the
+only look session left on X is her own scroll (`tomoe/social.py`). What is
+already on file still goes out -- 641 usable photographs against one a day
+-- so stages 3 and 4 are unchanged, and `/scenery harvest` still opens a
+session by hand.
+
+Four stages, all on her own X account and her own eyes:
+
+**This is machinery, not her.** She "took" these photos; she never
+searched for them. So nothing here runs inside her X look, nothing is
+written to her feed or her seen list, and no account is followed on her
+behalf: the harvester opens its own session on its own clock
+(`harvest_every_hours`), when she is not looking, and keeps a watchlist
+in kv `scenery_accounts`. Her record shows the photo she sent and
+nothing before it.
+
+1. **Discover** (`searches_per_run` quiet searches, `xm.search_posts(
+   record=False)`), aimed rather than round-robin: `next_query` takes the
+   worst gaps between where she actually stands (`demand`, off her own
+   scenes and the next days' plan) and what is on file for that kind and
+   hour, and searches `kind_queries` for those. New authors are judged by
+   the `scenery_judge` role from their posts' text and one image
+   description. The bar is the photographs, not the person: `follow` is
+   somebody's own snapshots, `place` is a ward or park or shop feed whose
+   pictures are still real pictures of real places, and both go on the
+   watchlist. He cannot tell a Saitama platform from a Nerima one; what
+   has to be right is the light, the weather and the hour.
+2. **Harvest** (each run, `accounts_per_run` of the watchlist, oldest-
+   visited first, `xm.fetch_user_posts`): their image posts are
+   downloaded to `data/scenery/img/` and described
+   by Gemini into a fixed JSON: place kind, indoor/outdoor, time of day,
+   season, weather, objects, visible text and names, whether it is a
+   selfie or a portrait (people in a street or a park are fine; a person
+   as the subject is not, since she is not in it and it is not her
+   friend), whether a girl her age could plausibly have taken it from
+   where she stands. Rows go to the `scenery` table with the source kept
+   (author, post URL, posted time) -- attribution is never dropped.
+3. **Pick and send** (`offer`, once a day at most, `send_p`): when her
+   scene is a place the database has, in the right season, at the right
+   hour, in compatible weather, not a portrait, and with no name that
+   contradicts her lore, one image becomes "a photo she just took". The
+   impulse is forced with the description as the whole hint, her bubbles
+   are the caption, and the photo goes out before them (a `photo` row in
+   the hub, an <img> in the app).
+4. **Adopt** (the management layer): a sent image's concrete details
+   (objects, visible text, the caption) are written to kv `scenery_lore`
+   under its place kind, one self-memory, one event. The picker rejects a
+   later image whose visible names contradict what has been adopted for
+   that place, and for local kinds (her station, her konbini, her park,
+   her library) rejects a sign that names a place that is not one of hers
+   (`local_names`, drawn wide -- her line, the wards around her). So the
+   second photo of "her station" cannot show a different station's sign.
+
+Where she is, for stage 3, is not guessed from the words the director
+wrote: the node `embodied/situation.py` walked her to carries a `kind` in
+`data/places.json`, a live journey's leg is `train` or `street`, and
+`place_map` is only the fallback. `/scenery gaps` is the ruler for stage
+1: what she needs, what is on file, and what the next search is for.
+
+Never reposted: `posting.py` writes text only, and nothing here hands an
+image to it. The images are other people's; they exist here for one
+viewer, with their source, and `/scenery` shows where each came from.
+
+DEFS:
+def _kw_hit(word, text): Does this keyword occur in this text? ASCII has to be a whole word -- "homework with Aya" is not "home", and that mistake has now been made in three separate resolvers. Japanese has no boundaries, so it is a substring an
+def _place_claim(text): Does this sign say where it is? A station name, a line, a ward or a city does; a barber's name, a phone number and a price do not.
+class Scenery: 
+    __init__(config, store, clock, vision, sv, llm, state, self_memory): 
+    img_dir(): 
+    accounts(): 
+    followed(): The watchlist: accounts judged worth harvesting. Not X follows.
+    _band(hour): 
+    _covers(row, band): Would this row pass the hour gate in that band? `daytime`/`day` is the vision unable to read the hour, and covers all the daylight bands; an indoor photograph has no hour to contradict.
+    demand(days): Where she actually stands, from her own scenes: {kind: {band: n}}. Not a guess about her life -- the record of it.
+    _event_core(name): What people actually write when they post about it: the name with the edition number and the subtitle taken off.
+    _named_by_her(live, said): Which of these she has actually said she is going to, from her own record: the promise she made, the stance she took, and what she has said about it in her own chats. Exactly one match, or nothing.
+    _listed_at(listed, node, away, said): The event the ward feeds have on at that node, that many days from now. The map is the join: the promise says "the Pixar event", the feed says CREVIA BASE Tokyo, and `data/places.json` knows both are `koto`.  The join is
+    events_soon(days): Named events she has said she is going to, within `days`. Each one: its name, the query for it, and the node it happens at.
+    event_rows(name): 
+    event_now(scene, node): The named event she is standing in right now, or "". Her node is the test: the map already knows that CREVIA BASE is `koto` and that 光が丘公園 is `hikarigaoka`, and it is the same resolver that walked her there.
+    route_bands(days): The kinds the next days' plans put her in, and at what hours: {kind: {band: blocks}}. A day she leaves Nerima is the day the base needs a station and a train, and it needs them in the morning if that is when she goes. A 
+    route_kinds(days): The kinds the next days' plans put her in.
+    coverage(): One row per kind: what she needs, what is on file, what is missing. Only kinds she could actually send from.
+    gaps(): The kinds worth searching for now, worst first.
+    coverage_report(): 
+    next_query(): What to search for, why, and the event to tag what comes back with. A named event she is going to comes first and is the only perishable thing here -- people post it while it is on and not afterwards -- then the worst ga
+    discover(driver, log): One quiet search, the authors judged, the good ones on the watchlist.
+    judge(handle, items): 
+    forget_skips(): Drop every skip so the accounts can be judged again. The bar moved (a park's own feed photographs her park); the ones already refused under the old one are not re-encountered otherwise.
+    _known(img_url): 
+    harvest_watchlist(driver, log): A few watchlist accounts, the ones visited longest ago first.
+    run_session(log, discover): The harvester's own session: open, search, harvest, close. Never while she is looking (the caller checks); marks itself `running` so her look waits for it.
+    due(social_busy): 
+    harvest(items, log, limit, event): Image posts from watchlist accounts: download, describe, keep.
+    _judge(text): The vision's answer as row fields plus the reason it is unusable, or '' when it is. One place, so a row described late (`redescribe`) is exactly the row it would have been on the day.
+    region_ok(region, setting): Outdoors has to be her part of the world: the light, the platform, the street. An interior -- a cafe table, a ramen counter, a shop -- gives nothing away, so anywhere in Japan will do (`scenery.indoor_any_japan`); abroad
+    describe_and_keep(it, url, event): 
+    redescribe(log, limit): Ask the vision again about rows it never described. "no description came back" is the vision being down -- the day's budget, the quota, the token -- and it was being written as a permanent verdict on the photograph: 103 
+    rows(usable_only): 
+    _season_now(): 
+    _tod_now(): 
+    _load_places(): The same map embodied/situation.py moves her around: node -> `kind`, and node -> keywords, so a location written in a schedule block resolves the way it does when she actually walks there. Re-read on change.
+    _node_kinds(): 
+    node_of_text(text): The place-graph node a free-text place names, or "". Longest keyword wins, the way embodied/situation.py resolves her there.
+    kind_of_place_text(text): A free-text location -> a place kind, the map's own keywords first (longest wins, as embodied/situation.py resolves), then `place_map`.
+    kind_of_text(text): The place kind a piece of free text names, or "". Longest keyword wins (商店街 before 店), and an ASCII keyword has to be a word: "homework with Aya" was resolving to `home` and sending her a photo of somewhere she was not. 
+    place_kind_of(scene, node, leg_mode, said): Where she actually is, as one of the database's place kinds.  The node comes from embodied/situation.py -- the resolver that walked her there -- and is the authority; the scene's free text is the fallback for a place the
+    lore(): 
+    _consistent(row, kind): 
+    pick(scene, weather, node, leg_mode, said, event): 
+    offer(scene, weather, awake, phone_free, force, node, leg_mode, said, event): Once a day at most, when the scene fits: (row, hint) or (None, why).
+    _dishes_in(cls, text): 
+    _eating(scene): Is she actually eating, by the scene's own words? On 2026-08-31 a table of mapo tofu, gyoza and shumai went out as her lunch while the director had her lying on her room floor scrolling Rena's chat: the food gate was the
+    _ledger_meal_text(): 
+    meal_now(): Which meal a food photo would be at this hour, or '' outside the windows (`scenery.food_hours`). A takeout box at 15:00 went out as 'dinner tonight' and five hours later the director served mackerel.
+    _sent_today(): 
+    adopt(row, caption): The photo went: its details are hers now.
+    lore_line(ja): For her prompt: what she has shown him of her places, so the words stay consistent with the pictures.
+    report(): 
+
+CONFIG SECTIONS: prompt_text, scenery, scenery.food_hours, scenery.min_quality, scenery.place_map, world.local_events_file, world.places_file
+KV READ: cast_chat, commitments, event_stances, scenery_accounts, scenery_last_run_ts, scenery_last_send_ts, scenery_lore, scenery_query_i, scenery_send_counts
+KV WRITE: scenery_accounts, scenery_last_run_ts, scenery_last_send_ts, scenery_lore, scenery_query_i
+TABLES: scenery
+LOG TAGS: scenery
+PROMPTS: scenery_judge
+LLM ROLES: scenery_judge
+OPS COMMANDS: 

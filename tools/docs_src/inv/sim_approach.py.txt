@@ -1,0 +1,25 @@
+# sim\approach.py  (232 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Approach: 
+    __init__(config, llm, store, clock, state, ick, sentiments, records): 
+    _for(item): 
+    _key(item): 
+    pressure(item, now): How hard this one is pushing. Live charge is most of it; the rest is that it has had time to work on her, and that she has nowhere else to put it.
+    due(scene): (item, why) when she is going to reach for one, else (None, why).  Pure code. Every gate here is opportunity or cost -- never whether the thing is important, which is the model's business and already priced into the char
+    write(item, scene): What she gets at and how obliquely. Returns the dict or None.  No words of hers: the subject and the angle go to her own call as a hint and she writes the message, so nothing here can arrive in his chat as a sentence a r
+    _how(item): 
+    note(item, out): Record it, discharge some of the thing, and let the pressure down.  This is the outlet that was missing. `unsaid` had two releases -- the diary at about 10 a day and an X post that the posting model kept refusing, on the
+    report(): 
+
+CONFIG SECTIONS: approach, prompt_text
+KV READ: charged
+KV WRITE: approaches, charged
+TABLES: 
+LOG TAGS: approach
+PROMPTS: approach
+LLM ROLES: approach
+OPS COMMANDS: 

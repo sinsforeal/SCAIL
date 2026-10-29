@@ -1,0 +1,40 @@
+# tomoe\curation.py  (590 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Curation: 
+    __init__(config, store, clock, llm): 
+    _counts(): 
+    post_times(): When she posted, on her clock, oldest first. Kept for a week.
+    posts_recently(): 
+    since_last_try(): Hours since she last opened the composer, or None if she never has. The last post counts as an attempt for a save written before this record existed.
+    may_post_now(): The two rules on her posting that are not hers to decide: how many in a day, and how close together. One owner, so the impulse gate and this one cannot say different things.
+    note_composer(): She has opened the composer. Costs the gap whether or not anything comes of it, so a skip is not retried on the next tick.
+    note_posted(): Recorded when a post is decided and never before: a post held here must not spend the budget of one that went out (2026-08-21).
+    _bump(kind): 
+    _protected(): Every account she may not unfollow, each with the reason in plain words, so the log and her own answer to "why did you unfollow X" say which rule held. Three sources, one place: his side of the account (what he liked, wh
+    _following(): 
+    drift(taste): Her verdicts on the inherited accounts, acted on at a pace: up to `drift_unfollows_per_day` unfollows a day from the drop list, oldest verdict first, never a protected account (`_protected`: his side of the account, a mu
+    follow_back(followers): Somebody new followed the account: follow them back. Not a matter of taste and not the social model's to propose -- following back is what the account does, so it needs no evidence in her taste sheet. It is still paced (
+    reply_times(): 
+    queue_reply(cand, text, why): A reply she has decided on, queued like every other action so it goes out through the one browser session and the one failure path. The action log row is the DECISION; the row that says she said it is written in run_queu
+    note_replied(rec): The send confirmed. Only now does anything say she answered: the dedupe record under the reply's own id, the rolling budget, and the event she can remember making.
+    decide(actions, items): Validate the social model's proposals against caps, evidence and his side; log each (dry_run when actions are off) and queue the allowed ones. Returns the list queued (or that would have been).
+    queue_direct(kind, target, why, extra): An action code decided on its own, outside a look's verdicts -- the like and the repost of the post whose photo she just sent him. Same caps, same action log, same dry-run as a verdict.
+    _taste_ground(handle): What her taste has to say about this account, for the judge. An empty answer means there is nothing of hers to judge with yet, which is one of the two ways the pick cannot run.
+    _pick_shared(post, sent_as, repost_on): Her pick on one post. Returns (verdict, why) with the verdict one of "repost" / "like" / "none", or (None, why not) when the pick could not be made and the caller falls back to its probability.
+    act_on_shared(post, sent_as, like_on, repost_on, roll_p, why): The account's move on a post she has just sent him. `post` carries author / text / url; `sent_as` says in words how it reached him, which is what makes this her pick rather than a rule about posts in general. `roll_p` is
+    run_queue(driver, log): At the start of a look: do what she decided last time, slowly.  The queue is rewritten after every row rather than once at the end. A session takes minutes -- four to nine seconds of sleep between actions and a browser i
+    _note_follow_change(kind, handle): Keep following.json honest without a refetch.
+    her_line(days): Her own recent moves on the account, for the situation block / media diet.
+
+CONFIG SECTIONS: curation, role_system, sensor_view
+KV READ: x_action_counts, x_action_queue, x_post_last_ts, x_post_times, x_replies_sent, x_reply_times, x_taste, x_verdicts
+KV WRITE: x_action_counts, x_action_queue, x_post_last_ts, x_post_times, x_replies_sent, x_reply_times
+TABLES: 
+LOG TAGS: share, x
+PROMPTS: 
+LLM ROLES: x_repost_judge
+OPS COMMANDS: 

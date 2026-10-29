@@ -1,0 +1,44 @@
+# machine\monitor_client.py  (112 lines)
+
+DOCSTRING:
+The bots' view of his machine when the collector is its own process.
+
+`machine/collector.py` is the one process on this machine that watches the
+keyboard, the foreground window and the browser history, and it writes two
+files as it goes: `sensors.telemetry_now_path`, what is in front of him this
+second and when he last touched anything, every few seconds; and beside it
+`<same>.attention.json`, the window sessions of the last day, whenever one
+ends. This reads them and answers the three questions `sim/phone.py` and
+`sim/receipts.py` used to put to the in-process monitor, in the same shapes,
+so neither knows the difference.
+
+Why it exists: each bot used to run the whole sensor stack inside itself. Two
+bots meant two processes copying his 180 MB browser history into ONE temp
+file every thirty seconds, and two id counters appending to one feed -- 157
+duplicate ids, every entry read twice by each character, and from 02:52 on
+2026-09-03 the Chrome half of the feed blind for both while the copies
+collided. His machine is one thing and it is watched once.
+
+When the collector is not running the answers are "unknown", which reads as
+present and awake: nobody is put to sleep on a guess.
+
+DEFS:
+class RemoteMonitor: 
+    __init__(config): 
+    _read(path, last_mtime, last_value): 
+    _warn(what): 
+    _load(): 
+    alive(): 
+    right_now(): (process, title, seconds in that window, seconds since input), or (None, "", 0, idle) when he is idle -- the in-process monitor's shape.
+    seconds_since_input(): 
+    attention_since(since_ts): Window sessions (start, end, process, title) touching the window after since_ts, the live one included, and when he last touched anything.
+    stop(): 
+
+CONFIG SECTIONS: telemetry_now_path
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: machine
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

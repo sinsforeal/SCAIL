@@ -1,0 +1,73 @@
+{
+ "_what": "The shared code names nobody, and no shared file names one person's places.",
+ "_rule": "Every entry was in the tree on the day the name check was widened to places, to five more directories, to five more kinds of file and to a match inside an identifier. A finding that is not here fails the run; an entry is deleted as its literal moves into the character's own files (docs/character-layers-plan.md, step 9).",
+ "_dated": "2026-09-16",
+ "_counts": {
+  "code": 8,
+  "prose": 2,
+  "inside": 0,
+  "comment": 0
+ },
+ "entries": [
+  {
+   "file": "channels/vn_bot.py",
+   "literal": "Momoka",
+   "kind": "code",
+   "reason": "a name in shared code, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "machine/dossier.py",
+   "literal": "the player",
+   "kind": "code",
+   "reason": "a name in shared code, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "prompts/scene_director.txt",
+   "literal": "the player",
+   "kind": "prose",
+   "reason": "a name in a shared prompt or template, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "scail.py",
+   "literal": "the player",
+   "kind": "code",
+   "reason": "a name in shared code, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "sim/watching_him.py",
+   "literal": "the player",
+   "kind": "code",
+   "reason": "a name in shared code, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "talkapp/app/index.html",
+   "literal": "the player",
+   "kind": "prose",
+   "reason": "a name in a shared prompt or template, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "tools/episode_account.py",
+   "literal": "the player",
+   "kind": "code",
+   "reason": "a name in shared code, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "tools/harness.py",
+   "literal": "Momoka",
+   "kind": "code",
+   "reason": "a name in shared code, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "tools/smoke.py",
+   "literal": "Momoka",
+   "kind": "code",
+   "reason": "a name in shared code, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  },
+  {
+   "file": "tools/work_resolve_test.py",
+   "literal": "the player",
+   "kind": "code",
+   "reason": "a name in shared code, there before the check was widened; step 9 of docs/character-layers-plan.md moves it into the character's own files"
+  }
+ ]
+}

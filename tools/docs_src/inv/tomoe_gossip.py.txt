@@ -1,0 +1,57 @@
+# tomoe\gossip.py  (364 lines)
+
+DOCSTRING:
+Something to talk about that is not the four of them.
+
+Measured over 175 group turns: 77% carried a time, a plan or an obligation
+and 13% carried a joke, a reaction, an appetite or a gripe. The chat was a
+committee because the committee's business was the only thing in the world.
+`cast_arcs` gives each of them a storyline, `cast_life` their days and
+`social_graph` what they hold about each other -- and every one of those is
+about the group itself or about Tomoe.
+
+This is the rest of the world: a boy in the other class, a teacher's
+haircut, a couple that broke up over the holidays, a shop that closed, a
+girl who got a part-time job she is too young for, a video everyone has
+seen. Written by the `gossip` role (`gossip.every_hours`) from what the
+group could actually have heard -- the strangers she has already met
+(`tomoe/npc.py`), what is going on in Japan this week (`tomoe/world/zeitgeist.py`),
+the school calendar and their own arcs -- and kept as a small pool with a
+heat that decays.
+
+An item is not a plot: nothing here reaches her life, nobody in it becomes
+a friend, and it is over when it cools. It exists to be the thing a message
+is ABOUT when the message is not about a meeting time.
+
+kv `gossip`: {"date", "items": [{id, what, who_about, source, heat, born,
+last_used, knows: [names]}]}.
+
+DEFS:
+class Gossip: 
+    __init__(config, llm, store, clock, cast, npc, zeitgeist, calendar): 
+    rec(): 
+    items(): 
+    live(): What is still warm, hottest first.
+    cool(): Every day takes the edge off. A thing nobody has mentioned for days is not gossip any more, it is just something that happened.
+    used(item_id, by, present): Somebody brought it up: it stays warm a little longer, and the pool remembers who has now heard it.  Everybody who was in the room when it was said has heard it, not only the person who said it. Without that a rumour spr
+    _plans(): 
+    _seed_knows(what, who_about, kind, given): Who would plausibly have heard this the day it is born.  A rumour used to start out known to whoever the writing call happened to name, which was one person or nobody for half of them, and `brief` shows a speaker only wh
+    due(): 
+    maybe(): 
+    _seen_people(): The faces she has actually met, so a rumour can be about somebody who exists rather than a new invention every time.
+    refresh(): 
+    note_text(text, by, present): Did this piece of group talk touch a live item? Matched on the kanji/katakana runs of `who_about` (two runs, or one of 4+ chars) -- loose on purpose: a false hit only keeps a rumour warm a day longer. This is the reader 
+    charge_shown(item_id): The rumour held the one stated slot in her turn: a showing. After `shows_max` showings unsaid it steps aside for the day and the next one comes up -- the same 'cute boy' line was stated in six turns on 2026-08-31 and sai
+    stated_ok(item): Can this one be the stated thing in a turn today?
+    _timeline_seen(n): kv `x_japan`: what she noticed about Japan on the X timeline (the `japan` field of the social read). Nothing read it back before; the group chat is where it belongs -- a new Häagen-Dazs and a scandal are what a fifteen-y
+    brief(for_who): For the planner and for a turn: what is going round, and who has heard it. A person who does not know a thing cannot bring it up.
+    report(): 
+
+CONFIG SECTIONS: gossip, gossip.warm_on_use, prompt_text
+KV READ: cast_plans, gossip, npcs, x_japan
+KV WRITE: gossip
+TABLES: 
+LOG TAGS: gossip
+PROMPTS: gossip
+LLM ROLES: gossip
+OPS COMMANDS: 

@@ -1,0 +1,27 @@
+# tools\x_delete.py  (124 lines)
+
+DOCSTRING:
+Delete one of her own posts from X, by the text it starts with.
+
+Her posts are hers, and the bot never deletes on its own -- this is an operator
+tool, run by hand, for the case where a post asserts something the world has
+since been corrected on. It is deliberately not wired into `curation.py`: a
+mechanism that can retract her own words is a different thing from one that can
+write them, and only the second was ever asked for.
+
+    python tools/x_delete.py --starts "寝ようと思ったのに" [--yes]
+
+Without --yes it finds the post, prints it, and stops.
+
+DEFS:
+def find_and_delete(driver, config, starts, do_it, log): 
+def main(): 
+
+CONFIG SECTIONS: json, x_page_wait_seconds
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,45 @@
+# tools\roster_migrate.py  (142 lines)
+
+DOCSTRING:
+Relabel the speakers in the stored speech record with their Japanese names.
+
+The record of what people said is Japanese, so the names on it are Japanese
+too: a turn is `{"who": "香芝玲奈"}`, not `{"who": "Rena-chan"}`. Romaji speaker
+labels were the same English leak the glosses were, and they had a second
+cost -- the model drifted between the forms it was shown ("Rena" one day,
+"Rena-chan" the next), which split one girl into two people in every reader
+that matched on the label.
+
+`sim/roster.py` resolves every form to one person, so the machinery no longer
+depends on this migration being run: the old labels keep resolving. This is
+for the record itself, so that what is stored reads the way it was lived.
+
+What moves: the SPEECH record only --
+
+    cast_chat          the opener's `who` and every turn's `who`
+    cast_beats         every beat's `who`
+    cast_beats_prev    the same, yesterday
+    exchange_live      the one in flight, if there is one
+
+What does not move: `relationships`, `cast_days`, `cast_plans`, `cast_life`,
+`social_graph` and the rest are machinery keyed by the roster handle, which is
+what they should be keyed by. Names there are handles, not record.
+
+Dry by default; `--apply` writes. **Stop the bot first** -- nothing may write
+to the save while this runs.
+
+    python tools/roster_migrate.py                 # what would change
+    python tools/roster_migrate.py --apply         # do it
+
+DEFS:
+def relabel(config, value, moved, unknown): Every `who` in a speech record, renamed to the record name. Walks the structure rather than assuming its shape, so a key that grows a field later does not quietly stop being migrated.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,31 @@
+# tools\episode_slice_test.py  (144 lines)
+
+DOCSTRING:
+The episode-slice test over the forms a 感想 post writes its own number in.
+
+`Recap._slice_and_why` decides whether a fetched page is about the episode he
+watched, and it was the binding constraint on how complete an account of an
+episode could get: it looked for `第7話` and nothing else, so a post titled
+`#07`, `７話`, `07話`, `Episode 7` or by the episode's own subtitle was dropped,
+and on three readings of one episode it dropped two thirds of what the search
+found. It is also the test that refuses a shop's listing page for the same
+episode, whose heading names it perfectly and whose body is prices -- so
+loosening it needs both halves proved, which is what this does.
+
+No network, no model, no save: fixtures in this file and the parser.
+
+    python tools/episode_slice_test.py
+
+spec: docs/recap.md section 3d
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

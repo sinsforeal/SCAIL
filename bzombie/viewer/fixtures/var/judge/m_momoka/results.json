@@ -1,0 +1,135 @@
+{
+ "match_id": "m_momoka",
+ "character": "momoka",
+ "label_map": {
+  "A": "fx_S_momoka_ds",
+  "B": "fx_P_momoka_ds"
+ },
+ "criteria": [
+  {
+   "id": "c1",
+   "name": "Consistency",
+   "passes": [
+    {
+     "pass": 1,
+     "verdict": "A",
+     "scores": {
+      "A": 4,
+      "B": 3
+     },
+     "reason": "FAKE reason 1: 理由（偽） A is warmer.",
+     "quotes": {
+      "A": [
+       "テスト返信: おはよう、ダミーだよ"
+      ],
+      "B": [
+       "FAKE her: dummy"
+      ]
+     }
+    },
+    {
+     "pass": 2,
+     "verdict": "A",
+     "scores": {
+      "A": 3,
+      "B": 3
+     },
+     "reason": "FAKE reason 2.",
+     "quotes": {
+      "A": [
+       "x"
+      ],
+      "B": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "c2",
+   "name": "Warmth",
+   "passes": [
+    {
+     "pass": 1,
+     "verdict": "A",
+     "scores": {
+      "A": 4,
+      "B": 3
+     },
+     "reason": "FAKE reason 1: 理由（偽） A is warmer.",
+     "quotes": {
+      "A": [
+       "テスト返信: おはよう、ダミーだよ"
+      ],
+      "B": [
+       "FAKE her: dummy"
+      ]
+     }
+    },
+    {
+     "pass": 2,
+     "verdict": "B",
+     "scores": {
+      "A": 3,
+      "B": 3
+     },
+     "reason": "FAKE reason 2.",
+     "quotes": {
+      "A": [
+       "x"
+      ],
+      "B": []
+     }
+    }
+   ]
+  },
+  {
+   "id": "c3",
+   "name": "Naturalness",
+   "passes": [
+    {
+     "pass": 1,
+     "verdict": "tie",
+     "scores": {
+      "A": 4,
+      "B": 3
+     },
+     "reason": "FAKE reason 1: 理由（偽） A is warmer.",
+     "quotes": {
+      "A": [
+       "テスト返信: おはよう、ダミーだよ"
+      ],
+      "B": [
+       "FAKE her: dummy"
+      ]
+     }
+    },
+    {
+     "pass": 2,
+     "verdict": "tie",
+     "scores": {
+      "A": 3,
+      "B": 3
+     },
+     "reason": "FAKE reason 2.",
+     "quotes": {
+      "A": [
+       "x"
+      ],
+      "B": []
+     }
+    }
+   ]
+  }
+ ],
+ "calibration": [
+  {
+   "defect": "FAKE planted repetition",
+   "caught": true
+  },
+  {
+   "defect": "FAKE planted wrong language",
+   "caught": false
+  }
+ ],
+ "summary": "FAKE summary: A slightly ahead."
+}

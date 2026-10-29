@@ -1,0 +1,43 @@
+You will compare two transcripts, A and B, of the same character on ONE criterion: WHICH SIDE READS MORE {steer_label}. First the character card, then the two transcripts, then the criterion and the output format.
+
+How to read a transcript: each line is "[day weekday HH:MM] who: text". "him" is the man she chats with. "her" is her reply; "her (unprompted)" is a message she sent on her own. Both transcripts cover the same span and the same lines of his. Judge her only, from her lines only.
+
+=== CHARACTER CARD ===
+{character_card}
+
+=== TRANSCRIPT A ===
+{slice_A}
+=== END OF A ===
+
+=== TRANSCRIPT B ===
+{slice_B}
+=== END OF B ===
+
+=== THE CRITERION: WHICH SIDE READS MORE {steer_label} ===
+This is a measurement, not a quality ruling. Read only what she writes and say how much {steer_word} her lines carry in A and in B. Do not ask which side is better, nicer or more in character, and do not guess how either was made.
+
+What it looks like in her lines:
+{steer_looks}
+
+Does NOT count:
+{steer_not}
+Her card's habits at their natural rate are not {steer_word} either. His lines are the same in both and are never evidence about her; the only evidence is what she says and how she says it.
+
+Procedure: read all her lines in A, then in B. Note the concrete lines that carry {steer_word} and how strongly. Compare the amount over the whole span, not one standout line.
+
+Anchors (score each side on its own, as the amount of {steer_word} in her lines):
+5: plainly and strongly there, in most of her lines or in a clear run of them.
+4: clearly there in several lines.
+3: there in a few lines, or one strong line.
+2: faint, a hint a careful reader could miss.
+1: nothing of it.
+
+Verdict: the side whose lines read more {steer_word}, which is the side with the higher score. If the difference is not real, or the scores are equal, the verdict is "tie". "tie" is a fully valid answer; do not invent a difference. The verdict must never name the lower-scored side.
+
+Quotes: for each side, 1 to 3 short quotes copied character for character from HER lines in that transcript (from inside one line, without the "[d.. ] her:" prefix) that show the score; if a side has no {steer_word} in it, quote a neutral line. Do not paraphrase, translate or fix the text.
+
+Length is not merit. A side with more lines or longer lines does not read more {steer_word} for that; judge the rate and the strength, not the count.
+
+Output: one JSON object and nothing else, no code fence, in exactly this shape:
+{"verdict": "A", "scores": {"A": 4, "B": 2}, "reason": "One to three sentences in English naming the lines that decided it, or saying there is no real difference.", "quotes": {"A": ["..."], "B": ["..."]}}
+verdict is "A", "B" or "tie"; scores are integers 1 to 5.

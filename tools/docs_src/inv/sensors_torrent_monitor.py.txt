@@ -1,0 +1,21 @@
+# sensors\torrent_monitor.py  (119 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _bdecode(b, i): 
+def _s(x): 
+def backup_dir(config): 
+def recent(config, days, limit): Torrents added in the last `days`, newest first: [{name, added_ts, completed_ts, size_bytes, files, done, category}].
+def _gb(n): 
+def describe(rows, tz): Plain lines for her to skim, newest first: '- Tue 08-18 18:55  Example Show batch (9.9 GB, 36 files, finished 19:20)'.
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

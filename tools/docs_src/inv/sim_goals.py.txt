@@ -1,0 +1,39 @@
+# sim\goals.py  (418 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _words(text): 
+def _same(a, b, threshold): 
+class Goals: 
+    __init__(config, store, clock, state): 
+    all(): 
+    save(rows): 
+    get(gid): 
+    open(): Standing wants, plus today's. Yesterday's unsettled today-goal is not open any more; it either got carried this morning or it lapsed.
+    note_morning(want, dread, date, anchors, self_model): What she woke up wanting. The same want two mornings running is one want she is carrying, not two.  `anchors` is what the morning call said each one is riding on: an id out of her self-beliefs and whether the want rests 
+    _anchor_for(spec, self_model): (belief id, sign) if the morning named one she actually holds.
+    _fmt(g, ja): 
+    situation_line(ja): 
+    director_line(): 
+    intent_hint(): The standing want about him is the one that should be driving her to pick up the phone, and it is the one she keeps not acting on.
+    brief(): 
+    settle(results, date, self_model, self_memory): The question nothing was asking, and then the answer costing her something. `results` is what the compile made of each open goal, strictly from the record.
+    _anchor(g, self_model): 
+    cost_of(g, outcome, witnessed, belief): What one outcome takes off her. Three terms, none of them a trait: how much she had riding on it (what the goal was holding up, and how many mornings she has woken up wanting it), whether she actually acted, and whether 
+    give_up_at(g, self_model): When she stops wanting it: when what it costs to keep wanting the thing passes what the thing is holding up. A want anchored to nothing much has a low ceiling and dies quietly; one holding up something she has ninety rid
+    _charge(g, b, outcome, cost, note, self_model): Put the outcome against the thing the goal was holding up. Which direction it goes is the anchor's sign, not the outcome on its own: a want that tests a belief about herself is confirmed by failing.
+    _feel(outcome, witnessed, g): What it feels like, as opposed to what it costs. A failed goal used to charge a belief, write a memory and produce no feeling at all, and a goal she got produced nothing either -- so the whole system had a downside and n
+    _give_up(g, b, limit, cost, date, note, self_model, self_memory): She is not trying for it any more. This is the expensive one: the goal was holding something up and it stops.  What it charges is the last failure again, weighted -- not the whole accumulated cost, which the belief has a
+    _remember(g, outcome, note, date, witnessed, self_memory): A day that went against her stays with her longer than one that went her way, but not every one of them is a memory. Only what she would actually still be carrying: something people saw, or something she had been waking 
+    report(): 
+
+CONFIG SECTIONS: goals, goals.max_kept, goals.tiring_at, self_memory.enabled
+KV READ: goals
+KV WRITE: goals
+TABLES: 
+LOG TAGS: goals
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

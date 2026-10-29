@@ -1,0 +1,25 @@
+# tools\school_scan.py  (96 lines)
+
+DOCSTRING:
+One-off scan: school vocabulary in what the second character is sent.
+
+Renders every role's prompt with her config and reports every line that holds a
+fifteen-year-old's school day, the first character's household or cast, or the
+phone-app sense of how she sees him. Kept because the same sweep is wanted
+after any change to a shared mechanism prompt.
+
+    python tools/school_scan.py            # her config
+    python tools/school_scan.py --config config.json
+
+DEFS:
+def names(): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

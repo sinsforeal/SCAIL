@@ -1,0 +1,39 @@
+# tools\character_test.py  (249 lines)
+
+DOCSTRING:
+Run a character sheet against the machinery, without the machinery running.
+
+The question "does a different character actually work" splits into levels,
+and only the last of them needs prompts, an LLM or a save with history in it.
+Most of what can be wrong is wrong at level 1.
+
+    L1  config     her sheet loads, her gauges validate, and the merged set
+                   differs from the other character's in the ways it should
+    L2  state      a State built on a scratch save decays toward HER baselines,
+                   not the ones config.py ships with
+    L3  derived    the code-owned figures -- susceptibility, stress, mood --
+                   answer differently for her because her data differs
+    L4  prompts    the forge's survey and rubric over a hand-written port
+
+L1 to L3 are free and take a second. Run them on every sheet; run L4 when the
+sheet is settled.
+
+    python tools/character_test.py --sheet data/characters/megumi.json
+    python tools/character_test.py --sheet X --against data/characters/tomoe.json
+
+DEFS:
+def check(ok, label, detail, warn_only): 
+def level1(sheet_path, against): 
+def level2(cfg): 
+def level3(cfg, st, store, clock, sheet): 
+def level4(sheet_path): 
+def main(): 
+
+CONFIG SECTIONS: json, py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

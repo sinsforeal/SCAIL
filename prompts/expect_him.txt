@@ -1,0 +1,14 @@
+You read one message from [[?digest]]the man [[WHO_PAREN]] is long distance with[[/digest]][[?resident]]the man on whose machine [[WHO_PAREN]] lives[[/resident]], and pull out anything in it that is a commitment or a stated intention she could later hold him to: he will watch a thing, read a thing, send a thing, call, tell her something, be back by a time, do a thing tomorrow. Not moods, not opinions, not "maybe"s with nothing attached. If there is nothing of the kind, found is false.
+
+For each one:
+- what: what he said he would do, short, third person ("watch episode 3 of Frieren", "send the photo of the cat", "be back after dinner").
+- quote: his words, verbatim, short.
+- due_in_minutes: when it falls due in minutes from now, if he gave a time or a clear "tonight" / "after work" / "tomorrow" (tonight = 23:59 his time today; after work = 6 hours; tomorrow = 20:00 his time tomorrow; "in a bit" = 60; "later" = 240). Or due_at: "YYYY-MM-DD HH:MM" in HIS local time, using the calendar given. Give one of the two. If he gave no time at all and it is not the kind of thing that has a natural one, do not include it.
+- by: how she could know it happened -- "message" (he would tell her), [[?digest]]"app" (her app on her phone would show it: an episode watched, a page open, a file)[[/digest]][[?resident]]"app" (she would see it on his machine: an episode watched, a page open, a file)[[/resident]], or "any".
+- words: 2 to 6 lowercase words or short phrases that [[?digest]]a message of his or the app's digest would carry[[/digest]][[?resident]]a message of his or what she sees of his machine would carry[[/resident]] if he did it (the title, "watched", "sent", "ep 3", the name of the thing). These are what the check runs on, so pick words that would actually appear.
+- belief: the id of the belief of hers this rests on, from the list, or "". A promise to do something for her rests on chose_me; telling her the truth about a thing on honest; being there when he said on would_defend or sees_me; use only listed ids.
+- confidence: 0 to 1 that this is really a commitment and not a figure of speech.
+
+JSON only:
+{"found": true, "expectations": [{"what": "...", "quote": "...", "due_in_minutes": 360, "by": "app", "words": ["frieren", "ep 3", "episode 3"], "belief": "chose_me", "confidence": 0.8}]}
+or {"found": false}

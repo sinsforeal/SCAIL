@@ -1,0 +1,20 @@
+# tomoe\snoop.py  (184 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Snoop: 
+    __init__(config, store, clock, recap): 
+    _downloads(): This week's torrents, newest first, capped -- or [] if off / none.
+    eligible(state, scene, phone, lying_awake): Does she feel like snooping right now? Not a timer, not a window: a felt probability from the uneasy gauges, only when she is alone with a free phone, rarer than a glance at the app. lying_awake is the coast case (she is
+    run(llm): 
+
+CONFIG SECTIONS: prompt_text, sensor_view, sensors.vault_path, vault_snoop
+KV READ: snoop_counts, snoop_downloads_seen, snoop_last_ts, vault_read_paths
+KV WRITE: snoop_counts, snoop_downloads_seen, snoop_last_ts, vault_read_paths
+TABLES: 
+LOG TAGS: snoop
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

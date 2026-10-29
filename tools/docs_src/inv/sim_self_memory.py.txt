@@ -1,0 +1,42 @@
+# sim\self_memory.py  (686 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _is_day(text): Does this row's `date` name a calendar day? Most do. A row written in from an extracted record may hold a month, or the span the archive bounds the thing by, because nothing narrower is known.
+def _words(text): 
+def _keys(row): A row's search tokens, in BOTH languages: what she wrote and its gloss. This is the dual key -- an English cue reaches a Japanese memory through the gloss, and a Japanese cue reaches an English one the same way.
+class SelfMemory: 
+    __init__(config, store, clock, state, llm): 
+    hers(text): Is this in the language she writes? Empty counts as hers -- there is nothing to read.
+    _ensure(): 
+    half_life_days(weight): 
+    standing(row): Part of who she is rather than something that happened to her.
+    score(row, now): 
+    rows(): 
+    embed_text(row): What a memory is embedded as: what she wrote and its other-language rendering together, so the one vector carries both of the keys the word search already uses.
+    _embed_row(rid, text): The vector of a row just written, written with it: the persona reads stored vectors only, so a memory the compile kept tonight has to be embedded by its writer to be reachable by meaning tomorrow.
+    gloss(text): The same line in the other language, for the search key. Failure is not fatal: the row goes in without an `alt` and is still findable in the language it was written in.
+    add(date, text, weight, feeling, valence, source, card_id): A near-duplicate of something she already carries reinforces it rather than sitting next to it: the same afternoon remembered twice is one afternoon she thinks about often.
+    _feeling_in_her_language(feeling): 
+    forget_day(date, source): Drop one writer's memories of one date, vectors and all.  For a writer that can be asked to do the same day twice -- the compile is the only one (`/compile <date>`) -- because the duplicate test is on wording, and the mo
+    repair(limit): Rows she cannot read: written before the rule above, or written while the rendering was failing. Most of them cost nothing to fix, because the rendering is already sitting in `alt` and the two only have to change places;
+    congruence(row): How well a memory matches the mood she is in. People do not retrieve evenly: feeling low surfaces the low ones, which deepens the low. It is the second self-feeding loop in the system after the spiral, and it was missing
+    _turn(ring, slots, step): Where in the record today starts.  Kept in the store and stepped once a character day, not once a call: every call that writes her words builds the system prompt twice (`persona.system_for` does it for his room and for h
+    _standing_for_prompt(rows, step): Her biography, bounded.  None of it fades, so all of it is equally in front of her and something other than the fade line has to choose. Two candidates were measured against her own record and both fail. Recency is meani
+    for_prompt(cue_text): What she is still carrying: what she is made of, which does not fade, plus the lived ones above the fade line, plus any a word of his just brought back (and those get their last_seen bumped -- it came back to her).
+    prompt_text(cue_text): 
+    search_items(): Her own past as rows of the retrieval: what to embed each one as, the label the searcher gives it, the body it quotes back, its word keys in both languages and the weight her own life carries against a day narrative (she
+    search(words): For the recall: her own past by words, scored the same way the days are. The meaning half of the same pool is added by `Recall._semantic` over `search_items`, which is where the labels come from.
+    recent_report(limit, exclude_date): The last few things she is carrying, for the nightly compile.  The compile is handed what she knows about him and about the people around her so that it reinforces rather than writing a second wording of the same thing; 
+    report(): 
+
+CONFIG SECTIONS: character, prompt_text, self_memory, self_memory.duplicate_jaccard, self_memory.half_life_days, self_memory.standing_in_prompt, state.gauges, state.mood_from
+KV READ: selfmem_turn
+KV WRITE: selfmem_turn
+TABLES: self_memories
+LOG TAGS: self
+PROMPTS: gloss
+LLM ROLES: gloss
+OPS COMMANDS: 

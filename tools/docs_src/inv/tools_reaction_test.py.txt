@@ -1,0 +1,18 @@
+# tools\reaction_test.py  (92 lines)
+
+DOCSTRING:
+Her face in the app (sim/reactions.py): one reaction each time her mood
+crosses a band, the face chosen by what is up, never the same image inside
+`repeat_days`. On a copy of the save, against the real reactions.db.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: state.gauges, state.mood_from
+KV READ: reaction_band, reaction_last, reactions_log
+KV WRITE: reaction_band, reaction_last, reactions_log
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

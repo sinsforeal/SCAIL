@@ -1,0 +1,38 @@
+# persona\delivery.py  (536 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Delivery: 
+    __init__(config, clock, store, tg, tts): 
+    _outbox(bubbles): The bubbles composed and not yet gone, in the save.  A bubble reaches the `messages` table only after it has actually left, and the queue in front of that is a `queue.Queue`, so a stop between composing and sending used 
+    _strand(): Bubbles the last process composed and never sent.  They are NOT sent now. She wrote them for a minute -- what she was doing, what he had just said, how present he was -- and putting them into a conversation that has move
+    typing_seconds(text): 
+    send_bubbles(bubbles, self_started, lead_seconds, voice, media): Queue bubbles. lead_seconds is character-time delay before the first one. voice is a short spoken line sent as a voice note after the last bubble.
+    _prompt_for(bubbles): The persona's record of the call these bubbles came out of -- and only when they ARE those bubbles.  `/send <text>`, a replaced reply and a photo caption go through `send_bubbles` too, and filing one of those under the l
+    _char_id(): 
+    _freeze(prompt, mid, anchor): The reply's own prompt, against the row the first bubble made.  Written as each bubble lands rather than when the burst ends: a stop is `Stop-Process -Force`, and a paid answer held in a local until the end of a loop is 
+    _cut_in(queued_ts): Anything unread from him that arrived after she started talking.
+    busy(): 
+    _note_share(text, ts): A bubble that has left, offered to her account: if it was a post of hers it is recorded as sent now, with the event.
+    _run(): 
+def slug_of(config, provider, name): The slug a model NAME goes out as at this provider. A name the provider has no entry for goes out as a literal, which is what the map is for.
+def cached_of(usage): The part of the prompt the host answered from its cache. On the same model a swipe's prompt is byte-identical to the original's, so this should be nearly all of it; on a different model it is zero, and the number is here
+def cost_of(slug, usage): What one call cost, from the same price table `/stats` uses. The host's own figure wins when it reports one.
+def to_bubbles(app, text): One answer split the way a reply is split.  The spoken line is lifted out and the draft cleaned with the persona's own two pure passes, so a candidate is shaped exactly like the reply it stands beside. The persona's `_sp
+def resolve(app, msg_id): (the anchor row's id, the frozen prompt) for an id that may be either the hub's or the record's.  The app knows hub ids and the record knows its own, and 141 in the store was 1813 on the hub. The hub's id is tried FIRST,
+def swipe(app, msg_id, model): Draw the reply again, on the model the chat is toggled to.  Returns a line for the ops log. The answer is written to her save the moment it exists, before it is shown anywhere.
+def report(app, msg_id): What has been drawn for one reply, or which replies can be drawn again.
+def sit(app, msg_id, n): Make one candidate the version the conversation goes on from.  Her rows take its text through the same path a hand correction uses, the hub's copies are edited so his phone shows what her record holds, and the voice note
+def _hub_voices(app, hub_ids): Which of these rows the hub has audio on, so only those are rendered again.
+def push(app, anchor): The candidates for one reply, up to the hub, so the arrows and the counter in the chat show them. The hub keeps them beside its own copy of the message the way it keeps the ops payload.
+
+CONFIG SECTIONS: character.name, delivery, delivery.interruptible, delivery.offline_wait_seconds, delivery.send_attempts, delivery.send_retry_seconds, delivery.split_on_blank_lines, model, raw, tts.enabled
+KV READ: outbox
+KV WRITE: outbox
+TABLES: 
+LOG TAGS: delivery, share, swipe
+PROMPTS: 
+LLM ROLES: persona
+OPS COMMANDS: 

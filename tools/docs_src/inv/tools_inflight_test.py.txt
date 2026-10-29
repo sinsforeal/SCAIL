@@ -1,0 +1,37 @@
+# tools\inflight_test.py  (153 lines)
+
+DOCSTRING:
+The in-flight flag, proven by killing a process in the middle of a job.
+
+    python tools/inflight_test.py
+    python tools/inflight_test.py --config config_yukarin.json --db data/yukarin.db
+
+A child process builds the App on a copy of the save and starts a real
+lookup on its background thread. The parent waits until the kv record
+`in_flight` shows the job, then kills the child with `taskkill /F`, which is
+`TerminateProcess`: no `finally`, no `atexit`, exactly what `restart.ps1`
+does. The parent then builds a second App on the same copy -- a restart --
+and runs the boot read, which must find the row, log it and settle it.
+
+Three more rows are written by hand before the boot read, because the
+outcomes they exercise cannot be reached by killing a lookup: a compile for
+a day that already has its `days` row (must NOT be paid for again), a compile
+for a day that has none (must be rerun, for real), and a photograph marked
+sent that never went (must go back in the pool).
+
+It spends: the lookup call the child is killed in the middle of, and one
+compile of an empty day.
+
+DEFS:
+def _kv(db, key): 
+def child(config, db): Build on the copy and start a lookup; then sit there to be killed.
+def main(): 
+
+CONFIG SECTIONS: json, logging.backup_dir
+KV READ: missed_calls
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,32 @@
+# sim\watchlist.py  (210 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Watchlist: 
+    __init__(config, store, clock): 
+    _seed_once(): 
+    all(): 
+    _save(rows): 
+    unfinished(): 
+    current(): The show she would put on next: an unfinished one, the one she has not touched for the longest (so she rotates rather than binges one).
+    advance(title): She watched an episode of this show: move its cursor on, stamp it.
+    add(title, ja, kind, ep, total): 
+    remove(title): 
+    set_ep(title, ep): 
+    queries(): What she would type into X search about her own shows: the Japanese titles. Joined to the taste sheet's queries by `Taste.queries`, so her searches seek her own things.
+    pick_due(): 
+    _bare(title): A title without the dressing a model uses to slip past a list: parentheticals, 're-watch', 'season 2', 'S2', 'part 1'.
+    _on_his_list(title, ja, kb): On his list, strictly and then by containment: 'Bocchi the Rock! (Re-watch)' is Bocchi the Rock!, and another season of a show he watched is his show.
+    pick_own(llm, sources, kb, force): One `watch_pick` call: a show she would watch, from her own corner -- her sheet, the accounts she keeps liking, what is going round. His list is context, not a fence (his call, 2026-08-31): a pick that is also his is mar
+    report(): 
+
+CONFIG SECTIONS: prompt_text, watchlist, watchlist.seed
+KV READ: watch_pick_log, watch_pick_ts, watchlist
+KV WRITE: watch_pick_log, watch_pick_ts, watchlist
+TABLES: 
+LOG TAGS: watchlist
+PROMPTS: watch_pick
+LLM ROLES: watch_pick
+OPS COMMANDS: 

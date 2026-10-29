@@ -1,0 +1,30 @@
+# tomoe\words.py  (240 lines)
+
+DOCSTRING:
+How the first character comes to know what he does: the app on her phone.
+
+Every phrase here is the wording the shared library carried before the words
+moved out of it, byte for byte, so nothing she reads changed. Registered under
+"app" in `sim/sight.py`; a pair is (English, Japanese) for the persona's `t()`.
+
+The exception is what he has been watching, which was hers for the first time
+on 2026-09-04 and is not a translation of anything the library used to say:
+she was not there when he played it and the app told her afterwards, so those
+phrases are written from that distance rather than from his shoulder.
+
+`{ed}` in those phrases is which EDITION of a franchise he watched -- the OVA,
+the film, a one-episode special -- and it is empty for an ordinary television
+run. MyAnimeList gives two Example Show entries the identical Japanese title, so
+a line built from the title and the episode number alone could not say which
+of them he had opened.
+
+DEFS:
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

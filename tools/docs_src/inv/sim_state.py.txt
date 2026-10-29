@@ -1,0 +1,80 @@
+# sim\state.py  (1946 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def clamp(v, lo, hi): 
+class State: 
+    __init__(config, store, clock): 
+    _seed_people(config): Who the relationship meters sit on, on a save that has none yet.  Asked of the roster (`sim/roster.py:meter_rows`) rather than read straight out of the cast file, because the file is not the answer for anybody but the ch
+    save(): 
+    note_company(scene): Who is with her, as a weight 0..1 for the loneliness terms.  Loneliness had exactly one owner: his silence. On 2026-08-26 it read 92 -- the highest figure of the day -- while she was in a live group round with Rena, Hina
+    decay(silent_hours, world): Deterministic movement per elapsed hour: drift toward baseline, plus the world terms (config state.world): weather on comfort, sleep on energy, the kind of block on boredom, exams ahead on anxiety, being read and ignored
+    _derive_affection(hours): How warm she is toward him, from its causes.  It used to be written, and every mechanical write was upward: +6 on any message he sent -- before the model read the tone, so a cold one warmed her as much as a kind one -- a
+    _derive_affection_from_primitives(prim, key, hours, c): Affection out of what actually happened, for a character who has no seeded meters.  The old derivation reads `attachment_rest` of 40 and a closeness that was hand-written into the cast file, so a stranger settles at 18 -
+    affection_band(): The word for where affection sits, for the operator's view and the reports: hate / cold / cool / neutral / warm / close. Empty for a character who has not got the gauge.
+    set_value(what, value): By hand: a gauge, `him.closeness`, or `sentiment.<kind>` on him. Derived gauges are refused with the reason; affection is allowed but drifts back to its target at inertia speed, and says so.
+    affection_target(): The same figure without moving anything, for /gauges and the reports. None for a character who has not got the gauge: what would write it is switched off, so the gauge is not built at all (`Config._existence_implies`), a
+    _mirror_primitives_closeness(key): For a character whose feelings are built out of events, how close they are is not a meter of its own.  `docs/primitives.md` §3 makes closeness the smaller of the two exposures, and `_derive_affection_from_primitives` rea
+    _relationship_gravity(hours): His meters drift toward what the record actually supports.  Before this they moved only when the state model returned a delta, and the model on a warm day always returns a small positive one. There was no decay of any ki
+    him_key_in(config, relationships): The row of a relationship table that is him: his name on the sheet, else the two conventions. None when the table has no him.
+    _him_key(): 
+    _him_tension(amount): Move his tension meter mechanically, outside the model's daily budget. Withdrawal has to be able to build from plain neglect: the state model only runs when something happens, and being ignored is precisely the case wher
+    things_happened(events, social_salience): Mechanical: salient events and a notable X scroll leave things unsaid.
+    note_his_mood(data): What he sounds like, kept and faded. Before this his state reached her as content and as read receipts, and never as a state -- there was no route by which his being flat could make her flat, and co-regulation is most of
+    his_mood(): Faded: what he sounded like six hours ago is not what he is now.
+    catch_his_mood(): Move her toward it. Automatic, unattributed, scaled by what he is to her -- you catch a partner's mood and not a stranger's -- and stronger downward than up, which is the asymmetry the research is clearest about. She is 
+    his_mood_line(ja): What she has noticed, which is a different thing from what she has caught: noticing is hers to act on, catching happens to her.
+    refused_line(): What the model kept trying to write this run. An empty line here after a long run would mean the prompt and the schema agree.
+    movable(): Gauges the state model may move, derived from the spec. Adding an emotion should not mean remembering to edit a list somewhere else.
+    gauge_tells(): What the state model is told about each gauge, rendered from the spec. A gauge carrying its own `tells` needs no edit to prompts/state.txt, which is the file that made adding one painful.
+    delta_schema(): The deltas block of the output schema, rendered from the spec so it cannot drift from it. Hand-written, it disagreed with the gauge list above it in the same file.
+    system_prompt(): 
+    wiring_report(): Whether each gauge is actually wired: who may move it, whether the state model is told about it, and what it has really done in the record. This is the standing check for the failure that keeps recurring -- a declared th
+    affect(axis): Signed sum over the gauges of how far each sits from its own rest, weighted by what kind of thing it is. A gauge at rest contributes nothing, so an unusually calm afternoon lifts her by the same mechanism that an anxious
+    _derive_mood(hours): Mood follows its causes with a lag. The lag is the point: emotions have objects and fade in hours, mood has no object and takes most of a day, so a bad afternoon is still on her in the evening after the thing that caused
+    body_noise(): How much of what she is feeling is actually her body, 0-1.  People misattribute arousal from one source to another reliably, and she has no way to do it: `health.py` and `body.py` move her gauges, and the state model rea
+    body_noise_line(): 
+    mood_state(ja): What sort of state she is in, rather than what number she is at. A number gates nothing: the `mood < 30` branch in this file had never once executed in 112 recorded states, because mood could not get there.
+    blends(): Two feelings both up at once that do not cancel, named. A person can want him and be furious with him in the same minute; the gauges held both and nothing said so, so the mood valence summed them to "even". Config `state
+    body_settled_line(): Once, after her body came right: the state call is told that some of how the last hours landed was hunger or exhaustion, and may let her notice or not. Cleared on read.
+    _body_settle_check(): The correction half of misattribution: when body noise drops from past `report_from` to under `clear_below` (she ate, she slept), part of the anger / anxiety / sadness that was really her body comes off mechanically, and
+    affect_report(): The grid, and what is missing from it. An empty cell is not a gap in the data, it is a feeling she cannot have.
+    _baseline(gauge): 
+    over_rest(gauge): How far the gauge sits from its rest, signed, in gauge units: the number every reader that asks "is she more anxious than usual" wants, and that nine of them computed by hand. Positive is above rest.
+    _room(gauge, spec): (rest, now, room): the gauge's rest, where it sits, and the room on the side it sits -- above rest the room is up to 100, below it the room is down to 0 -- so a deviation reads as a fraction of what was possible in that 
+    _stress_gain(gauge, amount): Stress amplifies what lands badly on a gauge it is named for.  Only upward, and only for the bad direction: being wound up does not make good news better, it makes a bad thing land as a worse one. The lookup is against `
+    _settle(gauge, amount): A release relaxes a gauge toward rest, never past it. Answering her satisfies an itch; it does not make her less curious than she is by nature. Flat releases with a 0-100 clamp drove straight through the baseline to the 
+    _nudge(gauge, amount, soft_cap, soft_floor): A signed mechanical move that loses value near whichever end it is heading for.  `_warm` only goes up and `_settle` only goes toward rest, so **nothing in the system could push a gauge below its baseline mechanically**. 
+    _warm(gauge, amount, soft_cap): A bump with the headroom taken out of it. A flat +6 per message put affection at 99 and held it there, and a gauge parked at the ceiling cannot signal anything. Full value at rest, nothing left near the cap.
+    his_attention(): He answered: the hunger is fed a little, mechanically, before the model reads the tone.
+    apply(deltas, rel_deltas, fresh): Model deltas, with three mechanical rules the model cannot be trusted to keep: diminishing returns near the ends of a gauge (a +3 at mood 85 is worth less than at 50), relationship meters that move at day speed (a per-da
+    _match_person(name): Which entry in `relationships` a name the model wrote is about.  This used to lowercase the name and strip `-chan`, so it resolved the roster handle and nothing else. The state model is shown the exchange it has just rea
+    gauge_line(): 
+    owner_off(key): Is the section that writes this gauge switched off for her?  A gauge whose owner is off is not a feeling resting at its baseline. It is a feeling she has not got, and printing it is printing a constant: the fourth charac
+    live_gauges(): Her gauges, without the ones nothing left in her build can move.
+    sources(ja): Every feeling that is up has a source, and the source is not whoever she happens to be talking to. {gauge: (who, why)} for the gauges something on record explains: an open rupture and a live withholding point at him; a p
+    directed_line(who): For a prompt about her with `who`: which of her feelings are aimed at somebody else (they show as being elsewhere, not as an edge on this person), and which are aimed at this very person.
+    mood_tags(ja): `ja` is for the one caller that is speaking TO her -- her situation block. The twenty others are mechanism prompts about her, in the third person, and they keep the English (`sim/lang.py`).
+    felt_hours(hours): How long his silence feels, as against how long it is.  Waiting is not measured in hours by anybody. Her sense of it stretches with the gauges that make waiting hurt and compresses when she is occupied, and she has no id
+    felt_gap_text(hours, ja): What she would say it has been. Never a decimal; nobody thinks in 1.7 hours.
+    register(ja): How she is answering him right now, mechanically: from tension, mood, craving, energy.  `ja` is the one caller that puts this in front of her (`sim/lang.py`); the reports and the operator's view read it about her, in Eng
+    delay_factor(): Multiplier on her read delay: slower when tense, low, tired; faster when craving.
+    compose_factor(): How long it takes her to get the words out, as a multiplier.  This is `delay_factor` moved to where it belongs. It used to scale the WHOLE wait and was then capped at 1.15 during a live exchange, on the reasoning that be
+    present_brief(scene): The people in the scene with her, with what they are to her and how they move her. `with_who` was a yes/no ("alone?") at every reader but the spiral; the state model read the scene JSON and a flat list of meters and had 
+    relationships_brief(): 
+    talk_relief(who, rounds): A conversation she took part in is company after the fact: it settles loneliness toward rest by how much that person is to her. Mechanical, so it happens whether or not the model remembers.
+    already_line(): The last few reasons lines, so the state model can see that the thing in front of it was already charged.
+    _talk_outcome(talk): How the room went, under the turns of it.  A room reached this role as its surviving turns and nothing else, so the two things that actually cost her were invisible: a room she never answered in at all, and a room the ot
+    _moment(deltas, reasons, user_msg_text, talk, scene): Code decides WHEN a tick was a moment (the size of the move) and what it was about (his message, an exchange, the scene); the state model's own `reasons` line, written at the time, is WHAT.
+    update_from_llm(llm, scene, events, user_msg_text, digest_text, his_side, talk, fresh): 
+
+CONFIG SECTIONS: character, character.user_name, contagion, delivery.mood_delivery, impulse.read_ignored_minutes, needs, primitives.fright_from, primitives.fright_hard_from, prompt_text, rupture, rupture.enabled, rupture.holds_gauges, self_memory, sentiment.attention_attachment, sentiment.family_roles, state, state.affection_from, state.blends, state.body_noise, state.company, state.felt_time, state.gauges, state.habituation, state.loneliness_per_silent_hour, state.mood_from, state.one_way_warn_from, state.sources, state.unsaid_ignored_per_hour, state.world, stress.compounds
+KV READ: body_noise_prev, body_settled_note, gauges, gauges_ts, his_mood, moment_counts, rel_delta_spent, rel_gravity_ts, relationships, standing_deltas
+KV WRITE: body_noise_prev, body_settled_note, gauges, gauges_ts, his_mood, rel_delta_spent, rel_gravity_ts, relationships, standing_deltas
+TABLES: 
+LOG TAGS: contagion, rupture, self, state, stress
+PROMPTS: state
+LLM ROLES: state
+OPS COMMANDS: 

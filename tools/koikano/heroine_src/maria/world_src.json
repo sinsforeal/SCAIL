@@ -1,0 +1,40 @@
+{
+  "_note": "真里亜's view of the shared 千代田 house, for the two-person world (Momoka and Maria in one house). It is data for the bench's event feed, not a world she owns or reads as a file (existence in_world false). The house is the same one as characters/momoka/world/koikano_world.json (frame, family, her_room); this file adds only what 真里亜's own lines give, each fact with a receipt, and says 'the record is silent' where it is. No age, no grade, no named parent, nothing in 一悟's mouth.",
+  "frame": "千代田家, the house of 百花, where 真里亜 is the maid. The record's own setting (user ruling 10-23 13:29).",
+  "place_ids": ["her_room", "house", "maid_room"],
+  "place_ids_note": "the bench's shared HOUSE ids (bz/two_minds bzombie/arms/s/make_run.py); school places (entrance, club room, hallway) are outside the house and carry place '' in the week rows",
+  "house": {
+    "momoka_room": {"place": "her_room", "bg": "BG18a01", "facts": [
+      {"text": "お嬢様's own room: 真里亜 guides a visitor to it, and the three of them once celebrated there.", "receipts": ["d03_01:0053", "b06_01:1412"]}]},
+    "guest_rooms": {"place": "house", "facts": [
+      {"text": "The house can lend rooms to the club for a training camp, and 真里亜 lays the guests' futons while they bathe.", "receipts": ["d08_01:0224", "08_01:1541"]}]},
+    "kitchen_and_tea": {"place": "house", "facts": [
+      {"text": "She makes the tea herself and names it (Darjeeling, autumnal).", "receipts": ["b06_01:0940", "04_01:2969", "a03_01:0886"]},
+      {"text": "She prepares food and baths through 'others' of the house, so there is household staff beyond her; none is named.", "receipts": ["d18_01:1720"]}]},
+    "her_own_room": {"place": "maid_room", "facts": [
+      {"text": "The record is silent: it never shows where 真里亜 sleeps or what is in it. LIBERTY: for the two-person world she has a plain maid's room in the house, with nothing in it described.", "receipts": []}]},
+    "owners": {"place": "", "facts": [
+      {"text": "The house has a master and a mistress, spoken of only as 「ご主人様と奥様」 and 「旦那様と奥方様」; unnamed, never present in a beat, no detail.", "receipts": ["03_01:2359", "d13_01:0258"]},
+      {"text": "Relatives of the mistress stay overnight at times.", "receipts": ["b01_01:0845"]}]}
+  },
+  "week": [
+    {"text": "A school shop shift three days a week at the entrance; she helps with the displays and serves.", "receipts": ["01_01:3466", "01_01:3597", "a02_01:1874", "09_01:1545"], "slot": "school_day", "place": "",
+     "note": "three days a week is 一悟's narration (01_01:3496), kept as a fact of the world, not as a line of hers"},
+    {"text": "Outside lessons and shifts she is with お嬢様, serving her.", "receipts": ["03_01:2420"], "slot": "outside_shift", "place": "her_room"},
+    {"text": "Before the first bell she watches the time and tells the club.", "receipts": ["01_01:3513"], "slot": "morning", "place": ""},
+    {"text": "In the club room she makes tea for the club.", "receipts": ["04_01:2969", "02_01:5694"], "slot": "after_school", "place": ""},
+    {"text": "She carries Cerberus's meals to the student council room.", "receipts": ["b03_01:1229", "d11_01:0260"], "slot": "after_school", "place": ""},
+    {"text": "She asks to be woken if anything happens at night.", "receipts": ["08_01:3145"], "slot": "night", "place": ""},
+    {"text": "When お嬢様 is unwell she stays with her and sends word to the school.", "receipts": ["d03_01:0053", "d03_01:0251", "d04_01:0200"], "slot": "sick_days", "place": "her_room"}
+  ],
+  "care_of_momoka": [
+    {"text": "She says the doctor found fatigue behind a cold, and that the fever has gone down.", "receipts": ["d03_01:0251"]},
+    {"text": "She says お嬢様 hides being unwell until the last moment and says 'I am fine'.", "receipts": ["d12_01:0685"]},
+    {"text": "She says trips and outings with friends were given up for お嬢様's health.", "receipts": ["d13_01:0258", "d13_01:0266"]}
+  ],
+  "silent": [
+    "Where she sleeps, her routine of morning and night, her own family and any day off.",
+    "A name, shape or staff list for the house beyond the maid and unnamed 'others'.",
+    "Any age or grade of hers or of anyone."
+  ]
+}

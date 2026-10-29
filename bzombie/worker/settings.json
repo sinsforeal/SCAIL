@@ -1,0 +1,6 @@
+{
+  "enabledPlugins": {
+    "fast-jev-compaction@fast-jev-compaction": false
+  },
+  "autoCompactEnabled": true
+}

@@ -1,0 +1,50 @@
+# world\rails.py  (215 lines)
+
+DOCSTRING:
+The railway a character actually uses, and what it refuses.
+
+Every character in a world has one file that says where she lives and how she
+travels (`world.geography_file`): her home station, the lines that station is
+on, the stops her commute passes through. Nothing outside her day planner read
+it, so the role that decides which national story reaches her was handed her
+taste sheet, the date and the headlines, and nothing at all about where she
+gets on a train. Asked why a crowding story at a station forty minutes away
+was relevant to her, it wrote her a commute: a line that does not serve her
+station, to a class that is nowhere near it. Nobody could have caught it,
+because nothing downstream knows what she rides.
+
+Two halves, and the second is only needed because the first can still be
+ignored:
+
+  `block(config)`   what her own file says, as a paragraph for a prompt that
+                    is judging what reaches her. Empty for a character with no
+                    world, whose geography path the load blanks.
+
+  `unowned(text, config)`
+                    the first railway line or station named in a sentence that
+                    her own file does not give her, or None. A relevance line
+                    that names one is dropped and logged; the story it was
+                    attached to is kept, because the story was true and only
+                    the reason was invented.
+
+Nobody is named here: the paths come from the config and the names come out of
+the file at the end of them.
+
+DEFS:
+def _key(name): One spelling for a name written five ways. The suffix that says what kind of thing it is carries no information here -- a line is already known to be a line by where the name was found -- so it comes off both languages, 
+def _map(config): 
+def _strings(value, out): Every string anywhere under a value. The map files are hand-written and a station list has turned up under three different keys already, so this reads the shape rather than a path into it.
+def _trains(config, key): 
+def nearby(config): The lines that run near her and are not hers to ride. Her own train watch already keeps the distinction -- the ones she is on carry one salience and the ones she only hears about carry another -- so this is that list und
+def ground(config): (the lines she rides, the stations she uses), as display names.  Two sources, because neither is complete on its own: her map file gives the station her home names, the lines that station is on and the stops her commute 
+def block(config): What her own file says about how she travels, for a prompt deciding which of the day's news would reach her at all. Empty when there is no file to read, so a character with no world is told nothing rather than told a bla
+def refuse(text, config): Why a sentence about how a story reaches her cannot stand, as (the name it got wrong, the reason in plain words), or None when it is fine.  Two ways to be wrong, and both are things her own files can settle:    * it name
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

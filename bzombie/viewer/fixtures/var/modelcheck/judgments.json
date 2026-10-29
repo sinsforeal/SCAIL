@@ -1,0 +1,235 @@
+{
+ "run_id": "modelcheck",
+ "judge": "fx-judge",
+ "criteria": [
+  "kino",
+  "natural"
+ ],
+ "passes": [
+  {
+   "pass": 1,
+   "judge": "fx-judge",
+   "scores": {
+    "sm100": {
+     "kino": 3,
+     "natural": 4,
+     "flags": []
+    },
+    "sm101": {
+     "kino": 4,
+     "natural": 3,
+     "flags": [
+      "timestamp_stamps"
+     ]
+    },
+    "sm110": {
+     "kino": 3,
+     "natural": 4,
+     "flags": []
+    },
+    "sm111": {
+     "kino": 4,
+     "natural": 3,
+     "flags": [
+      "timestamp_stamps"
+     ]
+    },
+    "sm120": {
+     "kino": 3,
+     "natural": 4,
+     "flags": []
+    },
+    "sm121": {
+     "kino": 4,
+     "natural": 3,
+     "flags": [
+      "timestamp_stamps"
+     ]
+    },
+    "sm200": {
+     "kino": 3,
+     "natural": 4,
+     "flags": []
+    },
+    "sm201": {
+     "kino": 4,
+     "natural": 3,
+     "flags": [
+      "timestamp_stamps"
+     ]
+    },
+    "sm210": {
+     "kino": 3,
+     "natural": 4,
+     "flags": []
+    },
+    "sm211": {
+     "kino": 4,
+     "natural": 3,
+     "flags": [
+      "timestamp_stamps"
+     ]
+    },
+    "sm220": {
+     "kino": 3,
+     "natural": 4,
+     "flags": []
+    },
+    "sm221": {
+     "kino": 4,
+     "natural": 3,
+     "flags": [
+      "timestamp_stamps"
+     ]
+    }
+   },
+   "ranks": {
+    "m1": [
+     "sm100",
+     "sm101",
+     "sm110",
+     "sm111",
+     "sm120",
+     "sm121"
+    ],
+    "m2": [
+     "sm200",
+     "sm201",
+     "sm210",
+     "sm211",
+     "sm220",
+     "sm221"
+    ]
+   }
+  },
+  {
+   "pass": 2,
+   "judge": "fx-judge",
+   "scores": {
+    "sm100": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm101": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm110": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm111": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm120": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm121": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm200": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm201": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm210": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm211": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm220": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    },
+    "sm221": {
+     "kino": 4,
+     "natural": 3,
+     "flags": []
+    }
+   },
+   "ranks": {
+    "m1": [
+     "sm121",
+     "sm120",
+     "sm111",
+     "sm110",
+     "sm101",
+     "sm100"
+    ],
+    "m2": [
+     "sm221",
+     "sm220",
+     "sm211",
+     "sm210",
+     "sm201",
+     "sm200"
+    ]
+   }
+  }
+ ],
+ "summary": {
+  "fxmodel-a": {
+   "all": {
+    "kino": 3.5,
+    "natural": 3.5,
+    "rank": 3.5
+   },
+   "momoka": {
+    "kino": 3.0,
+    "natural": 3.2,
+    "rank": 3.0
+   },
+   "tomoe": {
+    "kino": 4.0,
+    "natural": 3.8,
+    "rank": 4.0
+   },
+   "flags": {
+    "timestamp_stamps": 3
+   },
+   "first_places": 1
+  },
+  "fxmodel-b": {
+   "all": {
+    "kino": 3.5,
+    "natural": 3.5,
+    "rank": 3.5
+   },
+   "momoka": {
+    "kino": 3.0,
+    "natural": 3.2,
+    "rank": 3.0
+   },
+   "tomoe": {
+    "kino": 4.0,
+    "natural": 3.8,
+    "rank": 4.0
+   },
+   "flags": {
+    "timestamp_stamps": 3
+   },
+   "first_places": 2
+  }
+ },
+ "winner_model_agreement_moments": "1/2"
+}

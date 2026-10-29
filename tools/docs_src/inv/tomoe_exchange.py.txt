@@ -1,0 +1,96 @@
+# tomoe\exchange.py  (2701 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def is_stamp(text): Is this whole bubble a stamp and nothing else.  A stamp is not a conversational move and is not tested for repetition. All three bubbles the filter deleted from one character on 2026-09-08 were the same うん stamp, and one
+class Exchange: 
+    __init__(config, llm, store, clock, state, cast, records, calendar): 
+    _reads_world(): She is in this world and does not keep it (`Config.world_reader`).  A room has one owner (docs/peer-talk.md §4b): the process that starts it, paces it, decides whose turn it is and writes the record. A second process in 
+    _no_room(what): Said once per kind of opening refused, per process.
+    _rooms(): The rooms and who is in them. Built on the first look rather than in the constructor: the shared world is a declared wire and is attached after this object exists.
+    _room_of(rec): 
+    _room_members(kind, who): Who is in this room, by the one rule (`sim/rooms.members_for`).
+    _settle_room(rec): The room's membership as the roster now has it, at the moment the room starts. A join or a leave is written and said; an unchanged room writes nothing.
+    _note_move(rec, who, gist): One entry: who moved, when, and what the move was.  Recorded after the words exist, never before them. Returns True when this move is the same one that speaker made last time, which is what makes a round stale.
+    _pocket(): The store of what each person has to bring up today, filled once a day by the planner (`tomoe/cast.py`) and spent here.
+    _moves_txt(rec): 
+    _stale_round(rec, again): A round that added nothing: the filter dropped something in it, or somebody played a move they had already played.  Two of them in a row and the room is over. One of them drags the chance it continues (`_continue_p`), wh
+    _ask_agent(rec, who, kind, turns): True when this speaker writes her own turns, so nothing here may write them for her.  The first time round it puts the ask in her mailbox and marks the room as waiting on her. After the room has given up on her it still 
+    _agent_cue(rec, kind): One line of what the room is waiting for. Not a brief and not a plan: the moment, so her own process has something to answer.
+    _take_agent_turns(rec): Whatever arrived from somebody who writes her own turns, appended where it lands. Never written into the past: a turn that comes back late is stamped now, like every other turn, and the record keeps the order things were
+    _agent_wait(rec): True while the room is still waiting for somebody's own words. At the deadline the room says so and goes on without her, and she is not asked again in this conversation.
+    _turn_to_agents(rec, turn, kind): One turn out to everybody in the room who runs her own process. Membership decides it: somebody who joined after this turn was said is never sent it, and somebody who has left is sent nothing more.
+    _cal_line(): One calendar line for both callers: 'school: summer break' is the difference between a plan for tomorrow and an error about it.
+    wants(beat): 
+    _is_late_beat(beat): A group beat in tonight's late stretch.
+    live(): 
+    _save_live(rec): 
+    _availability(rec, next_side): How free the people in this exchange actually are, 0 to 1.  The pace used to read one person: whoever OPENED the conversation, and only when the next turn was theirs. In a group that is the wrong person nearly always -- 
+    _her_availability(): Hers, off the scene the loop is on: her phone access is the same fact about her that `Cast.available` is about everybody else.
+    _pace(hm, rec, next_side): How much slower than the daytime metronome: the hour, and where the people in the room actually are. Every turn used to land at one pace at 03:00 and at 15:00 alike, and a girl in class answered as fast as one on her bed
+    _gap(prev_len, n, kind, hm, rec, next_side): Seconds between a turn and the next: read the last, a pause, and the typing of this one -- or, `away_p` of the time, somebody got up.  The pause alone has no tail: it is bounded at about three minutes by construction, so
+    _away(hm): (seconds, why, ends the night) when somebody has gone off, else zero.  Late is a different kind of away from the middle of the afternoon: the bath and falling asleep belong to one end of the day and dinner to the other, 
+    _past_last_light(rec): Tonight's chat has a last light: drawn per night, and pulled in by what everybody has on tomorrow (`Cast._late_window` / `_group_morning`). Nothing enforced it once a conversation had started, so a group beat at 23:50 on
+    _asleep(): 
+    _awake(name): Is this person still up? A wake time in the past is forgotten.
+    _wake_ts(): The next morning hour, jittered, in her clock -- theirs is the same clock, and nobody here is on a different one.
+    _sleeps(rec, why): Put whoever was carrying this conversation to bed. Returns the name, or "" if there was nobody to put there.
+    _awake_friends(exclude_family): 
+    covered_today(limit): What the chat has already been over today, one line each.  A person's standing want is put in front of every call that writes them, so it comes back out of every call: Rena asked for the same festival photos in 27 messag
+    _hand_to_friends(rec, why): The chat goes on while she is not in it. True when it was handed over.  Her silence used to be the only way this happened, and her phone being away closed the chat outright -- so every group beat that landed while she wa
+    absorb(beat): A group beat that lands while the group chat is ALREADY running is not a second conversation. Rena dropping a photo in at 23:50 is a message in the chat she is already in, and the chat picks up from it.  Before this it w
+    hold_back(beats): Beats that wait a pass: an exchange is live and she has not yet had her turn in it. Two events landing in one pass -- her mother in the kitchen, Rena on LINE -- opened and dropped each other within the second, and the dr
+    start(beat, scene): The opener lands now; the rest follows on the clock.
+    tick(scene): One side's turns when their clock comes. Returns the finished record when the exchange ends on this pass, else None.
+    _append(rec, new, kind): Stamp the new turns from now and set the clock for the other side.
+    _turn_to_world(rec, turn, kind): One turn into the world file (`world/shared.py`) the moment it is stamped, so another process in the same world reads the room as it happens rather than hearing about it at the compile.  `witnessed_by` is the room's memb
+    _busy_with_him(): Is she ACTUALLY with him right now -- not merely owing him an answer.  This used to be true from the moment his message landed until she replied, which is not the same thing at all: a message that arrived while she was a
+    _finish(rec, why): 
+    _him_lines(): Him, as facts, in her rooms: what he last wrote and when, the gap, how he sounded, what she expects of him, what his machine showed. So she can bring him up with her own people -- never a thing to do to him (those ride o
+    _behind_line(): How far out of the chat she has let herself get, if it is far enough to be on her mind. This is what `behind` is FOR -- a number nothing reads is a dead gauge, and her own words say what it does: the day she misses is th
+    _note_charged(out, line): What the room cost her, written onto the record AFTER it was charged. The stored row is rewritten rather than the line being put on it before the charge: nothing is recorded before the action it claims happened.
+    _reply_cost(out): What a slow answer costs her, and what missing the chat compounds.  Both are her own rules, said in her own words: 「返事早くしないと 友達じゃ なくなっちゃう」 and 「休んだら みんなの話についていけなくなるもん。その1日が命とりなの」. Neither had a mechanism -- she could ign
+    flush(why): 
+    his_message(): He wrote while she is mid-conversation: her next turn to them waits while she deals with him.
+    live_line(): For the persona and the director: where the conversation stands.
+    run(beat, scene): A beat becomes an exchange on the clock: one side per loop pass, the partial record visible meanwhile, his message pushing her next turn back (`start`, `tick`).
+    self_open_score(): How much of her wants to say something into the group, on the same scale `sim/impulse.py` scores wanting to text him: a weighted sum of the gauges that push toward people, with belonging counted by how far UNDER par it i
+    self_open_reason(scene): Why she may NOT be the one to start the group chat, or "" if she may. The hard gates only; the score and its roll are `self_open`.  Split the way the impulse to text him is split (`Impulse.check`): a list of flat refusal
+    _next_group_beat_minutes(): Minutes until the next undelivered group beat today, or -1.
+    self_open(scene, chosen): She starts the group chat herself, at most `self_open_per_day` times.  Every beat is somebody reaching HER -- the planner is refused any beat written as her, and that rule stays -- so in the record she opens none of the 
+    open_with_reason(who, scene): Why she may NOT write to this person on her own right now, or "" if she may. Every one of these is a thing she CANNOT do; whether she wants to is not asked here, because she has already said she does.
+    open_with(who, intent, scene): She writes to one of her own people on her own, because she decided to (`sim/pick.py`).  The one-to-one door beside `self_open`'s group one. Every gate is `open_with_reason`; what she is reaching for is `intent`, which s
+    alone_reason(beat): Why the others may NOT carry this beat among themselves, or "" if they may. Said as a reason rather than a boolean because every refusal here is a thing worth reading in the log.  This runs only after `wants()` has alrea
+    alone_beat(beat, scene): The others carry a beat she was refused, and she reads it later.  A group beat `wants()` turns down became one unanswered line and the end of the room for the night -- 17 of the 47 group conversations in a week are that 
+    _opener(beat): The beat's ja lands verbatim as the other side's opening turn(s). The planner wrote those words; what she answers is exactly what was said, not a rewrite of it. A group burst splits per speaker, and so does its gloss whe
+    _split_speakers(src, who, field): 
+    _max_rounds(kind): A group chat runs longer than a one-to-one: several people are typing, and the thing is used all day.
+    _continue_p(kind, rec): How likely the thing keeps going after a round of hers. A group is far stickier than a one-to-one -- somebody always says one more thing -- and the shared 0.6 was what made a group chat ten messages long.  Every absence 
+    _live_minutes(kind): How long the thing may run before it is called trailed off. A late group chat legitimately runs for hours; 45 minutes cut it at about twenty messages whatever the rounds allowed.
+    _calls_me(r): What this person calls HER, from their `calls`: the entry whose key is one of her own names. It was `calls["Tomoe"]`, which on a promoted character's roster is what they call the first character.
+    _names_line(who): What she calls this person and what they call her, from the sheets; the `who` field stays the roster name, the words use these.
+    _chat_so_far(turns): The conversation with its clock: each turn's own stamp, and a marker for a gap a person would feel. Every turn carries an `hm` (`_stamp_turns`, `_append`) and this rendered none of them, so a group chat that came back af
+    _prev_with(who): 
+    _said_lately(who, turns, is_self): Everything this speaker has actually put out lately: the live conversation, and the finished ones behind it inside `exchange.no_repeat_hours`.  The list this returns is both the "do not say it again" lines in the prompt 
+    _her_turns(who, kind, turns, scene, opening, intent, rec): Only her. Her state, her standing with this person, her own life.  `opening` is how many minutes the room has held nothing when she is the one breaking it (`self_open`) rather than answering somebody, and `intent` is wha
+    _slip_ok(who, kind): Why a Hakata slip in front of the friends is the true reading now, or "" -- from who she is with, her gauges, and the meters with them.  Who comes first because it is the plainest of the three: the dialect is what is lef
+    _is_family(who): 
+    _speaker_record(who, kind): What this person actually said and did today, and what the group has already said today, plus the slow pressures on them.
+    _key_of(who): The roster key for a name in any of its forms -- the record's Japanese name, a nickname, the roster key itself. One table (`sim/roster.py`), never a substring match.
+    _their_turns(who, kind, turns, rec): The other side of the exchange. A single person speaks for themselves; a GROUP is multi-agent -- every member who jumps in gets their own call, with their own sheet, their own day and their OWN edges, reading the chat as
+    _one_speaker(who, kind, turns, rec): One person, one call. Their sheet, their day, their edges, the chat -- and nothing of her interior: if her message was short, they read a short message, not a mood.  Never for somebody who runs her own process. The calle
+    _settled_txt(for_whom, who): The day's ledger for a side of a chat: where she is and with whom, who is absent, what the plan fixed; her side also sees her money, her clothes and her open promises. A turn that names another value is the fault this ex
+    _clean(data, force_who, default_who, context, avoid, recent): 
+    _yesterday(): 
+    director_line(): 
+
+CONFIG SECTIONS: attention.enabled, cast, character, character.name, exchange, exchange.chat_gap_marker_minutes, exchange.interrupt_delay_seconds, prompt_text, read_text, sentiment.family_roles
+KV READ: behind, cast_asleep, cast_chat, exchange_alone_counts, exchange_counts, exchange_late_counts, exchange_live, exchange_self_open_counts, room_in
+KV WRITE: behind, cast_asleep, cast_chat, exchange_live
+TABLES: 
+LOG TAGS: carried, cast_mechanisms, commit, exchange, gossip, nudge, pocket, room, said, shared world, thread
+PROMPTS: cast_reply, cast_turn, persona
+LLM ROLES: cast_reply, cast_turn
+OPS COMMANDS: 

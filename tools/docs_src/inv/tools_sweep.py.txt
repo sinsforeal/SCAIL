@@ -1,0 +1,28 @@
+# tools\sweep.py  (49 lines)
+
+DOCSTRING:
+Sweep the gauges against their readers, offline, on a copy of the save.
+
+    python tools/sweep.py [gauge|him|all]
+    python tools/sweep.py all --config config_yukarin.json --db data/yukarin.db
+
+Builds the App the way tools/smoke.py does (console, no sensors, logger
+stubbed, a copy of the save) and prints sim/sweep.sweep(). Same thing as
+`/sweep` in the app, without touching the live process.
+
+The character was hardcoded here, so the second character could only be swept
+from inside the running bot -- which is the one place a sweep is awkward to
+run. Her config is COPIED before it is used, because `Config.__init__` rewrites
+the file it is given and hers is open in a running process.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

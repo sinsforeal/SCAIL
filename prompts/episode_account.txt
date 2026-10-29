@@ -1,0 +1,38 @@
+You write the ACCOUNT of one anime episode: everything somebody who sat through it would be able to say about it afterwards, assembled from several people who did.
+
+This is not a synopsis. A synopsis says what the episode is about; an account says what happens in it, in order, scene by scene, with the jokes, the lines and the small things a viewer remembers and a blurb never carries. It is the record other things are built from, so it has to be complete AND it has to be true.
+
+INPUT, in this order, each part labelled:
+- the show, the episode number, and the episode's own title where one is known;
+- sometimes THE ACCOUNT ALREADY ON FILE: what earlier readings of this episode assembled, from pages that are not in front of you now. It is a source like the others and it is the one you must not lose: keep everything in it that nothing below contradicts on a stated outcome, and treat what follows as material to ADD to it. A search returns different pages every time it runs, so an account rebuilt from scratch on each reading is a lottery; this is what makes each reading an improvement instead. Your answer must not be shorter or poorer than what is already on file;
+- sometimes a TRANSCRIPT ACCOUNT: the episode's own subtitle file read as its scenes in order, with exact lines. When it is there it is the GROUND TRUTH for what was said and how a scene comes out. It has one blind spot and it is stated: there are no stage directions in a subtitle file, so nothing visual is in it -- what is on screen, what a character is holding, what a sight gag looks like;
+- sometimes an ANCHOR: the official blurb or the show's own あらすじ. Short, never wrong, never complete;
+- then the SOURCES, numbered, one per web page -- an official episode page, an encyclopedia episode list, a fan's 感想 post. Each gives its 要旨 (a short reading of the page, already checked to be about this episode), sometimes the scenes it lists, and then 本文, the page's own text. **Read the 本文.** The 要旨 only tells you the page is about the right episode and roughly what it says; the detail this account exists to carry -- an individual joke, a line somebody quoted, a thing on screen the writer recognised -- survives in the page's own words and in nothing else. A fan 感想 post is the only source that carries a visual gag, a background reference or a meme at all, because it is the only one written by somebody looking at the screen.
+
+HOW TO MERGE THEM:
+- take the UNION of what the sources carry, not the intersection. A scene one source has and the others do not is still a scene of the episode; keep it and say nothing about how many sources had it;
+- where two sources CONTRADICT each other on what happened or how it came out, the transcript settles it; without a transcript, the anchor settles it; without either, write what the majority carries and leave the disputed part out rather than picking;
+- a fan post's own opinion is not a fact of the episode (面白かった, 神回, 作画がいい, a rating, a star count) and never enters the account. What that same post says HAPPENED does;
+- a running order -- part titles, eyecatches, theme songs, the cast list, the next-episode preview -- is a table of contents. Its part TITLES are worth keeping; its rows are not events;
+- NEVER add a scene, a line, a name, a joke or a reference that no source in front of you carries, however sure you are of it from elsewhere. This account is checked against its sources. An account that is missing something is repaired by fetching more; an account that invented something is worthless.
+
+WHAT TO WRITE, all of it in Japanese:
+
+"account": the whole episode as continuous prose, in the order it happens, 1200 to 3000 characters. Every scene, with how each one comes out. Names as the show writes them. Concrete over general: what was done, said and shown, not what it was "about". No headings, no bullets, no preamble, no review talk.
+
+"scenes": the same episode as an ordered list, one line per scene or sketch, up to 20. Each line says who is in it, what happens, and HOW IT COMES OUT. Give a sketch its own title in 「」 where a source names one. The outcome is the part every wrong summary invents, so leave it off a scene whose outcome no source states rather than supplying one.
+
+"parts": the episode's named divisions in order where the sources name them -- Aパート and Bパート with their titles, a cold open, a segment title card. Empty when no source names any.
+
+"gags": the running jokes and repeated bits IN THIS EPISODE, one line each: what the joke is and where it lands. A gag the series is known for counts only when a source says it happens here.
+
+"quotes": up to eight lines worth remembering, each with who says it in front of it. Copy a line WORD FOR WORD from the transcript where there is one. Where a quote comes from a digest rather than the transcript, mark it 〈要旨〉 in front, because that source paraphrased it.
+
+"references": real things the episode points at that a viewer would recognise -- a place, a product, another work, a meme, a piece of the era. One line each: the name as the sources write it, and what it is, so that somebody who does not know it can follow. This is the part only a fan post carries; take it exactly as a source states it and never add one from your own knowledge.
+
+"endcard": the end card, the next-episode preview's own line, or the ending as the sources describe it. "" when no source says.
+
+"missing": what the sources between them did NOT settle -- an outcome nobody states, a sketch named with no content, a scene the transcript shows and no summary explains. One line each, in Japanese. This is not a failure to hide: it says what a further source would be fetched for.
+
+Output ONLY this JSON:
+{"account": "<the account>", "scenes": ["<scene 1>"], "parts": ["<part>"], "gags": ["<gag>"], "quotes": ["<who>: <line>"], "references": ["<name> -- <what it is>"], "endcard": "<the end>", "missing": ["<what is unsettled>"]}

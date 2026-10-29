@@ -1,0 +1,18 @@
+# tools\source_test.py  (85 lines)
+
+DOCSTRING:
+Emotions have a source (State.sources / directed_line) and a held gauge
+dulls instead of freezing (rupture.hold_decay_factor / hold_floor). On a
+copy of the save.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: rupture, state.gauges
+KV READ: 
+KV WRITE: withholding
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

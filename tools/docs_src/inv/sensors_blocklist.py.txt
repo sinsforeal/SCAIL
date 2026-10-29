@@ -1,0 +1,36 @@
+# sensors\blocklist.py  (85 lines)
+
+DOCSTRING:
+The names of things he had open that no character may be shown.
+
+`sensors.window_title_blocklist` is one list and it is not only about window
+titles. The same name reaches her by three routes: the title bar of the window
+itself, the FOLDER a file manager is showing (its whole title is a path), and
+the title of a page in his browsing history. His project's name arrived in her
+prose the third way on 2026-09-04, through a Google search whose query was a
+path -- the URL was google.com, which no junk filter names, and the page title
+carried the path whole.
+
+So the patterns are compiled once here and every sensor that emits a name of
+something he had open asks this module. One rule, one place, and a pattern
+added to the config reaches all of them.
+
+What is done with a match differs by source, and that is the caller's to say.
+A window is BLANKED and never dropped: dropping it would leave
+`SystemMonitor.right_now` on the window before it, and the window still counts
+with its process and its minutes. A visit in a browsing log has no such
+continuity behind it and is dropped whole.
+
+DEFS:
+def hidden(config, proc): Is this a program whose own NAME no character may be shown?  `blocks` answers about a name a WINDOW carries; this answers about the program itself. Blanking the terminal titles left the process name behind, and for a ter
+def patterns(config): The compiled blocklist for this config, compiled once per list.
+def blocks(config, text): Is this name of something he had open -- a window title, a folder, a path, the title of a page he visited -- one she must not be shown?
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

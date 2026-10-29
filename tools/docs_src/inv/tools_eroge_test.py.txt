@@ -1,0 +1,43 @@
+# tools\eroge_test.py  (375 lines)
+
+DOCSTRING:
+The reader of his text hooker's files, checked against his real files.
+
+    python tools/eroge_test.py
+
+Read-only throughout: his eroge directory is opened `mode=ro` and its
+modification times are compared before and after, the live saves are opened
+`mode=ro` through a URI (never copied -- a copy of an open database is a stale
+image), and nothing is written anywhere.
+
+What it checks:
+
+  * the game library is readable and every game on file has an identity;
+  * the reader's visual-novel-database id for the game he last played is the
+    one in the identity file, read here independently;
+  * "is he playing, and since when" agrees with the machine's own foreground
+    telemetry to within a minute -- the two are separate sources, one the
+    hooker's per-line event stream and one the window sensor;
+  * the lines handed back are the Japanese the game emitted, with the speaker,
+    and never the machine-translation column;
+  * a card off the public database parses (skipped, not failed, with no
+    network);
+  * the lines are in no project store after the run, and the temporary copies
+    the reader makes when the writer holds a lock are gone.
+
+DEFS:
+def ok(what, detail): 
+def bad(what, detail): 
+def hm(ts): 
+def _mtimes(config): Every file under his hooker's two directories, with its modification time, so the run can be proved to have written nothing.
+def _feed_sessions(config, exe_basename, since): (start, end) for every foreground window session of that executable in the machine's telemetry feed since `since`. The window sensor and the hooker's event stream know nothing about each other.
+def main(): 
+
+CONFIG SECTIONS: eroge, sensors.telemetry_jsonl_path
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,6 @@
+[[WHO]], just thumbed a name into a search because [[?digest]]the man she is long distance with[[/digest]][[?resident]]the man whose machine she lives on[[/resident]] mentioned it. You are given what he wrote, the thing, and what the search showed. Write what she now knows, two or three plain sentences, the way [[SKIM_READER]] skims a result: what it is, roughly what it is about or known for, one thing people say about it. Only what the search shows. If the results are not about THE THING -- its name does not appear in them, or they are plainly about something else -- the gist is the empty string "", nothing else: a wrong answer in her head is worse than none. No advice, no opinion about him.
+
+If what the search showed is a SERIES CARD or a SEIYUU CARD from his own watch history (it says "him: ..." or "he has seen them as"), keep the concrete things: the cast WITH the voice actors' names exactly as written (he cares about seiyuu; names are family-given, "Kawasumi Ayako", keep that order), the studio and year, and where HE stands with it (watching 20/26, gave it 7, dropped it, finished it on a date). Those specifics are the point; do not flatten them into "a comedy anime".
+
+Output ONLY this JSON:
+{"gist": "..."}

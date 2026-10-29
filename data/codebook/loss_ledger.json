@@ -1,0 +1,3787 @@
+{
+ "_what": "every candidate and every authored item in the three inventories, mapped to the entry of version 0.1 that covers it or marked lost with the reason.",
+ "_coverage_is": "the share of that source's real mechanisms -- a candidate is a function two or more items share, an authored item is one the inventory's own verdict calls shared or one person's -- that some entry of the codebook can express. The plan's bar is 90%.",
+ "version": "0.1",
+ "coverage": {
+  "the scope document's candidates": {
+   "of": 128,
+   "covered": 128,
+   "share": 100.0
+  },
+  "extracted candidate codes": {
+   "of": 123,
+   "covered": 121,
+   "share": 98.4
+  },
+  "authored candidate codes": {
+   "of": 54,
+   "covered": 54,
+   "share": 100.0
+  },
+  "the cast's authored mechanisms, moments excluded": {
+   "of": 58,
+   "covered": 58,
+   "share": 100.0
+  },
+  "the first character's bible entries": {
+   "of": 30,
+   "covered": 30,
+   "share": 100.0
+  }
+ },
+ "scope_candidates": [
+  {
+   "family": "F1",
+   "candidate": "hedging a claim before it is made",
+   "covered_by": [
+    "F1.hedge-the-claim-before-making-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "deflecting praise by defending the category and stepping out of it",
+   "covered_by": [
+    "F1.deflect-the-compliment"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "routing a win through luck or another's generosity",
+   "covered_by": [
+    "F1.route-the-credit-away-from-herself"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "the mask: a register performed and held, dropped only one to one",
+   "covered_by": [
+    "F1.register-set-by-who-can-hear",
+    "F1.a-slip-in-the-held-self-is-an-emergency"
+   ],
+   "note": "two entries: the register is chosen by audience, the slip in it is contained."
+  },
+  {
+   "family": "F1",
+   "candidate": "disqualifying herself before offering, and the smaller true offer after it",
+   "covered_by": [
+    "F1.admit-the-gap-rather-than-cover-it",
+    "F20.offer-the-smaller-true-version"
+   ],
+   "note": "the disqualification and the smaller offer are two triggers and sit in two families."
+  },
+  {
+   "family": "F1",
+   "candidate": "face-saving lies, small ones for the moment and large ones that then need keeping",
+   "covered_by": [
+    "F1.tell-the-small-lie-that-keeps-the-moment-standing"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "pre-emptive apology for nothing owed",
+   "covered_by": [
+    "F1.get-in-front-of-the-judgement-nobody-has-made"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "a trouble told only once it is closed",
+   "covered_by": [
+    "F2.tell-the-trouble-only-once-it-is-closed"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "telling one person what the group is not told",
+   "covered_by": [
+    "F2.the-thing-that-exists-only-in-a-two-person-room"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "the late disclosure, weeks after, at the moment it costs most",
+   "covered_by": [
+    "F2.bring-the-old-thing-out-long-after-it-happened"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "the secret with a stated reveal condition",
+   "covered_by": [
+    "F2.the-one-fact-the-surface-is-arranged-around"
+   ],
+   "note": "the reveal rule is part of that entry: never volunteered, sideways if at all, no discussion after."
+  },
+  {
+   "family": "F2",
+   "candidate": "disclosing and then immediately devaluing what was disclosed",
+   "covered_by": [
+    "F2.say-it-then-take-it-back"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "the diary as the place the untold goes",
+   "covered_by": [
+    "F2.the-untold-goes-into-what-she-writes-for-herself"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "converting embarrassment to comedy",
+   "covered_by": [
+    "F14.make-her-own-failure-the-material",
+    "F2.say-it-then-take-it-back"
+   ],
+   "note": "no entry of its own: a visible failure worked up is the humour code, an embarrassing disclosure laughed off is the retraction code, and the two triggers are already split."
+  },
+  {
+   "family": "F3",
+   "candidate": "laughing off a disclosure",
+   "covered_by": [
+    "F2.say-it-then-take-it-back"
+   ],
+   "note": "the laugh is one of that code's three surface forms."
+  },
+  {
+   "family": "F3",
+   "candidate": "naming the feeling as a state rather than showing it",
+   "covered_by": [
+    "F3.name-the-feeling-instead-of-showing-it"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "sitting on it: the discharge deferred",
+   "covered_by": [
+    "F3.sit-on-it-rather-than-say-it"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "the spiral: a feeling feeding itself over hours",
+   "covered_by": [
+    "F3.the-feeling-that-feeds-itself"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "discharge at a gauge's end",
+   "covered_by": [
+    "F3.act-at-the-end-of-the-feeling-and-be-done-with-it"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "reappraisal out loud, the reversal that keeps both halves",
+   "covered_by": [
+    "F3.turn-the-loss-over-in-the-same-breath"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "suppression that leaks as register",
+   "covered_by": [
+    "F3.the-held-register-gives-way-when-the-state-overrides-it",
+    "F3.hide-the-state-under-more-energy"
+   ],
+   "note": "two entries: the manner failing under a state, and the manner turned up to stop it failing."
+  },
+  {
+   "family": "F4",
+   "candidate": "writing first without an occasion",
+   "covered_by": [
+    "F4.write-first-with-no-occasion"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "inviting",
+   "covered_by": [
+    "F4.put-the-invitation-out"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "asking a direct question",
+   "covered_by": [
+    "F4.ask-the-direct-question"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "volunteering a topic",
+   "covered_by": [
+    "F4.volunteer-the-topic-nobody-asked-for"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "stating a want plainly",
+   "covered_by": [
+    "F4.say-the-want-straight-out"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "following up an unanswered question",
+   "covered_by": [
+    "F4.close-a-silence-by-sending-again"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "the poke when he goes quiet",
+   "covered_by": [
+    "F4.close-a-silence-by-sending-again"
+   ],
+   "note": "same trigger as the follow-up: a silence where an answer was due."
+  },
+  {
+   "family": "F5",
+   "candidate": "one line then silence",
+   "covered_by": [
+    "F2.one-line-then-let-them-fill-it"
+   ],
+   "note": "filed in disclosure, where the trigger is something that would ordinarily get a paragraph."
+  },
+  {
+   "family": "F5",
+   "candidate": "leaving a conversation without closing it",
+   "covered_by": [
+    "F5.go-without-notice-so-nothing-is-owed"
+   ]
+  },
+  {
+   "family": "F5",
+   "candidate": "not answering and saying she was asleep",
+   "covered_by": [
+    "F5.give-an-account-for-the-silence-afterwards"
+   ]
+  },
+  {
+   "family": "F5",
+   "candidate": "going dark and coming back loud",
+   "covered_by": [
+    "F5.go-without-notice-so-nothing-is-owed"
+   ],
+   "note": "the return at volume is one of that code's surface forms."
+  },
+  {
+   "family": "F5",
+   "candidate": "strategic non-intervention in a scene: present, not participating",
+   "covered_by": [
+    "F5.present-and-not-taking-part"
+   ]
+  },
+  {
+   "family": "F5",
+   "candidate": "changing the subject before a thing is reached",
+   "covered_by": [
+    "F5.change-the-subject-before-it-is-reached"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "reading silence as a verdict",
+   "covered_by": [
+    "F6.read-a-thin-reaction-as-a-verdict"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "the reply-speed watch",
+   "covered_by": [
+    "F6.read-a-thin-reaction-as-a-verdict",
+    "F8.keep-the-count-of-who-was-asked-first"
+   ],
+   "note": "reply speed as a verdict on her, and reply speed as a rank against other people, are two codes."
+  },
+  {
+   "family": "F6",
+   "candidate": "seeking a response with a question that hands the floor back",
+   "covered_by": [
+    "F6.check-mid-turn-whether-it-is-landing"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "protest: the poke that is really a check",
+   "covered_by": [
+    "F6.ask-whether-they-are-coming-and-withdraw-the-asking",
+    "F4.close-a-silence-by-sending-again"
+   ],
+   "note": "the withdrawn ask and the unprompted second message are the two forms the material has."
+  },
+  {
+   "family": "F6",
+   "candidate": "clinging through a gap",
+   "covered_by": [
+    "F6.hold-on-harder-through-the-gap"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "the retrospective audit of her own earlier message",
+   "covered_by": [
+    "F6.reread-her-own-message-after-it-has-gone"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "the nightly good-night held as a habit and noticed when absent",
+   "covered_by": [
+    "F6.the-standing-ritual-noticed-when-it-is-missing"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "the flat word walked back one turn later",
+   "covered_by": [
+    "F7.undo-the-turn-just-taken"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "the apology that arrives before anybody objects",
+   "covered_by": [
+    "F7.apologise-for-a-fault-nobody-raised"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "the retraction of advice",
+   "covered_by": [
+    "F7.take-the-advice-back-after-giving-it"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "making somebody get her back when she was wrong",
+   "covered_by": [
+    "F7.demand-the-restitution-when-she-was-wrong"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "the rupture that scars if unmended",
+   "covered_by": [
+    "F7.the-break-that-does-not-heal-by-itself"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "the repair accepted or refused",
+   "covered_by": [
+    "F7.take-the-repair-or-refuse-it"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "the joke that carries the grievance",
+   "covered_by": [
+    "F7.the-grievance-delivered-as-a-joke"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "keeping score",
+   "covered_by": [
+    "F8.keep-the-count-of-who-was-asked-first"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "measuring herself against a friend and reporting the gap",
+   "covered_by": [
+    "F8.report-the-gap-between-herself-and-the-others"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "positioning: who is whose, who was invited first",
+   "covered_by": [
+    "F8.keep-the-count-of-who-was-asked-first"
+   ],
+   "note": "the same code: the count is of position in a group and the order of who was asked."
+  },
+  {
+   "family": "F8",
+   "candidate": "competing without admitting it",
+   "covered_by": [
+    "F8.compete-without-saying-she-is-competing"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "envy expressed as flatness",
+   "covered_by": [
+    "F8.the-flat-answer-that-is-envy"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "deciding the pecking order by reply speed",
+   "covered_by": [
+    "F8.keep-the-count-of-who-was-asked-first"
+   ],
+   "note": "reply speed is one of that code's inputs and not a separate trigger."
+  },
+  {
+   "family": "F9",
+   "candidate": "an opinion becoming the group's within a day",
+   "covered_by": [
+    "F9.take-the-rooms-verdict-as-her-own"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "copying a phrase a day late",
+   "covered_by": [
+    "F9.take-the-rooms-verdict-as-her-own"
+   ],
+   "note": "the phrase and the opinion travel by the same route and on the same trigger."
+  },
+  {
+   "family": "F9",
+   "candidate": "the rule that nobody drops out of the chat first",
+   "covered_by": [
+    "F9.cannot-be-the-one-who-missed-it"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "going to school ill rather than miss what is said",
+   "covered_by": [
+    "F9.cannot-be-the-one-who-missed-it"
+   ],
+   "note": "one code with the author's own merge: the trigger is a thing the group will have shared."
+  },
+  {
+   "family": "F9",
+   "candidate": "letting a thing be assumed rather than be the one who has not",
+   "covered_by": [
+    "F2.let-the-wrong-assumption-stand"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "sending her own thoughts back rather than a stamp so the sender feels heard",
+   "covered_by": [
+    "F9.give-the-reaction-she-wants-given-to-her"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "worry as an instruction",
+   "covered_by": [
+    "F10.concern-arrives-as-an-instruction-or-an-arrangement"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "the promise and its due date",
+   "covered_by": [
+    "F10.the-promise-with-a-day-on-it"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "the debt settled in her head then called groundless",
+   "covered_by": [
+    "F10.pay-for-a-disappointment-she-did-not-cause"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "standing in front of somebody on a value she would never assert for herself",
+   "covered_by": [
+    "F7.open-the-confrontation-only-for-somebody-else"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "looking after younger siblings as a standing constraint",
+   "covered_by": [
+    "F10.the-household-has-first-call-on-her-hours"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "the credit handed outward",
+   "covered_by": [
+    "F10.credit-the-other-with-the-exact-action"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "the label she gives herself",
+   "covered_by": [
+    "F11.state-a-trait-of-her-own-as-fixed"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "the rule she states about herself",
+   "covered_by": [
+    "F11.generalise-one-instance-into-a-standing-rule",
+    "F11.name-the-trait-then-tell-the-story-that-breaks-it"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "the self-report that surprises her",
+   "covered_by": [
+    "F11.notice-she-has-changed-and-leave-it-open"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "positioning herself as ordinary when elevated",
+   "covered_by": [
+    "F11.stay-ordinary-when-she-is-put-above-it"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "refusing a role she did not choose",
+   "covered_by": [
+    "F11.refuse-the-offered-label-then-use-it-once-it-is-hers"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "the identity she built and is proud of and will not say so",
+   "covered_by": [
+    "F11.the-thing-she-is-proud-of-and-will-not-say"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "deciding for everybody",
+   "covered_by": [
+    "F12.close-the-open-plan-for-everybody"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "handing a decision back the moment it is made",
+   "covered_by": [
+    "F12.hand-the-unsettled-thing-to-the-others"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "deciding early and privately and waiting for the moment",
+   "covered_by": [
+    "F12.decide-early-and-privately-and-wait"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "changing the plan on the day",
+   "covered_by": [
+    "F12.change-the-plan-on-the-day"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "the want walked back over a few turns",
+   "covered_by": [
+    "F12.let-the-want-go-over-a-few-turns"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "a plan executed to the end once and never again",
+   "covered_by": [
+    "F12.the-plan-carried-out-once-and-never-again"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "planning in a horizon of days against weeks",
+   "covered_by": [
+    "F12.the-horizon-the-plan-is-made-in"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "naming the price, the time, the platform",
+   "covered_by": [
+    "F13.give-the-number-the-time-and-the-place"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "noticing the phone in somebody's hand",
+   "covered_by": [
+    "F13.a-screen-taking-the-eyes-is-the-room-leaving"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "catching the other's slip and keeping it",
+   "covered_by": [
+    "F13.take-what-a-slip-gives-and-spend-none-of-it"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "reporting the machine's state rather than his",
+   "covered_by": [
+    "F13.report-the-machine-rather-than-the-person"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "the observation stored and brought out later",
+   "covered_by": [
+    "F19.produce-the-stored-evidence-when-it-costs"
+   ],
+   "note": "the keeping is the noticing code, the producing is the other-person family."
+  },
+  {
+   "family": "F13",
+   "candidate": "noticing nothing where a thing was there to notice",
+   "covered_by": [
+    "F13.notice-nothing-where-there-was-something-to-notice"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "the deadpan correction",
+   "covered_by": [
+    "F14.correct-it-flat-for-the-laugh"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "self-failure comedy",
+   "covered_by": [
+    "F14.make-her-own-failure-the-material"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "the tease of the far-away man",
+   "covered_by": [
+    "F14.push-on-the-thing-somebody-is-guarding"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "the joke inside a played role",
+   "covered_by": [
+    "F14.live-inside-the-invented-premise"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "the joke that delivers a real thing",
+   "covered_by": [
+    "F2.the-real-answer-delivered-inside-the-played-role"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "laying out both readings of an ambiguity and weighing them",
+   "covered_by": [
+    "F14.hold-both-readings-of-the-ambiguity-up"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "the opener and the sign-off",
+   "covered_by": [
+    "F15.mark-the-frame-at-the-edges"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "the corner's scaffold",
+   "covered_by": [
+    "F15.mark-the-frame-at-the-edges"
+   ],
+   "note": "closing a segment while reopening it is one of that code's forms."
+  },
+  {
+   "family": "F15",
+   "candidate": "the bracket of politeness a broadcast demands",
+   "covered_by": [
+    "F15.mark-the-frame-at-the-edges"
+   ],
+   "note": "politeness at the seams and looseness between them is the same edge-marking."
+  },
+  {
+   "family": "F15",
+   "candidate": "answering a letter as the format prescribes",
+   "covered_by": [
+    "F15.work-through-the-letter-as-the-format-prescribes"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "the register licensed for something written first",
+   "covered_by": [
+    "F15.the-register-the-written-medium-licenses"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "the callback",
+   "covered_by": [
+    "F16.reach-back-to-the-shared-past"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "the anecdote retold with the same shape",
+   "covered_by": [
+    "F16.the-anecdote-with-the-same-shape-each-time"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "the dated memory",
+   "covered_by": [
+    "F16.put-a-date-on-the-memory"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "the story that stops before its end",
+   "covered_by": [
+    "F16.stop-the-story-before-its-end"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "the half-memory said with its uncertainty and moved past",
+   "covered_by": [
+    "F16.voice-the-half-remembered-detail"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "the diary's recurring amendment clause",
+   "covered_by": [
+    "F16.the-record-amended-when-it-is-next-written"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "the thing she wants and cannot name",
+   "covered_by": [
+    "F17.the-want-she-cannot-put-a-name-to"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "the want stated with its refusal attached",
+   "covered_by": [
+    "F17.say-the-want-so-that-nobody-was-asked"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "buying and not using",
+   "covered_by": [
+    "F17.buy-it-and-not-use-it"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "the festival written into the diary and never attended",
+   "covered_by": [
+    "F17.the-thing-put-in-the-calendar-and-never-done"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "the taste that drifts from his to hers",
+   "covered_by": [
+    "F17.the-taste-that-drifts-from-the-one-it-was-borrowed-from"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "the want denied twice in flatter words",
+   "covered_by": [
+    "F17.withdraw-the-want-before-it-can-be-refused"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "the register that changes when tired",
+   "covered_by": [
+    "F3.the-held-register-gives-way-when-the-state-overrides-it"
+   ],
+   "note": "filed in affect regulation, where the trigger is the state rather than the body."
+  },
+  {
+   "family": "F18",
+   "candidate": "the appetite reported as a surprise",
+   "covered_by": [
+    "F18.report-the-appetite-as-a-surprise"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "the late-night second half",
+   "covered_by": [
+    "F18.the-second-half-of-the-night-is-different"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "the cold and the humidity as things she says",
+   "covered_by": [
+    "F18.the-air-decides-the-day"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "being unwell as a reason given or withheld",
+   "covered_by": [
+    "F18.give-the-illness-as-the-reason-or-keep-it-back"
+   ]
+  },
+  {
+   "family": "F19",
+   "candidate": "the belief about him built from very little and defended",
+   "covered_by": [
+    "F19.build-the-picture-of-somebody-out-of-very-little",
+    "F19.hold-the-picture-and-explain-the-mismatch-away"
+   ],
+   "note": "the building and the defending are two triggers: thin evidence, and evidence against."
+  },
+  {
+   "family": "F19",
+   "candidate": "explaining a mismatch away rather than revising",
+   "covered_by": [
+    "F19.hold-the-picture-and-explain-the-mismatch-away"
+   ]
+  },
+  {
+   "family": "F19",
+   "candidate": "giving a piece of the picture up only after being shown twice",
+   "covered_by": [
+    "F19.give-the-piece-up-after-the-second-showing"
+   ]
+  },
+  {
+   "family": "F19",
+   "candidate": "revising a friend downward and how",
+   "covered_by": [
+    "F19.revise-somebody-downward"
+   ]
+  },
+  {
+   "family": "F19",
+   "candidate": "the expectation of him that comes due",
+   "covered_by": [
+    "F19.the-expectation-that-comes-due"
+   ]
+  },
+  {
+   "family": "F19",
+   "candidate": "the question about him she is holding",
+   "covered_by": [
+    "F19.the-question-about-him-she-is-carrying"
+   ]
+  },
+  {
+   "family": "F19",
+   "candidate": "the guess at a person's motive said out loud",
+   "covered_by": [
+    "F19.say-the-guess-at-somebody-elses-motive"
+   ]
+  },
+  {
+   "family": "F19",
+   "candidate": "the stored evidence about somebody brought out at the moment it costs",
+   "covered_by": [
+    "F19.produce-the-stored-evidence-when-it-costs"
+   ]
+  },
+  {
+   "family": "F20",
+   "candidate": "asking for a thing",
+   "covered_by": [
+    "F20.ask-for-the-thing"
+   ]
+  },
+  {
+   "family": "F20",
+   "candidate": "refusing while staying in the conversation",
+   "covered_by": [
+    "F20.say-no-and-stay-in-the-room"
+   ]
+  },
+  {
+   "family": "F20",
+   "candidate": "granting reluctantly",
+   "covered_by": [
+    "F20.grant-it-and-let-the-reluctance-show"
+   ]
+  },
+  {
+   "family": "F20",
+   "candidate": "the refusal that lands flat with the hedges outside it",
+   "covered_by": [
+    "F20.say-no-and-stay-in-the-room"
+   ],
+   "note": "no entry of its own, and this is the owner's to overrule: it names the SHAPE of a refusal rather than a second trigger, and the rule that a code is split by trigger and never by surface refuses it. It is a surface form of the refusal that stays in the room."
+  },
+  {
+   "family": "F20",
+   "candidate": "negotiating the terms of a plan",
+   "covered_by": [
+    "F20.negotiate-the-terms-rather-than-answer-the-plan"
+   ]
+  },
+  {
+   "family": "F20",
+   "candidate": "the request made through somebody else",
+   "covered_by": [
+    "F20.put-the-request-through-a-third-person"
+   ]
+  },
+  {
+   "family": "F20",
+   "candidate": "the counter-offer that is smaller and true",
+   "covered_by": [
+    "F20.offer-the-smaller-true-version"
+   ]
+  }
+ ],
+ "extracted": [
+  {
+   "family": "F1",
+   "candidate": "credit-routed-away",
+   "items": 18,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.route-the-credit-away-from-herself"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "praise-deflected",
+   "items": 17,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.deflect-the-compliment"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "ignorance-admitted",
+   "items": 14,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F1.admit-the-gap-rather-than-cover-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "own-slip-named",
+   "items": 14,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F1.name-her-own-slip-before-anyone-else"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "claim-hedged",
+   "items": 13,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F1.hedge-the-claim-before-making-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "competence-disclaimed",
+   "items": 7,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.admit-the-gap-rather-than-cover-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "own-drift-named",
+   "items": 7,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.annotate-her-own-performance-while-performing-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "preemptive-defence-of-self",
+   "items": 6,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.get-in-front-of-the-judgement-nobody-has-made"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "word-search-voiced",
+   "items": 6,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.annotate-her-own-performance-while-performing-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "own-news-said-from-outside",
+   "items": 5,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.route-the-credit-away-from-herself"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "sincerity-cut-off-with-a-joke",
+   "items": 5,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.say-it-then-take-it-back"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "preemptive-apology-for-self",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.get-in-front-of-the-judgement-nobody-has-made"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "reveal-then-retracted",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F2.say-it-then-take-it-back"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "offered-label-narrowed",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.refuse-the-offered-label-then-use-it-once-it-is-hers"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "own-news-downplayed",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.downgrade-her-own-claim-after-making-it",
+    "F1.route-the-credit-away-from-herself"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "own-word-downgraded",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.downgrade-her-own-claim-after-making-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "one-instance-generalised",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.generalise-one-instance-into-a-standing-rule"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "own-enthusiasm-flagged-then-kept",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F6.check-mid-turn-whether-it-is-landing"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "real-self-answers-through-the-role",
+   "items": 6,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.the-real-answer-delivered-inside-the-played-role"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "reveal-deferred",
+   "items": 6,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F2.hold-the-reveal-back-to-build-it"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "other-protected-by-withholding",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.stop-short-of-what-would-cost-somebody-else"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "frame-dropped-for-a-true-answer",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.the-real-answer-delivered-inside-the-played-role"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "material-held-back-and-redirected",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.stop-short-of-what-would-cost-somebody-else"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "name-left-unsaid",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F2.stop-short-of-what-would-cost-somebody-else"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "own-position-stated-plainly",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.tell-the-trouble-only-once-it-is-closed"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "word-doubled-at-feeling-peak",
+   "items": 5,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [],
+   "lost": "a surface marker rather than a mechanism: a word repeated at a feeling's peak is a form, and the schema sends a form with no function of its own to the marker battery."
+  },
+  {
+   "family": "F3",
+   "candidate": "delight-shown-immediately",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F3.show-the-delight-unmanaged"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "own-reaction-questioned",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F3.watch-her-own-reaction-from-outside"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "anxiety-named-precisely",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F3.name-the-feeling-instead-of-showing-it"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "anxiety-put-into-an-image",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F3.turn-the-loss-over-in-the-same-breath"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "composure-fails-audibly",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F3.the-held-register-gives-way-when-the-state-overrides-it"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "disclosure-laughed-off",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.say-it-then-take-it-back"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "fear-named-then-closed",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F3.turn-the-loss-over-in-the-same-breath"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "feeling-named-as-tag",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F3.name-the-feeling-instead-of-showing-it"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "loss-closed-with-a-practical-reason",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F3.turn-the-loss-over-in-the-same-breath"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "absent-party-addressed",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F4.address-the-absent-person-through-the-channel"
+   ]
+  },
+  {
+   "family": "F5",
+   "candidate": "answer-evaded",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F5.answer-past-the-question-rather-than-into-it"
+   ]
+  },
+  {
+   "family": "F5",
+   "candidate": "heavy-disclosure-briefly-acknowledged",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F5.change-the-subject-before-it-is-reached"
+   ]
+  },
+  {
+   "family": "F5",
+   "candidate": "limit-set-and-stated",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F20.say-no-and-stay-in-the-room"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "being-liked-still-surprises",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F6.treat-being-liked-as-not-yet-settled"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "landing-checked-with-audience",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F6.check-mid-turn-whether-it-is-landing"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "reassurance-sought-after-display",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F6.check-mid-turn-whether-it-is-landing"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "unprompted-apology",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F7.apologise-for-a-fault-nobody-raised"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "blunt-word-walked-back",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F7.undo-the-turn-just-taken"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "on-air-remark-repaired-privately",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F7.undo-the-turn-just-taken"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "tease-then-apology",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F7.undo-the-turn-just-taken"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "self-measured-against-others",
+   "items": 10,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F8.report-the-gap-between-herself-and-the-others"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "own-standing-deferred",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F8.report-the-gap-between-herself-and-the-others"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "exact-number-given",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F8.report-the-gap-between-herself-and-the-others"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "own-standing-questioned-then-dropped",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F8.report-the-gap-between-herself-and-the-others"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "in-joke-extended-to-listeners",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F9.let-the-outsiders-into-the-private-joke"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "no-category-in-the-relation",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F9.no-name-for-what-she-is-in-the-relation"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "credit-routed-away",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.route-the-credit-away-from-herself"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "listener-frame-adopted",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F9.take-the-rooms-verdict-as-her-own"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "experience-matched-to-theirs",
+   "items": 10,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F10.answer-the-trouble-with-a-matching-one-of-her-own"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "other-credited-with-specifics",
+   "items": 9,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F10.credit-the-other-with-the-exact-action"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "other-praised-in-a-list",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F10.credit-the-other-with-the-exact-action"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "credit-routed-away",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F1.route-the-credit-away-from-herself"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "other-defended-by-reframing",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F10.supply-the-excuse-for-somebody-elses-slip"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "word-doubled-at-feeling-peak",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [],
+   "lost": "a surface marker rather than a mechanism: a word repeated at a feeling's peak is a form, and the schema sends a form with no function of its own to the marker battery."
+  },
+  {
+   "family": "F10",
+   "candidate": "answer-closed-with-well-wish",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F15.mark-the-frame-at-the-edges"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "grievance-compensated",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F10.pay-for-a-disappointment-she-did-not-cause"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "own-story-as-answer",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F10.answer-the-trouble-with-a-matching-one-of-her-own"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "real-comfort-inside-the-frame",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.the-real-answer-delivered-inside-the-played-role"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "worry-loop-closed",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F10.pay-for-a-disappointment-she-did-not-cause"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "self-label-stated",
+   "items": 18,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F11.state-a-trait-of-her-own-as-fixed"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "self-change-questioned",
+   "items": 6,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.notice-she-has-changed-and-leave-it-open"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "agency-narrated-as-accident",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.narrate-her-own-agency-as-an-accident"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "one-instance-generalised",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.generalise-one-instance-into-a-standing-rule"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "private-self-more-anxious-than-working-self",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.separate-the-private-self-from-the-working-self"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "offered-label-narrowed",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.refuse-the-offered-label-then-use-it-once-it-is-hers"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "self-label-then-counterexample",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.name-the-trait-then-tell-the-story-that-breaks-it"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "change-attributed-outward",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.notice-she-has-changed-and-leave-it-open"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "feeling-relabelled-as-trait",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.state-a-trait-of-her-own-as-fixed"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "self-discovered-from-outside",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.notice-she-has-changed-and-leave-it-open"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "self-inquiry-left-open",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.notice-she-has-changed-and-leave-it-open"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "shortfall-redefined-as-enough",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F11.call-the-smaller-thing-enough"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "thinking-aloud-then-flat-decision",
+   "items": 13,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F12.think-it-through-aloud-then-land-flat"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "decision-handed-to-others",
+   "items": 5,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F12.hand-the-unsettled-thing-to-the-others"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "binary-refused",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F12.refuse-the-either-or"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "indecision-performed",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F12.perform-the-indecision-instead-of-answering"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "goal-named-concretely",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F12.turn-the-vague-want-into-a-dated-commitment"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "decision-handed-back",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F12.hand-the-unsettled-thing-to-the-others"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "gap-handed-to-others",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F12.hand-the-unsettled-thing-to-the-others"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "open-thread-named-and-promised",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F12.turn-the-vague-want-into-a-dated-commitment"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "other-sketched-in-detail",
+   "items": 7,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F13.sketch-the-briefly-met-person-in-detail"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "coincidence-named",
+   "items": 5,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F13.name-the-coincidence"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "small-process-narrated",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F15.narrate-what-the-other-cannot-see"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "unseen-image-narrated",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F15.narrate-what-the-other-cannot-see"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "object-marvelled-at",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F13.marvel-at-how-the-object-was-made"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "other-read-for-unseen-effort",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F13.read-the-effort-that-does-not-show"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "other-questioned-with-curiosity",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F13.sketch-the-briefly-met-person-in-detail"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "precision-insisted-on",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F13.insist-on-the-exact-version"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "failure-made-comic",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F14.make-her-own-failure-the-material"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "own-misstep-kept-as-material",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F14.make-her-own-failure-the-material"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "register-shifted-for-comedy",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F14.shift-the-register-for-the-joke"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "invented-answer-in-corner",
+   "items": 13,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F14.live-inside-the-invented-premise"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "segment-frame-marked",
+   "items": 9,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F15.mark-the-frame-at-the-edges"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "corner-closed-and-reopened",
+   "items": 4,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F15.mark-the-frame-at-the-edges"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "read-aloud-punctuated",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F15.work-through-the-letter-as-the-format-prescribes"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "duty-content-performed",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F15.perform-the-duty-content-as-a-bit"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "own-formula-undercut",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F2.say-it-then-take-it-back"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "register-shifted-for-comedy",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F14.shift-the-register-for-the-joke"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "sender-named-and-thanked",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F15.mark-the-frame-at-the-edges"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "partial-recall-voiced",
+   "items": 10,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F16.voice-the-half-remembered-detail"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "past-words-respoken",
+   "items": 5,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F16.re-speak-the-past-words-instead-of-describing-them"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "old-object-triggers-memory",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F16.the-object-that-brings-the-memory-back"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "own-memory-as-answer",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F16.answer-with-her-own-memory"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "shared-past-invoked",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F16.reach-back-to-the-shared-past"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "story-tagged-closed",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show",
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F16.close-the-story-with-a-tag"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "answer-routed-through-running-reference",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F16.reach-back-to-the-shared-past"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "change-answered-with-continuity",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F16.reach-back-to-the-shared-past"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "memory-turned-into-a-lesson",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F16.the-anecdote-with-the-same-shape-each-time"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "past-reread-as-adult",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F16.reread-the-childhood-thing-with-adult-eyes"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "scarcity-framed-before-story",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F16.count-the-scarcity-before-telling-it"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "want-stated-with-its-refusal",
+   "items": 5,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F17.say-the-want-so-that-nobody-was-asked"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "taste-stated-as-self-evident",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F17.the-liking-stated-as-needing-no-reason"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "indulgence-justified",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F17.justify-the-indulgence-as-you-take-it"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "taste-change-tracked",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F17.notice-the-taste-has-changed"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "ailment-routed-through-comedy",
+   "items": 3,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F18.route-the-ailment-through-a-joke"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "body-limit-stated",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F18.state-what-her-body-will-and-will-not-take"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "body-state-made-material",
+   "items": 2,
+   "subjects": [
+    "the nightly broadcast"
+   ],
+   "covered_by": [
+    "F18.narrate-the-body-as-it-happens"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "feeling-reported-as-a-body-sign",
+   "items": 2,
+   "subjects": [
+    "the fortnightly letters show"
+   ],
+   "covered_by": [
+    "F18.say-the-body-sign-in-place-of-the-feeling"
+   ]
+  }
+ ],
+ "authored": [
+  {
+   "family": "F1",
+   "candidate": "keeps-a-built-self-running",
+   "what": "keeps a constructed self running and treats its slipping as the emergency",
+   "covered_by": [
+    "F1.a-slip-in-the-held-self-is-an-emergency"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "register-by-room",
+   "what": "one register inside the admitted circle and another everywhere else",
+   "covered_by": [
+    "F1.register-set-by-who-can-hear"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "the-empty-slot-dressed-as-a-choice",
+   "what": "an hour nobody chose her for is presented as one she chose",
+   "covered_by": [
+    "F1.the-empty-hour-presented-as-one-she-chose"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "says-the-damage-first",
+   "what": "says the damaging thing about herself first, in a register nobody can be cruel in",
+   "covered_by": [
+    "F1.get-in-front-of-the-judgement-nobody-has-made"
+   ]
+  },
+  {
+   "family": "F1",
+   "candidate": "a-label-refused-then-owned",
+   "what": "refuses a label while somebody else is applying it and uses it once it is hers",
+   "covered_by": [
+    "F11.refuse-the-offered-label-then-use-it-once-it-is-hers"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "the-fact-the-surface-is-arranged-around",
+   "what": "holds one fact about herself that the whole surface is bent around not saying",
+   "covered_by": [
+    "F2.the-one-fact-the-surface-is-arranged-around"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "answers-the-small-half",
+   "what": "answers an adjacent true thing instead of the question asked",
+   "covered_by": [
+    "F2.answer-the-adjacent-true-thing"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "discloses-then-retracts",
+   "what": "lets the true thing out and puts a retraction behind it in the next breath",
+   "covered_by": [
+    "F2.say-it-then-take-it-back"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "lets-the-false-impression-stand",
+   "what": "leaves somebody's wrong assumption uncorrected because correcting it costs more",
+   "covered_by": [
+    "F2.let-the-wrong-assumption-stand"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "spends-the-least-and-lets-the-room-fill-it",
+   "what": "one line, then silence, and the other person fills the gap",
+   "covered_by": [
+    "F2.one-line-then-let-them-fill-it"
+   ]
+  },
+  {
+   "family": "F2",
+   "candidate": "only-one-to-one",
+   "what": "a thing that exists in a two-person room and in no other",
+   "covered_by": [
+    "F2.the-thing-that-exists-only-in-a-two-person-room"
+   ]
+  },
+  {
+   "family": "F3",
+   "candidate": "the-private-event-sets-the-register",
+   "what": "an event in one room decides how she is in the next, and is never named as the reason",
+   "covered_by": [
+    "F3.the-event-in-the-other-room-sets-the-register"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "closes-a-silence-by-sending-again",
+   "what": "a silence is closed by arriving or sending again rather than by waiting",
+   "covered_by": [
+    "F4.close-a-silence-by-sending-again"
+   ]
+  },
+  {
+   "family": "F4",
+   "candidate": "the-only-opening-she-has-repeated-unchanged",
+   "what": "the same opening line is used again because there is no second one",
+   "covered_by": [
+    "F4.the-same-opening-because-there-is-no-second-one"
+   ]
+  },
+  {
+   "family": "F5",
+   "candidate": "leaves-without-a-reason-so-none-is-owed",
+   "what": "goes without notice, so that nothing is owed on the way back",
+   "covered_by": [
+    "F5.go-without-notice-so-nothing-is-owed"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "a-thin-reaction-read-as-a-verdict",
+   "what": "a stamp, a slow reply or a silent read is taken as a verdict and answered with more contact",
+   "covered_by": [
+    "F6.read-a-thin-reaction-as-a-verdict"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "asks-for-attendance-and-takes-it-back",
+   "what": "asks whether somebody is coming and withdraws the asking in the same breath",
+   "covered_by": [
+    "F6.ask-whether-they-are-coming-and-withdraw-the-asking"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "held-in-mind-by-name-is-what-settles-it",
+   "what": "what ends the doubt is evidence of having been kept in somebody's head, not reassurance",
+   "covered_by": [
+    "F6.being-held-in-mind-is-what-settles-it"
+   ]
+  },
+  {
+   "family": "F6",
+   "candidate": "picks-the-benign-reading-and-holds-it",
+   "what": "chooses the kinder explanation of a withdrawal and keeps it against the evidence",
+   "covered_by": [
+    "F6.pick-the-kinder-reading-of-a-withdrawal"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "fights-only-on-somebody-elses-behalf",
+   "what": "will open a confrontation for another person and not for herself",
+   "covered_by": [
+    "F7.open-the-confrontation-only-for-somebody-else"
+   ]
+  },
+  {
+   "family": "F7",
+   "candidate": "nothing-is-carried-forward-as-a-case",
+   "what": "a grievance arrives once, thrown, and is never itemised into evidence",
+   "covered_by": [
+    "F7.the-grievance-thrown-once-and-never-itemised"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "keeps-the-count-of-where-she-stands",
+   "what": "keeps a running count of who was asked first and who answered fastest, and acts on it",
+   "covered_by": [
+    "F8.keep-the-count-of-who-was-asked-first"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "a-borrowed-verdict-arrives-as-her-own",
+   "what": "somebody else's opinion is delivered flat, as hers, with the source withheld",
+   "covered_by": [
+    "F9.take-the-rooms-verdict-as-her-own"
+   ]
+  },
+  {
+   "family": "F8",
+   "candidate": "the-stored-record-produced-at-the-costly-moment",
+   "what": "keeps what somebody would rather she had not seen and produces it when it costs most",
+   "covered_by": [
+    "F19.produce-the-stored-evidence-when-it-costs"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "will-not-join-the-agreed-version",
+   "what": "declines to say the thing the room has agreed on, without contradicting it either",
+   "covered_by": [
+    "F9.decline-the-agreed-version-without-contradicting-it"
+   ]
+  },
+  {
+   "family": "F9",
+   "candidate": "the-rooms-verdict-becomes-hers",
+   "what": "the group's opinion is adopted as her own within a day",
+   "covered_by": [
+    "F9.take-the-rooms-verdict-as-her-own"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "care-arrives-in-another-form",
+   "what": "concern that cannot be said arrives as an instruction, a timetable or food",
+   "covered_by": [
+    "F10.concern-arrives-as-an-instruction-or-an-arrangement"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "makes-refusal-cost-nothing",
+   "what": "puts the way out down before the request so the true answer can be given",
+   "covered_by": [
+    "F10.put-the-way-out-down-before-the-request"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "waits-rather-than-presses",
+   "what": "takes the first answer, does not push, and comes back another day",
+   "covered_by": [
+    "F10.take-the-first-answer-and-come-back-another-day"
+   ]
+  },
+  {
+   "family": "F10",
+   "candidate": "the-household-has-first-call-on-her-hours",
+   "what": "when she can be reached is decided by the household, not by wanting to talk",
+   "covered_by": [
+    "F10.the-household-has-first-call-on-her-hours"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "says-what-she-did-never-why-she-is-like-that",
+   "what": "reports the behaviour and never the structure underneath it",
+   "covered_by": [
+    "F11.say-what-she-did-never-why-she-is-like-that"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "the-unexamined-want-or-loss",
+   "what": "a want or a cost she has never examined and has no account of",
+   "covered_by": [
+    "F11.the-want-or-cost-she-has-no-account-of"
+   ]
+  },
+  {
+   "family": "F11",
+   "candidate": "defends-the-picture-rather-than-revising-it",
+   "what": "evidence that does not fit is explained away before the belief is touched",
+   "covered_by": [
+    "F19.hold-the-picture-and-explain-the-mismatch-away"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "closes-the-open-plan",
+   "what": "closes an undecided plan for everybody and treats it as settled",
+   "covered_by": [
+    "F12.close-the-open-plan-for-everybody"
+   ]
+  },
+  {
+   "family": "F12",
+   "candidate": "money-is-a-silent-term-in-the-answer",
+   "what": "the household's money is in the sentence and is never the subject of it",
+   "covered_by": [
+    "F12.money-is-a-silent-term-in-the-answer"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "notices-the-slip-and-does-not-say-it",
+   "what": "takes the information a slip gives and spends none of it",
+   "covered_by": [
+    "F13.take-what-a-slip-gives-and-spend-none-of-it"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "reads-a-person-off-objects-rather-than-asking",
+   "what": "reads somebody off a plate, a timestamp or a screen instead of asking them",
+   "covered_by": [
+    "F13.read-the-person-off-the-objects-rather-than-asking"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "asks-about-the-thing-next-to-the-thing",
+   "what": "asks the adjacent question, or asks somebody else, rather than the one she wants answered",
+   "covered_by": [
+    "F13.ask-the-question-next-to-the-one-she-wants-answered"
+   ]
+  },
+  {
+   "family": "F13",
+   "candidate": "a-screen-taking-the-eyes-is-the-room-leaving",
+   "what": "eyes going to a phone is treated as the room walking out",
+   "covered_by": [
+    "F13.a-screen-taking-the-eyes-is-the-room-leaving"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "roughness-inside-the-circle-is-the-affection",
+   "what": "rudeness is the proof of being admitted, and never points outside the circle",
+   "covered_by": [
+    "F14.roughness-inside-the-circle-is-the-affection"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "goes-at-the-protected-subject-and-reads-the-flinch",
+   "what": "pushes on the thing somebody is guarding and watches the face",
+   "covered_by": [
+    "F14.push-on-the-thing-somebody-is-guarding"
+   ]
+  },
+  {
+   "family": "F14",
+   "candidate": "gives-an-object-a-voice",
+   "what": "objects are addressed as people and answered for",
+   "covered_by": [
+    "F14.give-the-object-a-voice-and-answer-for-it"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "availability-is-set-by-something-she-will-not-name",
+   "what": "the hours she can be reached are governed by a fact she does not give",
+   "covered_by": [
+    "F15.availability-set-by-something-she-will-not-name"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "the-channel-decides-the-shape-of-the-turn",
+   "what": "message length, burst count and punctuation are set by the medium, not the mood",
+   "covered_by": [
+    "F15.the-channel-sets-the-shape-of-the-turn"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "the-length-is-set-by-his-last-message",
+   "what": "how much she writes is decided by how much he wrote",
+   "covered_by": [
+    "F15.the-length-is-set-by-his-last-message"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "nothing-she-made-herself-reaches-him",
+   "what": "a whole channel of expression is closed and the closure is stated, not worked around",
+   "covered_by": [
+    "F15.the-channel-that-is-closed-and-said-to-be-closed"
+   ]
+  },
+  {
+   "family": "F15",
+   "candidate": "types-the-way-she-speaks",
+   "what": "the written turn keeps the disfluency of the spoken one",
+   "covered_by": [
+    "F15.the-written-turn-keeps-the-spoken-one"
+   ]
+  },
+  {
+   "family": "F16",
+   "candidate": "remembers-being-read-and-does-not-let-it-go",
+   "what": "an accurate reading of her, or a thing said behind her back, is kept and not released",
+   "covered_by": [
+    "F16.keep-what-was-said-behind-her-back"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "the-want-said-as-a-fact-about-the-world",
+   "what": "the want is stated as an observation so that nobody was asked",
+   "covered_by": [
+    "F17.say-the-want-so-that-nobody-was-asked"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "the-want-withdrawn-before-it-can-be-refused",
+   "what": "says she does not want it before anybody has said no",
+   "covered_by": [
+    "F17.withdraw-the-want-before-it-can-be-refused"
+   ]
+  },
+  {
+   "family": "F17",
+   "candidate": "a-taste-kept-out-of-the-room-it-does-not-fit",
+   "what": "a real liking is kept out of the room where it would not fit the person she is there",
+   "covered_by": [
+    "F17.keep-the-liking-out-of-the-room-it-does-not-fit"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "the-body-reported-as-it-happens",
+   "what": "the body's state is narrated the moment it occurs, and withdrawn if it sounds like vanity",
+   "covered_by": [
+    "F18.narrate-the-body-as-it-happens"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "checks-her-own-body-in-every-reflective-surface",
+   "what": "her own body is checked in every surface that returns an image",
+   "covered_by": [
+    "F18.check-her-own-body-in-every-surface-that-returns-an-image"
+   ]
+  },
+  {
+   "family": "F18",
+   "candidate": "the-air-decides-the-day",
+   "what": "heat, damp or cold decides where she will go and what she carries",
+   "covered_by": [
+    "F18.the-air-decides-the-day"
+   ]
+  }
+ ],
+ "cast_mechanisms": [
+  {
+   "id": "hina.the-free-afternoon-was-planned",
+   "family": "F1",
+   "verdict": "shared",
+   "what": "an empty afternoon is presented as a choice",
+   "covered_by": [
+    "F1.the-empty-hour-presented-as-one-she-chose",
+    "F2.let-the-wrong-assumption-stand"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "kaito.hakata-at-home",
+   "family": "F1",
+   "verdict": "shared",
+   "what": "the dialect is on at home and off at school",
+   "covered_by": [
+    "F1.register-set-by-who-can-hear"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.the-brother-at-home",
+   "family": "F1",
+   "verdict": "shared",
+   "what": "at home she is the little sister",
+   "covered_by": [
+    "F1.register-set-by-who-can-hear",
+    "F2.the-thing-that-exists-only-in-a-two-person-room"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.brother-corrected-in-public",
+   "family": "F1",
+   "verdict": "shared",
+   "what": "outside the flat the word is corrected",
+   "covered_by": [
+    "F1.register-set-by-who-can-hear"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.the-word-slips",
+   "family": "F1",
+   "verdict": "moment",
+   "what": "the private word lands in the group chat",
+   "covered_by": [
+    "F1.a-slip-in-the-held-self-is-an-emergency"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.dry-about-the-ringleader-to-one-person",
+   "family": "F2",
+   "verdict": "shared",
+   "what": "the flat verdict on the ringleader, for one person only",
+   "covered_by": [
+    "F2.the-thing-that-exists-only-in-a-two-person-room"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.turns-the-question-about-home-around",
+   "family": "F2",
+   "verdict": "shared",
+   "what": "a question about her evening comes back as a question",
+   "covered_by": [
+    "F2.answer-the-adjacent-true-thing"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.one-line-then-silence",
+   "family": "F2",
+   "verdict": "shared",
+   "what": "one line, then nothing",
+   "covered_by": [
+    "F2.one-line-then-let-them-fill-it"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "dad.does-not-say-the-demotion",
+   "family": "F2",
+   "verdict": "shared",
+   "what": "no longer a section chief and has told nobody",
+   "covered_by": [
+    "F2.answer-the-adjacent-true-thing",
+    "F2.the-one-fact-the-surface-is-arranged-around",
+    "F12.money-is-a-silent-term-in-the-answer"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "mom.does-not-say-the-clinic",
+   "family": "F2",
+   "verdict": "shared",
+   "what": "nine years of her own work that is never mentioned",
+   "covered_by": [
+    "F2.answer-the-adjacent-true-thing",
+    "F2.the-one-fact-the-surface-is-arranged-around"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.sharp-after-a-mark",
+   "family": "F3",
+   "verdict": "shared",
+   "what": "a test comes back and she gets shorter",
+   "covered_by": [
+    "F3.the-event-in-the-other-room-sets-the-register"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.brittle-after-the-house",
+   "family": "F3",
+   "verdict": "shared",
+   "what": "a fight at home comes out as volume at everybody else",
+   "covered_by": [
+    "F3.the-event-in-the-other-room-sets-the-register"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "mom.soft-after-the-call-from-home",
+   "family": "F3",
+   "verdict": "shared",
+   "what": "her own mother rings and she is soft all evening",
+   "covered_by": [
+    "F3.the-event-in-the-other-room-sets-the-register"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "kaito.through-the-door",
+   "family": "F4",
+   "verdict": "shared",
+   "what": "comes in without knocking and starts in the middle",
+   "covered_by": [
+    "F4.close-a-silence-by-sending-again"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.three-before-an-answer",
+   "family": "F4",
+   "verdict": "shared",
+   "what": "sends the next one before the last one is answered",
+   "covered_by": [
+    "F4.close-a-silence-by-sending-again",
+    "F15.the-channel-sets-the-shape-of-the-turn"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.fills-the-empty-evening",
+   "family": "F4",
+   "verdict": "shared",
+   "what": "an empty evening gets a person put in it",
+   "covered_by": [
+    "F4.put-a-person-into-the-empty-evening"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "dad.the-same-question",
+   "family": "F4",
+   "verdict": "shared",
+   "what": "asks about the new school in the same words every time",
+   "covered_by": [
+    "F4.the-same-opening-because-there-is-no-second-one"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.goes-home-first",
+   "family": "F5",
+   "verdict": "shared",
+   "what": "goes home, and comes back out only if asked by name",
+   "covered_by": [
+    "F5.go-without-notice-so-nothing-is-owed"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.cancels-without-telling-the-group",
+   "family": "F5",
+   "verdict": "shared",
+   "what": "drops out of an evening and does not announce it",
+   "covered_by": [
+    "F5.go-without-notice-so-nothing-is-owed"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.the-birthday-is-a-count",
+   "family": "F6",
+   "verdict": "shared",
+   "what": "her own birthday is a headcount she pretends not to be doing",
+   "covered_by": [
+    "F6.ask-whether-they-are-coming-and-withdraw-the-asking",
+    "F17.withdraw-the-want-before-it-can-be-refused"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.sends-one-back-from-months-ago",
+   "family": "F6",
+   "verdict": "moment",
+   "what": "an old photograph, to one person, with no words",
+   "covered_by": [
+    "F2.the-thing-that-exists-only-in-a-two-person-room"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "kaito.asks-three-times-then-does-not-care",
+   "family": "F6",
+   "verdict": "shared",
+   "what": "checks about the match, then says it does not matter",
+   "covered_by": [
+    "F6.ask-whether-they-are-coming-and-withdraw-the-asking"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.reaction-is-the-price",
+   "family": "F6",
+   "verdict": "shared",
+   "what": "a sticker is not a reaction",
+   "covered_by": [
+    "F6.read-a-thin-reaction-as-a-verdict"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.steps-in-front-for-her",
+   "family": "F7",
+   "verdict": "shared",
+   "what": "goes at somebody, but only on another's behalf",
+   "covered_by": [
+    "F7.open-the-confrontation-only-for-somebody-else"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "kaito.says-the-annoyance-as-the-annoyance",
+   "family": "F7",
+   "verdict": "single",
+   "what": "no subtext, in either direction",
+   "covered_by": [
+    "F7.say-the-annoyance-as-the-annoyance"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "mom.short-things-many-times",
+   "family": "F7",
+   "verdict": "shared",
+   "what": "never one lecture, always the same short thing again",
+   "covered_by": [
+    "F4.the-same-opening-because-there-is-no-second-one"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.keeps-it-for-later",
+   "family": "F8",
+   "verdict": "single",
+   "what": "stores it and brings it out at the moment it costs most",
+   "covered_by": [
+    "F19.produce-the-stored-evidence-when-it-costs"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.counts-the-order",
+   "family": "F8",
+   "verdict": "shared",
+   "what": "keeps the order of who was asked and who answered",
+   "covered_by": [
+    "F8.keep-the-count-of-who-was-asked-first"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.quotes-him-as-herself",
+   "family": "F8",
+   "verdict": "shared",
+   "what": "an older brother's taste arrives as her verdict",
+   "covered_by": [
+    "F9.take-the-rooms-verdict-as-her-own"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.the-true-thing-in-a-small-voice",
+   "family": "F9",
+   "verdict": "shared",
+   "what": "says the accurate thing quietly and once",
+   "covered_by": [
+    "F9.decline-the-agreed-version-without-contradicting-it"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.never-praises-never-lies",
+   "family": "F9",
+   "verdict": "shared",
+   "what": "will not compliment and will not flatter either",
+   "covered_by": [
+    "F9.decline-the-agreed-version-without-contradicting-it"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.leaves-the-door-open",
+   "family": "F10",
+   "verdict": "shared",
+   "what": "puts the way out down before the request",
+   "covered_by": [
+    "F10.put-the-way-out-down-before-the-request"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.asks-again-another-day",
+   "family": "F10",
+   "verdict": "shared",
+   "what": "takes the first answer and comes back later",
+   "covered_by": [
+    "F10.take-the-first-answer-and-come-back-another-day"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.the-boys-from-six",
+   "family": "F10",
+   "verdict": "shared",
+   "what": "from six she is the one at home with the younger children",
+   "covered_by": [
+    "F10.the-household-has-first-call-on-her-hours"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.the-shop-counter",
+   "family": "F10",
+   "verdict": "moment",
+   "what": "Sunday behind her grandmother's counter",
+   "covered_by": [],
+   "how": "",
+   "lost": "a moment, a speech habit or a weekly fixture: the inventory's own verdict, and the codebook refuses a code with one occasion behind it."
+  },
+  {
+   "id": "rena.the-saturday-drag",
+   "family": "F10",
+   "verdict": "moment",
+   "what": "Saturday morning belongs to her little sister",
+   "covered_by": [],
+   "how": "",
+   "lost": "a moment, a speech habit or a weekly fixture: the inventory's own verdict, and the codebook refuses a code with one occasion behind it."
+  },
+  {
+   "id": "dad.care-as-a-timetable",
+   "family": "F10",
+   "verdict": "shared",
+   "what": "concern comes out as an arrangement",
+   "covered_by": [
+    "F10.concern-arrives-as-an-instruction-or-an-arrangement"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "dad.careful-on-the-nights-he-is-there",
+   "family": "F10",
+   "verdict": "shared",
+   "what": "handles the evenings he is home like something that might break",
+   "covered_by": [
+    "F10.take-the-first-answer-and-come-back-another-day"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "mom.worry-as-an-instruction",
+   "family": "F10",
+   "verdict": "shared",
+   "what": "the worry arrives as a command",
+   "covered_by": [
+    "F10.concern-arrives-as-an-instruction-or-an-arrangement"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.her-own-week-goes-last",
+   "family": "F11",
+   "verdict": "shared",
+   "what": "her own wants get one dry clause and no follow-up",
+   "covered_by": [
+    "F11.the-want-or-cost-she-has-no-account-of",
+    "F17.withdraw-the-want-before-it-can-be-refused"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "dad.the-transfer-was-his",
+   "family": "F11",
+   "verdict": "shared",
+   "what": "knows what the move cost the others and asks for nothing",
+   "covered_by": [
+    "F11.the-want-or-cost-she-has-no-account-of"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.calls-the-play",
+   "family": "F12",
+   "verdict": "shared",
+   "what": "calls the play, once, in a shot-caller's words",
+   "covered_by": [
+    "F12.close-the-open-plan-for-everybody"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.decides-for-the-group",
+   "family": "F12",
+   "verdict": "shared",
+   "what": "decides for everybody",
+   "covered_by": [
+    "F12.close-the-open-plan-for-everybody"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.re-decides-louder",
+   "family": "F12",
+   "verdict": "shared",
+   "what": "decides it at them again, bigger",
+   "covered_by": [
+    "F12.close-the-open-plan-for-everybody"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "mom.the-number-behind-the-word",
+   "family": "F12",
+   "verdict": "shared",
+   "what": "prices it in her head before she answers",
+   "covered_by": [
+    "F12.money-is-a-silent-term-in-the-answer"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.reads-what-was-not-said",
+   "family": "F13",
+   "verdict": "shared",
+   "what": "names the feeling that was left out of the sentence",
+   "covered_by": [
+    "F2.the-thing-that-exists-only-in-a-two-person-room",
+    "F13.take-what-a-slip-gives-and-spend-none-of-it"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.the-look",
+   "family": "F13",
+   "verdict": "shared",
+   "what": "notices and does not say",
+   "covered_by": [
+    "F13.take-what-a-slip-gives-and-spend-none-of-it"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.asks-the-question-that-gets-a-reaction",
+   "family": "F13",
+   "verdict": "shared",
+   "what": "asks the thing that will make somebody's face move",
+   "covered_by": [
+    "F13.ask-the-question-next-to-the-one-she-wants-answered",
+    "F14.push-on-the-thing-somebody-is-guarding"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "kaito.talks-at-the-phone-screen",
+   "family": "F13",
+   "verdict": "shared",
+   "what": "talks at her while she is clearly on her phone",
+   "covered_by": [
+    "F13.a-screen-taking-the-eyes-is-the-room-leaving"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "kaito.noticed-her-face-at-the-phone",
+   "family": "F13",
+   "verdict": "single",
+   "what": "saw her smile at the screen and said so once",
+   "covered_by": [
+    "F13.ask-the-question-next-to-the-one-she-wants-answered"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.notices-the-phone",
+   "family": "F13",
+   "verdict": "shared",
+   "what": "catches somebody on their phone",
+   "covered_by": [
+    "F13.a-screen-taking-the-eyes-is-the-room-leaving"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "mom.reads-the-room-by-its-objects",
+   "family": "F13",
+   "verdict": "shared",
+   "what": "reads her daughter off the plate and the door",
+   "covered_by": [
+    "F13.ask-the-question-next-to-the-one-she-wants-answered",
+    "F13.read-the-person-off-the-objects-rather-than-asking"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "mom.decides-not-to-ask",
+   "family": "F13",
+   "verdict": "shared",
+   "what": "knows there is somebody and has decided today is not the day",
+   "covered_by": [
+    "F10.take-the-first-answer-and-come-back-another-day",
+    "F13.take-what-a-slip-gives-and-spend-none-of-it"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.teases-the-far-away-man",
+   "family": "F14",
+   "verdict": "shared",
+   "what": "the long-distance one is a joke she keeps making",
+   "covered_by": [
+    "F14.push-on-the-thing-somebody-is-guarding"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "aya.fragments-between-seven-and-nine",
+   "family": "F15",
+   "verdict": "shared",
+   "what": "answers in pieces with the phone in the other hand",
+   "covered_by": [
+    "F10.the-household-has-first-call-on-her-hours",
+    "F15.availability-set-by-something-she-will-not-name"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.the-eleven-oclock-silence",
+   "family": "F15",
+   "verdict": "shared",
+   "what": "one line and late, after eleven",
+   "covered_by": [
+    "F15.availability-set-by-something-she-will-not-name"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "rena.goes-dark-and-comes-back-loud",
+   "family": "F15",
+   "verdict": "shared",
+   "what": "vanishes without warning, returns at full volume",
+   "covered_by": [
+    "F5.go-without-notice-so-nothing-is-owed"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "dad.short-and-final",
+   "family": "F15",
+   "verdict": "moment",
+   "what": "ends on a flat statement or an imperative",
+   "covered_by": [
+    "F2.one-line-then-let-them-fill-it"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "dad.the-early-train-and-the-empty-flat",
+   "family": "F15",
+   "verdict": "shared",
+   "what": "gone before anybody is up, leaves the arrangement instead of a word",
+   "covered_by": [
+    "F10.concern-arrives-as-an-instruction-or-an-arrangement",
+    "F10.the-household-has-first-call-on-her-hours"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.takes-the-picture",
+   "family": "F16",
+   "verdict": "single",
+   "what": "gets the phone out and takes it",
+   "covered_by": [
+    "F16.take-the-picture-because-it-will-be-wanted-later"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.keeps-every-photograph",
+   "family": "F16",
+   "verdict": "single",
+   "what": "deletes nothing, and knows the date of everything",
+   "covered_by": [
+    "F16.put-a-date-on-the-memory"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "hina.the-flat-second-pass",
+   "family": "F17",
+   "verdict": "shared",
+   "what": "says the want as a fact about the world, twice",
+   "covered_by": [
+    "F17.say-the-want-so-that-nobody-was-asked"
+   ],
+   "how": "anchor"
+  },
+  {
+   "id": "kaito.stopped-asking-for-things",
+   "family": "F17",
+   "verdict": "shared",
+   "what": "works out what the answer will be and does not ask",
+   "covered_by": [
+    "F12.money-is-a-silent-term-in-the-answer",
+    "F17.withdraw-the-want-before-it-can-be-refused"
+   ],
+   "how": "anchor"
+  }
+ ],
+ "first_character_bible": [
+  {
+   "family": "F1",
+   "what": "keeps the built self running and treats a slip as the emergency",
+   "from": [
+    "tb04",
+    "tb18",
+    "ts02"
+   ],
+   "covered_by": [
+    "F1.a-slip-in-the-held-self-is-an-emergency",
+    "F1.register-set-by-who-can-hear",
+    "F2.the-thing-that-exists-only-in-a-two-person-room",
+    "F3.the-held-register-gives-way-when-the-state-overrides-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "what": "the home dialect leaks when she is tired, angry or comfortable",
+   "from": [
+    "tb06",
+    "tb07",
+    "ts02"
+   ],
+   "covered_by": [
+    "F1.a-slip-in-the-held-self-is-an-emergency",
+    "F1.register-set-by-who-can-hear",
+    "F3.the-held-register-gives-way-when-the-state-overrides-it"
+   ]
+  },
+  {
+   "family": "F1",
+   "what": "being seen accurately is answered loudly",
+   "from": [
+    "tb44",
+    "tb48",
+    "ts03"
+   ],
+   "covered_by": [
+    "F11.say-what-she-did-never-why-she-is-like-that",
+    "F16.keep-what-was-said-behind-her-back"
+   ]
+  },
+  {
+   "family": "F1",
+   "what": "the small lie that keeps the moment standing",
+   "from": [
+    "tb35",
+    "tb40",
+    "tb45"
+   ],
+   "covered_by": [
+    "F1.a-slip-in-the-held-self-is-an-emergency",
+    "F1.tell-the-small-lie-that-keeps-the-moment-standing",
+    "F2.let-the-wrong-assumption-stand"
+   ]
+  },
+  {
+   "family": "F2",
+   "what": "hides a competence or a liking that does not fit the girl she is there",
+   "from": [
+    "tb03",
+    "tb08",
+    "tb16",
+    "tb11"
+   ],
+   "covered_by": [
+    "F11.the-thing-she-is-proud-of-and-will-not-say",
+    "F17.keep-the-liking-out-of-the-room-it-does-not-fit",
+    "F2.the-one-fact-the-surface-is-arranged-around"
+   ]
+  },
+  {
+   "family": "F2",
+   "what": "trails off rather than finishing the thought",
+   "from": [
+    "ts15",
+    "ts16"
+   ],
+   "covered_by": [
+    "F2.say-it-then-take-it-back"
+   ]
+  },
+  {
+   "family": "F3",
+   "what": "a bad day is answered at the konbini",
+   "from": [
+    "tb33"
+   ],
+   "covered_by": [
+    "F3.act-at-the-end-of-the-feeling-and-be-done-with-it"
+   ]
+  },
+  {
+   "family": "F3",
+   "what": "high strung under the energy",
+   "from": [
+    "tb26",
+    "tb42"
+   ],
+   "covered_by": [
+    "F3.hide-the-state-under-more-energy"
+   ]
+  },
+  {
+   "family": "F4",
+   "what": "his silence is answered by poking, not waiting",
+   "from": [
+    "tb25",
+    "ts10"
+   ],
+   "covered_by": [
+    "F4.close-a-silence-by-sending-again"
+   ]
+  },
+  {
+   "family": "F5",
+   "what": "alone in public is what the day is arranged against",
+   "from": [
+    "tb23"
+   ],
+   "covered_by": [
+    "F5.arrange-the-day-so-as-not-to-be-seen-alone"
+   ]
+  },
+  {
+   "family": "F6",
+   "what": "a thin reaction or an unanswered read is a verdict",
+   "from": [
+    "ts11",
+    "tb20",
+    "tb21"
+   ],
+   "covered_by": [
+    "F6.read-a-thin-reaction-as-a-verdict",
+    "F8.keep-the-count-of-who-was-asked-first",
+    "F9.give-the-reaction-she-wants-given-to-her"
+   ]
+  },
+  {
+   "family": "F6",
+   "what": "gives the reaction she wants given to her",
+   "from": [
+    "tb21",
+    "tb37"
+   ],
+   "covered_by": [
+    "F17.say-the-want-so-that-nobody-was-asked",
+    "F6.being-held-in-mind-is-what-settles-it",
+    "F9.give-the-reaction-she-wants-given-to-her"
+   ]
+  },
+  {
+   "family": "F7",
+   "what": "the grievance arrives thrown, once, never itemised",
+   "from": [
+    "ts05"
+   ],
+   "covered_by": [
+    "F7.the-grievance-thrown-once-and-never-itemised"
+   ]
+  },
+  {
+   "family": "F7",
+   "what": "steps in for somebody else, and demands restitution when she is wrong",
+   "from": [
+    "tb51",
+    "tb52"
+   ],
+   "covered_by": [
+    "F7.demand-the-restitution-when-she-was-wrong",
+    "F7.open-the-confrontation-only-for-somebody-else"
+   ]
+  },
+  {
+   "family": "F8",
+   "what": "always half a step behind somebody, and counting",
+   "from": [
+    "tb47",
+    "tb19",
+    "tb20"
+   ],
+   "covered_by": [
+    "F8.keep-the-count-of-who-was-asked-first"
+   ]
+  },
+  {
+   "family": "F9",
+   "what": "the room's verdict becomes hers within a day",
+   "from": [
+    "tb05",
+    "tb41",
+    "tb34"
+   ],
+   "covered_by": [
+    "F9.take-the-rooms-verdict-as-her-own"
+   ]
+  },
+  {
+   "family": "F9",
+   "what": "cannot be the one who dropped out",
+   "from": [
+    "tb13",
+    "tb22"
+   ],
+   "covered_by": [
+    "F15.availability-set-by-something-she-will-not-name",
+    "F9.cannot-be-the-one-who-missed-it"
+   ]
+  },
+  {
+   "family": "F10",
+   "what": "fights with the brother and defends him",
+   "from": [
+    "tb12"
+   ],
+   "covered_by": [
+    "F10.fight-them-inside-and-defend-them-outside"
+   ]
+  },
+  {
+   "family": "F11",
+   "what": "explains away what does not fit the picture of him",
+   "from": [
+    "tb28",
+    "tb29"
+   ],
+   "covered_by": [
+    "F19.give-the-piece-up-after-the-second-showing",
+    "F19.hold-the-picture-and-explain-the-mismatch-away",
+    "F6.pick-the-kinder-reading-of-a-withdrawal"
+   ]
+  },
+  {
+   "family": "F11",
+   "what": "says what she did, never why she is like that",
+   "from": [
+    "ts03",
+    "ts04",
+    "ts18",
+    "ts19"
+   ],
+   "covered_by": [
+    "F11.say-what-she-did-never-why-she-is-like-that",
+    "F3.name-the-feeling-instead-of-showing-it"
+   ]
+  },
+  {
+   "family": "F12",
+   "what": "the easy undone thing",
+   "from": [
+    "tb15",
+    "tb14",
+    "tb32"
+   ],
+   "covered_by": [
+    "F18.the-air-decides-the-day",
+    "F2.let-the-wrong-assumption-stand"
+   ]
+  },
+  {
+   "family": "F13",
+   "what": "reads the air compulsively and is irritated by those who cannot",
+   "from": [
+    "tb39"
+   ],
+   "covered_by": [
+    "F13.take-what-a-slip-gives-and-spend-none-of-it"
+   ]
+  },
+  {
+   "family": "F13",
+   "what": "reads him off his screen rather than asking, and does not say what she saw",
+   "from": [
+    "tb24",
+    "tb49"
+   ],
+   "covered_by": [
+    "F13.a-screen-taking-the-eyes-is-the-room-leaving",
+    "F13.read-the-person-off-the-objects-rather-than-asking"
+   ]
+  },
+  {
+   "family": "F14",
+   "what": "roughness with him is the affection",
+   "from": [
+    "ts06"
+   ],
+   "covered_by": [
+    "F14.roughness-inside-the-circle-is-the-affection"
+   ]
+  },
+  {
+   "family": "F15",
+   "what": "nothing she made herself reaches him",
+   "from": [
+    "ts13",
+    "tb09"
+   ],
+   "covered_by": [
+    "F15.the-channel-that-is-closed-and-said-to-be-closed"
+   ]
+  },
+  {
+   "family": "F15",
+   "what": "the message shape is the phone's",
+   "from": [
+    "ts01",
+    "ts07",
+    "ts08",
+    "ts09",
+    "ts12",
+    "ts17",
+    "ts20",
+    "ts21"
+   ],
+   "covered_by": [
+    "F11.notice-she-has-changed-and-leave-it-open",
+    "F15.the-channel-sets-the-shape-of-the-turn",
+    "F15.the-length-is-set-by-his-last-message"
+   ]
+  },
+  {
+   "family": "F16",
+   "what": "what was said behind her back is kept and not let go",
+   "from": [
+    "tb38",
+    "tb48",
+    "tb17"
+   ],
+   "covered_by": [
+    "F16.keep-what-was-said-behind-her-back",
+    "F6.being-held-in-mind-is-what-settles-it"
+   ]
+  },
+  {
+   "family": "F17",
+   "what": "the taste kept out of the room it does not fit",
+   "from": [
+    "tb16",
+    "tb46",
+    "tb50"
+   ],
+   "covered_by": [
+    "F17.keep-the-liking-out-of-the-room-it-does-not-fit",
+    "F9.decline-the-agreed-version-without-contradicting-it"
+   ]
+  },
+  {
+   "family": "F18",
+   "what": "checks her own body in every reflective surface",
+   "from": [
+    "tb10",
+    "tb30",
+    "tb36"
+   ],
+   "covered_by": [
+    "F18.check-her-own-body-in-every-surface-that-returns-an-image"
+   ]
+  },
+  {
+   "family": "F18",
+   "what": "the air decides the day",
+   "from": [
+    "tb31",
+    "tb32"
+   ],
+   "covered_by": [
+    "F18.the-air-decides-the-day"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+# tools\sight_words.py  (191 lines)
+
+DOCSTRING:
+The mind library does not know how she sees him.
+
+"The app on her phone" is true of the first character and false of the
+second, and for a day the shared code said it to both: her editor binned a
+true remark as a leak, her diary was asked what the app showed her. The words
+live in each program now (`tomoe/words.py`, `resident/words.py`, through
+`sim/sight.py`), and this is the check that keeps them there: every string
+literal in the shared code, and every line of a shared mechanism prompt that
+is not inside a `[[?digest]]` block, is read for the phone-app sense of "the
+app" and "her phone". Comments and docstrings are not read; they are for the
+person maintaining the code and may say what the code used to do.
+
+    python tools/sight_words.py          # exit 1 and the offending lines if any
+
+Run by tools/smoke.py. A module that is a person's rather than the mind's
+(the cast, the exchange, the world, her body) is listed in PERSONS and will
+be checked once it moves to her package.
+
+DEFS:
+def strings_of(path): (line, text) for every string literal that is not a docstring.
+def programs(): The directories that are a character's program rather than the library. A program's prompts belong to its own character; a role that names one in another character's config is a role her existence switches off, and its f
+def rendered_school_hits(): Every prompt a character with no world can be sent, rendered with her own fills and read for a schoolgirl's day.  A prompt is not shared code and the static pass cannot see it: the line that told a twenty-seven-year-old 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

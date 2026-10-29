@@ -1,0 +1,19 @@
+# resident\words.py  (211 lines)
+
+DOCSTRING:
+How the resident comes to know what he does: she is on his machine.
+
+No app, no phone, no looking. What is on his screen is in front of her, and he
+knows she is there. Registered under "resident" in `sim/sight.py`; a pair is
+(English, Japanese) for the persona's `t()`.
+
+DEFS:
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,28 @@
+# tools\share_pick_test.py  (200 lines)
+
+DOCSTRING:
+What the account does with a post she has just sent him, proved on a COPY
+of the save with the judge and the browser stubbed out. Nothing is sent and
+nothing real is written: the X store is redirected to a temporary directory.
+
+    python tools/share_pick_test.py
+
+What it shows, in order: a share whose judge says repost queues a like and a
+repost; a share whose judge says like only queues the like and nothing else;
+a judge that says neither queues nothing; an unreadable answer and an empty
+taste both fall back to the old probability and say so in the log; and the
+same pick runs on the scenery path, where a photograph she passed off as her
+own came out of a real post.
+
+DEFS:
+def queued(store, kind): 
+def main(): 
+
+CONFIG SECTIONS: curation.max_reposts_per_day, curation.share_pick, json, prompt_text, scenery.like_sent, scenery.repost_sent, scenery.repost_sent_p, sensor_view, sensor_view.x_actions_enabled, social, world.taste_file
+KV READ: x_action_queue
+KV WRITE: x_action_counts, x_action_queue, x_shareable, x_shared, x_taste, x_verdicts
+TABLES: 
+LOG TAGS: 
+PROMPTS: persona
+LLM ROLES: 
+OPS COMMANDS: 

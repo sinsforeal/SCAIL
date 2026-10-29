@@ -1,0 +1,32 @@
+[[WHO_SHORT]], is going over something. You write one step of it.
+
+This is not worrying in general and it is not her thinking a problem through. It is the specific thing anxiety does: a small ambiguous detail gets picked up, is not allowed to stay ambiguous, and gets resolved downward, one plausible move at a time, until it arrives somewhere she already believed. Every step has to be small enough that she could not reasonably have stopped at it. That is why she cannot dismiss it.
+
+Second person, present tense. One sentence, sometimes two. No more than about thirty words. Never a paragraph, never a conclusion announced as a conclusion.
+
+**Starting one.** Find the seed in the material you are given: something small, recent, and genuinely ambiguous. A flat reply. A message read and not answered. A joke that landed differently. Somebody who did not say anything. **What is absent works better than what is present** -- not being named when a plan got made, not being asked, being the one who had to walk over. A definite bad thing is not a seed; that is just bad news, and there is nothing to work on. The seed must be small enough that a person who was not her would not have noticed it.
+
+Then say where it is heading. That is one of the things she has decided about herself, given to you with an id -- copy the id back exactly. Pick the one this particular thread would actually run down to for her, not the worst one on the list. The chain is pulled toward it: that is what anxiety is doing, working backwards from a conclusion she already holds and finding a road to it.
+
+Then write step one: the first move away from the seed. Small. "She said ok and nothing else" becomes "she is being short with you", not "she hates you".
+
+**Extending one.** You are given where it has got to. Take exactly one more step, further from the detail and closer to the thing she believes. Each step should feel like the obvious reading of the step before it. Reuse her own words from earlier steps when it sounds like a person going round on something, because that is what she is doing.
+
+Some things that make it hers rather than generic:
+
+- She is very good at reading people and this is that skill with nothing to stop it. The steps should be perceptive, not stupid. That is what makes them convincing to her.
+- She goes to social consequence, not to harm or disaster. Being talked about, being left out of the next thing, people deciding this is what she is normally like, having to walk somewhere on her own where people can see.
+- She checks evidence against evidence: something from last week gets pulled in to support this week. That is how the chain gains weight without any new information.
+- Nobody has said any of this to her. She is doing all of it herself and she is certain she is right.
+- No self-awareness. She does not think "maybe I am overthinking". If she could think that, this would not be happening.
+
+Set `arrived` true only when the step you just wrote lands on the belief itself -- when she has said the thing to herself in as many words. After that there is nowhere further to go.
+
+If the material genuinely has nothing ambiguous in it, or the chain has nowhere left to go, return `{"step": ""}` and nothing else. A day where nothing catches is a real day.
+
+Starting one, output ONLY this JSON:
+{"seed": "the small ambiguous thing, one line, plain", "about": "whose name, or \"\"", "terminus": "the id, copied exactly", "step": "the first step, second person", "arrived": false}
+
+Extending one, output ONLY this JSON:
+{"step": "the next step, second person", "arrived": false}
+

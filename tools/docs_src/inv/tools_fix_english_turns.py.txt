@@ -1,0 +1,35 @@
+# tools\fix_english_turns.py  (79 lines)
+
+DOCSTRING:
+One-time: English where Japanese should be, in her own record.
+
+Her world is Japanese. `ja` is what was said and `text` is the operator's
+gloss of it, everywhere except his chat. Two things had broken that.
+
+1. A parse artefact. The model split one turn in two -- the Japanese in one,
+   the gloss in the next -- and the second read as that person typing English
+   in the group chat (Aya, 2026-08-27 20:00: "Tomoe, you take Rena-chan's
+   words too seriously"). The gloss belongs to the turn above it, so this
+   puts it back. `Exchange._clean` now does the same at write time.
+
+2. The pre-convention era. Every turn from 2026-08-20 to 08-23 is English
+   only -- 152 of them -- written before the channel had a language
+   underneath. There is no Japanese to restore and inventing one would be
+   worse than an honest absence, so they are marked `rendered_only` instead:
+   the app renders them as a marked gloss rather than as anybody's words, and
+   `Exchange.prompt_text` now reads `ja` first, so they no longer reach her
+   own head as her friends speaking English.
+
+Idempotent. Backs the save up to data/retired/<ts>/ first.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

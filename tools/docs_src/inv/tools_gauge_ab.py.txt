@@ -1,0 +1,44 @@
+# tools\gauge_ab.py  (316 lines)
+
+DOCSTRING:
+Does what she feels reach what she writes?
+
+The controlled test of `docs/yukarin-meters-plan.md` §2.4. Three real moments
+out of her record; two gauge conditions per moment, staged from a clean rest
+state and differing in exactly the lines a gauge can reach -- the feeling
+adjectives and the register clause; N drafts per condition at the temperature
+she runs at, so within-condition spread is measurable against between-condition
+difference.
+
+Everything else is held: one copy of the save, the clock pinned to the moment,
+the record cut back so the reply cannot know the future, the shape drawn ONCE
+per moment and handed to both arms (the draw is itself a gauge reader), and one
+prompt assembly per arm -- the messages are built once with the model refused,
+then the same list is sent N times.
+
+    python tools/gauge_ab.py --probe                    # price it, spend nothing
+    python tools/gauge_ab.py --round before --n 12
+    python tools/gauge_ab.py --round after  --n 12
+
+It scores mechanically and it judges nothing (`docs/model-harness.md` §3): the
+drafts are written out one file per moment, shuffled and unlabelled, for a
+blind read, and the labelled copy sits beside it.
+
+DEFS:
+def _names(text): The names of things, in whichever script they are written: a Latin word of four characters or more, or a katakana run. These are what survives between an English digest of his machine and a Japanese reply about it.
+def _bigrams(text): 
+class Captured: 
+def capture_messages(app, situation, slot_override): The prompt `_draft` would send, built once and never sent.
+def stage(app, arm, key): The gauges, at the arm's values. Computed gauges are never written (mood and affection are derivations), and a gauge her sheet removes is not invented for her.
+def run_round(a): 
+def score(a, recs): The column that needs no judgement.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: charged
+KV WRITE: stance, thread_window
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: persona
+OPS COMMANDS: 

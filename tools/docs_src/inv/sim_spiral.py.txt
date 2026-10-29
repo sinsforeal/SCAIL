@@ -1,0 +1,39 @@
+# sim\spiral.py  (512 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Spirals: 
+    __init__(config, llm, store, clock, state, records, self_model, self_memory): 
+    all(): 
+    save(rows): 
+    live(): 
+    _count(): 
+    _note_count(): 
+    pressure(): How wound up she is, and how far past her own rest.  Measured purely as anxiety above baseline this is **zero almost all the time**, because a gauge sits at its baseline, and she could never start one at all -- the same 
+    seedability(): Who could start one, and how badly. Not a list of people she worries about: how unsettled her standing with each of them is, out of the meters the cast already carries. Somebody she is placed well with and has nothing ou
+    max_steps(terminus_invested): How far a chain can run. Not a constant: a chain runs while the belief it is heading for is still pulling, so what she has most riding on carries her furthest.
+    due(scene): Whether she is going over something right now. Code decides when; the call only writes what.
+    _stress(): Stress is the propensity's other half. Anxiety says how readily she starts on something; this says how little else she has left to hold it off with, and it multiplies both the starting and the extending.
+    _roll(prob): 
+    run(scene, mode, why): 
+    _pay(arrived): What going over it costs her. Through _warm, so the gauge saturates gracefully while the thought carries on getting worse -- those are two different curves and it is right that they come apart. Mood is left to the state 
+    suspend_for_him(): He answered. She feels better and nothing has been settled: the chain is suspended, not resolved, and the same seed can go again tomorrow. That is not a shortcut -- reassurance is what keeps anxiety alive in people, prec
+    fade_old(): It dies of neglect. Most of them do.
+    resume(): A suspended chain can pick up again. It is the same seed; nothing about it was answered.
+    settle(date): The only thing that resolves one. At the compile, the chains that got somewhere are put against what actually happened. This is the route by which a belief she has never once tested can be tested: a chain arrives at it, 
+    prompt_text(): 
+    director_line(): 
+    mood_tag(): 
+    impulse_bonus(): The social term the impulse never had. An afternoon that went badly with them is exactly when a girl like her picks up her phone to him.
+    report(): 
+
+CONFIG SECTIONS: prompt_text, role_system, self_memory.enabled, spiral, spiral.max_kept, spiral.max_per_day, spiral.seed_min, state.gauges
+KV READ: cast_chat, spiral_counts, spiral_last_ts, spirals
+KV WRITE: spiral_counts, spiral_last_ts, spirals
+TABLES: 
+LOG TAGS: spiral
+PROMPTS: spiral_settle
+LLM ROLES: spiral, spiral_settle
+OPS COMMANDS: 

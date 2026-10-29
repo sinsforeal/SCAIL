@@ -1,0 +1,42 @@
+# sim\sentiment.py  (487 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def seed_row(c, rel, now, owned): What one person is to her at the moment the meters are all there is.  Module level rather than inside the seeding loop because a save whose meters were seeded wrong is repaired later, and the row that repair adds for a p
+def note_phone_use(store, ts, kind, keep): She physically picked it up and looked at something. Kept as a plain ring of timestamps because the only question ever asked of it is "was she on her phone while these people were standing there".
+class Sentiments: 
+    __init__(config, store, clock, state, records): 
+    all(): 
+    save(rows): 
+    _seed(): Once, from the meters. Four months of talking to him did not happen for nothing, and starting every sentiment at zero would have her meeting him again on a save with a hundred days of history in it -- the same reasoning 
+    _him_names(): Every key a caller may ask for him under.  `state._him_key()` returns None when her relationship table has no row for him, and every call site then falls back to the literal "him", so refusing only the resolved key would
+    _no_him(name): True when this is a row about him and she has no chat with him.  A character who exists for somebody else's circle has never spoken to him, so there is nothing for this layer to hold about him: the row is not opened by a
+    _blank(): An all-zero row that is handed to a reader and never saved.
+    _name(name): The roster handle these rows are keyed by. A caller holding the Japanese record name must not open a SECOND row for somebody who already has one: an exchange with 前田亜矢 did exactly that, and the empty row sat beside Aya's
+    get(name): 
+    him(): 
+    live(name, kind): Faded to now. Sentiments erode with absence, toward nothing rather than toward a baseline: what somebody is to you goes if nothing keeps happening, which is the difference between a sentiment and a trait.
+    set_level(name, kind, value): By hand (the /set command): the level now, as if it had just been written; fades from here like any other.
+    move(name, kind, amount, why): A thing that happened with a person, put where it accumulates. Small amounts on purpose: a sentiment is a hundred evenings, not one.
+    _attachment(name): How attached she is to somebody.  For the person the primitives own, their figure -- which is attention times what losing him would cost, built out of events. This layer's own row for him was seeded from a closeness mete
+    longing(silent_hours): What attachment feels like at a distance, and the reason this girl needed the layer at all. `loneliness` is a deficit -- it wants contact, any contact, and it drives her at her phone. Longing is about one person and it i
+    susceptibility(name): How much of somebody's mood she catches. You catch the mood of a person who matters to you and not a stranger's, which is what makes this a reader of the sentiment layer rather than a constant.
+    impulse_bonus(): Attachment makes her reach; resentment makes her not. Resentment is the second thing in the whole system that can make her reach out less -- tension was the first and shame the second, and this is the one that lasts for 
+    delay_bonus(): 
+    peers(): The circle, which is not the family. Belonging is about the people who could leave you out -- her own named fear is being excluded at break, not at dinner -- and you belong to a family whether it is going well or not. `r
+    last_circle_contact(): When she was last actually among them. A scene carries a timestamp and who she was with; a message from one of them counts too.
+    belonging(): How held she is by the circle right now, which is the counterweight to him. `longing` is attachment to one person times his absence; this is her standing with the group times how recently they had her, and the two of the
+    phone_debt(date): What being on her phone with him costs her with them.  Rena's own sheet says being caught on her phone stings and Hinako's says she catches the phone habits, and neither of them could ever notice -- `influence` reaches t
+    prompt_text(): 
+    report(): 
+
+CONFIG SECTIONS: sentiment, sentiment.ceiling, sentiment.family_roles
+KV READ: cast_chat, phone_debt_done, phone_use, sentiments
+KV WRITE: phone_debt_done, phone_use, sentiments
+TABLES: 
+LOG TAGS: circle, sentiment
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

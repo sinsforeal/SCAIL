@@ -1,0 +1,60 @@
+# sim\ledger.py  (551 lines)
+
+DOCSTRING:
+One truth about the day, read by everyone who writes it.
+
+The 08-29 compile put her in her mother's coral yukata all afternoon and had
+her tell him "navy with white flowers" at night; walked her home from the
+festival with a Rena the cast had grounded that morning; and settled "attend
+the festival" KEPT, 120 minutes late, on that same phantom. Three writers of
+"what is happening" -- the schedule, the cast's lives, her own claims -- and
+none of them read the others. `settled` and `absent` closed two edges; this
+is the table they were the first two columns of.
+
+Nothing here asks a model. The ledger is composed from what code already
+owns -- the schedule (as corrected by the plan's `absent`), the plan's
+`settled`, what she is wearing (from the block, or a line his `/ledger`
+command pins for the day), what she has bought, the promises still open --
+and rendered as one block that the director, both sides of every exchange,
+her own reply and the compile all receive. The point is not that any one of
+them lacked the facts; it is that each had a different subset.
+
+kv `ledger_wearing` {date, text}: a pinned line for the day, set by hand.
+
+DEFS:
+def _short(activity, chars): A later block's activity, short enough to list a whole day of them.  Cut at a space so a word is never halved. Only ever applied to a block she has not reached: what she DID is the plan's wording in full, and this is a g
+class Ledger: 
+    __init__(config, store, clock, cast, commitments, money, situation, calendar): 
+    plan(date_str): The plan's own facts for the day: `settled` and `absent`.
+    _reads_world(): She is in a world she does not own, and the file has rows.  The day's absences and the day's settled lines are both written by the planner, and a character who does not keep the world runs no planner: her own `cast_beats
+    absent(date_str): [(record name, from_hm, to_hm, why)] for the day.
+    _own_windows(date_str): {record name: [(from, to)]} of what a character in this world has written about herself today. Empty in a world nobody but the owner writes into, so a roster of people who do not run themselves reads exactly as it did.
+    is_absent(who, hm, date_str): Is this person, at this hour of the day, somebody the plan removed?
+    settled(date_str, to_world): The lines the day has settled.  For the character who KEEPS the world, reading them is also what copies them into the world file, so another process in the same world plans against the same day -- which is right on the p
+    spoken(cls, text): The line with the binding written out, for a prompt that is asked for words. The marker is the record's own shorthand and a model given a bracket copies brackets; what a speaker needs is the fact that the thing is really
+    event_mark(date_str, title): The binding as it is written into a line.
+    event_ok(mark): Is this binding still a thing the calendar has: `"<date> <title>"` or the whole `[calendar: ...]` marker. No calendar of her own means nothing to check against and nothing refused.
+    event_for(text, date_str): The calendar entry a line about a public event means, as `"<date> <title>"`, or "". The word list says the line is about one; the calendar says which. Used where a promise binds.
+    outing_unbacked(text, date_str): Why a line that promises a public event is not backed by the calendar, or "".  She went to a festival on 2026-08-29: the calendar had two that day and the scenes put her at the takoyaki stand outside Otsuka station with 
+    promise_unbacked(r): Why a promise row is about something that is not happening, or "". A row bound to a calendar entry is judged on the entry -- an event pulled from the calendar after she agreed to go leaves the promise with nothing to kee
+    _settled_to_world(date_str, line): A line the day has settled, into the world file (`world/shared.py`) the moment it is accepted, so another process in the same world plans against the same day. Once per line per day: `settled` is read on every prompt bui
+    _refused(date_str, line, why): Said once a day per line: `settled` is read on every prompt build.
+    where(when, schedule): The block she is in: (block, with-list) -- names resolved to the record.
+    people_in(blk): 
+    wearing(blk, scene, date_str): A line pinned for the day wins; otherwise what the block implies.
+    pin_wearing(text): 
+    meals(date_str): The day's meals, pinned as they happen: [{hm, meal, text}]. A photo she sent of her lunch, a scene that has her eating a named thing -- one truth for what she ate, so the director, her turns and the compile do not each i
+    pin_meal(meal, text, hm): 
+    meal_line(date_str): 
+    text(scene, when, schedule, for_whom, ja): The ledger as prose lines. `for_whom` 'her' includes her money and promises; 'them' (a friend's turn) leaves those out -- they are not things a friend can see. `ja` is the wording she is addressed in; the block's activit
+    day_text(date_str): The whole day for the compile: every block with who was actually there, the absences, the settled facts.
+    audit(date_str): What contradicts the ledger, for `/absurd`: an absent person still in a block's `with`; a promise KEPT to somebody absent; a `with` name the roster does not know.
+
+CONFIG SECTIONS: situation, situation_block, world
+KV READ: ledger_meals, ledger_wearing
+KV WRITE: ledger_meals, ledger_wearing
+TABLES: 
+LOG TAGS: ledger
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

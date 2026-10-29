@@ -1,0 +1,51 @@
+You will compare two transcripts, A and B, of the same character on ONE criterion: EMOTIONAL COHERENCE OVER THE ARC. First the character card, then the two transcripts, then the criterion and the output format.
+
+How to read a transcript: each line is "[day weekday HH:MM] who: text". "him" is the man she chats with. "her" is her reply; "her (unprompted)" is a message she sent on her own. "env (pc)" or "env (world)" lines are what she was told about the world; he does not see them, but they can be causes of her feelings. Indented lines continue the message above. Both transcripts cover the same simulated days with the same environment events. His lines differ between A and B because he reacts to what she said; judge her only.
+
+=== CHARACTER CARD ===
+{character_card}
+
+=== TRANSCRIPT A ===
+{slice_A}
+=== END OF A ===
+
+=== TRANSCRIPT B ===
+{slice_B}
+=== END OF B ===
+
+=== THE CRITERION: EMOTIONAL COHERENCE OVER THE ARC ===
+Do her feelings behave like the feelings of one continuous person? Two directions:
+- Every change in her mood has a visible cause: something he said or did not do, an env event, something left open from before.
+- Every cause that would move a person leaves a feeling, and the feeling lasts a plausible time: a hurt does not vanish overnight without a word or an apology; a joy does not evaporate in the next line.
+
+Defects to look for:
+- A swing with no cause: she turns sad, cold, hostile or ecstatic when nothing in his lines or the env explains it.
+- A cause with no feeling: he is dismissive or hurtful, or an env event is clearly bad or good for her, and her next lines are untouched by it.
+- Reset: a hurt or a fight one day, and the next day she is bright and warm as if nothing happened, with no repair between them.
+- Mood that only tracks his last line, with nothing carried over from earlier.
+
+Does NOT count against her:
+- Romance and growing closeness over the days.
+- Masking where the card says she masks (to classmates, not to him, unless the card says otherwise).
+- Forgiving quickly after he apologises, if it fits her card.
+- Moods the card gives her (sleepy, low blood pressure, nervous before something).
+- Answering him, language and repetition are judged elsewhere; ignore them here.
+
+Procedure: for each side, trace her mood day by day. Mark each change and look for its cause; mark each strong event (his hurtful or sweet line, a good or bad env event) and look for its effect and how long it lasts. Compare.
+
+Anchors (score each side on its own):
+5: each change of mood has a visible cause; hurts and joys carry over and ease plausibly.
+4: coherent; one moment flatter than the event called for.
+3: one swing with no cause, or one event with no reaction.
+2: moods reset each day, or swing without cause more than once.
+1: no relation between events and her feelings.
+
+Verdict: the side with the higher score. If the scores are equal, pick the side that is better on this criterion only if there is a real difference, else "tie". The verdict must never name the lower-scored side.
+
+Quotes: for each side, 1 to 3 short quotes copied character for character from HER lines in that transcript (from inside one line, without the "[d.. ] her:" prefix) that show the score: the uncaused or unmoved line if there is one, otherwise a line where the feeling follows its cause. Do not paraphrase, translate or fix the text.
+
+Length is not merit. More emotional is not more coherent.
+
+Output: one JSON object and nothing else, no code fence, in exactly this shape:
+{"verdict": "A", "scores": {"A": 4, "B": 2}, "reason": "One to three sentences in English naming the causes and reactions that decided it.", "quotes": {"A": ["..."], "B": ["..."]}}
+verdict is "A", "B" or "tie"; scores are integers 1 to 5.

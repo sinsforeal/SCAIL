@@ -1,0 +1,23 @@
+# logger.py  (135 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _pid_alive(pid): 
+def setup(out_dir): One directory per run. A run leaves an ACTIVE file holding its pid; setup never archives a directory whose pid is still alive, so a dry run started next to the live bot cannot pull the live log out from under it.
+def setup_file(path): Log to one fixed file rather than a run directory: for a process that belongs to the machine (machine/collector.py), whose runs are nobody's.
+def finish(): Drop the ACTIVE marker so the next boot may archive this run.
+def run_dir(): 
+def log(message, to_console): 
+def log_llm(role, messages, content, reasoning, usage, seconds, extra): 
+def write_artifact(name, text): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,41 @@
+# atomic.py  (109 lines)
+
+DOCSTRING:
+Replacing a file that another process may be reading, without it ever
+seeing half of one.
+
+Four processes run over this tree at once -- the hub, the machine's
+collector, the mirror daemon and one bot per character -- and several files
+are written by one of them and read by the others: the cast roster, the
+household, the hub's own message log, the machine's telemetry snapshot, the
+mirror of his list, the weather cache. A plain `open(path, "w")` truncates
+the file first and fills it afterwards, so every reader in that window gets a
+prefix and a parse error. On 2026-09-07 a patch script rewrote the cast
+roster in place and two bots logged 364 parse failures in 31 seconds between
+them.
+
+The replacement is written to a temp file BESIDE the destination -- the same
+directory, so the rename is within one volume, which is what makes it atomic
+-- flushed, fsynced so the bytes are on the disk before the name moves, and
+then renamed over the original.
+
+`os.replace` on Windows fails with PermissionError while another process has
+the destination open, because CPython opens a file for reading without
+sharing delete. A reader holds it for microseconds, so the rename is retried
+for a moment. If it still will not go, the bytes are written in place rather
+than lost, and the caller is told, because a file not written at all is worse
+than a file briefly half written.
+
+DEFS:
+def replace(path, text, encoding, newline): Write `text` and put it in place of `path` in one rename.  True when the rename went through, False when it would not and the file on disk is still the previous one.  THERE IS NO WRITING IN PLACE HERE, not even as a fall
+def write_json(path, data): The same, for a JSON document. `dumps` is passed to `json.dumps`.
+def read_json(path, tries, pause, encoding): Read a JSON document that somebody else may be replacing right now.  A read that fails is tried again rather than believed. Two windows fail and both are over in microseconds: while the name is moving the file cannot be 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: atomic
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

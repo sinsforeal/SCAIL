@@ -1,0 +1,42 @@
+{
+  "_note": "The machine's own settings, shared by every character on purpose: his telemetry, his history, the vendor keys' locations, the hub. Not a person's. `tools/new_character.py compose` merges this under the library's defaults and the character's bundle. A value here that differs between two characters is hers, not the machine's, and belongs in her bundle.",
+  "_secrets": "Pasted in once and never written here: compose keeps whatever the character's existing config already carries for each of these, and leaves a new character's empty with a line saying so.",
+  "secrets": [
+    "api.api_key",
+    "talkapp.token",
+    "sensors.gelbooru_api_key",
+    "sensors.mal_client_id",
+    "telegram.bot_token",
+    "telegram.chat_id",
+    "trains.odpt_key",
+    "trains.odpt_challenge_key"
+  ],
+  "settings": {
+    "sensors": {
+      "chrome_history_path": "",
+      "firefox_history_path": "",
+      "gelbooru_enabled": false,
+      "gelbooru_user_id": "",
+      "mal_username": "",
+      "vault_extensions": [
+        "*.md",
+        "*.txt",
+        "*.srt"
+      ],
+      "vault_ignore_patterns": [
+        ".obsidian",
+        ".stfolder",
+        ".stverisons",
+        ".trash",
+        "4chan weekly",
+        "Accounts",
+        "Aegis",
+        "yukarin-voice-models.md"
+      ],
+      "vault_path": ""
+    },
+    "talkapp": {
+      "enabled": true
+    }
+  }
+}

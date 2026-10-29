@@ -1,0 +1,52 @@
+# sim\discharge.py  (136 lines)
+
+DOCSTRING:
+A gauge at its end is an event, not a level.
+
+His ask (2026-08-26): "gauge limits as events rather than saturating
+levels -- reaching a ceiling or floor discharges into a discrete
+behavioural or cognitive event, then resets lower." Before this a gauge
+at 95 sat at 95: anger stayed 81 for thirteen hours and the only thing it
+did was colour her register. A person at the end of their anger does
+something -- snaps, throws the phone on the bed, cries -- and comes down
+from it, and what they did is on the record.
+
+`state.discharge.rules`: one per gauge, with the level it fires at, what
+it resets to, a cooldown, and the behaviour. Four kinds of behaviour, all
+dispatched by `App.maybe_discharge`:
+
+- `say`: a forced self-started message -- the impulse gate and her resolve
+  do not get a vote, and the intent is given the discharge as the whole
+  hint (anger: it comes out at him sharp and unedited; unsaid: the thing
+  comes out badly worded; loneliness: she reaches with no pretext;
+  craving: she fishes). Needs the phone; otherwise the fallback fires.
+- `look`: a forced look at the app (boredom, jealousy).
+- `spiral`: a chain starts (anxiety). Falls back if one is live.
+- `act`: something in the room -- she cried, she gave up on the day, she
+  went small -- an event of salience 3 that the next director scene must
+  reflect (it rides in as THINGS THAT JUST HAPPENED), with side effects
+  on other gauges and, where it is a release, a stress relief.
+
+Code decides all of it; no model call is made here. The reset is to a
+level, not to rest: what caused it has not gone. `/discharge` lists the
+rules and what fired.
+
+DEFS:
+class Discharge: 
+    __init__(config, store, clock, state, stress): 
+    rules(): 
+    _count(): 
+    check(scene, asleep): Fire every rule whose gauge is at its end and off cooldown; reset the gauge; record it. Returns the rules that fired, for the App to act on.
+    act(r, how): The `act` behaviour (or any rule's fallback): the event, the side effects, the relief. Returns the event text.
+    record(r, did, text): 
+    take(): 
+    report(): 
+
+CONFIG SECTIONS: state.discharge
+KV READ: discharge_counts, discharge_last, discharges
+KV WRITE: discharge_last, discharges
+TABLES: 
+LOG TAGS: discharge
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

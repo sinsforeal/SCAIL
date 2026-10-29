@@ -1,0 +1,36 @@
+# tomoe\cast_arcs.py  (481 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _slug(name, taken): A handle for somebody the cast just invented. The machinery keys on role_id, so that is what a handle should be; the name is lore and may be entirely Japanese, which this used to reduce to "person" for everybody.
+def weekly_due(store, last_key, c, date_str, nothing_yet): The weekly gate the arcs and the showrunner share: on `c.weekday`, at most once a day, not inside `c.min_days_between` of the last run -- and straight away when there is nothing yet and a day on record.
+class CastArcs: 
+    __init__(config, llm, store, clock, state, records, calendar): 
+    _data(): 
+    _people(): 
+    due(date_str): 
+    _active_people(): Live cast minus him and anyone dormant.
+    _focus(): Who carries an active arc this week: highest attention x volatility + tension first (whose lives move, and where there is friction).
+    run(date_str): 
+    evolve_due(date_str): 
+    evolve(date_str): 
+    day_nudge(who, date_str): Something is going on in this person's own life today: they are more present (higher attention), read off their arc beats near date_str. Returns an attention bump for the daily draw, 0 if quiet.
+    beat_for(who, date_str, days): The beat of this person's own storyline that falls on or just after `date_str`, in words, or "".  `day_nudge` answers the same question as a number for the daily draw; this is the sentence, for the handful of concrete th
+    context_for_beats(date_str): 
+    brief(): 
+class Showrunner: 
+    __init__(config, llm, store, clock, calendar, state, records, receipts, cast): 
+    due(date_str): 
+    _drift_line(): 
+    run(date_str): 
+
+CONFIG SECTIONS: cast.him_share_warn, cast.seed, cast_arcs, cast_arcs.arc_active_attention_bump, cast_arcs.roles_focus, prompt_text, showrunner
+KV READ: cast_arcs, cast_evolve_last_date
+KV WRITE: cast_arcs, cast_arcs_last_date, cast_evolve_last_date, showrunner_last_date
+TABLES: 
+LOG TAGS: cast_arc, cast_evolve, showrunner
+PROMPTS: cast_arc, cast_evolve, showrunner
+LLM ROLES: cast_arc, cast_evolve, showrunner
+OPS COMMANDS: 

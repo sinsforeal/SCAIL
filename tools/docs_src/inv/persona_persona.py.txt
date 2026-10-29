@@ -1,0 +1,75 @@
+# persona\persona.py  (2382 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _when(dt, ja): A day and a time she can read at a glance. `%A` is an English weekday and the clock line is the first thing in her situation block.
+def _clip(text, n): Whole words, at most n chars, an ellipsis when cut.
+def _grab(obj, method): A subsystem's line for the block, or nothing: the subsystem may be absent for this character, and a subsystem that raises costs her a line, never the reply.
+def _gap_text(hours, ja): A stretch of time the way a person says it, never a decimal.
+def _mostly_japanese(text): More of the letters are kana or kanji than Latin: the answer is in the other room's language.
+def _run(a, b): The longest run the two sequences share.
+def _copied(hers, theirs): The longest run her text shares with the line that was put in front of her -- the measure of an instruction speaking through her.  Two scripts, two units. For English it is consecutive words of three letters or more, low
+def closing_instruction(config, spillish, tell_length, embodied, writes_ja): The last thing she reads before she writes: what language this chat is in, what makes two bubbles, and the four standing rules.  A function rather than lines inside `_situation` because a bench has to be able to build it
+def _runs(text, mask): The stretches of a message left once the furniture is taken out.
+class Persona: 
+    __init__(config, llm, store, clock, state, mal, receipts, notes, records, social, diary, body, diet, money, memory, reflection, outlook): 
+    t(): 
+    _world_rows(): The world file when it is somebody else's to write, else None.
+    _world_limit(): 
+    _world_orbit(): 
+    _world_gossip(): 
+    ja(): 
+    _system(cue_text): 
+    system_for(channel, cue_text): ONE assembly for every call that writes her words. `him` is the whole of it with `style.md` last; `friend` is the same person, byte for byte, without `style.md` (how she writes to HIM) -- the caller adds its own tail. Tw
+    frame_line(his): The line in her final turn that says what follows it is his.  The third public piece of her request, beside `system_for` and `carried_for`: the system half, what she carries, and the one line that separates it from his n
+    judge_situation(situation, scene, digest): Her situation block alone, headed, for a role that judges her.  The second reader of everything she carries was handed her whole assembly and the carrying block with it; it gets this and nothing else (his call). `situati
+    judge_view(scene, digest): What she has in front of her this minute, for a role that JUDGES her.  A judge -- the warmth reader, the urge picker, the reply predictor, the account sorter -- is a neutral party and gets no character sheet (`Config.ROL
+    _judge_build(scene, digest): 
+    carried_for(): The `<carrying>` block: the CARRIED sections of the last `_system` build, in order, framed in her language. The same block in both rooms -- one person. Call after `system_for`/`_system`, and after `memory.fit` when the c
+    _assemble(s): The system half in the one order (`persona/sections.py`), which the context view reads back in as well.
+    _own_people_as_yours(text): Her own household in the block of her friends' people, addressed to her. A character promoted out of a roster is on the roster she reads, so the world's orbit hands her her own sister as「香芝玲奈's little sister」: the posses
+    _facts_head(): The heading over what she knows of him, in the program's words for how she knows it -- or "" for a character with no contact with him (`with_him: none`), which drops the section rather than carrying an empty one addresse
+    _thread_cue(): What the thread is asked with: the messages of his she has not answered yet. One owner, because the situation block asks the thread what this same cue brings back before it pins a line about the past (`_phone`), and two 
+    _history(): One thread, both rooms (sim/thread.py). There is no other history: a thread that fails is a missed reply, never a thinner one.
+    _directed(): A feeling of hers that is aimed at somebody other than him, said so: he may get the edge of it, he is not its cause.
+    _primitives_line(): What he is to her, as things stand, for the situation block.  Silent when nothing has happened -- a row of zeros read as a description of a feeling is the thing `sim/primitives.py` exists to stop, and an empty string her
+    _primitives_gates(): What is not available to her with him, as conditions rather than numbers.  The line above is a description of a feeling and a model does what it likes with a description. These are the same gates the code enforces -- the
+    _situation(scene, digest, unread, impulse_reason, just_read, looked_up, recalled, shape): The now, in order of weight: who she is being right now (feelings, stance, what is aimed where), then him (the silence, the receipts, his rhythm), then her day (body, scene, events, plans, money), then what is on her pho
+    _moment(scene, digest, unread, impulse_reason, just_read, looked_up, recalled, shape): What every part of the block reads: the call's arguments, her clock, the day's events and yesterday, the silence measured up to the message she is reading now, and today's plan.
+    _her(m): Her, right now: the clocks, how she feels, how she is answering, what is aimed where, and the draft she cut.
+    _him(m): Him: what he is to her, the silence, the receipts, the gap he just ended, his rhythm and mood, and what she expects, foresees and wonders. A read of him older than the silence is not "now": the rhythm notice and his mood
+    _day(m): Her day: her body, the household, the scene as background, what is around her, hazards, today's events, goals, promises, the ledger, how she travels, money, the day's shape, yesterday, the morning and the anticipation, a
+    _phone(m): What she sees of him and what she has looked up: the digest and one thing off his screen, his list when anime is in the air, her account, a note read, a recall, the lookups, the things she knows by name, and the episode 
+    _digest_is_news(m): Whether what she is holding about his machine was built since she last wrote to him.  Pinned, it was the one line in her prompt that could not be dropped, and she had the same picture in front of her on the fourth reply 
+    _own_phrases(): The phrases she has been reaching for lately, out of her own recent messages. Code counts them and no model reads anything: character n-grams that turn up in at least `own_phrases_min` of her last `own_phrases_from` mess
+    _this(m): This message: what she is answering or why she is writing, the shape's engagement line, the closing instruction and the length, which is the last thing she reads.
+    _admit(m, her, him, day, phone, this): The attention gate over the four parts and the lore: what is kept, and the one line that holds the slot `_draft` fills. Without the gate, everything, in order. Sets `_gate_slot_line`, `_gate_pick`, `_cand_lines`, `_actio
+    generate(scene, digest, unread, impulse_reason, just_read, looked_up, recalled, intent_kind): Returns (bubbles, voice_line). voice_line is '' when she said nothing aloud. A continuity editor (separate model, prompts/editor.txt) reads the draft against what she demonstrably knows; on a real contradiction she gets 
+    _his_heavy(): Is his last message heavy -- sad, angry, hurt -- by the state model's reading of it (`his_mood`: valence -2..2), and fresh? Code's timing for the slot: the nag straight after he told her something bad is the case the sec
+    _draft(situation, slot_override): `slot_override` is the compare draft: the same prompt with this text in the slot instead of the nudge's, nothing decided or charged.
+    _knowledge(digest, just_read, bubbles, situation): What she demonstrably knows right now, for the editor. Compact.
+    _seen_of_him(digest, just_read): What she has actually been SHOWN of him, as one text: his list as she reads it, the notes of his she has read, what she has been shown of his machine, the note she just opened.  The second witness for a verdict that says
+    _rests_on_his_list(verdict, bubbles, digest, just_read): True when this failing verdict rests on his list holding a title and his list does not hold it, in which case it is dropped.  The fault: at 07:40 on 2026-09-06 her draft said "the smoking cat one. it's from a short anime
+    _editor_needed(bubbles): Is there anything in this draft for the continuity editor to check? Its job is a contradiction with what she demonstrably knows and a repeat of something she has already said. A draft with no number, no word from a fact 
+    _repeats_recent(text, n, run): Where this draft says again what she has just said, or "".  A run of `run` characters shared with one of her last `n` own messages, and the time she said it. No call, no model: this is the test the continuity check's gat
+    _edit(bubbles, situation, digest, just_read): 
+    recent_aloud(n): The last things she actually said out loud, newest last.
+    voice_for(bubbles, scene): A spoken line for a reply that came without one. Short model call, no thinking.
+    _extract_voice(text): 
+    _clean(text): 
+    _split(text): 
+    _drop_already_sent(parts): A bubble that is a message she has already sent him.  `drop_repeats` above only sees a RUN inside this burst, and the one that reached him twice was two hours and five messages old: he had answered it, she had answered h
+    _take_sticker(parts): Pull her sticker out of the text. It is not a bubble -- it goes as a picture after the words -- so it is recorded and `App` sends it.
+    _take_search(parts): Pull her search request out of the text and keep it for `generate`, which runs it and writes the reply again.
+    _resolve_shares(parts): [share: ID] on its own line (or at the end of a bubble) becomes the post's URL as its own bubble. The URL and nothing else: that she sent it is recorded when the bubble leaves (the delivery asks the account, which record
+
+CONFIG SECTIONS: anime_sense.situation_line, attention, attention.enabled, beliefs.enabled, character, character.existence, character.name, character.style_prompt, delivery, delivery.editor_enabled, delivery.gap_marker_hours, delivery.split_on_blank_lines, goals.enabled, ick.enabled, lookup, lore, memory.enabled, model, money.enabled, nudge.compare, prompt_text, read_text, role_check, rupture.enabled, self_memory.enabled, sensor_view, sentiment.enabled, shape, situation.enabled, situation_block, social.enabled, spiral.enabled, tts, tts.max_chars, weekly.enabled, weekly.in_prompt, world_shared
+KV READ: backstory, flags, his_mood, lookups, nudge_ab, persona_live_shown, self_claims, unsent_draft, weekly_self
+KV WRITE: flags, nudge_ab, pending_sticker, persona_live_shown
+TABLES: 
+LOG TAGS: attention, digest, editor, glance, household, judge, known, lookup, lore, nudge, own phrases, persona, recall, repeat, roles, search, stance, voice, watching
+PROMPTS: editor, persona, voice
+LLM ROLES: editor, persona, voice
+OPS COMMANDS: 

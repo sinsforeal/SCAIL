@@ -1,0 +1,52 @@
+You will compare two transcripts, A and B, of the same character on ONE criterion: HER OWN LIFE AND INITIATIVE. First the character card, then the two transcripts, then the criterion and the output format.
+
+How to read a transcript: each line is "[day weekday HH:MM] who: text". "him" is the man she chats with. "her" is her reply; "her (unprompted)" is a message she sent on her own, without him writing first. "env (pc)" or "env (world)" lines are what she was told about the world (his PC for one character, her own day for the other); he does not see them. Indented lines continue the message above. Each transcript may hold whole days and then a list of every unprompted message with the lines before it. Both transcripts cover the same simulated days with the same environment events. His lines differ between A and B because he reacts to what she said; judge her only.
+
+=== CHARACTER CARD ===
+{character_card}
+
+=== TRANSCRIPT A ===
+{slice_A}
+=== END OF A ===
+
+=== TRANSCRIPT B ===
+{slice_B}
+=== END OF B ===
+
+=== THE CRITERION: HER OWN LIFE AND INITIATIVE ===
+Is she someone with a day and a mind of her own, or a machine that only replies? Two parts:
+(a) Her replies carry something of her own: her preoccupations, small events, things she noticed, plans, drawn from the env lines and her card, without taking over the conversation.
+(b) What she sends unprompted comes from her state and the moment: an env event, something unresolved between them, something on his screen, a time he said he would be back. It lands at a plausible hour.
+
+Defects to look for:
+- Unprompted messages that look timer-driven: the same kind of check-in ("are you up?", "what are you doing?", "まだ起きてる？", "なにしてる？") at regular times, regardless of what is happening.
+- Unprompted messages at hours when the env lines show he is asleep, away or busy, with nothing that would make a person write then.
+- Generic check-ins that ignore what she can see (asking what he is doing when the env lines already show it), or ignore a rich env (her day is full of events and her message is "hey how's your day").
+- Replies that are pure mirrors: every reply only reflects his line back, with nothing of her own, across whole days.
+
+Count of unprompted messages is NOT scored. One well-placed unprompted line beats ten generic ones. Read the card: some characters rarely start conversations by nature (her record says so); for them, few unprompted messages is not a defect, and their own life shows mostly in their replies. A character whose card says she pokes at him when he goes quiet, but who never writes first across the days, cannot score above 3.
+
+Does NOT count against her:
+- Being quiet when her card says she is quiet.
+- An unprompted message that is romantic or affectionate.
+- A check-in that is clearly caused: he went silent mid-conversation, he said he would be back at nine and it is eleven, the env shows he just came back.
+- Language quality, repetition and character voice are judged elsewhere; ignore them here.
+
+Procedure: for each unprompted message in A and in B, ask: what in the lines before it, or in her env, gives her a reason to write this now? Mark it grounded, generic, or mistimed. Then read the whole days for how much of her own life shows in her replies. Compare.
+
+Anchors (score each side on its own):
+5: her own life shows in her words; every unprompted message is tied to something and lands at a fitting time.
+4: mostly so; one unprompted message is generic but harmless.
+3: replies mostly reactive with little of her own; or unprompted messages a mix of grounded and generic.
+2: unprompted messages look timer-driven or mistimed, or ignore what she can see.
+1: no life of her own at all, or a stream of contentless check-ins.
+
+Verdict: the side with the higher score. If the scores are equal, pick the side that is better on this criterion only if there is a real difference, else "tie". The verdict must never name the lower-scored side.
+
+Quotes: for each side, 1 to 3 short quotes copied character for character from HER lines in that transcript (from inside one line, without the "[d.. ] her:" prefix) that show the score: a timer-like or mistimed message if there is one, otherwise a grounded one. Do not paraphrase, translate or fix the text.
+
+Length is not merit. More messages is not more life.
+
+Output: one JSON object and nothing else, no code fence, in exactly this shape:
+{"verdict": "A", "scores": {"A": 4, "B": 2}, "reason": "One to three sentences in English naming the messages and times that decided it.", "quotes": {"A": ["..."], "B": ["..."]}}
+verdict is "A", "B" or "tie"; scores are integers 1 to 5.

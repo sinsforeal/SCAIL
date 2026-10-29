@@ -1,0 +1,105 @@
+# machine\dossier.py  (1332 lines)
+
+DOCSTRING:
+One file per play, joining everything the machine already knows about it.
+
+Every piece of this was already on disk and nothing joined them. The media
+player writes a line when a file is opened and another when it ends; the
+MyAnimeList mirror holds the list, the dated episode watches, the cast and the
+declared favourites; the machine's retrieval store holds the episode index in
+three scripts, the page a judge chose for that episode, the digest made from
+it and the ordered scenes. Answering "what did he just watch, and what is his
+history with it" meant opening four stores by hand. This writes it out once
+per play instead.
+
+**It is the machine's and runs once.** Three character processes tail the same
+media-player history, so a dossier built inside a character's loop would be
+built three times, in three saves, by three programs. It is built by the
+MyAnimeList mirror daemon (`tools/mal_history.py daemon`), which is the one
+process per machine, and an already-built play is skipped on its open time,
+so a restart mid-day rebuilds nothing.
+
+**It is built after the play ENDS.** How far he got and how long he was
+actually in it are only known then, and a file opened and closed inside ten
+minutes is not a play at all: it gets a line in the rolling file and no
+dossier. The numbers come from the end-of-play record the player writes,
+read through `machine/plays.py`, which is the only definition of that format.
+Where the player has recorded no end, the estimate is the gap to the next file
+opened -- the same rule the character-side watcher falls back on -- and the
+dossier says which of the two it was, because a number nobody can tell the
+provenance of is worse than no number.
+
+**Nothing here writes the list mirror.** The daemon owns that file and holds
+it open; the two page reads this module makes -- an actor's filmography and a
+missing premiere date -- are cached in its own store beside the build markers
+(`data/dossiers.db`), so the command-line door can be used while the daemon is
+running without two processes writing one database.
+
+Manual door, which is also how it is tested:
+
+    python -m machine.dossier --last            # the newest finished play
+    python -m machine.dossier --last 3          # the newest three
+    python -m machine.dossier --epoch 1788834607
+    python -m machine.dossier --path "...\Show - S01E03.mkv"
+    python -m machine.dossier --list            # what has been built
+
+spec: docs/dossiers.md
+
+DEFS:
+def settings(): What this module runs on: the defaults in `config.py`, with whatever a config FILE on disk says over the top.  The daemon that calls this has no character and must not build one -- a Config would print a character's name
+def _abs(path): 
+def opens(history_path, limit): [(epoch, path)] for every file the player has opened, oldest first.  Ordinary string work on a local file, so it is safe to read whole: the log is a quarter of a megabyte after three years.
+def plays(plays_path): Every play the player has FINISHED, oldest first, or [] when it has recorded none. `machine/plays.py` is the reader and the format's only definition; this module never parses that log itself.
+def play_for(open_epoch, cfg): What is known about one play: the record the player wrote when it ended, or an estimate built from the next file it opened.  `source` says which, and every line that quotes a duration says it too -- a number nobody can t
+def _ro(path): 
+def _jl(s): 
+def _stamp(ts, fmt): 
+def _hms(seconds): 
+def _premiere_order(premiere): (year, season) for sorting a franchise by when each entry came out.  A broadcast season is written `fall 2007`, which sorts alphabetically into a nonsense order -- autumn before spring before winter, every year mixed tog
+def _slug(text): 
+class Store: What has been built, and the two pages this module is allowed to read.
+    __init__(path): 
+    close(): 
+    horizon(candidates, last_n): The oldest play a SWEEP will look at, fixed the first time one runs.  Without it, the first pass on a machine meets every file the player has ever opened -- three years of them -- and writes a dossier for each. A cold st
+    is_built(open_epoch): 
+    mark(open_epoch): Written the moment the file exists, never held until the end of a run: a stop is `Stop-Process -Force`.
+    recent(n): 
+    person(pid, ttl_days): 
+    put_person(pid, d): 
+    extra(aid, ttl_days): 
+    put_extra(aid, d): 
+def fetch_person(pid, store, cfg, log): One actor's page from MyAnimeList's own origin, into this module's own store. The mirror holds a filmography for thirteen people; every other credited actor answers "what else has she done" out of his own list alone, whi
+def fetch_anime_extra(aid, store, cfg, log): A work's premiere date, studio and episode count from the list site's own interface, into this module's own store. What it is for: an entry he has marked plan-to-watch has no dates on his list at all, so a sequel everybo
+def episode_material(aid, ep, media_type, cfg): The episode index in three scripts, the page a judge chose, the digest made from it, the ordered scenes, how far the row was trusted and which sources agreed. All of it out of the machine's retrieval store (`machine/retr
+class Builder: 
+    __init__(cfg, log): 
+    close(): 
+    kb(): The title resolver the character-side watcher uses, so a filename resolves to the same work here as it does there. No client id, so it can reach nothing.
+    resolve(path): (anime_id, title, ep, how) for a played file, or (0, '', 0, why).  The same two readings the character-side watcher makes and in the same order: a numbered episode of a television run, then a special named by its folder 
+    anime_row(aid): 
+    completed(row): Was the show already finished on your list before this play.  NOT the list site's rewatching flag, which is only ever true when he has gone to the site and marked it so, and which this mirror does not carry a column for 
+    favourite_rank(kind, item_id): Where this sits in your declared favourites on the list site, or 0. Your own hand, and the strongest signal on the whole mirror.
+    episode_watches(aid): 
+    overall_mean(): 
+    _norm(t): 
+    siblings(aid, title): The other entries of the same franchise on your list.  The mirror holds no relation rows, so the grouping is by title stem: the SHORTEST title on your list that the played title starts with is the franchise's own name, a
+    fill_premieres(sibs): Look up the works in the franchise your list has no date for, newest first and capped. What this is for: a sequel you have marked plan-to-watch carries no dates on a list at all.
+    cast(aid): One row per credited actor: what they play here, where they sit in your declared favourites, every other show of theirs on your list with your score, and the mean of those scores against your overall.
+    person_credits(pid): The actor's whole filmography where somebody has mirrored it: (where it came from, [credits]). ('', []) is "nobody has looked", which is a different answer from "she has done nothing else" and the page says so.
+    fill_actors(cast): Read the pages of the leads whose filmography nobody has mirrored, capped and spaced out. Main roles first, because those are the actors a question about the episode is going to be about.
+    around(at, path): What else the player was opened on either side of this play, and every earlier play of the same FOLDER, which is what says whether a run is under way and whether this file has been through before.
+    build(open_epoch, force): One play, joined and written. Returns the path written, or ''.  A play under the floor is not a play: it is marked as a skim so the rolling file can say it happened and no dossier is written for it.
+    render(at, play, path, aid, title, ep, how): 
+    describe(path): One played file in a line: the work it resolves to, or the filename when it resolves to nothing -- the same folder holds music, recordings and files called `input.webm`.
+    write_rolling(): The last N plays in one file, rebuilt whole every time so it never drifts from the store it is written out of. A skim is a line here and has no dossier of its own.
+def sweep(cfg, log, limit): Every finished play the store has no row for, oldest first and a few per call.  This is what the mirror daemon calls once a cycle. A play still open is left alone: how far he got is only known when it ends, and the floor
+def main(argv): 
+
+CONFIG SECTIONS: json, py
+KV READ: 
+KV WRITE: 
+TABLES: anime_extra, built, meta, person_page
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

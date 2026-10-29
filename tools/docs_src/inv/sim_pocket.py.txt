@@ -1,0 +1,52 @@
+# sim\pocket.py  (211 lines)
+
+DOCSTRING:
+What somebody has to bring up today, and whether they brought it up.
+
+A group chat asked for "not arrangements" and given nothing else to be about
+becomes a loop. Measured in the world's own record on 2026-09-07: every one
+of six people's one carried thought was about the character whose world it
+is, four of them the identical sentence three days running, and half of what
+was going round was known to one person or to nobody, so the filter that
+shows a speaker only what she has heard showed most of them nothing. The
+prompt told each of them a group chat is mostly made of concrete things and
+then handed them the day's plan and each other.
+
+A pocket is the missing input: three or four concrete things ONE person
+could bring up today, assembled from what already exists about her -- the
+day's own record of her, what is going round that she has heard, the week's
+news, the beat of whatever is running in her life, and what she is into --
+each shown to at most one call and then marked, so nobody produces the same
+offering twice and the operator can see which of them never reached a word.
+
+Nobody is named here and nothing is invented here. Each program fills the
+pockets of the people it writes: the character who keeps a world fills the
+world's (`tomoe/cast.py`, at the compile, for the day about to start), and a
+character who runs herself fills her OWN from her own material and never
+from somebody else's roster (`sim/peers.py`) -- inventing for people who are
+not hers is the fault the partition exists to stop.
+
+kv `cast_pockets`: {date: {person: {"items": [{id, what, source}],
+"used": [id]}}}.
+
+DEFS:
+class Pocket: One store, read and written by whoever owns the people in it.
+    __init__(config, store, clock): 
+    _all(): 
+    _save(rec): 
+    row(date, who): 
+    put(date, who, items): Today's things for one person, replacing whatever was there.  An item is `{"what": ..., "source": ...}`; the id is this pocket's own and is what `used` records, so two items with the same words are still two items.
+    unused(date, who, limit): 
+    mark(date, who, ids): These were put in front of somebody who then wrote words. Recorded after the call, never before it: a thing offered to a call that came back with nothing was not offered at all.
+    block(date, who, limit, ja): (the lines to put in the call, the ids they were).  The caller marks the ids once the call has come back with words. Empty when this person has nothing today, which is a real answer: a day with nothing concrete in it is 
+    report(stale_days): What was offered, what was said, and what nobody ever brought up.  The last is the point: an item offered for two days and never said is either a thing nobody would say or a thing the calls never reached, and both are wo
+def own_items(store, t, limit): A pocket for the character whose process this is, from HER material.  Her scene, her own people's chats, what she is watching, the day's own record -- everything already in her save, no call and no roster but her own. A 
+
+CONFIG SECTIONS: 
+KV READ: cast_chat, cast_pockets, director_current, watchlist
+KV WRITE: cast_pockets
+TABLES: 
+LOG TAGS: pocket
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

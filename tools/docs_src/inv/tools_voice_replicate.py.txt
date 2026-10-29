@@ -1,0 +1,165 @@
+# tools\voice_replicate.py  (1508 lines)
+
+DOCSTRING:
+Is the extracted voice real information about her, or a fit to its own episodes?
+
+Everything else in this project measures the OUTPUT: does the character the
+pipeline produced sound like the tape. That is worth knowing and it does not
+test the method. A description can match its own source perfectly and carry no
+information -- the way a curve through every point predicts nothing.
+
+So: hold episodes back, and test the description against them. Six tests, no
+model calls, no network, entirely local. Nothing here is written; it reads
+`yukarin/corpus/`, `yukarin/sheet/`, `yukarin/persona/`, `yukarin/audit/` and
+`yukarin/providers.db` (read-only URI) and writes one document.
+
+    python tools/voice_replicate.py
+    python tools/voice_replicate.py --fit 70 --window 60 --trials 200
+    python tools/voice_replicate.py --out docs/yukarin-replication.md
+
+---------------------------------------------------------------------------
+THE DESIGN, AND WHERE IT DIFFERS FROM THE OBVIOUS ONE
+---------------------------------------------------------------------------
+
+**What can and cannot be held out.** Re-running the extraction on a subset of
+episodes would cost hundreds of model calls, so the sheet on disk is a fixed
+input here and it was built from all 99 episodes. What is held out is the
+MEASUREMENT and the WEIGHTS: every rate, every weight and every prevalence in
+this file is estimated on the fit episodes alone and tested on episodes the
+estimator never saw. That tests whether the description's content transfers.
+It does not test the extraction's sampling variance, which only re-running
+would. Both facts are stated in the output.
+
+**The description under test is code, not a list typed here.** Three batteries,
+each one an artefact that existed before this tool:
+
+  * the 35 regex markers in `yukarin/tools/fingerprint.py` -- the pipeline's
+    own mechanical description of her surface, imported from that file so it
+    cannot drift from it;
+  * the countable claims in `yukarin/audit/countable.json` that occur often
+    enough to be measurable -- his hand-written character card, not the
+    pipeline's output, so an independent description of the same woman;
+  * `signature_hers_against_the_room` in `yukarin/sheet/bounds.json` -- 24
+    markers the project already selected as hers by contrast with the room.
+    That selection used all 99 episodes, so it LEAKS the held-out set. It is
+    run anyway, labelled, because the gap between it and the honest batteries
+    is a measurement of what the leak is worth.
+
+Six of the 35 fingerprint markers were written from a close reading of ep095,
+which the chronological split holds out. The battery is therefore also scored
+with those six removed, and that variant is the leak-free headline.
+
+**The unit is a fixed-width window, not a cue and not a span.** Her spans
+average 134 characters and the other voices' average 54, so at span level a
+classifier that only reads length would look like a voice detector. Chopping
+every attribution span into windows of exactly `--window` characters removes
+that confound by construction: every unit is the same size, so length carries
+no information at all and the score cannot borrow any.
+
+**The negative class is separated by kind.** The attribution labels are
+`her | mail | read | song | other`. Only `other` is other people talking;
+`mail` is a listener's letter and `read` is copy, both voiced by her but
+written by somebody else. Telling her apart from a letter is a much easier
+problem than telling her apart from the staff, so lumping them would inflate
+the result. `other` is the headline; the rest are reported separately.
+
+**The controls decide whether any of it means anything.** Three, all scored
+through identical machinery on the identical held-out windows:
+
+  * frequency- and length-matched random markers -- for each real marker, a
+    character n-gram of the same length and comparable corpus frequency drawn
+    at random. Unmatched random n-grams would be a straw man, because rare
+    forms and common forms do not carry comparable evidence;
+  * the most frequent n-grams in the corpus, chosen with no reference to who
+    says them -- asks whether "any common form plus fitted weights" is enough;
+  * markers selected on the FIT episodes by her-versus-room log-odds, a
+    procedure that needs no extraction, no model and no reading -- asks
+    whether the extraction beats five lines of arithmetic. This is the control
+    most likely to embarrass the project, which is why it is here, and it is
+    built competently rather than as a straw man.
+
+Both of the last two beat the extraction. So the test that decides the thing
+is the nested one: add the extraction's markers ON TOP of each baseline and
+ask whether the AUC moves, with a bootstrap over held-out episodes paired
+across the two batteries. That is the only form of the question that
+distinguishes "the description is worse than counting" from "the description
+contains nothing counting does not already have", and they are different
+claims with different consequences for the project.
+
+**Two traps this tool refuses to walk into.**
+
+  1. A marker whose expected count in a sample is under `--min-expected`
+     (3) is not tested at all. "Expected 0.14, observed 0, DRIFT" is a lie
+     with arithmetic in front of it; `tools/voice_verify.py` exists because
+     that mistake was made once already.
+  2. A Poisson interval assumes occurrences are independent. They are not:
+     one circle-drawing bit put 45 `にゃん` into a single episode, and topic
+     clusters every marker in this corpus by episode. A Poisson test on
+     pooled counts therefore rejects almost everything and calls ordinary
+     burstiness drift. Each marker is tested BOTH ways -- the naive Poisson
+     interval the project's verifier uses, and a bootstrap over whole fit
+     episodes that carries the between-episode variance with it. The gap
+     between the two counts is itself a finding about `voice_verify.py`.
+     Every flagged marker is also reported with the share of its held-out
+     occurrences carried by the single busiest episode, because a marker
+     whose whole movement is one broadcast is a bit that ran that night.
+
+**A trap this tool hit while being written.** `babytalk` looked like a 346%
+rise until the concentration column showed 83% of its held-out occurrences in
+one episode. Two more of the five flagged markers were written from a close
+reading of ep095, which the chronological split holds out -- a form gets
+noticed because it was salient in the episode being read, so a marker picked
+there is of course commoner there. Selection on the test set arrives disguised
+as drift, and neither of those would have been visible without the extra
+column and the leak-free battery.
+
+**And a third, which is the reason `orthography_check` exists.** The one drift
+left after those two -- the thinking-aloud joints falling by a third -- is
+partly the recogniser. Split that family by spelling and the vowel-lengthened
+forms fall while the short one rises, and the long-vowel mark itself is 13%
+rarer in the late block. `fingerprint.py` already treats vowel length in a
+filler as whisper's guess and counts the family rather than the spelling; the
+same argument applies to any chronological comparison over this corpus, which
+tests the description against a moving target and a moving instrument at once.
+
+DEFS:
+def ep_key(ep): 021_5 is an omake half-episode and sorts between 21 and 22.
+def load_corpus(): One record per episode: its date and its attribution spans as text.  A span is a contiguous run of cues with one speaker label. Cue text is joined without a separator, matching the way the fingerprint battery and the cou
+def label_text(episode, label): 
+def windows(episodes, width, interior_only): (episode, label, text) for every full `width`-character window.  Windows never cross a span, so every one has a single speaker label, and every one is exactly `width` characters, so length carries no information. The rem
+def fingerprint_battery(): The 35 regexes in `yukarin/tools/fingerprint.py`, imported from it.
+def countable_battery(min_total): His character card's countable claims, at volumes worth measuring.  Most of the 74 markers in that file measured zero or once over 99 episodes. A marker seen once cannot separate anything and including it would only pad 
+def signature_battery(): bounds.json's 24 'hers alone against the room' markers.  Selected on all 99 episodes, so it leaks the held-out set by construction. Kept to measure what the leak is worth.
+def compile_battery(battery): 
+def count_vec(text, compiled): 
+def rate_vec(texts, compiled): Occurrences per 100,000 characters over a body of text, and its size.
+def weights_from(fit_pos, fit_neg, compiled, alpha): log of her rate over the other side's rate, per marker.  Smoothed by `alpha` per 100k so a zero on either side stays finite. A marker she uses twice as often contributes half as much as one she uses four times as often, 
+def score_windows(win, compiled, w): Every window is the same width, so the raw dot product is already a rate and needs no length normalisation.
+def auc(scored, pos_label, neg_label): Probability that a random window of hers outscores a random window of the other side's, ties counted half. 0.5 is a coin.
+def auc_ci(scored, pos_label, neg_label, rnd, boots): Bootstrap over held-out EPISODES, not over windows.  Windows inside one episode share a topic and a recording, so resampling windows would pretend to more independent evidence than exists.
+def ngram_index(texts, lengths, min_count): Counter of character n-grams over the pooled window text, by length.
+def marker_shapes(battery, pooled_text): For each real marker, the length and corpus frequency of what it actually matches -- the two properties a fair random control must copy.
+def matched_random_set(shapes, idx, rnd, real_forms): One random n-gram per real marker, same length, frequency within a factor of two, widening the band only if that band is empty.
+def top_frequency_set(shapes, idx, real_forms): The most frequent n-grams of each needed length, chosen with no reference to who says them.
+def fit_selected_set(fit_pos, fit_neg, idx, size, min_count): Markers chosen on the fit episodes alone by her-versus-room log-odds.  No model, no reading, no extraction -- the arithmetic an afternoon would produce. Whatever this scores is the bar the pipeline has to clear, so it is
+def auc_diff_ci(sc_a, sc_b, pos_label, neg_label, rnd, boots): Bootstrap CI for the DIFFERENCE between two batteries' AUC, resampling the same held-out episodes for both so the comparison is paired.
+def poisson_interval(lam): Normal approximation, 95%. Only ever called with lam >= 3.
+def bootstrap_interval(per_ep, test_chars, rnd, boots): Predictive interval for the held-out count, resampling whole fit episodes so between-episode burstiness is inside the interval.
+def stability(fit_eps, test_eps, battery, rnd, min_expected): 
+def orthography_check(fit_eps, test_eps): How much of an apparent drift is the recogniser's spelling rather than hers.  The corpus is whisper's transcript. `fingerprint.py` already says the vowel length in a filler is the recogniser's guess as much as the speake
+def mechanism_prevalence(fit_set, test_set, min_expected): Does a mechanism appear in held-out episodes at the rate the fit episodes give?  The clustering saw all 99 episodes, so this is not a clean holdout of the extraction: it asks whether a mechanism's prevalence is a stable 
+def fact_recurrence(fit_set, test_set, episodes): Do the fact records describe recurring properties or one-off content?  Each record's claims cite the cues they were located in. A record whose evidence sits only in the fit block and never recurs is episode content; one 
+def cited_cues(path): The cue indices a run pointed at as mechanism evidence.  This is the one thing comparable across runs. Mechanism NAMES are free text a model invents, so they cannot be matched mechanically; the cue index survives `extrac
+def jaccard(a, b): 
+def provider_agreement(rnd): Between-run agreement of the extraction, from the outputs on disk.
+def fmt(x, n): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

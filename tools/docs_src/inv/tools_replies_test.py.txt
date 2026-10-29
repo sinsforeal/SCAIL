@@ -1,0 +1,27 @@
+# tools\replies_test.py  (202 lines)
+
+DOCSTRING:
+Answering somebody who answered her, proved end to end on a COPY of the
+save with the browser stubbed out. Nothing is sent and nothing real is written:
+the X store is redirected to a temporary directory and the sender is a stub
+that says the reply left the box.
+
+    python tools/replies_test.py
+
+What it shows, in order: the first read-in is a baseline and answers nothing;
+a reply under a post from before the cutoff never becomes a candidate; a reply
+whose id is already in her sent record is refused; the one left gets a judge
+call with no character sheet and a voice call with her whole assembly; the
+record that she answered is written only after the send confirms.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json, prompt_text, x.replies_max_per_day, x.replies_not_before, x.reply_cooldown_minutes
+KV READ: x_action_queue, x_replies_seen, x_replies_sent
+KV WRITE: x_replies_seen, x_replies_sent, x_reply_candidates
+TABLES: 
+LOG TAGS: 
+PROMPTS: persona
+LLM ROLES: 
+OPS COMMANDS: 

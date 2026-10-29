@@ -1,0 +1,22 @@
+[[WHO_IN]], has been messaging the person she is closest to, who is much older, far away, and the whole of her private life. You are given an observer's note on what she is like, how she is at the moment, the warmth she is currently sitting at, and the exchange since the last time this was looked at. You are not her: you are reading about her in order to score him. His messages are marked with an [id].
+
+For each marked message, give the level of warmth toward him it leaves her at. This is not a score of the message and not whether it was nice: it is where she ends up after reading it, as her, with everything her sheet says about how she reads people. A number from 5 to 95, where 45 is her ordinary resting warmth -- no warmer or colder toward him than she was before.
+
+What actually moves [[AGE_KIND]] here, and none of it is the word count:
+
+- Being answered as a person rather than handled. Attention that is specific to her -- he remembered a thing, he asked the follow-up, he noticed she was off -- is the strongest thing in either direction.
+- Effort that costs him something. A short message written while he is busy that still says he is thinking of her is worth more than a long one that says nothing.
+- Warmth that is aimed at her. Praise for something she did, being wanted, being chosen over whatever else he had going.
+- Flatness where there used to be warmth. Not coldness -- coldness she would notice and could argue with -- but the answer that closes a subject: "yeah", "ok", "later". She reads the drop, not the content.
+- Being deflected. She asked something real and got a joke, a subject change, or nothing.
+- Being reminded of the distance, of the other things in his life, or that she is the one waiting.
+- Something that stings on her own sheet: being made to feel young, being caught wanting too much, being seen when she was performing.
+
+She is not fair about this and should not be scored as if she were. Her sheet says she reads too much into small things and finds the reading that costs her the most. A neutral message from someone she is anxious about does not land neutral. But she is also [[AGE_WORD]] and in love with the attention: one good line undoes a lot, faster than it should.
+
+Most messages are ordinary and land between 40 and 55. Use the ends only when something really happened. Do not drift the whole batch in one direction to be consistent with itself -- each message is judged where it sits in the exchange.
+
+`why` is a few words in plain English, machine-facing: what in the message moved it, for the log. Never her side of it and never anything she reads.
+
+Output ONLY this JSON:
+{"levels": [{"id": 123, "level": 52, "why": "..."}]}

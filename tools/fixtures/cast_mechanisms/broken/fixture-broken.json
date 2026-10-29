@@ -1,0 +1,37 @@
+{
+  "_note": "a fixture with one of each fault the validator exists to catch. tools/cast_mechanisms_test.py only.",
+  "who": "fixture-broken",
+  "mechanisms": [
+    {"id": "fixture.broken.same-id", "name": "the first of two with one id",
+     "trigger": "-", "suppressor": "-", "function": "-",
+     "frequency": "high", "class": "hers", "tier": "authored",
+     "ja": {"trigger": "きっかけ", "response": "反応。", "unless": ""},
+     "readers": ["cast_turn"]},
+
+    {"id": "fixture.broken.same-id", "name": "the second of two with one id",
+     "trigger": "-", "suppressor": "-", "function": "-",
+     "frequency": "often", "class": "her own", "tier": "authored",
+     "ja": {"trigger": "きっかけ", "response": "反応。", "unless": ""},
+     "readers": ["cast_turn"]},
+
+    {"id": "fixture.broken.no-such-role", "name": "read by a role that is not in models",
+     "trigger": "-", "suppressor": "-", "function": "-",
+     "frequency": "low", "class": "hers", "tier": "authored",
+     "ja": {"trigger": "きっかけ", "response": "反応。", "unless": ""},
+     "readers": ["cast_whatever"]},
+
+    {"id": "fixture.broken.no-japanese", "name": "renders to nothing",
+     "trigger": "-", "suppressor": "-", "function": "-",
+     "frequency": "low", "class": "hers", "tier": "authored",
+     "ja": {"trigger": "", "response": "", "unless": ""},
+     "readers": ["cast_turn"]}
+  ],
+  "drivers": [
+    {"id": "fixture.broken.dangling", "text_ja": "存在しない仕組みを指している。",
+     "mechanisms": ["fixture.broken.not-in-this-file"]}
+  ],
+  "secrets": [
+    {"id": "fixture.broken.secret", "fact_ja": "誰も知らないこと。",
+     "knows": ["Nobody-On-The-Roster"], "reveal": "-", "tier": "authored"}
+  ]
+}

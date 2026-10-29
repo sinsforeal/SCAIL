@@ -1,0 +1,219 @@
+{
+  "absent": {
+    "expression_vocabulary_unused_on_her_lines": [
+      "laugh",
+      "angry",
+      "cry",
+      "blush",
+      "embarrassed",
+      "worried",
+      "serious",
+      "shy",
+      "excited",
+      "talk",
+      "other"
+    ],
+    "gesture_macros_in_corpus_never_hers": [
+      "@なでなで",
+      "@ひざまずき",
+      "@キス",
+      "@キス止め",
+      "@主人公視点戻し",
+      "@噴飯２",
+      "@外から飛び出し",
+      "@居眠り横",
+      "@居眠り縦",
+      "@息切れ",
+      "@抱きつき"
+    ],
+    "note": "Absence here is corpus absence, not a claim about the character: a gesture or expression never authored on her line is unobserved, not forbidden.",
+    "on_screen_cast_absent_from_her_scenes": []
+  },
+  "emotional_pressures": {
+    "authored_emotion_overlays": {
+      "キラキラ": 3,
+      "キラン": 1,
+      "汗": 1
+    },
+    "expression_labels_on_her_lines": {
+      "neutral": 210,
+      "sad": 11,
+      "smile": 535,
+      "surprise": 36
+    },
+    "note": "Authored @emotion overlay types and C4 expression labels are distinct sets; the first is the author's, the second a hypothesis."
+  },
+  "relationships_present": [
+    {
+      "category": "protagonist",
+      "speaker": "一悟",
+      "turns": 15077
+    },
+    {
+      "category": "heroine",
+      "speaker": "千奈",
+      "turns": 2703
+    },
+    {
+      "category": "heroine",
+      "speaker": "真優",
+      "turns": 2496
+    },
+    {
+      "category": "heroine",
+      "speaker": "百花",
+      "turns": 2044
+    },
+    {
+      "category": "heroine",
+      "speaker": "アリス",
+      "turns": 1689
+    },
+    {
+      "category": "heroine",
+      "speaker": "知紗",
+      "turns": 540
+    },
+    {
+      "category": "heroine",
+      "speaker": "ひかる",
+      "turns": 401
+    },
+    {
+      "category": "heroine",
+      "speaker": "ケルベロス",
+      "turns": 139
+    },
+    {
+      "category": "npc",
+      "speaker": "天文部部員",
+      "turns": 30
+    },
+    {
+      "category": "npc",
+      "speaker": "ＡＶ女優",
+      "turns": 9
+    },
+    {
+      "category": "npc",
+      "speaker": "一年生女子",
+      "turns": 8
+    },
+    {
+      "category": "npc",
+      "speaker": "新聞部部長",
+      "turns": 8
+    },
+    {
+      "category": "npc",
+      "speaker": "事務所の社長さん",
+      "turns": 7
+    },
+    {
+      "category": "npc",
+      "speaker": "文化祭実行委員",
+      "turns": 6
+    },
+    {
+      "category": "npc",
+      "speaker": "テニス部部員",
+      "turns": 5
+    },
+    {
+      "category": "npc",
+      "speaker": "弱小部女子生徒Ａ",
+      "turns": 5
+    },
+    {
+      "category": "npc",
+      "speaker": "弱小部女子生徒Ｂ",
+      "turns": 5
+    },
+    {
+      "category": "npc",
+      "speaker": "見知らぬ女性Ａ",
+      "turns": 5
+    },
+    {
+      "category": "npc",
+      "speaker": "見知らぬ女性Ｂ",
+      "turns": 5
+    },
+    {
+      "category": "npc",
+      "speaker": "野村先生",
+      "turns": 5
+    },
+    {
+      "category": "npc",
+      "speaker": "三年生女子",
+      "turns": 3
+    },
+    {
+      "category": "npc",
+      "speaker": "映画研究部部長",
+      "turns": 3
+    },
+    {
+      "category": "npc",
+      "speaker": "野球部部員",
+      "turns": 3
+    },
+    {
+      "category": "npc",
+      "speaker": "案内アナウンス",
+      "turns": 2
+    },
+    {
+      "category": "npc",
+      "speaker": "演劇部部員Ｂ",
+      "turns": 2
+    },
+    {
+      "category": "unison",
+      "speaker": "真優＆千奈",
+      "turns": 2
+    },
+    {
+      "category": "unattributed",
+      "speaker": "",
+      "turns": 1
+    },
+    {
+      "category": "unison",
+      "speaker": "千奈＆アリス＆百花＆ひかる＆真里亜＆知紗",
+      "turns": 1
+    },
+    {
+      "category": "npc",
+      "speaker": "演劇部部員Ａ",
+      "turns": 1
+    },
+    {
+      "category": "npc",
+      "speaker": "演劇部部員Ｃ",
+      "turns": 1
+    },
+    {
+      "category": "unison",
+      "speaker": "百花＆真里亜",
+      "turns": 1
+    },
+    {
+      "category": "unison",
+      "speaker": "真優＆千奈＆一悟",
+      "turns": 1
+    },
+    {
+      "category": "npc",
+      "speaker": "芸能記者",
+      "turns": 1
+    }
+  ],
+  "reply_vs_initiation": {
+    "initiation": 1,
+    "reply": 1033,
+    "reply_rate": 0.999,
+    "self_continuation": 194
+  }
+}

@@ -1,0 +1,72 @@
+# sim\attention.py  (389 lines)
+
+DOCSTRING:
+Attention is what the situation block says once, and who gets the slot.
+
+A line is a claim with a weight: the mechanisms already have the numbers
+(severity, confidence, heat, pressure), and where they do not, the source
+has a default. `admit` ranks each section, suppresses a claim already made
+by a source that covers it (the ledger covers the promises and the money),
+lets a one-per-source source say it once, and hands back the single
+heaviest ACTION -- the nag, the thing she wanted to show him, a promise of
+his come due, a thread that has waited long enough -- to sit last, where
+she will read it.
+
+Three rules stand between an action and that slot, because the line reads
+as an order ("this is in this message") and an order should be worth
+giving. It has to be heavy enough (`attention.slot_min_weight`): a link to
+share held the slot twenty-five times in a week at 0.35, the lowest number
+in the table, in blocks whose heaviest lines are 0.85, and it held it
+because it was the only action offered. It must not be the thing she is
+braced against: `veto=` is a set of sources or a predicate over the line,
+built by `veto_from_text` from what the live prediction says may land
+badly -- on 2026-09-04 the slot told her to raise the follow she had
+objected to while another line six above it said raising it is what she is
+half braced for. And it may not hold the slot reply after reply while she
+answers with something else: `charge` counts the showings of one line and
+tells the source (`declined`), which retires its own item. An action
+blocked by the floor or the veto is not dropped: it rides as an ordinary
+line in its own section, without the imperative. Nothing is dropped for room: until 2026-09-04 the gate
+kept each section's heaviest lines inside a [lines, chars] budget and the
+block under a total, and was cutting 25 lines to 15 on an ordinary reply
+-- what happened today, at 0.83, dropped -- while the one budget over her
+prompt (`context.target_tokens`) had room for all of it. The weights still
+order the block and still pick the slot. The
+others queue in their own stores and take the slot when they are the
+heaviest; a hint is charged a showing only when it actually held the slot.
+
+`Line` is a `str` with a tag, so a caller that appends plain strings still
+works and gets the section's default weight. Instrument: one `[attention]`
+log line per call and kv `attention_last` for `/attention` -- a source
+whose line is never admitted is a dead line, the way a gauge nobody reads
+is a dead gauge.
+
+DEFS:
+class Line: 
+    __new__(cls, text, source, weight, kind, pin): 
+def tag(text, source, weight, kind, pin): Tag a line; an empty text stays empty so `if line:` keeps working.
+def _tokens(text): 
+def _subject_words(text): The words in `text` that could name a thing: three letters or more, the everyday ones out, Japanese as bigrams.
+def _names(words, subject): Do any of `words` name `subject`? Whole, or by a stem of three letters or more, which is what a risk written in English and an item named in Japanese usually have between them: a short English word against the front of t
+def _veto_pred(veto): `veto` is a set of sources, or a predicate over the line, or None.
+class Attention: 
+    __init__(config, store, clock): 
+    _weight(line, section, cue): 
+    veto_from_text(text, min_overlap): A predicate over an action line: does `text` -- what the live prediction says may land badly, free prose -- warn against THIS action? Two ways, because the two are as often as not written in different languages. The narr
+    admit(sections, cue_text, label, veto, veto_by): sections: {name: [lines]} in prompt order. Returns (kept lines in order, the slot line or '', a one-line report). `veto` names actions that may not take the slot this call -- a set of sources or a predicate over the line
+    _tally(ranked, kept, slot, room): Per day, per room, per source: offered, admitted, held the slot, covered. A source that is offered every call and admitted in none is a dead line with a config block behind it -- forty statuses compete for sixteen lines,
+    tally_totals(tally, days, today): {room: {source: [offered, admitted, slot, covered]}} over the last `days` dates on record.
+    tally_report(days): 
+    charge(slot_line): The source that held the slot is charged a showing; nothing else.
+    _count_showing(slot_line): How many replies running the same line has held the slot while she answered something else. A source retires its own item the moment she says it -- the bubble that has left is matched against it -- so the same text holdi
+    charge_source(src): The same, by source tag: what the nudge decided happens is what was shown.
+    report(): 
+
+CONFIG SECTIONS: attention
+KV READ: attention_last, attention_slot_shown, attention_tally
+KV WRITE: attention_last_friend, attention_slot_shown, attention_tally
+TABLES: 
+LOG TAGS: attention
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

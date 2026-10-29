@@ -1,0 +1,35 @@
+# tools\regen_reply.py  (140 lines)
+
+DOCSTRING:
+Answer one of his messages again, on a copy of a save, with the machinery as
+it is NOW -- and print what she said then beside what she says today.
+
+    python tools/regen_reply.py --config config_yukarin.json --db data/yukarin.db --message-id 138
+    python tools/regen_reply.py ... --anime Mitsudomoe --ep 9     # re-read that episode first
+
+What it does, in order: takes a consistent copy of the save with sqlite's
+backup API (a plain file copy of an open database returns a stale image --
+HANDOVER); deletes every message after the one named and marks it unread, so
+the App on the copy sees exactly what it saw then; builds the whole App on the
+copy, console channel, no sensors, so nothing can reach him or the live save;
+optionally re-runs the watching module's fetch for one episode synchronously
+(the synopsis comes from the recap cache, so no browser), which also makes the
+digest; then runs the same reply path `App` runs for an inbound message and
+prints the result. Nothing is delivered and the live save is not opened for
+writing.
+
+It spends model calls: a director tick, the state role, the digest once, the
+persona, and the continuity check on her draft for a character who has that
+check (it says so at the top of the run when she has not). Well under a dollar.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: roles_off
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

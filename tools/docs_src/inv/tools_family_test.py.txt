@@ -1,0 +1,19 @@
+# tools\family_test.py  (109 lines)
+
+DOCSTRING:
+Where the parents are, and the pickup answers, over a few weeks, on a
+copy of the save. No LLM.
+
+    python tools/family_test.py
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

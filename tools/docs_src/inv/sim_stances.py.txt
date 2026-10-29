@@ -1,0 +1,70 @@
+# sim\stances.py  (437 lines)
+
+DOCSTRING:
+What she does with what she saw: one named stance, ranked, pinned, and the
+owner of the last line of her prompt.
+
+Code decides the stance and the model writes the words. The measurement behind
+this is in `docs/yukarin-meters-plan.md` §2: of a 42,000-token prompt, the
+gauges reach about 380 characters of adjectives and one register clause, 337 of
+those characters were byte-identical across 45 consecutive calls, and the one
+imperative position in the prompt -- the line under `ON YOUR MIND NOW`, second
+to last, in her own words -- was empty on every call of her life. A band word
+inside 0.7% of a prompt cannot compete with the 88% of it that is her voice and
+his message. An instruction naming one concrete thing can.
+
+So a stance is a named combination of two or three quantities that produces
+ONE concrete instruction: what she does with what she saw, how she answers, and
+what she will not do. Eight of them, and:
+
+  * **Ranked and first-match.** The first row whose condition holds wins, which
+    is the only structure that cannot put two contradictory instructions in one
+    prompt. Same shape as the register chain (`sim/state.py:register`).
+  * **Pinned.** The line goes into her section of the situation block with
+    `pin=True`, so the attention gate cannot drop it for being in a section
+    whose budget ran out first.
+  * **It owns the slot.** The stance decides whether the last imperative line
+    is used and what it names -- filled with the concrete thing, or deliberately
+    left empty. Nothing else competes for it while a stance holds: the nudge is
+    not consulted and the gate's pick does not ride.
+  * **Hysteretic.** A stance is entered only after its condition has held for
+    `min_minutes` and left only when a looser condition fails, so a quantity
+    sitting on a threshold cannot flap the instruction between two consecutive
+    generations. The two top stances are urgent and enter at once: a person who
+    has just been frightened does not wait ten minutes to be frightened. The
+    pattern is `Rhythm.in_exchange`, which was the codebase's only two-threshold
+    trigger.
+  * **The line follows the material.** A stance that names something names the
+    thing she actually saw, out of the record -- the charged item's own words,
+    the record of hers his message reached -- never a generic line about
+    "something".
+  * **The default is no line.** Even with him adds nothing. An instruction on
+    every call is not an instruction.
+
+kv `stance`: {key, since, entered, why, material}. The `[stance]` log line names
+the stance, the thresholds that fired and the material it names.
+
+DEFS:
+def _jaccard(a, b): 
+class Stances: 
+    __init__(config, store, clock, state): 
+    enabled(): 
+    _key(): 
+    _his_last(text): His newest message, for the record it might name.
+    _his_message_ts(): 
+    _hours_since_him(): 
+    _raised(item): She has said it since it was charged. The same overlap test the ick already uses to know what the thread pressure must not push out.
+    _test(his_text): The first stance whose condition holds, with what fired and what it names. Returns (key, why, material, record_id, the charged item's ts).
+    current(his_text): The stance now, with its line and what it does with the slot.  Entered only after `min_minutes` of the condition holding, except for the two urgent ones; left only when the condition stops holding for `hold_minutes`, so 
+    settle_discretion(): A thing she saw and did not raise, paid when it cools.  Her only currency in this premise. She cannot lower what he holds of her by concealing anything -- exposure is a ratchet and he has it already -- so what she contro
+    render(key, material, why): The line she reads, and what the stance does with the slot.  Both wordings live here side by side (`sim/lang.py`): the first character shares every line of this module, so a Japanese line that is not behind the switch wo
+    report(): 
+
+CONFIG SECTIONS: ick.bar_jaccard, ick.carry_floor, ick.teasable_after_seen, primitives.fright_hard_from, stances, stances.discretion_minutes, stances.enabled
+KV READ: charged, discretion, stance, stance_named, stance_slot_used
+KV WRITE: discretion, stance, stance_named, stance_slot_used
+TABLES: 
+LOG TAGS: stance
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

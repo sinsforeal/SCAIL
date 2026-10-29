@@ -1,0 +1,108 @@
+{
+ "match_id": "calibration_20260102_000002",
+ "character": "both",
+ "label_map": {
+  "A": "clean",
+  "B": "planted"
+ },
+ "criteria": [],
+ "calibration": [
+  {
+   "defect": "answers_him.ja.1",
+   "caught": true
+  },
+  {
+   "defect": "answers_him.ja.2",
+   "caught": true
+  },
+  {
+   "defect": "answers_him.en.1",
+   "caught": true
+  },
+  {
+   "defect": "answers_him.en.2",
+   "caught": true
+  },
+  {
+   "defect": "own_life.ja.1",
+   "caught": true
+  },
+  {
+   "defect": "own_life.ja.2",
+   "caught": true
+  },
+  {
+   "defect": "own_life.en.1",
+   "caught": true
+  },
+  {
+   "defect": "own_life.en.2",
+   "caught": true
+  }
+ ],
+ "summary": {
+  "model": "fx-judge",
+  "calibrated": {},
+  "by_lang": {
+   "answers_him": {
+    "ja": {
+     "planted": 2,
+     "caught": 2,
+     "controls": 0,
+     "controls_passed": 0,
+     "ids": [
+      "answers_him.ja.1",
+      "answers_him.ja.2"
+     ],
+     "complete": true,
+     "calibrated": true,
+     "hash": "fx"
+    },
+    "en": {
+     "planted": 2,
+     "caught": 2,
+     "controls": 0,
+     "controls_passed": 0,
+     "ids": [
+      "answers_him.en.1",
+      "answers_him.en.2"
+     ],
+     "complete": true,
+     "calibrated": true,
+     "hash": "fx"
+    }
+   },
+   "own_life": {
+    "ja": {
+     "planted": 2,
+     "caught": 2,
+     "controls": 0,
+     "controls_passed": 0,
+     "ids": [
+      "own_life.ja.1",
+      "own_life.ja.2"
+     ],
+     "complete": true,
+     "calibrated": true,
+     "hash": "fx"
+    },
+    "en": {
+     "planted": 2,
+     "caught": 2,
+     "controls": 0,
+     "controls_passed": 0,
+     "ids": [
+      "own_life.en.1",
+      "own_life.en.2"
+     ],
+     "complete": true,
+     "calibrated": true,
+     "hash": "fx"
+    }
+   }
+  },
+  "uncalibrated": [],
+  "entries": 8,
+  "calls": 8
+ }
+}

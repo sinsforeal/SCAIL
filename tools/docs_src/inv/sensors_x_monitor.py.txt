@@ -1,0 +1,81 @@
+# sensors\x_monitor.py  (1282 lines)
+
+DOCSTRING:
+Her X (Twitter) account, read through a real logged-in Chrome profile.
+
+Read-only for now. Two things it can do: catalogue who the account follows
+(handle, name, bio) and scroll the *Following* timeline the way a person
+does: a few scrolls, uneven pauses, then leave. Never the For You tab, never
+recommendations, never fast. It runs with no window (`sensors.x_headless`);
+`/x headless off` puts the window back when the parsing needs watching.
+Everything it sees goes to
+data/x/ as plain files that the simulation reads later, when she looks.
+
+The parsing is lifted from x_scrape/x_watch.py, which has been reading X
+through the same kind of profile for months: a tweet is the article whose
+own permalink anchor wraps a <time>; nothing else identifies it reliably.
+
+DEFS:
+def _paths(config): 
+def _load(path, default): 
+def _save(path, data): 
+def _pause(config, factor): 
+def _text(element): 
+def profile_lock(timeout, who): Hold the Chrome profile, or yield False at once. Nobody waits on the main loop for a harvest that runs for minutes: her look skips this pass and comes back, which is what a person with a phone does anyway.
+def open_driver(config, profile_dir): Chrome on her profile, headless unless `sensors.x_headless` is off. Raises if selenium is missing or the profile is held by another Chrome (close the login window first).  `profile_dir` opens a DIFFERENT logged-in copy o
+def _hide_automation(driver, headless): Two things X can see. `navigator.webdriver` is true in every fresh document, so it is patched through CDP (a plain execute_script only holds until the next navigation). Headless Chrome also calls itself "HeadlessChrome/1
+def logged_in_handle(driver, config): 
+def _badge(cell, labels, testids): Is one of these badges on this user cell (or profile header)? Read from the markup rather than inferred: a test id when X gives one, then an aria-label, then an element whose whole text IS the label. Whole text, because 
+def _parse_user_cells(soup, found): 
+def profile_counts(driver, config, handle): (following, followers) as shown on the profile page, or (None, None).
+def _at_bottom(driver): 
+def _scroll_following_page(driver, config, found, log, quick_until): Scroll one loaded following page to its end, harvesting cells. X pages the list from the server and sometimes leaves a spinner hanging; when growth stops we nudge (scroll up and back) a few times, then give up and return
+def _fetch_user_list(driver, config, handle, tab, expected, log): One of the account's two user lists (`following` or `followers`), scrolled to its end at a human pace. X throttles the fetch mid-way (a spinner that never resolves); the page is then reloaded and re-scrolled quickly past
+def fetch_following(driver, config, handle, log): Everyone the account follows. Saved to following.json with the fetch time and the count the profile claims. Each entry carries whether that account follows back and whether it is private, which is what stops an unfollow 
+def fetch_followers(driver, config, handle, log): Everyone who follows the account, the same way. followers.json is what `Curation` reads to know a mutual (never unfollowed) and who is owed a follow back. Handles already known keep their first-seen time, so the follow-b
+def check_new_followers(driver, config, handle, log): The cheap per-look version: read the top of the followers page, newest first, for a couple of screens, and record anybody not already known. Returns the new ones. The first run is a baseline and returns nothing -- 302 ac
+def load_followers(config): 
+def follows_back(config): The handles that follow the account, lowercased. Two sources, because either can be stale on its own: everybody on the followers list, and anybody on the following list whose cell carried the `follows you` badge when it 
+def private_accounts(config): The handles known to be private (the padlock), from either list.
+def _click_following_tab(driver, config): The home page opens on For You unless X remembers Following. Find the tab by label, click it if it is not selected, and confirm. Tabs can take a moment to render; try a few times, reload once.
+def parse_articles(soup, found): 
+def _num(s): 
+def _counts(tweet): What a post has drawn. The action bar's group carries one aria-label with everything ("3 replies, 5 reposts, 20 likes, 900 views" or the Japanese), and each button its own ("20 Likes. Like"); the group first, the buttons
+def fetch_replies(driver, config, status_path, handle, limit, log): The replies under one of her posts: the articles on its page that are not hers. Nothing recorded here; the look decides what they were to her.
+def scroll_following(driver, config, scrolls, log): One human-paced look at the Following timeline: land on home, switch tab, read a few screens. New posts are appended to feed.jsonl; returns (new_items, articles_seen).
+def log_action(config, kind, target, why, dry_run, extra): 
+def her_actions(config, kind): 
+def fetch_likes(driver, config, handle, scrolls, log): New entries on the account's Likes tab, attributed: 'her' if the status is in her action log (a like she made, dry-run ones excluded), else 'him'. First run records the existing likes as his baseline.
+def check_follow_changes(driver, config, handle, log): Cheap per-look check of the account's follow list against following.json. The profile's following count is read; if it grew, the top of the following page (newest first) is scanned a couple of screens for handles not yet
+def his_follows_since(config, since_ts, limit): 
+def his_likes_since(config, since_ts, limit): 
+def _write_status(config): 
+def sessions_today(config, day_start_ts): 
+def last_session_ts(config): 
+def may_open_session(config, day_start_ts): True if pacing allows another look now: gap since the last one and the daily cap. The simulation adds its own gate (does she have her phone, is she bored) on top.
+def load_following(config): 
+def load_accounts(config): 
+def save_accounts(config, accounts): 
+def feed_since(config, since_ts, limit): 
+def feed_all(config): 
+def _type_slowly(element, text): 
+def like_status(driver, config, status_path, log): Open the post and tap like. Returns 'liked', 'already', or '' on failure.
+def repost_status(driver, config, status_path, log): Open the post and repost it. Returns 'reposted', 'already', or ''.
+def profile_flags(driver, config): (follows_you, private) for the profile page already open, or (None, None) when the page cannot be read. The name block is where X puts the padlock and the `follows you` pill; the test id is looked for across the whole co
+def set_follow(driver, config, handle, follow, log): Open the profile and tap follow (or unfollow + confirm). Returns 'followed' / 'unfollowed' / 'already' / 'refused: ...' / ''.  The last guard against an unfollow she may not make is here rather than only at the decision,
+def post_tweet(driver, config, text, log): Type a post the way a person does and send it. Returns True when the composer closed without an error.
+def reply_to_status(driver, config, status_path, text, log): Answer a post: open it, type into the reply box under it, send. The same shape as post_tweet -- success is the text having left the box, and X raises a toast on a good send as well as a bad one, so the toast is logged an
+def her_posts(config, limit): 
+def close_orphans(config, log): Chrome windows left on HER profile by a look that was killed mid-way (a restart during a scroll). Matched on the --user-data-dir argument only, so another program's profile is never touched. Windows only.
+def fetch_user_posts(driver, config, handle, scrolls, log): One account's own timeline, a screen or two, nothing recorded on her side (tomoe/scenery.py harvests from a watchlist this way).
+def fetch_trends(driver, config, log): The Trending tab, one page: the trend names in order. Written to data/x/trends.json for tools/zeitgeist.py, which reads it beside the public feeds. X's trends need a login, which the look session has.
+def search_posts(driver, config, query, scrolls, log, record): One search she typed, Latest tab, a couple of screens. Items carry `via: search` and the query, are appended to feed.jsonl like the timeline's, and the read labels them so the model knows she went looking. This is where 
+
+CONFIG SECTIONS: x_data_dir, x_feed_scrolls_max, x_feed_scrolls_min, x_followers_scrolls, x_following_reload_wait_max, x_following_reload_wait_min, x_following_reloads, x_max_sessions_per_day, x_page_wait_seconds, x_profile_dir, x_scroll_pause_max, x_scroll_pause_min, x_session_min_gap_minutes, x_window_size
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

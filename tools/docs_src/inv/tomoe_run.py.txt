@@ -1,0 +1,21 @@
+# tomoe\run.py  (21 lines)
+
+DOCSTRING:
+Run the first character: Koga Tomoe, her world, her cast, her phone.
+
+    python tomoeun.py                 # live, config.json, data/world.db
+    python tomoeun.py --sim ...       # any scail.py option
+
+Registers her words (how she sees him: the app on her phone) and hands the
+rest to the shared runtime. run.cmd launches this.
+
+DEFS:
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

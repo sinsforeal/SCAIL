@@ -1,0 +1,26 @@
+# sim\shape.py  (311 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _first_sentence(text, cap, floor): Enough of what he said to be worth quoting back at her. A sentence shorter than `floor` is an opener, not the point ("to be completely fair."), so it keeps reading.
+def engage_kind(his_txt): WHICH of the three things his message is, as a code word.  Separate from the wording because the caller has to know which case fired and cannot find out by looking for a phrase inside the sentence: the sentence is writte
+def engage_line(his_txt, ja): The line that says what his message obliges, or "" when it obliges nothing. Three cases, in the order they beat each other.
+class Shape: 
+    __init__(config, state, clock): 
+    ja(): The length line and the engage line are the last things she reads before she writes, so they are written in her own language. Read per call so a harness can flip the arm inside one process.
+    _mk(kind, line, engage): 
+    upset(): How hurt she is AT HIM, which is what makes a person send less to him. Tension is with him by definition; anger and sadness only count when their source is him (State.sources) -- a temper about school does not shorten he
+    _fade(): 0 right after the last thing that happened between them (the rupture or its latest attempt), 1 after upset_fade_hours.
+    _engage_only(unread): What his message obliges, and nothing about length. For a character who is told to reply how she wants (`shape.tell_length` false): the draw would only be the first character's English measured on somebody it was never f
+    draw(unread, intent_kind, scene): 
+
+CONFIG SECTIONS: shape, shape.kinds
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

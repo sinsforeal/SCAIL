@@ -1,0 +1,61 @@
+# tomoe\family.py  (424 lines)
+
+DOCSTRING:
+Where her parents are, and whether the car is.
+
+His ask (2026-08-26): dad's car needs dad's schedule, and mom's, well
+enough defined that a family trip can actually happen, that there are
+times he cannot pick her up, and times he could and does not want to.
+
+Everything here is drawn from `data/household.json` (`schedules` and
+`vehicle`) with seeded per-day variation, so the same date gives the same
+day on every restart and every reader agrees: the schedule writer (a
+family day is a block with the family in it), the director, the beat
+writer, the situation's pickup, `/family` and the ops view. No LLM.
+
+**Dad** (Kenji): Mon-Fri out at 07:00, home 21:10-22:30 drawn per day;
+Wednesday is no-overtime day on paper and he makes it home by 20:00
+about twice a month; a Friday nomikai a few times a month puts him home
+past 23:30 and in no state to drive; about one Saturday a month is a
+client golf day or a trade show; a two-night trip to the Hakata branch
+every couple of months; Sundays and holidays home. **Mom** (Yumi): Tue,
+Wed, Fri and alternate Saturdays 09:30-14:30 at the Life; errands; the
+Sunday call to Kashii about seven. **The car** is the one thing they did
+not sell in the move: dad commutes by train, so on a weekday it sits in
+the monthly lot six minutes away, and mom has a licence she does not
+like using in Tokyo.
+
+`can_pickup(ts, from_node)` is the honest answer: no car, no; nobody home,
+no; dad drunk, no; past his cut-off, no; dad home and tired on a weekday
+night, a coin toss he can lose ("take the last train, I'm not getting
+dressed"); mom only in daylight and only close. `trip(date)` is a family
+day when dad is off, seeded, about one Sunday or holiday in five, with a
+destination the car can reach.
+
+DEFS:
+def _fingerprint(members, sched, vehicle): What this module read out of the household file, as one short value.  A day is drawn once and kept in the save, and the draw is seeded by the date, so re-drawing an unchanged household gives the same day back. What it ca
+class Family: 
+    __init__(config, store, clock, calendar, cast): 
+    has(who): Is there such a person in this house?
+    has_car(): A car is a thing the household file says they have. No block, no car: a family with no vehicle written down does not own one by default, and `can_pickup` used to offer one.
+    _off(date): 
+    day(date): The parents' day, seeded by the date: {dad: {...}, mom: {...}}.
+    _mom_work(): What her mother's workplace is called in one phrase, from the household's own schedule block. It was the name of one family's supermarket, in the code, for every character.
+    _sibling(): The youngest brother or sister in this house, by the household's own members. The one twist about a sibling named one by hand.
+    _trip_draw(date, dad, mom, rng): A family day out, when dad is off and nobody has other plans.
+    where(who, ts): (state, note) for dad or mom at ts: asleep / home / commuting / work / out / away / drinking.
+    car_at_home(ts): 
+    can_pickup(ts, from_node, minutes_away): (ok, who, why). The honest answer, not the convenient one.
+    brief(date): One block for the schedule writer, the beat writer and the director: who is home when today, and the family day if there is one.
+    now_line(): 
+    report(): 
+def _hm(m): 
+
+CONFIG SECTIONS: family
+KV READ: family_days
+KV WRITE: family_days
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

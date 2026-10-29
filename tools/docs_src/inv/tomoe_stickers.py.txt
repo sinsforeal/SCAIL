@@ -1,0 +1,33 @@
+# tomoe\stickers.py  (102 lines)
+
+DOCSTRING:
+A fixed vocabulary of stamps, so the same feeling is the same stamp.
+
+The record narrated them -- 「（悲しそうなキツネのスタンプ）」, 「スタンプで返しとく」 --
+which is fine, because there is no image and a stamp read as text is what
+everybody actually sees. What was NOT fine is that every one was invented
+fresh, so a girl's stamps were never twice the same and none of them was
+hers. LINE stamps come in sets: a person buys a set and uses it for months,
+and which set you use is a thing about you.
+
+So the stamps are a closed list. Each person owns a set (`data/cast.json`
+`stamps`, or the default here), the beat and turn prompts are given only
+their own, and a stamp is written 「[スタンプ: <name>]」 -- the same shape as
+the photo marker, so the same readers carry it. A name off the list is
+snapped to the nearest one on it, or dropped.
+
+DEFS:
+def _people(config): 
+def set_for(config, key, role_id): The set this person uses: their sheet's `stamps`, else their role's.
+def names_for(config, key, role_id): 
+def line_for(config, key, role_id): The prompt line: this person's own stamps and how to send one.
+def snap(text, config, key, role_id): Any stamp marker in a turn, snapped to this person's own set. A name they do not own becomes the nearest one they do; a marker that matches nothing is dropped, because a stamp nobody has is a stamp nobody sent.
+
+CONFIG SECTIONS: character.cast_file
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

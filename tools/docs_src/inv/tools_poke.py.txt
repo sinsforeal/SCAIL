@@ -1,0 +1,39 @@
+# tools\poke.py  (202 lines)
+
+DOCSTRING:
+Fire a slash command at a RUNNING bot from the terminal, and watch it land.
+
+    python tools/poke.py yukari /idle --wait 30
+    python tools/poke.py tomoe /reply again --wait 60
+    python tools/poke.py yukari "/selfstart she is bored of waiting" --wait 60
+    python tools/poke.py help
+
+The command goes on the hub's ops queue exactly as the app's ops bar puts it
+there (`POST /ops/cmd`, the token out of `config.json`), and the bot picks it
+up on its next pass, runs it and posts the answer back. Nothing here opens a
+save, builds an App or spends a model call: the running bot does all of it.
+
+`--wait N` follows the character's newest run directory `session.log` for up
+to N seconds and prints every line the bot writes after the command was
+queued, so what the tick decided is visible in the terminal, and prints the
+command's own answer when the bot posts it to the hub.
+
+The character is the id the hub registers: `tomoe` or `yukari`. The leading
+slash is optional and is added if it is missing, which is what to do in Git
+Bash: that shell rewrites a bare `/idle` into a Windows path before python
+ever sees it, and `poke.py yukari idle` gets there intact.
+
+DEFS:
+def usage(): 
+def hub_config(): 
+def run_dir_of(char): The newest run directory whose bot registered as `char` with the hub.  A run leaves an ACTIVE file while it is alive; one with the marker wins over one without, so a finished run of hers is not tailed while the live one 
+def main(argv): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

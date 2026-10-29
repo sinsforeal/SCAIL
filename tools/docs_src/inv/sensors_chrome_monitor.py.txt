@@ -1,0 +1,23 @@
+# sensors\chrome_monitor.py  (244 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _host(url): The bare host of a URL, no scheme/www/port, for the browsing log. Kept short on purpose: she sees where he was, not the full querystring.
+def _cached(kind, paths, since_timestamp, compute): `paths` is every file the answer depends on. Firefox keeps its history in write-ahead-log mode: places.sqlite only moves at a checkpoint, while the log beside it moves on every visit, so a key built on the main file alon
+def get_history_since(config, since_timestamp): 
+def _chrome_history_since(config, since_timestamp): 
+def get_24h_history_raw(config): 
+def get_firefox_history_since(config, since_timestamp): 
+def _firefox_history_since(config, since_timestamp): 
+def get_firefox_24h_history_raw(config): 
+
+CONFIG SECTIONS: chrome_history_path, chrome_idle_gap_threshold_minutes, chrome_junk_filters, firefox_history_path, firefox_junk_filters
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

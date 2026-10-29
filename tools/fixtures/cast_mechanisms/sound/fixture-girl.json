@@ -1,0 +1,68 @@
+{
+  "_note": "a fixture, not a person on the roster: tools/cast_mechanisms_test.py only. Authored, tier 3 everywhere.",
+  "who": "fixture-girl",
+  "mechanisms": [
+    {"id": "fixture.answers-first", "name": "answers before anyone else can",
+     "trigger": "a question is put to the group and nobody has replied yet",
+     "suppressor": "the question was addressed to somebody by name",
+     "function": "keeps her at the front of the room without asking to be",
+     "variation": ["one word, instantly", "answers a question nobody asked her", "a stamp and nothing else"],
+     "frequency": "high",
+     "class": "hers",
+     "tier": "authored",
+     "ja": {"trigger": "グループに質問が投げられて、まだ誰も答えていないとき",
+            "response": "とりあえず先に一言返す。中身より速さ。",
+            "unless": "名指しで他の子に訊かれているときは黙る。"},
+     "readers": ["cast_turn", "cast_beat", "cast_day"]},
+
+    {"id": "fixture.changes-the-subject", "name": "moves the room off a heavy thing",
+     "trigger": "somebody says something that would need a serious answer",
+     "suppressor": "the person saying it is upset with her specifically",
+     "function": "keeps the chat somewhere she knows how to be",
+     "variation": ["a photo of what she is eating", "a joke at her own expense"],
+     "frequency": "medium",
+     "class": "hers",
+     "tier": "authored",
+     "ja": {"trigger": "重い話が出て、まともに答えないといけない空気になったとき",
+            "response": "全然関係ない写真か軽口を投げて話を逸らす。",
+            "unless": "相手が自分に対して怒っているときは逸らさない。"},
+     "readers": ["cast_turn", "cast_beat"]},
+
+    {"id": "fixture.checks-twice", "name": "confirms an arrangement she has already confirmed",
+     "trigger": "a plan is more than a day away",
+     "suppressor": "somebody has already confirmed it in the last hour",
+     "function": "buys her the certainty she cannot get any other way",
+     "variation": ["the time again", "the meeting place again"],
+     "frequency": "low",
+     "class": "hers",
+     "tier": "authored",
+     "ja": {"trigger": "予定が明日より先にあるとき",
+            "response": "もう決まっている時間と場所をもう一度確認する。",
+            "unless": "さっき誰かが確認したばかりなら訊かない。"},
+     "readers": ["cast_turn", "cast_day"]},
+
+    {"id": "fixture.goes-quiet", "name": "drops out of the chat for a night",
+     "trigger": "she has been the loudest one in the room for two days",
+     "suppressor": "somebody asks her directly whether she is all right",
+     "function": "resets what the group expects of her before it becomes a job",
+     "variation": ["reads and does not answer", "one line at midnight"],
+     "frequency": "rare",
+     "class": "hers",
+     "tier": "authored",
+     "ja": {"trigger": "二日くらい自分ばかり喋っていたと気づいたとき",
+            "response": "その晩は既読だけつけて何も返さない。",
+            "unless": "誰かに直接「大丈夫？」と訊かれたら普通に返す。"},
+     "readers": ["cast_turn", "cast_beat", "cast_day"]}
+  ],
+  "drivers": [
+    {"id": "fixture.be-needed", "text_ja": "自分がいないと話が回らない、という状態がいちばん落ち着く。",
+     "mechanisms": ["fixture.answers-first", "fixture.goes-quiet"]},
+    {"id": "fixture.no-serious-talk", "text_ja": "重い話の当事者にだけはなりたくない。",
+     "mechanisms": ["fixture.changes-the-subject"]}
+  ],
+  "secrets": [
+    {"id": "fixture.the-test", "fact_ja": "夏の試験に落ちたことを誰にも言っていない。",
+     "knows": ["Hinako"], "reveal": "she tells whoever finds out first, and tells them it was nothing",
+     "tier": "authored"}
+  ]
+}

@@ -1,0 +1,41 @@
+# sim\voicecheck.py  (177 lines)
+
+DOCSTRING:
+Is this line in the voice it is supposed to be in?
+
+Every speaker in her world has a sheet that says how they sound, and until
+today nothing checked the output against it. Reading all 299 turns by hand
+found a father written in his wife's register, a brother calling his sister
+君, one region's dialect in the mouth of a girl from another, and 绫 -- a
+simplified Chinese character -- in a Japanese sentence. All of it had been
+sitting in the record for days, teaching the next call.
+
+This flags. It does not rewrite: a line that is off is a signal about the
+prompt, and silently correcting it hides the signal and puts words in
+somebody's mouth twice over. Flags go to the log and to kv `voice_flags`,
+where `/voice` reads them.
+
+The rules live in the file the CHARACTER's own config names
+(`character.voice_rules_file`; there is one per character and nothing here
+knows which), keyed by a speaker's roster handle, by role (`role:diary`), or
+`_all` for everything. Adding a person or
+a role is an entry in that file and no code here. The file is re-read whenever
+it changes, like `cast.json` and `places.json`. A set may `inherit` another's
+rules, and may declare a `context` that is always true of it -- which is how
+the roles that are her private mind are exempt from the dialect rule without
+the caller knowing anything about her.
+
+DEFS:
+def _load(path): The rule file, re-read on change. A broken file flags nothing rather than taking the bot down over a comma.
+def check(config, text, who, role, context): Every rule this line breaks: [(set, id, why, what matched)]. `_all` always applies; the speaker's set and the role's set apply when named.  `context` is what the caller knows about the moment that a regex cannot see -- "
+def note(config, store, text, who, role, where, context): Check and record. Returns the flags; the caller carries on regardless, because nothing here changes what was written. `store` may be None (a tool's own LLM), and then it only logs.
+def report(config, store, limit): 
+
+CONFIG SECTIONS: character
+KV READ: voice_flags
+KV WRITE: voice_flags
+TABLES: 
+LOG TAGS: voice
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

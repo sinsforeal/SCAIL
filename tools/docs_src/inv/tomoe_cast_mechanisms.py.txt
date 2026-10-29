@@ -1,0 +1,71 @@
+# tomoe\cast_mechanisms.py  (558 lines)
+
+DOCSTRING:
+A person around her as a set of mechanisms rather than a description.
+
+A character sheet says what somebody is like. A mechanism says what makes
+them do a thing, what stops them, and what it buys them -- trigger,
+suppressor, function -- so the model has something to run rather than an
+adjective to perform. This is the same shape the extracted character
+already uses (`docs/mechanism-codebook.md`); the difference is that these
+are authored, not coded off a tape, so every one of them says so.
+
+The file is `<cast.mechanisms_dir>/<roster key>.json`, one per person on the
+roster, and a person with no file has no block: the calls go out exactly as
+they did before. `docs/cast-mechanisms.md` is the spec.
+
+Three things come out of a file and they do not go to the same places:
+
+- a **mechanism** goes to the roles named in its own `readers`, and to no
+  others. A mechanism nobody reads is DEAD, the way a gauge nothing acts on
+  is DEAD (`tools/cast_mechanisms_test.py` names them).
+- a **driver** is one short paragraph of what the person is after, rendered
+  with the mechanisms it drives.
+- a **secret** is what she knows and does not say, so it reaches her own
+  mouth (`cast_turn`, `cast_beat`) and nowhere else: never the planner, who
+  writes for everybody, and never another speaker's call.
+
+What never reaches a prompt from here: the mechanism's id, its `name`
+(a function phrase for humans), its `class` and `tier`. The personality type
+each person was written from is not in this file and is not readable from
+this module at all -- it lives in a file of the author's that only
+`tools/cast_type_test.py` may open, because naming the type to a model would
+be handing it the answer the measurement is asking for.
+
+DEFS:
+def mechanisms_dir(config): 
+def max_chars(config): 
+def own_max_chars(config): The ceiling on the CHARACTER's own block, which is a different size of thing from a block about somebody else: it rides in the half of her prompt that changes about once a day, so the provider caches it and it is not cha
+def path_for(config, key, directory): 
+def load(config, key, directory): That person's mechanisms file, or {} when there is none.  The empty case is the normal one while the roster is being written: a person with no file is a person the prompts say nothing extra about, never an error and neve
+def own_key(config, directory): Which file in this directory is the running character's own.  A file here is named after the ROSTER key, and a character's own name is not always that key. The first character is `Tomoe` under both, so keying on `charact
+def keys_on_disk(config, directory): Every roster key with a file, in a stable order.
+def _mechs(data): 
+def _freq_rank(m): 
+def _roster_keys(config): 
+def validate(config, directory, roles): Every problem in every file, as lines somebody can act on.  Empty means the set is sound. The checks are the ones that fail silently otherwise: an id used twice makes a driver ambiguous, a frequency outside the set sorts
+def dead(config, directory): (key, id, readers) for every mechanism no call renders.  A mechanism whose `readers` name only roles that never ask for a block is a mechanism written into the record and read by nothing -- the same fault as a gauge noth
+def _renderable(m, lang): 
+def _line(m, lang): One mechanism as one line: when it fires, what the person does, and what stops it. The rest of the fields are the author's -- the id, the `name`, the class, the tier and the code never reach a call. A mechanism carrying 
+def _assemble(lines, drivers, secrets, lang): 
+def block_ja(config, key, role, directory, cap, lang): The block for one person and one role, or "".  The mechanisms whose `readers` name this role, highest frequency first, then the drivers as one paragraph, then -- on this person's own calls only -- what she knows and does
+def mode_for(config, key, gauges, hours_above, directory): The mechanism whose gauge reading holds right now, or None.  `gauges` is that person's current readings, `{name: value}`; a person with no gauges of her own -- everybody on the roster today -- hands over nothing and is n
+def mode_line(config, key, gauges, hours_above, lang, directory): The one line that goes in front of a call while a mode is on, or "".  It carries the trigger's phrase and never the response: a line saying what she does in it would be an instruction to do it, and what the mode is is a 
+class OwnMechanisms: The character's own mechanisms file, rendered into her own prompt.
+    __init__(config, store, clock, state): 
+    lang(): 
+    section(): 
+    _hours_above(gauge, level): How long that gauge has been at or above a level, off the snapshots the record already keeps (`store.gauges_at`). Walked back an hour at a time and stopped at the first hour it was under, because what the mode asks is fo
+    mode_line(): 
+    report(): 
+def lang_of(config): Whether the character herself is addressed in Japanese. One import, kept here so the renderer above stays a pure function of its file.
+def block_for_planner(config, keys, directory): Every person's mechanisms for the day planner, with no secrets.  The planner writes beats for everybody at once, so it gets what each of them does and none of what any of them is hiding: a secret in a prompt that writes 
+
+CONFIG SECTIONS: cast, character, raw.get
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: cast_mechanisms
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

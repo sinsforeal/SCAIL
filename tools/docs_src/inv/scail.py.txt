@@ -1,0 +1,207 @@
+# scail.py  (4924 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def load_program(config): The program that runs this character: `tomoe.app` or `resident.app`, named by `character.program` in her config. The runtime never names a program in its own text; it asks the config which one she is.
+def parse_args(): 
+class App: 
+    __init__(args): 
+    unwired(): Declared wires still None on something the App holds, where the App has the thing to attach: built and never wired, the silent fault the declarations exist to catch (sim/wiring.py). A program slot the program did not bui
+    _parse_says(says): 
+    ensure_day(): 
+    _program_call(name): A hook of the program, if she has it. What a program does not define is not hers, and the runtime does not miss it.
+    anime_day(d): Her weekly look at his anime list, and his watching habits as facts. The shelf check becomes today's pending hint; the first free scene with her phone picks it up as a share_hint (intent/persona decide the rest).
+    foresee_after(bubbles, kind): After her bubbles exist: what she expects of him now. On a thread, because the send is already on one and the loop must not wait.
+    maybe_foresee_refresh(): While he is quiet, a fresh reading of what the silence means, a few hours apart, so the situation block is not carrying a window she gave him yesterday.
+    maybe_shelf_nag(): A pending weekly shelf hint becomes the scene's share_hint once she is free with her phone and nothing else is going on; then the impulse path runs and she may or may not say it.
+    maybe_generate_schedule(): 
+    maybe_compile(): The day is told when her day is actually over, not at a fixed hour.  `compile()` FLUSHES a live exchange -- a conversation open at the compile ends where it stands so the day's record holds it -- and 23:55 was chosen whe
+    backup_db(tag): A dated copy of the save file under data/backups, kept for backup_keep days.
+    compile(d): 
+    world_now(): world_terms plus how much of him she expects at this hour (0.4 at an hour he is never about, 1.0 when he usually is, or said he would be), which weights the loneliness climb: an hour he is never about in is not an hour o
+    world_terms(): What the deterministic state terms need to know about right now.
+    silent_hours(): 
+    phone_access(): 
+    _replay_setup(args, c): Before anything opens: the window, the backup, the clock.
+    temporal_gap(t0, t1, why, note): The alternative to covering a hole: say so. One event of kind `gap` at the hole's end, the director pointed past it so `_hole` never asks for it, the missed rows marked skipped. The compile and the coherence read see an 
+    _replay_prepare(): The store just opened: retire what the bot wrote inside the window, put the gauges back, point the director at FROM.
+    _replay_finish(): 
+    catch_up(force_tick, covered): The model calls that never got an answer (kv `missed_calls`, written by LLM.call when every provider failed) are read once a provider is back: the director's next scene covers the whole hole in one (the schedule blocks t
+    request_flush(wait_seconds): Ask the machine's collector to write what it is holding, now.  The collector buffers what it sees and writes the feed on a character count or on its heartbeat, so anything he did inside the current window was invisible t
+    latest_digest(): What her last look at his machine turned up, or "" for a character with no window on it -- `self.phone` is None then, not an app that answers nothing (`sim/existence.py`).
+    look_at_phone(force): 
+    poll_inbound(): 
+    _recall_extra(): The rest of the moment as a cue for recall: her own last line and where she is. His message stays the trigger; this only widens what the record is searched for. One owner (`sim/recall.py:moment_cue`), shared with the per
+    _cmd_episodes(arg, cmd, text): `/episodes` -- her past as cards: how many, and the last few, each with what it fed. `/episodes <date>` writes (or rewrites) that day's cards now; `/episodes backfill` writes the missing days the thread shows; `/episodes
+    _cmd_inflight(arg, cmd, text): `/inflight` -- the paid or stateful background jobs this process believes are running (kv `in_flight`). A row still here after a restart is a job the dead process was in the middle of; the boot read settles those by kind
+    _backfill_cards(): Cards for the days the thread shows past its verbatim window and does not have cards for. Once after boot, in a thread, and after a compile. Bounded: at most eight days a call.
+    _backfill_vectors(): Vectors for the facts and the memories that have none. Once after boot, in the background: the persona asks for meaning on the loop thread and is answered from what is stored, never by loading the model or encoding a poo
+    _backfill_context(): What her past needs written before the retrieval can reach it, after boot and off the loop thread: first the jobs a killed process left in flight, then the cards for the days the thread already shows, then the vectors of
+    handle_command(text): 
+    run_command(text): A slash command's output as text. Telegram sends it into the chat; the TALKAPP ops view shows it in its own log, never in her chat.
+    _run_command(cmd, arg, text): One table (`COMMANDS`): the method, the program slots its body touches, whether it needs an argument. A command whose slot this character has not got is answered as such rather than run into a None, and `/help` does not 
+    command_available(cmd): False when the command needs a program slot this character has not got.
+    _cmd_peers(arg, cmd, text): Who she can write to, what she has sent today, and the conversation in flight. `tick` runs one pass of it now; `flush` closes what is open the way the compile does.
+    _cmd_day(arg, cmd, text): 
+    _cmd_agenda(arg, cmd, text): What is coming, joined: the calendar, her promises, what he said he would do, who the day's plan has taken out of the day, and what today has settled. A number is how many days ahead.
+    _cmd_scene(arg, cmd, text): 
+    _cmd_state(arg, cmd, text): 
+    _cmd_schedule(arg, cmd, text): 
+    _cmd_tick(arg, cmd, text): 
+    _cmd_look(arg, cmd, text): 
+    _cmd_digest(arg, cmd, text): 
+    _cmd_snoop(arg, cmd, text): 
+    _cmd_compile(arg, cmd, text): 
+    _cmd_idle(arg, cmd, text): 
+    _cmd_reply(arg, cmd, text): 
+    _cmd_selfstart(arg, cmd, text): 
+    _cmd_impulse(arg, cmd, text): 
+    _cmd_pick(arg, cmd, text): 
+    _cmd_time(arg, cmd, text): 
+    _cmd_read(arg, cmd, text): 
+    _cmd_notes(arg, cmd, text): 
+    _cmd_x(arg, cmd, text): 
+    _cmd_memory(arg, cmd, text): 
+    _cmd_beliefs(arg, cmd, text): 
+    _cmd_graph(arg, cmd, text): 
+    _cmd_gauges(arg, cmd, text): 
+    _cmd_hazards(arg, cmd, text): 
+    _cmd_trains(arg, cmd, text): 
+    _cmd_rhythm(arg, cmd, text): 
+    _cmd_withhold(arg, cmd, text): 
+    _cmd_approach(arg, cmd, text): 
+    _cmd_sentiment(arg, cmd, text): 
+    _cmd_rupture(arg, cmd, text): 
+    _cmd_compare(arg, cmd, text): 
+    _cmd_spiral(arg, cmd, text): 
+    _cmd_ick(arg, cmd, text): 
+    _cmd_goals(arg, cmd, text): 
+    _cmd_commit(arg, cmd, text): 
+    _cmd_attach(arg, cmd, text): 
+    _cmd_where(arg, cmd, text): 
+    _cmd_family(arg, cmd, text): 
+    _cmd_care(arg, cmd, text): 
+    _cmd_reaction(arg, cmd, text): 
+    _cmd_kb(arg, cmd, text): 
+    _cmd_watch(arg, cmd, text): 
+    _cmd_scenery(arg, cmd, text): 
+    _cmd_discharge(arg, cmd, text): 
+    _cmd_wonder(arg, cmd, text): 
+    _cmd_expect(arg, cmd, text): 
+    _cmd_foresee(arg, cmd, text): 
+    _cmd_world(arg, cmd, text): 
+    _cmd_japan(arg, cmd, text): 
+    _cmd_npc(arg, cmd, text): 
+    _cmd_lives(arg, cmd, text): 
+    _cmd_remember(arg, cmd, text): 
+    _cmd_context(arg, cmd, text): 
+    _cmd_reflect(arg, cmd, text): 
+    _cmd_chat(arg, cmd, text): 
+    _cmd_recalls(arg, cmd, text): 
+    _cmd_morning(arg, cmd, text): 
+    _cmd_claims(arg, cmd, text): 
+    _cmd_intents(arg, cmd, text): 
+    _cmd_lookups(arg, cmd, text): 
+    _cmd_known(arg, cmd, text): 
+    _cmd_watching(arg, cmd, text): 
+    _cmd_money(arg, cmd, text): 
+    _cmd_gossip(arg, cmd, text): 
+    _cmd_orbit(arg, cmd, text): 
+    _cmd_bonds(arg, cmd, text): 
+    _cmd_missed(arg, cmd, text): 
+    _cmd_catchup(arg, cmd, text): 
+    _cmd_gap(arg, cmd, text): 
+    _cmd_provider(arg, cmd, text): 
+    _cmd_model(arg, cmd, text): 
+    _cmd_voicemodel(arg, cmd, text): 
+    _cmd_lang(arg, cmd, text): 
+    _cmd_swipe(arg, cmd, text): 
+    rebuild_reply_prompt(asked_id, store_id, model): A redraw of a reply that kept no prompt.  Nothing sent before the freeze went in has a `reply_prompts` row, and the array cannot be read back out of the record. It can be rebuilt -- a copy of the save cut back to the mom
+    _rebuild_worker(asked_id, store_id, hub_id, model): 
+    _swipe_pending(hub_id, note, reconstructed): Tell the chat what is happening to one of her messages, or that nothing is any more (an empty note). Only the messenger with a swipe control has the call; the fallback channel has nothing to show.
+    _cmd_sit(arg, cmd, text): 
+    _cmd_speed(arg, cmd, text): 
+    _cmd_attention(arg, cmd, text): 
+    _cmd_coherence(arg, cmd, text): 
+    _cmd_nudge(arg, cmd, text): 
+    _cmd_nudgeab(arg, cmd, text): 
+    _cmd_thread(arg, cmd, text): 
+    _cmd_stats(arg, cmd, text): 
+    _cmd_ledger(arg, cmd, text): 
+    _cmd_diet(arg, cmd, text): 
+    _cmd_health(arg, cmd, text): 
+    _cmd_beats(arg, cmd, text): 
+    _cmd_diary(arg, cmd, text): 
+    _cmd_week(arg, cmd, text): 
+    _cmd_threads(arg, cmd, text): 
+    _cmd_arcs(arg, cmd, text): 
+    _cmd_cast(arg, cmd, text): 
+    _cmd_places(arg, cmd, text): 
+    _cmd_showrun(arg, cmd, text): 
+    _cmd_castarcs(arg, cmd, text): 
+    _cmd_receipt(arg, cmd, text): 
+    _cmd_voice(arg, cmd, text): 
+    _cmd_derive(arg, cmd, text): 
+    _cmd_vision(arg, cmd, text): 
+    _cmd_say(arg, cmd, text): 
+    _cmd_send(arg, cmd, text): 
+    _cmd_anime(arg, cmd, text): 
+    _cmd_help(arg, cmd, text): 
+    _cmd_set(arg, cmd, text): 
+    _cmd_sweep(arg, cmd, text): 
+    _cmd_absurd(arg, cmd, text): 
+    _cmd_headless(arg, cmd, text): 
+    _cmd_voicecheck(arg, cmd, text): 
+    _cmd_ops(arg, cmd, text): 
+    help_text(arg): 
+    _context_command(arg): Her prompt, read back and corrected. Everything she is told is assembled per call and thrown away afterwards, so the only trace of why she believes a thing was a line of token counts in the log. `/context` shows the sect
+    tick(force, reading_text, extra_events): 
+    _x_his_likes_recent(): 
+    feed_backlog(): How many raw log entries have piled up behind her last look.  Counted off the file rather than through `Phone._pending`, because this is asked by a report: the pending range is what a look consumes, and a report must not
+    _morning_owed(): Today has no morning thought yet, she has already woken up, and it is still early enough for one to be honest.  The waking half is not optional: without it the date rolling over at her midnight counts as "no morning yet,
+    note_goals(): What she woke up wanting becomes a thing she is trying to do, rather than a line written to the store and read by nobody. The same want two mornings running is one want she is carrying.
+    assess_learned(what, source, context, gate, min_chars): Every route into her picture of him comes through here. The gates are about volume, not about significance: the app fires on every look and a two word message cannot contain anything, and neither is worth a call. Whether
+    _already_had(text): How much of a thing he just told her she already had, 0 to 1.  Measured against what is actually in front of her -- the digest of his machine and the things she is carrying about him -- by name rather than by wording, be
+    note_disclosure(bubbles): A thing she told him that the record did not already hold.  `disclosed` is the counterweight to `kept_private`, and it has never written once. Its only caller is the nightly compile's self-claims and her whole record hol
+    rupture_settled(row): A break that settled WORSE rather than mended puts him back outside her territory (his answer 3, `docs/yukarin-meters-plan.md` §3.4).  The rupture layer is the natural writer of this and does not know the method exists, 
+    on_talk(out): A finished exchange reaches her state the way his message does. Before this the state model saw the scene, his message and the app, and a talk with Rena reached it as one event line if at all -- so the people she spends 
+    note_pull(): Both sides of what she is pulled between, written straight onto the gauges. Code owns them -- the model is shown neither and can move neither -- because each is a pure function of the record: `longing` is what he is to h
+    maybe_spiral(scene): Whether she is going over something. Code decides when -- how wound up she is above her own rest, how unsettled she is with somebody, and whether there is an idle minute to do it in -- and the call only writes what. The 
+    maybe_revise(): A belief that has taken all it can take gets rewritten. Never in the same breath as the discovery that broke it: she talks herself out of things at the time and gives them up later, on her own, in a quiet moment.
+    maybe_discharge(scene, digest): A gauge at its end does something (sim/discharge.py). The rule names the behaviour; this is where it is carried out.
+    _primitives_tick(scene): Time passing, and whatever she could see of him this tick.  For a resident character this is the engine of the whole thing: she has none of him and he has all of her, and every window title is a piece of him taken withou
+    phone_moment(trigger, scene, digest, impulse, unread, in_write_path): One moment where something could be done and her phone is in her hand: she is asked what she does with it, and code does what she picks.  Returns what she decided, once it has been carried out, and None whenever code's o
+    act_on_pick(row, picked, scene, in_write_path): What she picked, done -- through the seam that tool already has.  A tool that is the mind's or the relationship's is carried out here; one that belongs to her world or her account is handed to the program, because what a
+    _at_her_time(when, now, default_minutes): A time she named, as an absolute stamp. `HH:MM` on her own clock is read; anything else is her words, which are kept verbatim on the record and are not a time code can act on -- so the default stands and the row says the
+    _plan_from_pick(decided, access, now): Her own answer about his message, as the reply plan the delivery path already runs on.  How long it takes her to NOTICE stays code's -- that is presence, not a decision -- and how long she takes to compose stays her stat
+    maybe_impulse(scene, digest, force_hint, media): 
+    write_him_first(scene, digest, hint_from_her, force_hint, media): The path a decision to write to him first runs down, whoever made it: the impulse function's yes, her own `text_him` pick, or a discharge. Returns whether anything actually went.  `hint_from_her` is her own account of wh
+    recover_lost_reply(): A reply that was generated but never sent. `maybe_reply` marks his message read before it generates, and delivery writes her bubbles to the store only once they have actually gone, so a stop in between leaves him read an
+    maybe_afterthought(): The bit she thinks of straight after she has already sent it: what she actually meant, the correction, wanting it back, or poking him because her own message sitting there unanswered is unbearable. Checked every pass rat
+    reply_plan(): 
+    reply_plan(v): 
+    maybe_reply(): 
+    ensure_voice(voice, bubbles, scene): Every reply speaks: if the persona did not write a [voice] line, the voice model does.
+    send_pending_sticker(): The sticker she put in a reply, sent after the words.  His rule (2026-08-27): a sticker is how she expresses a mood, hers to place and not his, and putting one down teaches the store that this picture is how SHE says tha
+    voice_gate(voice, scene, self_started): Decides whether a voice line she wrote actually gets spoken.
+    status(): 
+    maybe_watching(): Notice an episode he has played and go and read what happens in it.  Two local files per poll and nothing else on this thread; the fetch that follows opens a browser and runs on its own. Deliberately not tied to him sayi
+    _guarded(label, fn): One guard for a loop stage that must not take the pass down with it: the failure is logged under the stage's tag, by exception type, and the loop goes on. Every stage the loop runs bare is one whose failure should stop t
+    _situation_tick(): Where her body is, on the clock: a journey advancing, a line stopping under her, the day going into her legs. What happened is an event on the record and on the current scene.
+    _appraise_night(key): The day's messages read back once, now that the day is over; keyed to the night so a restart does not read it twice.
+    ordinary_tick(): One ordinary pass of her beat: the director tick, and everything that reads the scene it wrote -- what she pulls on, a spiral, a rupture aging, whether she writes first, her diary, the morning, what she is looking forwar
+    run(): 
+    shutdown(): 
+def _db_from_config(path): The save this character's config names. The lock is keyed to the save, and reading it from the command line alone meant a launcher that forgot `--db` locked the FIRST character's save while opening its own -- two bots on
+def main(argv, program): Run one character. The programs' entry points (`tomoe/run.py`, `resident/run.py`) call this after registering their own words; running `scail.py` directly is the first character with no words registered until the library
+
+CONFIG SECTIONS: afterthought, beliefs.enabled, care.enabled, cast.interrupt_salience, character, character.existence, character.name, character.user_name, commitments.enabled, delivery, delivery.busy_poll_max_seconds, delivery.busy_poll_seconds, delivery.recover_lost_reply_hours, delivery.reply_retries, director.coast_when_asleep, director.sleep_keywords, embed.enabled, environment.enabled, foresight, goals.enabled, health.enabled, ick, ick.about_her_top, impulse.threshold, json, logging.backup_dir, logging.backup_keep, logging.console_status_interval_seconds, logging.db_path, morning.enabled, morning.latest_hm, needs.enabled, needs.hungry_from, network.skip_model_work, notes.director_max_per_day, notes.enabled, path, pick, primitives, primitives.private_block_weight, recap, rhythm.enter_above, rhythm.glance_boost, rhythm.glance_ceiling, rhythm.he_left_extra_seconds, rhythm.stay_above, rupture.enabled, rupture.expel_severity, schedule.generate_at, schedule.max_replans_per_day, schedule.replan_on_change, sensor_view, sensor_view.x_actions_enabled, sensor_view.x_posting_enabled, sensors, sensors.telemetry_jsonl_path, sentiment, sentiment.enabled, spiral.enabled, state.llm_on_quiet_ticks, state.min_event_salience, state.world, stress.held_from, telegram.poll_seconds, timeline, tts, tts.always, tts.enabled, watching, weekly.enabled, weekly.weekday, withholding.enabled
+KV READ: afterthought_counts, afterthought_for_ts, afterthought_ignored_ts, anime_shelf_hint_pending, anticipation, anticipation_done, cast_chat, charged, compiled_dates, director_last_model_ts, gaps, ick_digest_last_ts, instructions_override, intent_counts, missed_calls, missed_calls_done, morning_intent, note_open_counts, open_threads, pending_sticker, phone_last_consumed_id, primitives_ts, private_block, recalls, reflections, replan_counts, replays, reply_plan, reply_retries, self_claims, sleep_scene_night, voice_counts, voice_last_ts, wake_days, watching_cursor, watching_fetch_counts, watching_held, watching_last, watching_queue, watching_short, weekly_self, withholding, wonder_seed, x_action_queue, x_japan, x_taste
+KV WRITE: anime_shelf_hint_pending, anticipation, anticipation_done, compiled_dates, director_last_model_ts, director_last_tick_ts, gaps, gauges, gauges_ts, health_note_today, ick_digest_last_ts, instructions_override, last_meal_ts, missed_calls, missed_calls_done, money_note_today, pending_sticker, phone_last_consumed_id, primitives_ts, private_block, relationship_derived, relationships, replays, reply_plan, reply_retries, sleep_scene_night, voice_last_ts, wake_days, watching_cursor, watching_last, watching_seen, zeitgeist_last_ts
+TABLES: 
+LOG TAGS: affection, afterthought, anime, anticipation, approach, attach, backup, boot, care, circle, coherence, commit, day, director, discharge, embed, episodes, expect, fatal, foresee, goals, him, ick, impulse, lookup, loop, ops, peer, phone, pick, primitives, program, recall, records, replay, reply, rhythm, roles, rupture, sentiment, sim, spiral, stance, state, status, sticker, stress, swipe, talkapp, threads, timeline, vision, voice, watching, watchlist, where, wiring, withhold, wonder, world
+PROMPTS: 
+LLM ROLES: after_phone_look, after_reflection, after_scene, after_self_start, after_situation, after_tick, asleep_pass, before_generate, before_reply, compile, compile_hold, day_planned, every_pass, exchange_live, late_pass, loop_pass, maybe_snoop, maybe_zeitgeist, on_his_message, pick_act, replan, sent_with_media, shutdown, start, tick_events, watch_sources
+OPS COMMANDS: /self

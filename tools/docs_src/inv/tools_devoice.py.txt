@@ -1,0 +1,42 @@
+# tools\devoice.py  (231 lines)
+
+DOCSTRING:
+Rewrite the poisoned text already in the save, in her register.
+
+The prompts were fixed, and the loops that fed her own phrasing back to her
+were cut, but the store still holds months of text written in a voice she does
+not have: similes that land, feelings located in her ribs, sentences built so
+the good part arrives last. All of it comes back into her context -- messages
+as literal history, scenes as the director's recent record, memories and day
+narratives through recall -- so it keeps teaching.
+
+This rewrites HER SIDE ONLY. His messages are never touched, never rewritten,
+never shown to the model as something to change: what he said is what he said.
+Rows are addressed by primary key, which every row has, rather than by any
+Telegram id, which only her recent bubbles carry.
+
+Nothing that happened is allowed to change. Same facts, same events, same
+order, same length roughly, same Japanese and kaomoji: only the phrasing moves.
+
+    python tools/devoice.py scan
+    python tools/devoice.py run --dry [--table messages] [--limit 40]
+    python tools/devoice.py run --yes
+
+A copy of the database is made before anything is written.
+
+DEFS:
+def _rows(con, table): 
+def _write(con, table, rowid, text): 
+def scan(args): 
+def run(args): 
+def _db(args): Her save, off her own config.
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: devoice
+OPS COMMANDS: 

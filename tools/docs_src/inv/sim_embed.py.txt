@@ -1,0 +1,62 @@
+# sim\embed.py  (357 lines)
+
+DOCSTRING:
+Sentence embeddings for retrieval, local, on his GPU.
+
+The record is searched by words (`sim/textutil.words`: Latin words, CJK
+bigrams), which is exact and cheap and cannot see that 「浴衣のこと」 and
+"the yukata evening" are the same thing, or that a paraphrase names an
+evening whose card used other words. A multilingual sentence embedding
+can. One small model (`embed.model`, multilingual-e5 by default: query and
+passage prefixes, normalised vectors, so cosine is a dot product), loaded
+on first use, vectors kept in the save in a side table keyed by what they
+are of, so nothing is embedded twice and a pool that has never been asked
+costs nothing.
+
+This is a scorer, not a store of meaning: every reader combines the cosine
+with the pool's own score (a fact's fade, a card's age) and with the word
+overlap, and there is a floor under which a cosine counts for nothing --
+which is what makes the rest a signal.
+
+**The floor is measured on the save it is used on, once per boot**
+(`_calibrate`), because it is not the same number on two saves: a Japanese
+cue against Japanese rows sits about 0.06 higher than an English cue against
+English rows, so the hand-set 0.80 that leaves 9% of the first character's
+facts above it left 100% of the second character's own memories above it and
+counted her whole pool as a hit on every cue. Each pool takes a sample of
+real cues from this save's record, scores them against a sample of its own
+stored vectors, and puts its floor a margin above the 90th percentile of
+that. `embed.min_cos` and `cos_by_pool` are the fallback for a pool with too
+few rows to measure, and `embed.calibrate` false restores them everywhere.
+
+Off (`embed.enabled` false, or the library missing) every reader falls back
+to words alone and says so once.
+
+DEFS:
+def cued(embed, kind, items, cue_text, word_scores, write, load, row_words, cue_words, cap, stats): One retrieval score per row of a pool: the word score it already has plus the cosine of the cue against it, and a row the words missed joins on its cosine alone once that clears `embed.min_cos`.  `items` is [(ref, text)]
+class Embeddings: 
+    __init__(config, store): 
+    _ensure(): 
+    available(): 
+    loaded(): Is the model in memory already? The persona runs on the loop thread, so it asks for meaning only when the answer is free: the first load of the model takes seconds and the backfill thread is what pays for it.
+    _load(): 
+    _encode(texts, prefix): 
+    vectors(kind, items, write): `items`: [(ref, text)]. The stored vector for each, the missing ones embedded now and kept. Returns {ref: vec} (refs as str).  `write=False` reads what is already stored and embeds nothing: for a caller on the loop threa
+    forget(kind, refs): Drop the vectors of rows that were rewritten (a day recompiled).
+    query(text, load): The vector of a cue, or None when embeddings are off. `load=False` answers None rather than loading the model, for a caller that must not block.
+    cosine(q, vec): 
+    _configured(pool): The floor and the full-weight point the config gives a pool.
+    _cues(n): A sample of real cues from this save's own record: what he wrote and what she wrote, which is most of what a moment cue is made of (`sim/recall.moment_cue`). Spread over the record rather than taken from the end, so one 
+    _calibrate(pool): This pool's floor, measured once per boot on this save's own rows.  The pair that has to be measured is the one the retrieval actually makes: a CUE, asked with the query prefix, against a stored row, which was written wi
+    centred(cos, pool, ref): This cosine with the ROW's own average taken out.  A row's mean cosine over unrelated cues varies by 0.035 across a pool whose whole scoring band is 0.07 wide, so the most central rows answered cues they had nothing to d
+    score(cos, pool, ref): A cosine as a retrieval score: nothing under the pool's floor, rising to `weight` at its top and capped there.  The pool's own measured floor if it has one (`_calibrate`, once per boot on this save's rows), otherwise the
+    report(): 
+
+CONFIG SECTIONS: embed, embed.batch_size, embed.enabled, embed.model
+KV READ: 
+KV WRITE: 
+TABLES: embeddings
+LOG TAGS: embed
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,40 @@
+# tools\voicelint.py  (150 lines)
+
+DOCSTRING:
+Run the voice rules over the exchanges already in the save and show what
+they would flag.
+
+The rules in `data/voice_rules.json` are regexes over Japanese, and a regex
+written by eye is a guess. This runs the real checker over the real record --
+every turn in kv `cast_chat` -- so a rule can be measured before it is
+trusted: what it catches, what it catches wrongly, and how much of each
+speaker it would light up.
+
+Read-only. Touches no model and no live state; the save is opened read-only,
+so it is safe against the running bot.
+
+    python tools/voicelint.py                  # every speaker, every rule
+    python tools/voicelint.py --rule kansai    # one rule
+    python tools/voicelint.py --who Tomoe      # one speaker
+    python tools/voicelint.py --lines          # every hit, not just a count
+
+The family caveat: her Hakata is hers at home, so a rule with `skip_when`
+naming "family" is suppressed for her turns inside a non-group exchange
+opened by her mother, father or brother -- reconstructed here the way
+`Exchange._speak` does it live. The "slip" context cannot be reconstructed,
+because the gauges of the moment are not stored on the turn, so a handful of
+her flagged lines were legitimately licensed when they were written. The
+count is an upper bound.
+
+DEFS:
+def turns_from(config, db_path): Every stored turn, with the context its exchange gives it.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

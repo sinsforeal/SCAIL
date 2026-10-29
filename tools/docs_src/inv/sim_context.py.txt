@@ -1,0 +1,33 @@
+# sim\context.py  (349 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _flat(text): 
+class ContextView: 
+    __init__(config, store, clock, persona, memory, state, director, phone): 
+    snapshot(fit): The prompt as it stands: the system sections, the literal history and the situation block. `fit` applies the same trimming a real call would, so what he reads is what she would be sent.
+    overview(): 
+    show(name): One section, numbered where its items can be addressed.
+    find(needle): Where a thing appears in what she is told. The answer to 'why does she keep saying that' is usually one line in one section.
+    dump(): The whole prompt to a file, in the order the model receives it.
+    items(name): The section's items as plain strings, oldest first, 1-based when addressed. None means the section has no items to address.
+    probes(name): The bare text of each item, in the same order, for testing whether it made it into the prompt (the display strings carry weights and dates that the prompt does not).
+    count(name): 
+    _cast_names(): 
+    delete(name, n): 
+    replace(name, n, text): 
+    add(name, text): 
+    messages(n): 
+    message_set(mid, text): 
+    message_del(mid): 
+
+CONFIG SECTIONS: 
+KV READ: backstory
+KV WRITE: backstory
+TABLES: 
+LOG TAGS: context
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

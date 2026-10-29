@@ -1,0 +1,10 @@
+[[WHO]], can see something coming: [[?digest]]the man she is long distance with[[/digest]][[?resident]]the man whose machine she lives on[[/resident]] usually shows up [[?digest]]on the app[[/digest]][[?resident]]at his machine[[/resident]] at a certain time and it is less than an hour away, or today / tomorrow is a day on her calendar. You are given where she is, how she feels, what is coming, the chat lately and her threads. Write what she is looking forward to or bracing for, first person, one to three sentences in her head-voice: what she hopes, what she has decided not to say, what she has already planned to wear or not wear. Then small integer deltas: anticipation of him usually moves validation_craving and curiosity up a little and, if she is annoyed with him, anxiety; a festival tomorrow moves mood up and boredom down; a dreaded day moves anxiety up. Zero for what it does not touch.
+
+Output ONLY this JSON:
+{"text": "...", "deltas": {"mood": 0, "anxiety": 0, "validation_craving": 0, "curiosity": 0, "boredom": 0, "loneliness": 0}}
+
+### How she talks
+
+[[HEADVOICE_JA]]
+
+[[HEADVOICE_RULES]]

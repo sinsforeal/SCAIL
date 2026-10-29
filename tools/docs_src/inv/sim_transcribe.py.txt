@@ -1,0 +1,70 @@
+# sim\transcribe.py  (280 lines)
+
+DOCSTRING:
+The episode transcribed on this machine, when nothing could be fetched.
+
+Every source above this one can come away with nothing, and does: three of the
+five episodes looked for in one fortnight are in neither internet archive at
+all, under any name. What is always there is the file he played. So the last
+step is to listen to it.
+
+**His own install does the work.** `Faster-Whisper-XXL Pro` sits on this
+machine with his own `processor.bat` beside it, and the command built here is
+the one that batch file builds -- Japanese, transcribe, the large model, SRT
+out, `cuda:0`, and his own flags after them -- so his batch file stays the
+reference and this follows it. Nothing under that directory is touched. The
+exe takes the video and writes the subtitle itself; there is no separate audio
+extraction and the video is never opened by this code for anything.
+
+**Where the result goes.** Beside the video, under the video's own stem, so
+his player finds it the next time he opens the file -- unless something is
+already there under that name, which is the sidecar case and was read one step
+earlier. And into the episode archive
+(`data/recaps/<show>/ep<NNN>/subtitle-01-*.srt`) with its origin noted, so the
+rest of the path -- the same qualification, the same account of the scenes,
+the same anchor over the web candidates -- does not know the difference.
+
+**Three restraints, and the reason for each.** It is minutes of a GPU that the
+reaction-image tool also wants, so: never on the reply path or the poll (the
+caller is already a worker thread), at most `recap.whisper_max_per_day` a day,
+nothing longer than `recap.whisper_max_minutes`, and only once he has watched
+at least `recap.whisper_min_watched_minutes` of it. That last one is a
+different question from whether the episode counts as watched at all
+(`watching.min_minutes_in`, three minutes): three minutes says he did not just
+brush the file, ten minutes says he settled into it, and paying for a GPU job
+is worth the stronger evidence. The fetching steps are gated on the first and
+not on this.
+
+**One run between the two characters.** The claim and the answer go in the
+machine's own store of what was fetched about the world (`machine/
+retrievals.py`, pool `whisper`), keyed on the work and the episode and never
+on a character, so the second character gets the text without the GPU running
+twice.
+
+spec: docs/recap.md
+
+DEFS:
+class Transcribe: 
+    __init__(config, store, clock, archive, retrievals): 
+    _c(key, default): 
+    available(): (True, "") when the transcriber is on this machine, else (False, why). Said once at boot rather than at the first miss.
+    boot_line(): 
+    minutes_of(video): The file's length in minutes, or 0.0 when nobody can say. Read only: the probe opens the container's header and nothing else.
+    _today(): 
+    spent_today(): 
+    _note_run(): 
+    _floor_minutes(): How long he must have sat through the file before it is worth minutes of the GPU -- and it is ONE number with the gate that decided the play was a watch at all (`watching.min_watched_minutes`), not a second one beside it
+    why_not(video, watched_seconds): Why this episode will not be transcribed, or "" when it will.
+    _command(video, out_dir): 
+    for_episode(video, watched_seconds, show_key, ep, show, ja, shared_key, retrievals): Transcribe the episode he played. Returns the same shape a fetched file returns, or None.  NEVER call this from the reply path or the poll: it is minutes of GPU on the calling thread. Its one caller is the watching worke
+    _beside_the_video(video, text): His player should find it next time. Never over the top of a file that is already there -- that one is his, or it is the sidecar this step only runs because there was not one.
+    _run(video, show_key, ep, show, ja): One run of his transcriber. Returns the SRT text, or "".
+
+CONFIG SECTIONS: recap, watching
+KV READ: whisper_counts
+KV WRITE: whisper_counts
+TABLES: 
+LOG TAGS: subs
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

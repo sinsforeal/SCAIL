@@ -1,0 +1,54 @@
+# tools\second_world_retire.py  (204 lines)
+
+DOCSTRING:
+Retire the second world a world READER built in her own save.
+
+A character who is in a world somebody else keeps runs none of the machinery
+that writes it (`docs/shared-world.md` §8). The rule landed after such a
+character had already been running for forty-five minutes, and what she wrote
+in that time is still in her save: her own draw of the roster's week, her own
+day's script for people whose day the owner had already fixed, her own pool of
+rumours, her own orbit and her own edges. The planner is gated now, so nothing
+new is written -- but a plan already in the record keeps coming due on her
+clock, and every subsystem that READS one of those keys reads the second
+world's answer rather than the owner's.
+
+So the rows are moved out of the save and into a file under
+`data/retired/`, and deleted. Never edited in place, never merged with the
+world file: they are one process's answer to a question that is not its own,
+and the honest thing to do with them is keep them where a person can read them
+and take them out of the running record.
+
+Two jobs, one marker:
+
+1. the world-writing keys and the `events` rows of kind `cast` (the only
+   writer of that kind is the day's beat delivery, which a reader now
+   refuses);
+2. one repair of her record of the rooms she is in that somebody else owns
+   (kv `peer_rooms`): a turn filed twice, once under the name of the process
+   that relayed it and once under whoever actually said it, is one turn, and
+   every turn is stamped with the day it was said on.
+
+`tomoe/app.py retire_second_world_once` runs this at the reader's next boot.
+On a stopped save it is also a command:
+
+    python tools/second_world_retire.py --db <save> --out <file.json> [--apply]
+
+Nobody is named here. Which character this is comes from the save it is
+pointed at.
+
+DEFS:
+def _decode(text): The stored value as data where it parses, and as its own text where it does not: the file is for a person to read, and a value that will not decode is still worth keeping verbatim.
+def collect(conn): What is in this save that belongs to a world she does not keep.
+def repair_rooms(conn, apply, log): Her record of a room somebody else owns, cleaned once.  Two things. A turn that arrived twice -- inside the ask that wanted her words, where it carried the real speaker and no clock, and as the relay of that same turn, w
+def retire(conn, out_path, apply, log): Move the second world out of this save. Returns the summary dict.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

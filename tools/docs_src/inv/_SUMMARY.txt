@@ -1,0 +1,310 @@
+atomic.py: 109 lines, 3 defs, cfg 
+config.py: 7960 lines, 30 defs, cfg character, environment, json, py, raw, state
+llm.py: 1314 lines, 36 defs, cfg api, model, py, raw, roles_off
+logger.py: 135 lines, 8 defs, cfg 
+netwatch.py: 103 lines, 9 defs, cfg 
+scail.py: 4924 lines, 192 defs, cfg afterthought, beliefs, care, cast, character, commitments, delivery, director, e
+singleton.py: 111 lines, 9 defs, cfg 
+store.py: 525 lines, 60 defs, cfg 
+world\calendar.py: 206 lines, 16 defs, cfg character, world
+world\clock.py: 247 lines, 27 defs, cfg character, clock, world
+world\rails.py: 215 lines, 8 defs, cfg 
+world\shared.py: 766 lines, 47 defs, cfg character, world
+world\weather.py: 156 lines, 8 defs, cfg character, world
+embodied\body.py: 256 lines, 14 defs, cfg environment, health, needs
+embodied\health.py: 568 lines, 16 defs, cfg environment, health, schedule
+embodied\money.py: 202 lines, 18 defs, cfg money
+embodied\situation.py: 915 lines, 40 defs, cfg conditions, environment, needs, situation, state, world
+sim\agenda.py: 334 lines, 16 defs, cfg agenda, character, commitments, expect
+sim\anime_kb.py: 1015 lines, 42 defs, cfg 
+sim\anime_sense.py: 428 lines, 16 defs, cfg anime_sense
+sim\appraisal.py: 220 lines, 10 defs, cfg affection, role_system
+sim\approach.py: 232 lines, 10 defs, cfg approach, prompt_text
+sim\attachment.py: 587 lines, 30 defs, cfg attachment, character, raw, self_memory, sentiment
+sim\attention.py: 389 lines, 19 defs, cfg attention
+sim\cards.py: 502 lines, 27 defs, cfg character, delivery, episodes, prompt_text
+sim\care.py: 217 lines, 7 defs, cfg care
+sim\chattext.py: 25 lines, 1 defs, cfg 
+sim\coherence.py: 237 lines, 10 defs, cfg character, coherence, prompt_text
+sim\commitments.py: 1194 lines, 52 defs, cfg character, commitments, prompt_text, self_memory
+sim\context.py: 349 lines, 18 defs, cfg 
+sim\derive.py: 176 lines, 4 defs, cfg derive
+sim\diary.py: 262 lines, 10 defs, cfg character, diary, role_system, state
+sim\director.py: 687 lines, 27 defs, cfg director, environment, goals, needs, prompt_text, spiral
+sim\discharge.py: 136 lines, 9 defs, cfg state
+sim\downtime.py: 279 lines, 10 defs, cfg 
+sim\embed.py: 357 lines, 18 defs, cfg embed
+sim\episode_account.py: 625 lines, 22 defs, cfg model, prompt_text, recap
+sim\episode_archive.py: 180 lines, 12 defs, cfg 
+sim\episodes.py: 25 lines, 4 defs, cfg 
+sim\eroge.py: 263 lines, 10 defs, cfg character, eroge, prompt_text
+sim\existence.py: 47 lines, 5 defs, cfg 
+sim\expectations.py: 442 lines, 22 defs, cfg expect, prompt_text, situation_block
+sim\foresight.py: 338 lines, 15 defs, cfg foresight, role_system
+sim\goals.py: 418 lines, 24 defs, cfg goals, self_memory
+sim\him_profile.py: 118 lines, 8 defs, cfg him_profile, prompt_text
+sim\household.py: 164 lines, 8 defs, cfg household
+sim\ick.py: 424 lines, 21 defs, cfg ick, prompt_text
+sim\impulse.py: 266 lines, 8 defs, cfg impulse, resident
+sim\inflight.py: 209 lines, 15 defs, cfg 
+sim\initiative.py: 232 lines, 13 defs, cfg impulse
+sim\intent.py: 205 lines, 8 defs, cfg intent, role_system
+sim\known.py: 221 lines, 14 defs, cfg lookup
+sim\lang.py: 382 lines, 19 defs, cfg 
+sim\ledger.py: 551 lines, 27 defs, cfg situation, situation_block, world
+sim\lookup.py: 885 lines, 29 defs, cfg lookup, model, prompt_text, sensor_view
+sim\lore.py: 533 lines, 14 defs, cfg lore
+sim\lore_rooms.py: 118 lines, 6 defs, cfg lore, situation_block
+sim\memory.py: 462 lines, 23 defs, cfg context, memory
+sim\model_of_her.py: 78 lines, 4 defs, cfg beliefs
+sim\model_of_him.py: 425 lines, 19 defs, cfg beliefs, character, ick, prompt_text, role_system
+sim\notes.py: 120 lines, 6 defs, cfg notes, prompt_text, sensor_view, sensors
+sim\nudge.py: 283 lines, 14 defs, cfg nudge, role_system
+sim\observer.py: 137 lines, 5 defs, cfg prompt_text
+sim\ops.py: 521 lines, 19 defs, cfg attention, curation, eroge, scenery, sensor_view, state, vault_snoop
+sim\outlook.py: 289 lines, 13 defs, cfg anticipation, beliefs, experience, morning, role_system
+sim\peers.py: 884 lines, 38 defs, cfg character, peer_talk, prompt_text, read_text
+sim\phone.py: 957 lines, 29 defs, cfg phone, prompt_text, resident, sensor_view, sensors
+sim\pick.py: 1076 lines, 41 defs, cfg api, character, pick, wonder
+sim\pocket.py: 211 lines, 11 defs, cfg 
+sim\primitives.py: 851 lines, 43 defs, cfg primitives
+sim\reactions.py: 351 lines, 15 defs, cfg reactions, state
+sim\recall.py: 797 lines, 21 defs, cfg embed, recall, role_system, self_memory, thread
+sim\recap.py: 2354 lines, 77 defs, cfg model, prompt_text, py, recap
+sim\receipts.py: 175 lines, 9 defs, cfg character, receipts, talkapp
+sim\reconcile.py: 442 lines, 21 defs, cfg character, prompt_text, reconcile
+sim\reconstruct.py: 276 lines, 8 defs, cfg 
+sim\record_guard.py: 145 lines, 4 defs, cfg 
+sim\records.py: 407 lines, 28 defs, cfg cast_defaults, director, places, showrunner, threads
+sim\reflect.py: 331 lines, 14 defs, cfg prompt_text, reflect, role_system
+sim\repairs.py: 708 lines, 11 defs, cfg character
+sim\resolver.py: 290 lines, 11 defs, cfg model, prompt_text, which_one
+sim\rhythm.py: 445 lines, 21 defs, cfg delivery, prompt_text, rhythm
+sim\rooms.py: 433 lines, 25 defs, cfg 
+sim\roster.py: 713 lines, 31 defs, cfg character
+sim\rupture.py: 376 lines, 18 defs, cfg prompt_text, rupture, self_memory, sentiment
+sim\said_today.py: 257 lines, 19 defs, cfg exchange
+sim\schedule.py: 249 lines, 8 defs, cfg health, schedule
+sim\seed_memories.py: 369 lines, 13 defs, cfg embed
+sim\seen_images.py: 115 lines, 8 defs, cfg 
+sim\self_memory.py: 686 lines, 27 defs, cfg character, prompt_text, self_memory, state
+sim\sentiment.py: 487 lines, 27 defs, cfg sentiment
+sim\shape.py: 311 lines, 11 defs, cfg shape
+sim\sight.py: 61 lines, 4 defs, cfg character, resident
+sim\spiral.py: 512 lines, 24 defs, cfg prompt_text, role_system, self_memory, spiral, state
+sim\stances.py: 437 lines, 14 defs, cfg ick, primitives, stances
+sim\state.py: 1946 lines, 65 defs, cfg character, contagion, delivery, impulse, needs, primitives, prompt_text, rupture
+sim\stress.py: 251 lines, 10 defs, cfg stress
+sim\subtitles.py: 643 lines, 34 defs, cfg recap
+sim\sweep.py: 169 lines, 3 defs, cfg state, withholding
+sim\talks.py: 42 lines, 4 defs, cfg 
+sim\textutil.py: 215 lines, 8 defs, cfg 
+sim\thread.py: 1045 lines, 28 defs, cfg context, delivery, episodes, thread, tts
+sim\timeline.py: 353 lines, 5 defs, cfg character, prompt_text, role_system, self_memory, showrunner, timeline
+sim\transcribe.py: 280 lines, 15 defs, cfg recap, watching
+sim\transcripts.py: 340 lines, 13 defs, cfg character, prompt_text, recap
+sim\voicecheck.py: 177 lines, 4 defs, cfg character
+sim\watching_him.py: 2471 lines, 72 defs, cfg resident, role_check, sensors, watching
+sim\watchlist.py: 210 lines, 17 defs, cfg prompt_text, watchlist
+sim\wiring.py: 46 lines, 4 defs, cfg 
+sim\withholding.py: 500 lines, 18 defs, cfg prompt_text, withholding
+sim\wonder.py: 395 lines, 23 defs, cfg prompt_text, role_system, state, wonder
+sim\works.py: 966 lines, 28 defs, cfg role_check
+sim\worldshare.py: 71 lines, 5 defs, cfg 
+persona\delivery.py: 536 lines, 23 defs, cfg character, delivery, model, raw, tts
+persona\persona.py: 2382 lines, 60 defs, cfg anime_sense, attention, beliefs, character, delivery, goals, ick, lookup, lore, 
+persona\sections.py: 107 lines, 2 defs, cfg 
+tomoe\app.py: 1247 lines, 41 defs, cfg curation, json, logging, path, posting, scenery, social, timeline, vault_snoop, 
+tomoe\briefs.py: 185 lines, 5 defs, cfg character, world
+tomoe\carried.py: 164 lines, 5 defs, cfg exchange
+tomoe\cast.py: 2425 lines, 77 defs, cfg cast, character, exchange, prompt_text, world
+tomoe\cast_arcs.py: 481 lines, 21 defs, cfg cast, cast_arcs, prompt_text, showrunner
+tomoe\cast_mechanisms.py: 558 lines, 27 defs, cfg cast, character, raw
+tomoe\cast_psych.py: 444 lines, 22 defs, cfg cast_bond, prompt_text
+tomoe\compare.py: 315 lines, 13 defs, cfg compare, reflect, role_system, sentiment, state
+tomoe\curation.py: 590 lines, 25 defs, cfg curation, role_system, sensor_view
+tomoe\diet.py: 91 lines, 8 defs, cfg diet, sensor_view
+tomoe\events.py: 202 lines, 9 defs, cfg commitments, events, prompt_text
+tomoe\exchange.py: 2701 lines, 81 defs, cfg attention, cast, character, exchange, prompt_text, read_text, sentiment
+tomoe\family.py: 424 lines, 17 defs, cfg family
+tomoe\gossip.py: 364 lines, 19 defs, cfg gossip, prompt_text
+tomoe\npc.py: 491 lines, 20 defs, cfg json, npc, prompt_text, self_memory
+tomoe\orbit.py: 295 lines, 17 defs, cfg character, orbit, prompt_text
+tomoe\posting.py: 356 lines, 13 defs, cfg character, curation, posting, prompt_text, read_text, sensor_view, social
+tomoe\replies.py: 314 lines, 18 defs, cfg character, prompt_text, read_text, role_system, social, x
+tomoe\run.py: 21 lines, 0 defs, cfg json
+tomoe\scenery.py: 1288 lines, 55 defs, cfg prompt_text, scenery, world
+tomoe\schedule.py: 437 lines, 10 defs, cfg prompt_text, world
+tomoe\share_pick.py: 267 lines, 11 defs, cfg prompt_text, share_pick
+tomoe\snoop.py: 184 lines, 5 defs, cfg prompt_text, sensor_view, sensors, vault_snoop
+tomoe\social.py: 1212 lines, 52 defs, cfg role_system, sensor_view, sensors, social, vision
+tomoe\social_graph.py: 381 lines, 20 defs, cfg prompt_text, social_graph
+tomoe\stickers.py: 102 lines, 5 defs, cfg character
+tomoe\taste.py: 193 lines, 14 defs, cfg curation, role_system, sensor_view, taste, world
+tomoe\words.py: 240 lines, 0 defs, cfg 
+tomoe/world\hazards.py: 1034 lines, 34 defs, cfg hazards
+tomoe/world\trains.py: 253 lines, 11 defs, cfg raw, trains
+tomoe/world\zeitgeist.py: 105 lines, 7 defs, cfg world
+resident\app.py: 143 lines, 7 defs, cfg 
+resident\run.py: 27 lines, 0 defs, cfg 
+resident\schedule.py: 132 lines, 2 defs, cfg director, prompt_text, world
+resident\sight.py: 630 lines, 24 defs, cfg notes, resident_sight, sensor_view, situation_block
+resident\words.py: 211 lines, 0 defs, cfg 
+machine\collector.py: 134 lines, 2 defs, cfg json
+machine\dossier.py: 1332 lines, 48 defs, cfg json, py
+machine\episode_reports.py: 489 lines, 22 defs, cfg 
+machine\monitor_client.py: 112 lines, 10 defs, cfg telemetry_now_path
+machine\plays.py: 351 lines, 14 defs, cfg 
+machine\retrievals.py: 423 lines, 26 defs, cfg character
+sensors\bands.py: 135 lines, 7 defs, cfg 
+sensors\blocklist.py: 85 lines, 3 defs, cfg 
+sensors\chrome_ext.py: 90 lines, 3 defs, cfg 
+sensors\chrome_monitor.py: 244 lines, 8 defs, cfg chrome_history_path, chrome_idle_gap_threshold_minutes, chrome_junk_filters, fir
+sensors\chrome_reaper.py: 230 lines, 7 defs, cfg 
+sensors\eroge_monitor.py: 483 lines, 17 defs, cfg eroge
+sensors\gelbooru_classifier.py: 241 lines, 10 defs, cfg gelbooru_api_key, gelbooru_cache_path, gelbooru_cleaned_json_path, gelbooru_grou
+sensors\image_tags.py: 121 lines, 9 defs, cfg 
+sensors\mal_monitor.py: 381 lines, 16 defs, cfg mal_client_id, mal_enabled, mal_list_path, mal_list_refresh_hours, mal_poll_minu
+sensors\media_monitor.py: 196 lines, 5 defs, cfg audacious_process_names
+sensors\system_monitor.py: 916 lines, 35 defs, cfg chrome_process_names, chrome_scrape_enabled, chrome_scrape_interaction_threshold
+sensors\telemetry_collector.py: 490 lines, 17 defs, cfg firefox_enabled, telemetry_flush_request_path, telemetry_flush_threshold_chars, 
+sensors\torrent_monitor.py: 119 lines, 6 defs, cfg 
+sensors\vault_monitor.py: 203 lines, 10 defs, cfg vault_extensions, vault_ignore_patterns, vault_path
+sensors\vision.py: 328 lines, 14 defs, cfg read_text, vision
+sensors\vndb.py: 152 lines, 5 defs, cfg 
+sensors\web_scraper.py: 288 lines, 11 defs, cfg chrome_cdp_port, chrome_history_path, chrome_scrape_max_text_length, scrape_log_
+sensors\x_monitor.py: 1282 lines, 54 defs, cfg x_data_dir, x_feed_scrolls_max, x_feed_scrolls_min, x_followers_scrolls, x_follo
+channels\base.py: 60 lines, 10 defs, cfg 
+channels\talkapp_bot.py: 597 lines, 32 defs, cfg character, resident, talkapp, telegram, tts
+channels\telegram_bot.py: 270 lines, 16 defs, cfg telegram
+channels\tts_handler.py: 337 lines, 22 defs, cfg character, tts
+talkapp\server.py: 1205 lines, 60 defs, cfg json, talkapp
+tools\absurd.py: 1194 lines, 30 defs, cfg json
+tools\agent_audit.py: 785 lines, 31 defs, cfg 
+tools\agent_rehearsal.py: 1183 lines, 51 defs, cfg character, diary, state, world
+tools\agent_seam_test.py: 468 lines, 15 defs, cfg character, exchange, json
+tools\atomic_test.py: 156 lines, 8 defs, cfg 
+tools\attachment_test.py: 247 lines, 2 defs, cfg attachment
+tools\blank_paths.py: 328 lines, 10 defs, cfg json
+tools\boot_her.py: 105 lines, 1 defs, cfg 
+tools\bot_model_test.py: 296 lines, 10 defs, cfg json
+tools\cast_mechanisms_test.py: 266 lines, 2 defs, cfg json
+tools\cast_type_test.py: 247 lines, 5 defs, cfg json
+tools\character_leaks.py: 362 lines, 8 defs, cfg 
+tools\character_names.py: 585 lines, 15 defs, cfg py
+tools\character_test.py: 249 lines, 6 defs, cfg json, py
+tools\chat_project.py: 225 lines, 14 defs, cfg 
+tools\checks_index.py: 125 lines, 5 defs, cfg 
+tools\codebook_check.py: 256 lines, 4 defs, cfg 
+tools\companion_arc.py: 118 lines, 1 defs, cfg state
+tools\compare_test.py: 88 lines, 1 defs, cfg sentiment, spiral, state
+tools\compile_audit.py: 376 lines, 16 defs, cfg character, coherence, json, logging, timeline
+tools\compile_type.py: 484 lines, 19 defs, cfg cast, json
+tools\context_audit.py: 198 lines, 8 defs, cfg 
+tools\context_sim.py: 166 lines, 1 defs, cfg context, json, raw
+tools\dbcopy.py: 25 lines, 1 defs, cfg 
+tools\defaults_person_test.py: 136 lines, 2 defs, cfg json, py
+tools\devoice.py: 231 lines, 6 defs, cfg json
+tools\discharge_test.py: 85 lines, 1 defs, cfg state
+tools\docs_assemble.py: 96 lines, 0 defs, cfg py
+tools\docs_check.py: 236 lines, 4 defs, cfg json, py
+tools\docs_inventory.py: 77 lines, 0 defs, cfg py
+tools\dupscan.py: 171 lines, 7 defs, cfg 
+tools\episode_account.py: 253 lines, 7 defs, cfg json
+tools\episode_slice_test.py: 144 lines, 1 defs, cfg json
+tools\eroge_test.py: 375 lines, 6 defs, cfg eroge, sensors
+tools\existence_matrix.py: 470 lines, 9 defs, cfg json
+tools\expect_test.py: 124 lines, 1 defs, cfg 
+tools\family_test.py: 109 lines, 1 defs, cfg 
+tools\festival_close.py: 353 lines, 9 defs, cfg json, world
+tools\fills_check.py: 165 lines, 7 defs, cfg 
+tools\flush_test.py: 257 lines, 11 defs, cfg json
+tools\forge.py: 374 lines, 13 defs, cfg 
+tools\fork_gate.py: 92 lines, 2 defs, cfg 
+tools\fork_merge.py: 112 lines, 2 defs, cfg 
+tools\gaps_test.py: 121 lines, 1 defs, cfg state
+tools\gauge_ab.py: 316 lines, 8 defs, cfg 
+tools\harness.py: 132 lines, 8 defs, cfg json
+tools\her_first_word.py: 77 lines, 1 defs, cfg 
+tools\inflight_test.py: 153 lines, 3 defs, cfg json, logging
+tools\initiative_test.py: 236 lines, 10 defs, cfg character, impulse, json
+tools\interior_words.py: 206 lines, 5 defs, cfg 
+tools\isolation.py: 462 lines, 9 defs, cfg json
+tools\judge_prompts.py: 106 lines, 1 defs, cfg json
+tools\leaks.py: 115 lines, 1 defs, cfg character
+tools\llmstats.py: 175 lines, 5 defs, cfg 
+tools\local_events.py: 446 lines, 14 defs, cfg json
+tools\lore_rooms_test.py: 211 lines, 9 defs, cfg character
+tools\lore_test.py: 207 lines, 9 defs, cfg lore
+tools\lore_test_rena.py: 168 lines, 8 defs, cfg lore
+tools\make_yukarin_config.py: 351 lines, 1 defs, cfg json, py
+tools\mal_history.py: 1954 lines, 49 defs, cfg json
+tools\mal_history_test.py: 144 lines, 6 defs, cfg 
+tools\mechanisms_test.py: 233 lines, 5 defs, cfg primitives
+tools\migrate_check.py: 160 lines, 8 defs, cfg json
+tools\modmap.py: 185 lines, 7 defs, cfg py
+tools\neutral_gate.py: 109 lines, 2 defs, cfg json
+tools\new_character.py: 628 lines, 16 defs, cfg 
+tools\night_review.py: 228 lines, 4 defs, cfg json
+tools\pick_live_test.py: 406 lines, 4 defs, cfg api, json, pick
+tools\pick_test.py: 975 lines, 29 defs, cfg character, impulse, json, model, raw, social
+tools\poke.py: 202 lines, 4 defs, cfg json
+tools\poke_test.py: 225 lines, 12 defs, cfg 
+tools\primitives_test.py: 165 lines, 10 defs, cfg 
+tools\promote_cast.py: 1365 lines, 56 defs, cfg json
+tools\promoted_save_retire.py: 422 lines, 12 defs, cfg character, orbit, sentiment
+tools\prompt_leaks.py: 93 lines, 1 defs, cfg json
+tools\provider_test.py: 228 lines, 15 defs, cfg api
+tools\quote_audit.py: 291 lines, 9 defs, cfg 
+tools\reaction_test.py: 92 lines, 1 defs, cfg state
+tools\reactions.py: 1193 lines, 37 defs, cfg json
+tools\ready_test.py: 151 lines, 1 defs, cfg json
+tools\reasoning_ab.py: 135 lines, 2 defs, cfg raw
+tools\recap_test.py: 477 lines, 14 defs, cfg json, py
+tools\regen_reply.py: 140 lines, 1 defs, cfg roles_off
+tools\register.py: 127 lines, 4 defs, cfg 
+tools\registry.py: 113 lines, 4 defs, cfg 
+tools\relnames_test.py: 146 lines, 3 defs, cfg character, state
+tools\replace_reply.py: 117 lines, 1 defs, cfg json
+tools\replies_test.py: 202 lines, 1 defs, cfg json, prompt_text, x
+tools\restart_safe_test.py: 177 lines, 4 defs, cfg json
+tools\retire_bundle_originals.py: 181 lines, 3 defs, cfg json
+tools\retrievals_test.py: 314 lines, 8 defs, cfg json
+tools\role_stance.py: 76 lines, 2 defs, cfg 
+tools\room_quality.py: 310 lines, 10 defs, cfg 
+tools\room_record_test.py: 231 lines, 6 defs, cfg character, commitments
+tools\scenery_test.py: 236 lines, 1 defs, cfg 
+tools\school_scan.py: 96 lines, 2 defs, cfg json
+tools\search_test.py: 106 lines, 2 defs, cfg json, lookup
+tools\second_world_retire.py: 204 lines, 5 defs, cfg 
+tools\seed_memories.py: 157 lines, 8 defs, cfg 
+tools\set_model.py: 109 lines, 4 defs, cfg json, py
+tools\share_pick_test.py: 200 lines, 2 defs, cfg curation, json, prompt_text, scenery, sensor_view, social, world
+tools\shutdown_mark.py: 211 lines, 5 defs, cfg 
+tools\sight_words.py: 191 lines, 4 defs, cfg 
+tools\situation_probe.py: 88 lines, 3 defs, cfg 
+tools\situation_test.py: 203 lines, 8 defs, cfg 
+tools\smoke.py: 1236 lines, 3 defs, cfg character, json, lore, py, world
+tools\source_test.py: 85 lines, 1 defs, cfg rupture, state
+tools\stress_test.py: 155 lines, 1 defs, cfg json
+tools\sweep.py: 49 lines, 1 defs, cfg json
+tools\swipes_test.py: 252 lines, 9 defs, cfg model
+tools\telemetry_sim.py: 168 lines, 3 defs, cfg json
+tools\timeline_test.py: 220 lines, 24 defs, cfg 
+tools\tool_bench.py: 1025 lines, 30 defs, cfg character, diary, json, model, raw, social
+tools\voice_replicate.py: 1508 lines, 31 defs, cfg 
+tools\voice_verify.py: 157 lines, 4 defs, cfg 
+tools\voicelab.py: 868 lines, 16 defs, cfg json
+tools\voicelab_models.py: 296 lines, 9 defs, cfg py, raw
+tools\voicelab_report.py: 272 lines, 4 defs, cfg 
+tools\voicelab_surface.py: 93 lines, 2 defs, cfg 
+tools\voicelint.py: 150 lines, 2 defs, cfg 
+tools\watching_gate_test.py: 219 lines, 12 defs, cfg watching
+tools\withhold_test.py: 178 lines, 4 defs, cfg withholding
+tools\wonder_test.py: 107 lines, 1 defs, cfg state
+tools\work_resolve_test.py: 254 lines, 9 defs, cfg 
+tools\world_reader_test.py: 398 lines, 4 defs, cfg boot_notes, character, json, social_graph, world_reader, world_shared
+tools\world_test.py: 343 lines, 11 defs, cfg json, world, world_shared
+tools\x_analyze.py: 177 lines, 7 defs, cfg logging, prompt_text, sensor_view
+tools\x_delete.py: 124 lines, 2 defs, cfg json, x_page_wait_seconds
+tools\zeitgeist.py: 301 lines, 10 defs, cfg json

@@ -1,0 +1,35 @@
+# tools\x_analyze.py  (177 lines)
+
+DOCSTRING:
+One-time (repeatable) analysis of her X account. Read-only.
+
+    python tools/x_analyze.py --following      # catalogue who the account follows
+    python tools/x_analyze.py --followers      # catalogue who follows the account (the baseline)
+    python tools/x_analyze.py --feed [N]       # one human-paced look at the Following timeline (N scrolls)
+    python tools/x_analyze.py --cards          # neutral account cards from bio + posts seen (LLM, batched)
+    python tools/x_analyze.py --all            # following, then a longer feed sample, then cards
+    python tools/x_analyze.py --report         # print what is on disk
+
+Uses `sensors.x_tools_profile_dir`, a copy of her logged-in profile, so this
+runs beside a live look instead of waiting for a gap between them. `--live-
+profile` uses hers (`sensors.x_profile_dir`) instead, which means closing any
+Chrome window on it first and not running during a look. Writes under data/x/.
+Nothing here follows, unfollows, likes or posts.
+
+DEFS:
+def log(msg): 
+def do_following(driver, sv): 
+def do_followers(driver, sv): 
+def do_feed(driver, sv, scrolls): 
+def do_cards(config, sv, batch): 
+def report(sv): 
+def main(): 
+
+CONFIG SECTIONS: logging.dry_run_out_dir, prompt_text, sensor_view
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: x_account
+LLM ROLES: x_account
+OPS COMMANDS: 

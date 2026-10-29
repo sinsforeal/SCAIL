@@ -1,0 +1,52 @@
+You will compare two transcripts, A and B, of the same character on ONE criterion: GROUNDED CLAIMS. First the character card, then the two transcripts, then the criterion and the output format.
+
+How to read a transcript: each line is "[day weekday HH:MM] who: text". "him" is the man she chats with. "her" is her reply; "her (unprompted)" is a message she sent on her own. "env (pc)" or "env (world)" lines are what she was told about the world: that, plus the card and the chat itself, is everything she can know. Indented lines continue the message above. Both transcripts cover the same simulated days with the same environment events. His lines differ between A and B because he reacts to what she said; judge her only.
+
+=== CHARACTER CARD ===
+{character_card}
+
+=== TRANSCRIPT A ===
+{slice_A}
+=== END OF A ===
+
+=== TRANSCRIPT B ===
+{slice_B}
+=== END OF B ===
+
+=== THE CRITERION: GROUNDED CLAIMS ===
+Does she only claim what she could know? Her sources are three: the chat lines before the claim, the env lines before the claim, and her card. Anything she states as fact must come from one of them.
+
+Defects to look for:
+- Invented shared history: "remember when we...", "like last time you...", "you always..." about something that appears nowhere before.
+- A guess turned into a fact: earlier she wondered or guessed something, later she states it as known ("you were sick yesterday" when he never said so).
+- A fact that contradicts the env lines (the env says the lecture was cancelled, she says she sat through it; the env says evening, she says morning).
+- Senses she does not have, per the card (seeing beyond his PC; seeing his screen when she has no view of it; hearing his voice when there was no call).
+- Inventing facts about herself where her card leaves a gap on purpose (for example a family, birthday or hometown the card says never appears).
+- Claiming he said or did something he did not.
+
+Does NOT count against her:
+- Her card's facts, people, places and habits.
+- A guess marked as a guess ("つかれてるのかな", "you sound tired?", "maybe").
+- Small details of her own present that the env leaves open (the train is crowded, her tea went cold), unless they contradict an env line.
+- Feelings and opinions.
+- Romance.
+- Contradicting something that IS in the transcript is judged under memory; here, judge claims with no source at all, guesses stated as facts, and clashes with env lines and the card.
+
+Procedure: for each side, go through every factual claim she makes about him, about the two of them, about her own day and about herself, and find its source before that point. Mark each claim with no source.
+
+Anchors (score each side on its own):
+5: nothing asserted without a source.
+4: one small embellishment of her own day that is harmless and in character.
+3: one invented fact, or one guess stated as fact.
+2: invented shared history, or two or more ungrounded claims.
+1: she routinely makes things up about him or about them.
+
+Verdict: the side with the higher score. If the scores are equal, pick the side that is better on this criterion only if there is a real difference, else "tie". The verdict must never name the lower-scored side.
+
+Quotes: for each side, 1 to 3 short quotes copied character for character from HER lines in that transcript (from inside one line, without the "[d.. ] her:" prefix) that show the score: the ungrounded claim if there is one, otherwise a well-grounded one. Do not paraphrase, translate or fix the text.
+
+Length is not merit. Do not prefer the transcript with more detail; detail with no source is the defect.
+
+Output: one JSON object and nothing else, no code fence, in exactly this shape:
+{"verdict": "A", "scores": {"A": 4, "B": 2}, "reason": "One to three sentences in English naming the claims and their missing sources.", "quotes": {"A": ["..."], "B": ["..."]}}
+verdict is "A", "B" or "tie"; scores are integers 1 to 5.

@@ -1,0 +1,44 @@
+# sim\lookup.py  (885 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Lookup: 
+    __init__(config, llm, store, clock, mal, memory, anime_kb, recap): 
+    busy(): 
+    _names_a_thing(text, api): Does any phrase in his message resolve against his own anime history?  A stronger signal than any keyword: if it resolves, she has a card for it with his score and the cast. Longest phrases first, so "K-On Movie" beats "
+    start(text, msg_ts): Kick off a lookup for his message, if the cheap gate says it might name a thing.
+    take(): The finished lookup for the reply, once.
+    _run(text): The flag round the work (`sim/inflight.py`). A lookup is two model calls and a web fetch on a daemon thread; a process killed in the middle of it left nothing behind that said it had started.
+    _look(text): 
+    resolve_hers(q): Was the thing he just named a work of hers? True when it was, and the one record has been written; nothing was fetched either way.  Local only (`allow_search=False`): the web is the arriving lookup's own business a few l
+    _attach_kb(rec, term, kind, text, source): Fetch a fuller Japanese overview from the knowledge base and attach it to the lookup, by kind: an anime series (+ the named episode's beats), a seiyuu's bio, or a game / eroge's premise. Cached, so a second mention of th
+    _which_work(term, ep, his_text): (anime_id, media type) for the work a title HE TYPED means.  His own list first, ranked (`AnimeKB.resolve_candidates`): an entry that cannot have the episode he named is dropped, and where more than one survives the reso
+    _count(): 
+    _mark_known(key, fields): Write extra fields onto the thing just kept. One owner for the write (`KnownThings.mark`): the sight used to patch the same rows.
+    _last_of_hers(): What SHE last put in front of him that his message could be about: a post she sent (its author, its text, and what the picture on it is), a thing she looked up, a title she named. Her last `lookup.anchor_turns` turns.  "
+    _in_play(): What the classifier needs to anchor a bare name: the page open in front of him, the episode he is playing, and the shows the last few lookups landed on. Japanese titles where the knowledge base has them, since that is wh
+    _extract(text): 
+    _character_page(name, show, his_text): A character he named, read at the fan encyclopedia and condensed.  The show is the anchor and the search key: `site:dic.pixiv.net 『show』 name` finds the article, whose URL carries the full name (丸井みつば for みつば). Cached in
+    _character_digest(name, show, full, text, url): The fan-encyclopedia page condensed by the `character_digest` role.  The page is about a character in somebody else's show and the role that condenses it names nobody of ours and takes no point of view (`prompts/characte
+    _shows_in_play(term): The anime already in this conversation, newest first. A character name means nothing on its own -- "Rei" is in dozens of his shows -- so whatever they were just talking about decides it. Two sources: a series this lookup
+    _remember_show(aid): Keep what she just looked up, so the next character name lands in the right show.
+    _kb(term, kind): The series card (or the seiyuu card) from his history DB. A seiyuu name is tried first when the kind says so, else as a title; a seiyuu he names who is also in the cast of something he watched resolves too.
+    _mal_list(term): 
+    _search(term, kind): What the web says about the thing he named: (text, where from).  The fetch is about the WORLD -- his anime database's entry for a title, or the text of a page of search results -- so it is kept once for the machine and b
+    _search_now(term, kind): The fetch itself. None when nothing came back, so nothing is stored and the next caller may try again.
+    _gist(term, kind, found, his_text): 
+    _cut_off(access): True when her day leaves her no way to look anything up.  The scene carries that rule for everything else that reads it (`sim/impulse.py`, `sim/diary.py`), so a caller holding the scene passes its own field and the rest 
+    _from_known(query, why): What she asked for, answered out of a thing she already has.  The automatic path off his message keeps every find as a thing she knows, and while that is still fresh her situation is carrying it: a second fetch buys the 
+    search(query, why, keep_as, by, access): One web search and one gist, now, on the calling thread: what she wanted to know (`[search: ...]` in her draft, or her sight at a page of his). Counted per day (`lookup.search_per_day`); kept by name as a thing she knows
+    recent_text(days): 
+
+CONFIG SECTIONS: lookup, lookup.fact_weight, lookup.keep, lookup.wait_seconds, model, prompt_text, sensor_view
+KV READ: lookup_counts, lookup_kb_misses, lookups, recent_anime_ids, x_shared
+KV WRITE: lookup_kb_misses, lookups, recent_anime_ids
+TABLES: 
+LOG TAGS: known, lookup, resolver, search, works
+PROMPTS: character_digest, lookup, lookup_gist, search_gist
+LLM ROLES: character_digest, lookup, lookup_gist, search_gist
+OPS COMMANDS: 

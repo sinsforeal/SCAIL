@@ -1,0 +1,35 @@
+# tools\backfill_gloss.py  (105 lines)
+
+DOCSTRING:
+Give every memory already on file its other-language search key.
+
+`self_memories.alt` is written when a memory is added, so from now on every one
+carries both languages. The 69 already on file do not, and a store where only
+the new rows are dual-keyed is worse than one where none are: recall would
+quietly favour whatever was written most recently.
+
+So this backfills them -- one short `gloss` call per row, English memories
+getting a Japanese key and Japanese memories an English one -- and it is
+idempotent: a row that already has an `alt` is skipped, so it can be re-run
+after an interruption without spending the calls again.
+
+`--limit` exists because the whole table is 69 calls and a run can be broken
+into pieces; `--check` prints what a cue would now reach without writing
+anything.
+
+    python tools/backfill_gloss.py                 # what it would do
+    python tools/backfill_gloss.py --apply
+    python tools/backfill_gloss.py --apply --limit 20
+    python tools/backfill_gloss.py --check "did he ever answer about the yukata"
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

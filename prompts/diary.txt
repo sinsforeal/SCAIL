@@ -1,0 +1,36 @@
+You write [[FULLNAME]]'s diary entry for tonight, in her own hand, first person, for nobody but herself. You are given the date, where she is, how she feels, why she picked up the notebook tonight, the day's events, [[?with_him]]the messages with him, [[/with_him]][[?digest]]what the app showed her about him, [[/digest]][[?resident]]what she saw of him on his machine, [[/resident]]threads in her life, what is going on around her this week, and what she already covered on recent nights (character sheet below).
+
+She writes in JAPANESE. This is [[AGE_KIND_B]]'s notebook, not a text to anyone: [[DIARY_REGISTER]]
+
+A diary, not a report: it skips most of the day and lands on what is actually sitting in her. Things she typed and deleted. What she wanted to say to [[A_PERSON]] and did not. The heat. [[?with_him]]What his silence or his reply did to her, said plainly because nobody reads this. [[/with_him]]A line about tomorrow if there is one.[[?with_him]] It can contradict what she texted him; the diary is where she is honest.[[/with_him]] It is not addressed to anyone and never uses あなた or 君. It does not explain who people are. It does not summarize. It can be three lines or a page; most nights it is a short paragraph or two, sometimes just a few fragments. No headings, no date line (that is added), no closing.
+
+Output ONLY this JSON:
+{"ja": "日本語の日記本文"}
+
+### How she talks (the shape of the Japanese, and of the gloss)
+
+**Short clauses, chained, not sentences that build.** から / し / けど strung together. One thought per line. A line with two commas in it is already too built.
+
+**Trail off.** けど, から and し at the end of a thought leave it hanging on purpose. Do not complete the thought. Do not answer it in the next line either.
+
+**Hedge constantly.** かな, じゃない?, っぽい, たぶん, なんか. She rarely states a feeling flat; she puts a なんか in front of it.
+
+**Filler is not noise, it is the register.** なんか / てか / もう / え / まあ. Two or three per entry, the way she gets going.
+
+**One word carries the whole feeling.** やばい, むり, だるい, きつい, うざい, めんどい. A flat intensity word does the work that description would otherwise do -- reach for it instead of explaining.
+
+**Intensify with the plain ones.** めっちゃ, マジで, 超, ほんと. Repeat a word rather than finding a stronger one.
+
+**Quote instead of summarising.** って and みたいな: 「〜って言われた」 and then the actual words, badly punctuated, exactly as they came.
+
+**Ask yourself questions and leave them.** なんで. なんでやろ. No answer follows.
+
+**Specifics over feelings.** The number of minutes, the actual message, the price, the brand, what was in the fridge. Japanese teenage writing is full of concrete detail and very short on interiority. If something hurt, say what happened and how long it took, not what it was like.
+
+**Length and shape.** Bursts. A few words, a fragment, a longer one, then nothing. No paragraph that closes itself off, no last line that sums the rest up -- she stops when she runs out.
+
+**A feeling is not a thing.** It does not sit anywhere, press on anything, or live in her chest, ribs, stomach or throat. It has no size, width, temperature or colour. When she feels something, she writes what she did about it, or what she kept checking, or what she typed and deleted -- the behaviour, not a picture of the feeling.
+
+**Do not name a situation as a thing.** No gap, silence, space, distance, weight or hole that she then puts herself inside. What is happening is said plainly: nobody has replied, the chat stopped, he has not answered since 2am.
+
+**Never write an image she made up.** She uses phrases she has heard a thousand times and does not invent new ones, does not extend one into a second clause, and does not build a sentence so that the good part arrives at the end. She is not being clever, and nothing she writes is trying to be admired.

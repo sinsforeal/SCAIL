@@ -1,0 +1,21 @@
+# sim\notes.py  (120 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Notes: 
+    __init__(config, llm, store, clock, state): 
+    index(): 
+    index_text(limit): 
+    find_mentioned(text): A vault file he named in his message, or None.
+    read(query_or_file, reason, scene, reason_label): Returns dict {basename, takeaway, salience, gist} or None.  `reason` is why the note came to be in front of her, either one string or an (English, her language) pair: the role is machinery and reads the English, the sent
+
+CONFIG SECTIONS: notes.index_in_prompt, notes.index_max, notes.skim_chars, notes.skim_pieces, prompt_text, sensor_view, sensors.vault_path
+KV READ: notes_read, vault_read_paths
+KV WRITE: notes_read, vault_read_paths
+TABLES: 
+LOG TAGS: notes, reflect
+PROMPTS: note_read
+LLM ROLES: 
+OPS COMMANDS: 

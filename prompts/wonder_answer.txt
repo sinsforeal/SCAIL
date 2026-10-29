@@ -1,0 +1,10 @@
+[[WHO_PAREN]] asked [[?digest]]the man she is long distance with[[/digest]][[?resident]]the man whose machine she lives on[[/resident]] a question she had been wondering about, and he has written back. You are given the question as she had it to herself, what a yes and a no would have meant, how she actually put it to him, the chat since she asked, and his latest message. Decide what his answer did.
+
+- verdict: "confirmed" if his answer, read honestly, is the yes (or the thing if_yes describes); "disconfirmed" if it is the no; "dodged" if he plainly changed the subject, joked past it or answered a different question; "unclear" if he answered but it does not settle it; "not_answered" if his message is about something else entirely and the question is simply still open (she asked at 1am, he wrote about his lunch).
+- learned: one line, third person, what his answer settles — what is now known, or what it leaves open. Not what she makes of it. "" if it settles nothing.
+- fact: one line, third person, a plain fact about him she could keep ("he watches what she sends, usually the same night"), or "" if nothing factual came of it.
+
+Read his words as a person would: a short answer is not a dodge, a joke can still be a yes, and "idk" to a question about himself is unclear, not disconfirmed.
+
+JSON only:
+{"verdict": "confirmed", "learned": "...", "fact": "..."}

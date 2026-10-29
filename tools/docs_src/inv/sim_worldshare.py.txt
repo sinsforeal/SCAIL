@@ -1,0 +1,29 @@
+# sim\worldshare.py  (71 lines)
+
+DOCSTRING:
+How much of her world is him, measured from the record.
+
+His ask (2026-08-26): "want to see her world being mostly me decrease over
+time with our changes". This is the ruler. Each figure is the share of rows
+of one kind that mention him, per day: what the director wrote as her inner
+line, the day's events, the state model's reasons, her private thoughts,
+her own memories of the day, and the message ratio. `composite` is the mean
+of the shares that exist. Recorded at the compile (kv `him_share`, one row
+per day) and printed by `/world`. Nothing reads it back into her; it is a
+ruler, not a lever.
+
+DEFS:
+def _share(rows): 
+def measure(store, date): 
+def record(store, clock, date, keep): 
+def _pct(v): 
+def report(store, clock, days): 
+
+CONFIG SECTIONS: 
+KV READ: him_share, reflections
+KV WRITE: him_share
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,46 @@
+# tools\context_audit.py  (198 lines)
+
+DOCSTRING:
+Read her world from each cast member's chair.
+
+Every call the cast layer makes is built from a different seat: Rena's turn is
+her sheet, her day, her edges and what she can see of the chat; Tomoe's reply
+is her whole interior; a beat is one person reaching for her. Nothing has ever
+LOOKED at those prompts side by side, and a prompt is where a contradiction
+hides: the same fact stated twice with two values, an English gloss in a
+Japanese-only field, a name that is one girl in the labels and another in the
+transcript.
+
+This builds the real prompts against a COPY of the save, with the model stubbed
+out, and prints them -- so a person can read what Rena actually reads. It also
+runs the cheap mechanical checks that a reader would otherwise have to do by
+eye:
+
+  names     every name in the prompt resolves through the roster, and the
+            person's own name is not among the people they are told about
+  clock     her time and his are labelled where they appear
+  language  the ja fields are Japanese and the English gloss is not in them
+  size      the sections, so a prompt that has quietly doubled is visible
+
+    python tools/context_audit.py                  # all three friends
+    python tools/context_audit.py --who Rena-chan
+    python tools/context_audit.py --full           # the whole prompt, verbatim
+
+DEFS:
+def build_app(src): 
+class Captured: The prompt is the point; the answer is not wanted.
+    __init__(messages): 
+def capture(app, fn): Run something that makes one model call and keep the messages.
+def sections(text): (label, chars) for the ALL-CAPS headings a prompt is built from.
+def checks(app, who, text): The mechanical half: what a careful reader would check by eye.
+def show(app, label, got, full): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

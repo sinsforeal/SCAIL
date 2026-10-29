@@ -1,0 +1,60 @@
+# tools\forge.py  (374 lines)
+
+DOCSTRING:
+The forge: an instrument for porting the prompts to another character BY HAND.
+
+The previous forge asked a model to rewrite the character-bearing spans and
+then checked the result. It was retired on 2026-09-01 for two reasons. It had
+gone stale -- its own docstring described 46 prompts when there are 84, it read
+`prompts/` flat so the six per-person sheets in `prompts/cast/` were invisible,
+its `{{PLACEHOLDER}}` rubric checked two tokens in the whole set, and its
+proper-noun rubric matched capitalised Latin words, which for a character who
+writes Japanese with a cast of 矢野さん and 鈴木さん sees nothing at all.
+
+The deeper reason is that generation is the wrong operation. What is
+character-bearing in these files is not the names, it is the psychology written
+into the mechanism. `state.txt` says "Being with Aya calms her. Being watched
+by Hinako does not", and defines anxiety as "how safe she feels in the group".
+Substituting proper nouns into that produces a Tamura Yukari with a school
+friend circle. Those sentences have to be *written*, by somebody who has read
+the character, and the reading is the work.
+
+So this does not write anything. It:
+
+  survey    every prompt, what it carries, and how much of it is character
+  show      one prompt with every character-bearing span marked
+  check     a hand-written port against the rubric -- what must not break
+  status    what is done and what is not
+
+The rubric is anchored on what is really in the files rather than on what the
+old one assumed, and it works in both scripts. It can only refuse; whether a
+port reads as her is a judgement and is not mechanical.
+
+    python tools/forge.py survey --sheet data/characters/yukarin.json
+    python tools/forge.py show prompts/state.txt --sheet data/characters/yukarin.json
+    python tools/forge.py check --dir prompts_yukarin --sheet data/characters/yukarin.json
+    python tools/forge.py status --dir prompts_yukarin
+
+DEFS:
+def for_names(text): The text as the name scanners should see it. Markdown structure comes off the front of a line so the word behind it is line-initial again, and bold markers come out everywhere, because `.** Work goes where...` hides the 
+def prompts(root): Every prompt file, including the per-person sheets in prompts/cast/, which the old forge could not see.
+def _no_notes(x): A sheet's `_`-prefixed keys are notes to whoever reads the file, not data about the person. Scanning them for names found `Nothing` (from "Nothing here is a stress LEVEL") and `The` (from "The single sheet a character is
+def sheet_names(sheet, identity_only): Every name this character may use, in both scripts. A sheet is data, so it is serialised and scanned rather than walked -- a name in a list, a key or a sentence counts the same.  `identity_only` narrows it to the fields 
+def mechanism(text): The vocabulary that must survive a port byte for byte.
+def character_hits(text, old_names): Where the old character survives. Matching is whole-word for a name written in Latin letters and plain containment for one written in Japanese, which has no word boundaries to anchor on.  It was containment for both, and
+def assumes(text): 
+def load(path): 
+def cmd_survey(args): 
+def cmd_show(args): 
+def cmd_check(args): The rubric. Every check is a fact about the file. It can refuse; it cannot approve -- whether the port reads as her is not mechanical.
+def cmd_status(args): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

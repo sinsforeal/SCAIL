@@ -1,0 +1,44 @@
+# sim\household.py  (164 lines)
+
+DOCSTRING:
+Her flat and her week as things with a STATE, moved by the director under a
+budget, met by her as facts.
+
+The director for a character with no world of her own had nothing to move.
+Her day is a plan of blocks and her flat is prose, and prose does not change
+state, so for three hours it wrote the same green laptop and then, starved,
+started writing her thoughts instead -- which she typed. The one thing a
+second agent adds to fidelity here is time: something has to make the hours
+between his messages have happened, so that when he comes back there is a
+fact he did not put there and she did not decide on.
+
+So this is the small piece of world she does have, made stateful. The seed
+(`household.file`) lists her objects and, for each, the states it can be in
+and the moves between them -- every one taken from her home file, which is
+every one something she said on air. The director is shown the state and the
+allowed moves, and returns `household_changes`; code checks the object and
+the state exist, holds the day's budget (`household.incidents_per_day`),
+applies the move, and writes it into the record as an event. She meets the
+state in her situation as one line of facts, in her language. A thought
+cannot be false; a dead tube can.
+
+kv `household`: {"objects": {id: {"state", "since"}}, "incidents": [{"date", "ts", "object", "to", "note"}]}.
+
+DEFS:
+class Household: 
+    __init__(config, store, clock): 
+    _load_seed(): 
+    _kv(): 
+    incidents_today(): 
+    director_text(): The state as it stands, and what may happen to it. English: the machine talking to the machine.
+    apply(changes): The director's `household_changes`, checked and applied under the budget. Returns the events written, as (text, salience).
+    situation_line(ja): One line of facts about her own flat and week, in her language.
+
+CONFIG SECTIONS: household
+KV READ: household
+KV WRITE: household
+TABLES: 
+LOG TAGS: household
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

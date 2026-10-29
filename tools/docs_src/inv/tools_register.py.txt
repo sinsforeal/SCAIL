@@ -1,0 +1,28 @@
+# tools\register.py  (127 lines)
+
+DOCSTRING:
+A register fingerprint per speaker and per room, from the record.
+
+`voicecheck` measures dialect and `ONE VOICE` sees only the extreme. Nothing
+measured whether Rena-to-Tomoe and Rena-to-the-group are different people,
+or whether everyone has flattened into one voice over a fortnight. This
+counts, from the stored turns: message length, the sentence-final particles
+and markers that carry register in written Japanese (ね よ じゃん さ かな
+の w 笑 ！ ？ emoji, the honorific-polite です/ます), per speaker and per kind
+of room, and compares rooms and weeks. Pure functions; `tools/voicelint.py
+--register` prints it and `/absurd REGISTER` reads it.
+
+DEFS:
+def fingerprint(turns): turns: [{who, ja, kind, date}] -> {(who, kind): {n, chars, <marker>: rate}} where a rate is markers per message.
+def room_contrast(fp, min_turns): Per speaker: how far their group register is from their one-to-one register, as the mean absolute difference of the marker rates. 0 is the same person in both rooms; a real teenager is not.
+def distinctness(fp_or_merged): How far each speaker sits from the cast's mean marker rates. A voice is not "drifting" because its numbers moved -- Rena's じゃん, 笑 and emoji all rising is her sheet arriving. Flattening is movement TOWARD everyone else, a
+def drift(turns, days, min_turns): Per speaker: the last `days` against the `days` before, all rooms together. `moved` is which markers moved by more than half and by more than 0.05 per message -- information, not a fault. `flattening` is the only fault: 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

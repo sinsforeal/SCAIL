@@ -1,0 +1,20 @@
+# sensors\media_monitor.py  (196 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def get_media_changes_since(config, activity_since): 
+def _get_recent_images(activity_since): 
+def _get_recent_mpv(activity_since): 
+def _get_audacious_current(config): 
+def _clean_audacious_title(title): 
+
+CONFIG SECTIONS: audacious_process_names
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

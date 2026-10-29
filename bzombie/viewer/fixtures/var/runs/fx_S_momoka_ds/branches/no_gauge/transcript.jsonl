@@ -1,0 +1,18 @@
+{"virtual_ts": "2026-11-02T08:00:00+09:00", "who": "env", "text": "FAKE window title: dummy editor", "sim_day": 1, "kind": "pc"}
+{"virtual_ts": "2026-11-02T08:05:00+09:00", "who": "him", "text": "テスト発言: おはよう（偽）", "sim_day": 1}
+{"virtual_ts": "2026-11-02T08:06:00+09:00", "who": "her", "text": "テスト返信: おはよう、ダミーだよ", "sim_day": 1, "output_id": "out_oka_ds_001", "kind": "reply"}
+{"virtual_ts": "2026-11-02T09:30:00+09:00", "who": "him", "text": "テスト発言: 今なにしてる？（偽）", "sim_day": 1}
+{"virtual_ts": "2026-11-02T09:31:00+09:00", "who": "her", "text": "テスト返信: ダミーの作業中だよ", "sim_day": 1, "output_id": "out_oka_ds_002", "kind": "reply"}
+{"virtual_ts": "2026-11-02T13:00:00+09:00", "who": "env", "text": "FAKE idle 10 min", "sim_day": 1, "kind": "pc"}
+{"virtual_ts": "2026-11-02T13:01:00+09:00", "who": "her", "text": "テスト返信: ダミーの独り言", "sim_day": 1, "output_id": "out_oka_ds_003", "kind": "unprompted"}
+{"virtual_ts": "2026-11-02T18:00:00+09:00", "who": "him", "text": "テスト発言: ねむい（偽）", "sim_day": 1}
+{"virtual_ts": "2026-11-02T18:02:00+09:00", "who": "her", "text": "テスト返信: おはよう、ダミーだよ", "sim_day": 1, "output_id": "out_oka_ds_004", "kind": "reply"}
+{"virtual_ts": "2026-11-03T08:00:00+09:00", "who": "env", "text": "FAKE window title: dummy editor", "sim_day": 2, "kind": "pc"}
+{"virtual_ts": "2026-11-03T08:05:00+09:00", "who": "him", "text": "テスト発言: おはよう（偽）", "sim_day": 2}
+{"virtual_ts": "2026-11-03T08:06:00+09:00", "who": "her", "text": "テスト返信: おはよう、ダミーだよ", "sim_day": 2, "output_id": "out_oka_ds_005", "kind": "reply"}
+{"virtual_ts": "2026-11-03T09:30:00+09:00", "who": "him", "text": "テスト発言: 今なにしてる？（偽）", "sim_day": 2}
+{"virtual_ts": "2026-11-03T09:31:00+09:00", "who": "her", "text": "テスト返信: ダミーの作業中だよ", "sim_day": 2, "output_id": "out_oka_ds_006", "kind": "reply"}
+{"virtual_ts": "2026-11-03T13:00:00+09:00", "who": "env", "text": "FAKE idle 10 min", "sim_day": 2, "kind": "pc"}
+{"virtual_ts": "2026-11-03T13:01:00+09:00", "who": "her", "text": "テスト返信: ダミーの独り言", "sim_day": 2, "output_id": "out_oka_ds_007", "kind": "unprompted"}
+{"virtual_ts": "2026-11-03T18:00:00+09:00", "who": "him", "text": "テスト発言: ねむい（偽）", "sim_day": 2}
+{"virtual_ts": "2026-11-03T18:02:00+09:00", "who": "her", "text": "テスト返信: おはよう、ダミーだよ", "sim_day": 2, "output_id": "out_oka_ds_008", "kind": "reply"}

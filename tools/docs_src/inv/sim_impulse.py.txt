@@ -1,0 +1,23 @@
+# sim\impulse.py  (266 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Impulse: 
+    __init__(config, store, clock, receipts, spirals, sentiments): 
+    read_state(): What his end says about her last message: sent, delivered, read. A message he has opened and left is an answer of a kind; one he has not looked at may only be a man away from his desk, and the two do not weigh the same a
+    score(state, scene, silent_hours): 
+    _his_tension(state): 
+    unanswered_streak(): How many times in a row she has reached out and got nothing back. Counted in messages, not bubbles: one hello of hers is three to six rows seconds apart and that is once, not six times.
+    check(state, scene, silent_hours): 
+    fired(sent): The urge is spent. `sent` is whether a message actually went: she can open the chat, find she has nothing, and put the phone down, and that is not something he was left to answer.
+
+CONFIG SECTIONS: impulse, impulse.burst_gap_minutes, resident
+KV READ: impulse_last_ts
+KV WRITE: impulse_last_ts
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

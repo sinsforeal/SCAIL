@@ -1,0 +1,41 @@
+# tools\docs_check.py  (236 lines)
+
+DOCSTRING:
+Do the docs still describe the code that is there?
+
+`tools/docs_assemble.py` regenerates PROJECT.md and CONFIG.md from the source,
+so those two cannot drift far. Everything else can: the module specs in
+`docs/`, the running state in HANDOVER.md, the operating rules in CLAUDE.md and
+the hand-written chapters in `tools/docs_src/`. A doc that names a config key
+that has been renamed, a function that has been deleted or a file that has
+moved is worse than no doc, because it is believed.
+
+So every backticked token in those files that LOOKS like an identifier is
+resolved against the code:
+
+  config keys     `exchange.away_p`, `cast.presence_gap_minutes`  -> config.py DEFAULTS
+  functions       `Reactions.tick`, `engage_line`, `_named_by_her` -> a def in the source
+  files           `tomoe/carried.py`, `prompts/style_ja.md`          -> the filesystem
+  kv keys         kv `cast_asleep`                                 -> a store.set in the code
+
+Prose in backticks is skipped: a token only counts when it has the shape of an
+identifier, and `_ALLOW` carries the handful that are real but unresolvable
+(external names, the shape of a thing rather than a thing).
+
+    python tools/docs_check.py
+    python tools/docs_check.py --verbose      # every token it resolved
+
+DEFS:
+def flat_defaults(d, prefix): 
+def code_text(): Every line of python in the project, once.
+def doc_files(): 
+def main(): 
+
+CONFIG SECTIONS: json, py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

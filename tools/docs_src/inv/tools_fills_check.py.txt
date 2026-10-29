@@ -1,0 +1,43 @@
+# tools\fills_check.py  (165 lines)
+
+DOCSTRING:
+Every role of every configured character, rendered; a hole nobody filled fails.
+
+A shared mechanism prompt carries `[[TOKEN]]`s that each character fills from
+her own sidecar (`character.neutral_file`). A token added to a shared prompt
+makes a hole in every fills file that already exists, and `Config.fill` writes
+`(not established for this character)` where the value should be -- loud on
+the console once per role, which is a line a reader has to be present for.
+On 2026-09-05 fourteen tokens were added; the next day twelve of them had no
+value in either of the third character's packages and twenty-one had none in
+the second character's file. None of the twenty-one reached her, because each
+sat in a role her program does not build or inside a fork her existence drops
+-- and nothing but a reading established that.
+
+So this renders every role's prompt through `Config.fill` for every
+character in `characters.json` (and any config given), the way the running
+bot would, and fails on a placeholder that survives: a token inside a fork
+the character drops is not a hole, and a role whose section is switched off
+for her is skipped and named. A hole is reported with the roles it reaches.
+
+    python tools/fills_check.py                         # every character in the register
+    python tools/fills_check.py --config asumin/persona/card/records_only/character/config_resident.json
+    python tools/fills_check.py --all-roles             # do not skip roles whose section is off
+
+DEFS:
+def _configs_from_register(): 
+def _load(cfgpath): `Config` rewrites the file it is given, so it gets a copy.
+def _section_of(c, role): The switchable section a role belongs to, by name, or None.  Most roles share their section's name (`diary`, `spiral`, `posting`); the rest carry it as a prefix or a suffix (`x_post` is the account's, `cast_day` and `ref
+def _section_off(c, role): 
+def check(cfgpath, who, all_roles, quiet): 
+def _forked_only(c, text, role): The text after the character's forks are applied and before the tokens are filled, so a token inside a dropped fork does not count.
+def main(argv): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

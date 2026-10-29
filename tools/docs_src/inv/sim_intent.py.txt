@@ -1,0 +1,23 @@
+# sim\intent.py  (205 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Intent: 
+    __init__(config, llm, store, clock, state, receipts, reflection, phone): 
+    _his_machine_line(): What his machine says about him THIS MINUTE, or "" when nothing is measuring it.  The receipt above it answers a different question -- has he opened what she sent -- and `unseen` is true both of a man asleep and of a man
+    _carrying(): The feeling strong enough to be deciding this, named. `confront` and `make_up` have been valid kinds since this was written and nothing ever pointed at them, so the model reached for them roughly never.
+    _account_line(): 
+    decide(scene, silent_hours, share_hint): Returns (kind, line) or ("nothing", why).
+    _week_ago(): 
+    reason_line(kind, about, share_hint, config): Why she is the one starting this, in the second person, for HER.  It goes into her situation block and the words are the builder's, not a role's, so they are in the language she is addressed in. Reading her own Japanese 
+
+CONFIG SECTIONS: intent, intent.enabled, role_system
+KV READ: intent_counts
+KV WRITE: intent_counts
+TABLES: 
+LOG TAGS: intent
+PROMPTS: 
+LLM ROLES: intent
+OPS COMMANDS: 

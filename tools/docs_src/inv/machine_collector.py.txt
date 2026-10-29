@@ -1,0 +1,37 @@
+# machine\collector.py  (134 lines)
+
+DOCSTRING:
+His machine's own collector: one per machine, belonging to neither character.
+
+    python machine\collector.py                     # forever; talkapp.cmd starts it
+    python machine\collector.py --once              # one poll, print the now file, exit
+
+What it runs is exactly what each bot used to run inside itself: the system
+monitor (foreground window, keyboard, mouse, the image viewer, the pictures'
+tags, the pages worth scraping) and the telemetry collector (browser history,
+media, the notes folder, his anime list), writing `sensors.telemetry_jsonl_path`,
+the one feed both characters read. Plus what a bot can no longer read out of
+its own memory: `sensors.telemetry_now_path` -- what is in front of him and
+when he last touched anything -- every few seconds, and the closed window
+sessions of the last day beside it whenever one ends. `machine/monitor_client.py`
+reads both. It also answers a bot that is about to build a reply and wants
+the buffer on disk now (`sensors.telemetry_flush_request_path`): the file is
+checked on every pass of the loop below, so the feed is at worst a few seconds
+behind him rather than a heartbeat.
+
+Single instance, by the same lock a bot uses on its save (`singleton.py`): a
+second copy exits at once. Logs to logs/machine_collector.log; the run
+directories under logs/ belong to the characters.
+
+DEFS:
+def _write_json(path, data): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: machine
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

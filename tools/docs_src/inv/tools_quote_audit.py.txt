@@ -1,0 +1,46 @@
+# tools\quote_audit.py  (291 lines)
+
+DOCSTRING:
+Every quoted line in a persona file, counted against the tape.
+
+Why this exists. A line quoted in a persona file becomes a catchphrase
+regardless of how rare it is in the material -- six models proved it in one
+afternoon (`docs/yukarin-voice-models.md` §3). The control speech guide
+illustrated her self-cancel with 「あ、今のなし」, which appears **zero** times in
+47 hours, and a model reproduced it verbatim on air. 「エロくない。エレガンス。」
+occurs once and came back three times in four opportunities.
+
+This is the same fault `docs/yukarin.md` §13 already overruled one level up,
+where his character card turned a twice-in-forty-seven-hours age gag into
+「永遠の17歳を自称する」. The card did it to the tape; the style file did it to
+the card's correction; the bible does it too. So: count them.
+
+A count is not a verdict. A line said once can be worth quoting -- it may be
+the only time she ever had the occasion. What the file must not do is quote it
+in a way that reads as a habit. The three honest outcomes are KEEP (frequent
+enough to be a habit), MARK (real but singular, and labelled as such in the
+file so it is read as an example of a KIND of move), and CUT (not hers at all).
+
+    python tools/quote_audit.py                              # every persona file
+    python tools/quote_audit.py --file prompts_yukarin/voice_as_she_writes_in_text/bible.md
+    python tools/quote_audit.py --min 3                      # stricter habit line
+
+DEFS:
+def her_cues(): (ep, cue index, text) for every cue attributed to HER.  The same split `yukarin/sheet/bounds.json` uses. Counting over the whole transcript instead would credit her with the room's lines, which is how 「わよ」 got read as he
+def every_cue(): Every cue in the transcript, whoever said it. Only needed for the half of a recorded exchange that is not hers: a demonstration of her on the phone has to quote the person on the other end to be readable.
+def norm(s): Whitespace-insensitive, the same rule the extraction verifies quotes by: whisper leaves stray spaces inside Japanese words and they broke quote matching once already.
+def find(needle, cues, joined, index): Where a quoted line occurs in her words, allowing a span across two adjacent cues -- the extraction's rule, because the transcript breaks a sentence wherever the speaker drew breath.
+def longest_fragment(needle, joined, minlen): The longest run of a quoted line that IS in her words, when the whole of it is not.  Without this the audit lies in the dangerous direction. 「何か無駄にならずに 済んだ感とかあってね。」 matched nothing and would have been called invented, bu
+def audit(path, cues, joined, index, min_habit): 
+def _longest_in(needle, hay): The longest run of a demonstration that really is in the tape. Uses the blockquote normaliser rather than `norm`, so it searches the same haystack the verdict was decided against.
+def blockquotes(path, hers, room): Every blockquoted demonstration, checked verbatim against the tape.  A line prefixed 相手: is the other half of a recorded exchange and is checked against every voice; anything else has to be in her own words.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

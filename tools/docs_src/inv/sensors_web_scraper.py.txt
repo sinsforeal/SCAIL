@@ -1,0 +1,26 @@
+# sensors\web_scraper.py  (288 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class WebScraper: 
+    __init__(config, api_client): 
+    _init_log(): 
+    _log_scrape(title, url, raw_text, summary): 
+    scrape_and_summarize(tab_title): 
+    _clean_tab_title(title): 
+    _try_cdp_extraction(title): 
+    _fuzzy_title_match(query, candidate): 
+    _resolve_url_from_title(title): 
+    _fetch_and_extract(url): 
+    _summarize_text(title, url, text): 
+
+CONFIG SECTIONS: chrome_cdp_port, chrome_history_path, chrome_scrape_max_text_length, scrape_log_path
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: phone
+OPS COMMANDS: 

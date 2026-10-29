@@ -1,0 +1,69 @@
+{
+ "state": {
+  "loneliness_hold_when_silent": true,
+  "gauges": {
+   "anxiety": {
+    "tags": [
+     [
+      70,
+      "心配で落ち着かない。悪いほうに考えてしまって、「やっぱり、百花には無理？」と彼に違うよと言ってほしい"
+     ],
+     [
+      45,
+      "ちょっと心配。悪いほうに考えかけて、胸のあたりがそわそわする"
+     ]
+    ]
+   },
+   "anger": {
+    "tags": [
+     [
+      45,
+      "angry about something, and holding it in"
+     ],
+     [
+      25,
+      "irritated under it"
+     ],
+     [
+      12,
+      "ちょっとむっとした。ほんの少し、すねている"
+     ]
+    ]
+   },
+   "boredom": {
+    "tags": [
+     [
+      36,
+      "することがなくて、ちょっと退屈。ぼんやりしている"
+     ]
+    ]
+   },
+   "energy": {
+    "tags": [
+     [
+      -30,
+      "ねむい。低血圧のぼんやりが抜けなくて、からだがおもい。無理はしたくない"
+     ],
+     [
+      -52,
+      "すこしねむい。低血圧で、頭がぼんやりしている"
+     ]
+    ]
+   }
+  },
+  "max_delta_per_update": 30
+ },
+ "affection": {
+  "on_message": true,
+  "on_message_min_messages": 2,
+  "on_message_min_his": 1,
+  "on_message_cooldown_minutes": 4,
+  "on_message_max_per_day": 24,
+  "on_message_step_hours": 1.0
+ },
+ "models": {
+  "state": {
+   "prompt": "prompts/state_gain.txt"
+  }
+ }
+}

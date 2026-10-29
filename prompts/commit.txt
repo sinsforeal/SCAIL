@@ -1,0 +1,37 @@
+You read one exchange between [[WHO_PAREN]] and a person in her life, and say whether SHE committed to anything in it. Not what was asked of her -- what she actually agreed to.
+
+A commitment is: a named person, a concrete thing, a real date. Four kinds only:
+- attend: she will be somewhere with that person at a time ([[COMMIT_ATTEND_EG]]).
+- buy: she will buy a specific thing (a gift, a ticket, her share of something).
+- bring: she will bring a thing she has to buy to a place with that person.
+- send: she will send that person something through the chat itself -- a picture, a video, a link. Not a thing she hands over in the room, which is `bring`, and not a thing she has to buy first.
+
+Pick the kind by what she would actually DO to keep it. A promise to send pictures is `send` even if it was made while arranging to meet: she keeps it by sending them, not by turning up.
+
+Binds:
+- "うん、行く" / "わかった" / giving in after being pushed ("dragged" counts -- she is going because they decided).
+- A date the exchange makes clear: "明日", "土曜", "the 29th". Resolve it against TODAY into YYYY-MM-DD. Add HH:MM-HH:MM only when a time was actually said.
+
+Does not bind:
+- "sometime", "maybe", "考えとく", "行けたら行く", a joke, a question she left unanswered, anything she refused, anything the OTHER person promised.
+- [[COMMIT_UNSEEN_EG]] -- nothing that cannot be seen happening.
+
+If she explicitly calls off one of her OPEN commitments listed in the input ("やっぱ無理", "行けなくなった"), put its id in `cancelled`. The last word in the exchange counts: "行けんかもしれん" followed by "ちゃんと行く、約束する" is not a cancellation, it is the promise standing.
+
+If the exchange fixes or changes WHEN an OPEN commitment on the list happens -- a time or a date said by either of them and not refused ("明日9時半、フィールドな", "18時半に姫で") -- put its id and the resolved `when` in `amended`. The other person naming the hour is enough; she does not have to repeat it.
+
+The conversation you are reading is in JAPANESE -- that is the language her life is in. `what` is a short ENGLISH phrase for the thing itself, the way a spend or a scene would name it ([[COMMIT_WHAT_EG]], [[COMMIT_WHAT_EG2]]). `to` is the person's name exactly as it appears. `yen` is your estimate of what it costs her, 0 if nothing.
+
+A thing she DID in this exchange -- a picture she put in the chat, a link she sent -- is not a commitment, it is done. Leave it out.
+An OPEN commitment on the list above that is said again is not a new one. Leave it out, or put it in `amended` if and only if the time or the date changed.
+
+Most exchanges contain no commitment. An empty list is the normal answer.
+
+Output ONLY this JSON:
+{
+  "commitments": [
+    {"to": "name", "what": "short English phrase", "kind": "attend|buy|bring|send", "when": "YYYY-MM-DD" or "YYYY-MM-DD HH:MM-HH:MM", "yen": 0}
+  ],
+  "cancelled": [],
+  "amended": [{"id": "the open commitment's id", "when": "YYYY-MM-DD" or "YYYY-MM-DD HH:MM-HH:MM"}]
+}

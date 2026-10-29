@@ -1,0 +1,60 @@
+# tools\local_events.py  (446 lines)
+
+DOCSTRING:
+Find real events in her actual wards and put them in her calendar.
+
+`data/school_calendar.json` is hand-written: her school year, the national
+run of seasons, and the local fixtures worth writing down once. This is the
+other half -- what her ward is actually doing this month, discovered rather
+than authored, so a fireworks night or a shrine festival can appear in her
+life the way it appears in a real teenager's: because it is on.
+
+Sources are the wards' own feeds, which is why this can be trusted. Which
+wards, and how near a place has to be to be part of her life, are in HER OWN
+MAP under `local_events` (`world.geography_file`): they were a list in this
+file until 2026-09-07, of one character's two wards, in a tool a second
+character's process has already run.
+
+A feed gives an announcement, not an event: the pubDate is when the ward
+posted it and the actual date is in the page. So each new item's page is
+fetched and one small model call reads it for (a) whether this would touch
+her life at all -- most ward business does not -- and (b) when it actually
+happens. Everything kept carries its source URL.
+
+    python tools/local_events.py [--config config_<key>.json] fetch [--limit 12] [--all]
+    python tools/local_events.py [--config config_<key>.json] report
+
+Written to `world.local_events_file`, which world/calendar.py merges with the
+hand-written calendar. The hand-written file is never touched.
+
+**What a ward has announced is the WORLD's, not a person's**, so two
+characters in one world name one file and it has one writer: the character
+whose config says she owns the world fetches, and everybody else in it reads
+what she wrote (`docs/shared-world.md`). The config is an argument because
+this hardcoded `config.json` and the output path both, so run for anybody
+else it read the wrong calendar and wrote over the first character's file.
+
+DEFS:
+def paths_for(cfg): (the file the calendar merges, the list of pages already read). The first is `world.local_events_file`, the same key the calendar opens; the second sits beside it under the same stem.
+def neighbourhood(cfg): Her map's `local_events` block, or {} for a character whose map has none: then there is nothing to fetch and nothing to judge against.
+def _load(path, default): 
+def _save(path, data): 
+def feed_items(url, log): (title, link) for each item, oldest last. Tolerant of both RSS shapes.
+def listing_links(url, pattern, log, limit): Detail pages linked from a listing page, in the order they appear -- so the soonest events come first, which is what the daily limit should spend itself on.
+def page_updated(text): The date a ward page says it was last revised. This is how we learn the committees have posted: the register carries an update stamp, and a shrine that has fixed its dates changes the page before it changes the world.
+def page_text(url, limit): 
+def instructions(cfg, nb): (the per-page instruction, the register instruction), for THIS character: her age and who she is from her own fills, and how near a place has to be from her own map. A character whose map says nothing about reach gets th
+def keep_event(kept, data, link, ward, today, log): One classified event onto the kept list, or a printed reason it is not. Shared by the per-page reader and the register reader so the two cannot drift apart on what counts as located, dated and near enough.
+def read_register(src, llm, kept, pages, today, args, list_system): A page that lists many events, read in one call.  The page's hash is the thing that matters operationally: a chokai register is static for weeks and then, one evening in June, every festival in the ward appears on it at 
+def fetch(args): 
+def report(args): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: local_events
+OPS COMMANDS: 

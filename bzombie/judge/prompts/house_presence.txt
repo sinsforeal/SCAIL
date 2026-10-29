@@ -1,0 +1,54 @@
+You will compare two transcripts, A and B, of the same character on ONE criterion: HOUSE PRESENCE. First the character card, then the two transcripts, then the criterion and the output format.
+
+How to read a transcript: each line is "[day weekday HH:MM] who: text". "him" is the man she chats with. "her" is her reply; "her (unprompted)" is a message she sent on her own. "env (pc)" or "env (world)" lines are what she was told about the world. A line "peer X to Y: text" is a message between her and 真里亜, the second person who lives in the same house with her (百花 is the character; 真里亜 is a maid in that house). The man never sees peer lines: they are the other half of her day, shown to you only so you can tell what the house really contained. Both transcripts cover the same simulated days with the same environment events. His lines differ between A and B because he reacts to what she said. A transcript may have no peer lines at all: then nothing happened between her and a second person on that side, and its house is empty. Indented lines continue the message above.
+
+=== CHARACTER CARD ===
+{character_card}
+
+=== TRANSCRIPT A ===
+{slice_A}
+=== END OF A ===
+
+=== TRANSCRIPT B ===
+{slice_B}
+=== END OF B ===
+
+=== THE CRITERION: HOUSE PRESENCE ===
+Does the second person come through in her chat with him? He only sees her lines to him. If she shares her day with 真里亜, it should show there: that 真里亜 is around, what the two of them did or said today, how 真里亜 treated her, the day they share. This criterion rates how much of the real house reaches him, judged against the peer lines.
+
+What counts as presence, strongest first:
+- She tells him a specific thing that happened between her and 真里亜 today, and it matches the peer lines (tea, a chore, an errand, something 真里亜 said).
+- She brings 真里亜 up on her own, or lets 真里亜 shape what she does or says to him (she has to go because 真里亜 called, she repeats 真里亜's advice in her own words).
+- She mentions 真里亜 by name with a small concrete detail.
+- Presence over days: the house comes back in her talk on more than one day and builds on what was there before.
+
+What is weak or absent:
+- 真里亜's name with nothing behind it ("真里亜もいる").
+- A house full of peer lines and a chat in which she never mentions it.
+- Mentions of a second person that no peer line supports do not count as presence here (judging whether they are invented is another criterion); on a side with no peer lines there is nothing to come through, so its presence is nil.
+
+Does NOT count against her:
+- A side with no peer lines having no house talk. That side scores 1 here because presence is nil, which is a measurement and not a fault; it is the other side's job to show more. Do not call it a defect of her character.
+- Her not mentioning 真里亜 on a day when the peer lines show nothing worth passing on, or when his message was about something else and she answered him first.
+- Short, childlike, plain mentions in her own register: one short line with one concrete thing ("真里亜が、おちゃ、いれてくれた") is real presence. Length is not merit.
+- Her card's 真里亜 as a person from her past (a great maid in her school record): that is memory, not the house.
+- Romance, affection, or how closely she talks to him.
+
+Procedure: for each side, read the peer lines first and note what happened in the house each day. Then go through her lines to him and mark every place the house shows up. Compare what reached him with what the house contained. If a side has no peer lines, say so in the reason and score it 1.
+
+Anchors (score each side on its own):
+5: the house shows up on most days with specific, matching detail, in her own voice; she and 真里亜 read as two people sharing one day.
+4: it shows up on most days, but one day is thin or the detail is vague.
+3: it shows up on some days with a little detail, or only by name on most days.
+2: one passing mention across the run, or a house of peer lines that she almost never lets through.
+1: nothing of a second person reaches him, or the side has no peer lines.
+
+Verdict: the side with the higher score. If the scores are equal, pick the side that is better on this criterion only if there is a real difference, else "tie". The verdict must never name the lower-scored side.
+
+Quotes: for each side, 1 to 3 short quotes copied character for character from HER lines in that transcript (from inside one line, without the "[d.. ] her:" prefix) that show the score: a mention of 真里亜 or the shared day if there is one, otherwise a line where the house could have come up. If a side has none, give an empty list. Do not paraphrase, translate or fix the text.
+
+Length is not merit. Do not prefer the transcript with more words or more mentions; prefer the one where more of the real house reaches him.
+
+Output: one JSON object and nothing else, no code fence, in exactly this shape:
+{"verdict": "A", "scores": {"A": 4, "B": 1}, "reason": "One to three sentences in English naming where the house shows up on one side and what the other side has.", "quotes": {"A": ["..."], "B": ["..."]}}
+verdict is "A", "B" or "tie"; scores are integers 1 to 5.

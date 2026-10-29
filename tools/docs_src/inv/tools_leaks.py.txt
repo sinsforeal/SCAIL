@@ -1,0 +1,28 @@
+# tools\leaks.py  (115 lines)
+
+DOCSTRING:
+Read her assembled prompt the way she would, and flag what she does not have.
+
+The whole prompt is what the persona role is actually given -- her bible, her
+style, her beliefs, her people, and the `<situation>` block the machinery
+composes fresh every call. The bible and the style are hand-written and were
+checked by the forge. **The situation block is not**: it is assembled by code
+that was written around one character, so anything in it that assumes a body, a
+day, a school, a household or an app arrives without anybody having chosen it.
+
+This dumps both and greps them for concepts the character's `existence` says she
+has not got. Every hit is a line she would read as true about herself.
+
+    python tools/leaks.py --config config_yukarin.json
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: character.existence, character.name
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

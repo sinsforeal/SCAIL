@@ -1,0 +1,22 @@
+{
+  "source": "Mechanical: koikano_work/expression_labels_lines.jsonl, the label and pose the game's own lines carry when that face is on screen (2026-10-23, tools/koikano/promote_heroine.py notes). Fills the 17 of Maria's 32 unlabeled faces that appear in a line. Not visually reviewed. The 28 faces in koikano_work/inventory/expression_labels.json are not repeated here. 15 faces are never on screen in a line and get no label: CG01A003 04 05 07 08 09, CG03A006, CG04A001 05 06 07 08, CG05A003 08 09.",
+  "labels": {
+    "CG02A004": {"expression": "smile", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG02A005": {"expression": "smile", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG02A007": {"expression": "surprise", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG02A009": {"expression": "sad", "pose": "none", "confidence": "unreviewed"},
+    "CG02B004": {"expression": "neutral", "pose": "none", "confidence": "unreviewed"},
+    "CG02B005": {"expression": "smile", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG02B007": {"expression": "surprise", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG02B009": {"expression": "smile", "pose": "none", "confidence": "unreviewed"},
+    "CG03A005": {"expression": "smile", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG03A007": {"expression": "surprise", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG04A002": {"expression": "smile", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG04A003": {"expression": "neutral", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG04A004": {"expression": "smile", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG04A009": {"expression": "sad", "pose": "none", "confidence": "unreviewed"},
+    "CG05A004": {"expression": "smile", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG05A005": {"expression": "smile", "pose": "finger_at_lips", "confidence": "unreviewed"},
+    "CG05A007": {"expression": "surprise", "pose": "finger_at_lips", "confidence": "unreviewed"}
+  }
+}

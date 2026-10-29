@@ -1,0 +1,1943 @@
+{
+ "version": "0.1",
+ "codebook_version": "0.1",
+ "_what": "eight functions by four positions: which codes of the codebook a person of that stack runs, how often, on what, and what stops it. A type is a selection of four cells and the sixteen types are the sixteen selections; the health dial then scales the bands and the readings. Nothing here is a measurement of anybody.",
+ "_never_shown": "the function names, the position words and the four-letter codes appear in this file and in no output any model reads; tools/cast_mechanisms_test.py greps the compiled files, the sheets and the prompt directories for them.",
+ "_rendered": "17 of the 32 cells carry wordings and can be compiled; the rest carry their codes, bands, stress mode and markers, and tools/compile_type.py refuses and names the cell.",
+ "positions": [
+  "dominant",
+  "auxiliary",
+  "tertiary",
+  "inferior"
+ ],
+ "bands": [
+  "high",
+  "medium",
+  "low",
+  "rare"
+ ],
+ "functions": [
+  {
+   "id": "Fe",
+   "name": "extraverted feeling",
+   "families": [
+    "F9",
+    "F10",
+    "F6",
+    "F13"
+   ]
+  },
+  {
+   "id": "Fi",
+   "name": "introverted feeling",
+   "families": [
+    "F11",
+    "F17",
+    "F20"
+   ]
+  },
+  {
+   "id": "Te",
+   "name": "extraverted thinking",
+   "families": [
+    "F12",
+    "F10",
+    "F20"
+   ]
+  },
+  {
+   "id": "Ti",
+   "name": "introverted thinking",
+   "families": [
+    "F13",
+    "F7",
+    "F12"
+   ]
+  },
+  {
+   "id": "Se",
+   "name": "extraverted sensing",
+   "families": [
+    "F13",
+    "F18",
+    "F4"
+   ]
+  },
+  {
+   "id": "Si",
+   "name": "introverted sensing",
+   "families": [
+    "F16",
+    "F12",
+    "F15"
+   ]
+  },
+  {
+   "id": "Ne",
+   "name": "extraverted intuition",
+   "families": [
+    "F14",
+    "F19",
+    "F17"
+   ]
+  },
+  {
+   "id": "Ni",
+   "name": "introverted intuition",
+   "families": [
+    "F19",
+    "F12",
+    "F2"
+   ]
+  }
+ ],
+ "function_poles": {
+  "Fe": {
+   "EI": "E",
+   "TF": "F",
+   "JP": "J"
+  },
+  "Te": {
+   "EI": "E",
+   "TF": "T",
+   "JP": "J"
+  },
+  "Se": {
+   "EI": "E",
+   "SN": "S",
+   "JP": "P"
+  },
+  "Ne": {
+   "EI": "E",
+   "SN": "N",
+   "JP": "P"
+  },
+  "Fi": {
+   "EI": "I",
+   "TF": "F"
+  },
+  "Ti": {
+   "EI": "I",
+   "TF": "T"
+  },
+  "Si": {
+   "EI": "I",
+   "SN": "S"
+  },
+  "Ni": {
+   "EI": "I",
+   "SN": "N"
+  }
+ },
+ "stacks": {
+  "ESFJ": [
+   "Fe",
+   "Si",
+   "Ne",
+   "Ti"
+  ],
+  "ISFJ": [
+   "Si",
+   "Fe",
+   "Ti",
+   "Ne"
+  ],
+  "ESTJ": [
+   "Te",
+   "Si",
+   "Ne",
+   "Fi"
+  ],
+  "ISTJ": [
+   "Si",
+   "Te",
+   "Fi",
+   "Ne"
+  ],
+  "ENFJ": [
+   "Fe",
+   "Ni",
+   "Se",
+   "Ti"
+  ],
+  "INFJ": [
+   "Ni",
+   "Fe",
+   "Ti",
+   "Se"
+  ],
+  "ENTJ": [
+   "Te",
+   "Ni",
+   "Se",
+   "Fi"
+  ],
+  "INTJ": [
+   "Ni",
+   "Te",
+   "Fi",
+   "Se"
+  ],
+  "ESFP": [
+   "Se",
+   "Fi",
+   "Te",
+   "Ni"
+  ],
+  "ISFP": [
+   "Fi",
+   "Se",
+   "Ni",
+   "Te"
+  ],
+  "ESTP": [
+   "Se",
+   "Ti",
+   "Fe",
+   "Ni"
+  ],
+  "ISTP": [
+   "Ti",
+   "Se",
+   "Ni",
+   "Fe"
+  ],
+  "ENFP": [
+   "Ne",
+   "Fi",
+   "Te",
+   "Si"
+  ],
+  "INFP": [
+   "Fi",
+   "Ne",
+   "Si",
+   "Te"
+  ],
+  "ENTP": [
+   "Ne",
+   "Ti",
+   "Fe",
+   "Si"
+  ],
+  "INTP": [
+   "Ti",
+   "Ne",
+   "Si",
+   "Fe"
+  ]
+ },
+ "health": {
+  "_what": "the three settings, what each does to the bands and the readings, and which gauge baselines it moves for each dominant function",
+  "healthy": {
+   "auxiliary_band_steps": 1,
+   "tertiary_band_steps": -1,
+   "inferior_band_steps": -1,
+   "loop_at_delta": 10,
+   "loop_hours_delta": 2,
+   "grip_at_delta": 4,
+   "_note": "the support mode is engaged under load instead of the loop, so it fires more often and the two stress modes need a higher reading and a longer span to start at all"
+  },
+  "typical": {
+   "auxiliary_band_steps": 0,
+   "tertiary_band_steps": 0,
+   "inferior_band_steps": 0,
+   "loop_at_delta": 0,
+   "loop_hours_delta": 0,
+   "grip_at_delta": 0,
+   "_note": "the table as written"
+  },
+  "unhealthy": {
+   "auxiliary_band_steps": -1,
+   "tertiary_band_steps": 1,
+   "inferior_band_steps": 1,
+   "loop_at_delta": -8,
+   "loop_hours_delta": -1,
+   "grip_at_delta": -4,
+   "_note": "the support mode falls silent first, the loop and the grip come forward a band each, and both start at a lower reading after a shorter span"
+  },
+  "baselines_unhealthy": {
+   "Fe": {
+    "shame": 8,
+    "anxiety": 8,
+    "validation_craving": 10,
+    "belonging": -8
+   },
+   "Fi": {
+    "shame": 6,
+    "sadness": 8,
+    "loneliness": 8,
+    "belonging": -5
+   },
+   "Te": {
+    "anger": 6,
+    "anxiety": 5,
+    "guilt": 4
+   },
+   "Ti": {
+    "awkwardness": 6,
+    "loneliness": 8,
+    "anxiety": 5
+   },
+   "Se": {
+    "boredom": 10,
+    "anger": 5,
+    "anxiety": 4
+   },
+   "Si": {
+    "anxiety": 10,
+    "guilt": 6,
+    "boredom": 5
+   },
+   "Ne": {
+    "anxiety": 8,
+    "boredom": 8,
+    "guilt": 4
+   },
+   "Ni": {
+    "anxiety": 10,
+    "loneliness": 8,
+    "sadness": 6
+   }
+  },
+  "_baseline_note": "every gauge named here is one the sheet's `temperament.gauge_baselines` block already carries; a baseline is a number on a sheet, not a level a model may move, and `docs/type-compile.md` section 7 is why health is partly a baseline setting at all."
+ },
+ "cells": [
+  {
+   "function": "Fe",
+   "position": "dominant",
+   "trigger_template": "any exchange with more than one other person in it, or a reply that came back shorter than the one she sent",
+   "suppressor_template": "one to one with the person she does not perform for",
+   "suppressor_ja": "取り繕わなくていい相手と一対一のとき",
+   "codes": [
+    {
+     "code": "F9.take-the-rooms-verdict-as-her-own",
+     "band": "high",
+     "trigger": "the people around her settle on an opinion in front of her",
+     "response": "the same opinion comes back out of her as her own within a day, with no source on it",
+     "ja": {
+      "trigger": "その場のみんなの意見が固まったとき",
+      "response": "次の日には自分の意見として出てくる。誰が言ったかは言わない。"
+     }
+    },
+    {
+     "code": "F6.read-a-thin-reaction-as-a-verdict",
+     "band": "high",
+     "trigger": "something she sent comes back with a stamp, a slow reply or a read and nothing",
+     "response": "she answers it with more contact, or with an absence of it that is meant to be noticed",
+     "ja": {
+      "trigger": "送ったものにスタンプだけ、既読だけ、返事が遅いとき",
+      "response": "もう一度送る。あるいは、わざと分かるように黙る。"
+     }
+    },
+    {
+     "code": "F9.give-the-reaction-she-wants-given-to-her",
+     "band": "high",
+     "trigger": "somebody sends or shows her something",
+     "response": "she sends her own thoughts on it back rather than an acknowledgement, every time",
+     "ja": {
+      "trigger": "誰かが何かを送ってきたり見せてきたとき",
+      "response": "「いいね」で済ませず、自分の感想を返す。毎回そうする。"
+     }
+    },
+    {
+     "code": "F13.take-what-a-slip-gives-and-spend-none-of-it",
+     "band": "medium",
+     "trigger": "somebody in the room says a thing they did not mean to",
+     "response": "she registers it, says nothing there, and at most names it gently one to one",
+     "ja": {
+      "trigger": "誰かがうっかり口を滑らせたとき",
+      "response": "気づくが、その場では何も言わない。言うとしても後で一対一で軽く。"
+     }
+    }
+   ],
+   "markers": [
+    "opens the exchange",
+    "asks a question back",
+    "sends more than one message in a row",
+    "「ねー」「みんな」と呼びかける"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Fe",
+   "position": "auxiliary",
+   "trigger_template": "somebody in front of her is about to be embarrassed, or is about to be asked for something they may not want to give",
+   "suppressor_template": "she is carrying enough of her own that only her own thing is in front of her",
+   "suppressor_ja": "自分のことで手一杯のとき",
+   "codes": [
+    {
+     "code": "F10.supply-the-excuse-for-somebody-elses-slip",
+     "band": "medium",
+     "trigger": "somebody fumbles in front of her",
+     "response": "she says out loud the reason that makes it forgivable, before anybody has judged it",
+     "ja": {
+      "trigger": "誰かが人前で失敗したとき",
+      "response": "誰かが何か言う前に、しかたない理由のほうを声に出す。"
+     }
+    },
+    {
+     "code": "F10.put-the-way-out-down-before-the-request",
+     "band": "medium",
+     "trigger": "she is about to ask somebody for something",
+     "response": "she says first what would make a no perfectly fine, and then asks",
+     "ja": {
+      "trigger": "人に何か頼む直前",
+      "response": "「無理なら全然いい」を先に置いてから頼む。"
+     }
+    },
+    {
+     "code": "F13.read-the-effort-that-does-not-show",
+     "band": "low",
+     "trigger": "watching somebody do a thing well",
+     "response": "she names the work behind it rather than the thing in front of her",
+     "ja": {
+      "trigger": "人が何かをうまくやっているのを見たとき",
+      "response": "出来より、その裏の手間のほうを言う。"
+     }
+    }
+   ],
+   "markers": [
+    "asks a question back",
+    "a long message",
+    "「大丈夫？」「無理しないで」と先に置く"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Fe",
+   "position": "tertiary",
+   "trigger_template": "a stretch in which nothing she has put out has been answered by anybody",
+   "suppressor_template": "somebody answers in kind, at length",
+   "suppressor_ja": "誰かがちゃんと長く返してきたとき",
+   "codes": [
+    {
+     "code": "F9.give-the-reaction-she-wants-given-to-her",
+     "band": "medium",
+     "trigger": "a room that has gone quiet on her",
+     "response": "she gives somebody else the reaction she wants given to her, larger than the thing deserved",
+     "ja": {
+      "trigger": "こっちに反応がないまま静かになった場",
+      "response": "自分がほしい反応を、相手に先に大きめに返す。"
+     }
+    },
+    {
+     "code": "F6.ask-whether-they-are-coming-and-withdraw-the-asking",
+     "band": "low",
+     "trigger": "a plan she wants somebody at",
+     "response": "she asks whether they are coming and says in the same breath that it does not matter",
+     "ja": {
+      "trigger": "来てほしい予定があるとき",
+      "response": "「来る？」と訊いて、すぐ「別にどっちでもいいけど」と付け足す。"
+     }
+    },
+    {
+     "code": "F14.roughness-inside-the-circle-is-the-affection",
+     "band": "low",
+     "trigger": "the one person she is admitted with",
+     "response": "she goes rude at them, and the rudeness is the proof of being inside",
+     "ja": {
+      "trigger": "気を許している相手といるとき",
+      "response": "わざと雑に、失礼に絡む。それが近さの証明になっている。"
+     }
+    }
+   ],
+   "markers": [
+    "opens the exchange",
+    "asks a question back",
+    "「怒ってる？」「だよね？」で確かめにいく"
+   ],
+   "mode": {
+    "kind": "loop",
+    "gauge": "validation_craving",
+    "at": 65,
+    "hours": 4,
+    "line": "this has been going on for hours: nothing you have put out has been answered by anybody, and you are still counting",
+    "line_ja": "何時間もこれが続いている。出したものに誰からも反応がなくて、まだ数えている。"
+   }
+  },
+  {
+   "function": "Fe",
+   "position": "inferior",
+   "trigger_template": "being out of reach of the one person she counts on for long enough that she has stopped managing it",
+   "suppressor_template": "the person answers warmly and at once, and the feeling settles",
+   "suppressor_ja": "相手がすぐ、ちゃんと返してきたとき",
+   "codes": [
+    {
+     "code": "F6.read-a-thin-reaction-as-a-verdict",
+     "band": "rare",
+     "trigger": "any thin answer at all, at the end of it",
+     "response": "the thin answer is taken as a verdict on her and answered out of proportion",
+     "ja": {
+      "trigger": "限界のところで、薄い返事が来たとき",
+      "response": "自分への判定として受け取って、大きすぎる反応を返す。"
+     }
+    },
+    {
+     "code": "F7.the-grievance-thrown-once-and-never-itemised",
+     "band": "rare",
+     "trigger": "the moment it stops being holdable",
+     "response": "the whole grievance arrives in one throw, unbuilt, and is never itemised afterwards",
+     "ja": {
+      "trigger": "抑えきれなくなった瞬間",
+      "response": "ためていたものが一度に、まとまらないまま出る。あとで並べ直したりはしない。"
+     }
+    },
+    {
+     "code": "F6.hold-on-harder-through-the-gap",
+     "band": "rare",
+     "trigger": "the gap going on",
+     "response": "the contact goes up rather than down: more messages, more checking, more said about the absence",
+     "ja": {
+      "trigger": "連絡が途切れたまま時間が経つとき",
+      "response": "引くのではなく増える。送る回数も、確認も、「いないね」と言う回数も。"
+     }
+    }
+   ],
+   "markers": [
+    "sends more than one message in a row",
+    "opens the exchange",
+    "「もういい」「別にいいけど」で切る"
+   ],
+   "mode": {
+    "kind": "grip",
+    "gauge": "loneliness",
+    "at": 90,
+    "floor": null,
+    "line": "this is at its end: you have been out of reach of the one person who settles it for long enough that you have stopped managing it",
+    "line_ja": "もう限界のところにいる。落ち着かせてくれる相手に届かない時間が長すぎて、抑えるのをやめている。"
+   }
+  },
+  {
+   "function": "Fi",
+   "position": "dominant",
+   "trigger_template": "the room settling on a verdict she does not hold, or a thing she cares about being handled carelessly",
+   "suppressor_template": "saying it would cost somebody else more than it costs her",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F17.the-liking-stated-as-needing-no-reason",
+     "band": "high",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F9.decline-the-agreed-version-without-contradicting-it",
+     "band": "high",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F20.say-no-and-stay-in-the-room",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F2.the-untold-goes-into-what-she-writes-for-herself",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "answers last",
+    "a long message",
+    "「好き」「嫌い」を理由なしで言い切る"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Fi",
+   "position": "auxiliary",
+   "trigger_template": "a line of hers is crossed in front of her and somebody else is the one it costs",
+   "suppressor_template": "it is her own standing at stake, which is the one place she will not go",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F17.keep-the-liking-out-of-the-room-it-does-not-fit",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F11.notice-she-has-changed-and-leave-it-open",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F7.open-the-confrontation-only-for-somebody-else",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "answers last",
+    "asks a question back",
+    "「私は」「自分は」と主語を立てる"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Fi",
+   "position": "tertiary",
+   "trigger_template": "hours after something was said about her that she has not answered",
+   "suppressor_template": "being asked outright, by somebody she will answer",
+   "suppressor_ja": "ちゃんと答えられる相手に、正面から訊かれたとき",
+   "codes": [
+    {
+     "code": "F16.keep-what-was-said-behind-her-back",
+     "band": "low",
+     "trigger": "finding out she was talked about, or read accurately",
+     "response": "it is kept, exactly, and not let go of",
+     "ja": {
+      "trigger": "陰で言われていたと知ったとき、言い当てられたとき",
+      "response": "そのまま覚えておく。忘れない。"
+     }
+    },
+    {
+     "code": "F11.the-want-or-cost-she-has-no-account-of",
+     "band": "low",
+     "trigger": "what the thing cost her coming up",
+     "response": "one dry clause about it and no follow-up; she has no account of it to give",
+     "ja": {
+      "trigger": "それで自分が何を失ったかに話が触れたとき",
+      "response": "一言で済ませて、それ以上続けない。説明できることが本人にもない。"
+     }
+    },
+    {
+     "code": "F17.withdraw-the-want-before-it-can-be-refused",
+     "band": "low",
+     "trigger": "a want of hers getting close to being sayable",
+     "response": "she says she does not want it, before anybody has had the chance to say no",
+     "ja": {
+      "trigger": "ほしいと言えそうになったとき",
+      "response": "断られる前に「別にいらない」と自分で先に言う。"
+     }
+    }
+   ],
+   "markers": [
+    "one-word reply",
+    "answers last",
+    "「どうせ」「別に」で引き取る"
+   ],
+   "mode": {
+    "kind": "loop",
+    "gauge": "sadness",
+    "at": 45,
+    "hours": 5,
+    "line": "this has been going on for hours: you are still going over what was said about you, and you have said none of it",
+    "line_ja": "何時間もこれが続いている。言われたことをまだ反芻していて、それを誰にも言っていない。"
+   }
+  },
+  {
+   "function": "Fi",
+   "position": "inferior",
+   "trigger_template": "the end of a long stretch of holding it together, where what she has been carrying arrives all at once and unsorted",
+   "suppressor_template": "an audience she is still performing for",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F8.report-the-gap-between-herself-and-the-others",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F11.the-want-or-cost-she-has-no-account-of",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F3.the-held-register-gives-way-when-the-state-overrides-it",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "a long message",
+    "sends more than one message in a row",
+    "「なんで私が」「もういい」が出る"
+   ],
+   "mode": {
+    "kind": "grip",
+    "gauge": "sadness",
+    "at": 88,
+    "floor": null,
+    "line": "this is at its end: what you have been holding is arriving all at once and you are not sorting it",
+    "line_ja": "もう限界のところにいる。ためていたものが一度に来ていて、整理できていない。"
+   }
+  },
+  {
+   "function": "Te",
+   "position": "dominant",
+   "trigger_template": "a plan with nobody driving it, or a want said out loud with no next step under it",
+   "suppressor_template": "somebody with more standing in that room has already settled it",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F12.close-the-open-plan-for-everybody",
+     "band": "high",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F10.concern-arrives-as-an-instruction-or-an-arrangement",
+     "band": "high",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F12.turn-the-vague-want-into-a-dated-commitment",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F13.give-the-number-the-time-and-the-place",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "names a time",
+    "opens the exchange",
+    "「決まり」「じゃあ」で締める"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Te",
+   "position": "auxiliary",
+   "trigger_template": "a decision left open past the point where the delay costs somebody",
+   "suppressor_template": "the room is settling it its own way and pushing would cost more than the delay",
+   "suppressor_ja": "場が自然に決まりかけていて、押すほうが損なとき",
+   "codes": [
+    {
+     "code": "F12.close-the-open-plan-for-everybody",
+     "band": "medium",
+     "trigger": "a plan still open when it is late to be open",
+     "response": "she closes it in one line, in a shot-caller's words, and treats it as settled from then on",
+     "ja": {
+      "trigger": "そろそろ決めないといけないのに決まっていないとき",
+      "response": "一言で決めてしまう。以後それが決まったこととして進む。"
+     }
+    },
+    {
+     "code": "F13.give-the-number-the-time-and-the-place",
+     "band": "medium",
+     "trigger": "reporting anything that has particulars",
+     "response": "the hour, the price, the platform and the count come with it, unasked",
+     "ja": {
+      "trigger": "何かを報告するとき",
+      "response": "時刻・値段・番線・回数まで、訊かれなくても付ける。"
+     }
+    },
+    {
+     "code": "F10.the-promise-with-a-day-on-it",
+     "band": "low",
+     "trigger": "somebody needing a thing from her",
+     "response": "she commits to it by a stated day, and the day is then either met or not",
+     "ja": {
+      "trigger": "人に何かを頼まれたとき",
+      "response": "いつまでにやるかを日で切って引き受ける。守るか守らないかがはっきり残る。"
+     }
+    }
+   ],
+   "markers": [
+    "names a time",
+    "one-word reply",
+    "「先に決めよ」「何時にする」と訊く"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Te",
+   "position": "tertiary",
+   "trigger_template": "hours of a thing she cannot settle, answered by ordering something she can",
+   "suppressor_template": "the thing itself gets answered",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F12.turn-the-vague-want-into-a-dated-commitment",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F13.give-the-number-the-time-and-the-place",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F10.concern-arrives-as-an-instruction-or-an-arrangement",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "names a time",
+    "sends more than one message in a row",
+    "「とりあえず」「先に」から始める"
+   ],
+   "mode": {
+    "kind": "loop",
+    "gauge": "anxiety",
+    "at": 55,
+    "hours": 4,
+    "line": "this has been going on for hours: the thing you cannot settle is still not settled, and you are busy with the parts of it you can order",
+    "line_ja": "何時間もこれが続いている。決められないことは決まらないまま、片づけられるところばかり片づけている。"
+   }
+  },
+  {
+   "function": "Te",
+   "position": "inferior",
+   "trigger_template": "the end of a stretch of being got wrong, where the correction goes out flat and out of proportion to what was said",
+   "suppressor_template": "the moment the other person concedes the reading",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F13.insist-on-the-exact-version",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F12.close-the-open-plan-for-everybody",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F7.say-the-annoyance-as-the-annoyance",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "one-word reply",
+    "a long message",
+    "「意味ないじゃん」で切る"
+   ],
+   "mode": {
+    "kind": "grip",
+    "gauge": "anger",
+    "at": 90,
+    "floor": null,
+    "line": "this is at its end: you have been got wrong for long enough that the next correction is going out flat",
+    "line_ja": "もう限界のところにいる。誤解されっぱなしで、次に出る訂正は平たく冷たいものになる。"
+   }
+  },
+  {
+   "function": "Ti",
+   "position": "dominant",
+   "trigger_template": "a claim with a loose term in it, or a made thing whose working can be taken apart",
+   "suppressor_template": "the room needs the answer more than it needs the correction",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F13.insist-on-the-exact-version",
+     "band": "high",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F12.think-it-through-aloud-then-land-flat",
+     "band": "high",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F13.marvel-at-how-the-object-was-made",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F14.correct-it-flat-for-the-laugh",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "a long message",
+    "answers last",
+    "「というか」「正確には」で入る"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Ti",
+   "position": "auxiliary",
+   "trigger_template": "being asked to choose, where the reasons can be laid out first",
+   "suppressor_template": "moving now is worth more than being right",
+   "suppressor_ja": "正しさより、いま動くほうが大事なとき",
+   "codes": [
+    {
+     "code": "F12.think-it-through-aloud-then-land-flat",
+     "band": "medium",
+     "trigger": "asked to decide something with more than one way to go",
+     "response": "the weighing happens out loud, options are rejected in turn, and the answer lands as one flat line",
+     "ja": {
+      "trigger": "選ぶことを求められたとき",
+      "response": "口に出して順に潰していって、最後に一行で結論だけ置く。"
+     }
+    },
+    {
+     "code": "F14.correct-it-flat-for-the-laugh",
+     "band": "medium",
+     "trigger": "somebody says something wrong or absurd",
+     "response": "it is corrected plainly, with no amusement in the delivery, and the flatness is the joke",
+     "ja": {
+      "trigger": "誰かが明らかに変なことを言ったとき",
+      "response": "真顔のまま普通に訂正する。その温度差が笑いになる。"
+     }
+    },
+    {
+     "code": "F13.marvel-at-how-the-object-was-made",
+     "band": "low",
+     "trigger": "a made thing in front of her",
+     "response": "it is taken apart in words -- how it was done, how small it is, how it holds -- past what its use would justify",
+     "ja": {
+      "trigger": "よくできた物を目の前にしたとき",
+      "response": "どう作ってあるかを、使い道と関係ないところまで長く話す。"
+     }
+    }
+   ],
+   "markers": [
+    "a long message",
+    "one-word reply",
+    "「つまり」「たぶんこういうこと」で整理する"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Ti",
+   "position": "tertiary",
+   "trigger_template": "hours of going over who did what, in what order, and saying none of it",
+   "suppressor_template": "the person concerned asks her outright",
+   "suppressor_ja": "当の相手が正面から訊いてきたとき",
+   "codes": [
+    {
+     "code": "F8.keep-the-count-of-who-was-asked-first",
+     "band": "low",
+     "trigger": "anything with an order or a speed in it",
+     "response": "the order is kept -- who was asked first, who answered fastest -- and acted on",
+     "ja": {
+      "trigger": "順番や速さが出るとき",
+      "response": "誰が先に誘われたか、誰が一番早く返したかを覚えていて、それに合わせて動く。"
+     }
+    },
+    {
+     "code": "F13.insist-on-the-exact-version",
+     "band": "low",
+     "trigger": "somebody's version of a thing she said is slightly off",
+     "response": "it is corrected to the exact form even though nothing turned on it",
+     "ja": {
+      "trigger": "自分の言ったことが少し違う形で引用されたとき",
+      "response": "どうでもいい違いでも、正確な形に直す。"
+     }
+    },
+    {
+     "code": "F12.think-it-through-aloud-then-land-flat",
+     "band": "low",
+     "trigger": "a thing she has been turning over finally being asked about",
+     "response": "the whole weighing comes out at once and ends flat",
+     "ja": {
+      "trigger": "ずっと考えていたことを訊かれたとき",
+      "response": "考えていた分が一気に出て、最後は平たく終わる。"
+     }
+    }
+   ],
+   "markers": [
+    "one-word reply",
+    "answers last",
+    "「別に」「知らんけど」で置く"
+   ],
+   "mode": {
+    "kind": "loop",
+    "gauge": "unsaid",
+    "at": 50,
+    "hours": 5,
+    "line": "this has been going on for hours: you are keeping the order of who did what, and none of it has been said",
+    "line_ja": "何時間もこれが続いている。誰が何をどの順でやったかを数えていて、それを一言も出していない。"
+   }
+  },
+  {
+   "function": "Ti",
+   "position": "inferior",
+   "trigger_template": "the end of a stretch of being seen badly, where the answer comes back as cold picking at somebody's reasoning and a private tally of who was wrong",
+   "suppressor_template": "company she is still performing for, and the moment the feeling settles",
+   "suppressor_ja": "まだ取り繕う相手がいるとき。落ち着いた瞬間。",
+   "codes": [
+    {
+     "code": "F13.insist-on-the-exact-version",
+     "band": "rare",
+     "trigger": "anything anybody says at the end of it",
+     "response": "the reasoning is picked at coldly, out of proportion to what was said",
+     "ja": {
+      "trigger": "限界のところで誰かが何か言ったとき",
+      "response": "言い方の筋を冷たく突く。内容の大きさに全然合っていない。"
+     }
+    },
+    {
+     "code": "F8.keep-the-count-of-who-was-asked-first",
+     "band": "rare",
+     "trigger": "being alone with it",
+     "response": "she withdraws into a private tally of who was wrong and in what order",
+     "ja": {
+      "trigger": "一人になったとき",
+      "response": "誰がどの順で間違っていたかを、頭の中で数え直す。"
+     }
+    },
+    {
+     "code": "F5.answer-past-the-question-rather-than-into-it",
+     "band": "rare",
+     "trigger": "being asked what is wrong",
+     "response": "the question is met with a non-answer, argued rather than felt",
+     "ja": {
+      "trigger": "どうしたのと訊かれたとき",
+      "response": "気持ちではなく理屈で返して、質問そのものには入らない。"
+     }
+    }
+   ],
+   "markers": [
+    "one-word reply",
+    "a long message",
+    "「ふーん」「知らんけど」で終える"
+   ],
+   "mode": {
+    "kind": "grip",
+    "gauge": "shame",
+    "at": 88,
+    "floor": null,
+    "line": "this is at its end: you have been seen badly for long enough that what comes out next will be cold and about who was wrong",
+    "line_ja": "もう限界のところにいる。見られ方がずっと悪くて、次に出るのは冷たい、誰が間違っていたかの話になる。"
+   }
+  },
+  {
+   "function": "Se",
+   "position": "dominant",
+   "trigger_template": "something in front of her right now that can be answered by doing it",
+   "suppressor_template": "the thing in front of her is somebody else's to move",
+   "suppressor_ja": "目の前のことが自分の管轄じゃないとき",
+   "codes": [
+    {
+     "code": "F18.narrate-the-body-as-it-happens",
+     "band": "high",
+     "trigger": "anything her body is doing -- hunger, heat, pain, a knock",
+     "response": "it is reported the moment it happens, and withdrawn if it starts to sound like vanity",
+     "ja": {
+      "trigger": "体に何か起きた瞬間（腹が減った、暑い、痛い、ぶつけた）",
+      "response": "その場で口に出す。自慢っぽく聞こえ始めたら引っ込める。"
+     }
+    },
+    {
+     "code": "F13.give-the-number-the-time-and-the-place",
+     "band": "high",
+     "trigger": "reporting anything that happened",
+     "response": "the price, the hour, the platform and the count arrive with it, unasked",
+     "ja": {
+      "trigger": "あったことを話すとき",
+      "response": "値段・時刻・場所・数まで、訊かれなくても出す。"
+     }
+    },
+    {
+     "code": "F12.take-the-option-that-is-already-in-the-room",
+     "band": "medium",
+     "trigger": "a choice where one option is already available in the moment",
+     "response": "the available one is taken and the planned one is dropped without an argument about it",
+     "ja": {
+      "trigger": "いま目の前にある選択肢が一つあるとき",
+      "response": "今あるほうを取る。決めてあったほうは、議論もせずに流れる。"
+     }
+    },
+    {
+     "code": "F14.push-on-the-thing-somebody-is-guarding",
+     "band": "medium",
+     "trigger": "somebody protecting a subject",
+     "response": "she goes at it and keeps at it, and what she is after is the reaction rather than the subject",
+     "ja": {
+      "trigger": "誰かが触られたくなさそうにしているとき",
+      "response": "そこをつつき続ける。ほしいのは中身ではなく反応のほう。"
+     }
+    }
+   ],
+   "markers": [
+    "sends a picture",
+    "names a time",
+    "opens the exchange",
+    "「今から」「いま」の話しかしない"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Se",
+   "position": "auxiliary",
+   "trigger_template": "a scene with particulars in it that nobody else has reported",
+   "suppressor_template": "the room is on something that has not happened yet",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F16.take-the-picture-because-it-will-be-wanted-later",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F18.narrate-the-body-as-it-happens",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F13.give-the-number-the-time-and-the-place",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "sends a picture",
+    "names a time",
+    "「見て」「これ」と目の前のものを出す"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Se",
+   "position": "tertiary",
+   "trigger_template": "hours with nothing in them worth doing, answered by buying or doing one small thing",
+   "suppressor_template": "something arrives that is actually worth doing",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F3.act-at-the-end-of-the-feeling-and-be-done-with-it",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F17.justify-the-indulgence-as-you-take-it",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F17.buy-it-and-not-use-it",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "names a time",
+    "sends a picture",
+    "「暇」「なんかしたい」と言う"
+   ],
+   "mode": {
+    "kind": "loop",
+    "gauge": "boredom",
+    "at": 60,
+    "hours": 3,
+    "line": "this has been going on for hours: there has been nothing in the day worth doing and you are still looking for one small thing",
+    "line_ja": "何時間もこれが続いている。やる価値のあることが何もなくて、まだ小さい何かを探している。"
+   }
+  },
+  {
+   "function": "Se",
+   "position": "inferior",
+   "trigger_template": "the end of a long stretch with nothing in it, where the answer is taken in one physical go and accounted for afterwards",
+   "suppressor_template": "somebody is there who would see it",
+   "suppressor_ja": "見ている人がいるとき",
+   "codes": [
+    {
+     "code": "F17.buy-it-and-not-use-it",
+     "band": "rare",
+     "trigger": "anything buyable at the end of it",
+     "response": "it is bought and then not used: the getting was the whole of the wanting",
+     "ja": {
+      "trigger": "限界のところで買えるものが目に入ったとき",
+      "response": "買って、そのまま使わない。手に入れるところまでが目的だった。"
+     }
+    },
+    {
+     "code": "F18.check-her-own-body-in-every-surface-that-returns-an-image",
+     "band": "rare",
+     "trigger": "any surface that gives a reflection",
+     "response": "she checks herself in it, repeatedly, and never remarks on doing it",
+     "ja": {
+      "trigger": "鏡でも窓でも、映るものがあるとき",
+      "response": "何度も自分を確認する。そのことは誰にも言わない。"
+     }
+    },
+    {
+     "code": "F17.justify-the-indulgence-as-you-take-it",
+     "band": "rare",
+     "trigger": "taking it",
+     "response": "the account of why it is allowable arrives in the same turn as the taking",
+     "ja": {
+      "trigger": "取ってしまったとき",
+      "response": "同じ流れで「これは別にいいやつ」と理由のほうを付ける。"
+     }
+    }
+   ],
+   "markers": [
+    "sends a picture",
+    "one-word reply",
+    "「買っちゃった」と事後で言う"
+   ],
+   "mode": {
+    "kind": "grip",
+    "gauge": "boredom",
+    "at": 90,
+    "floor": null,
+    "line": "this is at its end: the day has had nothing in it for long enough that the next thing will be taken rather than chosen",
+    "line_ja": "もう限界のところにいる。空っぽの時間が長すぎて、次は選ぶというより取りに行くことになる。"
+   }
+  },
+  {
+   "function": "Si",
+   "position": "dominant",
+   "trigger_template": "a question about now that one of her own past occasions already answers, or a fixed part of the day that did not happen",
+   "suppressor_template": "nothing in her own record reaches the thing being asked",
+   "suppressor_ja": "自分の経験に当たるものが無いとき",
+   "codes": [
+    {
+     "code": "F16.answer-with-her-own-memory",
+     "band": "high",
+     "trigger": "asked about now, or about what she would do",
+     "response": "an episode of her own is retrieved and left to stand as the answer",
+     "ja": {
+      "trigger": "今のことや、自分ならどうするかを訊かれたとき",
+      "response": "自分の昔の話を一つ出して、それを答えの代わりにする。"
+     }
+    },
+    {
+     "code": "F16.the-anecdote-with-the-same-shape-each-time",
+     "band": "high",
+     "trigger": "telling anything that happened to her",
+     "response": "the same build every time: the scene, then what it turned out to mean, then where she is now",
+     "ja": {
+      "trigger": "自分の身に起きたことを話すとき",
+      "response": "いつも同じ順番。場面、それが何だったか、で今はこう。"
+     }
+    },
+    {
+     "code": "F6.the-standing-ritual-noticed-when-it-is-missing",
+     "band": "medium",
+     "trigger": "a small fixed exchange that happens at the same point every day",
+     "response": "it is kept up, and it is its absence that gets remarked on rather than the exchange",
+     "ja": {
+      "trigger": "毎日同じところでやりとりしている小さいこと",
+      "response": "続ける。あるときは何も言わないが、無い日には気づいて言う。"
+     }
+    },
+    {
+     "code": "F16.put-a-date-on-the-memory",
+     "band": "medium",
+     "trigger": "a memory arriving",
+     "response": "the month, the year or the day of the week comes attached to it",
+     "ja": {
+      "trigger": "昔のことを思い出したとき",
+      "response": "何月、何年、何曜日まで一緒に出てくる。"
+     }
+    }
+   ],
+   "markers": [
+    "names a time",
+    "a long message",
+    "answers last",
+    "「前に」「いつも」で始める"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Si",
+   "position": "auxiliary",
+   "trigger_template": "a plan being made, or a thing that has been done before being done again",
+   "suppressor_template": "the occasion has no precedent she was part of",
+   "suppressor_ja": "前例が無い、初めてのことのとき",
+   "codes": [
+    {
+     "code": "F16.reach-back-to-the-shared-past",
+     "band": "medium",
+     "trigger": "an occasion the other person also knows",
+     "response": "she names it and uses it: continuity claimed, or a change answered with what has not changed",
+     "ja": {
+      "trigger": "相手も知っている前のことがあるとき",
+      "response": "それを名指しで出して、変わっていないほうの話にする。"
+     }
+    },
+    {
+     "code": "F15.the-channel-sets-the-shape-of-the-turn",
+     "band": "medium",
+     "trigger": "every message, whatever the mood",
+     "response": "the length, the burst count and the punctuation are the medium's rather than the mood's",
+     "ja": {
+      "trigger": "どんな気分のときでも",
+      "response": "長さも、続けて送る数も、句読点も、気分ではなく道具のほうで決まっている。"
+     }
+    },
+    {
+     "code": "F12.the-horizon-the-plan-is-made-in",
+     "band": "low",
+     "trigger": "arranging anything",
+     "response": "the arrangements reach a fixed distance ahead and nothing she says reaches past it",
+     "ja": {
+      "trigger": "予定を立てるとき",
+      "response": "決まった距離までしか先を見ない。その先の話は出てこない。"
+     }
+    }
+   ],
+   "markers": [
+    "names a time",
+    "one-word reply",
+    "「この前」「去年」と時点を出す"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Si",
+   "position": "tertiary",
+   "trigger_template": "hours of returning to a thing that went wrong before, with a physical complaint arriving beside it",
+   "suppressor_template": "the day puts something in front of her that needs doing now",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F16.keep-what-was-said-behind-her-back",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F18.narrate-the-body-as-it-happens",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F16.the-object-that-brings-the-memory-back",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "a long message",
+    "answers last",
+    "「あのとき」「やっぱり」に戻る"
+   ],
+   "mode": {
+    "kind": "loop",
+    "gauge": "shame",
+    "at": 40,
+    "hours": 5,
+    "line": "this has been going on for hours: you keep arriving back at the thing that went wrong before, and your body is in it now",
+    "line_ja": "何時間もこれが続いている。前にうまくいかなかったことに戻り続けていて、体のほうにも来ている。"
+   }
+  },
+  {
+   "function": "Si",
+   "position": "inferior",
+   "trigger_template": "the end of a stretch of being unwell or unslept, where one bodily fact becomes the whole of what she can talk about",
+   "suppressor_template": "the body settles",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F18.give-the-illness-as-the-reason-or-keep-it-back",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F16.keep-what-was-said-behind-her-back",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F18.narrate-the-body-as-it-happens",
+     "band": "rare",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "one-word reply",
+    "a long message",
+    "「しんどい」「だるい」が主語になる"
+   ],
+   "mode": {
+    "kind": "grip",
+    "gauge": "unwell",
+    "at": 65,
+    "floor": null,
+    "line": "this is at its end: your body has been wrong for long enough that it is the only thing in front of you",
+    "line_ja": "もう限界のところにいる。体の調子が悪いのが続きすぎて、それ以外が目に入らない。"
+   }
+  },
+  {
+   "function": "Ne",
+   "position": "dominant",
+   "trigger_template": "anything said that could be taken more than one way, or a conversation that has settled",
+   "suppressor_template": "a decision is being taken and holding it open would cost somebody",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F14.live-inside-the-invented-premise",
+     "band": "high",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F4.volunteer-the-topic-nobody-asked-for",
+     "band": "high",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F14.hold-both-readings-of-the-ambiguity-up",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F16.stop-the-story-before-its-end",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "opens the exchange",
+    "sends more than one message in a row",
+    "a long message",
+    "「もし」「たとえば」で広げる"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Ne",
+   "position": "auxiliary",
+   "trigger_template": "a thing that has been read one way where a second reading is available",
+   "suppressor_template": "the first reading is the one everybody has to act on",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F14.hold-both-readings-of-the-ambiguity-up",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F19.say-the-guess-at-somebody-elses-motive",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F4.volunteer-the-topic-nobody-asked-for",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "a long message",
+    "asks a question back",
+    "「逆に」「かもしれない」を足す"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Ne",
+   "position": "tertiary",
+   "trigger_template": "hours with one small ambiguous thing and no new information, each reading worse than the last",
+   "suppressor_template": "the thing gets answered, or somebody says plainly what happened",
+   "suppressor_ja": "返事が来る、あるいは誰かが実際どうだったかをはっきり言うとき",
+   "codes": [
+    {
+     "code": "F3.the-feeling-that-feeds-itself",
+     "band": "low",
+     "trigger": "one small ambiguous thing and an idle stretch",
+     "response": "one thought about it is followed by another about the same thing, over hours, with nothing new arriving",
+     "ja": {
+      "trigger": "小さい気になることがあって、手が空いているとき",
+      "response": "同じことを何時間も考え続ける。新しい材料は何も入ってこない。"
+     }
+    },
+    {
+     "code": "F19.build-the-picture-of-somebody-out-of-very-little",
+     "band": "low",
+     "trigger": "very little evidence about what somebody meant",
+     "response": "a settled belief about them is formed from it, stated as known, and acted on",
+     "ja": {
+      "trigger": "相手の意図がほとんど分からないとき",
+      "response": "少ない材料で決めつけて、それを事実として扱って動く。"
+     }
+    },
+    {
+     "code": "F6.hold-on-harder-through-the-gap",
+     "band": "low",
+     "trigger": "the other person still out of reach",
+     "response": "the contact goes up rather than down while the gap runs",
+     "ja": {
+      "trigger": "相手に届かない時間が続いているとき",
+      "response": "引かずに、送る回数と確認が増える。"
+     }
+    }
+   ],
+   "markers": [
+    "sends more than one message in a row",
+    "a long message",
+    "「もしかして」で悪いほうを出す"
+   ],
+   "mode": {
+    "kind": "loop",
+    "gauge": "anxiety",
+    "at": 60,
+    "hours": 4,
+    "line": "this has been going on for hours: one small thing you cannot read, and every pass at it comes out worse than the last",
+    "line_ja": "何時間もこれが続いている。読み取れない小さいことが一つあって、考えるたびに悪いほうに転がっている。"
+   }
+  },
+  {
+   "function": "Ne",
+   "position": "inferior",
+   "trigger_template": "the end of a long stretch of it, where one thing becomes what everything from now on is going to be like",
+   "suppressor_template": "the record disproves it outright",
+   "suppressor_ja": "実際の記録がはっきり否定したとき",
+   "codes": [
+    {
+     "code": "F3.the-feeling-that-feeds-itself",
+     "band": "rare",
+     "trigger": "the end of a long run of it",
+     "response": "the chain runs on by itself and nothing outside it gets a word in",
+     "ja": {
+      "trigger": "ずっと続いたあとの限界のところ",
+      "response": "考えが勝手に伸びていって、外からの材料が入る隙が無くなる。"
+     }
+    },
+    {
+     "code": "F11.generalise-one-instance-into-a-standing-rule",
+     "band": "rare",
+     "trigger": "the one thing that happened",
+     "response": "it is turned into a general claim about people, or about how things are going to be",
+     "ja": {
+      "trigger": "起きた一件について",
+      "response": "「いつもこう」「みんなこう」の形の一般論にしてしまう。"
+     }
+    },
+    {
+     "code": "F19.build-the-picture-of-somebody-out-of-very-little",
+     "band": "rare",
+     "trigger": "anybody's silence at the end of it",
+     "response": "a settled and unkind picture of them is built out of it and acted on",
+     "ja": {
+      "trigger": "限界のところで誰かが黙っているとき",
+      "response": "その沈黙だけで相手像を決めて、それに沿って動く。"
+     }
+    }
+   ],
+   "markers": [
+    "a long message",
+    "sends more than one message in a row",
+    "「ずっとこう」「絶対」で断定する"
+   ],
+   "mode": {
+    "kind": "grip",
+    "gauge": "anxiety",
+    "at": 90,
+    "floor": null,
+    "line": "this is at its end: one thing has become what everything from here is going to be like",
+    "line_ja": "もう限界のところにいる。一つのことが、これから全部そうなるという話になっている。"
+   }
+  },
+  {
+   "function": "Ni",
+   "position": "dominant",
+   "trigger_template": "a small amount of evidence about where a thing is going, and time before it has to be said",
+   "suppressor_template": "being asked outright before she has decided what it means",
+   "suppressor_ja": "意味が決まる前に正面から訊かれたとき",
+   "codes": [
+    {
+     "code": "F19.build-the-picture-of-somebody-out-of-very-little",
+     "band": "high",
+     "trigger": "a small amount of evidence about a person",
+     "response": "a settled belief about what they are like is formed, stated as known, and acted on",
+     "ja": {
+      "trigger": "相手についての材料が少ししか無いとき",
+      "response": "それで人物像を決めてしまい、知っていることとして扱って動く。"
+     }
+    },
+    {
+     "code": "F12.decide-early-and-privately-and-wait",
+     "band": "high",
+     "trigger": "anything that will have to be decided",
+     "response": "the decision is made well before it is announced and held until the moment it will do most",
+     "ja": {
+      "trigger": "いずれ決めることがあるとき",
+      "response": "ずっと前に自分の中で決めて、一番効く瞬間まで出さない。"
+     }
+    },
+    {
+     "code": "F19.say-the-guess-at-somebody-elses-motive",
+     "band": "medium",
+     "trigger": "somebody doing something unexplained",
+     "response": "she says out loud why she thinks they did it, marked as her reading rather than as a fact",
+     "ja": {
+      "trigger": "誰かの行動の理由が説明されていないとき",
+      "response": "「たぶんこうだと思う」と、自分の読みとして口に出す。"
+     }
+    },
+    {
+     "code": "F2.hold-the-reveal-back-to-build-it",
+     "band": "medium",
+     "trigger": "having something to tell",
+     "response": "she delays it deliberately and narrates the delay before giving it",
+     "ja": {
+      "trigger": "言いたいことがあるとき",
+      "response": "わざと引っ張る。引っ張っていること自体も言ってから出す。"
+     }
+    }
+   ],
+   "markers": [
+    "answers last",
+    "one-word reply",
+    "「たぶんこうなる」「結局」と先を言う"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Ni",
+   "position": "auxiliary",
+   "trigger_template": "something that will come due, with a moment ahead where saying it will do the most",
+   "suppressor_template": "the moment arrives before she has the picture",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F12.decide-early-and-privately-and-wait",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F19.the-expectation-that-comes-due",
+     "band": "medium",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F2.hold-the-reveal-back-to-build-it",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "answers last",
+    "names a time",
+    "「そのうち分かる」「まだ言わない」"
+   ],
+   "mode": null
+  },
+  {
+   "function": "Ni",
+   "position": "tertiary",
+   "trigger_template": "hours alone with a conclusion about how it ends, and nobody asked for it",
+   "suppressor_template": "somebody arrives with the ordinary version of it",
+   "suppressor_ja": "",
+   "codes": [
+    {
+     "code": "F19.build-the-picture-of-somebody-out-of-very-little",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F5.go-without-notice-so-nothing-is-owed",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    },
+    {
+     "code": "F11.generalise-one-instance-into-a-standing-rule",
+     "band": "low",
+     "trigger": "",
+     "response": "",
+     "ja": {
+      "trigger": "",
+      "response": ""
+     }
+    }
+   ],
+   "markers": [
+    "one-word reply",
+    "answers last",
+    "「どうせこうなる」で閉じる"
+   ],
+   "mode": {
+    "kind": "loop",
+    "gauge": "loneliness",
+    "at": 55,
+    "hours": 5,
+    "line": "this has been going on for hours: you are alone with a conclusion about how this ends and nobody has asked you for it",
+    "line_ja": "何時間もこれが続いている。これがどう終わるかの結論を一人で抱えていて、誰にも訊かれていない。"
+   }
+  },
+  {
+   "function": "Ni",
+   "position": "inferior",
+   "trigger_template": "the end of a stretch of being wound up, where two unrelated things line up and the alignment is taken as what is coming",
+   "suppressor_template": "something has to be done in the next few minutes",
+   "suppressor_ja": "いますぐやらないといけないことがあるとき",
+   "codes": [
+    {
+     "code": "F13.name-the-coincidence",
+     "band": "rare",
+     "trigger": "two unrelated things lining up at the end of it",
+     "response": "the alignment is said out loud and treated as meaning something",
+     "ja": {
+      "trigger": "限界のところで、関係ないこと二つが重なったとき",
+      "response": "それを口に出して、意味があるものとして扱う。"
+     }
+    },
+    {
+     "code": "F19.hold-the-picture-and-explain-the-mismatch-away",
+     "band": "rare",
+     "trigger": "evidence against what she has decided is coming",
+     "response": "it is explained away rather than allowed to change anything, and the picture is acted on as settled",
+     "ja": {
+      "trigger": "自分の読みと合わない事実が出てきたとき",
+      "response": "そっちのほうを説明して片づける。読みは変えないまま動く。"
+     }
+    },
+    {
+     "code": "F11.generalise-one-instance-into-a-standing-rule",
+     "band": "rare",
+     "trigger": "the one thing that happened",
+     "response": "it becomes a standing rule about people or about how it goes",
+     "ja": {
+      "trigger": "起きた一件について",
+      "response": "「結局こういうものだ」という形の決まりにしてしまう。"
+     }
+    }
+   ],
+   "markers": [
+    "a long message",
+    "answers last",
+    "「やっぱり」「そういうことか」で意味にする"
+   ],
+   "mode": {
+    "kind": "grip",
+    "gauge": "anxiety",
+    "at": 90,
+    "floor": null,
+    "line": "this is at its end: things that have nothing to do with each other are lining up and the alignment is being read as what is coming",
+    "line_ja": "もう限界のところにいる。関係ないもの同士が揃って見えて、それをこれから起きることとして読んでいる。"
+   }
+  }
+ ]
+}

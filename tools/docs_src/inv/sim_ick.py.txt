@@ -1,0 +1,36 @@
+# sim\ick.py  (424 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _words(text): 
+def _jaccard(a, b): 
+class Ick: 
+    __init__(config, llm, store, clock, state, model, records): 
+    kinds(): 
+    kinds_text(): What she has already run into, most familiar first. Shown to the scoring call so it can say which of these a thing is. Without this it was being asked to reuse a wording it had never been shown, and coined a fresh label 
+    _match_kind(kind): The model is shown her kinds and asked to copy one back exactly, so an exact hit is the normal path. The word-overlap pass underneath is only a loose net for near-misses; it cannot see that "his morning trading" and "mem
+    _record_kind(kind, ts): 
+    _state_multiplier(): Only unease adds. A calm gauge counts as nothing rather than as a discount, the rule the snoop gate had to learn twice.
+    _circle_multiplier(circle): The girls never find out and she never tells them, but she runs everything past them in her head. What they would have something to say about costs more than the same thing in private -- and only to the extent she is cur
+    _cast_text(): 
+    assess(what, source, context): 
+    _live(item, now): 
+    _hot(): 
+    carrying(): Hot, and she cannot raise it without admitting how she knows.
+    unraised(): Hot, and she could raise it. She has not, which is a different thing.
+    teasable(): Cooled off, and she has met the sort of thing enough times that it is just how he is. This is where a discovery ends up if nothing else happens to it: not forgotten, not unspeakable, something to needle him about.
+    settled(): How settled she is with him, 0 to 1: the share of what she has met lately whose sort she had already run into.  Habituation as a state rather than only as a discount. At 1.0 nothing he does is news and she can needle him
+    prompt_text(): 
+    bars(text): True when this is one of the things she cannot raise. The thread pressure has no idea what it is pushing out; left alone it would eventually make her say the one thing she never would.
+    report(): 
+
+CONFIG SECTIONS: ick, ick.bar_jaccard, ick.cast_in_prompt, ick.half_life_days, ick.in_prompt, ick.kind_jaccard, ick.kinds_in_prompt, ick.max_kinds, prompt_text
+KV READ: charged, ick_kinds
+KV WRITE: charged, ick_kinds
+TABLES: 
+LOG TAGS: ick
+PROMPTS: ick
+LLM ROLES: ick
+OPS COMMANDS: 

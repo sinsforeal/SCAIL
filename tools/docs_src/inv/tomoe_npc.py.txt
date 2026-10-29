@@ -1,0 +1,87 @@
+# tomoe\npc.py  (491 lines)
+
+DOCSTRING:
+The other people -- the ones she runs into rather than the ones she has.
+
+The cast is seven people with sheets, sentiments, a social graph and a place
+in her prompts. Everybody ELSE in Tokyo did not exist: she rode a packed train
+with `with: "strangers"` in her schedule and nobody on it, stood in a konbini
+with nobody behind the till, and spent a school day in a building holding one
+class of girls none of whom were ever in the room. A world where only the seven
+people who matter exist is not a world; it is a stage set.
+
+**Who is plausibly there comes from the place, not from a list of characters.**
+`data/places.json` already gives every node a `kind` -- konbini, station,
+school, library, park, shrine, museum, shotengai, city -- and that is the
+spine: a konbini has somebody behind the till and somebody else buying milk, a
+platform has a school kid from another school and a woman who is too close, a
+shrine has an old woman. Nobody is in her flat who is not family, because her
+family IS the cast.
+
+**Three things a person can be**, which is how it works in life:
+
+- a face she has never seen and will never see again -- the man who takes the
+  seat she was walking towards,
+- a face she knows by sight and has no name for -- the clerk on the evening
+  shift, the boy always on the 7:52. Code reuses a face already seen AT THAT
+  PLACE with probability `known_face_p`, which is why the konbini has a regular
+  clerk rather than a new stranger every visit,
+- a face with a name, which she only gets where you would actually learn one:
+  school, or a face met `name_after` times.
+
+**Code decides when and who; the model decides what.** The gate is the place,
+a gap, a daily cap and a roll (`_should`); the slot -- known face or new, and
+which role from the place's own table -- is picked in code and handed over; the
+call writes who that person concretely is and what passed between them. Most
+encounters have no words in them at all.
+
+**They stay out of the cast machinery.** An NPC never enters `relationships`,
+`sentiments`, the social graph, `cast_chat` or the group; there is no standing,
+no closeness, no beat. That is deliberate: the empty-person fault of 2026-08-27
+came from a name reaching a lookup that had no row for it. What an encounter
+DOES leave is an `events` row, which is the same door everything else in her
+day comes through -- the timeline, the diary, her memories and the director all
+read events already, so a stranger reaches her the way the weather does.
+
+A face she keeps meeting is a candidate for the cast, and this never writes
+`data/cast.json`: promotion is his, and `/npc` names the candidates.
+
+An encounter reaches her through `events` and nothing else, which is enough:
+the director reads the day's events (so the scene answers a stranger), the
+diary reads them all, and her own voice to him reads only `salience >= 2` --
+so the person on the till never reaches her chat with him and the man who
+said something that stayed with her does.
+
+Store: kv `npcs` (the faces), `npc_moments` (what happened), `npc_counts`,
+`npc_last_ts`, `npc_last_check_ts`. Ops: `/npc`.
+
+DEFS:
+class People: The world's other people. One tick, one possible encounter.
+    __init__(config, llm, store, clock, situation, state, calendar, weather): 
+    faces(): 
+    _save_faces(rows): 
+    moments(date_str): 
+    _place(scene): (node id, kind, human name) for where she is, or (None, "", "").  `commute` is a kind of its own: on a journey she is nowhere on the graph and the people around her are the ones a train has.
+    _population(nid, kind): 
+    _alone(scene): 
+    _place_p(kind): The chance per check at a place of this kind. A nested block in `config.json` arrives as a Section, not a dict, and `home` is 0.0 -- which `or default` would read as absent and turn back on.
+    _should(scene, nid, kind, pop): Is there an encounter this tick? Code owns all of it.
+    _pick_face(nid, kind, pop, rng): A face she already knows here, or a new one. Returns (face|None, role) -- the face when it is somebody she has seen at this place.
+    _her_line(): The little of her that an encounter needs. Not her interior: a stranger cannot see it, and she is only one of the two mouths here.
+    _prompt(place_name, kind, role, face, scene, alone): 
+    around(scene): Who is simply there, with no encounter: the ambient population of wherever she is, for the scene and her own prompt. No model call and nothing recorded -- you do not remember the person on the till, and the world would b
+    tick(scene): One pass. Returns the moment as a dict, or None -- which is what it returns almost every time, because most of a day is nobody.
+    _clean(data, nid, kind, place_name, role, face, date_str): 
+    _record(m, nid, kind, face, role, date_str): 
+    known_faces(place): 
+    promotion_candidates(): Faces she has met enough times to be a person rather than a face. Never acted on here: `data/cast.json` is his.
+    report(): 
+
+CONFIG SECTIONS: json, npc, npc.place_p, npc.place_p_default, prompt_text, self_memory
+KV READ: npc_counts, npc_last_check_ts, npc_last_ts, npc_moments, npcs
+KV WRITE: npc_counts, npc_last_check_ts, npc_last_ts, npc_moments, npcs
+TABLES: 
+LOG TAGS: npc
+PROMPTS: npc_moment
+LLM ROLES: 
+OPS COMMANDS: 

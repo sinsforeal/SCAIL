@@ -1,0 +1,846 @@
+html, body {
+  margin: 0;
+  height: 100%;
+  color-scheme: light;
+  background: #f4f0f8;
+  color: #2b2433;
+  font-family: "Yu Gothic", "Meiryo", system-ui, sans-serif;
+}
+
+#bg, #bg-prev {
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 20%, #2a2438 0%, #14121a 70%);
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.55) saturate(0.9);
+}
+/* no scene image yet (app.js sets backgroundImage inline): a light lavender
+   placeholder, undimmed, so an empty stage never opens dark. Once a scene is
+   set the game art and its dimming filter apply unchanged. */
+#bg:not([style*="background-image"]) {
+  background: radial-gradient(circle at 50% 20%, #fbf8ff 0%, #e4dcf0 75%);
+  filter: none;
+}
+#bg-prev { pointer-events: none; opacity: 1; z-index: 0; }
+#bg-prev[hidden] { display: none; }
+#bg-prev.fade-out { opacity: 0; transition: opacity .42s ease; }
+#bg-prev.fade-out-slow { opacity: 0; transition: opacity .6s ease; }
+
+/* The director's transition types (fade_black, white, flash) all cross a
+   solid overlay between the old and new background rather than crossfading
+   the two images directly. It sits above the backgrounds and below the
+   stage, and never intercepts a click. */
+#transition-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  background: #000;
+}
+#transition-overlay[hidden] { display: none; }
+
+/* The game's four small snow sprites fall over the background, behind her. */
+#weather {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+#weather[hidden] { display: none; }
+.snowflake {
+  position: absolute;
+  top: -64px;
+  width: var(--size);
+  height: var(--size);
+  background-image: var(--flake);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: var(--opacity);
+  animation: snow-fall var(--duration) linear var(--delay) infinite;
+}
+@keyframes snow-fall {
+  from { transform: translate3d(0, -64px, 0); }
+  to { transform: translate3d(8vw, calc(100vh + 128px), 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .snowflake { animation: none; top: var(--still-top); }
+}
+
+/* The stage holds the sprite against the top of the viewport and lets the
+   over-long canvas hang below it. Her art is cut at the socks with no feet, so
+   at 100vh the cut landed on the viewport edge behind the message window and
+   she read as footless; drawn larger and anchored to the top, the cut falls
+   below the visible area and the frame is head to about the knee. The zoom is
+   `vn.sprite_zoom`, written to `--vn-zoom` by the page. */
+#stage {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transition: transform 0.6s ease;
+}
+
+/* A brief jolt for `scene.camera === "shake"`; app.js clears the animation
+   and restores the standing transform once it ends. */
+@keyframes camera-shake {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-4px, 2px); }
+  20% { transform: translate(3px, -3px); }
+  30% { transform: translate(-2px, 4px); }
+  40% { transform: translate(4px, -1px); }
+  50% { transform: translate(-3px, -2px); }
+  60% { transform: translate(2px, 3px); }
+  70% { transform: translate(-4px, -1px); }
+  80% { transform: translate(3px, 2px); }
+  90% { transform: translate(-1px, -3px); }
+}
+
+/* The sway rides the wrapper, the breathing rides the canvas, so the two
+   transforms never fight over the one `transform` property. */
+#sprite-wrap {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+
+#sprite {
+  height: calc(100vh * var(--vn-zoom, 1.55));
+  width: auto;
+  max-height: none;
+  max-width: none;
+  transform-origin: 50% 100%;
+  will-change: transform;
+}
+#sprite-prev {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: calc(100vh * var(--vn-zoom, 1.55));
+  width: auto;
+  max-height: none;
+  max-width: none;
+  transform: translateX(-50%);
+  pointer-events: none;
+  opacity: 1;
+}
+#sprite-prev[hidden] { display: none; }
+#sprite-prev.fade-out { opacity: 0; transition: opacity .3s ease; }
+
+/* The feeling mark, drawn the way the game draws it: at the piece's own size
+   on the sprite's own scale, anchored to a named point on her head
+   (`CgSetupInfo.tjs` BUSTUP_EMOTION_POS: the head, the forehead and the temple
+   beside her upper right). It is not a fixed screen corner -- the page writes
+   left/top/width/height from the sprite's rendered rect and the face box every
+   frame, so zoom, breathing and sway all carry it. The size is the piece's
+   native pixels times the sprite's screen scale, so no aspect can outgrow the
+   others; the page caps it only as a last resort. */
+#overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 0;
+  /* above the sprite: the mark sits on her head, and the canvas is opaque
+     where her hair is, so an auto z-index would bury the mark behind it. The
+     backlog (3) and the stage controls (2, later in the DOM) stay on top. */
+  z-index: 2;
+  opacity: 0.95;
+  pointer-events: none;
+  display: none;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+  transform-origin: 50% 60%;
+  will-change: transform, opacity;
+}
+
+#overlay.on { display: block; }
+
+/* Idle motion. The classes are put on the body by the page, which reads the
+   channel's defaults, the player's toggle and `prefers-reduced-motion`. */
+body.motion-on #sprite {
+  animation: vn-breathe 5.2s ease-in-out infinite;
+}
+
+body.motion-on.sway-on #sprite-wrap {
+  animation: vn-sway 8s ease-in-out infinite;
+}
+
+/* Each mark's motion suits the mark: a heart drifts up and fades, a star
+   twinkles, a question bobs, a sweat drop settles, an attention mark pulses. */
+body.motion-on #overlay.mark-heart    { animation: vn-heart 3.6s ease-in-out infinite; }
+body.motion-on #overlay.mark-star     { animation: vn-star 2.4s ease-in-out infinite; }
+body.motion-on #overlay.mark-question { animation: vn-question 2.6s ease-in-out infinite; }
+body.motion-on #overlay.mark-drop     { animation: vn-drop 2.8s ease-in-out infinite; }
+body.motion-on #overlay.mark-attention{ animation: vn-attention 2.2s ease-in-out infinite; }
+body.motion-on #overlay.mark-baloon   { animation: vn-baloon 4.2s ease-in-out infinite; }
+body.motion-on #overlay.mark-chat     { animation: vn-chat 3.2s ease-in-out infinite; }
+body.motion-on #overlay.mark-generic  { animation: vn-question 2.6s ease-in-out infinite; }
+
+@keyframes vn-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-6px) scale(1.006); }
+}
+
+@keyframes vn-sway {
+  0%, 100% { transform: translateX(0); }
+  25%      { transform: translateX(-9px); }
+  75%      { transform: translateX(9px); }
+}
+
+@keyframes vn-heart {
+  0%   { transform: translateY(8px) scale(0.94); opacity: 0; }
+  25%  { opacity: 1; }
+  70%  { transform: translateY(-22px) scale(1.06); opacity: 0.9; }
+  100% { transform: translateY(-32px) scale(1.1); opacity: 0; }
+}
+
+@keyframes vn-star {
+  0%, 100% { transform: scale(0.9) rotate(-5deg); opacity: 0.7; }
+  50%      { transform: scale(1.14) rotate(5deg); opacity: 1; }
+}
+
+@keyframes vn-question {
+  0%, 100% { transform: translateY(0) rotate(-6deg); }
+  50%      { transform: translateY(-12px) rotate(6deg); }
+}
+
+@keyframes vn-drop {
+  0%   { transform: translateY(-8px) scaleY(0.85); opacity: 0.85; }
+  60%  { transform: translateY(10px) scaleY(1.12); opacity: 1; }
+  100% { transform: translateY(-8px) scaleY(0.85); opacity: 0.85; }
+}
+
+@keyframes vn-attention {
+  0%, 100% { transform: scale(0.92); opacity: 0.7; }
+  40%      { transform: scale(1.16); opacity: 1; }
+}
+
+@keyframes vn-baloon {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-14px) rotate(3deg); }
+}
+
+@keyframes vn-chat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-9px); }
+}
+
+/* A system that asks for less motion gets none only when nothing more
+   deliberate applies. Motion that resolved on is deliberate -- the player's
+   toggle or the channel's own default -- and `.force-motion` lets it through. */
+@media (prefers-reduced-motion: reduce) {
+  body:not(.force-motion) #sprite,
+  body:not(.force-motion) #sprite-wrap,
+  body:not(.force-motion) #overlay {
+    animation: none !important;
+  }
+}
+
+#hud {
+  position: fixed;
+  left: 50%;
+  bottom: 57px;
+  transform: translateX(-50%);
+  width: min(1280px, calc(100vw - 32px));
+  background: repeating-linear-gradient(45deg, rgba(129,98,61,.045) 0 1px, transparent 1px 11px), rgba(251, 246, 230, .89);
+  border: 1px solid #b9936d;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 16px 170px 18px 132px;
+  min-height: 136px;
+  box-shadow: inset 0 1px rgba(255,255,255,.8), 0 8px 30px rgba(46, 29, 22, .27);
+}
+#dialogue-content.line-in { animation: vn-line-in .22s ease-out; }
+@keyframes vn-line-in {
+  from { opacity: .35; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#hud.replying { padding: 17px 21px; min-height: 136px; }
+#hud.replying #face, #hud.replying #dialogue-content, #hud.replying #reply-open { display: none; }
+
+#face {
+  position: absolute;
+  left: 14px;
+  bottom: 12px;
+  width: 104px;
+  height: 104px;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 10px;
+  border: 1px solid #ae8966;
+  background: #eee4d7;
+}
+
+#name {
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #694739;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#voice-replay {
+  width: 30px;
+  height: 28px;
+  border: 1px solid #aa875c;
+  border-radius: 7px;
+  background: #fff7e6;
+  color: #7b5434;
+  font-size: 17px;
+  cursor: pointer;
+}
+#voice-replay:disabled { opacity: .45; cursor: wait; }
+
+#text {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #28664f;
+  text-shadow: 0 1px rgba(255,255,255,.7);
+  white-space: pre-wrap;
+  min-height: 1.6em;
+}
+
+#mood {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #977c65;
+  letter-spacing: 0.06em;
+}
+
+#reply-open { position: absolute; right: 20px; bottom: 19px; padding: 9px 14px; border: 1px solid #aa725e; border-radius: 7px; background: #b85a6b; color: white; font-weight: 700; cursor: pointer; box-shadow: 0 3px 8px rgba(93,50,42,.2); }
+#reply-open[hidden] { display: none; }
+#reply-open:hover { background: #a85063; }
+#say { display: block; width: 100%; }
+#say[hidden] { display: none; }
+#say label { display: block; margin-bottom: 10px; color: #694739; font-weight: 700; }
+.reply-fields { display: flex; gap: 10px; }
+
+#input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 14px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #a98664;
+  background: rgba(255, 251, 239, .95);
+  color: #4f3e34;
+}
+
+#input:focus { outline: 2px solid #b85a6b; }
+
+#send {
+  padding: 12px 22px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #a14e5c;
+  background: #b85a6b;
+  color: #fff;
+  cursor: pointer;
+}
+
+#send:disabled, #input:disabled { opacity: 0.5; cursor: default; }
+
+#status {
+  position: fixed;
+  top: 12px;
+  right: 14px;
+  font-size: 12px;
+  color: #8f82ab;
+}
+
+#toolbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 16;
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  overflow-x: auto;
+  padding: 7px 10px;
+  background: linear-gradient(#f8f0df, #e6d7bb);
+  border-top: 2px solid #aa875c;
+  box-shadow: 0 -3px 14px rgba(31, 21, 15, .3);
+  scrollbar-width: thin;
+}
+#toolbar button {
+  flex: 0 0 auto;
+  min-width: 66px;
+  padding: 7px 10px;
+  border: 1px solid #a77b55;
+  border-radius: 7px;
+  color: #654330;
+  background: linear-gradient(#fffef4, #f0e1c4);
+  box-shadow: inset 0 1px #fff, 0 2px 2px rgba(73, 44, 24, .15);
+  font: 700 12px "Yu Gothic", "Meiryo", sans-serif;
+  white-space: nowrap;
+  cursor: pointer;
+}
+#toolbar button:hover, #toolbar button[aria-pressed="true"] {
+  background: linear-gradient(#fae3dd, #e4b9af);
+  border-color: #a95063;
+}
+#toolbar button:disabled { opacity: .5; cursor: default; }
+
+/* The director console: he talks to it out of character and approves a scene.
+   A side panel, so the stage stays visible behind it. */
+#director {
+  position: fixed;
+  top: 40px;
+  right: 14px;
+  bottom: 96px;
+  z-index: 4;
+  width: min(360px, 40vw);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  background: rgba(250, 247, 254, 0.97);
+  border: 1px solid #b9aed6;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #3b3350;
+  box-shadow: 0 6px 24px rgba(40, 30, 60, .25);
+}
+
+#director[hidden] { display: none; }
+
+#director-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: #6f6590;
+}
+
+#director-close {
+  background: none;
+  border: none;
+  color: #6f6590;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+#director-scene {
+  padding: 6px 8px;
+  background: rgba(107, 79, 190, 0.12);
+  border-radius: 6px;
+  color: #5a4a8a;
+}
+
+#director-log {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#director-log .director-turn {
+  padding: 5px 8px;
+  border-radius: 6px;
+  white-space: pre-wrap;
+  line-height: 1.4;
+}
+
+#director-log .director-turn.him { background: #e8e1f5; align-self: flex-end; }
+#director-log .director-turn.console { background: #e1f1e8; align-self: flex-start; }
+
+#director-proposal {
+  padding: 8px;
+  border: 1px solid #b9aed6;
+  border-radius: 6px;
+  background: rgba(107, 79, 190, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#director-proposal[hidden] { display: none; }
+
+#director-proposal .director-proposal-text { color: #2b2240; }
+#director-proposal .director-proposal-meta { color: #6f6590; font-size: 11px; }
+
+#director-proposal button {
+  align-self: flex-start;
+  background: #6b4fbe;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+#director-proposal button:disabled { background: #b9aed6; cursor: default; }
+
+#director-form {
+  display: flex;
+  gap: 6px;
+}
+
+#director-input {
+  flex: 1;
+  background: #ffffff;
+  color: #2b2240;
+  border: 1px solid #b9aed6;
+  border-radius: 6px;
+  padding: 5px 8px;
+}
+
+#director-send {
+  background: #6b4fbe;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* The gauge chart: an out-of-character read-out, same dark console as the
+   director (light), but centered like the save sheet so the plot has room. */
+.gauge-panel {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  background: rgba(10, 8, 14, .66);
+}
+.gauge-panel[hidden] { display: none; }
+.gauge-panel-card {
+  width: min(940px, 94vw);
+  max-height: min(86vh, 720px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 18px;
+  background: rgba(250, 247, 254, 0.98);
+  border: 1px solid #b9aed6;
+  border-radius: 12px;
+  box-shadow: 0 22px 70px rgba(20, 12, 15, .4);
+  color: #3b3350;
+}
+.gauge-panel-card .panel-head { color: #3b3350; border-bottom: 1px solid #b9aed6; }
+.gauge-panel-card .panel-head small { color: #6f6590; }
+.gauge-panel-card .panel-head button {
+  border: 1px solid #b9aed6;
+  border-radius: 7px;
+  background: #ffffff;
+  color: #3b3350;
+  font-size: 18px;
+  cursor: pointer;
+}
+.gauge-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  font-size: 12px;
+  color: #3b3350;
+}
+.gauge-legend label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
+.gauge-legend input[type="checkbox"] { accent-color: #6b4fbe; }
+.gauge-legend .swatch {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 11px;
+  height: 11px;
+  border-radius: 3px;
+}
+.gauge-chart-canvas {
+  width: 100%;
+  height: 320px;
+  background: #ffffff;
+  border: 1px solid #cfc6e4;
+  border-radius: 8px;
+}
+
+#controls {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 25;
+  display: none;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  gap: 12px;
+  width: min(760px, 92vw);
+  max-height: min(80vh, 760px);
+  overflow-y: auto;
+  padding: 18px;
+  background: repeating-linear-gradient(45deg, rgba(156,126,91,.07) 0 1px, transparent 1px 12px), #f8f0dd;
+  border: 3px solid #aa805d;
+  border-radius: 13px;
+  box-shadow: 0 0 0 999vmax rgba(17,12,22,.48), 0 16px 55px rgba(30,18,14,.55);
+  font-size: 14px;
+  color: #523d30;
+}
+
+#controls.open { display: grid; }
+
+.panel-head { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; color: #7d4c45; font-size: 23px; font-weight: 800; border-bottom: 1px solid #b9976b; padding-bottom: 7px; }
+.panel-head small { color: #ae8f78; font: italic 12px Georgia, serif; }
+.panel-head button { border: 1px solid #a77b55; border-radius: 7px; background: #fff9ed; color: #6d4830; font-size: 20px; cursor: pointer; }
+
+#controls .opt-group {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 12px;
+  border: 1px solid #cfb99b;
+  border-radius: 9px;
+  background: rgba(255,255,250,.65);
+}
+
+#controls .opt-title {
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  color: #945646;
+  font-weight: 800;
+}
+
+#controls label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+#controls input { accent-color: #bd5367; }
+
+#controls input[type="range"] { flex: 1; min-width: 70px; }
+
+#controls select {
+  background: #fffaf0;
+  color: #523d30;
+  border: 1px solid #ae8f78;
+  border-radius: 6px;
+  font-size: 12px;
+  padding: 1px 4px;
+  max-width: 190px;
+}
+
+#fullscreen-toggle { border: 1px solid #ae8f78; border-radius: 6px; background: #fffaf0; color: #523d30; padding: 6px; cursor: pointer; }
+
+#save-dialog, #load-confirm, #reply-dialog { position: fixed; inset: 0; z-index: 30; display: grid; place-items: center; background: rgba(19,14,24,.56); }
+#save-dialog[hidden], #load-confirm[hidden], #reply-dialog[hidden] { display: none; }
+.save-panel, .confirm-card { width: min(930px, 94vw); max-height: min(84vh, 820px); overflow-y: auto; box-sizing: border-box; padding: 18px; color: #4b382a; background: repeating-linear-gradient(45deg, rgba(145,105,65,.06) 0 1px, transparent 1px 12px), #faf0df; border: 3px solid #a78060; border-radius: 14px; box-shadow: 0 22px 70px rgba(20,12,15,.55); }
+.save-tabs { display: flex; gap: 7px; margin: 14px 0; }
+.save-tabs button, #save-create, .save-actions button, .confirm-actions button { border: 1px solid #a77b55; border-radius: 7px; background: #fff8ea; color: #684631; padding: 8px 13px; font-weight: 700; cursor: pointer; }
+.save-tabs button.active { color: #fff; background: #a85065; border-color: #8e3e52; }
+#save-create { margin: 8px 0 15px; background: #b85a6b; color: #fff; border-color: #a64c5d; }
+#save-create:disabled { opacity: .5; cursor: wait; }
+#save-lead { font-size: 13px; color: #80644c; }
+#save-list { display: grid; grid-template-columns: repeat(auto-fill,minmax(230px,1fr)); gap: 12px; }
+.save-card { overflow: hidden; border: 2px solid #bb9b77; border-radius: 9px; background: #fffaf0; box-shadow: 0 3px 8px rgba(74,47,27,.14); }
+.save-thumb { position: relative; height: 116px; background: linear-gradient(135deg,#d9d0c6,#aab7be); background-size: cover; background-position: center; }
+.save-thumb img { position: absolute; right: 7px; bottom: 0; height: 104px; max-width: 90px; object-fit: contain; object-position: bottom; filter: drop-shadow(0 2px 3px rgba(0,0,0,.35)); }
+.save-stamp { position: absolute; left: 0; bottom: 0; right: 0; padding: 3px 7px; color: #fff; background: rgba(34,27,31,.7); font-size: 12px; }
+.save-info { padding: 8px; }
+.save-place { color: #a45061; font-size: 12px; font-weight: 800; }
+.save-text { height: 2.8em; overflow: hidden; margin: 5px 0; font-size: 13px; line-height: 1.4; }
+.save-actions { display: flex; justify-content: flex-end; }
+.save-actions button { padding: 5px 10px; }
+.confirm-card { width: min(440px,90vw); text-align: center; }
+.confirm-card p { line-height: 1.6; }
+.confirm-actions { display: flex; justify-content: center; gap: 10px; }
+#load-accept { background: #a85065; color: white; }
+#history-indicator { position: fixed; z-index: 14; left: 50%; top: 16px; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; padding: 6px 9px; color: #593b30; background: #fff7e6; border: 1px solid #aa805d; border-radius: 8px; font-size: 12px; box-shadow: 0 3px 9px rgba(0,0,0,.25); }
+#history-indicator[hidden] { display: none; }
+#history-return { border: 1px solid #a77b55; background: #fff; border-radius: 5px; color: #753f4c; cursor: pointer; }
+#history-change, #reply-draw { border: 1px solid #a85065; background: #a85065; color: #fff; border-radius: 5px; padding: 5px 9px; cursor: pointer; }
+#history-change[hidden] { display: none; }
+.reply-choice { margin: 12px 0; padding: 10px; border: 1px solid #bd9c7b; border-radius: 8px; background: #fff9ed; text-align: left; white-space: pre-wrap; }
+.reply-choice button { margin-top: 8px; padding: 6px 10px; background: #a85065; color: white; border: 0; border-radius: 5px; cursor: pointer; }
+@media (max-width: 640px) {
+  #controls { grid-template-columns: 1fr; }
+  #toolbar { justify-content: flex-start; }
+  #hud { bottom: 57px; width: calc(100vw - 20px); padding: 12px 12px 12px 100px; min-height: 116px; }
+  #hud.replying { padding: 12px; }
+  #face { width: 78px; height: 78px; }
+  #reply-open { position: static; margin-top: 8px; }
+  #save-list { grid-template-columns: 1fr; }
+}
+
+/* Which voice spoke the last line: a recorded clip out of her own record, or
+   the synthesiser. Empty until a line has played. */
+#voice-badge {
+  margin-left: 8px;
+  font-size: 11px;
+  font-weight: 400;
+  color: #9b6b63;
+  letter-spacing: 0.04em;
+}
+
+/* The backlog, after the game's OWN history screen -- which I went and looked
+   at, having built the wrong thing first. It is not a panel at the side: it is
+   a full-height sheet of cream paper laid over the stage, opened with the
+   wheel and closed with Esc or a right click. `FRM_0401` is the paper (a faint
+   diagonal crosshatch over warm cream, the scene showing through it) and
+   `FRM_0402` the thin brown rule between entries. Each entry is drawn the way
+   `Log.set` draws it: the speaker alone on one line, the line itself in 「」
+   under it. */
+#backlog {
+  position: fixed;
+  inset: 0 0 0 10%;
+  z-index: 19;
+  display: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 26px 5vw 44px 18%;
+  color: #3a2c1c;
+  background:
+    repeating-linear-gradient(45deg, rgba(150, 128, 96, 0.10) 0 1px, transparent 1px 8px),
+    repeating-linear-gradient(-45deg, rgba(150, 128, 96, 0.07) 0 1px, transparent 1px 10px),
+    linear-gradient(rgba(250, 244, 230, 0.94), rgba(243, 235, 217, 0.94));
+  font-size: 17px;
+  line-height: 1.6;
+  scrollbar-width: thin;
+  scrollbar-color: #b39468 #efe6d3;
+}
+
+#backlog.open { display: block; }
+
+#backlog::-webkit-scrollbar { width: 10px; }
+#backlog::-webkit-scrollbar-track { background: #efe6d3; }
+#backlog::-webkit-scrollbar-thumb { background: #b39468; border-radius: 5px; }
+
+/* the line of help the game prints at the head of the sheet */
+#backlog .hint {
+  position: sticky;
+  top: -26px;
+  float: right;
+  margin-top: -14px;
+  font-size: 13px;
+  color: #8a6030;
+}
+
+#backlog .bl {
+  margin: 0;
+  padding: 10px 0 14px;
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  column-gap: 12px;
+  border-bottom: 1px solid rgba(138, 96, 48, 0.45);
+}
+
+#backlog .bl:last-child { border-bottom: none; }
+
+/* the speaker, alone on its line and larger, as the game sets it */
+#backlog .bl .who {
+  grid-column: 2;
+  font-size: 21px;
+  font-weight: 700;
+  color: #6b4522;
+  text-shadow: 0 1px 0 #fff, 0 0 3px rgba(255, 255, 255, 0.9);
+  margin-bottom: 1px;
+}
+
+/* what was said, held in the game's own quotes */
+#backlog .bl .line {
+  grid-column: 2;
+  font-size: 19px;
+  color: #3a2c1c;
+  text-shadow: 0 1px 0 #fff, 0 0 3px rgba(255, 255, 255, 0.9);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+#backlog .bl.her .who { color: #46604f; }
+
+/* the small ♪ the game puts beside a line that has a voice: a cream key with a
+   brown edge. Ours replays that one line rather than the scene. */
+#backlog .bl .note {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 3px 0 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1px solid #a98455;
+  background: #fdf8ec;
+  color: #8a6030;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+#backlog .bl .note:hover { background: #f6ecd8; }
+
+/* A line the ♪ would play from tape rather than synthesise: a small note under
+   the line naming the recorded line it matched and how close it was, so a near
+   miss is visible in the record and not only in the ear. */
+#backlog .bl .match {
+  grid-column: 2;
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #8a7350;
+}
+
+#backlog .bl .jump { grid-column: 1; grid-row: 2; align-self: start; border: 1px solid #a98455; border-radius: 6px; background: #fff9ec; color: #714c34; font: 700 12px Georgia, serif; padding: 3px 5px; cursor: pointer; }
+#backlog .bl .jump:hover { background: #f5dfd0; }
+
+/* His own line, briefly, in the floating box: the player's line the way a
+   visual novel shows it, from the moment he sends until her reply replaces it.
+   Apart from hers in colour, and with her face hidden while it shows. */
+#hud.his #name { color: #5a576f; }
+#hud.his #text { color: #455b76; }
+#hud.his #face { visibility: hidden; }
+
+/* The advance mark: her reply spans several lines and the rest wait for a
+   click. A click anywhere on the stage or the box advances; this is only the
+   visible sign that there is more behind the line on screen. */
+#advance {
+  position: fixed;
+  right: 34px;
+  bottom: 77px;
+  width: 34px;
+  height: 34px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 248, 231, .96);
+  border: 1px solid #a98455;
+  color: #8b5d3d;
+  font-size: 15px;
+  line-height: 1;
+  cursor: pointer;
+  z-index: 6;
+  animation: advance-bob 1.1s ease-in-out infinite;
+}
+#advance.on { display: flex; }
+/* the next line's voice is still being made: the mark says so rather than
+   playing silence when he advances */
+#advance.waiting {
+  color: #aa8e72;
+  animation: none;
+  opacity: 0.7;
+}
+/* The draft while the model is still writing: dimmed and with no advance mark,
+   so her whole message never reads as a finished turn. */
+#hud.streaming { opacity: 0.7; }
+#hud.streaming #mood { color: #9b7fe0; }
+/* The line on screen is not finished: its voice is still being made. The mood
+   tag says so rather than the box looking done. */
+#hud.generating #mood::after { content: " \266A\2026"; color: #9b7fe0; }
+@keyframes advance-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #advance { animation: none; }
+}

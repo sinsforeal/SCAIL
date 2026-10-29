@@ -1,0 +1,49 @@
+# tomoe\orbit.py  (295 lines)
+
+DOCSTRING:
+The orbit: people who are not the cast but belong to somebody in it.
+
+Rena's little sister existed as one sentence in `cast_facts` ("swims on
+Saturday mornings", three mentions) and nothing else -- no identity, so the
+next week could make her a brother, and no standing, so nothing anybody
+felt about her could be carried. This is the registry: one row per person,
+owned by a cast member, with a relation, a name only if one was ever given,
+the facts the record has put on them, what is going on with them now, and
+two standings -- how Tomoe stands with them and how their owner does --
+each a sentence and a slow number.
+
+Code decides when (the compile, once a day) and keeps the rows honest
+(match by owner+relation or by name; a name the roster owns is refused;
+nudges clamp to +-2 and numbers to 0-100; caps); the `orbit` role decides
+what was said about whom today. Readers: the exchange (a speaker knows the
+people in their own life), the planner (a beat can be about somebody's
+sister), her own prompt (the people around her friends), and the gossip
+pool (an orbit person is off limits, like the cast). kv `orbit`; `/orbit`.
+
+DEFS:
+def _norm(s): 
+class Orbit: 
+    __init__(config, llm, store, clock): 
+    rec(): 
+    _relatives(): (owner key, row) for every relative written down beside a cast member in the cast file. Somebody's brother is on their sheet from the day the sheet is written; there is no reason for this registry to wait until a convers
+    _seed_relatives(rec): The day's first read: a row for every relative the store does not hold yet. Matched by owner and relation through `_find`, the same matcher the day's update uses, so a second run adds nothing and a row the model has alre
+    _fold(facts): The same fact twice in two wordings, folded into the longer one.  The cast file seeds one sentence -- "care assistant at a nursing home in Nerima, evening shift 16:30-23:00 three or four nights a week" -- and the day's r
+    people(): 
+    _save(people): 
+    _owner_key(name): The roster key for an owner, or '' when the roster does not know them -- an orbit person must belong to somebody on the record.
+    _find(people, owner, relation, name): 
+    update_at_compile(date_str, new_cast_facts): Once, at the compile: what today's record said about the people around the people around her.
+    _line(p, today): 
+    line_for(owner, limit): The people in one cast member's life, for that speaker's prompt.
+    brief(limit): 
+    owns(who): Is this a person the orbit already holds -- by name or by 'owner's relation' -- so a rumour cannot be about them.
+    report(): 
+
+CONFIG SECTIONS: character, orbit, orbit.enabled, prompt_text
+KV READ: cast_chat, orbit
+KV WRITE: orbit
+TABLES: 
+LOG TAGS: orbit
+PROMPTS: orbit
+LLM ROLES: orbit
+OPS COMMANDS: 

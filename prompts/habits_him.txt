@@ -1,0 +1,13 @@
+You are working out what the man [[WHO_PAREN]] is [[?digest]]long distance with[[/digest]][[?resident]]inside the machine of[[/resident]] does with his day, from a week of what [[?digest]]her phone app showed her[[/digest]][[?resident]]she has seen[[/resident]] of his PC (window titles, apps, media, times, all in HIS local time). Not a biography: recurring windows. "On the charts / trading 09:00-11:00 on weekdays", "watching anime after 23:00", "coding in the afternoon", "gaming Saturday evening". Three to six habits, only ones that appear on at least three of the days shown; if the week does not support a habit she already expects, drop it.
+
+[[?no_history]]**Fewer than three is a correct answer.** A week that shows no repeated pattern yields no habits, and an empty list is right where a guessed one is not: this feeds what she can predict about him, and a habit invented here becomes a prediction she was never entitled to make. She is watching a stranger, and a stranger's first week is mostly noise.
+
+[[/no_history]]For each:
+- what: a short present-participle phrase in her words ("on the news", "watching anime", "coding", "on Twitter"), lowercase.
+- hours: [start_hour, end_hour] in his local 24h clock, integers; a window that crosses midnight has end < start.
+- days: "any", or a list of weekday numbers (0 = Monday ... 6 = Sunday) if it is clearly weekday-only or weekend-only.
+- words: 3 to 8 lowercase words [[?digest]]the app's digest[[/digest]][[?resident]]the digest[[/resident]] carries when he is doing it -- the actual app names, site names, title fragments seen this week (e.g. "newsfeed", "reader", "news", "candles"). The daily check greps the digest for these, so they must be words that really appear.
+- confidence: 0 to 1.[[?no_history]] Be honest and be low: three days out of seven is a suspicion, not a habit, and the number is read by the thing that decides whether she is surprised.[[/no_history]]
+
+JSON only:
+{"habits": [{"what": "on the news", "hours": [9, 11], "days": [0,1,2,3,4], "words": ["newsfeed", "reader", "news"], "confidence": 0.8}]}

@@ -1,0 +1,32 @@
+# resident\app.py  (143 lines)
+
+DOCSTRING:
+The second character's program: everything the runtime runs for her and for
+nobody else.
+
+She is resident on his machine. She has a flat and a week of her own, planned
+from her home file; she has no world for them to be in, no cast, no account
+and no phone, so none of that is built here -- it does not exist in her
+process. What is hers is her sight: a note he opens she has read, and she
+sleeps when he does.
+
+The same hooks as `tomoe/app.py`, and the runtime asks `hasattr` before it
+calls one; what is not here is not hers.
+
+DEFS:
+def build(app): 
+def plan_day(app, d): A character with no world may still have a home. Her own place, her own week, and nothing of the present: planned from her home file alone, with the one-block day as the fallback if she has no such file or the plan does 
+def day_line(app): 
+def every_pass(app): Her sight, every pass: a note in front of him, whether he is up, and how long he has been gone.
+def after_self_start(app, bubbles): She reached out; a page of hers in front of him was said once.
+def before_reply(app, reason): A reply of hers is about to be written -- because he wrote to her, or because she decided to. If he is in a visual novel, this is the moment the account of what he is reading is worth paying for, and the only one: not a 
+def on_his_message(app, text): 
+
+CONFIG SECTIONS: 
+KV READ: habits_him
+KV WRITE: 
+TABLES: 
+LOG TAGS: eroge, memory, resident, schedule
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

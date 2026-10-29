@@ -1,0 +1,34 @@
+# sim\model_of_him.py  (425 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class ModelOfHim: The machine, and the picture of him that first used it. What it works on
+    __init__(config, llm, store, clock, memory): 
+    _seed(): 
+    settle_against_history(facts): Put the day-zero picture where months of knowing him would have left it. The beliefs are derived from her, so they are right as a starting point and wrong as a description of someone four months in: she has been reading 
+    beliefs(): 
+    save(rows): 
+    get(bid): 
+    live_strain(b, now): Strain fades. A thing that did not fit once and never again is a thing she talked herself out of; only repeated pressure gets anywhere.
+    revise_at(b): How much it takes to make her let a piece of it go. What she has most riding on she defends longest; what she has actual grounds for she also defends longer, having reasons and not only needs.
+    settled(b): She is not weighing this one any more: either she is certain of it or she has seen it demonstrated past arguing.
+    strain(bid, amount, why): Something did not fit. Normally she absorbs it and finds a reason.  But a belief she is certain of does not wear away by degrees. The higher the certainty the worse the contradiction, so past `certain_from` a real one ta
+    confirm(bid, amount, why): Something bore a belief out. Before this the model could only ever erode: nothing raised evidence or confidence, so given enough time every belief revised, `invested` ratcheted down and she became unshockable. A belief s
+    _graduate(b, rows): She has seen it demonstrated past arguing. It stops being one of the things she has decided and becomes one of the things she knows, which is what user_facts is. It can still be shattered; it cannot be nibbled at, and it
+    due_revision(): 
+    revise(b): She cannot hold it any more. One call rewrites what she believes now, in her own voice; the old wording is kept, because she should be able to feel that she used to think something else. After this the same evidence cost
+    _revised_event(b, row): 
+    prompt_text(): 
+    brief(): For the ick call: what there is to violate, with how much rests on each.
+    report(): 
+
+CONFIG SECTIONS: beliefs, beliefs.event_salience, beliefs.in_prompt, beliefs.strain_half_life_days, beliefs.straining_from, character, ick.strain_per_point, prompt_text, role_system
+KV READ: backstory
+KV WRITE: ick_kinds
+TABLES: 
+LOG TAGS: 
+PROMPTS: settle_beliefs
+LLM ROLES: settle_beliefs
+OPS COMMANDS: 

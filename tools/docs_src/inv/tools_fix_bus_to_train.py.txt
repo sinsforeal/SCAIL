@@ -1,0 +1,37 @@
+# tools\fix_bus_to_train.py  (83 lines)
+
+DOCSTRING:
+One-time: she said "on the bus" and there is no bus.
+
+`data/places.json` has four modes -- walk, train, bike, car -- and no bus edge
+anywhere, so the trip she meant (the Pixar exhibition in Koto, tomorrow) is
+西武池袋線 to Ikebukuro then 有楽町線, about 57 minutes with one change. The
+prompt now carries that as fact (`Situation.travel_line` / `trip_lines`), which
+stops the next one; this fixes the two rows already on the record, because both
+are read back to her -- the message as her own history, the anticipation as an
+event of the day.
+
+Three places, because her record and his view must not diverge (that is what
+`Store.update_message`'s comment is about: her history and his Telegram came
+apart in four places on 2026-08-20 and neither could be put back):
+
+  1. `messages` in data/world.db -- her context
+  2. `events` in data/world.db   -- the 08-24 anticipation
+  3. the hub's own log           -- what he sees in the app, edited through
+                                    /bot/edit so the open app updates live
+
+Idempotent: it matches on "bus" and does nothing once they read "train".
+Backs the save up to data/retired/<ts>/ first. The hub must be running for
+step 3; if it is not, the first two still happen and it says so.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

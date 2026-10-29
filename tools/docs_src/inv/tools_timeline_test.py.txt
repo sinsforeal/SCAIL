@@ -1,0 +1,58 @@
+# tools\timeline_test.py  (220 lines)
+
+DOCSTRING:
+The day compile's retry, proven without a model call.
+
+    python tools/timeline_test.py
+
+The compile asks again when the narrative came back too short for the day.
+The role answers with the whole JSON, not with the one field it was asked
+about, and the second telling is a fresh one: on 2026-09-07 the second
+character's first answer carried fourteen facts about him and the second
+carried none, and the second is what was stored -- so a day of facts about
+him exists nowhere in her record (HISTORY.md section 5.14).
+
+Two stub answers go through `sim/timeline.py` with a stub store, a stub
+clock and a stub client, and the stored day must carry the long narrative
+from the second answer AND everything else from the first. The retry
+message must also name the language the prose goes out in, for a character
+who is instructed in her own language: the system half says it, but the
+retry's own English paragraph is the last thing the model reads, and the
+answer that lost the facts also came back with an English summary.
+
+Nothing is fetched, nothing is paid for and no live save is opened.
+
+DEFS:
+def check(ok, what, got): 
+class Bag: An attribute bag: the config sections this call reads, and nothing
+    __init__(): 
+class Clock: 
+    now_ts(): 
+    hm(ts): 
+class Store: Only what `_compile_day` asks a store for. `save_day` keeps its
+    __init__(): 
+    get_schedule(date_str): 
+    scenes_for_date(date_str): 
+    events_for_date(date_str): 
+    state_for_date(date_str): 
+    digests_for_date(date_str): 
+    messages_for_date(date_str): 
+    user_facts(): 
+    get(key, default): 
+    set(key, value): 
+    add_user_fact(ts, text): 
+    save_day(date, ts, narrative, summary, user_facts): 
+class LLM: Answers a queue of `(parsed, raw)` pairs and keeps every message list
+    __init__(answers): 
+    call_json(role, messages): 
+def config(): A character who is instructed in her own language, so the retry's language line is exercised as well as the merge.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

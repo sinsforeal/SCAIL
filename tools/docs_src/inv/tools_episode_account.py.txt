@@ -1,0 +1,42 @@
+# tools\episode_account.py  (253 lines)
+
+DOCSTRING:
+Read up one episode until the account of it is complete, and show it.
+
+This is the on-demand surface for `sim/episode_account.py`: the account is
+built by the watching worker when he plays something, and this is how an
+episode is read up (or read up AGAIN) without waiting for him to play it, how
+an account that came out thin is repaired, and how the whole record for an
+episode is read back with its sources.
+
+    python tools/episode_account.py --print --ja エグザンプル --ep 6
+    python tools/episode_account.py --ja エグザンプル --ep 6 --id 24031         --english "Example Show"
+    python tools/episode_account.py --plays 10          # the last plays of his
+    python tools/episode_account.py --refetch --ja ... --ep 6
+
+It builds on a COPY of a save (`tools/harness.build_on`), never on a live one.
+The machine's own store is NOT copied: an account is about a television
+episode and not about anybody, so one written here is one the running
+characters never have to pay for -- which is the whole point of that store.
+
+`--print` fetches nothing and spends nothing.
+
+spec: docs/recap.md section 3e
+
+DEFS:
+def parse_args(): 
+def _plays(app, n): The last N distinct (work, episode) plays of his player, newest first, off the module that already reads that file.
+def _entry(app, ja, english, aid): What the pipeline is asked with. His own mirror answers the Japanese title and the edition where the work is on his list, so a caller who knows only the id still gets a complete entry.
+def show(row, as_json): 
+def main(): 
+def _video_for(a, ep): The file he played for this episode and how long he sat through it, or ("", 0). His own two flags win; otherwise the player's state file answers, and only when the file it names carries this episode's number -- reading u
+def _drop(rc, app, entry, ep): Forget what is on file for this episode, in BOTH stores, so the next call reads it up rather than answering from the cache. The machine's copy goes too -- leaving it there would have the rebuild adopt exactly the row it 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

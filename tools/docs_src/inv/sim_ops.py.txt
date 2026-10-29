@@ -1,0 +1,34 @@
+# sim\ops.py  (521 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _ago(clock, ts): 
+class Ops: 
+    __init__(app): 
+    note(cmd, text): 
+    _gauges(): 
+    _him(): 
+    _phone(): Her looks at the app about him: the digest is the only form his activity ever reaches her in.  The digest goes up whole. It used to be cut at 900 characters here, which is shorter than most of them (the first character's
+    _snoop(): 
+    _x(): 
+    _watch(): Her shows, where she is in each, and what she thought when she watched (the `experience` role, events `her_thing`).
+    _mind(): What she is carrying that the chat does not show: promises on the record, the questions she is turning over, what she woke wanting.
+    _checks(): What the readers say: the seams the day showed, the lines she never hears, the flags.
+    _scenery(): Borrowed eyes: the base, the watchlist, what went out, the lore.
+    _eroge(): What he is reading in a visual novel: the game, since when, how many lines this session, and what she has of it.
+    _agenda(): What is coming, joined (sim/agenda.py): today and the days ahead, every dated thing with the store it came from. Read-only, like the rest of this file -- the join itself decides nothing.
+    _models(): 
+    _world(): 
+    _pick(): What she would have done with the phone, and how much of the day's allowance of asking is left. Logged only; nothing acted on.
+    payload(): 
+
+CONFIG SECTIONS: attention.unheard_min_offers, curation.drift_unfollows_per_day, curation.unfollow_min_dislikes, eroge, scenery.send_kinds, sensor_view, state.gauges, vault_snoop
+KV READ: attention_tally, cast_chat, eroge_last, flags, model_ab, morning_intent, phone_last_consumed_id, phone_last_live, phone_last_look_ts, reflect_cast_counts, reflect_counts, scenery_last_run_ts, snoop_counts, snoop_downloads_seen, snoop_last_ts, vault_read_paths, x_action_queue, x_japan, x_look_counts, x_taste
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

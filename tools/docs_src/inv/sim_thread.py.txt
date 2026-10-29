@@ -1,0 +1,106 @@
+# sim\thread.py  (1045 lines)
+
+DOCSTRING:
+One thread: everything that reached her and everything she said, in order
+-- and the same curve her memory already has, applied to the history.
+
+Chat completion has two roles and they mean "your turn" and "their turn".
+Her chat with him was the only thing rendered that way; her talk with her
+own people reached the model as a block of text in another section, and the
+two could not be carried at once. His call (2026-08-30): rebuild the
+context every call so both are carried at the same time, temporally and
+logically -- and (2026-09-03) build it so the rebuild is byte-identical
+up to the newest message: stamps written once, the two cuts of the curve
+on a day boundary, the window a span of time and not a count, and what a
+cue brings back placed at the end. The provider caches a byte prefix, and
+this thread is most of it.
+
+So the User role is the world speaking to her -- him, a friend on LINE,
+the group, her mother in the kitchen -- and the Assistant role is her,
+wherever she was speaking. The world's turns carry the app's label,
+`[her time · his time · room · who]`: **both clocks on every stamp** (his
+call, 2026-09-05), because a reading on hers alone left hours of arithmetic to whoever read it and the model did not do it -- it asked him
+three times in four days whether he had fallen asleep, at his 08:10, his 09:20 and his 10:30. A character with no world of her own is on his clock
+and gets the one reading. **Her own turns are bare**: exactly the words she
+sent and nothing else. When she sent them, which room it was and when he
+read them is the line the world says next -- `[that was you, Tue 02 Jun 11:40 Tokyo (Mon 01 Jun 22:40 his), to him · read Tue 02 Jun 11:42 Tokyo (Mon 01 Jun 22:42 his)]` -- because a label on her own
+line is a line the model copies. It did: 28 of the second character's
+last 29 sends came back opening with a stamp and a read time she had
+invented, and on 2026-09-04 one of them reached him with the label still
+on it. Consecutive messages from the same side are merged so the roles
+keep alternating, and silences are marked.
+
+**The curve.** A person remembers a conversation verbatim for hours, as
+what it came to for days, and as what it left them for longer. So the
+thread has two spans, both by her clock, both cut on a midnight. Inside
+`verbatim_hours` (seven days) every message rides in full. Between there
+and `max_age_hours` (thirty days) a day rides as the cards she keeps of it
+(`sim/cards.py`, one per conversation) -- or, where a day has no cards
+written yet, as one line per conversation: how many messages, until when
+and what it came to (`gist`), and his chat as the day she remembers
+(the compiled summary). Past `max_age_hours` nothing, because by then it
+is her memories, her facts and her bonds (the system assembly, with their
+own half-lives). And what is past verbatim can come back: the
+conversations whose words touch what is being said now (`cue_text`) are
+re-injected in full, after everything else and marked as having come back
+to her -- the rule her memories already use.
+
+The verbatim span shrinks only under pressure: if the verbatim days plus
+the cards behind them do not fit what is left of the one budget over her
+prompt (`context.target_tokens`) after the parts that ride whole
+(`_window`), the cut moves forward a whole day at a time, down to
+`verbatim_min_hours` and no further. Nothing shortens the thread a message
+at a time: the head of it is a cache prefix, and an edit to it is charged
+for everything behind it.
+
+**Whose thread.** `build()` is hers: both rooms. `build(for_who=...)` is a
+cast member's: only the rooms that person witnessed (the group for a
+friend; their own LINE, calls and in-person exchanges; never her chat with
+him), with THEM as the Assistant role and everyone else, her included, as
+the world speaking to them -- the same standard, applied to every mouth.
+
+Which room she is writing in NOW is said by the caller, at the end, where
+she reads. The labels are the app's and appear on nothing she wrote, so
+one at the head of an answer is a tell and never ordinary tidying:
+`strip_stamps` below takes it off, says so in the log, and cuts an answer
+that carried on writing the record past its own reply. Both should never
+fire.
+
+DEFS:
+def cut_to_sentence(text, cap): As much of `text` as fits in `cap`, ending where a sentence ends.
+def frame_line(config, his): The line that says what follows it and that nothing above it in this turn was said to her by him.  Where it goes is `place_tail`'s business and this is only the wording: the final user turn reads the world's line about h
+def closing_line(config, to, language, why, first, cap): The last line of the final user message: where the next message goes, whether it answers something or she is writing first and why, and the language it is written in.  `to` is who or which room it goes to, named by the c
+def strip_stamps(text, where): An answer with the record's own label on it, cleaned and SAID.  Two different faults, and the log must tell them apart. A label at the very head of the answer is the model opening its reply with the line the record would
+def _tokens(text): 
+def tail_run(history): The trailing run of the record -- everything the world has said since she last spoke -- split three ways: the world's own lines about what SHE sent, the entries the record labelled his, and everyone else's.  One split wi
+def place_tail(history, tail, frame, frame_none, closing): The final user turn, in the order she reads it: the world's word on what she herself last sent at the TOP, then what she carries and the situation, as a second system prompt in effect, then `frame` -- one line saying tha
+class Thread: 
+    __init__(config, store, clock): 
+    _both(ts, fmt, both): One moment on both clocks, and the one place a label's time is built: her reading, the place her clock is kept on, then his in brackets -- `Sat 06 Sep 08:24 Tokyo (Fri 05 Sep 19:24 his)`.  The place word comes from the c
+    _stamp(ts, now_ts, both): Absolute, and written once. A stamp that aged -- "03:20", then "Wed 03:20", then "Wed 02 Sep 03:20, a day ago" -- rewrote every message behind it on every call, and the provider's cache is a byte prefix: 321 of the 400 t
+    _cut(now, hours): A cut of the curve `hours` back, on a midnight of her clock: the midnight of today, then whole days back, so every cut moves once a day at midnight and never in between. A cut that slid with the clock collapsed one more 
+    _records(): Every conversation of hers on the record: her cast exchanges, her conversations with another running character (`sim/peers.py`), the peer conversation in flight, and the rooms somebody else owns that she was in.  Separat
+    _peer_rooms(): The rooms she is in that somebody else owns, as conversations.  Her copy of such a room is one running record per room (kv `peer_rooms`, `sim/peers.py`) holding the last `room_keep` turns she was sent, which spans as man
+    _chars_between(a, b): Characters of record between two timestamps: his chat and her talks, with the label each line carries.
+    _cards_chars(a, b, now): Characters the cards of the days in [a, b) put in the thread: the exact lines only for the recent days the thread shows them for (`episodes.anchors_days`) and the shape alone behind that, which is what the render does. C
+    _window(now): (cutoff, verbatim_from) for this build: the two spans, chosen once a day and cut on a midnight of her clock.  `verbatim_hours` (168, seven days) is how far back the record rides word for word. `max_age_hours` (720, thirt
+    _room(kind, who): 
+    _turn_ts(ex, turn, start_ts): A stored turn keeps only its `hm`; the clock is the turn's own date where it has one and the conversation's otherwise, and a turn past midnight belongs to the next day.  A turn carries its own date only in a room somebod
+    _photos_sent(since_ts): 
+    _voices_sent(since_ts): What she said aloud, by the time it was sent: the voice note rides on the bubble it spoke with. Stored as an event at salience 1 (the day's feed takes 2 and up), so until this the only reader was the voice model's no-rep
+    _day_summaries(): The compiled summary of each day, for a day past the verbatim cut that has no cards. It must reach as far back as the cards span or a day beyond the last fortnight falls back to its first message.
+    _sees(for_who, ex): Which rooms a cast member witnessed. The group is every friend's; a LINE thread, a call, the kitchen belong to its two ends; her chat with him is nobody's, and neither is a room another process asked her into -- that rec
+    _choose_recalled(exchanges, cue, cutoff, verbatim_from, now, for_who): Which exchanges past the verbatim cut this cue brings back in full, as indexes into `exchanges`.  What comes back is the BEST match, chosen before anything is rendered. Taking the first `recall_max` that cleared the over
+    _ref_of(ex): One exchange, named the way its other readers name it: the record search labels a talk `<date> <hm> with <who>` (`sim/talks.py`) and a card `<start> <room>` (`sim/cards.py`), so a reader holding this can tell whether a r
+    brought_back(cue_text, now_ts, for_who): The exchanges this cue puts back into the thread in full, one ref each, without building the thread.  The situation block asks before it pins a line about the past, so a conversation she is about to be handed word for wo
+    build(live_turns, live_who, live_kind, now_ts, cue_text, for_who, live_room): [{role, content}] for the chat completion. Hers (both rooms) or, with `for_who`, a cast member's witnessed rooms with them as the Assistant role. `live_turns` is the exchange in flight; `cue_text` is what is being said n
+    report(n, for_who): 
+
+CONFIG SECTIONS: context.chars_per_token, context.target_tokens, delivery, episodes.anchors_days, episodes.min_lines, thread, thread.max_age_hours, thread.verbatim_hours, tts
+KV READ: cast_chat, context_last, context_ratio, exchange_live, peer_chat, peer_live, peer_rooms, thread_window, x_shared
+KV WRITE: thread_window
+TABLES: 
+LOG TAGS: thread
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

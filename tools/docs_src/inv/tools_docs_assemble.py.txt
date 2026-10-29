@@ -1,0 +1,17 @@
+# tools\docs_assemble.py  (96 lines)
+
+DOCSTRING:
+Assemble the new PROJECT.md: the hand-written chapters plus two generated
+references -- the config sections from config.py:DEFAULTS (key, default,
+the trailing comment) and the kv keys each module reads / writes.
+
+DEFS:
+
+CONFIG SECTIONS: py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

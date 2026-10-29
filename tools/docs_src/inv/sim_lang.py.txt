@@ -1,0 +1,97 @@
+# sim\lang.py  (382 lines)
+
+DOCSTRING:
+Which set of instructions a character is addressed in, as an arm that can
+be swapped and compared rather than a decision baked into the code.
+
+Every wording lives in the source twice, side by side, and `character.
+instructions` picks which one is rendered. Named the way the prompt sets are
+named, because they are the same kind of thing -- approaches to be compared,
+not a migration with a winner already chosen:
+
+  as_they_run_today   The control, and the default. What her prompt is TODAY,
+                      preserved byte for byte: English scaffolding and section
+                      headers around Japanese identity sections, with finished
+                      Japanese prose injected mid-block by other roles. It is
+                      not "the English version" of anything -- it is a
+                      mixture -- and its whole value is that every measurement
+                      taken so far was taken under it. Nothing in here tidies
+                      it. Where a tidier way of deciding something would change
+                      one rendered byte, this arm keeps the untidy way and says
+                      why at the call site.
+  in_english          A clean, consistent English-instruction arm. TODAY IT
+                      RENDERS THE SAME BYTES AS `as_they_run_today`: the
+                      scaffolding was already English, and nothing was invented
+                      to fill the slot. It exists as a name a bench result can
+                      carry, and as the place a genuinely tidied English arm
+                      would go if anyone builds one.
+  in_her_language     The instructions in the language the character lives in.
+                      Japanese, for the second character.
+
+`character.instructions` may also say `auto`, which is the default and is
+what an unset value means: her own language when she declares one this
+switch can render, and the control when she does not. A character who says
+she lives in Japanese is instructed in Japanese without anybody switching
+her on, and the boot line and `/lang` both name the arm and where it came
+from, so which one is in force is never invisible.
+
+**It is a variable to be benched.** The arms must differ in the instructions
+and in nothing else, so `set_override` flips it inside one process
+(`tools/voicelab.py --instructions`) and the environment variable
+`SCAIL_INSTRUCTIONS` flips it for a whole run -- neither touching a config file
+and neither needing a restart.
+
+**And it is a switch he throws.** `/lang ja|en|auto` writes kv
+`instructions_override` on her save and sets it here; the boot reads that kv
+back, so the arm moves between two replies and survives a restart without a
+config edit, and `auto` forgets it and lets her config decide again. Which
+language `in_her_language` renders is hers to declare
+(`character.instruction_language`): a character whose instructions are
+English has no second arm and the command says so. How far the arm reaches
+beyond her own prompt -- the roles that write the material she reads -- is
+the `language` section and `material_line` below.
+
+What is covered is decided by AUDIENCE, not by file. A line she is meant to
+read as herself is in her instruction language: her situation block, the
+section headers above it, the closing instruction that says what to write and
+how. What the machine says to itself has no audience and stays English: the
+state role is gauge arithmetic with nobody being spoken to, a JSON field name
+is a key, a log line is for a developer.
+
+**Every translated string goes behind this switch.** The first character is on
+`as_they_run_today` and shares every line of the code these strings live in, so
+a Japanese line that is not selected here would reach her too.
+
+    from sim.lang import say
+    t = say(config)
+    t("today so far: ", "今日ここまで: ")
+
+DEFS:
+def _norm(value): 
+def named(value): The arm a person typed, or "" for a word that names none. Public because the ops command has to be able to say "that is not an arm" before it writes anything to her save.
+def set_override(value): Force an arm for this process, or clear it with None.  For a harness that builds the same character's prompt both ways in one run: the arms must differ in the instructions and in nothing else, and a config edit between t
+def override(): 
+def set_saved(value): The arm saved on her save, or None to forget it. `App` reads kv `instructions_override` at boot and `/lang` writes it and calls this, so which arm is in force is one question with one answer rather than a kv that some ca
+def saved(): 
+def arm(config): Which arm is being rendered: the process override, else the environment, else the arm saved by `/lang`, else her config.  A config that says `auto`, or says nothing, is decided from what she declares she lives in: her ow
+def source(config): Where the arm in force came from, for a status line. A switch whose provenance cannot be seen is one that gets flipped twice.
+def instruction_language(config): Which language `in_her_language` renders for THIS character.  Off her config (`character.instruction_language`), and never inferred from `writes_to_him`: the first character is bilingual, her chat with him is the one roo
+def switchable(config): Is there another language to switch this character into?  Every wording behind the switch lives in the source as an English and Japanese pair -- `say()` here, the gauge and feeling glosses below, the words tables each pr
+def language_name(config): Her instruction language the way a role prompt should name it.
+def reads_ja(config): Is this character being instructed in her own language right now?  Both halves of the question: the arm has to be `in_her_language` AND her instruction language has to be one this switch can render. Without the second ha
+def material_line(config, role): The one line a role that writes WHAT SHE READS is given while she is being instructed in her own language, or "".  The arm covers everything the prompt builder writes: her section headers, her situation block, the closin
+def status(config): One line for a boot log and a status command: the arm, where it came from, her instruction language, and how far the arm reaches.
+def control(config): Is this the frozen control -- the prompt exactly as it renders today?  Read at the two places where deciding something a tidier way would change a rendered byte. The control keeps the untidy way; every other arm gets the
+def say(config): `t(english, japanese)` -- the one wording this character is addressed in.  A call rather than a lookup table so the two wordings sit side by side in the source: a translation nobody can see next to its original is one th
+def pick(ja): `t(english, japanese)` for a caller that already knows which language the line is going out in. Ten modules wrote this closure by hand.
+def gauge_ja(key): Her word for a gauge, or the key when nothing has been written for it -- a missing gloss shows as the key rather than as a hole.
+def feeling_ja(text): Her wording for a feeling the config states in English, or the config's own words when nothing has been written for it.
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

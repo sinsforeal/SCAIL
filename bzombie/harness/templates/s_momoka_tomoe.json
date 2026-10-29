@@ -1,0 +1,17 @@
+{
+ "run_id": "{run_id}",
+ "arm": "S",
+ "character": "momoka",
+ "lang": "ja",
+ "model": "deepseek-v4.1-flash-1017",
+ "cap_usd": 0.5,
+ "claude_cap_usd": 3,
+ "sim_days": 1,
+ "clock_start": "2026-10-26T07:00:00",
+ "seed": 1,
+ "him_timezone": "Asia/Tokyo",
+ "arm_variant": "own_day",
+ "peer_step_s": 60,
+ "peers": [{"character": "tomoe", "key": "tomoe", "lang": "en"}],
+ "arm_cmd": ["C:\\Python314\\python.exe", "-m", "bzombie.harness.s_launcher", "--s-root", "F:\\REPS2\\SCAILV4\\tmp\\wt_two_minds", "--port", "{port}"]
+}

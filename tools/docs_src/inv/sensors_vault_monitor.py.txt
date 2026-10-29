@@ -1,0 +1,25 @@
+# sensors\vault_monitor.py  (203 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _all_files(config): 
+def get_modified_file_info_since(config, since_timestamp): 
+def catalogue(config, max_items): The shape of his notes folder, titles only, newest first: (relpath, mtime).
+def tail_excerpt(path, max_chars): The end of a note, where he was most likely writing. Empty on failure.
+def _read(path, max_chars, pieces, seed): What she actually gets from a note: a skim, not the file. Short notes are read whole. Long ones give the opening, the ending (where he was last writing) and a few paragraphs from the middle that would catch a bored fifte
+def _catchy(par): 
+def skim(content, max_chars, pieces, seed): 
+def pick_unread(config, already_read, count, max_chars, pieces, seed, name_regex, min_bytes, newest): Files she has not opened yet. The snoop narrows this hard: `name_regex` to his daily-note format (his journal is where his life is; the rest of the vault is code dumps, prompt scratch and reference), `min_bytes` to skip 
+def find(config, query, max_chars, pieces, seed): 
+def match_title_to_vault_file(config, title): 
+
+CONFIG SECTIONS: vault_extensions, vault_ignore_patterns, vault_path
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

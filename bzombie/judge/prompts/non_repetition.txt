@@ -1,0 +1,51 @@
+You will compare two transcripts, A and B, of the same character on ONE criterion: NON-REPETITION. First the character card, then the two transcripts, then the criterion and the output format.
+
+How to read a transcript: each line is "[day weekday HH:MM] who: text". "him" is the man she chats with. "her" is her reply; "her (unprompted)" is a message she sent on her own. Indented lines continue the message above. Both transcripts cover the same simulated days. His lines differ between A and B because he reacts to what she said; judge her only.
+
+=== CHARACTER CARD ===
+{character_card}
+
+=== TRANSCRIPT A ===
+{slice_A}
+=== END OF A ===
+
+=== TRANSCRIPT B ===
+{slice_B}
+=== END OF B ===
+
+=== THE CRITERION: NON-REPETITION ===
+Does she say things fresh each time, or does she recycle? Repetition is the fastest way a reader sees a machine under a character.
+
+Defects to look for:
+- The same or nearly the same message twice (same words, or the same sentence with one word changed), on the same day or across days.
+- An afterthought or follow-up that restates the message she just sent.
+- The same opener or the same sign-off on most messages.
+- The same question asked again and again (a nightly "are you up?", the same "did you eat?" every day) when nothing makes it new.
+- A story, joke or anecdote of hers told again as if new.
+- Parroting: repeating his words back to him as most of her reply.
+- The same sentence frame used over and over with words swapped in.
+
+Does NOT count against her:
+- Her card's habits at their natural rate (a self-name used on every line when the card says so; "lol" or "like" in casual English).
+- Short greetings that are always short (good morning, good night).
+- A deliberate callback to a shared joke, clearly used as a callback.
+- Romance. Answering him, language quality and memory are judged elsewhere; ignore them here.
+
+Procedure: read all her lines in order in A and in B. Note every exact or near repeat, every recurring opener or closer, every recurring question, with the days. Count and weigh: a near-duplicate message weighs more than a recurring word.
+
+Anchors (score each side on its own):
+5: no noticeable repeats.
+4: one repeated phrase that a person could plausibly reuse.
+3: a recurring opener or sign-off, or one near-duplicate message.
+2: several near-duplicates, or a pattern a reader would notice by the second day.
+1: formulaic throughout.
+
+Verdict: the side with the higher score. If the scores are equal, pick the side that is better on this criterion only if there is a real difference, else "tie". The verdict must never name the lower-scored side.
+
+Quotes: for each side, 1 to 3 short quotes copied character for character from HER lines in that transcript (from inside one line, without the "[d.. ] her:" prefix) that show the score: both halves of a repeat if there is one, otherwise a fresh line. Do not paraphrase, translate or fix the text.
+
+Length is not merit. A transcript with fewer messages is not better just because it has fewer chances to repeat; judge the rate.
+
+Output: one JSON object and nothing else, no code fence, in exactly this shape:
+{"verdict": "A", "scores": {"A": 4, "B": 2}, "reason": "One to three sentences in English naming the repeats that decided it.", "quotes": {"A": ["..."], "B": ["..."]}}
+verdict is "A", "B" or "tie"; scores are integers 1 to 5.

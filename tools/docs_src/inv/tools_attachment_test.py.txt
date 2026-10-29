@@ -1,0 +1,27 @@
+# tools\attachment_test.py  (247 lines)
+
+DOCSTRING:
+Drives sim/attachment.py through one full episode on a COPY of the save.
+
+No LLM: the mechanism is code-only. The clock is moved by hand, his silence
+is set by hand, and the assertions are the ends that must hold: an episode
+opens only after threat holds for `engage_minutes`; protest turns cold after
+`protest_exhaust_hours`; a cold front can break back into protest under
+need; his answer resolves it; the beliefs the strategies bet on are settled;
+every reader reports the stance while it is open and nothing once it is
+closed.
+
+    python tools/attachment_test.py
+
+DEFS:
+def main(): 
+def finish(fails): 
+
+CONFIG SECTIONS: attachment
+KV READ: 
+KV WRITE: attachment
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

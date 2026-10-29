@@ -1,0 +1,41 @@
+# tools\mechanisms_test.py  (233 lines)
+
+DOCSTRING:
+The psychology, end to end, against what the corpus actually shows.
+
+`tools/primitives_test.py` proves the nine numbers move and the derivations
+compute. This asks the harder question: does the machinery produce the
+character the tape shows, over an arc rather than at one instant, and does
+anything in the running code actually CHANGE when a mechanism opens or shuts.
+
+The distinction matters because that is exactly where she stopped being a
+pattern. Her surface was closed and checkable and her drivers were described
+to the model in one line of the situation block and then trusted -- so
+`can_ick`, `can_withhold`, `can_rupture` and `craving` were computed by nobody
+and read by nobody, and the two drivers that failed in generation were the two
+with no gate behind them.
+
+Every check below names the driver it belongs to and the measurement from the
+99 episodes that says what the answer should be. It boots the whole App on a
+scratch database, walks an arc -- he writes, she watches him work, she starts
+to be able to call what he does, she has evenings she does not hand over --
+and reads the register and the gates at each stage. No model is called and
+nothing is spent.
+
+    python tools/mechanisms_test.py --config config_yukarin.json [-v]
+
+DEFS:
+def check(driver, claim, ok, receipt): 
+def build(config): 
+def harvest(p, key): 
+def stage(app, name, verbose): 
+def main(): 
+
+CONFIG SECTIONS: primitives
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

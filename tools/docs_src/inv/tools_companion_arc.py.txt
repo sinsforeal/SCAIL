@@ -1,0 +1,35 @@
+# tools\companion_arc.py  (118 lines)
+
+DOCSTRING:
+Three months of an ordinary companionable relationship, and what she becomes.
+
+`tools/mechanisms_test.py` asks whether each mechanism opens and shuts at the
+right moment. This asks the longer question: run a character forward through a
+relationship that is going *well* -- he writes several times a day, she watches
+him, she keeps the odd promise, she writes most nights -- and see whether the
+numbers describe a companion at the end of it.
+
+The first run of this found the thing that mattered. Closeness reached 72 in a
+week and **fell to 10 by day ninety**, because a diary entry lowers what he
+holds of her and nothing raised it: the one mechanism that gave her a private
+interior was quietly dismantling the relationship. That is not visible in a
+single tick, in the arc test, or in any generation -- only in a long run.
+
+No model is called and no save is touched: it drives the primitives directly at
+rates measured from the first character's real record (a median of six things a
+day she tells him about herself, over fourteen days).
+
+    python tools/companion_arc.py --config config_yukarin.json
+    python tools/companion_arc.py --days 180 --quiet-diary
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: state.affection_from
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

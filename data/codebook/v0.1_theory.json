@@ -1,0 +1,65 @@
+{
+ "version": "0.1",
+ "_what": "the second tier of the codebook: entries the compile table needed and neither an anchored nor a theory-derived entry of data/codebook/v0.1.json covers. Same schema, empty anchors, status theory-derived, and `provenance` says which cell asked for it. The pilot codes anchored entries only; one of these is anchored the day a record shows an instance, and the version has to move for that.",
+ "entries": [
+  {
+   "id": "F12.take-the-option-that-is-already-in-the-room",
+   "family": "F12",
+   "layer": "function",
+   "definition": "A choice is settled by taking whatever is already available in the moment, and the thing that was arranged is dropped without being argued about.",
+   "trigger": "a choice where one of the options is physically available now and the other has to be waited for or travelled to",
+   "suppressor": "somebody else's arrangement is what would be dropped, and they are present to see it dropped",
+   "occasions": [
+    "a plan for later exists and something is available now",
+    "a shop, a train or a seat is in front of her and the arranged one is not",
+    "somebody asks which of two, one of them present",
+    "the arranged thing comes round and is not taken"
+   ],
+   "function": "gets the day moving on what is in reach, at the cost of whatever was arranged for later.",
+   "variation": [
+    "the arranged place is swapped for the one they are standing outside",
+    "the answer is the thing on the table rather than the thing named",
+    "the plan is not cancelled and simply does not happen"
+   ],
+   "includes": "The taking of the available option is the instance, whether or not the dropped arrangement is ever mentioned.",
+   "excludes": [
+    {
+     "neighbour": "F12.change-the-plan-on-the-day",
+     "rule": "changing the plan is announced with its reason at the time; this one substitutes without announcing anything."
+    },
+    {
+     "neighbour": "F12.refuse-the-either-or",
+     "rule": "refusing the either-or gives both options their due; this one settles it by proximity and gives the dropped one nothing."
+    }
+   ],
+   "anchors": [],
+   "near_misses": [
+    {
+     "ref": "F3.act-at-the-end-of-the-feeling-and-be-done-with-it",
+     "why": "the act there ends a feeling that has run to its limit; here nothing is at a limit and the option is taken because it is there."
+    },
+    {
+     "ref": "F17.buy-it-and-not-use-it",
+     "why": "that one is about the getting being the whole of the wanting; here the thing taken is used, and what is lost is the arrangement."
+    }
+   ],
+   "provenance": "bespoke",
+   "tunes": {
+    "module": "sim/ledger.py",
+    "dial": "what the day's plan is allowed to be overwritten by",
+    "fits": "threshold",
+    "note": "the plan is the day's one truth, so a rate here is a rate of the ledger being rewritten by the moment."
+   },
+   "sources": [
+    "scope: none",
+    "extracted: none",
+    "authored: none",
+    "library: none"
+   ],
+   "status": "theory-derived",
+   "single_source": false,
+   "version": "0.1",
+   "_from_cell": "extraverted sensing, dominant"
+  }
+ ]
+}

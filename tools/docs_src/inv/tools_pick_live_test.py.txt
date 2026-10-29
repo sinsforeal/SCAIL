@@ -1,0 +1,39 @@
+# tools\pick_live_test.py  (406 lines)
+
+DOCSTRING:
+The live pick, proved on a COPY of the save with the model stubbed.
+
+    python tools/pick_live_test.py
+
+One moment is put to her once per tool, with the answer decided by the test
+instead of by a paid call, and each case asserts that the seam that tool names
+was the one that ran -- and that code's own answer ran only where it should.
+Nothing is sent, no room opens, no browser starts and no model is called: every
+seam is replaced by a recorder, so what this proves is the wiring between the
+answer and the action.
+
+In order: the tools she is offered follow from her sheet; putting the phone
+down is her answer and not a no-op; writing to him first goes down the same
+path the impulse function's yes goes down, with her own reason as the hint; the
+group chat and a friend go through the exchange's own gates and a refusal is
+recorded rather than turned into some other action; her own feed goes through
+the account's caps; his message is answered now, at an hour she names, or left
+where it is; a tool nobody offered and arguments that do not parse leave the
+backup to decide; the frequency cap and the phone gate stop the call before it
+costs anything; shadow mode acts on nothing; and a host that does not take
+tools moves the same question to text.
+
+DEFS:
+def check(label, ok, detail): 
+def answer(name, args, text): One tool answer in the shape `LLM.call_tools` hands back.
+def offered_for(cfgpath): What each registered character is offered, off her sheet alone. Built against a stub store and clock: `PhonePick.offered` reads what she IS.
+def main(): 
+
+CONFIG SECTIONS: api.hosts_without_tools, json, pick.enabled, pick.shadow
+KV READ: 
+KV WRITE: pick_counts, pick_host, pick_last_ts
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

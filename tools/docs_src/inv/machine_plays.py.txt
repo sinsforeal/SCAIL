@@ -1,0 +1,82 @@
+# machine\plays.py  (351 lines)
+
+DOCSTRING:
+Every play his media player has FINISHED, and the timeline of them he reads.
+
+The player's history log says a file opened and nothing else. That is enough
+to know an episode happened and useless for the only question that follows:
+did he sit through it. A file opened for four seconds and a file watched to
+the last frame leave the identical line, so an open was fetched, digested,
+paid for and kept as "he watched it" either way. The 2023 logger recorded the
+position at exit for exactly this reason and the current one had stopped.
+
+So `tools/mpv/scail_logger.lua` writes a second log, one line per finished
+play, and this module is what reads it. THE RECORD FORMAT, appended when a
+file ends:
+
+    <open epoch>|<end epoch>|<path>|length=<s>|time=<s>|watched=<s>|reason=<r>
+
+    1700000000|1700001400|D:\Videos\Example Show - 06.mkv|length=1421.0|time=1419.3|watched=1402.5|reason=eof
+
+  * `open epoch` is the same integer the history log carries for that open,
+    which is what joins a play to the file that opened it. Nothing else is
+    needed to match the two, and matching on the path alone would confuse two
+    plays of one file in an evening.
+  * `length` is the file's duration in seconds, `time` where he stopped.
+    Both `0.0` when the player never knew (a stream).
+  * `watched` is WALL CLOCK SPENT UNPAUSED, in seconds, and it is the number
+    that separates a watch from a skim. The end position cannot do it: seeking
+    to the last minute and closing the file gives the same `time=` as sitting
+    through the whole thing, and a file left paused for an hour gives the same
+    elapsed clock as an hour watched.
+  * `reason` is the player's own word for what ended it -- `eof` it ran out,
+    `stop` he closed the file, `quit` he closed the player, `error`,
+    `redirect`, `unknown`.
+
+The live half of the same signal is `mpv_now.json`, which carries `watched`
+and `opened` while a file is open, so a reader can gate on how far in he is
+before the play has ended.
+
+**The timeline is the machine's, not a character's**, and this module is why
+it is not written by a character's process. Three processes run the watching
+module over one player. Electing one writer means the record stops when that
+character is stopped; letting all three write means three copies of every
+line. So any process may call `record_new()` as often as it likes and the
+write is idempotent: the open's own epoch is a column of the row, a row whose
+epoch is already in the file is not written again, and the append is taken
+under a lock file so two processes reaching one play in the same second still
+produce one row. Whatever is in the plays log and not yet in the timeline is
+written on the first call after a boot, so plays made while nothing was
+running are picked up rather than lost.
+
+The timeline itself is `reports/plays.md` (`watching.plays_timeline_path`) --
+plain text he can open, newest at the bottom, one row per play:
+
+    | 2026-01-02 15:05 | Example Show ep6 | 23.4 of 23.7 min | stopped 15:29 | full | counted | 1700000000 |
+
+spec: PROJECT.md §12.12
+
+DEFS:
+def parse_line(line): One line of the plays log as a dict, or None.  Tolerant on purpose: a line written by a future version of the script with a field this build does not know keeps its known fields rather than being thrown away, and a trunc
+def read(path, tail): The last `tail` finished plays, oldest first. `[]` for a log that is not there, which is every machine until he next opens the player.
+def for_open(path, open_ts, file_path, window): The finished play for ONE open of the history log, or None.  Matched on the open's own epoch, which both logs write from the same call, with a few seconds of slack because the two lines are written by two `os.time()` cal
+def _norm(p): 
+def _reached_the_end(row): Did this play run to the end of its own file: the player said so, or he stopped inside the credits, or he sat unpaused through nearly all of it.
+def verdict(row, min_watched_seconds): `full`, `partial`, `played out` or `skim` for one play.  The gate -- the minutes a play has to run before anything is fetched -- decides whether the play reaches her, and it is a poor name for what happened when the FILE
+def _mmss(seconds): 
+def _row_text(row, resolve, min_watched_seconds, when_fmt): One timeline row. Every time in it is machine local time, because the file is his and his clock is the one he reads it by.
+def written_opens(timeline_path): The open epochs already in the timeline. Read off the rows themselves rather than a sidecar, so deleting the file rebuilds it and no second record can disagree with it.
+class _Lock: A lock file over the append, so two characters' processes reaching one
+    __init__(path, stale, tries, wait): 
+    __enter__(): 
+    __exit__(): 
+def record_new(plays_path, timeline_path, min_watched_seconds, resolve, tail, log): Append every finished play not in the timeline yet. Returns the rows written.  Idempotent and safe to call from every process on every poll: the open's epoch is read back out of the file under the lock, so a row cannot b
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

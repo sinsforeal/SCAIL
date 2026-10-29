@@ -1,0 +1,58 @@
+# sim\inflight.py  (209 lines)
+
+DOCSTRING:
+Work that was in flight when the process died.
+
+`tools/restart.ps1` stops with `TerminateProcess`, so no `finally` and no
+`atexit` runs: a job on a background thread -- a lookup, a recall, the day's
+compile, a harvest of photographs, her look at her timeline -- simply stops
+mid-call, and the next process has no way to know it ever started. That was
+the last row of the restart inventory
+(`data/retired/2026-09-04_restart_safe/REPORT.md`).
+
+One kv record, `in_flight`, holds a row per running job: what kind it is,
+what it is about, when it started, the pid that started it, and `redo` --
+the request the next process would need to do it again. A job writes its row
+when it starts and deletes it when it finishes, whether it finished well or
+raised; a killed process leaves the row behind, and that leftover row IS the
+flag.
+
+At boot the leftovers are logged in one line and handed to `POLICY`, which
+is the whole of the per-kind behaviour -- redo it, drop it and record it as a
+missed call the way `LLM.call` does, or put a picked photograph back in the
+pool. A job kind with no row in that table is logged and dropped; nothing
+gets a guard of its own.
+
+    from sim import inflight
+    with inflight.job(store, "lookup", about=text[:80]):
+        ...                                   # the work
+
+`resolve(app)` is the boot read. It runs off the loop thread (the compile it
+may redo is a model call of a minute or more) and before any job of this
+process has started, so a row it finds is by definition a dead process's.
+
+DEFS:
+def rows(store): [{token, kind, about, started_ts, pid, redo}] -- the jobs believed to be running.
+def _write(store, out): 
+def start(store, kind, about, redo): Record that a job has begun; returns the token that clears it.
+def done(store, token): The job finished -- well or badly. Either way it is no longer in flight.
+class job: `with inflight.job(store, kind, about, redo):` round the body of a job.
+    __init__(store, kind, about, redo): 
+    __enter__(): 
+    __exit__(): 
+def _redo_compile(app, row): A day the compile started and never told is told now.
+def _drop_as_missed(app, row): Dropped, and written where an unanswered call is written: the work was paid for and lost, and `App.catch_up` is the one reader of that.
+def _release_photo(app, row): A photograph picked to send that never went stays usable.
+def _drop(app, row): Nothing to redo and nothing to give back: the next run does it again on its own clock.
+def resolve(app): The boot read: log what was in flight, then act on each by its kind.  Off the loop thread and before this process starts any job of its own. Returns the number of rows it found.
+def _ago(app, row): 
+def report(store): `/inflight`: what this process believes is running now.
+
+CONFIG SECTIONS: 
+KV READ: in_flight, missed_calls
+KV WRITE: in_flight, missed_calls
+TABLES: 
+LOG TAGS: boot
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

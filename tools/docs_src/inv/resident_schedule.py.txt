@@ -1,0 +1,19 @@
+# resident\schedule.py  (132 lines)
+
+DOCSTRING:
+The second character's day: a flat and a week of her own, planned from her
+home file and from nothing of the present. Hers alone; `sim/schedule.py`
+keeps what every character's day is made of.
+
+DEFS:
+def resident_day(): The day of a character who has no world: one block, all of it, free.  A character whose whole world is his desktop has no wake time, no commute and nowhere to be, so there is nothing here for a model to plan and asking o
+def own_day(config, llm, clock, date, his_hours): A day in her own place, for a character who has no world but has a home.  `resident_day` gives a character whose whole existence is his desktop one block of twenty-four hours, which is honest for somebody with nowhere to
+
+CONFIG SECTIONS: director.sleep_keywords, prompt_text, world
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: schedule
+PROMPTS: schedule
+LLM ROLES: schedule
+OPS COMMANDS: 

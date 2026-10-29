@@ -1,0 +1,225 @@
+{
+  "source": "Visual review of Momoka F portraits and paired L patches, 2026-09-18",
+  "labels": {
+    "CD01A005": {
+      "expression": "sad",
+      "pose": "hands_clasped",
+      "confidence": "medium"
+    },
+    "CD01A009": {
+      "expression": "talk",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD01A012": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD01A013": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD01A015": {
+      "expression": "serious",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD01A016": {
+      "expression": "smile",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD02A016": {
+      "expression": "smile",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD03A009": {
+      "expression": "talk",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD03A015": {
+      "expression": "serious",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD05A004": {
+      "expression": "smile",
+      "pose": "hands_clasped",
+      "confidence": "high"
+    },
+    "CD05A005": {
+      "expression": "sad",
+      "pose": "hands_clasped",
+      "confidence": "high"
+    },
+    "CD05A010": {
+      "expression": "neutral",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD05A013": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD05A014": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD05A015": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD05A016": {
+      "expression": "neutral",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD06A001": {
+      "expression": "smile",
+      "pose": "hands_clasped",
+      "confidence": "medium"
+    },
+    "CD06A004": {
+      "expression": "smile",
+      "pose": "hands_clasped",
+      "confidence": "high"
+    },
+    "CD06A005": {
+      "expression": "sad",
+      "pose": "hands_clasped",
+      "confidence": "high"
+    },
+    "CD06A007": {
+      "expression": "smile",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD06A008": {
+      "expression": "surprise",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD06A009": {
+      "expression": "laugh",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD06A010": {
+      "expression": "neutral",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD06A011": {
+      "expression": "smile",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD06A012": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD06A013": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD06A014": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD06A015": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD06A016": {
+      "expression": "neutral",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD07A001": {
+      "expression": "neutral",
+      "pose": "hands_clasped",
+      "confidence": "medium"
+    },
+    "CD07A003": {
+      "expression": "talk",
+      "pose": "hands_clasped",
+      "confidence": "medium"
+    },
+    "CD07A004": {
+      "expression": "shy",
+      "pose": "hands_clasped",
+      "confidence": "medium"
+    },
+    "CD07A005": {
+      "expression": "sad",
+      "pose": "hands_clasped",
+      "confidence": "high"
+    },
+    "CD07A006": {
+      "expression": "talk",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD07A007": {
+      "expression": "smile",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD07A008": {
+      "expression": "surprise",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD07A009": {
+      "expression": "embarrassed",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD07A010": {
+      "expression": "neutral",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD07A011": {
+      "expression": "smile",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD07A012": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD07A013": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "high"
+    },
+    "CD07A014": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD07A015": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "medium"
+    },
+    "CD07A016": {
+      "expression": "smile",
+      "pose": "none",
+      "confidence": "high"
+    }
+  }
+}

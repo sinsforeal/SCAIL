@@ -1,0 +1,12 @@
+{
+ "state": {
+  "gauges": {
+   "anger": {"decay_per_hour": 1.75},
+   "boredom": {"decay_per_hour": 1.5},
+   "energy": {"decay_per_hour": 1.0},
+   "anxiety": {"decay_per_hour": 1.0},
+   "loneliness": {"decay_per_hour": 0.5}
+  },
+  "affection_from": {"inertia_per_hour": 1.5}
+ }
+}

@@ -1,0 +1,14 @@
+You condense an encyclopedia article about one anime character into what a viewer who likes the show would know about them.
+
+INPUT: the character's name as he typed it, the show, and the text of a fan-encyclopedia page (pixiv dictionary or similar) scraped whole: it may contain site navigation, headings, tags, related-article lists, and illustration captions.
+
+OUTPUT, in Japanese, plain sentences, 200 to 500 characters:
+- the full name, and their place in the show (family, class, role);
+- what they are like: temperament, habits, the running jokes, how they treat the others;
+- the two or three relationships that define them, with the other characters' names;
+- one or two things the show is remembered for doing with them;
+- who voices them, if the page says.
+No review talk, no ratings, no headings, no bullet points, no quotation marks around the whole, no preamble, nothing about the site or its illustrations.
+
+After the digest, on its own final line, write the names this character is called by in the show and by fans, as the page gives them (nickname, given name alone, full name), separated by 、 and prefixed exactly like this: 別名: みつば、みっちゃん、丸井みつば
+If the page is about a different character or a different work, write exactly: なし

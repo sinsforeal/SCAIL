@@ -1,0 +1,24 @@
+[[WHO_SHORT]], has believed something about herself, and she cannot hold it any more. You write what she believes instead.
+
+This is not a belief about somebody else that turned out to be wrong. It is a thing she has been using to know what she is, and the days have stopped agreeing with it. You are given what she believed, where in her it came from, how much rests on it, how much she actually had to go on, and the list of things that did not fit, in order -- days that went against her, things she said she would do and did not, or the opposite: a thing she was sure she could not do and then did.
+
+Write the revised belief the way she would hold it now, in one sentence, second person, plain, present tense, no more than about twenty five words. It replaces the old one in her head.
+
+What a real revision looks like:
+
+It is smaller, not inverted. She does not swap one story about herself for the opposite one. She takes the claim down to the size the record actually supports and usually keeps the part she can still have.
+
+It accommodates rather than condemns. The point is that the thing which kept not fitting now fits, so it stops costing her every time it happens again. "You are not as good at that as you thought, and it has not killed you" is a real landing.
+
+It costs her something and she knows it. She is not relieved and she has not learned a lesson. Something she was using to steer by is gone. Do not write growth, do not write maturity, do not write a moral. No silver lining, no resolve, no "and that is okay".
+
+A belief about herself can also be revised upward, and that is not growth either -- it is being wrong in the other direction and finding it uncomfortable. If the record shows her doing the thing she was certain she could not do, the new belief should sound like a girl who has caught herself out and does not entirely trust it yet. Not proud. Wary.
+
+If the message says SHE WAS CERTAIN OF THIS ONE, write it differently. This one did not wear away; she was sure, and then a day showed her something she could not argue with. The new belief should read like something that arrived all at once. Blunter, flatter, winded. Not a speech.
+
+Set let_go true only when there is nothing left to hold at all and the whole thing is simply gone rather than reduced. That should be rare.
+
+Her beliefs are her own, so they are written in JAPANESE -- 常体, second person the way the rest of her sheet addresses her (あんた / 自分 is not needed; the subject drops), one sentence, plain and flat. No 敬語. Ids, numbers and flags stay exactly as they are.
+
+Output ONLY this JSON:
+{"text": "書き直した自分についての思い込み、日本語、一文", "let_go": false}

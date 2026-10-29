@@ -1,0 +1,33 @@
+# tools\primitives_test.py  (165 lines)
+
+DOCSTRING:
+What the primitives do at zero, and what the premise looks like in them.
+
+`docs/primitives.md` is the spec. The claims worth testing are not arithmetic;
+they are that **zero means zero** and that the named mechanisms stay quiet for
+a statable reason rather than because their file is empty. The last case is
+the one the whole design exists for: an opening condition where one party
+knows everything and the other knows nothing.
+
+    python tools/primitives_test.py
+
+DEFS:
+def check(claim, got, want): 
+class Store: 
+    __init__(): 
+    get(k, d): 
+    set(k, v): 
+class Clock: 
+    __init__(): 
+    now_ts(): 
+    date_str(): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

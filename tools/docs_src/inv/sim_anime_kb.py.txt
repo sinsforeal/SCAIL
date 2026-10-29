@@ -1,0 +1,57 @@
+# sim\anime_kb.py  (1015 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def parse_characters(page): MAL /anime/<id>/_/characters -> [{char_id, character, role, vas:[(name, lang, person_id)]}]
+def parse_person(page): MAL /people/<id> -> {name, name_jp, alt_names, birthday, favorites, bio, roles:[(anime_id, anime, char, role, char_favs)]}. name_jp is the Japanese-script name (family+given, '田村ゆかり') and alt_names the fan nicknames MAL 
+def _jp_name(name): MAL renders people and characters 'Family, Given'. He thinks family-given for Japanese names ('Koga Aoi', 'Kawasumi Ayako'), so she does too: just drop the comma, keep the order.
+def open_rw(db_path): His list's database (`tools/mal_history.py` writes it; the knowledge base adds its own tables), writable, in WAL so a reader never waits.
+def open_ro(db_path): The same database read-only, or None when it cannot be opened: the readers (the anime sense, the watching) carry on without it.
+def rows_norm(rows): The cached special rows as they are; a seam for tests.
+class AnimeKB: 
+    __init__(config, db_path, client_id): 
+    _con(): 
+    _ensure(): 
+    _norm(t): 
+    _raw(t): A title as written, only case and runs of space levelled. What the normalisation cannot keep: `K-On!!` and `K-On!` are one string once the punctuation is stripped, and they are two shows.
+    entries(): Every entry on his list with the edition it is: the id, both titles, the normalised and the as-written forms, the media type and the episode count. Cached; one query.  The episode count is what makes an impossible resolu
+    entry(aid): One entry as his list holds it -- the edition, the episode count and the season where the knowledge base has fetched it -- or `{}`.  This is what lets a line say OVA rather than repeat a Japanese title two editions share
+    is_special(media_type): 
+    resolve_candidates(term, ep, kind): Every entry on his list this term could mean, best first.  Three tiers, because the first row sqlite happened to return was deciding this: the title AS WRITTEN, then the title with its punctuation stripped, then a distin
+    ambiguous(cands): Is the top of this ranking a tie code cannot break? Two candidates matched the same way and neither is nearer than the other.
+    his_titles(): Every title in his own list, normalized, cached. His list is the whole point: a thing is worth her looking up because he watched it.
+    resolve_special(base): (anime_id, title, media type) for the OVA / ONA / special entry on his list whose title begins with `base` -- for a player file that names a special with no number (`sim/watching_him.py parse_special`). Local only, his l
+    has(aid): Is this one of his? MAL search will return a hit for any query at all, so this is what separates a thing he watched from a thing that exists.
+    resolve_strict(term, ep, kind): (anime_id, title) for the one entry on his list this term means, or None. Local only, no network, and deliberately unforgiving: this is used to decide whether he named something, not to be generous once we know he did. `
+    person_name_jp(person_id): The seiyuu's Japanese-script name from the cached person row, for a Japanese Wikipedia lookup. '' if not cached.
+    japanese_title(aid): The kanji title from MAL (`alternative_titles.ja`), for a Japanese search that finds real あらすじ blogs -- the romaji title finds only database sites. Cached in the `anime_kb` row's title_eng? no: a tiny keyed cache in memo
+    resolve(term): His list first (what he actually calls it is usually there), then the MAL search API. Returns (anime_id, title) or (None, None).
+    _fetch_facts(aid): 
+    _fetch_cast(aid): 
+    ensure(aid, max_age_days): Facts + cast for a series, fetched once and cached. Returns the kb row dict or None.
+    ensure_person(person_id, max_age_days): Bio + all roles for a voice actor, fetched once and cached.
+    _ro(): 
+    _cast_rows(aid): How many cast rows are stored for this title. For a log line that says what an empty parse did not lose.
+    _credit_rows(person_id): The same for a filmography.
+    person_row(person_id): Who this id is on his mirror, and when the page was last read: {person_id, name, name_jp, fetched_at, credits}, or None when nobody has mirrored them. An id, never a name: her given name alone matches nine other people i
+    credits_of(person_id): Every credit mirrored for this person id: [(anime_id, anime, character, role, year)]. Local, read-only, no fetch, and empty when the person is not mirrored -- which is a different answer from "they are in nothing" and th
+    cast_mirrored(aid): (when the cast was mirrored, its rows) for one title, or (0, []) when nobody has mirrored it. The stamp is the point: it separates "the cast is here and she is not in it" from "nobody has looked", and only the first of t
+    find_person(name, search): A seiyuu he named -> (person_id, name). Romaji either order, the Japanese-script name ('田村ゆかり'), or a fan nickname MAL lists ('ゆかりん'); from the cast rows and persons already cached, else a cold MAL people search (he will
+    roles_of(name): Every role MyAnimeList lists for a voice actor, by any name the person is known by: [(anime_id, anime, character, role)]. Fetched once and cached (`ensure_person`); empty when the person is not found. The glance asks thi
+    person_brief(person_id, max_roles): The card for a seiyuu: who they are, their notable roles, and which of those HE has actually seen (from his list) -- the crossover she would notice: 'Kawasumi Ayako, Saber, also Shimoda in 16bit which you just watched'.
+    find_character(name, prefer): A character he named -> (anime_id, character, role, jp_va, title, status, score) or None.  Matched on a whole name part, never a substring: LIKE '%Yanami%' finds "Ayanami, Rei" from Evangelion when he meant Yanami from M
+    character_brief(hit): What she knows about a character he mentioned: who they are, who voices them, and where he stands with the show they are in.
+    _favorite_names(): 
+    _his_standing(aid): 
+    brief(aid, max_cast): The card she gets in her situation when he names this series: facts he'd care about, the cast with JP voices, and his own standing with it. Synopsis is a single sentence at the end, not the lead.
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: anime_cast, anime_kb, person, person_role
+LOG TAGS: animekb
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

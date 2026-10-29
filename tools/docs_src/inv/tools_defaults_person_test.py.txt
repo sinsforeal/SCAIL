@@ -1,0 +1,37 @@
+# tools\defaults_person_test.py  (136 lines)
+
+DOCSTRING:
+No default in the library is one person's file.
+
+    python tools/defaults_person_test.py     # exit 1 on any finding; run by smoke
+
+`config.json` is generated from `config.py:DEFAULTS` and backfilled: a key a
+character's config does not carry is filled in from the defaults on her first
+load and written into her own file, where it then looks authored. So a default
+that names one character's household, roster, map or save is inherited by the
+next character in silence -- which is what the fourth character's first day
+was, in full: the first character's household, map, roster and cast sheets.
+
+This builds nothing. It walks the defaults with the same path finder the
+isolation check uses (`tools/isolation.paths`) and fails on any path-shaped
+value that is neither the machine's, nor a mechanism prompt's, nor the
+shared world's own. Those three categories are the same ones
+`tools/isolation.py` classifies a shared file into, imported from there so the
+two cannot drift.
+
+It also names the seventeen person-shaped keys explicitly and fails if one of
+them is not empty, so that re-pointing one at a file -- rather than adding a
+new key -- is caught with the key named rather than by a prefix rule.
+
+DEFS:
+def _dig(d, dotted): 
+def main(): 
+
+CONFIG SECTIONS: json, py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

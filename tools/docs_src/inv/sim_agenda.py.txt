@@ -1,0 +1,75 @@
+# sim\agenda.py  (334 lines)
+
+DOCSTRING:
+What is coming, joined from every store that holds a dated thing.
+
+Her sense of the week was second-hand. The clock line at the head of her
+situation block says the weekday and the time and nothing else, and what
+was COMING lived in five stores that never met: the calendar's holidays
+and the wards' events with their lookahead, which reached the director and
+the morning outlook and never her reply; the promises she has made, with a
+date and often an hour on them; what he said he would do, with a deadline
+his side; the people the day's plan has taken out of it; and the lines the
+day has settled. She could be asked "what are you up to this week" with
+every one of those on file and nothing in front of her.
+
+One reader over all of them, and two views of it. `items()` is the join:
+dated rows, sorted, exact repeats dropped. `prompt_text()` is the short
+block she reads. `panel()` is the operator's, in the ops payload, and
+`report()` is what `/agenda` prints.
+
+**Nothing here is a plan and nothing here writes.** Every row is something
+another module already decided and already owns; this only puts them in
+one order. A collaborator that is `None` because the program did not build
+it contributes nothing, which is the whole guard -- the calendar loads no
+data at all for a character with no world, so it needs none.
+
+**The block she reads must change only at her midnight, or when one of
+these things lands.** It sits in the system half of her prompt, which the
+provider caches as a byte prefix (`persona/sections.py`), so a wording
+that counts down -- "in two days" -- would rewrite the block on every
+midnight for every row and, worse, invite a per-call reading. Every date
+is written absolutely: the weekday, the day and the month. And the block
+starts at TOMORROW, because today is the day's one truth
+(`sim/ledger.py`) and is in front of her on every call already, in the
+half of the prompt that is re-sent anyway; the two views for the operator
+show today as well.
+
+Two stores that hold nothing dated, and why they are not read here. Her
+account's posting is an impulse held for at most
+`posting.hold_max_minutes` and dropped when her date turns over
+(`tomoe/posting.py`), so it has no future date to carry. Foresight
+predicts whether he answers the message she just sent, in minutes
+(`sim/foresight.py`); it has a horizon of an hour, it is replaced by the
+next send, and a row of it in the system half would rewrite the block
+several times an evening.
+
+Config `agenda`: `enabled`, `days` (how far ahead), `max_items` (how many
+lines the block may carry, nearest first) and `in_prompt`.
+
+DEFS:
+class Agenda: The coming days, joined. Built for every character.
+    __init__(config, store, clock): 
+    items(days): [{date, hm, kind, text, source}] for today and the next `days`, sorted by date then time, exact repeats dropped.  `kind` is the machine's own word for what the row is -- `event`, `holiday`, `promise`, `he_said`, `away`, 
+    _row(date, kind, text, source, hm): 
+    _calendar(today, days): The national holidays and what is on, hers and her wards'.  No guard: a character with no world has an empty holiday table and an empty event file, so this returns nothing for her by the data rather than by a branch (`wo
+    _promises(today, days): The promises still open, with the date they come due.  A promise about a public event the calendar has nothing of is left out, the same rule and the same reader as the day's one truth (`Ledger.promise_unbacked`): six day
+    _he_said(today, days): What he said he would do, and when he said he would be about, each with the deadline it is judged against (`sim/expectations.py`). His deadline is his local time; the date it lands on is hers, because the week she reads 
+    _away(today, days): Who the day's plan has taken out of the day, and why. The ledger is the one reader of this: for the character who keeps the world it is her own plan, and for a character who reads a world somebody else keeps it is the ro
+    _settled(today, days): The lines today has settled. Today alone: the plan settles the day being lived, and there is nothing settled about a day the planner has not reached.  `to_world=False` because this is a view. For the character who keeps 
+    _when(date_str, hm, ja): The date as she reads it, absolute. Never a countdown: this block rides in the cached half of her prompt, and a relative wording would rewrite every line of it.
+    _head(kind, t): 
+    prompt_text(): The short block in the system half of her prompt, or "".  **From tomorrow on.** Today is already in front of her on every call, in full and in the half of the prompt that is re-sent anyway: where she is and who with, who
+    panel(days): The ops payload's rows: today and the days ahead, uncut.
+    in_prompt_rows(): The rows the block carries: tomorrow on, capped. One reader, so `/agenda` marks the same lines her prompt has.
+    report(days): `/agenda [days]`: every dated thing in the window, today included, with a mark against the ones her prompt carries.
+    boot_line(): One line at boot naming what is on, so a week that is empty when it should not be is visible without asking for it.
+
+CONFIG SECTIONS: agenda, agenda.days, character.existence, commitments.enabled, expect.enabled
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: agenda
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

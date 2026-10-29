@@ -1,0 +1,88 @@
+# tools\mal_history.py  (1954 lines)
+
+DOCSTRING:
+MyAnimeList episode-level watch history: backfill, live watch, and analysis.
+
+MAL's API and RSS give list state and coarse "recently watched" items, but not
+the per-episode timestamps ("Ep 13, watched on 05/10/2024 at 12:26"). Those
+live behind the logged-in Edit -> History panel, served by
+`ajaxtb.php?detailedaid=<id>`. This tool drives a logged-in Chrome (Selenium,
+its own profile `C:/ChromeProfileMAL` -- never another program's `C:/ChromeProfile` or
+Tomoe's `C:/ChromeProfileTomoe`) to read that panel for every anime, into a
+SQLite DB tied to the real anime (id, titles, studios, genres...). It also
+watches the public /history page for new episodes as they happen and enriches
+them with the exact minute, so the bot can know precisely when he watched an
+episode -- and so he has his own data to analyse.
+
+    python tools/mal_history.py login              # open Chrome, log into MAL once (persists)
+    python tools/mal_history.py sync               # refresh the anime table (public, no login)
+    python tools/mal_history.py backfill           # scrape every anime's episode history
+    python tools/mal_history.py backfill --statuses 2 --limit 20
+    python tools/mal_history.py daemon                 # forever: list sync + new episodes + periodic
+                                                       #   panel reconcile (run.cmd launches this)
+    python tools/mal_history.py export                 # CSV: data/mal_export/{episodes,anime}.csv
+    python tools/mal_history.py report                 # personal analysis over the DB
+    python tools/mal_history.py report --anime "16bit"
+
+The DB is `data/mal_history.db`. Times are as MAL renders them (his MAL profile
+timezone); the raw string is kept alongside every row.
+
+DEFS:
+def db(path): 
+def open_log(path): Point stdout and stderr at a file for the rest of the run.  The daemon runs as `pythonw` with no console, and the launcher's `>>` redirect binds to cmd's `start` rather than to the process it detaches, so every line prin
+def jikan_watch(con, min_interval): At most one request an hour: is the wrapper answering yet?  Records `jikan_status` (the HTTP code, or the exception type), the time, and `jikan_state` (up / down) in the mirror's `meta` table, and prints one line only wh
+def meta_get(con, key, default): 
+def meta_set(con, key, value): 
+def _get(url, timeout): 
+def fetch_list(username): The site's own list JSON (all statuses, paged by 300). No login.
+def _note_status(con, anime_id, title, new_status, watched): Record a status change before it is overwritten.  The anime table holds only what is true now, so watching -> dropped, and the quieter one where a show he was watching turns up in plan_to_watch again with five episodes b
+def sync_anime(con, username, verbose): 
+def parse_episode_history(text_or_html): From the ajaxtb panel body -> [(ep:int, watched_at:iso, raw:str)]. Tolerant of markup: strips tags, then reads 'Ep N, watched on MM/DD/YYYY at HH:MM'.
+def _site_zone(): 
+def _site_now(now): (now on MAL's clock, now here). What its page means by "Today" is the first; the second is what a time on its clock has to be converted to.
+def _site_to_local(site_naive, local_now): A time on MAL's clock, as the same moment on this machine's.
+def _resolve_history_time(when, now): MAL history renders relative/short times: 'Today, 1:19 PM', 'Yesterday, ...', 'Aug 16, 4:13 PM' (this year), or 'MM-DD-YY, H:MM AM'.  Every one of them is resolved against the SITE's own calendar and clock and then conve
+def parse_history_page(page, now): Public /history/<user>/anime -> [(anime_id, ep, watched_at_iso_or_None, raw)].
+def migrate_episode_stamps(con, dry, out): Bring the rows written before the site's clock was understood into line with the panel's, and take out the duplicates one watch produced.  Two rules, in this order.  1. A row from the public history page for a (work, epi
+def cmd_migrate_stamps(args): `python tools/mal_history.py migrate-stamps [--apply]`. THE DAEMON MUST BE STOPPED: it writes this table every five minutes.
+def _extension_dir(): Ad blocker path from config.json, so the bot and this tool agree.
+def make_driver(headless, profile): 
+def _fetch_in_page(driver, url, timeout): Fetch a URL from within the myanimelist.net origin, reusing the login cookies, without a full navigation.
+def _is_logged_in_nonav(driver): Check login without navigating the window (so a login in progress is not disturbed): fetch the panel from within the current MAL-origin page.
+def logged_in(driver): 
+def cmd_login(args): 
+def _upsert_episodes(con, anime_id, rows, source, scraped_at): One row per (work, episode) watch, and the LIST'S OWN PANEL is the stamp of record.  The panel is read behind the login, so its times are on his account's clock, which is this machine's; the public history page is read w
+def cmd_backfill(args): 
+def cmd_watch(args): 
+def _reconcile(con, driver, delay, force, verbose): Re-scrape the panel for every anime whose list row changed since we last scraped it (or all if force). This is what makes the DB authoritative even when the public-history poll was down: nothing relies on the shallow pag
+def _daemon_alive(pid): Is the pid in the lock file actually another daemon.  The old check was `OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION)` and treated any handle as proof of life. **OpenProcess succeeds on a process that has already exite
+def _close_orphan_chrome(profile): A daemon that died leaves Chrome holding the profile, and the next Chrome cannot start on a locked one -- it fails with "DevToolsActivePort file doesn't exist", which reads like a Chrome crash and is not. Kill only the o
+def cmd_reap(args): Kill the browser the daemon left behind, and say what the lock file says.  A daemon stopped with `Stop-Process -Force` runs no exit path, so its headless Chrome and the chromedriver above it survive holding this tool's p
+def _refresh_subtitle_mirror(): The clone of the subtitle archive, brought up to date once a day.  The path is read out of the config FILE rather than through the project's config machinery: this daemon is the machine's and has no character, and buildi
+def _build_dossiers(): One file per finished play, joining the player's log with this mirror and the machine's retrieval store (`machine/dossier.py`, `docs/dossiers.md`).  It is called from HERE and not from a character's loop because three ch
+def cmd_daemon(args): Runs forever: every --interval s, sync list updates + poll the public history page; every --reconcile h, re-scrape the panel for changed anime. Single instance (lock file). This is what run.cmd launches alongside the bot
+def _client_id(): The MAL API v2 client id from the bot's config.json (sensors.mal_client_id).
+def cmd_enrich(args): Per-title detail from the official API v2: exact average episode duration (watch time needs it -- a movie is not 24 min), studios, the full genre / theme / demographic set, source, season, MAL mean. Idempotent; only titl
+def cmd_export(args): CSV of the master data: one row per episode event joined to its anime, plus an anime-level CSV.
+def split_runs(events): Split one anime's episode events into watch RUNS. MAL's history logs rewatches unmarked; the tell is the episode number resetting (ep 3 after ep 13). A new run starts when the ep falls two or more below the current run's
+def _fmt_h(seconds): 
+def _bar(v, mx, w): 
+def cmd_report(args): 
+def cmd_report_detail(con, args): The detailed analysis: total watch time (per-episode duration from the API), time and habits over time, genres by hours, studios, pacing, scores. Watch time is computed from the dated episode events (what he sat through,
+def cadence(con, min_gaps): How fast he watches a thing, and what that predicts.  He does not decide to drop a show. He slows down, stops, and the official status catches up months later or never -- so the gap between episodes is a better read on w
+def cmd_cadence(args): 
+def cmd_cast(args): Fetch the cast (characters + JP voice actors) for every anime he has watched, into anime_cast via AnimeKB. Public MAL pages, ~1 req/s, idempotent (skips anime whose cast is already cached).
+def cmd_seiyuu(args): Which voice actors he actually likes, from what he watched: for every seiyuu in the cast of a show he has episodes of, weight by his hours on that show (main role full, supporting half), his score, and whether he finishe
+def parse_favorites(page): Public /profile/<user>/favorites -> {anime:[(id,title)], characters:[(id,name,from_title)], people:[(id,name)]}. His explicit, deliberate favorites -- a stronger signal than anything inferred.
+def cmd_favorites(args): Pull his explicit MAL favorites (anime, characters, people) into the DB (table `favorites`), and cross them against the behavioural seiyuu affinity so the two signals can be read together.
+def cmd_watching(args): What he is currently watching, and an estimate of when each finishes, from his own pacing: the title's recent eps/day (from its logged events), falling back to his global median pace, with a staleness flag for shows he h
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: anime, anime_detail, episodes, favorites, meta, status_log
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

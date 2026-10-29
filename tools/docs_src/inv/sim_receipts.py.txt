@@ -1,0 +1,24 @@
+# sim\receipts.py  (175 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Receipts: 
+    __init__(config, store, clock, sys_monitor): 
+    _chat_of(title): The conversation a Telegram Desktop window has open.  The title is the chat name, with a left-to-right mark in front of it and the unread count after: `‎Tomoe - (679745)`. Strip both and what is left is who he is talking
+    _is_her_chat(process, title): He has HER conversation open, rather than Telegram being somewhere on screen.  This used to match the process OR the word "telegram" in the title, and against the live feed that was 4 real hits out of 1407: a terminal ca
+    status(): Returns dict or None when nothing of hers is pending. keys: state (unseen|seen|read|replied), her_ts, minutes, read_ts, active
+    was_around_between(t0, t1): Was he at the machine at any point in (t0, t1)? A window session touching the span, or his last input falling inside it.
+    _stamp_read(her_ts, read_at): 
+    line(st, ja): One sentence for her situation block, or '' when there is nothing to say. `ja` is her copy of it; `/receipts` reads the same status in English, because that one is for a developer.
+    brief(st): Short form for the director and state prompts.
+
+CONFIG SECTIONS: character, receipts, receipts.enabled, receipts.idle_after_minutes, receipts.read_min_seconds, talkapp.enabled
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

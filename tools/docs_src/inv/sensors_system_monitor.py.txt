@@ -1,0 +1,50 @@
+# sensors\system_monitor.py  (916 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _get_foreground_window_info(): 
+def _is_md5_filename(filename): 
+def _extract_filename_from_title(title, process_name): 
+def _extract_chrome_tab_title(title): 
+def _get_system_stats(): 
+class SystemMonitor: 
+    __init__(config): 
+    set_gelbooru_classifier(classifier): 
+    set_web_scraper(scraper): 
+    start(): 
+    stop(): 
+    _poll_loop(): 
+    _poll_foreground(): 
+    _allowed_title(proc_name, title): The title a character may be handed, or "" -- blanked, never dropped: dropping the window would leave `right_now()` on the one before it. Blanked when `sensors/blocklist.py` says the name is one she must not be shown, or
+    _finalize_current_session(end_time): 
+    right_now(): What is in front on his PC this second and how long since he touched it: (process, title, seconds_in_window, seconds_since_input).
+    seconds_since_input(): Seconds since the last real keypress, click or mouse move. Processes running in the background do not count.
+    attention_since(since_ts): Sessions (start, end, process, title) touching the window after since_ts, including the live one.
+    _poll_input(): 
+    _poll_system_stats(): 
+    _gelbooru_worker(): 
+    _scrape_worker(): 
+    consume_accumulated(): 
+    _wait_for_pending_gelbooru(max_wait): 
+    get_buffer_info(): 
+def _categorize_vk(vk): 
+def _clean_window_title(title, process_name): 
+def _merge_key(title): A title with its numbers taken out, for deciding whether two consecutive windows are the same window.  A price page, a chart, an unread badge and a clock all repaint their own title several times a minute, and each repai
+def _fmt_dur(sec): 
+def _image_full_detail(s): Full per-image block (filename + Gelbooru tags): the old behavior, kept for short viewing sessions and the first few images of a look.
+def _summarize_image_window(group): One dated block for a burst of image views: when, how many, who/what series, the rating spread and the average score. She never sees the raw tags of thirty pictures, only this glance.
+def _group_image_windows(img_sessions, gap_seconds): Split image sessions (sorted by start) into bursts separated by > gap.
+def _shown_title(config, session): The title of a stored window session, or "" when the list blocks it.  The monitor blanks a title as the window closes, so the feed on disk holds whatever the list said at the time it was written. A pattern added since th
+def _span_minutes(data): How long the window sessions in this block cover, for a keys-per-minute band when the collector recorded no typing bursts to measure against.
+def format_system_activity(data, image_opts, config, t): The raw activity a character's account of his machine is written from.  `t` is the (english, japanese) chooser of whoever is being written for (`sim/phone.py:_t`); without one every band renders English, which is what a 
+
+CONFIG SECTIONS: chrome_process_names, chrome_scrape_enabled, chrome_scrape_interaction_threshold_keypresses, chrome_scrape_time_threshold_seconds, image_viewer_processes, system_monitor_enabled, system_monitor_poll_ms, system_stats_interval_seconds, typing_burst_gap_seconds, vault_read_time_threshold_seconds
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

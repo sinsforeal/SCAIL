@@ -1,0 +1,14 @@
+{
+ "pair_id": "p1",
+ "character": "momoka",
+ "mapping": {
+  "A": "fx_S_momoka_ds",
+  "B": "fx_P_momoka_ds"
+ },
+ "A": {
+  "text": "FAKE output A for p1 テスト"
+ },
+ "B": {
+  "text": "FAKE output B for p1"
+ }
+}

@@ -1,0 +1,37 @@
+# channels\tts_handler.py  (337 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class TTSQueue: 
+    __init__(config, tg): 
+    enqueue(text): 
+    _load_pending(): 
+    _save_pending(): 
+    _done(text): 
+    _recover(): Lines left unsent by the previous process: render the recent ones, drop the stale.
+    status(): 
+    _minimax(): The MiniMax script's own config: key, model, voice, so the two paths sound the same.
+    _voice_setting(mc): Whose voice this is. The MiniMax config file is shared by everything on this machine and names a single voice, so a second character would otherwise speak in the first one's. `tts.voice_id` in a character's own config wi
+    _render_sync(text, flac): The synchronous endpoint: audio comes back inline, about a second for a short line.
+    _render_script(text, flac, inp): 
+    _load_index(): 
+    _ogg_path(stored): Where that cached line lives now, wherever the project sits.
+    _save_index(): 
+    _key(text): The cache key is the line AND the voice saying it.  It was the line alone, and the cache directory is shared by every character on this machine, so the second character saying anything the first had already said would ha
+    cached_path(text): 
+    _remember(text, ogg): 
+    speak_on_demand(text, deliver): He tapped a line and wants to hear it: render, hand the file back.  On the same worker as the voice notes, so two renders never run at once, and never in `pending.json` -- a tap is not owed to him across a restart the wa
+    _run(): 
+    render(text): The audio for a line, cached: a path, or None if it could not be made.  Split out of `_render_and_send` so that making the sound and pushing it at him are two decisions. A character who does not send voice notes can stil
+    _render_and_send(text): A voice note of hers: the same render and cache as a line he taps (`render`), then the send -- the note as opus, the raw audio when the conversion failed.
+
+CONFIG SECTIONS: character, tts, tts.cache_dir, tts.enabled, tts.minimax_config_path, tts.mode, tts.recover_max_age_minutes
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

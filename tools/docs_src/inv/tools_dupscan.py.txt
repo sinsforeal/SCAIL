@@ -1,0 +1,41 @@
+# tools\dupscan.py  (171 lines)
+
+DOCSTRING:
+Blocks of code that appear twice in a row.
+
+A patch script that writes per edit, is not idempotent, and gets re-run after a
+partial failure duplicates its inserts. It has happened four times in this
+project: the sentiment config, the contagion block, the `longing` gauge, and
+`State.update_from_llm`'s `catch_his_mood` -- which then ran the contagion at
+double the configured strength for a day and raised nothing at all, because a
+doubled block is valid Python that imports, parses, constructs and runs.
+
+Nothing else here can see it. `ast.parse` is happy, the import is happy, and
+building the whole App is happy. The signature is simple though: N consecutive
+lines immediately followed by the same N lines.
+
+A block only counts if it does something -- two lines of substance, one of
+which calls or assigns -- so a pair of identical `parts.append("")` stays a
+layout idiom rather than a finding.
+
+    python tools/dupscan.py [path ...]
+
+`tools/smoke.py` runs this on every check.
+
+DEFS:
+def _trivial(line): 
+def scan_file(path): [(line_no, block_length, first_line)] for every immediately repeated block.
+def scan(root): [(path, line_no, block_length, first_line)] over every .py under root.
+def _decorator_names(fn): 
+def redefinitions(path): [(line of the first, line of the second, scope, name, "identical" or "different")] for every function defined twice in one class or module.
+def scan_redefinitions(root): [(path, first, second, scope, name, how)] over every .py under root.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

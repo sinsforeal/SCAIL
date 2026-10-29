@@ -1,0 +1,24 @@
+# netwatch.py  (103 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def redact(s): 
+class NetWatch: 
+    __init__(config): 
+    fail(source, detail): A network call failed. Logs once on the way down, counts after.
+    ok(source): A network call succeeded.
+    offline(): 
+    down_minutes(): 
+    status(): 
+def configure(config): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: network
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

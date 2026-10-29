@@ -1,0 +1,59 @@
+# tomoe\share_pick.py  (267 lines)
+
+DOCSTRING:
+Which post she sends him: the one decision of hers that is a tool call.
+
+Everywhere else in this project a model writes words and code decides what
+happens; here a model decides what happens. When her scroll leaves her
+wanting to show him something, three things used to be true: the wanting was
+hers (the look's own "might say" line, kept as the pending show-him thought),
+the words were hers (the reply call), and the CHOICE OF POST was code's -- the
+best text match to her own sentence, then the newest others, three of them,
+handed to the reply call to pick from with `[share: <id>]`. The choice is hers
+now, made in its own call, before the reply prompt is built, and acted on: the
+post she names is the only one her prompt then offers, and if she says she
+would rather not, the thought is put away and nothing is offered.
+
+Why this decision and not another. It is small (one post out of a handful she
+has already looked at), it is bounded (two tools, no free text, so no words of
+hers arrive through the tool -- the reply call still writes those), its whole
+input is already in her prompt, and it is cheap: one flash call behind the
+system half the reply is about to send anyway, so the provider's cache holds
+most of it. Measured on the replay of forty-six moments that decided this was
+worth wiring, a pick of this shape cost $0.0009
+(`data/retired/20260906_1912_pick_test/REPORT.md`).
+
+The three faults that replay found, and what is done about each:
+
+* **a tool name that was not offered** (it invented `dislike` once) -- the name
+  is checked against the two that were offered and nothing else is acted on;
+* **content beside the call** (723 characters of her next message to him
+  arrived with one pick) -- the text is dropped and logged, never used;
+* **an argument in the wrong language** (it wrote her a Japanese sentence for a
+  character who writes English to him) -- there is no free-text argument at
+  all, so there is nothing to be in the wrong language.
+
+The account is the program's, so this is the program's too: nothing under
+`sim/`, `persona/` or `scail.py` imports it or names it.
+
+DEFS:
+class SharePick: 
+    __init__(config, llm, store, clock): 
+    enabled(): 
+    pending(): The show-him thought waiting for a reply to carry it, or None.
+    due(p): Has this thought had its one pick yet, and may it have another.  One pick per thought: `picked` on the thought is the answer, and while it is there the offer in her prompt is that post alone. An answer that did not valid
+    candidates(): Every post she could send him, the whole list.  `Social.shareable()` is the list, and it is the list because the share rule guarantees each row's author, its text and one line saying what is in its picture (`docs/x-accou
+    tools(): The two she may call. Constant bytes: built once, so the provider's cache keys on the same prefix every time.  No free-text argument anywhere. She is not writing to him here -- she is deciding which post the reply she is
+    _moment(thought, rows, scene): The last user message: the only part of the request that moves.  Her system half is the whole of `persona.system_for("him")` -- the same bytes the reply call is about to send, so the cache is already warm for it -- and e
+    pick(thought, scene): ONE call, and what it decided, written to the save before it is acted on. Returns the decision, or None when there was nothing to choose from.  No loop and no second ask. An answer that does not validate is a decision no
+    _read(got, ids): The answer judged against what was offered: `send_this` with an id on the list, `nothing`, or invalid with the reason.
+    maybe_pick(scene): Her reply is about to be built and it would carry the offer. If a show-him thought is standing and has not had its pick, this is the moment: after this the offer in her prompt is one post or none.  Called from the progra
+
+CONFIG SECTIONS: prompt_text, share_pick.enabled, share_pick.max_attempts
+KV READ: x_share_picks, x_show_pending
+KV WRITE: x_share_picks, x_show_pending
+TABLES: 
+LOG TAGS: share
+PROMPTS: share_pick
+LLM ROLES: 
+OPS COMMANDS: 

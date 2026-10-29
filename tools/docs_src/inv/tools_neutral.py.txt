@@ -1,0 +1,71 @@
+# tools\neutral.py  (268 lines)
+
+DOCSTRING:
+Fill the character-shaped holes in a neutralised prompt from the character's
+own data, at assembly time.
+
+The proposal this exists to test: the prompt holds the mechanism, the character
+sheet holds the person. `prompts/state.txt` says "Being with Aya calms her.
+Being watched by Hinako does not", which is a fact about two girls sitting
+inside a file whose job is gauge arithmetic. The neutralised file in
+`prompts_neutral/` says the rule instead and leaves a `{{PEOPLE}}` for the
+names, and this module renders that from `data/cast.json` and the character
+sheet.
+
+Nothing here is called by the bot. It is a stand-in for the one line that would
+have to go into `Config.prompt_text` if the idea were adopted, and it is kept
+outside `sim/` and `persona/` on purpose so that testing it cannot touch the
+live path.
+
+Two kinds of token, and the difference is the whole finding:
+
+  a rule with a reference -- {{PEOPLE}}, {{SOOTHES}}, {{ABRADES}}, {{DAY}} --
+      where the prompt keeps the rule and the data supplies the values. These
+      are the ones the proposal is about.
+
+  a relocation -- {{VOICE}} -- where the span was never mechanism at all and
+      moves out of the prompt whole, into a character-side file. Nothing is
+      derived; the bytes are the same bytes, in the other place.
+
+    python tools/neutral.py prompts_neutral/state.txt      # render one, to stdout
+    python tools/neutral.py --list                         # every token and what fills it
+
+DEFS:
+def _load(path, default): 
+def _text(path): 
+class Character: One character's data as the neutral prompts need to see it: the sheet
+    __init__(sheet, sidecar, cast): 
+    _person_line(p): One person as the mechanism needs them: what they are to her, the meters, and what their presence does. Every field is already in data/cast.json; `influence` is the sentence the prompts duplicate.
+    people_block(): 
+    _by_tension(low): 
+    soothes(): Who settles her, and what else does. The people come from the meters; the rest comes from the sheet's own recovery habits.
+    abrades(): 
+    day_block(): 
+    _list(key, sep): 
+    places(): 
+    textures(): 
+    spends(): 
+    threads(): 
+    events(): 
+    new_faces(): 
+    peers(): 
+    peer_scene(): 
+    peer_outsiders(): 
+    peer_talk(): 
+    voice(): 
+    record_name(): 
+    peer_language(): 
+    who(): 
+    who_long(): 
+    table(): 
+def resolve(text, char): Every {{TOKEN}} this module owns, filled. A token it does not own is left standing, because the mechanism renders it later.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

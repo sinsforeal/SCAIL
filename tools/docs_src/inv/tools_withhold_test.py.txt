@@ -1,0 +1,37 @@
+# tools\withhold_test.py  (178 lines)
+
+DOCSTRING:
+Not answering on purpose, and what happens to his message afterwards.
+
+    python tools/withhold_test.py
+
+On a COPY of the save, with the one call that decides stubbed and the clock
+moved by hand. What it drives:
+
+  a `silence` consumes his message while she holds it -- it is marked read
+  and her reply queue does not have it;
+
+  the hold runs out with him still quiet and the message goes back into the
+  queue, once, so the pick and her reply plan are asked about it again;
+
+  building the App again on the same file -- what a restart does -- does not
+  put it back a second time, and neither does another pass of the tick;
+
+  a hold he wrote into, and a hold he broke, hand nothing back: the newer
+  message is already in front of her, and a message that ended the hold is
+  not one she was silent on.
+
+DEFS:
+def check(label, ok, detail): 
+def _say(store, clock, role, text, ts, read_ts): 
+def _silence(app, minutes, why): The decision, with the one call that makes it stubbed.
+def main(): 
+
+CONFIG SECTIONS: withholding.silence_hands_back
+KV READ: withholding, withholding_handed_back
+KV WRITE: withholding, withholding_handed_back
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

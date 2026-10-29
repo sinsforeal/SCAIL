@@ -1,0 +1,67 @@
+# sim\resolver.py  (290 lines)
+
+DOCSTRING:
+Which work he means, when the machine's own facts cannot settle it.
+
+Three layers decide what she is told about a thing he opened, and only the
+third is a model's.
+
+**One: the identity of the work is code's.** Every piece of evidence needed
+to tell a 2006 one-episode OVA from the 2007 television run that shares its
+Japanese title was already on the machine and unread: the folder the file sat
+in, the season number in `S00E01`, and each candidate's episode count. That
+is `sim/watching_him.py parse_file` / `parse_special` and
+`AnimeKB.resolve_candidates`, and it costs nothing.
+
+**Two: the relevance of a recalled row is also code's**, because it happens
+on the reply path -- one shared content word, a cap on rows that arrived on a
+cosine alone, each row's own mean subtracted (`sim/embed.py`).
+
+**Three: this file.** The residue is genuinely a reading of text: two
+editions with one title and no id from his list yet, a page whose identity
+only its own words can settle, a title he typed that ties. One small role,
+`which_one`, is handed a table of candidates code built and answers with an
+id OUT OF THAT TABLE, or `null` for "none of these", or `"unsure"` for
+"fetch nothing and wait". It never writes a word she reads: the caller looks
+the id up in its own table and uses its own object, and the reason the model
+gives goes to the log and to the store and nowhere else.
+
+Where it runs: the worker that reads up on an episode he played, and the
+lookup's own thread. **Never in a reply path**, the same rule
+`works.her_part_verdict` is written to. A failure, a timeout, an answer that
+does not parse, a confidence under the floor and an id code had already ruled
+impossible all leave CODE's ranking standing, so nothing here can stop her
+or delay her.
+
+Where the answer is kept, and this is the line that matters: **the identity
+of a work is a fact about the world, so it goes in the machine's shared store**
+(`machine/retrievals.py`, pool `resolved`) under a key that names the question
+and never the character, and both characters read the one answer. **A question
+about HER RECORD -- whether a memory of hers is about this moment -- must
+never go there**, because its candidates are her memories; it belongs in her
+own save. `record_relevance` is the only way to write one and it refuses the
+machine's store outright.
+
+spec: docs/resolver.md
+
+DEFS:
+def norm(s): The same normalisation `AnimeKB` uses, so a key written here and an id resolved there cannot disagree about what the question was.
+class Resolver: 
+    __init__(config, store, clock, anime_kb): 
+    say(question, cands, chosen, dropped, by, why): One `[resolver]` line per decision: the question, the candidates with their ids and editions, what was chosen, what was dropped and why, and whether code or the model chose.  Until 2026-09-04 the only trace of a wrong ch
+    on(): 
+    _table(cands): The candidate table the role is handed: one row per candidate, ids and quoted text only. Nothing about her interior goes in, and a candidate's own words are quoted rather than translated.
+    _ask(question, cands, cue, key): The one call. Returns `{chosen, confidence, why, unsure}` or None.  The answer is written to the machine's store the moment it exists (`get_or_fetch`), keyed on the question, so the other character never pays for it agai
+    _model_slug(): 
+    _timed(fn): The call with `which_one.timeout_seconds` over it. Past the timeout code's answer stands and the thread finishes on its own -- the paid answer still reaches the store, because the store is written inside the call and nev
+    choose_work(question, cands, cue, key, code_pick): The identity question. `cands` is the ranked list code built, best first, each `{aid, title, type, eps, ...}`; `code_pick` is what code would answer on its own, which is `cands[0]` unless the caller says otherwise.  Retu
+    record_relevance(cue_key, verdicts): A decision about HER RECORD, written to HER OWN SAVE.  The candidates of a relevance question are her memories and her facts. A key naming them in the machine's shared store would put one character's record in a file the
+
+CONFIG SECTIONS: model, prompt_text, which_one
+KV READ: resolved_relevance
+KV WRITE: resolved_relevance
+TABLES: 
+LOG TAGS: resolver
+PROMPTS: which_one
+LLM ROLES: which_one
+OPS COMMANDS: 

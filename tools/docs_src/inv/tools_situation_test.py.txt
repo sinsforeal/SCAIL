@@ -1,0 +1,29 @@
+# tools\situation_test.py  (203 lines)
+
+DOCSTRING:
+Walk one school-morning commute through embodied/situation.py with the clock
+moved by hand, on a copy of the save. No LLM. Asserts the things that are
+easy to break: the journey starts from the block, the legs come from the
+map, a delayed line adds minutes, arrival lands on the right node, a late
+arrival is an event, fatigue climbs on the walk in heat and falls in bed.
+
+    python tools/situation_test.py
+
+DEFS:
+class FakeWeather: 
+    __init__(feels, rain): 
+    current(dt): 
+class FakeTrains: 
+    __init__(): 
+class FakeBody: 
+    __init__(feels): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

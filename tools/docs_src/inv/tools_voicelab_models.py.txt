@@ -1,0 +1,51 @@
+# tools\voicelab_models.py  (296 lines)
+
+DOCSTRING:
+The models a voicelab run can put behind the same prompt, and how each is called.
+
+Kept out of `tools/voicelab.py` because it is a different job: that file decides
+what a fair comparison is, this one deals with five vendors disagreeing about
+what a request looks like.
+
+**Not routed through `llm.py` on purpose.** That client is configuration-driven
+(`api.providers` in each character's config), carries provider health, strikes
+and a fallback chain, and is read by two running bots. Adding five hosts to it
+to run a bench would mean editing `config.py:DEFAULTS` and both config files --
+a live-system change for a measurement -- and its fallback chain would silently
+move a call to another host mid-run, which is the one thing a bench comparing
+hosts must never do. So this calls each vendor directly, pins the host, and
+fails loudly instead of falling back.
+
+**Fairness, and its limits.** Every model gets the same prompt, temperature
+1.0, and reasoning at the highest setting short of a vendor's unbounded
+default -- which is what her live `persona` role uses (thinking on, effort
+high). Exact equivalence across vendors is not achievable and is not claimed:
+"effort: high" on an OpenRouter host, `reasoning_effort: "high"` on Kimi and a
+`thinkingBudget` in tokens on Vertex are three different dials. What is held is
+the intent (think hard, then answer) and everything the prompt contains. Where
+a vendor's default would differ, the deviation is written down here rather than
+left in a shrug -- see `NOTE` on each row.
+
+Costs are OpenRouter's posted per-million prices for the pinned host, read on
+2026-09-02; Vertex bills separately and its row is the published Gemini price
+for the same model, so its dollar figure is an estimate rather than a receipt.
+
+DEFS:
+def carry_reasoning(messages): Kimi's requirement, applied to every vendor because it costs nothing.  Its docs say to preserve `reasoning_content` on each historical assistant message or the model loses its own chain. Every assistant turn this harness
+class Caller: One vendor, one pinned host, no fallback. Returns (text, usage, seconds).
+    __init__(config): 
+    _client(kind): 
+    _openai_like(spec, messages, temperature, effort): 
+    _vertex_token(): Same service account and refresh rule as sensors/vision.py.
+    _vertex_call(spec, messages, temperature): generateContent. Gemini has no system role in the v1 body the way the chat API does, so the system prompt goes in `systemInstruction` and the turns become contents with model/user roles.
+    call(model_name, messages, temperature, effort): 
+def cost(model_name, tok_in, tok_out, charged): What the call cost. `charged` is the figure the provider returned and wins whenever there is one; the price table is the fallback for the paths that report no cost -- Vertex, which has no such field at all.
+
+CONFIG SECTIONS: py, raw
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

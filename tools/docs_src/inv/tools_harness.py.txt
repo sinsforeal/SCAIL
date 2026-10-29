@@ -1,0 +1,37 @@
+# tools\harness.py  (132 lines)
+
+DOCSTRING:
+The App on a copy of a save, the way the loop builds it.
+
+Twelve harnesses carried the same eight lines: copy the save, swap
+`sys.argv` for the console flags, parse with scail's own parser so the flags
+never drift from the real ones, build. This is those lines once. The copy
+is SQLite's backup (`tools/dbcopy.py`), never a file copy of an open save.
+
+    from tools import harness
+    app = harness.build_on(tmp)                       # config.json, data/world.db
+    app = harness.build_on(tmp, "config_yukarin.json", "data/yukarin.db")
+    app = harness.build_on(tmp, copy=False)           # again on the same copy: a restart
+
+`refuse_model(app)` makes every model call raise, for a harness that must
+not spend: nothing here does it by default, because a harness that catches
+exceptions around a call would pass for the wrong reason.
+
+DEFS:
+def quiet_logger(): No run directory, no ACTIVE pid file, nothing written under `logs/`.  `App.__init__` calls `logger.setup()`, which makes a timestamped run directory with an ACTIVE file the restarter reads. Smoke stubs the logger for tha
+def build_on(tmp, config, db, extra, copy, quiet): Copy `db` to `tmp` and build the App on it, console mode, no sensors.  `copy=False` skips the copy and builds on whatever is at `tmp` already: what a restart does, for a harness that wants to see whether the state the fi
+class Refused: 
+def refuse_model(app): Every model call on this App raises `Refused`: a harness that must not spend.
+class NoNetwork: 
+def refuse_network(): Every outbound connection from this process raises `NoNetwork`.  A scratch build on a fresh save fetches what the live save has cached (weather, the train table, the hazards backfill, the anime index), each with its own 
+def refuse_model_before_build(): Every model call in this process raises `Refused`, including one made while the App is being built. `refuse_model` patches an App that exists; a build that spends before returning (the cast-arcs planner ran at boot on a 
+def scratch_config(config, tmp): A copy of the config beside the scratch save, with every path a build WRITES pointed away from the live tree.  `Config` rewrites the file it is given (the backfill), and the shared world (`world/shared.py`) is written th
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,149 @@
+{
+ "run_id": "modelcheck",
+ "labels": {
+  "sm100": {
+   "model": "fxmodel-a",
+   "moment": "m1",
+   "k": 0,
+   "call_id": "fake-sm100",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 100
+   }
+  },
+  "sm101": {
+   "model": "fxmodel-b",
+   "moment": "m1",
+   "k": 0,
+   "call_id": "fake-sm101",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 150
+   }
+  },
+  "sm110": {
+   "model": "fxmodel-a",
+   "moment": "m1",
+   "k": 1,
+   "call_id": "fake-sm110",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 100
+   }
+  },
+  "sm111": {
+   "model": "fxmodel-b",
+   "moment": "m1",
+   "k": 1,
+   "call_id": "fake-sm111",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 150
+   }
+  },
+  "sm120": {
+   "model": "fxmodel-a",
+   "moment": "m1",
+   "k": 2,
+   "call_id": "fake-sm120",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 100
+   }
+  },
+  "sm121": {
+   "model": "fxmodel-b",
+   "moment": "m1",
+   "k": 2,
+   "call_id": "fake-sm121",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 150
+   }
+  },
+  "sm200": {
+   "model": "fxmodel-a",
+   "moment": "m2",
+   "k": 0,
+   "call_id": "fake-sm200",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 100
+   }
+  },
+  "sm201": {
+   "model": "fxmodel-b",
+   "moment": "m2",
+   "k": 0,
+   "call_id": "fake-sm201",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 150
+   }
+  },
+  "sm210": {
+   "model": "fxmodel-a",
+   "moment": "m2",
+   "k": 1,
+   "call_id": "fake-sm210",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 100
+   }
+  },
+  "sm211": {
+   "model": "fxmodel-b",
+   "moment": "m2",
+   "k": 1,
+   "call_id": "fake-sm211",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 150
+   }
+  },
+  "sm220": {
+   "model": "fxmodel-a",
+   "moment": "m2",
+   "k": 2,
+   "call_id": "fake-sm220",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 100
+   }
+  },
+  "sm221": {
+   "model": "fxmodel-b",
+   "moment": "m2",
+   "k": 2,
+   "call_id": "fake-sm221",
+   "finish_reason": "stop",
+   "usage": {
+    "completion_tokens": 17,
+    "prompt_tokens": 100,
+    "buyer_cost_micro": 150
+   }
+  }
+ }
+}

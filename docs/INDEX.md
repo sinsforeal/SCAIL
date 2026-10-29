@@ -1,0 +1,94 @@
+# SCAIL docs index
+
+One line per doc and tool. Written 2026-10-22 15:00 by Ryan v2 (generated from first headings, then kept by hand). Generated: PROJECT.md and CONFIG.md at the repo root (from tools/docs_src/, never hand-edit).
+
+## Living docs
+- docs/2026-09-17_gauge_appraisal_composite_scoring_design.md. Gauge appraisal as composite scoring: design for System One on the `state` role
+- docs/2026-09-17_jev_stage_roles_design.md. Design: moving the director and the judge-shaped stage roles onto Jev (System One)
+- docs/2026-09-17_vn_director_idea_build_scope.md. 2026-09-17 — VN stage director-idea control: build scope
+- docs/2026-09-17_vn_director_idea_scope.md. 2026-09-17 — VN stage: the director-idea control (scope)
+- docs/2026-09-17_vn_stage_manager_scope.md. The stage manager (the director button): scope
+- docs/2026-10-14_b_zombie_poc_design.md. B-zombie: a proof of concept on SCAIL
+- docs/2026-10-22_b_zombie_methods.md. B-zombie: two methods evaluated, the V3 lesson (criterion 3 failed), autonomous loop with the User as tester, sacrifices, feasibility, measured cost
+- docs/2026-10-14_what_scail_is.md. What SCAIL is
+- docs/FEATURES.md. SCAIL features (his names)
+- docs/PREEXISTING_VN_PROTOTYPE_README.md. SCAILV4 — 百花 (Momoka) one-character fork
+- docs/README.md. docs
+- docs/ab-judge-roles.md. The judge-role A/B, read: pro against flash on the first character's four judge roles
+- docs/agent-character.md. A character who runs herself: what she needs, and how you know she has it
+- docs/audit-and-expansion.md. Easier to work in, to audit and to expand: the measures
+- docs/building.md. BUILDING
+- docs/bundle.md. The character bundle: one directory that is one person
+- docs/cast-mechanisms.md. A cast member as a set of mechanisms
+- docs/character-layers-plan.md. Composing a character: the generic library and the character bundle
+- docs/character-method.md. Making a character from material: the one guide
+- docs/checks.md. The checks, in one table
+- docs/codebook.md. The mechanism codebook: the file, the schema, and the version discipline
+- docs/context-architecture.md. Context management: what her prompt is made of, and a shape for it to grow into
+- docs/context.md. Context: what a character is sent, in what order, and why
+- docs/dossiers.md. One file per play: what it joins, from where, and what it looks like
+- docs/episode-summaries-plan.md. Plan: more accurate episode summaries
+- docs/extraction-runbook.md. The extraction runbook: one page, for a fresh subject
+- docs/her_own.md. Something of her own
+- docs/ick-primitives.md. Ick primitives
+- docs/interpretation.md. Interpretation: how she acts where the tape cannot vouch for her
+- docs/language.md. The language a character is addressed in
+- docs/memory-tiers-plan.md. Memory tiers: what rides in her thread as the record ages
+- docs/memory.md. Memory: what she keeps, how it fades, and how it comes back
+- docs/model-harness.md. The model harness -- providers, hosts, and the ranking
+- docs/modmap.md. The module map
+- docs/neutral-roles-plan.md. Neutral roles that narrate her interior: the check, and the plan
+- docs/openrouter.md. OpenRouter: the request this project sends, what it gets back, and what was measured
+- docs/pattern.md. The pattern spec: how a character is described, measured and filled
+- docs/peer-talk.md. Two running characters talking to each other
+- docs/performance.md. Performance
+- docs/primitives.md. Psychological primitives
+- docs/promotion.md. Promoting a cast member to a character
+- docs/reactions.md. Reactions -- `tools/reactions.py` (the images) and `sim/reactions.py` (her face in the app
+- docs/recap.md. Grounded watching & the Japanese knowledge base -- `sim/watchlist.py` + `sim/recap.py`
+- docs/regen-reply.md. Answering a message again, and putting the answer where the old one was
+- docs/resolver.md. Deciding which work he means
+- docs/retrieval-agent-plan.md. A retrieval agent over the situation block: what exists, what one would be, and whether to
+- docs/retrievals.md. `machine/retrievals.py` -- one store of what was fetched about the world
+- docs/role-check.md. Was she in it: the role check, and what the local MyAnimeList mirror holds
+- docs/room-quality.md. Whether a room is a conversation
+- docs/scail-concept.md. 
+- docs/seamless-additions-plan.md. Seamless additions: what it takes to add or promote a character today, and the work that m
+- docs/shared-world.md. The shared world
+- docs/situation.md. `embodied/situation.py` -- a situated body: the map, journeys, fatigue
+- docs/sky-room.md. The friends' room drawn as a sky -- a proposal
+- docs/stances.md. The stances and the loops -- `sim/attachment.py`, `sim/withholding.py`, `sim/rupture.py`, 
+- docs/state.md. `sim/state.py` -- the gauges, the meters, and the rules they live by
+- docs/system-one.md. System One (typesafe.ai) against SCAIL: what it is, where it would fit, and the access req
+- docs/talkapp.md. TALKAPP -- `talkapp/server.py`, `channels/talkapp_bot.py`, `talkapp/app/`, `talkapp/androi
+- docs/tool-calling.md. Tool calling: the model chooses what she does with her phone, code is the backup
+- docs/verification.md. Verifying her voice against the tape
+- docs/vn-channel.md. The VN channel (Phase 2)
+- docs/voice.md. Her voice: recorded koikano lines first, MiniMax otherwise
+
+## Reports
+- docs/reports/2026-10-22_private_machine_comparison.md. SCAIL vs flamingrickpat/private-machine: differences, ideas to take, suggestions back, B-zombie tie-in
+- docs/reports/2026-10-22_b_zombie_precheck.md. B-zombie test pre-check: P dependencies, Surplus probes, GLM 5.3 and DeepSeek V4.1 prompting rules, gateway policy, content rule
+- docs/reports/2026-10-23_bzombie_results.md. B-zombie S vs P results (cl2, Tomoe judged), why P is slow, how close S is, plan and suggestions for S; P dropped 10-23
+- docs/reports/2026-10-23_private_machine_ab_note.md. A/B note for the private-machine author (docs-only PR, tk-q5k): method, result, fairness limits, P findings, suggestions
+- bzombie/harness/peers.py. Two-minds driver parts: PeerHub (peer_talk relay), House (shared rooms), PeerArm, Minds; template bzombie/harness/templates/s_momoka_tomoe.json
+- tools/surplus_ab/prefill_variants.py. Replays the 7 trailing-assistant requests on Surplus under prefill variants (as-is, fold, prefix:true, continue_final_message)
+- bzombie/judge/RUBRIC.md. B-zombie judge rubric: 9 criteria with anchors, slice cutting, pass swap, calibration rules (prompts/, cards/, calibration/defects.json beside it)
+
+## Tools (root and tools/)
+- momoka.cmd. launcher
+- mal_daemon.cmd. launcher
+- mal_watchdog.cmd. launcher
+- restart.cmd. launcher
+- collector.cmd. launcher
+- dryrun.cmd. launcher
+- run.cmd. launcher
+- tools/smoke.py. Pre-restart smoke test on a copy of her save.
+- tools/restart.ps1. Restart a target (-Target momoka).
+- tools/mal_history.py. MAL mirror daemon and CLI.
+- tools/mal_watchdog.py. Watchdog that restarts the MAL daemon.
+- tools/mal_watchdog_setup.ps1. Registers the watchdog scheduled task (not run by the scaffold).
+- tools/docs_check.py. Checks the generated docs against tools/docs_src/.
+- tools/docs_src/. Source parts of PROJECT.md and CONFIG.md.
+- tools/ (about 519 files). Standalone build, audit and extraction scripts; look up by name.
+- tests/test_vn_saves.py. VN save system tests.
