@@ -1,0 +1,393 @@
+{
+  "_note": "Everything that is 知紗 and nothing that is not. Shape: Momoka's resident bundle (docs/bundle.md) with her own name, prompts, quality caps and existence answers; built by tools/koikano/promote_heroine.py from sheet.json and heroine_src/chisa/. Not in the operator's register: `registered` is false, so compose leaves characters.json and the launcher alone.",
+  "key": "chisa",
+  "name": "Enomoto Chisa",
+  "hub_id": "chisa",
+  "config": "config_chisa.json",
+  "db": "data/chisa.db",
+  "program": "resident",
+  "launcher": "chisa.cmd",
+  "task": "SCAIL_chisa",
+  "match": "resident[\\\\/]run\\.py.*config_chisa|scail\\.py.*config_chisa",
+  "registered": false,
+  "world": {
+    "id": "",
+    "owner": false
+  },
+  "prompts_dir": "prompts_chisa",
+  "prompts_generated": true,
+  "files": {
+    "character.cast_file": "cast.json",
+    "character.neutral_file": "fills.json",
+    "world.character_file": "sheet.json"
+  },
+  "holes": [
+    "no lore records: the record has 0 inner lines, no diary and no memory entries beyond the lines; her register in her head is a LIBERTY (HEADVOICE fills built from her spoken register)",
+    "her places are world data (world/chisa_house.json), not household or home files: she does not own a world, she works at the school, and her own place ids (school, road, her_home) are not the bench's shared HOUSE ids; her home is a LIBERTY (the record has no home scene)",
+    "gauge baselines: none, no numbers; meter rows seed flat",
+    "voice off: clips are prefix CHS (557 spoken lines carry a voice id) but tools/voice_index.py accepts MMK only, and no clone sample exists",
+    "vn off: channels/vn_expression.py hard-codes the letter CD (lines 223, 238, 247, 288, 294); her letter is CF and her port is 8775 (8770 is Momoka's, 8771 Maria's, 8773 Sena's); her sprite folder CHISA_知紗 is checked in expression_labels_unreviewed.json"
+  ],
+  "blank": [
+    "hazards.her_area_names",
+    "hazards.her_wards",
+    "scenery.kind_queries",
+    "scenery.local_names",
+    "scenery.place_map",
+    "scenery.queries",
+    "sensors.x_actions_enabled",
+    "sensors.x_data_dir",
+    "sensors.x_enabled",
+    "sensors.x_images_db",
+    "sensors.x_posting_enabled",
+    "sensors.x_profile_dir",
+    "sensors.x_tools_profile_dir",
+    "trains.her_lines",
+    "trains.nearby_lines",
+    "trains.odpt_challenge_lines",
+    "trains.odpt_lines",
+    "trains.odpt_operator_lines",
+    "world.geography_file",
+    "world.holidays_file",
+    "world.household_file",
+    "world.local_events_every_days",
+    "world.local_events_file",
+    "world.outing_words",
+    "world.places_file",
+    "world.school_calendar_file",
+    "world.shared_dir",
+    "world.taste_file",
+    "world.zeitgeist_every_hours"
+  ],
+  "config_overrides": {
+    "embed": {
+      "url": "http://127.0.0.1:18320/v1/embeddings"
+    },
+    "models": {
+      "persona": {
+        "prompt": "prompts_chisa/bible.md",
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "revise_self": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "spiral": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "approach": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "morning": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "anticipation": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "reflect": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "diary": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "wonder": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "peer_reply": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "quality_rewrite": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      }
+    },
+    "character": {
+      "name": "Chisa",
+      "program": "resident",
+      "name_ja": "知紗",
+      "reading_ja": "えのもと ちさ",
+      "writes_to_him": "japanese",
+      "instruction_language": "japanese",
+      "style_prompt": "prompts_chisa/style.md",
+      "style_ja_prompt": "prompts_chisa/style.md",
+      "existence": {
+        "embodied": true,
+        "in_world": false,
+        "sees_him": "none",
+        "has_account": false,
+        "with_him": "none",
+        "player_driven": true
+      }
+    },
+    "reunion": {
+      "enabled": true
+    },
+    "afterthought": {
+      "enabled": false
+    },
+    "receipts": {
+      "enabled": false
+    },
+    "world": {
+      "weather_enabled": false
+    },
+    "director": {
+      "scene_source": "plan"
+    },
+    "lore": {
+      "enabled": true
+    },
+    "diet": {
+      "enabled": false
+    },
+    "money": {
+      "enabled": false
+    },
+    "environment": {
+      "enabled": false
+    },
+    "needs": {
+      "enabled": false
+    },
+    "health": {
+      "enabled": false
+    },
+    "situation": {
+      "enabled": false
+    },
+    "household": {
+      "enabled": false
+    },
+    "watching": {
+      "enabled": true
+    },
+    "reactions": {
+      "enabled": false
+    },
+    "vault_snoop": {
+      "enabled": false
+    },
+    "typesafe": {
+      "enabled": true,
+      "key_file": "secerts/typesafe.txt",
+      "model": "jev-1.13.0",
+      "timeout_seconds": 20,
+      "floor": 0.6,
+      "uses": {
+        "reconcile": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "sight_activity": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "emotion": {
+          "enabled": true,
+          "threshold": 0.35
+        },
+        "inbound_signals": {
+          "enabled": false,
+          "threshold": 0.5
+        },
+        "scene_director": {
+          "enabled": false,
+          "threshold": 0.3,
+          "music_threshold": 0.5,
+          "vocal_threshold": 0.6
+        },
+        "which_one": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "wonder_answer": {
+          "enabled": false,
+          "threshold": 0.5
+        },
+        "intent": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "foresee": {
+          "enabled": false,
+          "threshold": 0.3
+        },
+        "said_when": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "lookup": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "ick": {
+          "enabled": false,
+          "threshold": 0.3
+        },
+        "affection": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "wonder": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "rupture_settle": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "expect_him": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "habits_him": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "state_appraisal": {
+          "enabled": true,
+          "threshold": 0.6
+        }
+      }
+    },
+    "primitives": {
+      "enabled": true
+    },
+    "pick": {
+      "enabled": true
+    },
+    "stances": {
+      "enabled": true
+    },
+    "eroge": {
+      "enabled": true
+    },
+    "shape": {
+      "tell_length": false
+    },
+    "tts": {
+      "enabled": false,
+      "on_demand": true,
+      "voice_mode": "exact",
+      "minimax_script_path": "minimax/minimax_tts.py",
+      "minimax_config_path": "minimax/config.json",
+      "voice_id": "",
+      "emotion_enabled": true,
+      "language_boost": "Japanese",
+      "pronunciation_dict": {
+        "tone": [
+          "知紗/ちさ",
+          "榎本/えのもと",
+          "百花/ももか",
+          "一悟/いちご"
+        ]
+      },
+      "interjection_tags": true
+    },
+    "vn": {
+      "enabled": false,
+      "host": "127.0.0.1",
+      "port": 8775,
+      "character_dir": "extracted_games/koikano/by_character/CHISA_知紗",
+      "inventory": "extracted_games/koikano/koikano_work/inventory/expression_inventory.json",
+      "labels": "extracted_games/koikano/koikano_work/inventory/expression_labels.json",
+      "reviewed_labels": "characters/chisa/expression_labels_unreviewed.json",
+      "sprite_dir": "png_sprites",
+      "face_dir": "png_faces",
+      "voice_dir": "voice",
+      "bgm_dir": "extracted_games/koikano/audio/bgm",
+      "default_bgm": "BGM03",
+      "view_dir": "view",
+      "out_dir": "data/vn",
+      "default_expression": "neutral",
+      "sprite_zoom": 1.55,
+      "idle_motion": true,
+      "idle_sway": false
+    },
+    "scene_director": {
+      "enabled": true,
+      "use_model": true,
+      "default_bg": "BG02a01",
+      "places": {}
+    },
+    "stage_manager": {
+      "enabled": true,
+      "history_turns": 20
+    },
+    "emotion": {
+      "enabled": true,
+      "use_model": true,
+      "default_label": "neutral"
+    },
+    "quality": {
+      "enabled": true,
+      "use_model": true,
+      "max_chars": 600,
+      "repeat_run": 16,
+      "recent_messages": 8,
+      "openers": true,
+      "forbidden": {},
+      "caps": {
+        "phrases": {
+          "青春": 1,
+          "先生": 2,
+          "宮国君": 2,
+          "十川さん": 2,
+          "かしら": 1
+        },
+        "doubled_group": 2,
+        "source": "her own marks (prompts/style.md 撒く量の物差し and tools/koikano/b3/chisa.py): 青春 (17 lines, share 0.0305, a catchphrase so one per draft), 先生 for herself (51 lines, 0.0916), the two student names she says most, 宮国君 (67 lines containing it) and 十川さん (47), and かしら (27 lines, 0.0485 against 0.0004 in the room); each capped per draft so none piles up"
+      }
+    },
+    "talkapp": {
+      "enabled": false
+    },
+    "delivery": {
+      "compose_seconds": [
+        0,
+        0
+      ],
+      "read_delay_free_seconds": [
+        0,
+        0
+      ],
+      "read_delay_glance_seconds": [
+        0,
+        0
+      ],
+      "mood_delivery": {
+        "enabled": false
+      }
+    },
+    "rhythm": {
+      "notice_live_seconds": [
+        0,
+        0
+      ],
+      "notice_glance_seconds": [
+        0,
+        0
+      ],
+      "notice_idle_seconds": [
+        0,
+        0
+      ],
+      "he_left_extra_seconds": [
+        0,
+        0
+      ]
+    },
+    "logging": {
+      "db_path": "data/chisa.db"
+    }
+  }
+}

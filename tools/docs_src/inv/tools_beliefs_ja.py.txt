@@ -1,0 +1,34 @@
+# tools\beliefs_ja.py  (138 lines)
+
+DOCSTRING:
+Her beliefs, in the language she thinks in.
+
+`beliefs` (what she has decided about him) and `self_beliefs` (about herself)
+were written in English and rendered straight into her system prompt: "You are
+just a box he checks when he is tired of being alone." That is the sentence she
+carries around, so it is hers, so it is Japanese -- the same argument as her
+friends and her diary.
+
+Translated, not rewritten: the English is a faithful record of what she
+decided, and the point is the same belief in her own words, not a new one. Both
+prose fields go over -- `text` (the belief) and `from` (what it grew out of) --
+and the `was` history with them, so the old wording a revision kept is still
+readable beside the new. Ids, numbers, states and flags are untouched, because
+`anchor` matching and `_graduate` key on the id.
+
+    python tools/beliefs_ja.py [--db data/world.db] [--dry]
+
+Idempotent: a field already in Japanese is skipped. Backs the save up first.
+
+DEFS:
+def call(llm, rows): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: revise_self
+OPS COMMANDS: 

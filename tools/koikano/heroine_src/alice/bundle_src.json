@@ -1,0 +1,18 @@
+{
+  "tone": ["アリス/ありす", "百花/ももか", "一悟/いちご"],
+  "voice_prefix": "ALC",
+  "name_en": "Alice",
+  "tts_note": "off until a MiniMax clone exists (docs/voice.md); her clips are ALC*.ogg, tools/voice_index.py accepts MMK only",
+  "caps": {
+    "phrases": {"アリス": 1, "ふふ": 2, "おや": 1, "一悟くん": 2},
+    "doubled_group": 2,
+    "source": "her own marks (tools/koikano/markers/alice.json, prompts/style.md): her name, her laugh ふふ (107 + 41 lines), the noticing おや (50) and her address 一悟くん (146), capped per draft so none piles up"
+  },
+  "holes": [
+    "no lore records: her 39 inner lines are a register, not a diary, so no records, memories or triggers are written",
+    "her stay and rooms are world data (world/alice_house.json: the shared house ids; her guest room maps to 'house', school and town carry place ''), not household or home files: she does not own a world",
+    "gauge baselines: none, no numbers; meter rows seed flat",
+    "voice off: clips are prefix ALC but tools/voice_index.py accepts MMK only, and no clone sample exists",
+    "vn off: channels/vn_expression.py hard-codes the letter CD (lines 223, 238, 247, 288, 294); her letter is CC and port 8774 is planned"
+  ]
+}

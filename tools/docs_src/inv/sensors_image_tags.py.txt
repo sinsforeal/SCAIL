@@ -1,0 +1,42 @@
+# sensors\image_tags.py  (121 lines)
+
+DOCSTRING:
+The tag store: what an image IS, kept once and shared.
+
+Her vision descriptions were thrown away after a single use -- held in memory
+on the look's thread, handed to the social read, and gone. So the same picture
+was paid for again every time it came past, a restart between the scroll and
+the read lost the lot, and nothing she had ever looked at could be recalled.
+
+This is the objective half, and it is deliberately not hers. An image is a
+row: its tags, what it is, who posted it. Keyed by a hash of the URL so the
+same picture is never sent to a model twice, whoever reposts it.
+
+The tags are booru-style on purpose. His own image activity is already
+classified in that vocabulary (data/gelbooru/ground_truth.json, 20k tags), so
+tagging hers in the same space makes the two comparable -- what she keeps
+stopping on and what he keeps looking at become the same kind of fact, which
+they were never able to be while one side was prose.
+
+Her side of it -- that she saw this, when, and what she took from it -- lives
+in her own save, because that is memory and it fades. See sim/seen_images.py.
+
+DEFS:
+def img_id(url): 
+class ImageTags: 
+    __init__(path): 
+    get(url): 
+    tags_for(url): 
+    note_seen(url): 
+    put(url, data, status_id, author, model): `data` is what the tagger returned: subject, tags, characters, series, rating.
+    top_tags(limit): 
+    stats(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: images, tag_counts
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

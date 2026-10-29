@@ -1,0 +1,60 @@
+# channels\talkapp_bot.py  (597 lines)
+
+DOCSTRING:
+The TALKAPP channel: same surface as TelegramInterface, backed by the hub.
+
+The hub (talkapp/server.py) is a separate process on localhost; his phone
+reaches it over Tailscale. This adapter is deliberately synchronous requests,
+like the Telegram one, because the loop already polls.
+
+Two things ride along on the poll, because the loop calls get_new_messages
+every pass (and between bubbles, for interruption):
+- his exact reads come back from the hub and are stamped onto her messages
+  with store.mark_read -- receipts.py already prefers a stamped read_ts over
+  its window inference, so no receipts change is needed;
+- her reads of his messages, the group chat as she sees it, and one presence
+  line are pushed up (throttled), which is what makes her 既読 real on his
+  screen.
+
+DEFS:
+class TalkappInterface: 
+    __init__(config, vision, clock, store): 
+    _get(path): 
+    _post(path, body): 
+    verify_connection(): 
+    flush_queue(): 
+    get_new_messages(): Returns list of (text, message_id). Also syncs reads both ways.
+    send_typing(): 
+    send_message(text): 
+    delete_message(message_id): 
+    edit_message(message_id, text): 
+    file_link(path): Copy a file where the hub serves it (`/file/<name>`); the ops view links it. A document used to go out as a bubble in her chat.
+    send_document(path, caption): 
+    send_photo(path): A photo of hers, as a row of its own before the bubbles that caption it.
+    send_sticker(path, bucket, ts, quiet, auto): A reaction of hers in the chat: a frame of her from the episodes, the size of a LINE sticker. Not a message she wrote; never in her context. `ts` in the past places it there (the backfill).
+    send_voice(ogg_path, attach_to): `attach_to` names the bubble this belongs to.  Without it the hub attaches to her most recent bubble, which is right for a voice note she has just spoken and wrong for a line he tapped: a render takes a second or two and
+    post_swipes(hub_id, items, sat, rows): The answers drawn for one of her messages, up to the hub, so the counter and the arrows in the chat show them.
+    post_swipes_state(hub_id, pending, reconstructed): What is happening to one of her messages, without touching the answers already drawn for it.  A rebuild of the moment a reply was written in takes a second process and the better part of a minute; with nothing sent, the 
+    hub_rows(): The hub's own copies of the recent rows.  Read when a change to her words has to keep what is hanging off them: the audio on a bubble is a field of the CHANNEL's row, not of hers, so whether a line has been spoken is a q
+    speak_requests(): Lines he has tapped since the last look: [{id, text}].
+    send_audio(audio_path): 
+    _sync_reads(): Down: his view reads -> store.mark_read on her rows (receipts.py already trusts a stamped read_ts). Up (throttled): her reads of his messages, the group chat, presence.
+    _push_state(force): Up: her reads of his messages, the group chat, presence, the operator's payload and which model writes in her words.  Throttled to `talkapp.state_push_seconds`, because most of it moves slowly; `force` is a control he ha
+    state_push_due(): Send the state NOW rather than waiting out `talkapp.state_push_seconds`.  The chat header is drawn from that push, and it is the only thing that tells the hub which model her voice is on. Clearing the throttle and leavin
+    get_ops_commands(): Commands typed in the app's ops view, oldest first; the hub clears them on read.
+    post_ops_result(cmd, text): 
+    peer_send(to_id, text, room): One character to another (docs/peer-talk.md). The hub puts it in the RECIPIENT's mailbox with this character named on it; it is never a row in either chat, so nothing is pushed to his phone and nothing is read-receipted.
+    peer_updates(after): What another character has said to her since `after`. The mailbox is not cleared on read, so a bot that was down misses nothing.
+    _ts(date, hm, opened): The moment a row of the record actually was. The record keeps her wall time and her date, which is a time only if you already know whose clock it is; the app shows every one of these on HIS. `opened` is the time the exch
+    _self_names(): Every name that means her, for the app. Guarded, because a roster that will not load must not cost him the whole group payload.
+    _group(): The group chat as she sees it: delivered beats plus her own turns, with the undelivered rest carried but flagged, for the backstage toggle. Nobody in the APP sees a beat before its time unless the operator asks to.  Thre
+    _presence(): One line: where she is, as the phone could plausibly show (last seen). Scene detail stays in the simulation.
+
+CONFIG SECTIONS: character, character.existence, character.name, resident, talkapp, talkapp.state_push_seconds, telegram.console_only, telegram.max_message_length, tts, tts.enabled
+KV READ: cast_beats, cast_beats_prev, cast_chat, exchange_live, peer_chat, peer_live, peer_rooms, resident_asleep, talkapp_last_id
+KV WRITE: talkapp_last_id
+TABLES: 
+LOG TAGS: peer, talkapp
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,54 @@
+# tools\recap_test.py  (477 lines)
+
+DOCSTRING:
+Offline checks for grounded watching, and a scored run over a truth set.
+
+    python tools/recap_test.py              # the offline checks, no network
+    python tools/recap_test.py --scored     # score what the live saves hold now
+    python tools/recap_test.py --scored --run [--only "Mitsudomoe:12"]
+                                            # run the pipeline on a COPY and score it
+    python tools/recap_test.py --scored --archive
+                                            # score the last run again off disk, no calls
+
+The offline part parses, slices and extracts against fixtures kept beside it
+in `tools/fixtures/recap/` -- the real page text that motivated each check,
+stored rather than fetched, so a check cannot pass because a site changed.
+
+The scored part measures accuracy rather than parsing, against
+`tools/fixtures/recap/truth.json`: the nine episode rows the two live saves
+hold, hand-checked against sources the pipeline did not read. Per episode it
+counts the scenes named (recall), whether they are named in the order they
+happen, scenes invented, and outcomes stated that contradict the truth. The
+headline number is **episodes with no error and at least two-thirds of the
+scenes**.
+
+`--run` spends model calls and fetches pages; it never opens a live save
+except read-only, and builds on a copy (`tools/harness.build_on`).
+`--archive` scores a run that has already happened by reading the winning
+digest back out of `data/recaps`, which costs nothing and is half the reason
+the archive exists.
+
+DEFS:
+def check(name, cond): 
+def fixture(name): 
+class FakeClock: 
+    __init__(): 
+    now_ts(): 
+    date_str(): 
+def offline(): 
+def load_truth(): 
+def score_one(text, ep): One digest against one episode's hand-checked truth.  `found` is scenes named, `order` whether the named ones appear in the order they happen, `errors` outcomes stated that contradict the truth, `invented` details in no 
+def stored_digest(db, ep, stage): What the save actually holds for this episode: the digest her record kept (`stage="digest"`), or the raw page text her line was cut from (`stage="raw"`). Read-only through a uri connection -- never a file copy of an open
+def from_archive(ep, root): The digest the last pipeline run chose for this episode, read back out of the archive on disk. Scoring a run again costs nothing this way, which is half the reason the archive exists.
+def _runnable_config(name): The config as it will be once the patch script has been applied.  A run needs the `transcript_digest` role and the two unbanned hosts. If `data/retired/<ts>_summaries_build/patch_config.py` has not been applied yet, a pa
+def scored(run, only, config, db, archive): 
+def main(): 
+
+CONFIG SECTIONS: json, py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

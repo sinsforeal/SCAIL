@@ -1,0 +1,22 @@
+# resident\run.py  (27 lines)
+
+DOCSTRING:
+Run the second character: Tamura Yukari, resident on his machine.
+
+    python residentun.py              # live, config_yukarin.json, data/yukarin.db
+    python residentun.py --sim ...    # any scail.py option
+
+Registers her words (how she sees him: his machine in front of her), fills in
+her config and save unless they are given, and hands the rest to the shared
+runtime. yukarin.cmd launches this.
+
+DEFS:
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

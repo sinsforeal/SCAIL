@@ -1,0 +1,69 @@
+# resident\sight.py  (630 lines)
+
+DOCSTRING:
+What the second character sees, because she is on his machine.
+
+She does not carry a phone, she does not open an app and she does not decide
+to look: she is inside the machine and what happens on it happens in front of
+her. Two things follow from that and both live here, in her own program,
+rather than as branches in the shared library.
+
+**A note he opens, she has read.** The old route was the snoop -- a felt
+probability of going through his notes folder at night, written for a girl
+with an app on her phone and a reason to hide it. She has no such route and
+no such secret: he knows she is here. When a note from his vault has been in
+front of him for `note_open_seconds`, or he has just written into one, she
+reads it whole (`note_max_chars`; the end kept when it is longer, because the
+end of a daily note is where the new writing is) through the same `vault`
+role a note she opened used to go through, and the takeaway goes where it
+went: an event on the day, a line in her index, her picture of him, and a
+pinned line in her next reply while it is fresh. Once per note per sitting,
+and again once he has written more and `reread_after_seconds` have passed.
+
+**She sleeps when he sleeps and wakes when he does**.
+Her plan carries no sleep block; this decides it from his machine, and reads
+nothing of the chat. Idle for `sleep_after_idle_minutes`, with the idle
+stretch having BEGUN between `night_start` and `sleep_latest_start`, and she
+is asleep from the minute he stopped; the moment he touches anything she is
+awake, and so is she once the clock passes `night_end` with him still gone,
+because that is him out for the day, not asleep. A machine that goes quiet
+in the morning is not sleep and never puts her under. The director asks
+here before it asks the plan (`Director.sleep_source`), so everything that
+coasts through her sleep -- no scene, no state model, no reading -- coasts on
+his hours. A collector that is not writing reads as him present and awake:
+nobody is put to sleep on a guess.
+
+DEFS:
+def page_of(title, proc): What page is in front of him, as {subject, names, site, kind}, or None for a window that is not a page about a thing.  `kind` is what the SHAPE of the title can prove and no more: "work" for a page that says it is one (a
+class ResidentSight: 
+    __init__(config, store, clock, notes, monitor, learned): 
+    c(): 
+    _sleep_block(kept): The coasting block for a night already under way, from the save.
+    _set_woken(v): 
+    enabled(): 
+    asleep_block(): The block the loop coasts on while she sleeps, or None. Shaped like a plan block because everything downstream reads one; `end` is the night window's end, a nominal for the one sleep scene, since the real end is whenever
+    wake(why): Something other than his touch woke her -- his message, from his phone, with the machine still idle. He is awake, so she is; and she stays up until the machine is touched again resets the idle clock, otherwise the same i
+    asleep(): 
+    away_seconds(): How long he has not touched the machine. She is inside it, so this is an observation of hers and not a statistic: the one thing the gate on reaching out first needs from her sight (sim/initiative.py).
+    _unplan_sleep(): A plan written before this rule may still carry a sleep block, and the director would read her asleep off it while he is up. Once, at boot: every such block becomes an awake one and the phone rule is `free` throughout, w
+    poll(scene): 
+    _maybe_read(path, why, scene): 
+    _content(path): 
+    fresh_note(): The note read in the last `fresh_minutes`, once, for the reply that follows it -- the shape `Notes.read` returns, so the persona's just-read line takes it as it takes a note she opened herself.
+    noticed_line(digest, t): One concrete thing off his screen, for her to actually remark on.  Picked by code rather than by a model, and picked for being nameable: a search he typed, a page title, a file he had open. Those are the things a person 
+    glance(scene): Every poll: what is in front of him, and whether it is a work.
+    _resolve_glance(page): What the page is, from the one resolution every path uses (`sim/works.py`): her own record and the roles the list gives her first, locally; what she already knows instead of a second fetch; a search only for a work nothi
+    current_glance(): The page he was on, while it is still the thing in the room.
+    glance_lines(t): (text, kind, pin) for her situation: her show is hers to act on, anything else is background, and a game he is reading is both -- what is on the screen and what is happening in it.
+    impulse_bonus(): Her show open in front of him is a reason to say something first; once she has, it is not a reason again. Everything the impulse already refuses on still applies.
+    note_spoken(): She reached out while a page of hers was the thing in the room; whatever she said, it does not get to be the reason twice.
+    noticed_title(what): A window title, or nothing.  What the patterns above scrape is free prose written by a model, so a capture is only worth showing her if it still looks like the name of a thing. A sentence about him, a clock time, and the
+
+CONFIG SECTIONS: notes.enabled, resident_sight, sensor_view, situation_block
+KV READ: glance_last, glance_seen, noticed_last_ts, noticed_said, resident_asleep, resident_notes_seen, resident_notes_since, resident_woken
+KV WRITE: glance_last, glance_seen, noticed_last_ts, noticed_said, resident_asleep, resident_notes_seen, resident_notes_since, resident_woken
+TABLES: 
+LOG TAGS: eroge, glance, resident
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

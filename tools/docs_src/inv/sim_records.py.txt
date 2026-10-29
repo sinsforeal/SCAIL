@@ -1,0 +1,43 @@
+# sim\records.py  (407 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _norm(s): 
+def _strip_age(text): The brief decorates threads with '(today)' / '(3d)'; the director echoes it. Remove it.
+def _head(s): The stable part of a thread: what comes before a colon, or the first six words.
+def _sim(a, b): Thread identity is the head; the director rewrites the tail every tick.
+class Records: 
+    __init__(config, store, clock): 
+    _match(text, candidates): 
+    sync_threads(open_list, resolved_list, people_hint): Reconcile the director's lists with the table. Open ones are touched or created; resolved ones are closed; open ones the director dropped go dormant (they can resurface) instead of vanishing.
+    dedupe_threads(): Rows with the same head are one thread: keep the most recently touched, drop the rest. Returns how many went.
+    age_threads(): Nightly: open threads nobody touched for a while go dormant.
+    open_thread_texts(): 
+    pressing_thread(unsaid, now_ts, bars): The thing she has been not-saying to him, once it has sat long enough to force itself out.  Every outlet for `unsaid` was private -- the diary takes 30 off it and an X post 12 -- so the pressure vented and the thread nev
+    threads_brief(keep): The small ongoing things, as prompt text.  `keep(row)` is asked of each thread by a caller that may not be shown all of them -- a day planned for a circle of her own, in a world somebody else keeps, where a thread about 
+    cast_sheet(rels, meters, influence): `influence` -- the clear pressure this person puts on her, from cast.json -- was dropped here for four months and so reached the beat-writer and nothing else. Readers that weigh what a person does to her (the state model
+    apply_cast(rels, updates, new_people, date_str): 
+    _cast_key(rels, name): 
+    places(): 
+    places_brief(): 
+    apply_places(new_places, date_str): 
+    arcs(): 
+    all_arcs(): 
+    set_arcs(arcs, retire_titles): 
+    apply_arc_notes(notes, date_str): 
+    arcs_brief(with_beats): 
+    dump(): 
+def _others(config): 
+def about_him(text, config): Is this thread about him? The threads table stores the scene's company in `people`, which is "alone" for every thread that is actually about him, so it cannot be used. His threads are the ones written in he/him/his and n
+def unasked(text): Still not raised with him. The director writes the tail of a thread in plain words and says so.
+
+CONFIG SECTIONS: cast_defaults, director.max_open_threads, places.in_prompt, places.max_places, showrunner.max_arcs, threads, threads.dormant_after_days, threads.match_threshold
+KV READ: arcs, places
+KV WRITE: arcs, places
+TABLES: 
+LOG TAGS: records
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

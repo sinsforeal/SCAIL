@@ -1,0 +1,44 @@
+# sim\care.py  (217 lines)
+
+DOCSTRING:
+How much she cares about him, worked out from the record.
+
+His ask (2026-08-26): quantify her present "caring" and look at her
+checking through a lens of realism -- would a person this invested
+actually be checking like she is, and how do we say so in numbers that
+come from what happened rather than from a gauge the model wrote.
+
+`measure(days)` reads the store: her initiative (self-started messages a
+day), the balance of the chat, how fast she answers him, how often she
+leaves him on read, how often she opens the app about him and goes
+through his notes, how much of her head he takes (worldshare), and the
+durable side (the attachment and resentment sentiments, the computed
+affection target). Each becomes a 0-100 component; `investment` is the
+weighted mean. Then the realism check: a person's checking follows
+investment times uncertainty -- anxious investment under his silence
+checks MORE, resentful withdrawal checks less -- so `checking_expected`
+is what that would predict per day, against `checking_actual` from the
+digests and the snoop events. `/care` prints it; the compile keeps one row
+a day in kv `care_history`.
+
+Optionally (`care.scale_checking`) the app-look and snoop probabilities
+are multiplied by `checking_factor` (0.5..1.5 from investment), so the
+checking is derived from the caring rather than from a base constant.
+
+DEFS:
+def _pct(v): 
+class Care: 
+    __init__(config, store, clock, state, sentiments): 
+    measure(days): 
+    checking_factor(): 0.5..1.5 from investment, for the look and snoop rolls when `care.scale_checking` is on. Cached for an hour: it reads the record.
+    record(): 
+    report(days): 
+
+CONFIG SECTIONS: care, care.weights
+KV READ: care_factor_cache, care_history
+KV WRITE: care_factor_cache, care_history
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

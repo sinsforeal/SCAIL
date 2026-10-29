@@ -1,0 +1,72 @@
+# sim\expectations.py  (442 lines)
+
+DOCSTRING:
+Expectations of him: signed, checkable, with a due time and a source.
+
+His ask (2026-08-26): everything that predicted him predicted one thing
+(whether he answers this message, `foresight.py`) or described him (the
+beliefs, the facts, the rhythm). Nothing held "he said he would watch it
+tonight" as a thing that comes due, gets checked against the record, and
+costs something when it does not happen -- his promises had no weight
+while hers (`commitments.py`) had a stake and a settle. Nothing noticed
+"he is always on the charts at this hour and today he is not". And the
+`risk` foresight named was never scored.
+
+One object, four sources, all settled by code off the record:
+
+- `do`: he said he would do a thing (watch, read, send, call, tell, be
+  back). The `expect_him` call names it, when it is due (his local time),
+  how she could know (`by`: a message of his, the app, either) and the
+  words that would show it, and which belief of hers it rests on. Kept
+  when a message or a digest after the promise carries the words before
+  the deadline (plus a grace); missed when the deadline passes.
+- `around`: mirrored from `rhythm_said` (he said when he would be about);
+  kept if he spoke or was at the machine inside the window, missed if not.
+- what foresight said might land badly is foresight's own to score
+  (`sim/foresight.py`, `score_risks`); it was mirrored here as rows once,
+  and seventy-nine of eighty rows on a save were that mirror.
+- `habit`: learned once a day at the compile from a week of digests
+  (`habits_him`: what, hours of his day, words); each day the window is
+  checked against the digests that covered it. Missed is a small event
+  she can notice; kept is nothing, because expected.
+
+Effects are code. Kept `do`: confirm the belief, a little relief. Missed
+`do` / `around`: strain the belief, resentment toward him, tension, an
+event, and the row is **raisable** -- a line in her situation block until
+she brings it up (her own later message carries the words) or it ages
+out. This is the one place his word is held to the record the way hers
+is. Nothing here predicts what she hopes; it records what she was told and
+what she has learned, and settles it. `/expect [now]`.
+
+DEFS:
+class Expectations: 
+    __init__(config, llm, store, clock, state, model_of_him, sentiments, rhythm, receipts): 
+    rows(): 
+    _save(rows): 
+    _him(): 
+    _his_local(ts): 
+    _calendar_lines(): 
+    hear(text): 
+    _mirror_said(rows): 
+    learn_habits(days): Once a day at the compile: what he does with his day, from a week of digests, as windows with words the digest would carry.
+    _check_habits(rows): Each habit whose window ended today (his day) is checked once against the digests that covered it.
+    _his_messages_since(ts): 
+    _her_messages_since(ts): 
+    _digests_since(ts): 
+    _evidence(r, until): 
+    _around_evidence(r): 
+    tick(): Every loop pass: mirror new sources, settle what is due, notice her raising a missed one. Cheap; no model.
+    _settle(r, state, note): 
+    _unmet_rows(rows): Things he said he would do, did not, and she has not raised. This is the record, not the wording: whether her prompt line is something to DO is read from here rather than from the sentence, which is written in whichever 
+    has_unmet(): 
+    situation_line(ja): Her prompt: what she is expecting of him and what he owes her.
+    report(): 
+
+CONFIG SECTIONS: expect, expect.keep, prompt_text, situation_block
+KV READ: expectations, habits_checked, habits_him, rhythm_said
+KV WRITE: expectations, habits_checked, habits_him
+TABLES: 
+LOG TAGS: expect
+PROMPTS: expect_him, habits_him
+LLM ROLES: expect_him, habits_him
+OPS COMMANDS: 

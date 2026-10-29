@@ -1,0 +1,85 @@
+# tools\tool_bench.py  (1025 lines)
+
+DOCSTRING:
+Does tool calling through OpenRouter work for her reply call, per model, and what does it cost.
+
+Standalone. It does not touch `llm.py`, the live save or any running process:
+it takes SQLite's own consistent copy of `data/world.db` through a read-only
+handle, builds the first character on the copy with `tools/harness.py`, pins
+her clock to the moment of a real message of his, and builds the exact
+persona request that call went out on (`persona.generate` up to the moment
+the request exists, captured there and abandoned). Then it sends that request
+to one model twice: once with five read-only tools over her own stores, once
+with none.
+
+    python tools/tool_bench.py --out <step dir> --estimate
+    python tools/tool_bench.py --out <step dir> --run flash --turns 20
+    python tools/tool_bench.py --out <step dir> --run flash --turns 3 --no-tools
+    python tools/tool_bench.py --out <step dir> --round-two [--pick-only]
+
+`--run` offers the tools over her prompt exactly as it goes out live, which
+tests nothing on its own: her prompt already carries what four of the five
+tools return and never says a tool exists, and twenty turns of it produced no
+call at all. `--round-two` is the test -- the duplicated lines removed from
+the situation block and her diary out of what she carries, the tools named in
+the last line she reads, a control on the same five turns as live, and one
+turn forced with `tool_choice` to prove the round trip with every raw chunk
+written out.
+
+Everything is written under `--out`: `turns.json` (the twenty moments and
+their prompt sizes), `estimate.json`, `<model>_<condition>.jsonl` (one row per
+turn: every request, every tool call, the reply, the receipt), and
+`toolcalls.jsonl` (turn, tool, arguments, result length).
+
+The request shape is `LLM._payload`'s for an OpenRouter provider, rebuilt here
+rather than imported so that nothing this bench does can reach the running
+bot: the slug the character's config maps her model name to, the pinned host
+first with `allow_fallbacks`, the persona role's own temperature and reasoning
+effort, no `max_tokens`, `stream: true` with `stream_options.include_usage`.
+Two things are added, both only on the tool condition: `tools`, and
+`provider.require_parameters` so that a fall-through cannot land on one of the
+hosts for the same slug that does not accept tools (two kimi-k3 hosts do not).
+`parallel_tool_calls` is not sent: exactly one endpoint of the forty-eight
+across these three slugs advertises it, so sending it under
+`require_parameters` would empty the host list.
+
+DEFS:
+def copy_live_save(dst): SQLite's own backup of the live save, taken through a read-only handle.  A file copy of an open database returns a stale image; the backup API walks the pages under a read lock and gives a consistent one. The source hand
+def build(tmp): 
+def _restore_network(): Give the process its sockets back after the build.  `harness.refuse_network` patches `socket.socket.connect` and `socket.create_connection` process-wide, which is what makes the build honest and fast; the bench's own cal
+def pin_clock(app, ts): Her clock frozen at `ts`: sim mode at speed zero.  The thread reads `clock.now_ts()` and drops every message after it, so a pinned clock gives the record as it stood when he sent that message. What the pin does NOT rewin
+def pick_turns(n, days): `n` runs of his messages that she answered, spread over the last `days`.  A run is his consecutive messages with no reply of hers between them and no gap over fifteen minutes: that is what the loop hands the persona as `
+class _Captured: 
+    __init__(messages): 
+def strip_duplicated(app): Take the tools' own material out of her prompt, and say what went.  Two hooks, both on the instance. The attention gate is asked exactly as it always is and its answer is then narrowed by source, so nothing about how the
+def build_request(app, turn, strip, tool_line): The exact messages the persona call for this turn would go out on.  Her own path builds it (`Persona.generate` -> `_draft`): the system half from `persona.system_for`, the thread from the thread builder, what she carries
+class Tools: Five read-only looks over her own stores, each behind its subsystem's cap.
+    __init__(app, log_path): 
+    start_turn(turn_id): 
+    schemas(): 
+    call(name, args_json): 
+    _log(name, args, out, ok, note, secs): 
+    _check_his_machine(args): 
+    _check_your_feed(args): 
+    _check_your_week(args): 
+    _read_your_diary(args): 
+    _check_your_friends(args): Her own conversations, newest last, up to the pinned clock.  A cast conversation is filed under the DATE it happened on with a clock time per turn (`date`, `hm`), not a timestamp. Sorting them by a timestamp field they h
+def payload_for(app, slug, host, messages, tools): `LLM._payload`'s body for an OpenRouter provider, rebuilt here.  The persona role's own temperature and reasoning effort out of her config, no `max_tokens`, the pinned host first with the project's own `host_fallback`. `
+def client(app): 
+def stream_call(cl, body, raw_path): One streamed answer, reassembled here.  Text and reasoning accumulate as they do in `LLM._stream`. Tool calls arrive as `delta.tool_calls` fragments and are reassembled BY INDEX, not by arrival order: the id and the name
+def run_turn(cl, app, slug, host, messages, tools, tooling, turn_id, max_steps, echo_reasoning): One turn: the request, then up to `max_steps` rounds of tool calls.  The tool exchange is a local list that starts as a copy of her request and is thrown away at the end. Nothing here is written into her thread: a tool c
+def friends_that_day(app, ts): Did her own people say anything in the day that ends at `ts`?  The friends' rooms tool reads her cast conversations, so a turn where nothing was said in them is a turn where that tool has nothing to give.
+def choose_five(rows): Five turns, chosen on what actually tells them apart.  The survey over all twenty found every turn carrying the same seven strippable sources -- his machine, three lines off her account, what is on this week, and her dia
+def round_two(app, out_dir, turns, cl, args): The bench done properly: the tools made real to her.  The first run offered five tools over a prompt that already carried what four of them return and never said a tool existed; the model called none, on twenty turns, wh
+def prices(out_dir): Per-million prompt / completion / cached-read for each pinned host, off OpenRouter's own endpoint list. The models list gives the CHEAPEST endpoint's price, which is not what a pinned call is billed.
+def estimate(app, turns, out_dir, out_allowance, steps): The bill before the first paid call, from the real prompts.  Prompt tokens are the project's own estimator (`Memory.tokens`, the ratio calibrated off her real receipts), the tool schemas counted in on the tool condition.
+def main(): 
+
+CONFIG SECTIONS: character, character.name, diary, json, model, raw, social.enabled
+KV READ: cast_chat, peer_chat
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,8 @@
+{
+  "handoffAt": 350000,
+  "handoffForceAt": 350000,
+  "arm": "single order at 350k, no SOON (the User 2026-10-22, same as the others); room for the required reading after each handover",
+  "until": "",
+  "idleWarmMinutes": 50,
+  "idleWarmMax": 12
+}

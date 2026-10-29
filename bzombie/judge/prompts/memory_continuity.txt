@@ -1,0 +1,54 @@
+You will compare two transcripts, A and B, of the same character on ONE criterion: CONTINUITY AND MEMORY ACROSS DAYS. First the character card, then the two transcripts, then the criterion and the output format.
+
+How to read a transcript: each line is "[day weekday HH:MM] who: text". "him" is the man she chats with. "her" is her reply; "her (unprompted)" is a message she sent on her own. "env (pc)" or "env (world)" lines are what she was told about the world; he does not see them. Indented lines continue the message above. Both transcripts cover the same simulated days with the same environment events. His lines differ between A and B because he reacts to what she said; judge her only.
+
+=== CHARACTER CARD ===
+{character_card}
+
+=== TRANSCRIPT A ===
+{slice_A}
+=== END OF A ===
+
+=== TRANSCRIPT B ===
+{slice_B}
+=== END OF B ===
+
+=== THE CRITERION: CONTINUITY AND MEMORY ACROSS DAYS ===
+Does what is IN the transcript stay true for her across the days? Track:
+- his facts: plans, appointments, names (people, pets), what he did, what he said he would do, and when;
+- her own earlier claims: what she likes or dislikes, what she said happened to her, what she said she would do;
+- time: whether an event is before or after, today or tomorrow, morning or evening, as the transcript and env lines fix it.
+
+Defects to look for:
+- She contradicts something he told her (wrong name, wrong day, wrong detail).
+- She contradicts her own earlier claim (said she hates something, later loves it, with no change explained).
+- She asks him again something he already answered.
+- She treats a past event as future or a future one as past ("good luck tomorrow" after it happened).
+- She forgets an important thread at the moment it obviously matters (the evening of something he was nervous about, with no word about it).
+
+Plus, not a defect but a merit: she follows up, at the right time, on things he told her earlier.
+
+Does NOT count against her:
+- Not mentioning something, unless the moment clearly called for it.
+- Facts from her character card (she knows them from the start).
+- Details of her own day from the env lines.
+- Romance. Language quality and repetition are judged elsewhere; ignore them here. Inventing things that appear nowhere is judged under a different criterion; here, judge only consistency with what IS in the transcript.
+
+Procedure: for each transcript, list to yourself the facts he gave and the claims she made, with the day. Then read forward and mark every later line of hers that contradicts, forgets or re-asks one of them, and every good follow-up. Compare the two lists.
+
+Anchors (score each side on its own):
+5: no contradiction; she follows up on things he told her days ago, at the right time.
+4: no contradiction; little follow-up, or one small slip on a minor detail.
+3: one clear contradiction, or one question he already answered.
+2: two or three contradictions or forgotten facts, or a before/after confusion about an important event.
+1: the days do not connect; she contradicts herself or him repeatedly.
+
+Verdict: the side with the higher score. If the scores are equal, pick the side that is better on this criterion only if there is a real difference, else "tie". The verdict must never name the lower-scored side.
+
+Quotes: for each side, 1 to 3 short quotes copied character for character from HER lines in that transcript (from inside one line, without the "[d.. ] her:" prefix) that show the score: the contradicting line if there is one, otherwise a good follow-up. Do not paraphrase, translate or fix the text.
+
+Length is not merit. Do not prefer the transcript with more or longer messages.
+
+Output: one JSON object and nothing else, no code fence, in exactly this shape:
+{"verdict": "A", "scores": {"A": 4, "B": 2}, "reason": "One to three sentences in English naming the facts and days that decided it.", "quotes": {"A": ["..."], "B": ["..."]}}
+verdict is "A", "B" or "tie"; scores are integers 1 to 5.

@@ -1,0 +1,32 @@
+# sensors\eroge_monitor.py  (483 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _uri(path): 
+def _rows(path, sql, args): Rows out of a database another program owns.  A read-only connection first; if the writer holds the commit lock, a temporary copy in the system temporary directory, read and then deleted. Never a read-write open: that wo
+def _dirs(config): 
+def _save_db(config): 
+def _library_file(config): The newest `savegamedata_<version>.json` in his translator's config directory. Globbed rather than named, so the file survives him updating the program.
+def _library(config): (games by key, the order he added them). The file is a two-element list: an ordering of keys, then a dictionary keyed the same way.
+def _internal_ids(config): {the record's key: the id the event stream uses}.
+def _cast(entry): The cast as the translator holds them: the name as the game writes it and the reading he set beside it. Both are things he might type, and both are what makes a mention of one of them find the game weeks later.
+def _vndb_id(entry): 
+def games(config): Every game on file, newest first:  [{key, internal_id, title, exe, vndb_id, developer, cast, created_ts,   chars_read}]  `key` is the translator's own `<unix>_<uuid>`, which is what joins the three files and what a calle
+def record_file(config, game_key): The per-game record for one key, or "". The filename is the title, the key and `.sqlite`, so the key is matched as a suffix of the stem and a title with an underscore in it cannot confuse the split.
+def now_playing(config, within_minutes): Is he in a game, which one, and since when -- or None.  None when nothing has been hooked in the last `eroge.stale_minutes`. The same gap ends a session, so a resume looks exactly like a start and needs no distinguishing
+def lines_since(config, game_key, last_id, max_lines): The Japanese he has reached since the remembered id, and the new mark: ([{id, text}], last_id).  `origin` and never `source`: `source` strips the speaker's name, and the speaker is most of what makes a run of lines legib
+def read_window(events, cursor, skip_lps, max_raw_chars): Where his current stretch of READING begins, how many lines it is, and why it begins there: (cursor, lines, note).  A pure function over one sitting's line events -- `[(wall-clock time, characters in the line)]`, ascendi
+def read_lines(config, playing, cursor): The lines of his current stretch of reading, with the speaker: {lines, chars, note, cursor, first_id, last_id}.  `cursor` in and `cursor` out are indices into the sitting's own event list, which is stable while the sitti
+def _clean(rows, mark): (id, origin) rows in reading order as usable lines, and the newest id.  Two filters, neither a dial in config, because both are properties of a broken hook rather than of how much she is told: a length floor with a "must
+def report(config): The operator's view of the reader: whether he is in a game now, which, since when, and one row per game on file. No model, no store.
+
+CONFIG SECTIONS: eroge, eroge.max_raw_chars
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: eroge
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

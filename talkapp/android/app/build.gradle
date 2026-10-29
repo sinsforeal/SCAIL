@@ -1,0 +1,50 @@
+plugins { id 'com.android.application' }
+
+// the token is baked in at build time from the project's own config.json --
+// this APK is personal (served only on the tailnet) and carries its auth
+def cfg = new groovy.json.JsonSlurper().parse(file("../../../config.json"))
+
+// versionCode must only ever rise for Android to install over the old copy;
+// minutes since 2026-01-01 does that with no counter to remember
+def vcode = (int) ((System.currentTimeMillis() / 60000L) - 29448000L)
+def vname = new Date().format("yyyy-MM-dd HH:mm")
+
+android {
+    namespace 'net.scail.talkapp'
+    compileSdk 34
+    defaultConfig {
+        applicationId "net.scail.talkapp"
+        minSdk 26
+        targetSdk 34
+        versionCode vcode
+        versionName vname
+        // the tailscale serve front; the hub itself is 127.0.0.1 on his PC
+        buildConfigField "String", "BASE_URL", '"https://YOUR-TAILNET-HOST.ts.net"'
+        buildConfigField "String", "TOKEN", "\"${cfg.talkapp.token}\""
+    }
+    buildFeatures { buildConfig true }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+}
+
+dependencies {
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+}
+
+// the build IS the release: the APK lands where the hub serves it, and
+// talkapp.ver is what /ver reports so the running app can offer the update
+afterEvaluate {
+    tasks.named("assembleDebug").configure {
+        doLast {
+            copy {
+                from "build/outputs/apk/debug/app-debug.apk"
+                into "../../app"
+                rename { "talkapp.apk" }
+            }
+            file("../../app/talkapp.ver").text = "${vcode} ${vname}"
+            println "APK -> talkapp/app/talkapp.apk  version ${vcode} (${vname})"
+        }
+    }
+}

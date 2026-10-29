@@ -1,0 +1,23 @@
+# sim\seen_images.py  (115 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class SeenImages: 
+    __init__(config, store, clock): 
+    note(img_id, url, noticed, tags, status_id, author, weight): 
+    recent(n): 
+    today(limit): What she stopped on today, in her words: the pictures still in her head from the last scroll. Newest first, the description and whose feed it was in; the tags are the machine's vocabulary and never hers.
+    recall(cue_text, days, min_overlap): An older picture the moment reaches for: the one whose description or author shares enough words with what he just wrote. One at most, silent otherwise; a hit counts as a mention and refreshes it, the way her own memorie
+    taste(days, limit): Which tags keep coming back in what she stops on.
+    report(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: seen_images
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

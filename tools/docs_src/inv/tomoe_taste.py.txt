@@ -1,0 +1,44 @@
+# tomoe\taste.py  (193 lines)
+
+DOCSTRING:
+Her taste against the account she inherited.
+
+The X account was his: 305 followed accounts, 302 of them from before she
+took it. She sees twenty-five posts a look, four looks a day, so her
+reaction sheet (kv `x_taste`) only ever covers the thirty loudest accounts
+and the other 270 are never judged; at one unfollow a day after three
+dislikes of posts she may never see, the account would stay his for years.
+His ask (2026-08-26): over time the account should become hers.
+
+Two things here. `judge` reads every carded account against her declared
+taste (`data/taste.json`, his to edit) once, in batches, and writes a
+verdict per handle to kv `x_verdicts`: keep (hers), leave (not hers, not
+offensive; his, tolerated), drop (she would unfollow). `Curation.drift`
+then unfollows from the drop list at a paced rate, and the look session
+runs one of her `queries` now and then so there are accounts of her own to
+follow. `/x drift` is the ruler: inherited remaining, hers added, dropped.
+
+DEFS:
+def sheet(config): Her declared taste, as she (he) wrote it: `world.taste_file`.
+def sheet_text(config): The sheet as the paragraph a model is shown. Module level, because two things put a decision to her taste and there must be one wording of it: the account judge here, and the pick the account makes about a post she has j
+class Taste: 
+    __init__(config, llm, store, clock): 
+    sheet(): 
+    sheet_text(): 
+    queries(): The sheet's queries plus her own shows' Japanese titles: a search is how she builds a timeline with no crossover with his.
+    verdicts(): 
+    verdict(handle): 
+    unjudged(): 
+    judge(limit, batch, log): Every carded account she has not judged yet, in batches, against the sheet. Returns the number judged. Cheap (flash, cards only).
+    drift(): Where the account stands between his and hers, from the record.
+    record_drift(): 
+    report(): 
+
+CONFIG SECTIONS: curation.drift_unfollows_per_day, role_system, sensor_view, taste, world.taste_file
+KV READ: watchlist, x_drift, x_taste, x_verdicts
+KV WRITE: x_drift, x_verdicts
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: taste
+OPS COMMANDS: 

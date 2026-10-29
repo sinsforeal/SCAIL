@@ -1,0 +1,394 @@
+{
+  "_note": "Everything that is 真優 and nothing that is not. Shape: Momoka's resident bundle (docs/bundle.md) with her own name, prompts, quality caps and existence answers; built by tools/koikano/promote_heroine.py from sheet.json and heroine_src/mayu/. Not in the operator's register: `registered` is false, so compose leaves characters.json and the launcher alone.",
+  "key": "mayu",
+  "name": "Togawa Mayu",
+  "hub_id": "mayu",
+  "config": "config_mayu.json",
+  "db": "data/mayu.db",
+  "program": "resident",
+  "launcher": "mayu.cmd",
+  "task": "SCAIL_mayu",
+  "match": "resident[\\\\/]run\\.py.*config_mayu|scail\\.py.*config_mayu",
+  "registered": false,
+  "world": {
+    "id": "",
+    "owner": false
+  },
+  "prompts_dir": "prompts_mayu",
+  "prompts_generated": true,
+  "files": {
+    "character.cast_file": "cast.json",
+    "character.neutral_file": "fills.json",
+    "world.character_file": "sheet.json"
+  },
+  "holes": [
+    "no lore records: the record has 280 inner lines (01_01:4013, 01_01:4028) but no diary and no memory file; lore records are hand work not done here",
+    "the places are world data (world/mayu_house.json), not household or home files: she does not own a world and her own home is data for the bench feed",
+    "gauge baselines: none, no numbers; meter rows seed flat",
+    "voice off: clips are prefix MAY but tools/voice_index.py accepts MMK only, and no clone sample exists",
+    "vn off: channels/vn_expression.py hard-codes the letter CD (lines 223, 238, 247, 288, 294) and port 8770 is Momoka's; Mayu planned 8772"
+  ],
+  "blank": [
+    "hazards.her_area_names",
+    "hazards.her_wards",
+    "scenery.kind_queries",
+    "scenery.local_names",
+    "scenery.place_map",
+    "scenery.queries",
+    "sensors.x_actions_enabled",
+    "sensors.x_data_dir",
+    "sensors.x_enabled",
+    "sensors.x_images_db",
+    "sensors.x_posting_enabled",
+    "sensors.x_profile_dir",
+    "sensors.x_tools_profile_dir",
+    "trains.her_lines",
+    "trains.nearby_lines",
+    "trains.odpt_challenge_lines",
+    "trains.odpt_lines",
+    "trains.odpt_operator_lines",
+    "world.geography_file",
+    "world.holidays_file",
+    "world.household_file",
+    "world.local_events_every_days",
+    "world.local_events_file",
+    "world.outing_words",
+    "world.places_file",
+    "world.school_calendar_file",
+    "world.shared_dir",
+    "world.taste_file",
+    "world.zeitgeist_every_hours"
+  ],
+  "config_overrides": {
+    "embed": {
+      "url": "http://127.0.0.1:18320/v1/embeddings"
+    },
+    "models": {
+      "persona": {
+        "prompt": "prompts_mayu/bible.md",
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "revise_self": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "spiral": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "approach": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "morning": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "anticipation": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "reflect": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "diary": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "wonder": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "peer_reply": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "quality_rewrite": {
+        "model": "glm-5.3-flash",
+        "thinking": true
+      }
+    },
+    "character": {
+      "name": "Mayu",
+      "program": "resident",
+      "name_ja": "真優",
+      "reading_ja": "まゆ",
+      "writes_to_him": "japanese",
+      "instruction_language": "japanese",
+      "style_prompt": "prompts_mayu/style.md",
+      "style_ja_prompt": "prompts_mayu/style.md",
+      "existence": {
+        "embodied": true,
+        "in_world": false,
+        "sees_him": "none",
+        "has_account": false,
+        "with_him": "none",
+        "player_driven": true
+      }
+    },
+    "reunion": {
+      "enabled": true
+    },
+    "afterthought": {
+      "enabled": false
+    },
+    "receipts": {
+      "enabled": false
+    },
+    "world": {
+      "weather_enabled": false
+    },
+    "director": {
+      "scene_source": "plan"
+    },
+    "lore": {
+      "enabled": true
+    },
+    "diet": {
+      "enabled": false
+    },
+    "money": {
+      "enabled": false
+    },
+    "environment": {
+      "enabled": false
+    },
+    "needs": {
+      "enabled": false
+    },
+    "health": {
+      "enabled": false
+    },
+    "situation": {
+      "enabled": false
+    },
+    "household": {
+      "enabled": false
+    },
+    "watching": {
+      "enabled": true
+    },
+    "reactions": {
+      "enabled": false
+    },
+    "vault_snoop": {
+      "enabled": false
+    },
+    "typesafe": {
+      "enabled": true,
+      "key_file": "secerts/typesafe.txt",
+      "model": "jev-1.13.0",
+      "timeout_seconds": 20,
+      "floor": 0.6,
+      "uses": {
+        "reconcile": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "sight_activity": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "emotion": {
+          "enabled": true,
+          "threshold": 0.35
+        },
+        "inbound_signals": {
+          "enabled": false,
+          "threshold": 0.5
+        },
+        "scene_director": {
+          "enabled": false,
+          "threshold": 0.3,
+          "music_threshold": 0.5,
+          "vocal_threshold": 0.6
+        },
+        "which_one": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "wonder_answer": {
+          "enabled": false,
+          "threshold": 0.5
+        },
+        "intent": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "foresee": {
+          "enabled": false,
+          "threshold": 0.3
+        },
+        "said_when": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "lookup": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "ick": {
+          "enabled": false,
+          "threshold": 0.3
+        },
+        "affection": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "wonder": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "rupture_settle": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "expect_him": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "habits_him": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "state_appraisal": {
+          "enabled": true,
+          "threshold": 0.6
+        }
+      }
+    },
+    "primitives": {
+      "enabled": true
+    },
+    "pick": {
+      "enabled": true
+    },
+    "stances": {
+      "enabled": true
+    },
+    "eroge": {
+      "enabled": true
+    },
+    "shape": {
+      "tell_length": false
+    },
+    "tts": {
+      "enabled": false,
+      "on_demand": true,
+      "voice_mode": "exact",
+      "minimax_script_path": "minimax/minimax_tts.py",
+      "minimax_config_path": "minimax/config.json",
+      "voice_id": "",
+      "emotion_enabled": true,
+      "language_boost": "Japanese",
+      "pronunciation_dict": {
+        "tone": [
+          "真優/まゆ",
+          "十川/とがわ",
+          "百花/ももか",
+          "一悟/いちご"
+        ]
+      },
+      "interjection_tags": true
+    },
+    "vn": {
+      "enabled": false,
+      "host": "127.0.0.1",
+      "port": 8772,
+      "character_dir": "extracted_games/koikano/by_character/MAYU_真優",
+      "inventory": "extracted_games/koikano/koikano_work/inventory/expression_inventory.json",
+      "labels": "extracted_games/koikano/koikano_work/inventory/expression_labels.json",
+      "reviewed_labels": "characters/mayu/expression_labels_unreviewed.json",
+      "sprite_dir": "png_sprites",
+      "face_dir": "png_faces",
+      "voice_dir": "voice",
+      "bgm_dir": "extracted_games/koikano/audio/bgm",
+      "default_bgm": "BGM03",
+      "view_dir": "view",
+      "out_dir": "data/vn",
+      "default_expression": "neutral",
+      "sprite_zoom": 1.55,
+      "idle_motion": true,
+      "idle_sway": false
+    },
+    "scene_director": {
+      "enabled": true,
+      "use_model": true,
+      "default_bg": "BG02a01",
+      "places": {}
+    },
+    "stage_manager": {
+      "enabled": true,
+      "history_turns": 20
+    },
+    "emotion": {
+      "enabled": true,
+      "use_model": true,
+      "default_label": "neutral"
+    },
+    "quality": {
+      "enabled": true,
+      "use_model": true,
+      "max_chars": 600,
+      "repeat_run": 16,
+      "recent_messages": 8,
+      "openers": true,
+      "forbidden": {},
+      "caps": {
+        "phrases": {
+          "だもん": 2,
+          "でしょ": 2,
+          "してあげる": 1,
+          "好き": 3,
+          "百花ちゃん": 2,
+          "一悟": 3
+        },
+        "doubled_group": 2,
+        "source": "her own marks (prompts/style.md 手 and 撒く量の物差し; tools/koikano/markers/mayu.json): the one-by-one tics at their measured rate (だもん 0.0369, でしょ 0.0214, してあげる 0.0203, 好き 0.0282, 百花ちゃん 0.0234, a closing 一悟 0.0231) capped per draft so none piles up; わたし, えへへ and the ん reply are left uncapped because her guide says to use them without counting"
+      }
+    },
+    "talkapp": {
+      "enabled": false
+    },
+    "delivery": {
+      "compose_seconds": [
+        0,
+        0
+      ],
+      "read_delay_free_seconds": [
+        0,
+        0
+      ],
+      "read_delay_glance_seconds": [
+        0,
+        0
+      ],
+      "mood_delivery": {
+        "enabled": false
+      }
+    },
+    "rhythm": {
+      "notice_live_seconds": [
+        0,
+        0
+      ],
+      "notice_glance_seconds": [
+        0,
+        0
+      ],
+      "notice_idle_seconds": [
+        0,
+        0
+      ],
+      "he_left_extra_seconds": [
+        0,
+        0
+      ]
+    },
+    "logging": {
+      "db_path": "data/mayu.db"
+    }
+  }
+}

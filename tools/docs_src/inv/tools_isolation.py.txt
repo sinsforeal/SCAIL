@@ -1,0 +1,41 @@
+# tools\isolation.py  (462 lines)
+
+DOCSTRING:
+What a second character still shares with the first, subsystem by subsystem.
+
+Three things reach a character: the switches that decide which subsystems run
+for her, the files those subsystems read, and the prompts they are written in.
+This reports all three against one config, so "is she isolated" is a table
+somebody can read rather than a boot to sit through.
+
+The rule it enforces is narrow and worth stating: **a path shared between two
+characters must belong to the machine, not to a person.** His telemetry, his
+anime history, the API keys and the model prompts are the machine and are
+shared on purpose. A household, a place graph, a school calendar and a cast are
+a person, and sharing one means the second character is reading the first one's
+life. `Config.WORLD_KEYS` blanks those; anything else shared and person-shaped
+is reported here and fails.
+
+    python tools/isolation.py                          # the second character
+    python tools/isolation.py --config config.json     # the first, as a control
+    python tools/isolation.py --against config.json    # what she shares with whom
+
+DEFS:
+def _dig(d, dotted): 
+def can_be_synthesised(cfg): Is there any route from this character to the renderer?  Three, and a character with none of them never makes a sound whatever her identifier says: `tts.always` speaks a line of hers unprompted, `tts.on_demand` speaks on
+def would_fall_back_to(cfg): The identifier the shared vendor file would hand her, or "".
+def effective_voice(cfg): The voice she will actually be synthesised in.  Her own `tts.voice_id` if she has one, otherwise whatever the shared MiniMax config names -- and that fallback is the trap, because the shared file's default is one charact
+def key_of(config_path): The operator's key for the character this config file belongs to.  Read off the register rather than guessed from the file name: the first character's config is `config.json` and her key is not `config`.
+def bundle_owner(value, keys): Whose bundle this path is under, or "" for a path that is under none.
+def _world_of(cfg): The id of the world this loaded config is in, or "" for no world.  Read off the LOADED config for the same reason the file table is: a character with no world has the section forced off at load (`Config.REQUIRES`), so he
+def paths(d, pre): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

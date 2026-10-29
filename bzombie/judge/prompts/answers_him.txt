@@ -1,0 +1,52 @@
+You will compare two transcripts, A and B, of the same character on ONE criterion: ANSWERS HIM. First the character card, then the two transcripts, then the criterion and the output format.
+
+How to read a transcript: each line is "[day weekday HH:MM] who: text". "him" is the man she chats with. "her" is her reply; "her (unprompted)" is a message she sent on her own. "env (pc)" or "env (world)" lines are what she was told about the world; he does not see them. Indented lines continue the message above. The transcripts are cut into numbered windows (W1, W2, ...): the same numbers in A and B are the same moment of the same simulated day. His lines differ between A and B because he reacts to what she said; judge her only.
+
+=== CHARACTER CARD ===
+{character_card}
+
+=== TRANSCRIPT A ===
+{slice_A}
+=== END OF A ===
+
+=== TRANSCRIPT B ===
+{slice_B}
+=== END OF B ===
+
+=== THE CRITERION: ANSWERS HIM ===
+When he writes, does her next output take up what he actually said or asked?
+- A question gets an answer, or a dodge that is clearly deliberate and in character (she heard it and chose not to answer, and it shows).
+- A claim, a story or a reading of her gets a reaction to that claim, story or reading.
+- If he said two things, both count; taking up one and dropping the other is a partial miss.
+
+Defects to look for, per window:
+- His question gets no answer at all; she talks about something else.
+- She answers about herself instead of what he asked or said (he says something about the world or about himself, and her reply is about her own standing or feelings without touching his point).
+- She replies to an older message, or to a different topic, as if his latest line was not there.
+- She answers only after a long detour of her own, so his point is buried.
+
+Does NOT count against her:
+- A short answer to a short message.
+- An answer that is in character but not what he hoped: a refusal, teasing, "I don't know", a counter-question that shows she heard him.
+- Answering first and then adding her own thing.
+- A deliberate, visible dodge when the card gives her a reason (for example, Tomoe getting loud and defensive when he reads her correctly).
+- Romance. Language quality, repetition and character voice are judged elsewhere; ignore them here.
+
+Procedure: go window by window. For each window in A and in B, note what he said or asked and whether her outputs took it up. Count the misses on each side. Then score.
+
+Anchors (score each side on its own):
+5: in every window she takes up his point first; any dodge is clearly deliberate and in character.
+4: one window where she answers only part of a two-part message, or takes up his point late but does take it up.
+3: one or two windows where his question gets no answer at all; the rest fine.
+2: three or more windows where she talks past him, or answers about herself instead of what he asked.
+1: most windows ignore what he said.
+
+Verdict: the side with the higher score. If the scores are equal, pick the side that is better on this criterion only if there is a real difference, else "tie". The verdict must never name the lower-scored side.
+
+Quotes: for each side, 1 to 3 short quotes copied character for character from HER lines in that transcript (from inside one line, without the "[d.. ] her:" prefix) that show the score: a miss if there is one, otherwise a good answer. Do not paraphrase, translate or fix the text.
+
+Length is not merit. Do not prefer the transcript with longer or more emotional replies.
+
+Output: one JSON object and nothing else, no code fence, in exactly this shape:
+{"verdict": "A", "scores": {"A": 4, "B": 2}, "reason": "One to three sentences in English naming the windows and the misses that decided it.", "quotes": {"A": ["..."], "B": ["..."]}}
+verdict is "A", "B" or "tie"; scores are integers 1 to 5.

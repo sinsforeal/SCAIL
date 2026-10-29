@@ -1,0 +1,41 @@
+# tools\poke_test.py  (225 lines)
+
+DOCSTRING:
+Forcing what normally waits on her clock: /idle, /reply, /selfstart.
+
+    python tools/poke_test.py            # the whole thing, on a copy of the second character's save
+    python tools/poke_test.py --static   # the drift check only, no App and no save (what smoke runs)
+
+No model call is ever made: `LLM.call` and `LLM.call_json` are replaced by a
+stub that answers from a script and counts what it was asked. What is checked
+is that each command takes the path the loop takes rather than a shortcut --
+the tick writes a scene and the gauges are read, his message goes through the
+reply path and her words reach her own store, and the forced opener goes
+through the persona and her delivery.
+
+The static half is the one that catches the fault this was built against: the
+loop's ordinary pass and `/idle` must be the same method, so the branch in
+`App.run` may hold nothing but the call.
+
+DEFS:
+def check(ok, what, detail): 
+def static(): The loop's ordinary pass and the forced one cannot drift, because there is only one of them. Reads scail.py; builds nothing.
+class Stub: Every model call, answered from a script and counted.
+    __init__(app): 
+    call(role, messages): 
+    call_json(role, messages): 
+    count(role, since): 
+def settle(app, seconds): Wait for her delivery queue to empty: the bubbles are typed out on a worker thread with her own pauses between them.
+def her_rows(app, n): 
+def last_hers(app): The id of her newest message: a row added is a row she really sent, which counting the last few messages is not (his go in the same window).
+def full(): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

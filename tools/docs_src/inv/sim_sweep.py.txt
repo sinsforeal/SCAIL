@@ -1,0 +1,32 @@
+# sim\sweep.py  (169 lines)
+
+DOCSTRING:
+Does a value actually do anything?
+
+His ask (2026-08-26): the ability to fix gauges by hand, and a smoke test
+that shows whether those values have a meaningful effect on behaviour. A
+gauge with no reader is a tag nothing acts on -- the fault `social_standing`
+was deleted for -- and the wiring report only says who WRITES a gauge. This
+sweeps each value across its range and asks the code-side readers what they
+would do: her read delay, how long she takes to compose, her register line,
+the impulse score, the withholding pressure, the shape she would draw, the
+posting mode, and her felt affect. A gauge that moves none of them between
+0 and 100 is flagged DEAD. Nothing is changed: the gauges are restored
+after every probe.
+
+Run in-app as `/sweep [gauge|him|all]`, or offline:
+    python tools/sweep.py [gauge]
+
+DEFS:
+def _probe(app, silent_hours): 
+def _him_meters(app): 
+def sweep(app, what): Text table. `what`: a gauge name, "him" (his meters and the two sentiments), or "all".
+
+CONFIG SECTIONS: state.gauges, withholding.enabled
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,45 @@
+# config.py  (7960 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _strip_html_comments(text): A prompt file without its `<!-- ... -->` notes. The notes are for the person editing the file (provenance, a reminder); the model never gets them, and a leading one used to be the first bytes of the system prompt, which 
+def _merge(defaults, override): 
+class Section: 
+    __init__(data): 
+    __getattr__(name): 
+class Config: 
+    __init__(path, character_file): 
+    _note(line): A line about what this character is: printed now, and kept so the log can have it too.  `Config` is built before `logger.setup` opens `session.log`, so the two lines naming the sections a sheet switches off went to stdou
+    _apply_character(merged): The character sheet's own temperament, over the mechanism's defaults.  `gauge_baselines` retunes what already exists -- a calm character's anxiety baseline is 25 and a raw one's is 55, and neither is a property of the si
+    _read_sheet(merged): Her sheet, or nothing if she has not got one.
+    _from_sheet(merged, sheet): What her sheet says about her, over the mechanism's defaults.
+    _mechanisms_absent(merged, sheet): The machinery this character has not got: `mechanisms_absent` on her sheet, the counterpart of `gauges_absent` beside it.  This is NOT the existence table, and the difference is the whole reason it exists. `REQUIRES` der
+    roles_off(): The roles in `models` this character never calls, and why.  `/model` builds its table out of `models`, which is the same for every character, so the continuity check printed there with its model beside the roles that do 
+    _check_existence_answers(ex): All four answers are present, and `sees_him` is one of the three.  An absent answer is read as "she has it" by every test of it, which is the same default -- runs for everybody -- that `_check_existence_table` refuses fo
+    _check_existence_table(cls, merged): Every switchable subsystem is assigned to the master switch.  A new section with an `enabled` flag and no row in REQUIRES is a subsystem nobody has decided about, and the default for an undecided subsystem has always bee
+    _check_role_stance(cls, merged): Every role named in ROLE_STANCE is still a role.  The other half of the guard is in `role_system` itself, which stops on a caller with no row; this half catches the row left behind when a role is renamed or removed, whic
+    _existence_implies(merged): 
+    _person_file_rows(cls, merged, ex): (key, value, why) for every row of PERSON_FILES that applies to this character, with `why` naming what makes it apply.
+    _check_person_files(merged): A file that is one person's, named by nobody, while the thing that reads it is running.  Run after what kind of character she is has been applied, so that a path this very load blanked (`WORLD_KEYS`) is judged together w
+    _check_drift(loaded, defaults, path, where): Keys a config file still carries that DEFAULTS no longer has.  The merge keeps config.json's value over the default and keeps extra keys, which is what makes changing a default a two-file job. A key removed or renamed in
+    _check_gauges(merged): A gauge has to say what sort of thing it is, and the emotion set has to span the valence x arousal grid. This is a load-time check because the failure it prevents is invisible at runtime: `mood` sat among its own causes 
+    model(role): 
+    _fills(): Her values for the holes, loaded once. The sidecar is the file that holds what the sheet and the cast file do not: the example lists and the shape of a day that mechanism prompts used to carry inline.
+    world_reader(): Whether the world she is in is one somebody else keeps.  One accessor, because the difference has to be asked by the day's planner, by the exchange and by the day's one truth, and reading the two keys by hand in each of 
+    resident(): Whether she lives on his machine rather than reading a digest of it.  One accessor, because the difference has to be asked in several places and reading the sheet field by hand in each of them is how a mechanism written 
+    conditions(): The named facts a prompt may branch on. A closed set derived from what the character declares, plus anything she names herself under `conditions` in her fills file -- so a prompt cannot branch on something nobody defined
+    fill(text, role): Her values for the holes, and only the blocks her condition keeps.
+    prompt_text(role): A role's prompt file, filled for this character. The file is read once per change (mtime), because the bible is asked for by every interior role on every tick and was read off disk each time.
+    role_system(role, extra): The system prompt of a role that runs beside her: its own instruction, and her character sheet only if the role speaks as her.  `Config.ROLE_STANCE` decides, and a role with no row stops the process here rather than quie
+    read_text(path, default): 
+
+CONFIG SECTIONS: character.existence, environment.ac_feels, json, py, raw, state.gauges
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: persona
+LLM ROLES: 
+OPS COMMANDS: 

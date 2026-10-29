@@ -1,0 +1,17 @@
+{
+  "tone": ["千奈/せな", "七瀬/ななせ", "百花/ももか", "一悟/いちご"],
+  "voice_prefix": "SEN",
+  "tts_note": "off until a MiniMax clone exists (docs/voice.md); her clips are SEN*.ogg, tools/voice_index.py accepts MMK only",
+  "caps": {
+    "phrases": {"ハレンチ": 1, "いやらしい": 1, "みゃー先輩": 2, "十川先輩": 2, "千奈": 1},
+    "doubled_group": 2,
+    "source": "her own marks (tools/koikano/markers/sena.json and prompts/style.md 撒く量の物差し): the two scolding words ハレンチ and いやらしい (rates 0.0097 and 0.012, the stammered scold is her signature so one per draft), the two forms of address she uses most, みゃー先輩 (288 lines) and 十川先輩 (170), and her own name, which she says in only 4 lines; each capped per draft so none piles up"
+  },
+  "holes": [
+    "no lore records: the record has 449 inner lines but no diary and no memory entries beyond the lines; her inner register is carried by the HEADVOICE fills, not by a lore file",
+    "her home is world data (world/sena_house.json), not household or home files: she does not own a world, and her own place ids (her_home, school, town) are not the bench's shared HOUSE ids",
+    "gauge baselines: none, no numbers; meter rows seed flat",
+    "voice off: clips are prefix SEN (3493 spoken lines carry a voice id) but tools/voice_index.py accepts MMK only, and no clone sample exists",
+    "vn off: channels/vn_expression.py hard-codes the letter CD (lines 223, 238, 247, 288, 294); her letter is CB and her port is 8773 (8770 is Momoka's, 8771 Maria's)"
+  ]
+}

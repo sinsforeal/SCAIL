@@ -1,0 +1,24 @@
+# tomoe\briefs.py  (185 lines)
+
+DOCSTRING:
+The first character's household and her map, as prompt text: who is home,
+what the house is like, what the ward costs to cross. Read from her files
+(`world.household_file`, `world.geography_file`), which a character with no
+world has blanked; hers alone, and the shared director asks its program for
+them rather than reading them itself.
+
+DEFS:
+def _household(config): 
+def household_brief(config): The family as an economy: who works where, on what hours, for how much, and what a month actually leaves over. Written for the calls that build her world, so that 'mom worries about money' has the same number under it ev
+def household_secret(config): The one thing in the house she has not been told, and how it could reach her. World-facing only: the director and the cast beats may act on it, the persona may never see it. Nothing here is a script -- it is a fact that 
+def home_brief(config, location): Her own place, for a character with no world but a home of her own.  The room she is in described in her own terms, with the rest of the flat under it. Without this the day planner knows about the fan heater and the gree
+def geography_brief(config): Her map as a short block: real addresses, her line and its stops, what is near what. Read from the file on each call, like the calendar -- it is reference rather than state, and should be editable without a restart.
+
+CONFIG SECTIONS: character, world
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

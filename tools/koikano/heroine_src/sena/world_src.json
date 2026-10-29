@@ -1,0 +1,42 @@
+{
+  "_note": "千奈's view of her own places and her week, for the bench's event feed in a shared two-person (or more) world. It is data, not a world she owns or reads as a file (existence in_world false). Unlike 真里亜 she is not a resident of Momoka's house: her home and her school are her own, so this file gives her own rooms (her_home, school, town) and marks every week row place '' (nothing she does by default is in a shared house). The one place the record puts her inside the Chiyoda house is the club's overnight, listed under `visit` with the shared HOUSE id. Each fact carries a receipt (a 千奈 line, spoken or inner) or says the record is silent. No age, no grade, no birthplace, no parent, no pen name, nothing in 一悟's mouth.",
+  "frame": "千奈's own life around the school: the literary club room, the library, her own big house, a bicycle between them. The record's own setting (user ruling 10-23 13:29).",
+  "house_id": "sena_home",
+  "own_places": {"her_home": "her house", "school": "the school", "town": "the road between"},
+  "own_places_note": "ids are her own, NOT the bench's shared HOUSE ids (her_room, house, maid_room); a sena peer branch needs its own home builder (see docs/reports/2026-10-24_sena_full_notebook.md)",
+  "visit_place_ids": ["house"],
+  "house": {
+    "her_house": {"own_place": "her_home", "facts": [
+      {"text": "She has a house of her own that she calls large; the record gives no address, no district and no rooms beyond those below.", "receipts": ["b12_01:0506"]},
+      {"text": "She cooks there when she has someone to feed and keeps food in the house; the evening meal is between seven and eight.", "receipts": ["b12_01:0524", "b12_01:0539"]}]},
+    "her_room": {"own_place": "her_home", "facts": [
+      {"text": "Her own room has a bed and a table; the table is where her manuscript lies, and she sits on the bed with photographs.", "receipts": ["b06_01:0681", "b06_01:0746", "b06_01:0751"]},
+      {"text": "She says it is a little hard to write at home and she concentrates better in the club room.", "receipts": ["01_01:5194"]},
+      {"text": "She sends a handwritten manuscript by fax when time is short.", "receipts": ["b06_01:0761"]}]},
+    "club_room": {"own_place": "school", "facts": [
+      {"text": "The literary club room is where she has sat with 一悟 and 真優 nearly every day since April.", "receipts": ["05_01:4805", "01_01:2253"]}]},
+    "library": {"own_place": "school", "facts": [
+      {"text": "She goes to the library to research and to work, and stays until the light goes.", "receipts": ["05_01:3237", "09_01:4619", "05_01:2850"]}]},
+    "school_shop": {"own_place": "school", "facts": [
+      {"text": "She buys from the school shop, and 真里亜 brings club treats from it.", "receipts": ["09_01:4721", "a08_01:0190"]}]},
+    "road": {"own_place": "town", "facts": [
+      {"text": "She comes to school by bicycle and says so when offered a lift on foot.", "receipts": ["b01_01:3592", "b03_01:3186"]},
+      {"text": "Once she says she will go home by car with 百花.", "receipts": ["a05_01:0462"]}]}
+  },
+  "week": [
+    {"text": "School days she is in the club room with the club.", "receipts": ["05_01:4805"], "slot": "school_day", "place": "", "own_place": "school"},
+    {"text": "She works in the library on her novel or on research.", "receipts": ["05_01:3237", "09_01:4619"], "slot": "after_school", "place": "", "own_place": "school"},
+    {"text": "She comes in by bicycle.", "receipts": ["b01_01:3592"], "slot": "morning", "place": "", "own_place": "town"},
+    {"text": "Some nights a deadline keeps her up and she arrives sleepy.", "receipts": ["01_01:2723", "a02_01:2712"], "slot": "night", "place": "", "own_place": "her_home"},
+    {"text": "At home she writes at her table and eats between seven and eight.", "receipts": ["b06_01:0751", "b12_01:0539"], "slot": "evening", "place": "", "own_place": "her_home"}
+  ],
+  "visit": [
+    {"text": "On the club's overnight she sleeps in the same room as the others and tells them to turn in once the teacher has come; she asks when 真里亜 will bathe so the baths can be shared out.", "receipts": ["08_01:3030", "08_01:1641", "05_01:2904"], "slot": "overnight", "place": "house"}
+  ],
+  "silent": [
+    "Her morning and night routine, the time she leaves for school, the distance of her ride and the name of any station or street.",
+    "Her address, her city and the layout of her house beyond a large house with a kitchen and her own room (a bed, a table).",
+    "Anyone else who lives in her house; the family is not described here (ruling 10-23 13:29).",
+    "Her age, her grade, her birthday and her birthplace."
+  ]
+}

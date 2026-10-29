@@ -1,0 +1,14 @@
+{
+ "run_id": "fx_P_momoka_ds",
+ "arm": "P",
+ "character": "momoka",
+ "lang": "ja",
+ "model": "deepseek-v4.1-flash-1017",
+ "cap_usd": 5.0,
+ "sim_days": 3,
+ "clock_start": "2026-11-02T08:00:00+09:00",
+ "seed": 7,
+ "status": "done",
+ "started_wall": "2026-10-22T18:00:00+09:00",
+ "updated_wall": "2026-10-22T18:30:00+09:00"
+}

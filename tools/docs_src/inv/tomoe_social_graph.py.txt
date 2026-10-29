@@ -1,0 +1,35 @@
+# tomoe\social_graph.py  (381 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class SocialGraph: 
+    __init__(config, llm, store, clock, state): 
+    _reads_world(): 
+    read_only(): Whether these edges are somebody else's to move. Read by the promises (`sim/commitments.py`), which moves an edge by code.
+    _say_reads_world(what): Said once per kind of thing withheld, per process: the gates are asked on every compile and a line each would be a line a day for the life of the process.
+    _load(): 
+    _world_edges(): The owner's compiled edges out of the world file, in the shape the readers below expect. Read on the call rather than cached: the owner rewrites them once a day, and a reader holds nothing open between looks. `updated` a
+    _save(g): 
+    _holders(): Non-dormant cast. Friends hold edges to her and to each other; family hold only their view of her.
+    seed_if_empty(): 
+    _witnessed(name, role, date): What this person saw today, deterministically. Group chat is visible to every friend; a LINE/call thread to its two ends; an in-person line to whoever was in the room (their name in the record).
+    update_at_compile(date): 
+    _decay(e): Irritation cools on a half-life; regard and the view only move on evidence. Applied lazily at update time.
+    _days_ago(n): 
+    brief_for(name, present): This speaker's edges, for their cast_turn / the day planner. Only their own -- what THEY hold, never anyone else's.
+    tomoe_lines(): Every holder's actual view of her: the ground truth her guesses are settled against, and the ick's cast amplification.
+    witnessed_heat(): 0..1: how hot the friend group currently runs toward her. 0.5 is neutral. Prices a witnessed failure: the same stumble costs more in front of an irritated group than a warm one.
+    drift_lines(): Regard movement over the last week, for the showrunner: converging irritations and sliding regards are plots.
+    report(): /graph: every edge, for the operator.
+    payload(): For TALKAPP's backstage: the raw edges.
+
+CONFIG SECTIONS: prompt_text, social_graph
+KV READ: cast_chat, social_graph
+KV WRITE: social_graph
+TABLES: 
+LOG TAGS: graph
+PROMPTS: graph
+LLM ROLES: graph
+OPS COMMANDS: 

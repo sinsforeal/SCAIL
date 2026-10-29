@@ -1,0 +1,25 @@
+# sensors\gelbooru_classifier.py  (241 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class GelbooruClassifier: 
+    __init__(config): 
+    _load_data_files(): 
+    _load_disk_cache(): 
+    _save_disk_cache(): 
+    classify_by_md5(md5): 
+    _fetch_post(md5): 
+    _classify_tags(raw_tags): 
+    _compute_local_score(classified): 
+def cached_classifications(path): What the board said about the pictures he has opened. Read only.  Keyed by the picture's own content hash and written by the classifier within two seconds of him opening it. A reader that only wants to NAME a picture (`s
+
+CONFIG SECTIONS: gelbooru_api_key, gelbooru_cache_path, gelbooru_cleaned_json_path, gelbooru_ground_truth_json_path, gelbooru_ratings_json_path, gelbooru_request_delay, gelbooru_user_id
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

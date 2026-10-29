@@ -1,0 +1,43 @@
+# tools\lore_test.py  (207 lines)
+
+DOCSTRING:
+Does she reach for the right thing she knows, and stay quiet otherwise.
+
+Retrieval has two ways to be wrong and they cost differently. Fetching nothing
+when he asks the name of her own programme makes her a person with no past.
+Fetching something on every turn makes her a person who always has a fact to
+tell you, which is worse, because silence is the design.
+
+So the cases come in pairs: messages that must produce a named record, and
+messages that must produce nothing. Each case prints the top match and its
+score whether it passed or not, because the number is the evidence and a table
+of ticks is not.
+
+It reads the record file and the phrase file off disk and touches no save at
+all: the store is stubbed, so suppression is off and a case does not fail
+because that record happened to be offered in the real conversation an hour
+ago.
+
+    python tools/lore_test.py            # the whole set
+    python tools/lore_test.py --gate     # again with the era gate forced on
+    python tools/lore_test.py --off      # again with it forced off
+
+DEFS:
+class _Store: The record is read from disk; nothing else here touches a save.
+    get(k, default): 
+    set(k, v): 
+class _Clock: 
+    now_ts(): 
+def _lore(gate): 
+def _top(lore, cue): The best match and its score, without offering it or noting it.
+def opened_by_him(): A work she cannot know yet, and the one thing that opens it.  With the era gate on she has nothing to say about a 2006 series, which is the gate working. When he watches it the record is released and only that one is (`s
+def run(gate): 
+
+CONFIG SECTIONS: lore.era_gate, lore.min_score, lore.triggers_file
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

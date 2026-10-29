@@ -1,0 +1,54 @@
+# sim\episode_archive.py  (180 lines)
+
+DOCSTRING:
+Everything fetched about one episode, kept on disk and findable later.
+
+The cache row in `recaps` holds one chosen text. Everything the choice was
+made from -- each candidate page's extracted text and its raw HTML, each
+subtitle file, the transcript it parsed to, each digest, the judge's verdict
+-- is written here instead of being thrown away, so a bad summary can be
+argued with afterwards rather than re-fetched and guessed at.
+
+    data/recaps/<show>/ep<NNN>/
+        manifest.json                  the index: what each file is
+        page-01-myanimelist.net.txt    the extracted text of a candidate
+        page-01-myanimelist.net.html   the bytes it was extracted from
+        subtitle-01-<name>.srt         the file as downloaded
+        transcript-01.json             its parsed lines with timestamps
+        digest-01.txt                  what the digest role made of a page
+        judge-01.json                  the verdict and the reason
+
+`<show>` is the show's id on his list when there is one and a slug of its
+title otherwise -- an episode of a television programme, not a person, which
+is why one directory serves both characters (`tools/isolation.py`).
+
+**Nothing is overwritten.** A second fetch of the same page writes
+`page-02-...`, and the manifest gains a row; the manifest itself is the one
+file rewritten, because it is the index rather than a record.
+
+Each manifest row says what the file is (`kind`), where it came from (`url`),
+when it arrived (`at`, machine local time), and how big it was. `chosen`
+names the file and URL the judge picked, with its reason and confidence.
+
+DEFS:
+def slug(name, fallback): A directory name from a show's title. A Japanese title reduces to nothing under an ASCII filter, so it becomes a short stable hash with a `jp-` mark; the readable title is written into the manifest.
+class EpisodeArchive: 
+    __init__(root, enabled): 
+    show_key(anime_id, ja, title): 
+    dir_for(show_key, ep): 
+    _manifest_path(show_key, ep): 
+    manifest(show_key, ep): 
+    _write_manifest(show_key, ep, man): 
+    save(show_key, ep, kind, data, url, ext, note, name, show, ja): Write one fetched thing and index it. Returns its file name, or ''.  `kind` is what it is: page, html, subtitle, transcript, digest, judge, index. The file name carries the kind, a version number that never reuses an ear
+    note_choice(show_key, ep, url, confidence, reason, anchor, candidates): Which candidate the judge chose, and why, beside the files it chose among -- so the index answers 'which one did it take' on its own.
+    read(show_key, ep, fname): 
+    report(limit): What is on disk, for /kb: shows, episodes, files.
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: archive
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

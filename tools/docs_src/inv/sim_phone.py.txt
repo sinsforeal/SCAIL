@@ -1,0 +1,44 @@
+# sim\phone.py  (957 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Phone: 
+    __init__(config, store, clock, telemetry_module, sys_monitor): 
+    force_next(): 
+    force_next(v): 
+    _pending(): 
+    peek_activity(): 
+    user_idle(): He is away from the PC. Measured from real keyboard/mouse input, never from what is running.
+    should_look(state, scene, access, silent_hours, ignored): Not a timer: after the minimum gap, a felt decision from curiosity, boredom, loneliness and -- the strongest of them -- how long he has been quiet. Returns (bool, why).  The gap is its own term rather than something rout
+    _relieve(state): 
+    _rolling_hours(): 
+    account(): The one running account of the last `phone.rolling_hours`, or {}.  Replaced by every look rather than added to, and dropped whole once it is older than its own window. A digest per batch of flushed entries left her promp
+    _picture_cache(): The board's record of the pictures he has opened. Read only.
+    _viewer_md5(proc, title): The picture's content hash out of an image viewer's window title, or "".  The viewer puts the bare filename in its title and his picture files are named by their own hash, which is the only reason any of this is possible
+    _picture_words(md5, cache): What one picture is, in the few words a trail item can carry: the board's own rating, then who is in it and what it is from.  The tag names are never rendered. There are eighteen of them on a picture, sorted into wholeso
+    _picture_item(group): One trail item for a run of consecutive pictures: (label, duration).  A single picture is named. Several are counted, because the run is the event and not any one of them: how many, over how long, how explicit they were 
+    idle_minutes(): Whole minutes since he last touched the machine, or None when he is at it or there is no monitor to ask.  A measured figure, stored beside the status line and read back by `latest_digest`, which used to recover it by mat
+    his_side_now(): Where he is in relation to his machine this minute, for a MECHANISM role rather than for her: ("at it", minutes in the window he is in), ("away", minutes since he touched anything), or (None, None) when there is no monit
+    live_line(): The status line: what his PC shows this moment. Only from the live monitor; without sensors there is no 'now'.  Every line of it is addressed to her and is written in her language (`self._ja`). The label used to be Engli
+    _sessions_from_feed(since_ts): Window sessions off the telemetry feed on disk, in the monitor's own shape, for when the in-memory history has been emptied by a restart.
+    window_trail(since_ts, max_items): What he has actually been doing since `since_ts`, newest last.  `live_line` answers "what is in front of him this second", which is the right question for someone glancing at a phone and the wrong one for someone who liv
+    catalogue_text(): Titles only, newest first, for the app and the director's open_note.
+    day_shape_line(): Mechanical, from the feed: his first activity today (his local day) and the longest quiet stretch, so she can see roughly when he slept.
+    _fingerprint(entries): What a look SHOWS, as a set the next look can be compared with: the processes in front, the sites in his browsers, whether pictures were opened, which notes were on screen, whether media played. The prose of a digest is 
+    look(llm, force, state, scene, access, silent_hours, ignored): She opens the app. Returns digest text or '' if nothing new.
+    _ja(): The digest itself is written by the `phone` role and comes back in that prompt's language; what is wrapped round it here is code's, and it is addressed to her. Read per call so a harness can flip the arm inside one proce
+    _t(en, ja): One line of this module's own wording, in the arm she is on.
+    latest_digest(): The last digest plus the live status line from her last look, if it is recent -- and, when he has not been at the machine for a while, the ABSENCE first and the digest as history behind it.  At 06:00 on 2026-08-28 her pr
+def _pretty_tag(tag): A board tag as a name: `oyama_mahiro` -> `Oyama Mahiro`, `onii-chan_wa_oshimai!` -> `Onii-chan wa Oshimai`.  The underscore is the board's word separator, a particle in the middle of a title is not capitalised, and a tra
+def _last_input_ts(e): When he last touched the keyboard or mouse inside this feed entry, or 0. Browser history and vault changes are not evidence of presence (autoplay, sync); only input is.
+
+CONFIG SECTIONS: phone, phone.day_shape, phone.digest_min_minutes, phone.live_line, phone.live_line_max_age_minutes, phone.look, phone.max_entries_per_look, phone.max_raw_chars, phone.vault_catalogue_items, prompt_text, resident, sensor_view, sensors, sensors.user_idle_seconds
+KV READ: his_first_active, phone_account, phone_force_next, phone_last_active_wall, phone_last_consumed_id, phone_last_fingerprint, phone_last_live, phone_last_look_ts, phone_trail_shown
+KV WRITE: his_first_active, phone_account, phone_force_next, phone_last_active_wall, phone_last_consumed_id, phone_last_fingerprint, phone_last_live, phone_last_look_ts, phone_trail_shown
+TABLES: 
+LOG TAGS: phone
+PROMPTS: phone
+LLM ROLES: phone
+OPS COMMANDS: 

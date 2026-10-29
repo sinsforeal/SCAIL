@@ -1,0 +1,46 @@
+{
+  "_note": "アリス's view of the shared 千代田 house, for the bench's event feed. She is a homestay guest in 百花's house and a housemate of Momoka (and of 真里亜), not a visitor with a home of her own and not a reader of a world file (existence in_world false). The house is the same one as characters/momoka/world/koikano_world.json; this file adds only what アリス's own lines give, each fact with a receipt, and says 'the record is silent' where it is. No age, no grade, no birthplace, no parent, nothing in 一悟's mouth.",
+  "frame": "千代田家, the house of 百花, where アリス stays as a homestay guest while she studies at 早久保学園. The record's own setting (user ruling 10-23 13:29; orchestrator ruling 10-24 00:16: housemate in the shared house). She presides over the student council and is also in the literature and drama clubs.",
+  "place_ids": ["house"],
+  "place_ids_note": "the bench's shared HOUSE ids (bz/two_minds bzombie/arms/s/make_run.py: her_room, house, maid_room). Her own guest room has no id there, so it maps to 'house', as 真里亜's guest rooms and tea do. School and town places are outside the house and carry place '' in the week rows. A `guest_room` place id would be a bench HOUSE change for later (make_run.py is not edited here).",
+  "house": {
+    "guest_room": {"place": "house", "facts": [
+      {"text": "She has a room of her own in the house where she stays: she offers it to others to change in or to move to, and goes to it to change into her own clothes.", "receipts": ["06_01:6202", "07_01:5174"]},
+      {"text": "The record says she stays as a homestay guest in 百花's house, and that she has lived with 百花 for some time. It never describes the room or the house around it.", "receipts": ["01_01:4627", "07_01:4882"]},
+      {"text": "Her own clothes take a long time to change into: she calls them somewhat special.", "receipts": ["07_01:5185"]}]},
+    "momoka_room": {"place": "her_room", "facts": [
+      {"text": "百花 lies down when she is unwell and アリス passes on what the doctor said about it.", "receipts": ["07_01:3909"]}]}
+  },
+  "outside": {
+    "school": {"place": "", "facts": [
+      {"text": "The student council room is where she works through the day's business and where she asks people to come after school.", "receipts": ["01_01:1381", "02_01:2851", "04_01:0317"]},
+      {"text": "The literature club's club room is where she joins the club once the day's chores are done.", "receipts": ["a11_01:0408", "03_01:3934"]},
+      {"text": "She walks the school with Cerberus and goes looking for it when it is missing; the gym is where it was chased.", "receipts": ["01_01:1505", "02_01:2202"]},
+      {"text": "From the council she runs the festival preparations and the night-after festival campfire.", "receipts": ["01_01:1254", "02_01:4297"]}]},
+    "town": {"place": "", "facts": [
+      {"text": "She looks forward to karaoke with the club, to hear 百花 sing.", "receipts": ["a01_01:1887"]},
+      {"text": "She eats Japanese snack food and says she would eat nothing else.", "receipts": ["01_01:4614"]},
+      {"text": "The record names no street, shop or district.", "receipts": []}]},
+    "family": {"place": "", "facts": [
+      {"text": "The record is silent on where she lived before and on anyone at home: nothing is written about it here (ruling 10-23 13:29).", "receipts": []}]}
+  },
+  "week": [
+    {"text": "Before lessons she feeds Cerberus; without it he goes hungry until noon. Where she does it the record does not say.", "receipts": ["01_01:1388", "01_01:1397"], "slot": "morning", "place": ""},
+    {"text": "She works through the council's business in the council room before and between lessons.", "receipts": ["01_01:1381", "01_01:1254"], "slot": "school_day", "place": ""},
+    {"text": "After school she asks people to come to the council room, then goes on to the club.", "receipts": ["02_01:2851", "a11_01:0408"], "slot": "after_school", "place": ""},
+    {"text": "In the club room she reads the club's work, checks it, and sits with the others.", "receipts": ["08_01:0483", "08_01:0492", "a12_01:0554"], "slot": "after_school", "place": ""},
+    {"text": "She judges a contest when asked, and presides over a festival's prizes and small talks.", "receipts": ["09_01:5260", "09_01:5487"], "slot": "event_day", "place": ""},
+    {"text": "She changes at her own room in the house and comes back to the others after.", "receipts": ["07_01:5174", "07_01:5568"], "slot": "evening", "place": "house"},
+    {"text": "When 百花 is unwell she passes on what the doctor said and takes the report to the school with the teacher.", "receipts": ["07_01:3909", "07_01:3171"], "slot": "sick_days", "place": ""}
+  ],
+  "care_of_momoka": [
+    {"text": "She says it was an anemia from fatigue and that 百花 felt better lying down.", "receipts": ["07_01:3909"]},
+    {"text": "She says 百花 was weak in the body from long ago and that going to school was hard for her.", "receipts": ["07_01:4733", "07_01:4740"]},
+    {"text": "She says that as the one who lived with her longer she should have noticed.", "receipts": ["07_01:4882"]}
+  ],
+  "silent": [
+    "Where in the house she sleeps (beyond 'my room'), her routine of morning and night, and any day off.",
+    "Any room, street or shop beyond the school's council room, club room and gym.",
+    "Any age or grade of hers or of anyone; where she came from; anyone at home."
+  ]
+}

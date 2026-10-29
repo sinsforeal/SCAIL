@@ -1,0 +1,37 @@
+{
+  "_note": "A DEMONSTRATION OF THE FORMAT, not the author's file. The real one is data/cast_types.json and is his. This exists so tools/cast_type_test.py can be run and read before that file is written; it names one real roster key only because the counts have to land on real turns to mean anything. Nothing at runtime reads either file.",
+  "_format": "<roster key>: type (four letters) + axes.<EI|SN|TF|JP>.behaviour (one line of what the type was translated into) + axes.<axis>.markers.<pole> (observable markers: a Japanese surface form counted as a substring of the turn, or one of the structural facts named in tools/cast_type_test.py STRUCTURAL).",
+  "Rena-chan": {
+    "type": "ESTJ",
+    "axes": {
+      "EI": {
+        "behaviour": "she opens rooms and fills silences instead of waiting to be addressed, and her messages come in bursts",
+        "markers": {
+          "E": ["opens the exchange", "sends more than one message in a row", "！"],
+          "I": ["one-word reply", "sends a stamp"]
+        }
+      },
+      "SN": {
+        "behaviour": "she talks about what is in front of her -- the time, the place, the thing she is holding -- rather than what it might mean",
+        "markers": {
+          "S": ["names a time", "sends a picture", "どこ", "何時"],
+          "N": ["かも", "気がする", "みたいな", "たぶん"]
+        }
+      },
+      "TF": {
+        "behaviour": "she settles a thing rather than sitting with how somebody feels about it",
+        "markers": {
+          "T": ["じゃあ", "でいい", "決め", "無理"],
+          "F": ["大丈夫", "ごめん", "ありがと", "えらい", "かわいい"]
+        }
+      },
+      "JP": {
+        "behaviour": "she closes an open plan on the spot, with a time on it",
+        "markers": {
+          "J": ["names a time", "answers last", "集合", "予定"],
+          "P": ["asks a question back", "どうする", "とりあえず", "あとで"]
+        }
+      }
+    }
+  }
+}

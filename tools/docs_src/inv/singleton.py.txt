@@ -1,0 +1,55 @@
+# singleton.py  (111 lines)
+
+DOCSTRING:
+One bot, one save file. Enforced, not asked for.
+
+On 2026-08-19 two copies of `scail.py` ran at once for about twenty minutes.
+Telegram's `getUpdates` hands an update to whoever asks with an offset that has
+not passed it yet, so both processes were told about the same message and both
+called `store.add_message`:
+
+    2026-08-19_16-39-58   [21:46:16] [him] do you eat anything other than melon pan?
+    2026-08-19_21-40-43   [21:46:12] [him] do you eat anything other than melon pan?
+
+rows 254 and 255, identical text, identical `tg_id` 619. Same again at 21:58.
+Her unread queue held it twice, the persona saw it twice, both copies were
+marked read, and both processes answered.
+
+The rule "never run two copies" was written in CLAUDE.md and a rule is not a
+mechanism. This is the mechanism.
+
+Liveness is psutil plus a cmdline match, and both halves matter. `OpenProcess`
+returns a usable handle for a process that has already exited, which is exactly
+how the MAL daemon spent three days refusing to restart against its own corpse;
+and pids are recycled, so a lock naming a pid that now belongs to something
+else must not wedge the bot shut forever.
+
+The cmdline the lock compares against is the one the HOLDER wrote when it took
+the lock, on the second line of the file. It used to be a fixed string,
+`scail.py`, which stopped matching the day the runtime moved behind
+`tomoe/run.py` and `resident/run.py`: every live bot then read as dead, so
+`holder()` returned 0 for a save a bot was sitting on and `acquire()` would
+have taken the lock over and started a second copy -- the fault this module
+exists to prevent, inert for as long as the two programs have existed. A
+holder that records its own command line needs no guess about what a bot is
+called. A lock file from before this (a bare pid) still falls back to `marker`.
+
+DEFS:
+class AlreadyRunning: 
+class Singleton: 
+    __init__(path, marker): 
+    _read(): (pid, the command line the holder wrote, or "").
+    _alive(pid, cmdline): 
+    _own_cmdline(): 
+    holder(): The pid of the live process holding this save, or 0. For anything that wants to know whether a bot is up before touching its save -- `yukarin/week/patch_live.py` refuses to write behind a running one. The liveness test b
+    acquire(): Raises AlreadyRunning when another live bot holds it.
+    release(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: lock
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

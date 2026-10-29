@@ -1,0 +1,42 @@
+# sim\director.py  (687 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Director: 
+    _family_txt(now): Never lets the tick down: a fault here is a missing line, not a missing scene (it took the director out for three runs on 08-26).
+    _friends_line(): 
+    _japan_line(): 
+    __init__(config, llm, store, clock, weather, calendar, state, records, phone, health, body, diet, money): 
+    catch_up(): 
+    catch_up(v): 
+    _resume_scene(): The scene she is in, as the code left it.  The `scenes` table has a fixed column list, so a scene rebuilt from it loses every key the code attached after the model answered -- what she ate, what she spent, the note she h
+    _keep_scene(data): The current scene, whole, for the next process to pick up.
+    _brief(name): Her household, her map: the program's text, if she has a world. `briefs` is a module the program wires (tomoe/briefs.py); a character with no world has none and gets nothing.
+    from_plan(): Is this character's scene cut from her plan in code, with no model call? `director.scene_source` decides: "model" (the default, and the first character's) asks the director role every tick; "plan" reads the schedule bloc
+    _until_block_end(blk): How long a scene cut from the plan holds: to the end of the block, and never longer than the ordinary beat.  The boundary is the only moment a planned day changes, so a scene must never outlast it. The beat is the cap be
+    _plan_scene(blk, extra_events): The scene as the plan already holds it: no call, nothing invented.  Every field a reader of a scene asks for is answered from the block or from the machine's own record. `sensory` and `inner` are empty because the block'
+    due(schedule): 
+    _hole(schedule): The stretch since the model last wrote a scene, when placeholders stand in for it: the schedule blocks that passed, as one block of text for the prompt. Empty when the record is whole.
+    sleeping(): True when the current scene is the one written for tonight. The flag cannot live in the scene dict: it is rebuilt from the scenes table's columns on boot and anything the code added is lost.
+    scene_fresh(): 
+    phone_access(schedule): 
+    asleep_block(schedule): True when the schedule has her asleep now (phone none + a sleep word). A resident's sleep is not in her plan: `sleep_source` (resident/sight.py) reads it off his machine and is asked first.
+    sleep_scene(schedule, block, reason): One scene for the whole night, written when she goes under.  The director does not tick while she sleeps, so whatever the last waking scene said stayed on the record until morning: "eyes closed but not asleep", true at 0
+    _settle_sleep(data, raw, block, now): The night written down, whoever described it: one copy, so the scene cut from the plan and the scene a model wrote are the same record with the same fields.
+    _waiting(): Whose message she has not answered, from `cast_chat` itself.  The scene model was writing "Hinako's message still sits unread on her phone" at 11:00 having answered Hinako at 10:38 -- three lines below it in the same pro
+    _ledger_txt(schedule): 
+    tick(schedule, digest_text, unread_count, extra_events, his_side): 
+    _same_but_the_figures(text): Is this the previous event over again with the numbers moved on?  The director is asked for a scene every `tick_minutes`, and a machine he has walked away from produces the same true sentence every time: "He's been away 
+    _settle_scene(data, blk, unread_count, raw): Everything that happens to a scene after somebody has written it: the fields checked, the money spent, the meal noted, the events and the household's moves written to the record, the threads synced, the timestep clamped,
+def scene_brief(scene): 
+
+CONFIG SECTIONS: director, director.sleep_keywords, director.tick_minutes, environment, goals.enabled, needs.director_may_deviate, needs.enabled, needs.red_tick_minutes, prompt_text, spiral.enabled
+KV READ: backstory, cast_chat, director_catch_up, director_current, director_last_model_ts, director_last_tick_ts, director_next_tick_minutes, last_life_event, morning_intent, open_threads, sleep_scene_ts
+KV WRITE: director_catch_up, director_current, director_last_model_ts, director_last_tick_ts, director_next_tick_minutes, last_life_event, open_threads, sleep_scene_ts
+TABLES: 
+LOG TAGS: director, household
+PROMPTS: director, sleep
+LLM ROLES: director, sleep
+OPS COMMANDS: 

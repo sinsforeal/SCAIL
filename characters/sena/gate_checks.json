@@ -1,0 +1,32 @@
+[
+  {
+    "check": "holdout_size",
+    "pass": true,
+    "detail": "514 holdout spoken lines (needs 100)"
+  },
+  {
+    "check": "registers_reconcile",
+    "pass": true,
+    "detail": "H 306 + non-H 208 vs pooled 514"
+  },
+  {
+    "check": "self_reference_holds",
+    "pass": true,
+    "detail": "私 in 0.115 of holdout lines vs 0.137 of build lines (within 0.1)"
+  },
+  {
+    "check": "mechanisms_distinctive",
+    "pass": true,
+    "detail": "9 of 10 mechanisms above the control rate on the holdout (needs half)"
+  },
+  {
+    "check": "rule_detector_above_chance",
+    "pass": true,
+    "detail": "bible-rule detector balanced accuracy 0.817 full, 0.778 non-H (chance 0.5)"
+  },
+  {
+    "check": "rules_beat_bigram",
+    "pass": false,
+    "detail": "bible-rule 0.817 vs plain bigram 0.837 (full); scored on own speech_guide markers (10)"
+  }
+]

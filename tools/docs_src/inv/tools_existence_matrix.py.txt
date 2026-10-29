@@ -1,0 +1,60 @@
+# tools\existence_matrix.py  (470 lines)
+
+DOCSTRING:
+Every kind of character the sheet can declare, built once each.
+
+A character says what kind of thing she is with five answers on her sheet
+(`embodied`, `in_world`, `sees_him`, `has_account`, `with_him`) and everything else
+follows: which sections run, which world paths are blanked, which program
+builds the rest of her. Two kinds have ever been booted -- the first
+character's (a body, a world, a phone-app view, an account) and the second's
+(a body, no world, resident, no account). The third character's in-world
+package was the first to answer "a body, a world, no account", and it could
+not build her system prompt: the taste module was built for every embodied
+character and read the account store, and the account monitor made a
+directory from a blanked key. Nothing had ever tried that combination, so
+nothing had failed.
+
+This tries all of them. For each combination of the answers it writes a whole
+scratch BUNDLE under the temp directory -- her sheet, her values for the holes
+in the library's prompts, her voice, her speech guide, her household, her map
+and, when she is in a world, a world of two people written for the run --
+composes her config from it with `tools/new_character.py`, builds the whole
+App the way smoke does (console, no sensors, the logger stubbed, every model
+call and every network connection refused), renders her system prompt and what
+she carries the way the first reply would, and asserts that none of it names a
+character who actually runs. The program is the one the answer implies
+(`tomoe` for a character in a world, `resident` for one who is not).
+
+Every kind used to be built from a copy of `config.json` with the identity
+block rewritten, which meant forty builds of the FIRST character in a costume:
+her fills, her household, her map and her roster, and by construction no leak
+could show. Nothing here is read out of a character who runs; the name and the
+place belong to nobody (`tools/fixtures/neutral_fills.json`).
+
+Reported by default; `--strict` fails on any combination that does not
+build, for smoke once every combination does.
+
+    python tools/existence_matrix.py              # the table
+    python tools/existence_matrix.py --strict     # exit 1 on a failing row
+    python tools/existence_matrix.py --only "embodied,in_world,digest,no_account"
+
+DEFS:
+def _stub_logger(): 
+def _label(embodied, in_world, sees, account, owner, with_him): 
+def _sheet(embodied, in_world, sees, account, path, with_him): The smallest sheet the config accepts: who she is and what kind.
+def _bundle(d, key, embodied, in_world, sees, account, owner, with_him): A whole scratch bundle for one kind of character, under `d`.  Everything that is this person: her sheet, her values for the holes in the library's prompts, her voice, her speech guide and the manifest that says how she i
+def _scratch_world(d, in_world): A whole world for this run: a roster of two, their sheets, their mechanisms, their types, the places and the school year. Nothing is read out of the live world, so a kind of character that is IN a world is built against 
+def _room_checks(app, in_world, owner): What a room hands a writer, on a character who does not exist.  Three things this cannot be allowed to lose, because each of them was absent for weeks before anybody read a transcript: the handful of concrete things a sp
+def build_one(embodied, in_world, sees, account, keep, owner, with_him): (ok, note): the App built, or the exception type and where.
+def _leaks(cfg, text): Every registered character's name or place that this synthetic character's prompt says. Built once: it is the same set for every row.
+def main(argv): 
+
+CONFIG SECTIONS: json
+KV READ: room_out
+KV WRITE: director_current
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

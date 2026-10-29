@@ -1,0 +1,37 @@
+# tools\checks_index.py  (125 lines)
+
+DOCSTRING:
+Every check the project runs, in one table, read off the tools themselves.
+
+`tools/smoke.py` runs before every restart and refuses one if it fails; it
+carries about thirty checks, each announced by a `[smoke]` line in its
+source, and half of them are other tools it runs as subprocesses. Beside it
+are thirty `tools/*_test.py` harnesses that are run by hand. Nothing listed
+them: to know what was guarded you read smoke's 750 lines, and a new check
+went in wherever the last one was.
+
+This reads them and writes `docs/checks.md`: one row per smoke check in the
+order smoke runs them (its heading, the tool it runs if any, and whether a
+failure stops a restart or is only reported), then one row per hand-run tool
+with the first line of its docstring. Generated; edit the tools, not the
+table. `tools/docs_check.py` resolves every path in it, so a row that names
+a tool that has been deleted fails the docs pass.
+
+    python tools/checks_index.py            # writes docs/checks.md
+    python tools/checks_index.py --print    # to stdout only
+
+DEFS:
+def _docline(path): 
+def smoke_rows(): (heading, tool, stops-a-restart) per `[smoke]` announcement, in order.  The block after a heading runs to the next heading; a tool named in it is the subprocess it runs; `failures.append` in it means a failure stops a re
+def hand_rows(): 
+def render(): 
+def main(argv): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

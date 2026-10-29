@@ -1,0 +1,63 @@
+{
+ "output_id": "out_oe_glm_007",
+ "arm": "P",
+ "run_id": "fx_P_tomoe_glm",
+ "virtual_ts": "2026-11-03T13:01:00+09:00",
+ "text": "FAKE her: dummy unprompted thought",
+ "final_call_id": "c-oe_glm-007-1",
+ "calls": [
+  {
+   "call_id": "c-oe_glm-007-0",
+   "role": "plan"
+  },
+  {
+   "call_id": "c-oe_glm-007-1",
+   "role": "speak"
+  }
+ ],
+ "inputs": [
+  {
+   "kind": "his_words",
+   "source": "tr:7",
+   "text": "FAKE him: morning"
+  },
+  {
+   "kind": "env_event",
+   "source": "env:7",
+   "text": "FAKE world: lecture at 2nd period"
+  },
+  {
+   "kind": "memory",
+   "source": "mem:1",
+   "text": "FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory "
+  },
+  {
+   "kind": "state",
+   "source": "st:1",
+   "text": "FAKE state"
+  },
+  {
+   "kind": "persona",
+   "source": "persona",
+   "text": "FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona "
+  },
+  {
+   "kind": "own_past_line",
+   "source": "tr:6",
+   "text": "FAKE her: hey, dummy reply one"
+  }
+ ],
+ "state_at_output": {
+  "mood": "fake"
+ },
+ "causal": {
+  "percepts": [
+   "FAKE percept"
+  ],
+  "workspace": [
+   "FAKE item"
+  ],
+  "decision": "FAKE decision text",
+  "route": "reply"
+ }
+}

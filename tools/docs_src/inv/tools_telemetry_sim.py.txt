@@ -1,0 +1,39 @@
+# tools\telemetry_sim.py  (168 lines)
+
+DOCSTRING:
+Replay the telemetry feed through the phone pipeline and measure what survives.
+
+The feed is rich and the digest is three sentences, and until this existed
+there was no way to see where in between the information went. It replays the
+real caps -- `phone.max_backlog_entries`, `max_entries_per_look`,
+`max_raw_chars` -- over the whole feed as a series of looks, and reports what
+reaches the model rather than what was collected.
+
+No LLM: everything up to `llm.call("phone", ...)` is deterministic, and that is
+the part worth measuring.
+
+    python tools/telemetry_sim.py                 the whole feed
+    python tools/telemetry_sim.py --last 40       the last 40 entries
+    python tools/telemetry_sim.py --sample 2      print look #2's kept text
+
+What to read. `truncated` is the share of formatted text thrown away by
+`max_raw_chars`; it is cut from the front, so what is lost is the oldest and
+not the least interesting. `noise` is the share of her budget spent on window
+lines carrying no title -- a terminal repainting its own title once a second
+produced one session per second, and 53% of every session ever recorded was
+WindowsTerminal.exe. `browsing kept/lost` counts the lines that name a site,
+which is the closest thing to a measure of whether the look was worth taking.
+
+DEFS:
+def profile(text): What this block of context actually consists of.
+def run(entries, cfg, look_times, sample, verbose): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: phone
+OPS COMMANDS: 

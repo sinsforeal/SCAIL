@@ -1,0 +1,50 @@
+# tools\voicelab_report.py  (272 lines)
+
+DOCSTRING:
+One table over every model AND every subagent, scored for Japanese.
+
+`tools/voicelab.py` asks "is this her". This asks the narrower question the
+model bench is actually for: **which model writes the best Japanese in her
+voice.** Same answers, different lens, so the checks are different ones.
+
+Four faults a voice screen does not look for, each seen in a real run:
+
+  * **Script leakage.** qwen3.8-flash answered a Japanese prompt in English
+    against three separate instructions. Latin letters in her output are almost
+    always that, not a loanword.
+  * **Wrong-language characters.** A model trained mostly on Chinese can emit a
+    simplified form that is not a Japanese kanji (说, 时, 见) or a traditional
+    one Japanese does not use (實, 體). Both read as Japanese to a checker that
+    only asks "is this CJK", and to nobody who reads Japanese.
+  * **Hangul and other scripts**, which appear when a multilingual model slips.
+  * **Kanji density.** Her writing is chat, not prose: heavy kanji is the tell
+    of a model writing formal Japanese in a text box. Reported, never scored --
+    the corpus is speech transcription and its own kanji rate is a property of
+    whisper, so this column compares models to each other and not to the tape.
+
+Everything else here is the voice standard's (`docs/yukarin-voice-standard.md`),
+counted the same way as in `tools/voicelab.py` so the two runs can be read
+side by side.
+
+**Subagent rows are not comparable on cost or on independence** and the table
+says so: they answered all 42 prompts in one context while every API model got
+42 fresh calls. That asymmetry cannot be removed with the tools here, so it is
+labelled rather than hidden.
+
+    python tools/voicelab_report.py --run data/voicelab/<stamp>
+    python tools/voicelab_report.py --run <stamp> --agents data/voicelab
+
+DEFS:
+def _japanese_chars(): Every character she is on record using. Cached to a file: reading the corpus takes a second and this module is run per report.
+def jp_signals(text): 
+def load(run_dirs, agents_dir): Several runs plus the agent files, as one set of rows.  Several, because a model that has to be run apart from the others still belongs in the same table -- Gemini gets its own pass at two workers with a long backoff, si
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

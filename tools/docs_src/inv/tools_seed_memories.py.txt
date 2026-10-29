@@ -1,0 +1,36 @@
+# tools\seed_memories.py  (157 lines)
+
+DOCSTRING:
+Look at, and rehearse, the seed of a character's own past.
+
+The work itself is `sim/seed_memories.py`, which the program that runs her
+calls once at boot, so this is not the route the rows normally arrive by.
+What it is for is seeing what the seed is made of before it runs, and running
+it against a COPY of a save to prove what it writes.
+
+It refuses to write a save named in `characters.json`: a seed run against a
+live one would be a second writer on it, and a character whose own process
+does this at boot needs nothing done to her by hand.
+
+    python tools/seed_memories.py --config config_asumin.json --report
+    python tools/seed_memories.py --config config_asumin.json --sample 12
+    python tools/seed_memories.py --config config_asumin.json --db /tmp/copy.db
+
+DEFS:
+def live_saves(): 
+def paths_from(config_path): 
+def report(rows, moments_seen): 
+def main(): 
+class _Today: The one thing `first_day` asks a clock for.
+    now(): 
+def _ensure_table(store): 
+def _count(store): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: self_memories
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

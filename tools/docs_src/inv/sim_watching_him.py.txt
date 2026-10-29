@@ -1,0 +1,137 @@
+# sim\watching_him.py  (2471 lines)
+
+DOCSTRING:
+What he is watching, found out about and read up on while he watches it.
+
+Her anime knowledge already had every piece except the one that joins them.
+His list is mirrored locally (700 shows, 3,161 episodes, cast with Japanese
+voice actors for 479 of them), a real Japanese あらすじ can be fetched for any
+(show, episode) and cached, and she has a record of her own career. Nothing
+connected the three: he could watch an episode and she would learn only that a
+count on a website went up, because the synopsis fetcher was reachable *only*
+from him naming the show in chat.
+
+So this module is the join, and it does four things in order:
+
+  * notices a new episode two ways -- the player's own history, which is the
+    moment he starts, and the list, which is minutes later but carries the
+    show's id rather than a filename to guess from;
+  * fetches the Japanese あらすじ for that episode, off the main thread because
+    it opens a browser, cached so a rewatch costs nothing;
+  * asks whether SHE IS IN IT, which for this character is not a rare case:
+    72 of the shows on his list have her in the cast, and one of the thirteen
+    he is part-way through has her in the lead;
+  * and when she is, opens the part of her own record that was held back.
+
+**When the result reaches her is the program's, not this module's.** The
+notice, the fetch, the digest, the thing known by name and the record it may
+open all happen the moment he plays an episode, for every character. What she
+is HOLDING is gated on `note_seen()`: a character who is on his machine is
+told as it lands and the moment is dated to his play, and a character who
+learns what he is doing in snapshots she has to go and fetch is told when she
+next fetches one. `current()`, `situation_lines()` and `impulse_bonus()`
+answer only for an episode that has reached her, and the freshness and settle
+windows are counted from that moment rather than from his play.
+
+That last one is the point of the whole thing and it needs saying plainly.
+Her record is pinned to early 2003 and 178 claims about her later career are
+withheld, because a character who volunteers what she will do in 2011 is not a
+character. **Him watching it is what releases it**, and only the part he
+touched: Higurashi opens Furude Rika and nothing else, Nanoha opens Nanoha and
+the note about what it did to her career, and the concerts, the singles and
+the roles in shows he has never opened stay shut. Her future arrives through
+him, one work at a time, rather than by a date on a calendar.
+
+The match is deliberately strict -- a record's words must all appear in the
+show and character, or share a long word with the show's own title -- because
+the two failure directions are not equal. A record that fails to open is a
+thing she does not bring up. A record that opens wrongly is her claiming a
+part she never played: on a looser rule, him watching Kashimashi (Kurusu
+Tomari, played by someone else) opened her Kurusu Kanako record from a
+different show four years later. `Rino Randou` is a known miss in the other
+direction, romanised two ways; misses are logged.
+
+spec: PROJECT.md §12.12
+
+DEFS:
+def path_marks(name): What the FOLDERS a file sits in say about it: (special kind, season).  Either may be None. The innermost segment wins, because a path runs from the general to the particular: `...\Example Show\OVA\` is an OVA of Example Show w
+def parse_file(name): A player filename as (title, episode), or (None, None).  Ordinary string work and no lookups, so it is safe to run over the whole history on every poll.  **The whole path is read, not just the basename.** A file under an
+def parse_special(name): A player filename that names a special rather than a numbered episode, as (base title, kind, n) -- `Yuyushiki - OVA` is ('Yuyushiki', 'OVA', 1) -- or None. His list holds an OVA under its own title (`Yuyushiki: Komaraset
+def _tokens(s): 
+def _person_name(name): 
+class WatchingHim: 
+    __init__(config, store, clock, anime_kb, recap, db_path): 
+    _history_opens(): `[(epoch, path, episode)]` for every open the player's history holds, oldest first. The whole file rather than its tail: this is the one caller that is looking backwards.
+    _open_path(opens, at, ep): The file open at this moment, or ''. The open's own epoch is what the record of the play was stamped with, so the exact match is the answer whenever the history still holds that line; inside a minute of it is the fallbac
+    _backfill_paths(): Put the file he played back on the rows written before the row carried it, once per save.  Her record of a play kept the work, the episode and the moment and threw the filename away, so the repair pass had nothing to han
+    _con(): 
+    _from_list(since_ts): (anime_id, title, ep, watched_at) for episodes the list has logged since the cursor. Exact -- it carries the show's own id.
+    _from_player(since_ts): (anime_id, title, ep, when) for files the player opened since the cursor. Earlier than the list by however long he takes to mark it, and the only signal at all for a show he never marks.
+    poll(): Cheap, on the loop: the newest episode he has watched that she has not been told about, or None. Two local files, no network.
+    _watched_for_open(path, open_ts, aid, ep, raw, opens, now): `(seconds watched, still open, who answered, the file's length)` for ONE open of the player's history.  Three answers, best first, and the log says which one decided.    * The player's own record of the FINISHED play (`m
+    _same_path(p): 
+    _raw_is_open(raw, path, open_ts, aid, ep): Is the file the player has open right now THIS open of the history.  The state file carries the epoch the file opened at, which is the same integer the history line carries, so the two join exactly. The path and then the
+    _hold(key, title, ep, open_ts, watched, need, by, path): One open being waited on, written to the SAVE.  A hold that lived on the object would be lost by a stop and the next boot would either fetch an episode he skimmed or hold the same open a second time. Keyed on the episode
+    _clear_hold(key): 
+    _settle_short(key, open_ts, title, ep, watched, length, by, floor, need, short): A play that ended under the gate, and the end of its hold.  Two different things are recorded with the same mechanism and said with different words: under `min_minutes_in` he opened the file and closed it, and above that
+    _record_plays(): His readable timeline of finished plays, kept up to date by whichever process polls first (`machine/plays.py`).  Not elected to one character and not one file per character: the timeline is the machine's, the write is id
+    _name_of_file(path): What to call a played file in his timeline: the work and the episode as his own list has them, and nothing when the file is not an episode of anything -- the same folder holds radio recordings, music videos and a file ca
+    _when_ts(when): One route's stamp as seconds, whichever route wrote it: his list writes an ISO minute, the player a unix time.
+    _fetched_today(): 
+    note_fetch(): One episode was read up on today. The count is what the day's cap is measured against; a week of days is kept and no more.
+    _first_of_each(rows): The lowest-numbered episode of each work, newest work first: where a session has to be cut short, the one worth reading up on is where he started, because it is what the rest of the run follows from.
+    _queue_rest(found, seen, taken_key): Everything HIS LIST logged in this poll that was not taken up, kept for a reading-up of its own. Returns how many were queued.  Only the list route. A run in the player arrives one open per poll -- he is inside each epis
+    _stub(row, seen): An episode of a batch the day's cap will not stretch to. It happened, it counts towards the range she is told about, and nobody reads it up. Marked seen at once so no later poll spends a fetch on it, and no network is to
+    _from_queue(seen): The next episode of a batch that is still owed its reading-up, or None. One per poll, so six episodes of one work cost six fetches over half an hour rather than six at once.
+    _list_id_for(ep, at, allow, title): (anime_id, title) his list has logged for THIS watch, or None. Exact where the filename is a guess, and typically half an hour later.  The episode number alone is not enough to say two records are one watch: he marks epi
+    _await_id(aid, title, ep, when, how): The confirm window over a title-only resolution.  `(aid, title, how)` to go ahead with, or None to wait: the player's cursor is put back so the next poll finds this open again, exactly as the too-short-open case does.
+    _type_of(aid): 
+    _entry(aid): What his list holds about one work: the edition, the episode count, the season. `{}` without a mirror.
+    _standing(aid): One line of where HE stands with a candidate -- what he has marked and scored -- which is most of what separates two editions of one franchise: he had finished the 26-episode entry three days before he opened the OVA.
+    _seen(): {episode key: when it was counted}. The list kept before the clock was reads as counted long ago, so an open of one of those is a rewatch -- except the one the module still holds, which keeps its own time.
+    _mark_seen(seen, key): 
+    _now_raw(): The player's state file as written, playing or not; None if unread.
+    _raw_is(raw, aid, ep): Does the player's file name this show and episode.
+    now_playing(): Where he is in the file open in front of him, or None.  Written from inside the player (`tools/mpv/scail_logger.lua`), because the obvious answer -- how long since the file opened -- is wrong the moment he pauses, and pa
+    progress(anime_id): Where he is in this series: (watched, total, status). His own list, so it is what he has marked rather than what he has played.
+    her_parts(anime_id): [(character, 'Main'|'Supporting')] for the parts she plays in this show, from the cast his own mirror already holds.  By her PERSON ID where her config gives one, which cannot go wrong. The substring match below it is wh
+    open_her_record(title, parts): Add this work and the parts she plays in it to the set of things the era gate will let through. Returns the tokens newly added.
+    record_opens(record_title, contact): Does contact with these works release this record?  Either every word of the record's title appears in the work, or the record shares a long word with the work's own title. The second is what lets a note *about* a role -
+    busy(): 
+    digest(item): The important parts of the synopsis, in Japanese, a few hundred characters, by the `watching_digest` role. The raw synopsis is a blog page -- impressions, headings, other episodes -- and cutting it at a character count k
+    start(item): Fetch the あらすじ for one episode off the main thread. The browser it opens is a throwaway profile, so it never contends with her own.
+    judge(ja, ep, scored, anchor, anchor_kind): Which of several digests a viewer would trust: an index into `scored`, or -1. One call on the cheap model, comparing the candidates with each other and with the anchor. The judge itself lives in `sim/recap.py`, so both w
+    _work(item): 
+    _recent_row(aid, ep): Her own record of one episode, out of the list the grouped block is built from.
+    _page_is_there_now(row): Has the machine's shared store got a page for this episode since her own reading-up failed? Local, no network, no model: it is the cheap half of the repair, and when it answers yes the retry costs a lookup rather than a 
+    owed(): The next episode she was told he watched and never told what is in, as an item for `start`, or None.  A record with no digest and no raw page is a reading-up that lost a race rather than an episode nobody looked at: on 2
+    _note_attempt(aid, ep, n, when): One more reading-up begun for this episode, on the record before it runs.
+    impulse_bonus(): How much this makes her want to say something first, added to the impulse score rather than going round it.  Two restraints, and only the first is new. **Nothing at all while he is still watching**: a settle window means
+    note_spoken(): She has reached out while this episode was the thing in the room. Whatever she actually said, it does not get to be the reason twice.
+    note_seen(at_play): The episode the module read up on has now reached her.  WHICH MOMENT that is belongs to the program, not to this library. A character who is on his machine sees the file open, so her moment is his play itself (`at_play`)
+    current(): The last episode he watched, once it has reached her and while it is still recent enough to be the thing in the room. After that it is something that happened, and her ordinary memory carries it or does not.  Recent is c
+    played_words(ts, ja): When he played it, on HER clock, in words: "yesterday, in the afternoon".  Never a stamp and never a count of hours. The block is rebuilt on every reply, and a number that ticks would change its bytes every time; these w
+    _gist(text, n): What happens in one episode, in one clause: up to its first full stop, cut at `n`. An episode that is not the newest of a run is NAMED, not retold -- six digests in a row is a reading list, and what she needs is that he 
+    _arc(rows, ja): The earlier episodes of a run, in order, one clause each.
+    recent(): Every episode that has reached her and is still the thing in the room, newest play first, one row per (work, episode).  **This is the window the grouped block covers: everything since her last look at it.** One look mark
+    provisional_facts(ja): `(what he watched, one line about it)` per episode she has been shown that her permanent record of him does not hold yet, newest first. The name comes back beside the line so the section that places it can tell whether a
+    _one_play_once(rows): One play is one row, even when it was filed under two ids.  A play resolved from the filename is written under the work the filename meant, and his list may name a different id half an hour later; both rows are in the re
+    _grouped(rows): The same rows by WORK, newest play first, each work's episodes in order. A work with no id on his list is grouped by its title, which is what her own watchlist has.
+    _name_of(group): What to call the work: its Japanese title from whichever of its episodes was read up on, and its romaji title otherwise. An episode recorded without a synopsis has no Japanese title of its own -- the poll does not go to 
+    _also_line(group, ja): One work that is not the newest: what it was, how much of it, when on her clock, and one clause of the newest episode of it.
+    grouped_lines(ja): What she is shown about his watching: ONE LINE PER WORK, newest play first, over everything that has reached her since her last look.  Her line used to be the newest episode and nothing else, so an evening of six episode
+    _account_for(it): The stored account of one episode when it came out at WATCHED level, else None.  A thinner one is deliberately refused. The wording that goes with an account says she knows the episode the way somebody who sat through it
+    _account_wanted(row): Whether this episode's record is still short of watched level, and the repair pass should therefore read it up again.  The row carries the level as of its last reading (`account_level`), which costs nothing to read; the 
+    _run_accounts(others, ja, t): The rest of a run he sat through, for the case where the newest episode's whole account is in the block.  The one before it gets its account too (`watching.account_recent`, oldest dropped first, under `account_recent_max
+    situation_lines(item, ja, run, others): The tagged text for her situation: what he watched, what happens in it, and her own part if she has one. Wording matters more than usual here -- handed a synopsis, a model recites it, and what is wanted is a person who h
+    _edition_words(it, t): " (the OVA)" or "" -- which edition of a franchise this is, said out loud only when it is worth saying.  A one-episode OVA and a 26-episode television run under one Japanese title are two works, and the edition is the on
+    _season_ja(cls, season): 
+
+CONFIG SECTIONS: resident, role_check, sensors, watching, watching.digest_max_chars, watching.remember_episodes
+KV READ: lore_contact, watching_cursor, watching_fetch_counts, watching_held, watching_last, watching_path_backfill, watching_queue, watching_recent, watching_seen, watching_short, watching_spoken
+KV WRITE: lore_contact, watching_cursor, watching_fetch_counts, watching_held, watching_last, watching_path_backfill, watching_queue, watching_recent, watching_seen, watching_short, watching_spoken
+TABLES: 
+LOG TAGS: known, plays, resolver, roles, watching
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

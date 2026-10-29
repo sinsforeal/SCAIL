@@ -1,0 +1,28 @@
+# sim\outlook.py  (289 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Outlook: 
+    __init__(config, llm, store, clock, state, calendar, phone, diet, records, health, money, self_model, watchlist, recap): 
+    experience_due(scene): 
+    _has_object(act): Is there a thing here to have an experience OF? The trigger is only a verb, and her verbs attach to him as readily as to a show -- reading his reply, watching the typing indicator, listening to her dad. This asks for the
+    _watching(scene): 
+    experience(scene): 
+    morning(schedule): 
+    morning_line(ja): 
+    _his_wake_hm(): His usual first activity, her time, from the app's day shapes (kv his_first_active: list of hm strings).
+    anticipation_due(scene): 
+    settle_past_events(): A catch-up scene has written the day through today's calendar events: they are behind her, and nothing anticipates them now.
+    anticipate(scene, why): 
+    anticipation_line(ja): 
+
+CONFIG SECTIONS: anticipation, anticipation.hours_in_prompt, beliefs.enabled, experience, experience.watch_regex, morning, role_system
+KV READ: anticipation, anticipation_done, experience_counts, experience_last_ts, his_first_active, morning_intent
+KV WRITE: anticipation, anticipation_done, experience_last_ts, morning_intent
+TABLES: 
+LOG TAGS: anticipation, experience, morning
+PROMPTS: 
+LLM ROLES: anticipation, experience, morning
+OPS COMMANDS: 

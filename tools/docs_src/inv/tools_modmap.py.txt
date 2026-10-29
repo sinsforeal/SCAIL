@@ -1,0 +1,48 @@
+# tools\modmap.py  (185 lines)
+
+DOCSTRING:
+One page of what every module is, read off the code: `docs/modmap.md`.
+
+The project is ninety-odd modules in five packages plus two programs, and
+the question a reader has before touching one -- what is it, who owns it,
+what does it read, who hands it its collaborators, which check covers it,
+where is its spec -- was answered by reading it. This writes the answer as a
+table, from the source, so that it is never stale by more than a run:
+
+    module          the file, with its line count
+    kind            shared (the mind library), program (one character's),
+                    machine (his machine's sensors), runtime, tools
+    what            the first line of its docstring
+    wires           the collaborators it declares in WIRES (sim/wiring.py)
+    config          the config sections it reads (`config.<section>` /
+                    `c.<section>` / `self.config.<section>`)
+    roles           the model roles it calls: the role name given to the
+                    client's call, to the prompt loader or to the
+                    role-system builder
+    kv              the kv keys it reads and writes (`store.get("k")`,
+                    `store.set("k")`), counted
+    spec            `docs/<module>.md` if one exists
+    checks          the `tools/*` scripts that name the file
+
+Generated; `tools/docs_check.py` resolves every path in it.
+
+    python tools/modmap.py             # writes docs/modmap.md
+    python tools/modmap.py --print
+
+DEFS:
+def _files(): 
+def _wires(tree): 
+def _sections(): The config's section names, so `c.something` that is not a section is not reported as one.
+def _checks_naming(): tool -> set of source files it names by path.
+def rows(): 
+def render(): 
+def main(argv): 
+
+CONFIG SECTIONS: py
+KV READ: k
+KV WRITE: k
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,32 @@
+# sensors\telemetry_collector.py  (490 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def get_max_file_id(config): 
+class TelemetryCollector: 
+    __init__(config, system_monitor_instance): 
+    _read_last_id(): 
+    _run_loop(): 
+    _poll_sources(): 
+    _check_flush(): 
+    _flush(reason): 
+    _write_entry(reason): 
+    _write_pending_log(): 
+    check_flush_request(poll_first): Somebody is about to build a reply: write what is held, now.  The buffer otherwise reaches the feed on a character count or on the heartbeat, so anything he did inside the current window was invisible to a reply built du
+    force_flush(): 
+    get_buffer_status(): 
+    stop(): 
+def consume_new_entries(config, last_consumed_id): 
+def merge_entries(entries): 
+def format_telemetry_for_context(entry, image_opts, config, t): 
+
+CONFIG SECTIONS: firefox_enabled, telemetry_flush_request_path, telemetry_flush_threshold_chars, telemetry_heartbeat_interval_seconds, telemetry_jsonl_path, telemetry_pending_log_path, telemetry_poll_interval_seconds, vault_excerpt_chars
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

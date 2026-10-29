@@ -1,0 +1,23 @@
+# world\weather.py  (156 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Weather: 
+    __init__(config, clock): 
+    _load_cache(): 
+    _save_cache(): 
+    _fetch(): 
+    _ensure(): 
+    current(dt): Returns dict: temp, feels, humidity, precip_mm, sky, sunrise, sunset, source.  Empty when there is no weather for this character. `describe` already refused honestly and this did not: with the feed off it fell through to
+    describe(dt): 
+
+CONFIG SECTIONS: character.existence, world.character_timezone, world.weather_cache_path, world.weather_enabled, world.weather_latitude, world.weather_longitude, world.weather_refresh_minutes
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: weather
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

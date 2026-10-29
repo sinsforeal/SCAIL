@@ -1,0 +1,25 @@
+# sim\appraisal.py  (220 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Appraisal: 
+    __init__(config, llm, store, clock, state, sentiments): 
+    rows(): 
+    _save(rows): 
+    level(): (how much of the target these levels own, what they say), or None.  Faded by age, because how a message left her stops mattering: the weight is what makes a fortnight-old kindness count for less than last night's, withou
+    due(night_key): Once, as she goes under, and only if the day had a conversation in it. `min_messages` counts the exchange rather than his half: his half of a day is a modest number of messages, so counting only his would make the floor the whol
+    _unjudged(): His messages since the last cycle. Hers go in for context but are never scored -- this is what he left her feeling, not what she did.
+    run(night_key): The night's read: everything of his since the last one, with the exchange around it for context.
+    score(fresh, window): The call itself. Kept separate from the nightly read so the backfill tool can hand it a stretch of history without touching the clock that decides which day gets read next.
+    report(): 
+
+CONFIG SECTIONS: affection, affection.max_kept, role_system
+KV READ: appraisal_last_ts, appraisal_levels, appraisal_night
+KV WRITE: appraisal_last_ts, appraisal_levels, appraisal_night
+TABLES: 
+LOG TAGS: affection
+PROMPTS: 
+LLM ROLES: affection
+OPS COMMANDS: 

@@ -1,0 +1,19 @@
+# sim\model_of_her.py  (78 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class ModelOfHer: 
+    _graduate(b, rows): Past arguing with. It does not become a `user_fact` -- that store is things she knows about him -- it stays here marked known, which is what stops it soaking up further confirmations while leaving it breakable. A thing a
+    _revised_event(b, row): 
+    anchor_brief(): For the morning call: what a want could be riding on, with how much rests on each. The same shape as the kinds list in the ick call, and for the same reason -- the model is shown the ids and copies one back, because word
+
+CONFIG SECTIONS: beliefs.event_salience
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,17 @@
+{
+  "tone": ["真優/まゆ", "十川/とがわ", "百花/ももか", "一悟/いちご"],
+  "voice_prefix": "MAY",
+  "tts_note": "off until a MiniMax clone exists (docs/voice.md); her clips are MAY*.ogg, tools/voice_index.py accepts MMK only",
+  "caps": {
+    "phrases": {"だもん": 2, "でしょ": 2, "してあげる": 1, "好き": 3, "百花ちゃん": 2, "一悟": 3},
+    "doubled_group": 2,
+    "source": "her own marks (prompts/style.md 手 and 撒く量の物差し; tools/koikano/markers/mayu.json): the one-by-one tics at their measured rate (だもん 0.0369, でしょ 0.0214, してあげる 0.0203, 好き 0.0282, 百花ちゃん 0.0234, a closing 一悟 0.0231) capped per draft so none piles up; わたし, えへへ and the ん reply are left uncapped because her guide says to use them without counting"
+  },
+  "holes": [
+    "no lore records: the record has 280 inner lines (01_01:4013, 01_01:4028) but no diary and no memory file; lore records are hand work not done here",
+    "the places are world data (world/mayu_house.json), not household or home files: she does not own a world and her own home is data for the bench feed",
+    "gauge baselines: none, no numbers; meter rows seed flat",
+    "voice off: clips are prefix MAY but tools/voice_index.py accepts MMK only, and no clone sample exists",
+    "vn off: channels/vn_expression.py hard-codes the letter CD (lines 223, 238, 247, 288, 294) and port 8770 is Momoka's; Mayu planned 8772"
+  ]
+}

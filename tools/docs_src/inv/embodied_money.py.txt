@@ -1,0 +1,33 @@
+# embodied\money.py  (202 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Money: 
+    __init__(config, store, clock): 
+    save(): 
+    ensure_allowance(): On the allowance day (or the first day she is around after it) mom hands it over. Returns the event text or ''.
+    days_to_allowance(): 
+    spend(spent): Apply the director's `spent` {yen, on}; clamps to the balance. Returns the amount actually spent.
+    spent_today(): 
+    reserve(gid, yen): Put aside up to `yen` for a commitment; returns what could be.
+    release(gid): 
+    reserved(): 
+    available(): 
+    balance(): 
+    broke(): 
+    tags(): 
+    line(): For the director and the schedule model.
+    bought_line(date_str): What the money record says she bought on a date, for the ledger -- every reader of the day, hers and theirs. The plan wrote 'she buys a used paperback for 100 yen' into a block and a friend's turn read it as done; the re
+    persona_line(): 
+    brief(): 
+
+CONFIG SECTIONS: money, money.allowance_day, money.enabled, money.log_keep, money.start_balance_yen
+KV READ: money
+KV WRITE: money
+TABLES: 
+LOG TAGS: money
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

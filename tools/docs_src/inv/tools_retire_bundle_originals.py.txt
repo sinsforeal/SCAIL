@@ -1,0 +1,38 @@
+# tools\retire_bundle_originals.py  (181 lines)
+
+DOCSTRING:
+Move each character's material out of the place it used to live, once every
+process is reading it from her bundle.
+
+The bundle move COPIES and repoints and takes nothing away
+(`docs/bundle.md`). It has to: six processes are running when it happens, and
+each of them reads a path per call -- the roster on the first read of the day,
+the household on every world-facing call, a prompt on its mtime -- so a file
+that disappears mid-day is a crash or a silent blank.
+
+This is the other half, and it runs AFTER the restart. It refuses to move
+anything unless both of these are true for every registered character:
+
+  * no config on disk still names the old path, and
+  * her process started after her config was repointed, so the process in
+    memory is reading the bundle and not the old place.
+
+What it moves goes to `data/retired/<stamp>_bundle_originals/`, keeping its
+path under it, and nothing is ever deleted.
+
+    python tools/retire_bundle_originals.py            # check and say
+    python tools/retire_bundle_originals.py --apply    # check, then move
+
+DEFS:
+def _configs(): Every config file on disk, as a flat map of path-shaped values.
+def _running(): [(command line, started)] for every python process on this machine.  Read through PowerShell's process table rather than by image name: this project has killed a program out of another program that way once.
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

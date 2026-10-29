@@ -1,0 +1,36 @@
+# sim\rhythm.py  (445 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Rhythm: 
+    __init__(config, store, clock, state, llm, receipts): 
+    profile(): Per hour of HIS day: how much of him is usually in it, 0..1, and the median minutes he has taken to answer her. Faded by age, so a habit he has dropped stops counting.
+    learned_now(ts): 0..1: how usual it is for him to be about at this hour of his day, from the record alone.  Smoothed across the neighbouring hours, because nobody's day has edges on the hour and one quiet 14:00 in the record should not m
+    hear(text): He said something about when he is around. It becomes an expectation.  Not a booking. Nothing fires off a clock because of it, nothing punishes him for being wrong, and it does not survive being wrong for long. What it d
+    expectation(ts): -1..+1: what he has told her about this moment, faded since he said it.  Positive: he said he would be about. Negative: he said he would not. Faded, because a thing he said three days ago about his afternoon is not a thi
+    said_now(ts): The row he said, if one covers this moment. For her prompt.
+    usual_now(ts): What she actually expects of him at this moment: what she has learned, moved by what he has told her.  Both, because both are real. Four months of record say he is never about at three in the morning; him saying "I'm up,
+    usual_latency(ts): What he usually takes to answer at this hour, in minutes, or None.
+    presence(): 0..1: is he actually at the phone, right now.  This replaces `tempo`, which had three terms and one signal -- his last latency, the message density and the freshness are all "how recently was he active", heavily correlat
+    _decay(minutes, half): 
+    _last_latency(msgs): Minutes he took to answer her, most recently.
+    in_exchange(): Are they in a conversation, with hysteresis.  Turn-taking is bimodal -- you are in one or you are not -- and the old single threshold at 0.45 with linear interpolation above it meant the fast regime only really bit near 
+    tempo(): Kept as the old name for anything still asking. Presence is the thing.
+    noticing_seconds(access): How long before she even looks at it.  The old model multiplied ONE range by her mood factor, which conflates two different things: noticing a message and composing an answer. A live exchange collapses the noticing to no
+    notices(ja): The subtle half: what she has picked up about how he is being.  Not a number she is told -- a comparison she would actually make, against four months of him. This is the only place the learned shape reaches her as words.
+    reply_seconds(): Her read delay range, from the tempo. Not a floor imposed by a declared window: the faster this is going, the faster she is in it.
+    delay_cap(): How much the mood factor may still slow her while it is live. Being tense does not make a person slower when the other one is right there.
+    silence_factor(ts): How much an hour of silence counts, at this hour of his day.  Read by `State.felt_hours`. Four months of record say he is not there at three in the morning, so three in the morning does not hurt.
+    brief(ja): One line, in the shape of something she would actually think.  `ja` is her copy; the foresee role reads the same line about her in English.
+    report(): 
+
+CONFIG SECTIONS: delivery.read_delay_free_seconds, prompt_text, rhythm, rhythm.min_samples, rhythm.neighbour_weight, rhythm.tempo_from
+KV READ: in_exchange, rhythm_said
+KV WRITE: in_exchange, rhythm_said
+TABLES: 
+LOG TAGS: rhythm
+PROMPTS: said_when
+LLM ROLES: said_when
+OPS COMMANDS: 

@@ -1,0 +1,22 @@
+# sim\chattext.py  (25 lines)
+
+DOCSTRING:
+His chat with her as lines of prompt text.
+
+Twenty modules each formatted the same block by hand -- a stamp, a label for
+his side and one for hers, the text cut to a length -- and three of them had
+the first character's name in the label. One function; every caller keeps
+its own labels, its own cut and its own "(nothing recent)", so the bytes a
+prompt carried before are the bytes it carries now.
+
+DEFS:
+def lines(msgs, clock, chars, labels, stamps, sep): `msgs` are store rows (`role`, `text`, `ts`); his side is the user role. `chars` cuts each text (None: whole); `stamps` puts `[HH:MM]` of her clock first; the join is `sep`. Empty input gives "" so a caller's `or "(nothi
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,45 @@
+# tools\room_record_test.py  (231 lines)
+
+DOCSTRING:
+What a finished room writes down: the promise it kept, the summary it keeps, and what she said to whom today.
+
+    python tools/room_record_test.py
+
+Three faults reached the record on 2026-09-08 and all three are about the
+moment a conversation ends. No model call and no network: the App is built on
+a copy of the save with every model call refused, and the three checks drive
+the real functions.
+
+1. A promise to SEND somebody something was settled at the next morning's
+   compile, so sending the photograph at 16:01 left the promise open all
+   evening; the judge was then shown it as still outstanding and the chooser
+   was offered it four more times. It is settled where it is kept, before the
+   judge is asked, and the judge's list of what she still owes that person is
+   empty by the time it goes out.
+
+2. The summary of a conversation was assigned before the check that any bubble
+   survived the filter, so a room whose only bubble was deleted stored a
+   sentence saying what she said in it. And that round -- the one that produced
+   literally nothing -- was the one round never counted as having produced
+   nothing, because the branch returned first.
+
+3. Her memory of what she has said to whom did not cross conversations, so one
+   character confirmed the same arrangement seven times in six rooms. One line
+   per finished room, under everybody she said it to, thrown away at midnight.
+
+DEFS:
+def check(what, ok, detail): 
+def a_friend(app): One of her own people, as the record names her.
+def promise_settles_where_it_is_kept(app): 
+def a_deleted_bubble_writes_nothing(app): 
+def what_she_said_today(app): 
+def main(): 
+
+CONFIG SECTIONS: character.name, commitments.max_new_per_day
+KV READ: cast_chat
+KV WRITE: cast_chat, exchange_live, said_today
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

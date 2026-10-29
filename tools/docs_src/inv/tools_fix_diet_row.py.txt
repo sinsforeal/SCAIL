@@ -1,0 +1,29 @@
+# tools\fix_diet_row.py  (56 lines)
+
+DOCSTRING:
+One-time: the media-diet row that is not media.
+
+`experience` fired on a scene of her rereading his message (the trigger caught
+the verb "reading" and there was no object test yet), so "his split message
+(text): he just stopped there, mid-sentence..." went into `media_diet` -- the
+list her system prompt renders as what she is into, and the list the next
+experience call is handed as "WHAT SHE HAS BEEN INTO, continue these". Left
+there it seeds more of itself. `experience.object_regex` stops new ones;
+this drops the one that got through.
+
+From now on `/context del diet <n>` does this from the ops bar: `diet` was
+added to the editable sections in sim/context.py, so no script is needed again.
+
+Idempotent, and backs the save up to data/retired/<ts>/ first.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,36 @@
+# sim\textutil.py  (215 lines)
+
+DOCSTRING:
+Small text tests shared by the writers.
+
+`near_duplicate` exists because a model asked for two or three short messages
+sometimes writes the same one twice with a word moved, and nothing caught it.
+Both halves of it reached the record: two near-identical bubbles went to him
+
+    "so you're saying my english is fine and i should stop worrying about it.
+     sure. i'll just write that on the blank page tonight"
+    "so you're saying i'm fine and i should stop worrying. sure. i'll write
+     that on the blank page tonight"
+
+and the same fault stored 「なしてぇ? まだ決めてないって言ったやん。試すって決めたと?」
+twice in one exchange. A person sending a burst does repeat themselves, but
+they do not paraphrase themselves.
+
+DEFS:
+def near_duplicate(a, b, ratio): Is `b` the same message as `a` with the words moved? Compared without whitespace, so a line break is not what makes two texts different.
+def drop_repeats(items, text_of, ratio, why): `items` with any run of near-identical consecutive entries collapsed to the first. Logged when it fires, because how often it fires says whether the prompt is the problem.
+def sentences(text, min_chars): The sentences of one message, markers dropped.  `min_chars` is measured without whitespace, so a line break inside a sentence does not change its length.
+def echoed_by(text, prior, min_chars, ratio): Who this message is repeating, when more than half of it is a repeat.  `prior` is the room's recent turns as (who, text) pairs, from ANY speaker including this one. A message whose long sentences are more than half alrea
+def drop_echoes(items, prior, text_of, who_of, min_chars, ratio, why): `items` with every message that echoes the room dropped, and each drop logged. Whatever survives joins `prior` for the messages behind it, so one burst cannot repeat itself either.  Flagged and dropped, never rewritten: 
+def words(text, min_latin): The tokens two texts are compared on, in either language.  Six modules carried the same regex -- `[A-Za-z][A-Za-z'-]{3,}|[CJK]{2,}` -- and it is right for English and wrong for Japanese. Japanese has no spaces, so a maxi
+def is_japanese(text): Is this actually Japanese? A `ja` field is only named ja -- nothing checked it, so a call that answered in English stored English as the words somebody said. Counted rather than sniffed: a kaomoji or a stray LINE / OK is
+def unquoted(text): `text` with everything it quotes taken out: quotations in either language, inline and fenced code, links, paths and file names.  What is left is the prose the writer wrote herself, which is the only part a judgement abou
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: dedup
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

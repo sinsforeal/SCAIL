@@ -1,0 +1,237 @@
+{
+  "_note": "知紗's view of her own places and her week, for the bench's event feed in a shared two-person (or more) world. It is data, not a world she owns or reads as a file (existence in_world false). Like 千奈 she is not a resident of Momoka's house: she works at the school, so this file gives her own rooms (school, road, her_home) and marks every week row place '' (nothing she does by default is in a shared house). The two places the record puts her inside the Chiyoda house are listed under `visit` with the shared HOUSE id: the club's overnight (08_01) and her visit to the sick 百花 (07_01). A row whose text starts with LIBERTY is not in the record: it is built from the lines named and listed in the side-cast notebook Liberties. Each other fact carries a receipt (a 知紗 spoken line) or says the record is silent. No age, no grade, no birthplace, no parent, nothing in 一悟's mouth.",
+  "frame": "知紗's life around the school as its PE teacher and the adviser of the small clubs: the gym and pool, the staff room, the club rooms, the school shop, and her car on the road. The record's own setting (user ruling 10-23 13:29).",
+  "house_id": "chisa_home",
+  "own_places": {
+    "school": "the school (gym, pool, staff room, club rooms, shop)",
+    "road": "the road and her car",
+    "her_home": "her place after work (LIBERTY: the record shows nothing of it)"
+  },
+  "own_places_note": "ids are her own, NOT the bench's shared HOUSE ids (her_room, house, maid_room); a chisa peer branch needs its own home builder (see docs/reports/2026-10-23_side_cast_notebook.md)",
+  "visit_place_ids": [
+    "house"
+  ],
+  "house": {
+    "gym_pool": {
+      "own_place": "school",
+      "facts": [
+        {
+          "text": "She is the PE teacher: she gets the gym permit for the clubs, opens the pool for the club's pool day and teaches 百花 water-walking there at 真里亜's request.",
+          "receipts": [
+            "03_01:0663",
+            "a03_01:1777",
+            "06_01:0362",
+            "d16_01:0342"
+          ]
+        },
+        {
+          "text": "She teaches health as well, and is flustered when the lesson turns to 'sex education'.",
+          "receipts": [
+            "01_01:4284",
+            "d10_01:2082",
+            "d10_01:2160"
+          ]
+        }
+      ]
+    },
+    "staff_room": {
+      "own_place": "school",
+      "facts": [
+        {
+          "text": "She goes to the staff room for forms and meetings; the club entry forms are kept there.",
+          "receipts": [
+            "a02_01:1269",
+            "a09_01:0634",
+            "a09_01:2187"
+          ]
+        },
+        {
+          "text": "Colleagues are 野村先生 and the school nurse 清水先生; to the first she speaks politely.",
+          "receipts": [
+            "03_01:0644",
+            "05_01:3555"
+          ]
+        }
+      ]
+    },
+    "club_rooms": {
+      "own_place": "school",
+      "facts": [
+        {
+          "text": "She drops in on the literary club room, the theatre club and the council room as their adviser, and says it is natural for an adviser to look in.",
+          "receipts": [
+            "01_01:4136",
+            "a02_01:1148",
+            "04_01:2923",
+            "d05_01:0399"
+          ]
+        }
+      ]
+    },
+    "school_shop": {
+      "own_place": "school",
+      "facts": [
+        {
+          "text": "She buys her first-aid kits at the school shop, and tells 真里亜 and then 一悟 to keep it secret.",
+          "receipts": [
+            "05_01:3580",
+            "05_01:3760"
+          ]
+        }
+      ]
+    },
+    "infirmary": {
+      "own_place": "school",
+      "facts": [
+        {
+          "text": "She is a regular of the infirmary and says last year she broke the visit record; she is clumsy and bruised.",
+          "receipts": [
+            "05_01:3677",
+            "05_01:3730",
+            "b02_01:1226"
+          ]
+        }
+      ]
+    },
+    "road": {
+      "own_place": "road",
+      "facts": [
+        {
+          "text": "She drives; she offers a lift to students and to 十川さん, and parks the car at school.",
+          "receipts": [
+            "a09_01:0613",
+            "b01_01:0950",
+            "d18_01:1199"
+          ]
+        },
+        {
+          "text": "She jogs at night; she is on a run when she meets 一悟 outside the convenience store.",
+          "receipts": [
+            "b03_01:1670",
+            "b03_01:1548"
+          ]
+        }
+      ]
+    },
+    "her_home": {
+      "own_place": "her_home",
+      "facts": [
+        {
+          "text": "LIBERTY: she has a place of her own after work. The record shows no home scene, no room and no one who lives with her; nothing is said about it beyond the car she drives there in.",
+          "receipts": [
+            "a09_01:0613"
+          ]
+        }
+      ]
+    }
+  },
+  "week": [
+    {
+      "text": "School day: she teaches PE and health.",
+      "receipts": [
+        "03_01:0663",
+        "d10_01:2082"
+      ],
+      "slot": "school_day",
+      "place": "",
+      "own_place": "school"
+    },
+    {
+      "text": "At noon she buys her lunch at the shop, or eats with a student who is on her own.",
+      "receipts": [
+        "02_01:1216",
+        "c05_01:0938"
+      ],
+      "slot": "noon",
+      "place": "",
+      "own_place": "school"
+    },
+    {
+      "text": "After lessons she goes round the small clubs she advises: the club rooms, the theatre club, the council.",
+      "receipts": [
+        "01_01:4120",
+        "a02_01:1104",
+        "04_01:2923",
+        "d05_01:0399"
+      ],
+      "slot": "after_school",
+      "place": "",
+      "own_place": "school"
+    },
+    {
+      "text": "Staff meetings and forms fill some afternoons.",
+      "receipts": [
+        "a09_01:2187",
+        "a09_01:1971",
+        "a02_01:1269"
+      ],
+      "slot": "meeting",
+      "place": "",
+      "own_place": "school"
+    },
+    {
+      "text": "On a pool day she opens the pool and teaches.",
+      "receipts": [
+        "06_01:0362",
+        "d16_01:0342"
+      ],
+      "slot": "pool_day",
+      "place": "",
+      "own_place": "school"
+    },
+    {
+      "text": "In the evening she jogs and, when a student needs one, drives them home.",
+      "receipts": [
+        "b03_01:1670",
+        "a09_01:0613"
+      ],
+      "slot": "evening",
+      "place": "",
+      "own_place": "road"
+    },
+    {
+      "text": "LIBERTY: at night she is at her own place with the day's papers and the first-aid box; the record shows nothing of it.",
+      "receipts": [],
+      "slot": "night",
+      "place": "",
+      "own_place": "her_home"
+    }
+  ],
+  "visit": [
+    {
+      "text": "On the club's overnight she brings her own pyjamas and a sleeping bag, is glad not to be forgotten and sleeps among the students; she says goodnight and tells them to rely on her.",
+      "receipts": [
+        "08_01:2361",
+        "08_01:2409",
+        "08_01:3152"
+      ],
+      "slot": "overnight",
+      "place": "house"
+    },
+    {
+      "text": "When 百花 collapses she goes to the house, finds her recovering and asks to greet the family; that evening she phones 一悟 to tell him the doctor's word.",
+      "receipts": [
+        "07_01:5091",
+        "07_01:5134",
+        "07_01:5669"
+      ],
+      "slot": "visit",
+      "place": "house"
+    }
+  ],
+  "silent": [
+    "Her home, her room, who lives with her and the distance of her drive (the one row of her_home is a LIBERTY).",
+    "Her morning and night routine and her days off beyond the school events.",
+    "Her family; none is described (the record has none).",
+    "Her age, her grade, her birthday and her birthplace.",
+    "Any life of hers outside the 37 scenes."
+  ],
+  "places": {
+    "school": "the school (gym, pool, staff room, club rooms, shop)",
+    "road": "the road and her car",
+    "her_home": "her place after work (LIBERTY: the record shows nothing of it)"
+  },
+  "shared_places": {
+    "house": "the main part of the house"
+  }
+}

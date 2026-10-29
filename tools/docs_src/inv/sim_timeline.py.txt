@@ -1,0 +1,20 @@
+# sim\timeline.py  (353 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _blank(v): Is this field of a compile answer empty? A day that wrote nothing for a field and a day that never mentioned it look the same in JSON, and both mean "this answer has nothing to say here".
+def merge_retry(first, second, asked_about): The stored answer when the compile asked again about ONE field.  Returns `(merged, from_second)` -- the answer to keep, and the names of the fields taken from the second call.  The retry names the narrative and nothing e
+def compile_day(config, llm, store, clock, date_str): The flag round the day (`sim/inflight.py`). The compile is minutes of model calls and the one thing a restart cannot pick up where it left off; the row it leaves behind is what tells the next process that a day was start
+def _compile_day(config, llm, store, clock, date_str, state, records, diet, memory, goals, self_memory, self_model, ledger, orbit, episodes): 
+def compile_week(config, llm, store, clock, date_str, state): Sunday: a first-person paragraph of how the week felt, from the day summaries, her diary and the gauge trend. Memory, not mutation: the bible is never touched.
+
+CONFIG SECTIONS: character, prompt_text, role_system, self_memory.compile_max_per_day, showrunner.enabled, timeline
+KV READ: diary, self_claims, weekly_self
+KV WRITE: self_claims, weekly_self
+TABLES: 
+LOG TAGS: episodes, eroge, memory, orbit, primitives, self, timeline, weekly
+PROMPTS: timeline
+LLM ROLES: timeline, weekly
+OPS COMMANDS: 

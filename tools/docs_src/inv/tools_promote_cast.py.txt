@@ -1,0 +1,113 @@
+# tools\promote_cast.py  (1365 lines)
+
+DOCSTRING:
+Turn one of the people on the roster into a character who could run.
+
+A person beside the first character exists today as three things: a row in the
+roster (`data/cast.json`), a sheet in her own language under `prompts/cast/`,
+and a file of her mechanisms (`data/cast_mechanisms/`) with a hidden type
+beside it (`data/cast_types.json`, which no call may read). A character who
+runs is a BUNDLE: one directory, `characters/<key>/`, holding everything that
+is that person -- her sheet, the values that fill the shared prompts' holes,
+her own voice and speech guide, and a manifest saying what kind of thing she
+is and how she is run (`docs/bundle.md`). This tool writes that directory;
+`tools/new_character.py compose <key>` turns it into her config, her prompt
+directory, her row in the register, her staged launcher and her save, and
+`verify <key>` says whether any of it is somebody else's.
+
+    python tools/promote_cast.py Rena-chan --dry-run
+    python tools/promote_cast.py Rena-chan --root C:/temp/bundles
+    python tools/promote_cast.py Rena-chan            # into characters/rena-chan/
+
+Two rules decide what it may write.
+
+**Her material is her own.** Everything comes from her row, her sheet, her
+mechanisms and the world's public facts -- the names on the roster, the school,
+the line the trains run on. Another person's row carries that person's inside
+(what they think of the first character, what their evenings are really like,
+what the first character has noticed about them), and handing it to her would
+give her a peer's interior for free. Her own sheet says so in as many words:
+she does not know what one of them does after school and thinks she knows.
+
+**The four letters never reach her sheet.** The type file exists for the author
+and for the measurement. What is copied out of it is the sentence of behaviour
+written for each axis, and every gauge baseline this tool sets carries that
+sentence beside it as its reason, so a reader can argue with the number without
+being told a letter.
+
+What promotion CANNOT write is listed on the sheet under `holes`, in the
+manifest under `holes`, and printed at the end of a run: her household as a
+file, her map, her flat, what is going round for her, and a day of her own
+beyond the week her row carries. Those are authored, and until they exist she
+is a character whose boot refuses to start (`Config.PERSON_FILES`).
+
+She keeps her row. The roster belongs to the world, not to the first character,
+and the other people on it still speak to her through the row and the sheet
+under `prompts/cast/` until they are promoted too.
+
+DEFS:
+def _load(path, default): 
+def _text(path): 
+def sheet_path(key): Her sheet under `prompts/cast/`, whose name is the roster key lowercased.
+def sheet_sections(md): The sheet's bold headings and the prose under each.  The sheets are written as a run of `**heading.**` paragraphs, so the way she talks, her household and what she does not know can each be lifted whole without reading t
+def romaji(reading): Hepburn for a name's kana reading, one word per space.  Names only: no long-vowel marks and no particles, because what it is given is the `reading` field of a roster row, which is the name and nothing else. A reading it 
+def number_word(n): 
+def kanji_number(n): 
+def _kanji_to_int(s): 
+def age_from_sheet(md): Her age and the string it was read out of.  A roster row does not carry an age; her sheet says it in her own language, in the first line about her, as either 「十五歳」 or 「15歳」.
+def school_year_from_sheet(md): Which year she is in and which class, and the strings both came out of.
+def born_window(age, year_n, level, today): The span her birthday must be in, and a date inside it.  Two facts constrain it and neither gives a day. Her age today puts the birthday in the twelve months ending today. The Japanese school year puts a first-year of hi
+def temperament(type_block, base_gauges): Her gauge baselines and, per gauge, the behaviour they were written from.  Returns (baselines, basis). The letters go no further than this function.
+def split_ja(row): A roster row's family and given names in kanji.  The row's own aliases carry both halves -- one is a prefix of the full name and another is a suffix -- so the split is read rather than guessed. A row with no such alias f
+class Person: Everything the writers below need, read once out of her own material.
+    __init__(key, world, slug): 
+    _split_ja(): 
+    _household(): Who lives with her, from the household paragraph of her own sheet.  Prose is the only place a roster row carries this, and only the roles stated as 「兄は慶太」 are taken: a role, a name, and nothing inferred.
+    _school_area(): 
+    _train_line(): 
+    _city_en(): The city, off the world's map rather than written here: the last part of her own address. A tool that writes one city's name into every character it promotes is the same fault as a default that is one person's file.
+    _city_ja(): The city in Japanese, off the world's map, for the values she is addressed in. Her ward has no Japanese form anywhere in her material, and a romanised ward inside a Japanese sentence is the tool inventing.
+    mechanisms(cls, freq): 
+    variations(n): 
+    fixtures(): (day, what, start, end) for every fixture her week names.
+    twists(n): 
+    peer_name(i, fallback): 
+class Layout: Where each piece of the bundle goes, and what compose will make of it.
+    __init__(slug, root): 
+def sheet(p, layout): 
+def _addressed(p): 
+def _dialect(p): 
+def _existence(p): 
+def household_rows(p): The rows in the world's roster that are HER household.  They stay on the world's roster so that the owner's process can resolve them, and the promoted character's own cast file is written from them. In the owner's roster
+def flat_household(p): Those of them whose meters are zero with nothing saying that was decided.
+def _holes(p, layout): 
+def fills(p, layout): Every hole the shared prompts leave, filled from her own material.  A value is her row, her sheet, her mechanisms, or a shape with a name in it -- never a fact out of somebody else's row. The register values are in Japan
+def _day_places(p): Up to two places round her SCHOOL that a plan for a day may reach for.  Her school's area and nothing nearer: the world's map is the owner's, and her own home area is one of the holes promotion cannot fill, so taking a s
+def _sentence(text): 
+def _short(text): The head of an authored line: a roster row writes a fixture or a twist as the thing and then a clause about it ("her little sister's swimming, she gets dragged"), and an example list wants the thing.
+def _gerund(name): A mechanism's name as something she could promise not to do.  The names are written in the third person ("sends the next one before the last one is answered"), and a promise reads as a gerund.
+def _jp_year(p): Her school year as her own sheet writes it (高一), and nothing if it does not: a year label in English inside a Japanese sentence is the tool talking.
+def _short_ja(p, key): 
+def _given_ja(row): 
+def _ja_of(p, key): 
+def _ore_line(p): Who on the roster writes 俺, from the roster's own `first_person` fields.
+def _schedule_cast(p, home_words): 
+def _fixture_line(fix, after): 
+def manifest(p, layout, world_id): Her bundle's own manifest: what kind of thing she is, how she is run, which of her files answer which config key, and every key her config needs that the library's defaults do not give her.  `tools/new_character.py compo
+def overrides(p, layout, world_id): Only what is about HER. Everything absent from here is the mechanism and is shared with every other character, and every consequence of what kind of thing she is, is left to `Config` to apply at load.
+def bible(p): Her bible, seeded from the sheet she already has.  The sheet under `prompts/cast/` is her, in her own language, written to be read by the call where she speaks. It is the only authored statement of who she is that exists
+def style(p): Her speech guide: the 話し方 paragraph of her sheet, her first-person line and her `voice` line, over the project's own two rules about how a feeling and a situation may be written.
+def registry_row(p, layout): 
+def _base_gauges(): 
+def _named_paths(man, layout): Every file the manifest names that promotion does not write.
+def _write(path, text): 
+def main(argv): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,55 @@
+# tomoe\compare.py  (315 lines)
+
+DOCSTRING:
+Social comparison: measuring herself against the people around her.
+
+His ask (2026-08-26): jealousy was entirely about him. Peer comparison --
+looks, weight, clothes, being half a step behind Rena, never having had a
+boyfriend framed as a social fact (undateable, rumours) rather than a
+romantic one -- is core adolescent psychology, is all over her bible, and
+had no mechanism.
+
+Code decides WHEN: a peer is in the scene or she has just talked with one,
+and the felt probability comes off validation_craving, shame and anxiety
+above their own baselines and belonging below par, under a daily cap and a
+cooldown. A call (`compare` role) decides WHAT out of the record only: who,
+which dimension, which direction, the thought in her own head-voice, and
+which self-belief it lands on. `fires: false` is a legal answer and should
+be the common one.
+
+Effects are code. Upward (she comes off worse): `envy` toward that person
+(a fifth sentiment kind, weeks to fade, per person), shame, craving, a
+little anxiety, and a strain on the self-belief the model named
+(`plain_underneath`, `alone_is_shameful`, ...) -- which is how "half a step
+behind Rena" hardens into "plain underneath" over a term. Downward: a
+little pride. Level: nothing but the thought. The thought goes out through
+the reflections channel, so her prompt, `cast_reply` for that person and
+the director's inner hint all see it, and nothing is ever said aloud.
+
+Readers of `envy`: `Spirals.seedability` (someone she measures herself
+against can start a chain), the meters line in `cast_reply`, the sentiment
+prompt text and `/sentiment`.
+
+DEFS:
+class Comparison: 
+    __init__(config, llm, store, clock, state, sentiments, model_of_her, memory, cast, reflection): 
+    _key(name): One person, one key, whatever form the name arrived in -- the record's Japanese name, a nickname, the roster key. A name nobody owns keys on itself, so two strangers do not become one person.
+    peers(): The circle, never family and never him: you measure yourself against who could leave you out.
+    present(scene, talk): Peers in the scene's `with_who`, or in a finished exchange.
+    _count(): Comparisons she has actually made today.  This used to count CALLS, and the model answers `fires: false` four times in five, so two refusals closed the day: over a fortnight the layer was asked 20 times, fired 4, and the
+    pressure(): 0..1: how much of her is looking for a ruler right now.
+    eligible(scene, talk): 
+    maybe(scene, talk, force): 
+    _person_block(name): 
+    run(who, scene, talk, why): 
+    apply(name, dim, direction, inten, bid, thought): 
+    report(scene): 
+
+CONFIG SECTIONS: compare, reflect.keep, role_system, sentiment.family_roles, state.gauges
+KV READ: compare_counts, compare_last_ts, comparisons, reflections
+KV WRITE: compare_last_ts, comparisons, reflections
+TABLES: 
+LOG TAGS: compare
+PROMPTS: 
+LLM ROLES: compare
+OPS COMMANDS: 

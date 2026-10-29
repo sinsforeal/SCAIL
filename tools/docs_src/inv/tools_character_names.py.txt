@@ -1,0 +1,79 @@
+# tools\character_names.py  (585 lines)
+
+DOCSTRING:
+The shared code names nobody, and no shared file names one person's places.
+
+Reads every character's sheet, cast file and map for the names a person goes by
+(her own, her family's, her friends', with readings and aliases) and for the
+places that are hers (her home area, her station and the stops on her line, her
+ward, her school and its area, the places she keeps going back to). Then it
+greps everything both characters share for any of them.
+
+    python tools/character_names.py                 # exit 1 on a NEW hit; run by smoke
+    python tools/character_names.py --all           # every finding, not just the new ones
+    python tools/character_names.py --write-known   # rewrite tools/known_literals.json
+
+What is scanned:
+
+  the mind library and the runtime  `sim/`, `persona/`, `embodied/`, `world/`,
+                                    `machine/`, and the eight files at the root;
+  what the machine serves          `channels/`, `sensors/`, `talkapp/`,
+                                    `tools/`, `car/` -- one hub and one set of
+                                    tools for four characters;
+  the programs                     `tomoe/`, `resident/` -- a program is one
+                                    character's by design, so a name of HERS is
+                                    not reported there and a name belonging to
+                                    a character on the other program is;
+  the prompts                      the shared directory and each character's
+                                    own, minus the three files that ARE a
+                                    character (her voice, her speech guide in
+                                    each language) and her cast's sheets.
+
+And in six kinds of file rather than one: `.py`, `.html`, `.js`, `.txt`, `.md`
+and `.json`. The hub serves all four characters and labelled every one of them
+with the first character's name in `.html` for months, with this check
+reporting that the shared code names nobody.
+
+Findings come in four lists, never mixed:
+
+  code     a name or a place in an identifier or a string literal;
+  prose    the same, in a file that is not Python (a template, a prompt);
+  inside   the literal inside a longer word (`ChromeProfileTomoe`), reported
+           separately because a word boundary is what hid that one;
+  comment  a comment or a docstring, which this project uses for failure
+           histories and worked examples: left alone, listed so that a reader
+           knows the check saw them.
+
+`tools/known_literals.json` is what was already there when the check was
+widened. Every entry names the file, the literal, which of the four lists it is
+in, and why it is expected; a finding that is not in it fails the run. It is
+emptied as the literals are moved into the characters' own files.
+
+A generic word that is also a role (mom, dad, mother, class) is not a name and
+is not looked for; a literal shorter than three characters is skipped.
+
+DEFS:
+def _load(path): 
+def _wards(text): Every ward named in an address, in either script. A ward is the unit a news feed, a train board and a place classifier are configured by, and those three carried the first character's wards as defaults.
+def material(): {literal: {"what": name|place, "who": {character keys}, "where": file}}.  `who` is what makes a program package exempt for its own character: a name of hers in `tomoe/` is her program naming her, and a name of somebody e
+def names(): Every name a person on any character's roster goes by. Kept as its own call because two other checks ask for exactly this and nothing else.
+def code_tokens(path): (line, text) for every identifier and string literal in the file, comments and docstrings left out.
+def origin_hits(): Every place a shared prompt or a shared module names one character's dialect or home region.
+def prompt_dirs(): The shared prompt directory and every character's own, with the files that ARE a character left out.
+def owned_prompt_dirs(): {directory: character key} for each character's own prompt directory: a name of hers there is her own file, and a name of somebody else's is a leak.
+def programs_of(): {character key: her program package}.
+def _files(): Everything both characters share, by kind of file.
+def _exempt(path, row, owned, progs): Is this literal allowed to be in this file?  A program package is one character's by design: her own name in `tomoe/` is her program naming her. A name belonging to a character on the OTHER program is not exempt, and nei
+def scan(): [(file, line, literal, kind, text)] for every finding, in four kinds: `code`, `prose`, `inside` and `comment`.
+def known(): {(file, literal, kind)} that were already there when the check was widened, from `tools/known_literals.json`.
+def _write_known(hits, wanted): 
+def main(): 
+
+CONFIG SECTIONS: py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

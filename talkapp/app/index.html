@@ -1,0 +1,1773 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#ffffff">
+<title>TALKAPP</title>
+<link rel="manifest" href="/app/manifest.json">
+<link rel="icon" href="/app/icon192.png">
+<style>
+  /* one palette, named by what each colour is for. Light is the default skin
+     (standing rule 10-23: no dark default, ever). Dark is opt-in only, via
+     data-theme="dark" on <html>, set from the menu row. The phone's own
+     prefers-color-scheme is deliberately ignored. */
+  :root {
+    --bg:#f4f6f8;
+    --fg:#1b2430;
+    --err-bg:#ffe3e3;
+    --err-fg:#7a1f1f;
+    --bar:#ffffff;
+    --bar-line:#d9e0e7;
+    --act:#1976d2;
+    --her:#c96f8e;
+    --mute:#6b7885;
+    --line:#e3e8ee;
+    --grp:#4a7350;
+    --faint:#8a96a3;
+    --chip:#e6ebf1;
+    --her-b:#ffffff;
+    --him-b:#d4e9ff;
+    --link:#1a66d2;
+    --ok:#2e8b57;
+    --me-b:#d9f0dc;
+    --who:#2f6fa8;
+    --pre:#eef1f5;
+    --menu:#ffffff;
+    --menu-line:#c9d3dd;
+    --menu-on:#cfe3f6;
+    --menu-on-line:#7fb0dc;
+    --quick:#e9eef3;
+    --opsbar:#ffffff;
+    --inp-fg:#1b2430;
+    --warn:#b07a10;
+    --warn-fg:#ffffff;
+    --warn-bg:#fff3d6;
+    --me-who:#2e8b57;
+    --inp:#e9eef3;
+    --shadow:rgba(0,0,0,.25);
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --bg:#0e1621;
+    --fg:#e7ecf0;
+    --err-bg:#7a1f1f;
+    --err-fg:#ffd9d9;
+    --bar:#17212b;
+    --bar-line:#0b131b;
+    --act:#64b5f6;
+    --her:#c96f8e;
+    --mute:#7a8a99;
+    --line:#141e28;
+    --grp:#4a7350;
+    --faint:#5c6b7a;
+    --chip:#1b2734;
+    --her-b:#182533;
+    --him-b:#2b5278;
+    --link:#6cb4ff;
+    --ok:#6fc98f;
+    --me-b:#3a5741;
+    --who:#8fb3d9;
+    --pre:#0f1720;
+    --menu:#132030;
+    --menu-line:#24384c;
+    --menu-on:#27506f;
+    --menu-on-line:#3d7aa5;
+    --quick:#0e1722;
+    --opsbar:#0b1118;
+    --inp-fg:#e6edf3;
+    --warn:#e0a83c;
+    --warn-fg:#14100a;
+    --warn-bg:#3a2c10;
+    --me-who:#8fd9a8;
+    --inp:#233240;
+    --shadow:rgba(255,255,255,.25);
+    color-scheme: dark;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  /* an app, not a page: nothing is selectable except what people copy */
+  html { -webkit-user-select:none; user-select:none; touch-action:manipulation; }
+  .b, .gja, .ggloss, .sja, .sgloss, #inp { -webkit-user-select:text; user-select:text; }
+  html, body { height:100%; overflow:hidden; }
+  body { background:var(--bg); color:var(--fg); font-family:'Segoe UI', Roboto, 'Hiragino Sans', 'Noto Sans JP', sans-serif; font-size:15px; }
+  #app { height:100%; display:flex; flex-direction:column; }
+
+  #errbar { display:none; background:var(--err-bg); color:var(--err-fg); font-size:12px; padding:6px 10px; }
+
+  /* header */
+  #hdr { flex:0 0 auto; display:flex; align-items:center; gap:10px; padding:10px 12px;
+         padding-top:calc(10px + env(safe-area-inset-top)); background:var(--bar); border-bottom:1px solid var(--bar-line); }
+  #back { font-size:22px; padding:0 6px; cursor:pointer; display:none; color:var(--act); }
+  #avatar { width:38px; height:38px; border-radius:50%; background:var(--her); color:#fff;
+            display:none; align-items:center; justify-content:center; font-weight:600;
+            position:relative; overflow:hidden; }
+  .av { position:relative; overflow:hidden; }
+  .av img, #avatar img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  #title { font-weight:600; }
+  #presence { font-size:12px; color:var(--mute); }
+  #menubtn { margin-left:auto; font-size:20px; padding:2px 12px; cursor:pointer; color:var(--mute); }
+
+  .view { flex:1; overflow-y:auto; display:none; overscroll-behavior:contain; }
+
+  /* menu view */
+  .mrow { padding:15px 16px; border-bottom:1px solid var(--line); cursor:pointer; }
+  .mrow .msub { font-size:12px; color:var(--mute); margin-top:2px; }
+
+  /* conversation lists */
+  .conv { display:flex; gap:12px; padding:12px 14px; border-bottom:1px solid var(--line); cursor:pointer; align-items:center; }
+  .conv .av { width:48px; height:48px; border-radius:50%; background:var(--her); color:#fff; flex:0 0 auto;
+              display:flex; align-items:center; justify-content:center; font-weight:600; font-size:19px; }
+  .conv .av.g { background:var(--grp); }
+  .conv .body { min-width:0; flex:1; }
+  .conv .cname { font-weight:600; }
+  .conv .clast { font-size:13px; color:var(--mute); overflow:hidden; text-overflow:ellipsis;
+                 white-space:nowrap; margin-top:2px; }
+  .conv .cwhen { font-size:11px; color:var(--faint); align-self:flex-start; margin-top:4px; }
+  .phonehint { padding:10px 14px; font-size:12px; color:var(--faint); }
+
+  /* his chat */
+  #chat { padding:10px 10px 4px; }
+  .day { text-align:center; margin:10px 0 6px; }
+  .day span { background:var(--chip); color:var(--mute); font-size:12px; padding:3px 10px; border-radius:10px; }
+  .row { display:flex; margin:2px 0; align-items:flex-end; }
+  .row.him { justify-content:flex-end; }
+  .b { max-width:78%; padding:7px 11px; border-radius:14px; white-space:pre-wrap;
+       word-break:break-word; line-height:1.35; }
+  .her .b { background:var(--her-b); border-bottom-left-radius:4px; }
+  .him .b { background:var(--him-b); border-bottom-right-radius:4px; }
+  .meta { font-size:10.5px; color:var(--mute); margin:0 6px 1px; flex:0 0 auto; }
+  .him .meta { text-align:right; }
+  .kidoku { color:var(--ok); display:block; }
+  .b audio { width:210px; max-width:64vw; height:36px; }
+  .b a.lnk { color:var(--link); text-decoration:underline; word-break:break-all; }
+  .b .prev:first-child { margin-top:0; }
+  .prev { display:block; margin-top:6px; border:1px solid var(--shadow); border-radius:10px; overflow:hidden;
+    background:var(--bg); color:inherit; text-decoration:none; max-width:min(70vw,320px); }
+  .prev img { width:100%; max-height:170px; object-fit:cover; display:block; }
+  .prev .pt { font-weight:600; font-size:13px; padding:6px 8px 0; line-height:1.25; }
+  .prev .pd { font-size:12px; opacity:.78; padding:2px 8px 4px; line-height:1.3; max-height:4.2em; overflow:hidden; white-space:normal; }
+  .prev .ps { font-size:11px; opacity:.55; padding:0 8px 6px; }
+  .b .vn { margin-top:6px; display:flex; align-items:center; gap:2px; }
+  /* keep this one: the same file asked for by name, which the hub sends as
+     an attachment and the app hands to the phone's download manager */
+  .dl { text-decoration:none; color:inherit; opacity:.42; font-size:15px; line-height:1; padding:0 3px; }
+  .dl:hover, .dl:focus { opacity:.85; outline:none; }
+  /* the speaker on one of her lines: small, quiet, on the bubble rather than
+     beside it, so a line he never taps looks like a line and nothing else */
+  .say { border:0; background:transparent; cursor:pointer; padding:0 2px; margin-left:6px;
+         font-size:13px; line-height:1; opacity:.42; vertical-align:baseline; }
+  .say:hover, .say:focus { opacity:.85; outline:none; }
+  .say.on { opacity:.95; }
+  .say.wait { opacity:.6; animation:blink 1.1s infinite; }
+  #typing { display:none; margin:4px 0 2px; }
+  #typing .b { background:var(--her-b); color:var(--mute); }
+  .dots span { display:inline-block; width:6px; height:6px; margin:0 1.5px; border-radius:50%;
+               background:var(--mute); animation:blink 1.2s infinite; }
+  .dots span:nth-child(2){ animation-delay:.2s } .dots span:nth-child(3){ animation-delay:.4s }
+  @keyframes blink { 0%,80%,100%{opacity:.25} 40%{opacity:1} }
+
+  /* her phone: chat view */
+  #herchat { padding:10px; }
+  .grow { display:flex; margin:3px 0; align-items:flex-end; }
+  .grow.me { justify-content:flex-end; }
+  .gb { max-width:80%; padding:6px 10px; border-radius:12px; background:var(--her-b); }
+  .grow.me .gb { background:var(--me-b); }
+  .gwho { font-size:11px; color:var(--who); margin-bottom:1px; }
+  .gav { width:30px; height:30px; border-radius:50%; background:var(--her); color:#fff; flex:0 0 auto;
+         display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:600;
+         margin-right:6px; align-self:flex-start; }
+  .gja { white-space:pre-wrap; word-break:break-word; }
+  .gphoto { display:flex; gap:8px; align-items:center; min-height:64px; padding:10px 12px; margin:2px 0 4px;
+            border:1px dashed var(--mute); border-radius:10px; background:var(--chip); font-size:12.5px; color:var(--mute); }
+  .gphotoicon { font-size:22px; flex:0 0 auto; }
+  .gphotoimg { display:block; max-width:min(60vw,280px); max-height:240px; object-fit:cover; border-radius:10px; margin:2px 0 4px; }
+  .gstamp { display:inline-block; padding:12px 16px; margin:2px 0 4px; border-radius:14px;
+            background:var(--chip); border:1px solid var(--line); font-size:15px; }
+  .ggloss { font-size:11.5px; color:var(--mute); margin-top:3px; white-space:pre-wrap; }
+  #lightbox { display:none; position:fixed; inset:0; z-index:99; background:rgba(0,0,0,.9);
+              align-items:center; justify-content:center; }
+  #lightbox.open { display:flex; }
+  #lightbox img { max-width:100vw; max-height:100vh; object-fit:contain; }
+  .gnote { font-size:11px; color:var(--mute); font-style:italic; text-align:center; margin:8px 12px; line-height:1.45; }
+  .gtime { font-size:10px; color:var(--faint); margin:0 6px; flex:0 0 auto; }
+
+  /* ops: the machine, backstage */
+  #ops { padding:8px 10px 90px; font-size:13px; }
+  .ops h3 { font-size:13px; color:var(--her); margin:14px 0 4px; text-transform:uppercase; letter-spacing:.5px; }
+  .ops .kv { display:flex; gap:8px; padding:2px 0; border-bottom:1px solid var(--line); }
+  .ops .kv .k { color:var(--mute); flex:0 0 38%; }
+  .ops .kv .v { flex:1; white-space:pre-wrap; word-break:break-word; }
+  .ops .g { display:flex; gap:6px; align-items:center; padding:1px 0; }
+  .ops .g .gn { flex:0 0 34%; color:var(--mute); }
+  .ops .g .bar { flex:1; height:8px; background:var(--line); border-radius:4px; position:relative; }
+  .ops .g .bar i { position:absolute; top:0; bottom:0; background:var(--grp); border-radius:4px; }
+  .ops .g .bar b { position:absolute; top:-2px; width:2px; height:12px; background:var(--her); }
+  .ops .g .gv { flex:0 0 34px; text-align:right; }
+  .ops pre { background:var(--pre); padding:8px; border-radius:8px; white-space:pre-wrap; word-break:break-word; font-size:12px; margin:4px 0; }
+  /* whose backstage this is: one chip per character running against the hub */
+  .ops .whos { display:flex; flex-wrap:wrap; gap:6px; margin:0 0 8px; }
+  .ops .whos .who { background:var(--chip); border:1px solid var(--line); padding:6px 12px; border-radius:14px; cursor:pointer; font-size:13px; }
+  .ops .whos .who.on { background:var(--her); border-color:var(--her); color:#fff; }
+  .ops .menus { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 0; }
+  .ops .menus .menu { background:var(--menu); border:1px solid var(--menu-line); padding:6px 11px; border-radius:12px; cursor:pointer; font-size:12px; }
+  .ops .menus .menu.on { background:var(--menu-on); border-color:var(--menu-on-line); }
+  .ops .quick { display:flex; flex-wrap:wrap; gap:6px; margin:6px 0 10px; padding:7px; background:var(--quick); border-radius:12px; }
+  .ops .quick span { background:var(--chip); padding:6px 10px; border-radius:10px; cursor:pointer; font-size:12px; }
+  .ops .quick span:active { background:var(--menu-on); }
+  .ops .quick span.pending { opacity:.55; outline:1px dashed var(--menu-on); }
+  #opsbar { position:fixed; left:0; right:0; bottom:0; display:none; gap:6px; padding:8px; background:var(--opsbar); border-top:1px solid var(--line); }
+  #opsbar input { flex:1; background:var(--her-b); color:var(--inp-fg); border:0; border-radius:16px; padding:9px 12px; font-size:14px; }
+  #opsbar button { background:var(--her); color:#fff; border:0; border-radius:16px; padding:0 14px; }
+  .ops .fold { cursor:pointer; }
+  .ops .fold::before { content:"▸ "; color:var(--mute); }
+  .ops .fold.open::before { content:"▾ "; }
+
+  /* backstage: the unplayed script must be unmistakable */
+  .future .gb, .future .sline { background:rgba(224,168,60,.16) !important;
+    border-left:3px solid var(--warn); }
+  .futuretag { display:inline-block; background:var(--warn); color:var(--warn-fg); font-size:10px;
+    font-weight:700; border-radius:4px; padding:1px 6px; margin-bottom:3px; letter-spacing:.5px; }
+  .bsbanner { position:sticky; top:0; z-index:3; background:var(--warn-bg); color:var(--warn);
+    font-size:12px; padding:7px 12px; border-bottom:1px solid var(--warn); text-align:center; }
+  .bsbar { position:sticky; top:0; text-align:right; z-index:2; padding-bottom:4px; }
+  .bsbar label { background:var(--bar); border-radius:10px; padding:4px 10px; font-size:12px; color:var(--mute); }
+
+  /* in person: spoken dialogue, not chat bubbles */
+  #irlchat { padding:10px 14px; }
+  .sline { display:flex; gap:8px; padding:5px 8px; border-radius:6px; margin:2px 0; }
+  .swho { flex:0 0 auto; min-width:52px; color:var(--who); font-size:13px; text-align:right; }
+  .sline.me .swho { color:var(--me-who); }
+  .sbody { flex:1; }
+  .sja { white-space:pre-wrap; word-break:break-word; }
+  .sgloss { font-size:11.5px; color:var(--mute); margin-top:2px; white-space:pre-wrap; }
+  .stime { flex:0 0 auto; font-size:10px; color:var(--faint); align-self:flex-start; margin-top:3px; }
+
+  /* Another answer to the same message. One quiet button per bubble opens
+     a menu; the answers themselves live in a popup of their own, because a
+     strip of glyphs inside the bubble was not recognisable from the phone.
+     Looking changes nothing -- her record moves only on Keep this. */
+  .swp { display:flex; align-items:center; gap:7px; margin-top:4px; font-size:11px; color:var(--mute); }
+  .swp button { border:0; background:transparent; color:var(--mute); cursor:pointer;
+                font-size:18px; line-height:1; padding:0 6px; border-radius:8px; letter-spacing:1px; }
+  .swp button:hover, .swp button:focus { color:var(--act); outline:none; }
+  .swp .cnt { font-variant-numeric:tabular-nums; cursor:pointer; }
+  .swp .cnt.rebuilt::after { content:" \00b7 rebuilt"; opacity:.7; }
+  .swp .pend { animation:blink 1.1s infinite; }
+  .swp .fail { color:var(--warn); }
+  /* the per-message menu: the same box as the model picker */
+  #mmenu { display:none; position:fixed; z-index:41; background:var(--menu);
+           border:1px solid var(--menu-line); border-radius:12px; padding:6px;
+           box-shadow:0 6px 20px rgba(0,0,0,.35); }
+  #mmenu div { padding:9px 14px; border-radius:9px; font-size:13px; cursor:pointer; white-space:nowrap; }
+  #mmenu div.off { opacity:.45; cursor:default; }
+  /* the viewer: a sheet over the chat, one candidate at a time */
+  #viewer { display:none; position:fixed; inset:0; z-index:60; background:rgba(0,0,0,.55);
+            align-items:flex-end; justify-content:center; }
+  #viewer.open { display:flex; }
+  #viewer .sheet { width:100%; max-width:640px; max-height:88vh; display:flex; flex-direction:column;
+                   background:var(--menu); border:1px solid var(--menu-line); border-radius:16px 16px 0 0;
+                   box-shadow:0 -6px 24px rgba(0,0,0,.4); }
+  #viewer .top { display:flex; align-items:center; gap:8px; padding:10px 12px; font-size:12px;
+                 color:var(--mute); border-bottom:1px solid var(--menu-line); }
+  #viewer .top .x { margin-left:auto; border:0; background:transparent; color:var(--mute);
+                    font-size:20px; line-height:1; cursor:pointer; padding:0 4px; }
+  #viewer .body { padding:12px 14px; overflow-y:auto; white-space:pre-wrap; font-size:15px; line-height:1.4; }
+  #viewer .body .note { font-size:12px; color:var(--mute); margin-bottom:8px; }
+  #viewer .who { padding:6px 14px 0; font-size:11px; color:var(--mute); }
+  #viewer .who.sitting { color:var(--ok); }
+  #viewer .who.rebuilt { color:var(--warn); }
+  #viewer .nav { display:flex; align-items:center; gap:10px; padding:10px 12px 12px; }
+  #viewer .nav button { border:0; background:var(--chip); color:var(--act); cursor:pointer;
+                        border-radius:12px; padding:8px 14px; font-size:13px; }
+  #viewer .nav button:disabled { opacity:.35; cursor:default; }
+  #viewer .nav .arrow { font-size:18px; padding:6px 12px; }
+  #viewer .nav .cnt { font-variant-numeric:tabular-nums; font-size:13px; color:var(--mute); min-width:44px; text-align:center; }
+  #viewer .nav .cnt.sitting { color:var(--ok); }
+  #viewer .nav .keep { margin-left:auto; background:var(--act); color:#fff; }
+  #viewer .nav .wait { animation:blink 1.1s infinite; }
+  /* which model writes her words, in the chat header; the menu button is
+     hidden in the chat view, so this takes the right-hand end */
+  #vmodel { margin-left:auto; display:none; font-size:11px; color:var(--act);
+            background:var(--chip); border-radius:11px; padding:5px 10px; cursor:pointer;
+            max-width:46vw; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  #vmenu { display:none; position:fixed; right:8px; z-index:40; background:var(--menu);
+           border:1px solid var(--menu-line); border-radius:12px; padding:6px;
+           box-shadow:0 6px 20px rgba(0,0,0,.35); }
+  #vmenu div { padding:8px 13px; border-radius:9px; font-size:13px; cursor:pointer; white-space:nowrap; }
+  #vmenu div.on { background:var(--menu-on); border:1px solid var(--menu-on-line); }
+  /* composer */
+  #composer { flex:0 0 auto; display:none; gap:8px; padding:8px 10px;
+              padding-bottom:calc(8px + env(safe-area-inset-bottom)); background:var(--bar); }
+  #inp { flex:1; background:var(--inp); color:var(--fg); border:0; border-radius:18px;
+         padding:10px 14px; font-size:15px; resize:none; max-height:120px; font-family:inherit; }
+  #send { background:none; border:0; color:var(--act); font-size:22px; padding:0 6px; cursor:pointer; }
+</style>
+</head>
+<body>
+<div id="app">
+  <div id="errbar"></div>
+  <div id="hdr">
+    <div id="back">&#8249;</div>
+    <div id="avatar"></div>
+    <div>
+      <div id="title">TALKAPP</div>
+      <div id="presence"></div>
+    </div>
+    <div id="vmodel"></div>
+    <div id="menubtn">&#8942;</div>
+  </div>
+  <div id="home" class="view"></div>
+  <div id="menu" class="view"></div>
+  <div id="chat" class="view"></div>
+  <div id="herphone" class="view"></div>
+  <div id="herchat" class="view"></div>
+  <div id="irl" class="view"></div>
+  <div id="irlchat" class="view"></div>
+  <div id="graphv" class="view"></div>
+  <div id="ops" class="view"></div>
+  <div id="opsbar"><input id="opsin" placeholder="/state, /set anger 20, /sweep him ..."><button id="opssend">run</button></div>
+  <div id="composer">
+    <textarea id="inp" rows="1" placeholder="Message"></textarea>
+    <button id="send">&#10148;</button>
+  </div>
+  <div id="vmenu"></div>
+  <div id="mmenu"></div>
+  <div id="viewer"><div class="sheet"></div></div>
+</div>
+<script>
+"use strict";
+var BUILD = "2026-09-08 09:40";
+// any script error becomes a visible red bar instead of a dead button
+window.onerror = function (msg, src, line) {
+  var eb = document.getElementById("errbar");
+  eb.style.display = "block";
+  eb.textContent = "app error: " + msg + " @" + line + "  (build " + BUILD + ")";
+};
+
+// ---- auth key ----
+const qs = new URLSearchParams(location.search);
+if (qs.get("key")) { try { localStorage.setItem("takey", qs.get("key")); } catch(e){}
+  history.replaceState(null, "", location.pathname); }
+let KEY = ""; try { KEY = localStorage.getItem("takey") || ""; } catch(e){}
+const $ = id => document.getElementById(id);
+const api = (p, params) => {
+  const u = new URL(p, location.origin);
+  u.searchParams.set("key", KEY);
+  for (const k in (params||{})) u.searchParams.set(k, params[k]);
+  return fetch(u).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+};
+const post = (p, body) => fetch(`${p}?key=${encodeURIComponent(KEY)}`,
+  {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(body)});
+
+// Another answer to the same message, and which one the conversation goes on
+// from. `swipes` is the hub's copy of her bot's record, keyed by the hub's own
+// message id; `viewing` is this screen's own business and is never sent
+// anywhere -- looking at a candidate changes nothing.
+let swipes = {}, viewing = {};
+const swipeWaiting = new Set();
+// which model writes her words, and the names her bot will accept
+let VOICE_MODEL = "", VOICE_MODELS = [];
+let CUR = null, NAME = "";
+let OPSCHARS = [];      // every character registered with the hub, for the ops switcher
+// Of those, the ones he has no chat with: a character who exists for another
+// character's circle registers with the hub so those rooms can reach her, and
+// her backstage is worth opening even though the home list must never show
+// her a conversation. Filled from the same answer that fills OPSCHARS.
+const HIDDEN = new Set();
+function isHidden(id) { return HIDDEN.has(id); }
+// whether the open character's bot will speak a line he taps. Per character:
+// one of them having a voice on demand must not put a speaker on the other's
+// lines. Set from /history, which the chat always loads, and from /chars.
+let CAN_SPEAK = false;
+// the one <audio> everything plays through, so tapping a second line stops the
+// first instead of talking over it
+let sayAudio = null;
+let msgs = [];
+let typingUntil = 0;
+let group = {}, presenceLine = "";
+let ws = null;
+let pendingReads = new Set(), readTimer = null;
+let backstage = false;
+let HERKEY = null;
+
+// ================= self-update =================
+// Firefox on Android keeps the tab alive in the background indefinitely, so
+// the running page must notice the server has a newer client and reload
+// itself. Checked at boot, on every foreground, on ws reconnect, and on a
+// timer.
+let MYVER = 0, APKVER = 0, APKNAME = "";
+// inside the native app the page can ask what version is installed
+const NATIVE = window.talkappNative ? window.talkappNative.version() : 0;
+async function verCheck() {
+  try {
+    // tell the hub what this phone is running, so "is the APK installed"
+    // is something the system knows instead of something he gets asked
+    const {ver, apk_ver, apk_name} = await api("/ver", NATIVE
+      ? {app: NATIVE, app_name: window.talkappNative.versionName()} : {});
+    APKVER = apk_ver || 0; APKNAME = apk_name || "";
+    if (!MYVER) MYVER = ver;
+    else if (ver !== MYVER) location.reload();
+    if ($("menu").style.display === "block") renderMenu();
+  } catch(e) {}
+}
+setInterval(verCheck, 5 * 60 * 1000);
+
+// ================= navigation =================
+const VIEWS = ["home", "menu", "chat", "herphone", "herchat", "irl", "irlchat", "graphv", "ops"];
+function render(state, fromPop) {
+  const v = (state && state.v) || "home";
+  for (const id of VIEWS) $(id).style.display = "none";
+  $("composer").style.display = "none";
+  $("back").style.display = v === "home" ? "none" : "block";
+  $("avatar").style.display = "none";
+  $("menubtn").style.display = v === "home" ? "block" : "none";
+  $("presence").textContent = "";
+  if (v === "home") {
+    $("title").textContent = "TALKAPP";
+    $("home").style.display = "block";
+    loadChars();
+  } else if (v === "menu") {
+    $("title").textContent = "menu";
+    $("menu").style.display = "block";
+    renderMenu();
+  } else if (v === "chat") {
+    CUR = state.char; NAME = state.name || NAME;
+    $("title").textContent = NAME;
+    $("avatar").innerHTML = esc(NAME[0] || "?") + avImg(CUR);
+    $("avatar").style.display = "flex";
+    $("chat").style.display = "block"; $("composer").style.display = "flex";
+    if (fromPop) reloadChat(); else { renderChat(); scrollBottom("chat"); }
+    updHdr();
+  } else if (v === "herphone") {
+    $("title").textContent = "her phone";
+    $("herphone").style.display = "block";
+    renderHerPhone();
+  } else if (v === "herchat") {
+    HERKEY = state.her;
+    $("title").textContent = state.hername || HERKEY;
+    $("herchat").style.display = "block";
+    renderHerChat();
+    scrollBottom("herchat");
+  } else if (v === "irl") {
+    $("title").textContent = "in person";
+    $("irl").style.display = "block";
+    renderIrl();
+  } else if (v === "irlchat") {
+    HERKEY = state.her;
+    $("title").textContent = state.hername || HERKEY;
+    $("irlchat").style.display = "block";
+    renderIrlChat();
+    scrollBottom("irlchat");
+  } else if (v === "graphv") {
+    $("title").textContent = "the graph";
+    $("graphv").style.display = "block";
+    renderGraph();
+  } else if (v === "ops") {
+    $("title").textContent = "ops · " + opsWho();
+    $("ops").style.display = "block";
+    $("opsbar").style.display = "flex";
+    loadOps();
+  }
+  if (v !== "ops") $("opsbar").style.display = "none";
+  $("vmenu").style.display = "none";
+  updVModel();
+}
+function nav(state) { history.pushState(state, ""); render(state, false); }
+// Back past home used to step out of the app's history into the blank page
+// the tab started from -- a white screen in Firefox, which has no
+// standalone-PWA exit. A sentinel sits under home: landing on it bounces
+// forward, so back-at-home stays at home and the app is left via the
+// Android home button or recents, like any messenger.
+window.onpopstate = e => {
+  if (!e.state || e.state.v === "root") {
+    history.pushState({v: "home"}, "");
+    render({v: "home"}, true);
+    return;
+  }
+  render(e.state, true);
+};
+history.replaceState({v: "root"}, "");
+history.pushState({v: "home"}, "");
+
+// ---- reaching the top of the chat loads the page before it ----
+// The hub has always taken a `before` cursor and answered with the 80 rows
+// under it; the client asked once per open and assigned the answer, so the
+// top of the scroll was whatever row was eightieth from the end at the moment
+// the chat was opened and reaching it did nothing. He hit that floor on
+// 2026-09-06 and could not get back past a message from three days earlier.
+// `reloadChat` and `openChar` are unchanged: they still take the newest page
+// and go to the bottom. Only the top of the list is new.
+let olderBusy = false, olderDone = false, olderGen = 0;
+// a reload or another character is a different list; a page still in flight
+// for the old one must not land in it
+function resetOlder() { olderGen++; olderBusy = false; olderDone = false; }
+async function loadOlder() {
+  if (olderBusy || olderDone || !CUR || !msgs.length) return;
+  if ($("chat").style.display !== "block") return;
+  const before = msgs[0].ts;
+  if (!before) return;                 // a row from before the hub stamped one
+  const el = $("chat"), char = CUR, gen = olderGen;
+  olderBusy = true;
+  try {
+    const d = await api("/history", {char, before});
+    if (gen !== olderGen || char !== CUR) return;
+    const have = new Set(msgs.map(m => m.id));
+    const older = (d.messages || []).filter(m => !have.has(m.id));
+    // the hub sends no has_more: an empty page is the end of the chat
+    if (!older.length) { olderDone = true; return; }
+    const h0 = el.scrollHeight, top0 = el.scrollTop;
+    msgs = older.concat(msgs);
+    takeSwipes(d, true);
+    renderChat();
+    // hold the line he was reading, the way renderOps keeps its offset across
+    // an innerHTML rebuild: 80 rows prepended would otherwise put him at the
+    // top of the new block
+    el.scrollTop = top0 + (el.scrollHeight - h0);
+  } catch (e) {
+  } finally {
+    if (gen === olderGen) olderBusy = false;
+  }
+}
+$("chat").addEventListener("scroll", () => { if ($("chat").scrollTop < 300) loadOlder(); });
+
+async function reloadChat() {
+  resetOlder();
+  try {
+    const d = await api("/history", {char: CUR});
+    msgs = d.messages; typingUntil = d.typing_until * 1000;
+    group = d.group || {}; presenceLine = d.presence || "";
+    CAN_SPEAK = !!d.speak;
+    takeSwipes(d);
+    if (d.reaction !== undefined) reaction = (d.reaction && d.reaction.file) ? d.reaction : null;
+  } catch(e) {}
+  renderChat(); scrollBottom("chat"); updHdr();
+}
+
+// ================= menu =================
+async function loadGroup() {
+  try {
+    const chars = (await api("/chars")).chars;
+    if (chars.length) {
+      // Whoever is being looked at, not whoever registered with the hub
+      // first. This fetched the first character unconditionally, so the
+      // menu rows that call it before navigating -- her phone, in person,
+      // the graph, ops -- pulled the FIRST character's friends' chat and
+      // her face into a screen about the second one.
+      if (!CUR) CUR = chars[0].id;
+      const d = await api("/history", {char: CUR});
+      group = d.group || {};
+    }
+  } catch(err) {}
+}
+// the user's theme, kept on this phone only; no choice means light (never dark by default)
+function themeName() {
+  let t = ""; try { t = localStorage.getItem("theme") || ""; } catch (e) {}
+  return t === "dark" ? "dark" : "light";
+}
+function applyTheme() {
+  const t = themeName();
+  if (t === "light") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.setAttribute("data-theme", t);
+  // the status bar follows: what --bar resolves to under the chosen skin
+  const m = document.querySelector('meta[name="theme-color"]');
+  if (m) m.setAttribute("content", getComputedStyle(document.documentElement).getPropertyValue("--bar").trim() || "#ffffff");
+}
+function cycleTheme() {
+  const next = themeName() === "dark" ? "light" : "dark";
+  try { if (next === "light") localStorage.removeItem("theme"); else localStorage.setItem("theme", next); } catch (e) {}
+  applyTheme();
+}
+applyTheme();
+function renderMenu() {
+  const el = $("menu"); el.innerHTML = "";
+  const diag = location.origin
+    + " | secure:" + (window.isSecureContext ? "yes" : "NO")
+    + " | sw:" + ("serviceWorker" in navigator ? "yes" : "no")
+    + " | push:" + ("PushManager" in window ? "yes" : "no")
+    + " | notif:" + (("Notification" in window) ? Notification.permission : "none");
+  const rows = [
+    ["her phone", "the group chat and her LINE threads, as she sees them", async () => { await loadGroup(); nav({v: "herphone"}); }],
+    ["in person", "what was said to her face to face, as a transcript", async () => { await loadGroup(); nav({v: "irl"}); }],
+    ["the graph", "backstage: what each person privately holds - she never sees this", async () => { await loadGroup(); nav({v: "graphv"}); }],
+    ["ops", "backstage: the machine - her looks at his phone, the snoops, X, model calls, the gauges; commands go here, not into her chat. One character at a time, chosen at the top", async () => { await loadGroup(); nav({v: "ops"}); }],
+    NATIVE
+      ? ["notifications: native", "over the app's own socket to the hub - no push service in the path", () => {}]
+      : [notifState(), "her messages ping this phone when the app is closed", notifTap],
+    ["theme: " + themeName(), "light is the default; dark on request (tap to change)", () => { cycleTheme(); renderMenu(); }],
+    ["reload app", "build " + BUILD, () => location.reload()],
+    ["status", diag, () => {}],
+  ];
+  if (NATIVE) {
+    // the APK's build writes talkapp.ver beside itself; a newer one than
+    // the running app is offered here, and tapping hands the link to the
+    // system browser, which downloads it and offers the install
+    const name = window.talkappNative.versionName();
+    rows.push(APKVER > NATIVE
+      ? ["update app", "installed " + name + "  ->  available " + APKNAME + "  (tap to download)",
+         () => { location.href = "/app/talkapp.apk"; }]
+      : ["app version", name + " (up to date)", () => {}]);
+  }
+  for (const [name, sub, fn] of rows) {
+    const d = document.createElement("div");
+    d.className = "mrow";
+    d.innerHTML = `<div>${esc(name)}</div><div class="msub">${esc(sub)}</div>`;
+    d.onclick = fn;
+    el.appendChild(d);
+  }
+}
+
+// ================= ops =================
+// The machine, backstage. Everything here is what the bot posts with its
+// state sync (sim/ops.py); commands typed below go to the hub's queue and
+// come back as rows in the log -- never through her chat.
+let OPS = {}, opsLog = [], opsOpen = {}, APPVER = null;
+// The command bar was one strip of twenty. Grouped, one group open at a
+// time, so the page is a menu and not a wall.
+let opsMenu = "";
+const OPS_MENUS = [
+  ["her", ["/state", "/scene", "/gauges", "/health", "/money", "/where", "/diet", "/morning"]],
+  ["day", ["/schedule", "/schedule regen", "/tick", "/day", "/agenda", "/week", "/compile", "/commit", "/goals", "/threads"]],
+  ["him", ["/attach", "/withhold", "/rupture", "/impulse", "/expect", "/sweep him", "/sweep affection", "/digest", "/look"]],
+  ["people", ["/cast", "/beats", "/lives", "/graph", "/castarcs", "/voice", "/sentiment"]],
+  ["X", ["/x status", "/x drift", "/x taste", "/x actions", "/x post", "/japan"]],
+  ["scenery", ["/scenery", "/scenery gaps", "/scenery now", "/scenery harvest", "/scenery rejudge", "/reaction"]],
+  ["her head", ["/beliefs", "/self", "/reflect", "/spiral", "/ick", "/wonder", "/compare", "/foresee", "/discharge"]],
+  ["memory", ["/memory", "/recalls", "/diary", "/claims", "/arcs", "/context", "/places"]],
+  ["world", ["/world", "/trains", "/hazards", "/time", "/snoop", "/notes", "/kb", "/watch"]],
+  ["run", ["/ops", "/vision", "/headless", "/showrun", "/absurd", "/absurd full", "/help"]],
+];
+async function loadOps(quiet) {
+  try {
+    // whose backstage this is. Two characters run as two processes against
+    // two saves, and the view used to inherit whichever chat was open last
+    // with nothing on screen saying so -- so his second character's gauges
+    // and his first character's gauges were the same screen to look at.
+    // `all` because this switcher is the only way to reach the backstage of a
+    // character his phone lists no chat with; the home list asks without it
+    // and still gets only the conversations.
+    try {
+      OPSCHARS = (await api("/chars", {all: 1})).chars || [];
+      HIDDEN.clear();
+      for (const c of OPSCHARS) if (c.hidden) HIDDEN.add(c.id);
+    } catch(e) {}
+    // a first open lands on somebody he has a chat with, never on the one who
+    // is only here for another character's rooms
+    if (!CUR && OPSCHARS.length) CUR = (OPSCHARS.find(c => !c.hidden) || OPSCHARS[0]).id;
+    const d = await api("/ops", {char: CUR});
+    OPS = d.ops || {}; opsLog = d.log || [];
+    try { APPVER = await api("/app"); } catch(e) {}
+  } catch(err) { if (!quiet) OPS = {error: String(err)}; }
+  renderOps();
+}
+// The character whose backstage is open, by her own name. The hub serves four
+// characters and the story view labelled EVERY character's own turns with the
+// first one's name, written into the page.
+function herName() {
+  const c = OPSCHARS.find(x => x.id === CUR);
+  return (c && (c.name || c.id)) || NAME || CUR || "her";
+}
+function opsWho() { return herName(); }
+function kv(k, v) { return `<div class="kv"><div class="k">${esc(k)}</div><div class="v">${esc(v === undefined || v === null ? "-" : (typeof v === "object" ? JSON.stringify(v) : String(v)))}</div></div>`; }
+function section(id, title, inner) {
+  const open = opsOpen[id] !== false;
+  return `<h3 class="fold ${open?"open":""}" data-id="${id}">${esc(title)}</h3><div ${open?"":"style='display:none'"}>${inner}</div>`;
+}
+function renderOps() {
+  const el = $("ops"); const o = OPS;
+  if ($("ops").style.display === "block") $("title").textContent = "ops · " + opsWho();
+  let h = `<div class="ops">`;
+  if (OPSCHARS.length > 1) {
+    h += `<div class="whos">` + OPSCHARS.map(c =>
+        `<span class="who${c.id === CUR ? " on" : ""}" data-w="${esc(c.id)}">${esc(c.name || c.id)}</span>`).join("") + `</div>`;
+  }
+  h += `<div class="menus">` + OPS_MENUS.map(([name, cmds]) =>
+      `<span class="menu${opsMenu===name?" on":""}" data-m="${esc(name)}">${esc(name)}</span>`).join("") + `</div>`;
+  const openMenu = OPS_MENUS.find(([n]) => n === opsMenu);
+  if (openMenu) h += `<div class="quick">${openMenu[1].map(c => `<span data-c="${esc(c)}">${esc(c)}</span>`).join("")}</div>`;
+  h += section("log", "command log (an answer arrives on the bot's next loop pass)", `<div id="opslog"></div>`);
+  if (o.error) h += kv("error", o.error);
+  if (!o.at) { h += `<div class="phonehint">no ops payload yet; the bot posts one every ${20}s</div>`; }
+  const w = o.world || {}, g = o.gauges || {}, him = o.him || {}, ph = o.phone || {}, sn = o.snoop || {}, x = o.x || {}, m = o.models || {};
+  h += section("world", "now", kv("time", w.her_time) + kv("scene", w.scene) + kv("where (body)", w.where) + kv("family", w.family) + kv("care", w.care) + kv("with", w.with) + kv("phone", w.phone_access) + kv("ticks today", w.ticks_today)
+      + kv("exchange live", w.exchange_live || "-") + kv("diary today", w.diary_today) + kv("reflections today", w.reflections_today) + kv("money", w.money)
+      + kv("weather", w.weather) + kv("japan", (w.japan||[]).join(" / ")) + kv("him share today", w.him_share_today !== null && w.him_share_today !== undefined ? w.him_share_today + "%" : "-")
+      + kv("run", `${w.run_dir||""} pid ${w.pid||""} up ${w.uptime_h||0}h`)
+      + kv("app", APPVER ? `installed ${APPVER.installed_name||APPVER.installed} / served ${APPVER.served_name||APPVER.served} — ${APPVER.state}` : "-") + kv("payload age", o.at ? Math.round(Date.now()/1000 - o.at) + "s" : "-"));
+  let gh = "";
+  for (const r of (g.rows||[])) {
+    const pct = Math.max(0, Math.min(100, r.value));
+    gh += `<div class="g"><div class="gn">${esc(r.gauge)}</div><div class="bar"><i style="width:${pct}%"></i><b style="left:${r.baseline}%"></b></div><div class="gv">${Math.round(r.value)}</div></div>`;
+  }
+  gh += kv("affection", `${g.affection_band||""} (target ${g.affection_target})`) + kv("register", g.register || "-") + kv("delay x", g.delay_factor) + kv("compose x", g.compose_factor) + kv("tags", g.tags);
+  gh += `<div class="phonehint">pink tick = baseline. set by hand: /set anger 20, /set him.tension 60, /set him.resentment 40; /sweep affection shows what a value changes</div>`;
+  h += section("gauges", "gauges", gh);
+  h += section("him", "him", kv("closeness / standing / tension", `${him.closeness} / ${him.standing} / ${him.tension}`) + kv("sentiments", him.sentiments) + kv("attachment", `${him.attachment_strategy||"-"} (threat ${him.attachment_threat})`)
+      + kv("rupture", him.rupture || "-") + kv("withholding", him.withholding || "-") + kv("withhold pressure", him.withhold_pressure) + kv("his side", him.his_side) + kv("silent hours", him.silent_hours)
+      + kv("impulse", him.impulse) + kv("unread of his", him.unread_his) + kv("delivery busy", him.delivery_busy));
+  h += section("phone", "her phone-app about him", kv("last look", ph.last_look) + kv("looks today", ph.looks_today) + kv("curiosity", ph.curiosity) + kv("live line", ph.live || "-")
+      + kv("last digest (" + (ph.last_digest_at||"") + ")", "") + `<pre>${esc(ph.last_digest || "(none)")}</pre>`);
+  let sh = kv("last snoop", sn.last) + kv("today / week", `${sn.today} / ${sn.week}`) + kv("eligible now", sn.eligible_now) + kv("notes read", `${sn.notes_read} (last: ${(sn.notes_last||[]).join(", ")})`) + kv("downloads seen", sn.downloads_seen);
+  for (const e of (sn.seen||[])) sh += `<div class="kv"><div class="k">${esc(e.date)} ${esc(e.at)} (${esc(e.ago)})</div><div class="v">${esc(e.text)}</div></div>`;
+  h += section("snoop", "the snoops: what she saw", sh);
+  const sc = o.scenery || {};
+  if (sc.on_file !== undefined) {
+    const thumbs = (rows, dim) => `<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px">` + (rows||[]).map(r =>
+      `<div style="width:150px;font-size:11px;opacity:${dim?0.5:1}"><a href="${esc(r.url)}" target="_blank" rel="noreferrer"><img src="/scenery/${encodeURIComponent(r.img)}?key=${encodeURIComponent(KEY)}" style="width:150px;height:110px;object-fit:cover;border-radius:8px;display:block"></a>`
+      + `<div><b>${esc(r.kind)}</b> ${esc(r.tod)} ${esc(r.season)} ${esc(r.weather)} q${r.q}${r.region&&r.region!="unknown"?" · "+esc(r.region):""}${r.sent?" · SENT":""}${r.rejected?" · <span style='color:#c66'>"+esc(r.rejected)+"</span>":""}</div>`
+      + `${r.event?`<div style="color:var(--mute)">${esc(r.event)}</div>`:""}<div>@${esc(r.author)}</div><div>${esc(r.caption)}</div></div>`).join("") + `</div>`;
+    let ss = kv("on file / usable / sendable / sent", `${sc.on_file} / ${sc.usable} / ${sc.sendable_usable} / ${sc.sent}`) + kv("usable by place", Object.entries(sc.by_kind||{}).map(([k,v]) => `${k} ${v}`).join(", ") || "none")
+      + kv("watchlist", (sc.watchlist||[]).map(w => `@${w.handle} (${w.verdict}, ${w.kind})`).join(", ") || "none") + kv("judged / last harvest / running", `${sc.judged} / ${sc.last_harvest} / ${sc.running}`)
+      + kv("her scene now", sc.scene_kind) + kv("what fits now", sc.fits_now) + kv("sent today", sc.sent_today)
+      + kv("next search", sc.next_search);
+    if ((sc.events||[]).length) ss += kv("events she is going to", sc.events.map(e => `${e.name} (${e.in_days?"in "+e.in_days+"d":"today"}${e.node?" @"+e.node:""}): ${e.rows} photo(s) on file`).join(" | "));
+    if ((sc.coverage||[]).length) {
+      ss += `<div class="kv"><div class="k">coverage</div><div class="v"><table style="font-size:11px;border-collapse:collapse">`
+        + `<tr><th align="left">kind</th><th>route</th><th>scenes</th><th>rows</th><th>morn</th><th>mid</th><th>aft</th><th>eve</th><th>night</th><th>missing</th></tr>`
+        + sc.coverage.map(r => `<tr><td>${esc(r.kind)}</td><td align="center">${r.route?"yes":"-"}</td><td align="center">${r.scenes}</td><td align="center">${r.rows}</td>`
+          + ["morning","midday","afternoon","evening","night"].map(b => `<td align="center">${(r.bands||{})[b]||0}</td>`).join("")
+          + `<td align="center"><b>${r.missing}</b></td></tr>`).join("") + `</table></div></div>`;
+    }
+    ss += kv("refused, by reason", Object.entries(sc.rejections||{}).map(([k,v]) => `${k} ${v}`).join(", ") || "nothing refused");
+    ss += `<div class="kv"><div class="k">kept (newest first)</div><div class="v"></div></div>` + thumbs(sc.kept_rows, false);
+    ss += `<div class="kv"><div class="k">refused (newest first)</div><div class="v"></div></div>` + thumbs(sc.refused_rows, true);
+    if ((sc.skipped||[]).length) ss += kv("accounts skipped lately", sc.skipped.map(x => `@${x.handle}: ${x.why}`).join(" | "));
+    for (const [k, items] of Object.entries(sc.lore||{})) ss += kv("lore " + k, items.map(i => `${i.date}: ${i.caption}${i.her?" — she said: "+i.her:""}`).join(" | "));
+    h += section("scenery", "borrowed eyes: real photos, hers when she sends one", ss);
+  }
+  const dr = x.drift || {};
+  h += section("x", "X", kv("last look", x.last_look) + kv("looks today", x.looks_today) + kv("busy / error", `${x.busy} ${x.error||""}`) + kv("noticed", x.noticed)
+      + kv("24h likes / follows / unfollows / posts", `${x.likes_24h} / ${x.follows_24h} / ${x.unfollows_24h} / ${x.posts_24h}`) + kv("queue", x.queue) + kv("post mode", x.post_mode)
+      + (x.last_posts||[]).map(p => kv("post " + p.at, p.text)).join("")
+      + kv("drift", dr.following !== undefined ? `${dr.following} followed: inherited ${dr.inherited}, hers ${dr.hers}, his new ${dr.his_new}; unfollowed ${dr.unfollowed}; verdicts ${JSON.stringify(dr.verdicts||{})}; ${dr.drop_left} to drop` : "-")
+      + kv("taste", x.taste_top) + kv("japan noted (what she saw about Japan on the timeline; it feeds the group chat)", (x.japan||[]).join(" / "))
+      + (x.actions_recent||[]).map(t => kv(`${t.kind}${t.drift?" (drift)":""} ${t.at}${t.done?"":" — not done yet"}`, `${t.target}${t.why?" — "+t.why:""}`)).join("")
+      + kv("unfollowed (drift), why", (x.dropped||[]).map(d => `@${d.handle}: ${d.why}`).join(" | ") || "-")
+      + kv("drops next", (x.drop_next||[]).map(d => `@${d.handle}: ${d.why}`).join(" | ") || "-") + kv("drop rule", x.drop_rule)
+      + kv("hers only (followed by her, never his)", x.hers_only ? `${x.hers_only.n}: ${(x.hers_only.follows||[]).map(h => "@"+h).join(", ") || "-"}` : "-"));
+  const wl = o.watch || {}, ck = o.checks || {};
+  h += section("watch", "what she is watching, and what she thought", (wl.shows||[]).map(s => kv(`${s.title} (${s.ja})${s.own?" — hers":" — seed"}${s.his?" (also his)":""}`, `ep ${s.ep}/${s.total||"?"}, last watched ${s.last}${s.why?" — why: "+s.why:""}`)).join("")
+      + kv("she would put on next", wl.next) + kv("next pick of her own", wl.next_pick)
+      + kv("recaps read (the real Japanese あらすじ, fetched once per episode)", (wl.recaps||[]).join(" | ") || "none")
+      + (wl.thoughts||[]).map(t => kv(`she thought ${t.at}${t.grounded?" — grounded in the real episode":""}`, t.text)).join(""));
+  const mind = o.mind || {};
+  h += section("mind", "what she is carrying: promises, questions, the morning", kv("open promises", (mind.promises||[]).join(" | ") || "none")
+      + kv("recently settled", (mind.settled||[]).join(" | ") || "-")
+      + kv("questions she is turning over (unasked)", (mind.questions_open||[]).join(" | ") || "none")
+      + kv("questions settled", (mind.questions_settled||[]).join(" | ") || "-")
+      + kv("what she woke wanting", mind.morning) + kv("goals", (mind.goals||[]).join(" | ") || "-"));
+  h += section("checks", "what the readers say", kv("seams (last 2 days)", (ck.seams||[]).join(" | ") || "none") + kv("day last read as a story", ck.seams_read)
+      + kv("never heard (7 days)", (ck.unheard||[]).join(", ") || (ck.tally_sources ? `none of ${ck.tally_sources} sources` : "no tally yet"))
+      + kv("flags", (ck.flags||[]).join(" | ") || "none") + kv("pro/flash A/B", ck.ab) + kv("stamped back today", ck.stamped_back));
+  let mh = kv("calls hour / day / run", `${m.hour} / ${m.day} / ${m.run}`) + kv("tokens hour / day", `${m.tokens_hour} / ${m.tokens_day}`) + kv("model seconds (hour)", m.seconds_hour) + kv("errors / empties", `${m.errors} / ${m.empties}`);
+  for (const [r, b] of Object.entries(m.by_role_hour||{})) mh += kv(r, `${b.n} calls, ${b.s}s avg, in ${b.in} out ${b.out}${b.think?" think "+b.think:""}`);
+  if (m.last) mh += `<pre>${esc(m.last.map(l => `${l.ago}s ago ${l.role} ${l.s}s out ${l.out}`).join("\n"))}</pre>`;
+  h += section("models", "model calls", mh);
+  h += `</div>`;
+  // where he had scrolled to survives the redraw. The bot pushes a new
+  // payload every 20 seconds and the whole view is rebuilt from it; replacing
+  // the scroller's children empties it for an instant, which clamps the
+  // scroll offset to the top. That was survivable while the digest was cut
+  // to 900 characters and is not now that it goes up whole: a long one takes
+  // more than a screen and he would be thrown back to the top mid-read.
+  const wasAt = el.scrollTop;
+  el.innerHTML = h;
+  if (wasAt) el.scrollTop = wasAt;
+  for (const f of el.querySelectorAll(".fold")) f.onclick = () => { opsOpen[f.dataset.id] = !(opsOpen[f.dataset.id] !== false); renderOps(); };
+  for (const q of el.querySelectorAll(".quick span")) q.onclick = () => opsSend(q.dataset.c);
+  for (const m of el.querySelectorAll(".menus .menu")) m.onclick = () => { opsMenu = (opsMenu === m.dataset.m ? "" : m.dataset.m); renderOps(); };
+  for (const w of el.querySelectorAll(".whos .who")) w.onclick = () => {
+    // switching here changes whose ops this is and nothing else: her chat,
+    // her phone and the graph are reached from their own rows
+    if (w.dataset.w === CUR) return;
+    CUR = w.dataset.w; OPS = {}; opsLog = [];
+    $("title").textContent = "ops · " + opsWho();
+    loadOps();
+  };
+  renderOpsLog();
+}
+function opsText(t) {
+  // a result whose first line is /file/<name> (her whole prompt) becomes a link to the hub's copy
+  const m = /^(\/file\/\S+)\n?([\s\S]*)$/.exec(t || "");
+  if (!m) return esc(t);
+  return `<a href="${esc(m[1])}?key=${encodeURIComponent(KEY)}" target="_blank" rel="noopener">open ${esc(m[1].slice(6))}</a>
+${esc(m[2])}`;
+}
+function renderOpsLog() {
+  const el = $("opslog"); if (!el) return;
+  el.innerHTML = opsLog.slice(-12).reverse().map(r => `<div class="kv"><div class="k">${esc(hm(r.ts))} ${esc(r.cmd)}${r.pending ? " …" : ""}</div></div><pre${r.pending ? ' style="opacity:.6"' : ""}>${opsText(r.text)}</pre>`).join("") || `<div class="phonehint">(no commands yet)</div>`;
+}
+let opsPending = {};   // command text -> ts sent, until its answer arrives
+async function opsSend(text) {
+  text = (text || $("opsin").value).trim(); if (!text) return;
+  $("opsin").value = "";
+  if (!text.startsWith("/")) text = "/" + text;
+  const now = Date.now()/1000;
+  if (opsPending[text] && now - opsPending[text] < 90) {
+    opsLog.push({ts: now, cmd: text, text: `(already sent ${Math.round(now - opsPending[text])}s ago; waiting for the bot -- it answers on its next loop pass, up to a minute)`, pending: true});
+    renderOpsLog(); return;
+  }
+  opsPending[text] = now;
+  opsLog.push({ts: now, cmd: text, text: "(sent; waiting for the bot -- it answers on its next loop pass, up to a minute)", pending: true}); renderOpsLog();
+  for (const q of document.querySelectorAll(".quick span")) if (q.dataset.c === text) q.classList.add("pending");
+  try { await post("/ops/cmd", {char: CUR, text}); } catch(err) { opsLog.push({ts: Date.now()/1000, cmd: text, text: "(could not reach the hub: " + err + ")"}); delete opsPending[text]; renderOpsLog(); }
+}
+function opsAnswered(row) {
+  // the answer replaces the pending row for that command
+  delete opsPending[row.cmd];
+  opsLog = opsLog.filter(r => !(r.pending && r.cmd === row.cmd));
+  opsLog.push(row);
+  for (const q of document.querySelectorAll(".quick span")) if (q.dataset.c === row.cmd) q.classList.remove("pending");
+}
+
+// ================= home =================
+async function loadChars() {
+  try {
+    // no `all`: this is the list of conversations, and a character he has no
+    // chat with must not get a row here even though the ops switcher shows her
+    const d = await api("/chars");
+    d.chars = d.chars.filter(c => !c.hidden);
+    const el = $("home"); el.innerHTML = "";
+    if (!d.chars.length) {
+      const p = document.createElement("div"); p.className = "phonehint";
+      p.textContent = "no characters registered yet"; el.appendChild(p);
+    }
+    d.chars.sort((a,b) => b.last_ts - a.last_ts);
+    for (const c of d.chars) {
+      const div = document.createElement("div");
+      div.className = "conv";
+      div.innerHTML = `<div class="av">${esc(c.name[0]||"?")}${avImg(c.id)}</div>
+        <div class="body"><div class="cname">${esc(c.name)}</div>
+        <div class="clast">${esc(c.last)}</div></div>
+        <div class="cwhen">${c.last_ts ? hm(c.last_ts) : ""}</div>`;
+      div.onclick = () => openChar(c.id, c.name);
+      el.appendChild(div);
+    }
+  } catch(e) {
+    const el = $("home");
+    el.innerHTML = `<div class="phonehint">cannot reach the hub (${esc(e.message)})</div>`;
+  }
+}
+
+async function openChar(id, name) {
+  resetOlder();
+  const d = await api("/history", {char: id});
+  msgs = d.messages; typingUntil = d.typing_until * 1000;
+  group = d.group || {}; presenceLine = d.presence || "";
+  CAN_SPEAK = !!d.speak;
+  takeSwipes(d);
+  // Her face, and it has to be set even when the answer is that she has none.
+  // Opening a chat used to leave whatever face was already loaded, so tapping
+  // the second character in the list showed the FIRST character's face under
+  // the second one's name. Arriving at the same chat by going back corrected
+  // it, because that path reloads, which is what made the fault intermittent.
+  applyReaction(d.reaction === undefined ? null : d.reaction);
+  nav({v: "chat", char: id, name});
+}
+
+// ================= shared =================
+function esc(s) { return (s||"").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+let reaction = null;   // {file, bucket, ts, why} -- her face right now, from the episodes (sim/reactions.py)
+function avImg(key) {
+  if (reaction && reaction.file && key === CUR)
+    return `<img src="/reaction/${encodeURIComponent(reaction.file)}?key=${encodeURIComponent(KEY)}&v=${reaction.ts}" onerror="this.remove()" alt="" title="${esc(reaction.bucket)}">`;
+  return `<img src="/avatar/${encodeURIComponent(key)}?key=${encodeURIComponent(KEY)}" onerror="this.remove()" alt="">`;
+}
+function applyReaction(r) {
+  reaction = (r && r.file) ? r : null;
+  if ($("chat").style.display === "block") $("avatar").innerHTML = esc(NAME[0] || "?") + avImg(CUR);
+  updHdr();
+}
+function hm(ts) { const d = new Date(ts*1000); return String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); }
+// the name a saved file lands under, on his clock like everything else drawn here
+function stamp(ts) { const d = new Date(ts*1000), p = n => String(n).padStart(2,"0"); return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}_${p(d.getHours())}${p(d.getMinutes())}`; }
+// Her record keeps HER wall time. Everything drawn here is drawn on his
+// clock, from the real instant the hub stamps on the row (`ts`), so the two
+// panels of this app are not many hours apart without saying so. A row
+// from before the hub learned to stamp keeps its own string.
+function tlabel(it) { return it.ts ? hm(it.ts) : (it.t || ""); }
+function ttitle(it) { return it.ts && it.t ? it.t + " her time" : ""; }
+function dayOf(ts) { const d = new Date(ts*1000); return d.toLocaleDateString("ja-JP", {month:"numeric", day:"numeric", weekday:"short"}); }
+function scrollBottom(id) {
+  const go = () => { const el = $(id); el.scrollTop = el.scrollHeight; };
+  requestAnimationFrame(go);
+  setTimeout(go, 250);
+}
+
+// ================= his chat =================
+function bubble(m) {
+  const row = document.createElement("div");
+  row.className = "row " + (m.role === "him" ? "him" : "her");
+  row.dataset.id = m.id;
+  const meta = document.createElement("div"); meta.className = "meta";
+  let mt = hm(m.ts);
+  if (m.role === "him" && m.read_ts) mt = `<span class="kidoku">既読</span>` + mt;
+  meta.innerHTML = mt;
+  const b = document.createElement("div"); b.className = "b";
+  // The bar, and beside it a control that keeps the file. Playing streams
+  // from the hub, which tells the phone the file is good for a year (the
+  // name carries the millisecond it was made and never stands for other
+  // audio), so the second play reads the phone's own disk. The save control
+  // asks for the same file with a name on it: the hub sends that as an
+  // attachment, and the Android app puts it in the phone's Downloads.
+  const msrc = f => `/media/${encodeURIComponent(f)}?key=${encodeURIComponent(KEY)}`;
+  const saveAs = f => `${CUR || "her"}_${stamp(m.ts)}${(String(f).match(/\.[a-z0-9]+$/i) || [".ogg"])[0]}`;
+  const player = f => `<audio controls preload="none" src="${msrc(f)}"></audio>`
+    + `<a class="dl" href="${msrc(f)}&dl=${encodeURIComponent(saveAs(f))}" download="${esc(saveAs(f))}" title="keep this on the phone">\u2913</a>`;
+  if (m.kind === "voice" && m.media)
+    b.innerHTML = player(m.media);
+  else if (m.kind === "photo" && m.media)
+    b.innerHTML = `<img class="photo" src="/media/${encodeURIComponent(m.media)}?key=${encodeURIComponent(KEY)}" alt="photo" style="max-width:min(70vw,360px);border-radius:12px;display:block">`;
+  else if (m.kind === "sticker" && m.media) {
+    // a sticker she PLACED in a reply reads as her saying something; one her
+    // mood put there on its own is a status light, and the two must not look
+    // the same in his chat
+    const auto = m.auto ? `<div style="font-size:11px;opacity:.55;margin-top:3px">her face changed`
+      + (m.bucket ? ` &middot; ${esc(faceLabel(m.bucket))}` : "") + `</div>` : "";
+    b.innerHTML = `<img class="sticker" src="/media/${encodeURIComponent(m.media)}?key=${encodeURIComponent(KEY)}" alt="sticker" title="${esc(m.bucket||"")}${m.auto ? " (automatic)" : " (she put it there)"}" style="width:min(40vw,160px);height:min(40vw,160px);object-fit:cover;border-radius:14px;display:block${m.auto ? ";opacity:.72;border:1px dashed var(--shadow)" : ""}">` + auto;
+    b.style.background = "transparent"; b.style.padding = "0"; b.style.boxShadow = "none";
+  }
+  else {
+    // a link is blue and opens in his browser (the shell hands foreign hosts
+    // to it); the first one gets a card from the hub
+    // the candidate on screen, which is her sent words unless he is looking
+    // at another answer; the record itself is only ever what she sat
+    const urls = linkify(b, m.text);
+    // the spoken line rides inside the bubble it speaks (hub attaches it).
+    // Appended without re-parsing the bubble: `innerHTML +=` replaced the
+    // card node the preview fetch was about to fill, and no card ever showed
+    // Audio that exists wins. A bubble with a file on it has been spoken
+    // already -- a voice note she sent, or a line he tapped and her bot
+    // rendered -- so it gets the player, with its scrub bar and its download.
+    // The speaker is for a line with no audio yet, on the character whose bot
+    // will make some on request: nothing is synthesised until he taps it, and
+    // the tap after that plays it out of the cache, which is what makes it
+    // free to hear again. Ordered the other way round, the speaker matched
+    // first and the player was unreachable for that character, so her voice
+    // notes showed as an emoji.
+    if (m.voice)
+      b.insertAdjacentHTML("beforeend", "<div class=\"vn\">" + player(m.voice) + "</div>");
+    else if (CAN_SPEAK && m.role === "her" && (m.text || "").trim())
+      b.appendChild(sayButton(m));
+    // the menu that draws this reply again or opens the answers drawn for it.
+    // appendChild rather than innerHTML: re-parsing the bubble detaches the
+    // card node the preview fetch is about to fill
+    if (m.role === "her" && (m.text || "").trim()) b.appendChild(swipeMenu(m));
+    // a message that is nothing but the link shows the card alone: the
+    // card is the link, and the URL above it read as the link twice
+    if (urls.length) previewCard(b, urls[0], (m.text || "").trim() === urls[0]);
+  }
+  if (m.role === "him") { row.appendChild(meta); row.appendChild(b); }
+  else { row.appendChild(b); row.appendChild(meta); }
+  return row;
+}
+
+
+// ================= another answer to the same message =================
+// A swipe asks her bot to draw the same reply again from the prompt frozen at
+// the moment she sent it -- her state has moved on since, and the question is
+// what she would have said THEN. The arrows walk what has been drawn and
+// change nothing: the record is untouched and no prompt anywhere carries a
+// candidate. `keep` is the one write, and everything it changes comes back
+// over the socket as an ordinary edit.
+// `merge` is an older page of the chat. The hub bounds the `swipes` it sends
+// to the 80 rows of the page it served (talkapp/server.py, h_history), so
+// assigning here would drop the candidates of every NEWER message on screen;
+// and `voice_model` / `voice_models` / `viewing` are about the chat as a
+// whole, not about a page, so an older page leaves all three alone.
+function takeSwipes(d, merge) {
+  if (merge) {
+    const got = d.swipes || {};
+    for (const k in got) if (!(k in swipes)) swipes[k] = got[k];
+    return;
+  }
+  swipes = d.swipes || {};
+  viewing = {};
+  VOICE_MODEL = d.voice_model || "";
+  VOICE_MODELS = d.voice_models || [];
+  updVModel();
+}
+function swipeRec(m) { return swipes[String(m.id)] || null; }
+function swipeItems(r) { return (r && r.items ? r.items.slice() : []).sort((a, b) => a.n - b.n); }
+function viewedN(m) {
+  const r = swipeRec(m), items = swipeItems(r);
+  if (!items.length) return 0;
+  const v = viewing[m.id];
+  return (v === undefined || !items.some(x => x.n === v)) ? (r.sat || 0) : v;
+}
+// what the bot answered when a draw could not start; shown under the bubble
+// until the next render that has something better to say
+const swipeNote = {};
+
+function swipeMenu(m) {
+  const el = document.createElement("div");
+  el.className = "swp";
+  const r = swipeRec(m), items = swipeItems(r);
+  const dots = document.createElement("button");
+  dots.type = "button";
+  dots.textContent = "⋯";
+  dots.title = "regenerate, or look at the answers drawn for this one";
+  dots.onclick = ev => { ev.stopPropagation(); openMsgMenu(m, dots); };
+  el.appendChild(dots);
+  if (items.length > 1) {
+    const cnt = document.createElement("span");
+    cnt.className = "cnt" + (r.reconstructed ? " rebuilt" : "");
+    cnt.textContent = items.length + " answers";
+    cnt.title = r.reconstructed ? "the prompt behind these was rebuilt afterwards, not kept as she wrote"
+                                : "tap to look through them";
+    cnt.onclick = ev => { ev.stopPropagation(); openViewer(m); };
+    el.appendChild(cnt);
+  }
+  const line = (r && r.pending) ? r.pending
+             : swipeWaiting.has(m.id) ? "drawing..."
+             : "";
+  if (line) {
+    const pend = document.createElement("span");
+    pend.className = "pend"; pend.textContent = line; el.appendChild(pend);
+  } else if (swipeNote[m.id]) {
+    const f = document.createElement("span");
+    f.className = "fail"; f.textContent = swipeNote[m.id]; el.appendChild(f);
+  }
+  return el;
+}
+
+function openMsgMenu(m, at) {
+  const mn = $("mmenu");
+  if (mn.style.display === "block" && mn.dataset.id === String(m.id)) { mn.style.display = "none"; return; }
+  mn.dataset.id = String(m.id);
+  mn.innerHTML = "";
+  const items = swipeItems(swipeRec(m));
+  const row = (label, fn, off) => {
+    const d = document.createElement("div");
+    d.textContent = label;
+    if (off) d.className = "off";
+    d.onclick = ev => { ev.stopPropagation(); mn.style.display = "none"; if (!off) fn(); };
+    mn.appendChild(d);
+  };
+  const busy = swipeWaiting.has(m.id) || !!(swipeRec(m) || {}).pending;
+  row(busy ? "Regenerate (drawing...)" : "Regenerate", () => drawAgain(m), busy);
+  row("Swipes... (" + items.length + ")", () => openViewer(m), false);
+  const r = at.getBoundingClientRect();
+  mn.style.display = "block";
+  const w = mn.offsetWidth || 180;
+  mn.style.left = Math.max(6, Math.min(r.left, window.innerWidth - w - 6)) + "px";
+  mn.style.top = (r.bottom + 4) + "px";
+}
+
+async function drawAgain(m) {
+  if (swipeWaiting.has(m.id)) return;
+  swipeWaiting.add(m.id); delete swipeNote[m.id];
+  renderChat(); renderViewer();
+  try {
+    const j = await (await post("/swipe", {char: CUR, id: m.id})).json();
+    if (!j.ok) { swipeWaiting.delete(m.id); swipeNote[m.id] = j.why || "this one cannot be drawn again"; }
+  } catch (e) { swipeWaiting.delete(m.id); swipeNote[m.id] = "the hub did not answer"; }
+  renderChat(); renderViewer();
+  // a draw that never comes back (the bot down, the answer in the ops log
+  // only) stops waiting rather than blinking for ever. A rebuild of the
+  // moment is longer than a draw, and the hub's own pending line carries it
+  setTimeout(() => { if (swipeWaiting.delete(m.id)) { renderChat(); renderViewer(); } }, 240000);
+}
+
+// ---- the viewer ----
+let viewerId = null;
+function openViewer(m) { viewerId = m.id; $("viewer").classList.add("open"); renderViewer(); }
+function closeViewer() { viewerId = null; $("viewer").classList.remove("open"); }
+function renderViewer() {
+  if (viewerId === null) return;
+  const m = msgs.find(x => x.id === viewerId);
+  if (!m) { closeViewer(); return; }
+  const r = swipeRec(m), items = swipeItems(r), sat = r ? (r.sat || 0) : 0;
+  const n = viewedN(m), i = Math.max(0, items.findIndex(x => x.n === n));
+  const c = items[i] || null;
+  const sh = $("viewer").firstElementChild;
+  sh.innerHTML = "";
+  const top = document.createElement("div"); top.className = "top";
+  top.innerHTML = "<span>" + esc(hm(m.ts)) + " · " + esc(NAME || "her") + "</span>";
+  const x = document.createElement("button"); x.className = "x"; x.type = "button";
+  x.textContent = "×"; x.onclick = closeViewer; top.appendChild(x);
+  sh.appendChild(top);
+  const who = document.createElement("div");
+  if (!c) {
+    who.className = "who";
+    who.textContent = "no answers drawn for this one yet";
+  } else if (c.n === 0) {
+    who.className = "who sitting";
+    who.textContent = "what she sent" + (n === sat ? " · the one the conversation goes on from" : "");
+  } else {
+    who.className = "who" + (n === sat ? " sitting" : "");
+    who.textContent = "drawn on " + c.model + " · " + (c.in || 0) + " in"
+                    + (c.cached ? " (" + c.cached + " cached)" : "") + " / " + (c.out || 0) + " out"
+                    + (c.cost ? " · $" + Number(c.cost).toFixed(5) : "")
+                    + (n === sat ? " · the one the conversation goes on from" : "");
+  }
+  sh.appendChild(who);
+  if (r && r.reconstructed) {
+    const rb = document.createElement("div"); rb.className = "who rebuilt";
+    rb.textContent = "the prompt behind these was rebuilt afterwards from her record, not kept as she wrote";
+    sh.appendChild(rb);
+  }
+  const body = document.createElement("div"); body.className = "body";
+  const line = (r && r.pending) ? r.pending : swipeWaiting.has(m.id) ? "drawing..." : swipeNote[m.id] || "";
+  if (line) { const nt = document.createElement("div"); nt.className = "note"; nt.textContent = line; body.appendChild(nt); }
+  body.appendChild(document.createTextNode(c ? c.text : m.text));
+  sh.appendChild(body);
+  const nav = document.createElement("div"); nav.className = "nav";
+  const arrow = (glyph, d, off) => { const b = document.createElement("button");
+    b.type = "button"; b.className = "arrow"; b.textContent = glyph; b.disabled = off;
+    b.onclick = () => { viewing[m.id] = items[i + d].n; renderViewer(); };
+    b.title = "look at another answer; nothing changes"; return b; };
+  nav.appendChild(arrow("‹", -1, i <= 0));
+  const cnt = document.createElement("span");
+  cnt.className = "cnt" + (c && n === sat ? " sitting" : "");
+  cnt.textContent = items.length ? (i + 1) + "/" + items.length : "–";
+  nav.appendChild(cnt);
+  nav.appendChild(arrow("›", 1, i >= items.length - 1));
+  const busy = swipeWaiting.has(m.id) || !!(r && r.pending);
+  const again = document.createElement("button"); again.type = "button";
+  again.textContent = "Regenerate"; again.disabled = busy;
+  if (busy) again.classList.add("wait");
+  again.title = "draw this reply again on " + (VOICE_MODEL || "her own model");
+  again.onclick = () => drawAgain(m);
+  nav.appendChild(again);
+  if (c && n !== sat) {
+    const keep = document.createElement("button"); keep.type = "button"; keep.className = "keep";
+    keep.textContent = "Keep this";
+    keep.title = "make this the one the conversation goes on from: her record takes these words "
+               + "and her next reply is written with them";
+    keep.onclick = async () => {
+      keep.disabled = true;
+      try {
+        const j = await (await post("/sit", {char: CUR, id: m.id, n})).json();
+        if (!j.ok) { keep.disabled = false; swipeNote[m.id] = j.why || "cannot keep that one"; renderViewer(); }
+      } catch (e) { keep.disabled = false; }
+    };
+    nav.appendChild(keep);
+  }
+  sh.appendChild(nav);
+}
+$("viewer").onclick = e => { if (e.target === $("viewer")) closeViewer(); };
+document.addEventListener("click", e => {
+  const mn = $("mmenu");
+  if (mn.style.display === "block" && !mn.contains(e.target)) mn.style.display = "none";
+});
+
+// ---- which model writes her words ----
+function updVModel() {
+  const el = $("vmodel");
+  if (!el) return;
+  const show = CUR && $("chat").style.display === "block" && VOICE_MODELS.length;
+  el.style.display = show ? "block" : "none";
+  el.textContent = VOICE_MODEL || "model?";
+  el.title = "her words are written on " + (VOICE_MODEL || "whatever her config says")
+           + " -- tap to change it for the next reply and any swipe";
+}
+function vmenuToggle(ev) {
+  if (ev) ev.stopPropagation();
+  const mn = $("vmenu");
+  if (mn.style.display === "block") { mn.style.display = "none"; return; }
+  mn.innerHTML = "";
+  for (const name of VOICE_MODELS.concat(["auto"])) {
+    const row = document.createElement("div");
+    row.textContent = name === "auto" ? "auto (her own config)" : name;
+    if (name === VOICE_MODEL) row.className = "on";
+    row.onclick = async () => {
+      mn.style.display = "none";
+      try { await post("/model", {char: CUR, model: name}); } catch (e) {}
+    };
+    mn.appendChild(row);
+  }
+  const r = $("vmodel").getBoundingClientRect();
+  mn.style.top = (r.bottom + 6) + "px";
+  mn.style.display = "block";
+}
+// ---- her voice, on request ----
+// The button never renders anything itself: it asks the hub, the hub queues
+// the line for her bot, her bot speaks it in her own voice and posts the audio
+// back attached to this bubble, and the edit that arrives over the socket puts
+// the file in `m.voice`. From then on the same tap plays it straight from the
+// cache and costs nothing, which is the whole point of it being a button.
+function playSaid(file, btn) {
+  if (sayAudio) { try { sayAudio.pause(); } catch(e){} }
+  sayAudio = new Audio(`/media/${encodeURIComponent(file)}?key=${encodeURIComponent(KEY)}`);
+  if (btn) {
+    btn.classList.remove("wait"); btn.classList.add("on");
+    sayAudio.onended = sayAudio.onerror = () => btn.classList.remove("on");
+  }
+  sayAudio.play().catch(() => { if (btn) btn.classList.remove("on", "wait"); });
+}
+
+const sayWaiting = new Set();
+
+function sayButton(m) {
+  const btn = document.createElement("button");
+  btn.className = "say";
+  btn.type = "button";
+  btn.title = "hear her say it";
+  btn.textContent = "🔊";
+  if (sayWaiting.has(m.id)) btn.classList.add("wait");
+  btn.onclick = async ev => {
+    ev.stopPropagation();
+    if (m.voice) { playSaid(m.voice, btn); return; }
+    if (sayWaiting.has(m.id)) return;
+    sayWaiting.add(m.id); btn.classList.add("wait");
+    try {
+      const r = await post("/speak", {char: CUR, id: m.id});
+      const j = await r.json();
+      if (j.voice) { sayWaiting.delete(m.id); m.voice = j.voice; playSaid(j.voice, btn); }
+      else if (!j.ok) { sayWaiting.delete(m.id); btn.classList.remove("wait"); btn.title = j.why || "cannot speak that"; }
+    } catch(e) { sayWaiting.delete(m.id); btn.classList.remove("wait"); }
+  };
+  return btn;
+}
+
+// the render came back: the hub broadcasts the bubble with `voice` set, and if
+// he is still waiting on that line it plays without a second tap
+function saidArrived(m) {
+  if (!m || !m.voice || !sayWaiting.has(m.id)) return;
+  sayWaiting.delete(m.id);
+  const btn = document.querySelector(`.row[data-id="${m.id}"] .say`);
+  playSaid(m.voice, btn);
+}
+
+const URL_RE = /https?:\/\/[^\s<>"'）)\]]+/g;
+function linkify(el, text) {
+  const t = text || "";
+  const urls = [];
+  let h = "", last = 0, m;
+  URL_RE.lastIndex = 0;
+  while ((m = URL_RE.exec(t)) !== null) {
+    let u = m[0];
+    // trailing punctuation belongs to the sentence, not the link
+    while (/[.,!?;:。、」']$/.test(u)) u = u.slice(0, -1);
+    h += esc(t.slice(last, m.index)) + `<a class="lnk" href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u)}</a>`;
+    last = m.index + u.length;
+    urls.push(u);
+  }
+  h += esc(t.slice(last));
+  el.innerHTML = urls.length ? h : esc(t);
+  return urls;
+}
+const PREVIEWS = {};
+async function previewCard(el, url, only) {
+  const card = document.createElement("a");
+  card.className = "prev"; card.href = url; card.target = "_blank"; card.rel = "noopener noreferrer";
+  card.style.display = "none";
+  el.appendChild(card);
+  try {
+    let c = PREVIEWS[url];
+    if (!c) {
+      const r = await fetch("/preview?key=" + encodeURIComponent(KEY) + "&url=" + encodeURIComponent(url));
+      if (!r.ok) return;
+      c = await r.json(); PREVIEWS[url] = c;
+    }
+    if (!c || (!c.title && !c.desc && !c.image)) return;
+    card.innerHTML = (c.image ? `<img src="${esc(c.image)}" alt="" loading="lazy" onerror="this.remove()">` : "")
+      + (c.title ? `<div class="pt">${esc(c.title)}</div>` : "")
+      + (c.desc ? `<div class="pd">${esc(c.desc)}</div>` : "")
+      + `<div class="ps">${esc(c.site || "")}</div>`;
+    card.style.display = "block";
+    if (only) { const a = el.querySelector("a.lnk"); if (a) a.remove(); }
+    // keep the newest message in view when its card grows the bubble
+    const ch = $("chat");
+    if (ch && ch.scrollHeight - ch.scrollTop - ch.clientHeight < 400) ch.scrollTop = ch.scrollHeight;
+  } catch (e) {}
+}
+
+function renderChat() {
+  const el = $("chat"); el.innerHTML = "";
+  let lastDay = "";
+  for (const m of msgs) {
+    const d = dayOf(m.ts);
+    if (d !== lastDay) { lastDay = d;
+      const c = document.createElement("div"); c.className = "day";
+      c.innerHTML = `<span>${esc(d)}</span>`; el.appendChild(c); }
+    el.appendChild(bubble(m));
+  }
+  const t = document.createElement("div");
+  t.id = "typing"; t.className = "row her";
+  t.innerHTML = `<div class="b"><span class="dots"><span></span><span></span><span></span></span></div>`;
+  el.appendChild(t);
+  updTyping();
+  observeReads();
+}
+
+function updTyping() {
+  const on = Date.now() < typingUntil;
+  const t = $("typing");
+  if (t) t.style.display = on ? "flex" : "none";
+  if (on) setTimeout(updTyping, 500);
+  updHdr();
+}
+// The face buckets `sim/reactions.py` picks from. Named and marked the same
+// way wherever her mood is shown, so the sticker sitting in the chat and the
+// line under her name are visibly the same thing rather than two unrelated
+// words.
+const FACE = {happy: "🙂", sad: "😔", nervous: "😰", angry: "😡", surprised: "😮", tired: "😴", flustered: "😳", neutral: "😐"};
+function faceLabel(bucket) {
+  const b = String(bucket || "").toLowerCase();
+  return b ? ((FACE[b] || "") + " " + b).trim() : "";
+}
+
+function updHdr() {
+  if (!CUR || $("chat").style.display !== "block") return;
+  const on = Date.now() < typingUntil;
+  // neutral IS her mood, and hiding it left the line looking like nothing was
+  // running. It is her face; it should always say which one.
+  const face = (reaction && reaction.bucket) ? " · " + faceLabel(reaction.bucket) : "";
+  $("presence").textContent = (on ? "typing..." : presenceLine) + face;
+  updVModel();
+}
+
+// ---- his reads: a bubble of hers on a visible screen is a read ----
+let observer = null;
+function observeReads() {
+  if (observer) observer.disconnect();
+  observer = new IntersectionObserver(entries => {
+    if (document.visibilityState !== "visible") return;
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      pendingReads.add(parseInt(e.target.dataset.id));
+      observer.unobserve(e.target);
+    }
+    if (pendingReads.size && !readTimer) readTimer = setTimeout(flushReads, 700);
+  }, {root: $("chat"), threshold: 0.6});
+  for (const row of $("chat").querySelectorAll(".row.her")) {
+    const m = msgs.find(x => x.id === parseInt(row.dataset.id));
+    if (m && !m.read_local) observer.observe(row);
+  }
+}
+function flushReads() {
+  readTimer = null;
+  if (!CUR || !pendingReads.size) return;
+  const ids = [...pendingReads]; pendingReads.clear();
+  for (const m of msgs) if (ids.includes(m.id)) m.read_local = true;
+  sendWS({type:"read", char:CUR, ids});
+}
+
+// ================= websocket =================
+function sendWS(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); }
+function connect() {
+  const proto = location.protocol === "https:" ? "wss" : "ws";
+  ws = new WebSocket(`${proto}://${location.host}/ws?key=${encodeURIComponent(KEY)}`);
+  ws.onopen = () => {
+    sendWS({type:"focus", focused: document.visibilityState==="visible"});
+    // a dropped socket misses her replies; on (re)connect rebuild the home
+    // list so its preview is her last line, not a stale one (the preview
+    // used to show his last message until a live "message" event landed)
+    if ($("home") && $("home").style.display === "block") loadChars();
+  };
+  ws.onmessage = ev => {
+    const d = JSON.parse(ev.data);
+    if (d.char !== CUR) {
+      if (d.type === "message" && $("home").style.display === "block") loadChars();
+      return;
+    }
+    // Opening the ops view for a character he has no chat with makes her the
+    // current one, and everything below this line edits the chat state --
+    // the message list, the typing flag, the read marks, her face, the model
+    // on the header. That state still belongs to whichever chat was last
+    // open, so only her backstage events get through; the rest are dropped.
+    if (isHidden(d.char) && d.type !== "ops" && d.type !== "ops_result") return;
+    const inChat = $("chat").style.display === "block";
+    if (d.type === "message") { msgs.push(d.msg); if (inChat) { renderChat(); scrollBottom("chat"); } }
+    else if (d.type === "typing") { typingUntil = d.until*1000;
+      if (inChat) { updTyping(); scrollBottom("chat"); } }
+    else if (d.type === "kidoku") {
+      for (const m of msgs) if (d.ids.includes(m.id)) m.read_ts = m.read_ts || Date.now()/1000;
+      if (inChat) renderChat(); }
+    else if (d.type === "read") {
+      for (const m of msgs) if (d.ids.includes(m.id)) m.read_ts = d.ts; }
+    else if (d.type === "edit") { const i = msgs.findIndex(m => m.id===d.msg.id);
+      if (i>=0) { msgs[i] = d.msg; if (inChat) renderChat(); saidArrived(d.msg); } }
+    else if (d.type === "delete") { msgs = msgs.filter(m => m.id!==d.id);
+      if (inChat) renderChat(); }
+    // both of these carry the character they are about, and neither used to
+    // be checked: the other bot posting its payload reloaded this view, and
+    // the other bot's answer to a command was appended to this log
+    else if (d.type === "ops") { if (d.char === CUR && $("ops").style.display === "block") loadOps(true); }
+    else if (d.type === "swipes") {
+      // a fresh draw shows itself at once; keeping one puts the counter back
+      // on whatever the conversation now goes on from
+      const was = swipes[String(d.id)] || {items: [], sat: 0};
+      swipes[String(d.id)] = {items: d.swipes || [], sat: d.sat || 0,
+                              pending: d.pending || "", reconstructed: d.reconstructed || 0};
+      if ((d.sat || 0) !== was.sat) delete viewing[d.id];
+      else if ((d.swipes || []).length > (was.items || []).length)
+        viewing[d.id] = Math.max.apply(null, (d.swipes || []).map(x => x.n));
+      // a waiting line is the bot saying it is still busy; the draw itself
+      // is what ends the wait
+      if (!d.pending) swipeWaiting.delete(d.id);
+      if (inChat) { renderChat(); renderViewer(); } }
+    else if (d.type === "model") { VOICE_MODEL = d.model || ""; VOICE_MODELS = d.models || [];
+      updVModel(); if (inChat) renderChat(); }
+    else if (d.type === "reaction") { applyReaction(d.reaction); }
+    else if (d.type === "ops_result") { if (d.char === CUR) { opsAnswered(d.row); if ($("ops").style.display === "block") renderOpsLog(); } }
+    else if (d.type === "group") { group = d.group; presenceLine = d.presence||presenceLine;
+      updHdr();
+      if ($("herphone").style.display === "block") renderHerPhone();
+      if ($("herchat").style.display === "block") renderHerChat();
+      if ($("irl").style.display === "block") renderIrl();
+      if ($("irlchat").style.display === "block") renderIrlChat(); }
+  };
+  ws.onclose = () => setTimeout(() => { verCheck(); connect(); }, 2500);
+  ws.onerror = () => ws.close();
+}
+document.addEventListener("visibilitychange", () => {
+  sendWS({type:"focus", focused: document.visibilityState==="visible"});
+  if (document.visibilityState === "visible") { observeReads(); verCheck();
+    if ($("home") && $("home").style.display === "block") loadChars(); }
+});
+
+// ================= her world =================
+// Speakers inside a burst are written short ("Rena"); the cast name is
+// "Rena-chan". One roster, so a bubble and its avatar agree.
+function roster() {
+  const names = new Set();
+  for (const b of (group.beats || [])) if (b.who) names.add(b.who);
+  for (const x of (group.exchanges || [])) if (x.who) names.add(x.who);
+  return [...names];
+}
+function canon(who) {
+  const w = (who || "").trim();
+  if (!w) return w;
+  for (const n of roster())
+    if (n === w || n.toLowerCase().startsWith(w.toLowerCase() + "-")
+        || w.toLowerCase().startsWith(n.toLowerCase())) return n;
+  return w;
+}
+
+// A group burst is several people inside ONE beat: "Rena: ...\nMiki: ...".
+// Split on the speaker prefix or the whole chat reads as a monologue.
+function splitLines(src, who) {
+  const out = [];
+  let cur = null;
+  for (const raw of (src || "").split("\n")) {
+    const ln = raw.trim();
+    if (!ln) continue;
+    const m = ln.match(/^([^:：\s][^:：]{0,23})[：:]\s*(.*)$/);
+    if (m && m[2] !== undefined) { cur = {who: m[1].trim(), body: m[2]}; out.push(cur); }
+    else if (cur) cur.body += "\n" + ln;
+    else { cur = {who, body: ln}; out.push(cur); }
+  }
+  return out;
+}
+// The gloss splits the same way when the planner prefixed it per speaker;
+// otherwise the whole gloss rides on the last line.
+function splitBurst(b) {
+  const src = b.ja || b.text || "";
+  const parts = splitLines(src, b.who);
+  if (!parts.length) return [{who: b.who, body: src, text: b.ja ? b.text : ""}];
+  const gl = b.ja ? splitLines(b.text, b.who) : [];
+  parts.forEach((p, i) => {
+    p.text = gl.length === parts.length ? gl[i].body : (b.ja && i === parts.length - 1 ? b.text : "");
+  });
+  return parts;
+}
+
+// mode "phone": what her phone shows (group + LINE; in_person is not phone
+// content). mode "irl": the spoken moments, one thread per person.
+function buckets(mode) {
+  const irl = mode === "irl";
+  const map = new Map();
+  const put = (key, name, isGroup, item) => {
+    if (!map.has(key)) map.set(key, {key, name, isGroup, items: []});
+    map.get(key).items.push(item);
+  };
+  // An exchange is written FROM a beat and already contains that beat's
+  // turns plus her replies; the beat stands only when she never answered.
+  const answered = new Set((group.exchanges || []).map(x => `${x.date}|${x.hm}|${x.who}`));
+  // Whose turns go on her side of the room. Every name that means the open
+  // character comes down in the payload, as her own roster resolves them
+  // (`_group`, `me`) -- her name, her Japanese name, the short forms her
+  // friends use in a group burst. This was a pattern with one character's
+  // names in it, and a room the fourth character was SENT has the room
+  // owner's turns in it: read against that pattern the owner's lines were
+  // drawn as the open character's own. A payload from before the bot sent
+  // `me` marks nothing as hers, which lasts one push.
+  const meNames = new Set((group.me || []).map(n => String(n).trim().toLowerCase()).filter(Boolean));
+  const mine = w => meNames.has(String(w || "").trim().toLowerCase());
+  for (const b of (group.beats || [])) {
+    if ((b.kind === "in_person") !== irl) continue;
+    if (!b.done && !backstage) continue;
+    if (answered.has(`${b.date || group.date}|${b.time}|${b.who}`)) continue;
+    if (b.kind === "group") {
+      const parts = splitBurst(b);
+      parts.forEach((p, i) => put("__group", "group chat", true, {
+        t: b.time, ts: b.ts, date: b.date || group.date, who: canon(p.who), ja: p.body,
+        text: p.text,
+        undone: !b.done, me: mine(p.who)}));
+    } else {
+      put(b.who, b.who, false, {t: b.time, ts: b.ts, date: b.date || group.date,
+          who: b.who, ja: b.ja, text: b.text, undone: !b.done, me: false,
+          // "ignored" is not an utterance -- it is being left on read, and its
+          // text is third person ABOUT her. As a bubble in her own thread it
+          // read like a stray debug line.
+          note: b.kind === "ignored"});
+    }
+  }
+  for (const x of (group.exchanges || [])) {
+    if ((x.kind === "in_person") !== irl) continue;
+    // her talks are Japanese; the gist is the one English line, shown once
+    // above the exchange rather than glossing every bubble
+    if (x.gist) put(x.kind === "group" ? "__group" : canon(x.who),
+                    x.kind === "group" ? "group chat" : canon(x.who), x.kind === "group",
+                    {t: x.hm, ts: x.ts, date: x.date, who: x.who, ja: "", text: x.gist,
+                     undone: false, me: false, note: true});
+    for (const t of x.turns) {
+      const me = mine(t.who);
+      const it = {t: t.hm || x.hm, ts: t.ts || x.ts, date: x.date, who: me ? t.who : canon(t.who),
+                  ja: t.ja, img: t.img, text: t.text, undone: false, me};
+      if (x.kind === "group") put("__group", "group chat", true, it);
+      else put(canon(x.who), canon(x.who), false, it);
+    }
+  }
+  const key = it => it.ts || 0;
+  for (const b of map.values())
+    b.items.sort((a, c) => key(a) - key(c) || (a.date + a.t).localeCompare(c.date + c.t));
+  return [...map.values()].sort((a, c) => {
+    const la = a.items[a.items.length-1], lc = c.items[c.items.length-1];
+    return key(lc) - key(la) || ((lc.date + lc.t)).localeCompare(la.date + la.t);
+  });
+}
+
+function bsControls(el, rerender) {
+  if (backstage) {
+    const ban = document.createElement("div"); ban.className = "bsbanner";
+    ban.textContent = "BACKSTAGE ON - amber items have NOT happened yet; this is tonight's unplayed script";
+    el.appendChild(ban);
+  }
+  const bar = document.createElement("div"); bar.className = "bsbar";
+  bar.innerHTML = `<label><input type="checkbox" id="bsc" ${backstage?"checked":""}> backstage</label>`;
+  el.appendChild(bar);
+  bar.querySelector("#bsc").onchange = e => { backstage = e.target.checked; rerender(); };
+}
+
+function renderList(elId, mode, navView, hint, emptyText) {
+  const el = $(elId); el.innerHTML = "";
+  bsControls(el, () => renderList(elId, mode, navView, hint, emptyText));
+  const h = document.createElement("div"); h.className = "phonehint";
+  // the date is HER day (the record's own unit); the times under it are his
+  h.textContent = hint + " - her " + (group.date || "") + ", times on your clock";
+  el.appendChild(h);
+  const bs = buckets(mode);
+  if (!bs.length) {
+    const p = document.createElement("div"); p.className = "phonehint";
+    p.textContent = emptyText; el.appendChild(p);
+  }
+  for (const b of bs) {
+    const last = b.items[b.items.length - 1];
+    const up = b.items.filter(i => i.undone).length;
+    const div = document.createElement("div");
+    div.className = "conv";
+    div.innerHTML = `<div class="av ${b.isGroup ? "g" : ""}">${b.isGroup ? "&#128101;" : esc(b.name[0]||"?")}${avImg(b.isGroup ? "group" : b.name)}</div>
+      <div class="body"><div class="cname">${esc(b.name)}${up ? ` <span class="futuretag">+${up} SCRIPTED</span>` : ""}</div>
+      <div class="clast">${esc((last.ja || last.text || "").split("\n")[0].replace(/^\[写真: /, "📷 ").replace(/^\[動画: /, "🎥 ").replace(/^\[スタンプ: /, "🏷 ").replace(/\]$/, ""))}</div></div>
+      <div class="cwhen" title="${esc(ttitle(last))}">${esc(tlabel(last))}</div>`;
+    div.onclick = () => nav({v: navView, her: b.key, hername: b.name});
+    el.appendChild(div);
+  }
+}
+function renderHerPhone() { renderList("herphone", "phone", "herchat", "what her phone shows her", "(nothing on her phone today)"); }
+function renderIrl() { renderList("irl", "irl", "irlchat", "said out loud, face to face", "(nobody has spoken to her today)"); }
+
+function renderHerChat() {
+  const el = $("herchat"); el.innerHTML = "";
+  bsControls(el, renderHerChat);
+  const b = buckets("phone").find(x => x.key === HERKEY);
+  if (!b) {
+    const p = document.createElement("div"); p.className = "phonehint";
+    p.textContent = "(empty)"; el.appendChild(p);
+    return;
+  }
+  let lastDate = "";
+  for (const it of b.items) {
+    // his day, so the separator agrees with the times under it: her evening
+    // and his morning are the same date, her morning is the day before his
+    const day = it.ts ? dayOf(it.ts) : (it.date || "").slice(5);
+    if (day && day !== lastDate) { lastDate = day;
+      const c = document.createElement("div"); c.className = "day";
+      c.innerHTML = `<span>${esc(day)}</span>`; el.appendChild(c); }
+    if (it.note) {
+      const n = document.createElement("div"); n.className = "gnote";
+      n.title = ttitle(it);
+      n.textContent = `${tlabel(it)} ${it.text || ""}`.trim();
+      el.appendChild(n); continue;
+    }
+    const row = document.createElement("div");
+    row.className = "grow" + (it.me ? " me" : "") + (it.undone ? " future" : "");
+    const gb = document.createElement("div"); gb.className = "gb";
+    gb.innerHTML = (it.undone ? `<div><span class="futuretag">SCRIPTED - lands ${esc(tlabel(it) || "later")}</span></div>` : "")
+      + (it.me ? "" : `<div class="gwho">${esc(it.who)}</div>`)
+      + (it.ja ? gjaHtml(it.ja, it.img) : "")
+      + (!it.ja && it.text ? `<div class="ggloss">${esc(it.text)}</div>` : "");
+    const tm = document.createElement("div"); tm.className = "gtime";
+    tm.textContent = tlabel(it); tm.title = ttitle(it);
+    if (it.me) { row.appendChild(tm); row.appendChild(gb); }
+    else {
+      const gav = document.createElement("div");
+      gav.className = "av gav"; gav.innerHTML = esc((it.who||"?")[0]) + avImg(it.who);
+      row.appendChild(gav); row.appendChild(gb); row.appendChild(tm);
+    }
+    el.appendChild(row);
+  }
+}
+
+// the social graph: pure backstage. Every edge is what one person privately
+// holds about another; nothing here is visible to anyone in the fiction.
+function renderGraph() {
+  const el = $("graphv"); el.innerHTML = "";
+  const ban = document.createElement("div"); ban.className = "bsbanner";
+  ban.textContent = "BACKSTAGE - private opinions; nobody in the fiction sees this, least of all her";
+  el.appendChild(ban);
+  const edges = group.graph || [];
+  if (!edges.length) {
+    const p = document.createElement("div"); p.className = "phonehint";
+    p.textContent = "(graph not seeded yet)"; el.appendChild(p);
+    return;
+  }
+  const holders = [...new Set(edges.map(e => e.who))];
+  for (const h of holders) {
+    const head = document.createElement("div"); head.className = "phonehint";
+    head.style.fontWeight = "600"; head.style.color = "var(--who)";
+    head.textContent = h + " holds:";
+    el.appendChild(head);
+    for (const e of edges.filter(x => x.who === h)) {
+      const d = document.createElement("div"); d.className = "mrow";
+      const warm = e.regard >= 60 ? "var(--ok)" : e.regard <= 40 ? "#d98f8f" : "var(--fg)";
+      d.innerHTML = `<div>of <b>${esc(e.of)}</b> — <span style="color:${warm}">regard ${e.regard}</span>`
+        + (e.irritation > 25 ? ` · <span style="color:var(--warn)">irritation ${e.irritation}</span>` : ` · irritation ${e.irritation}`)
+        + `</div>` + (e.view ? `<div class="msub">${esc(e.view)}</div>` : "");
+      el.appendChild(d);
+    }
+  }
+}
+
+// a turn that begins [写真: ...] is a picture: the bracket is what is in it
+// (sim/cast.py photo_ja). Drawn as a frame with the description inside it,
+// the caption under it -- there is no file, and the frame says so.
+function gjaHtml(ja, img) {
+  // a stamp: one of a fixed set (sim/stickers.py), drawn as the label it is
+  const st = /^\[スタンプ:\s*([^\]]{1,40})\]\n?([\s\S]*)$/.exec(ja || "");
+  if (st) {
+    return `<div class="gstamp">${esc(st[1])}</div>`
+      + (st[2].trim() ? `<div class="gja">${esc(st[2].trim())}</div>` : "");
+  }
+  const m = /^\[(写真|動画): ([^\]]{1,120})\]\n?([\s\S]*)$/.exec(ja || "");
+  if (!m) return `<div class="gja">${esc(ja)}</div>`;
+  // a real photograph from the pool, when the beat found one; the bracket
+  // is its description either way. A video is only ever the frame -- a
+  // still from the pool would be a lie about what was sent.
+  const vid = m[1] === "動画";
+  const pic = (img && !vid)
+    ? `<img class="gphotoimg" src="/scenery/${encodeURIComponent(img)}?key=${encodeURIComponent(KEY)}" alt="${esc(m[2])}" title="${esc(m[2])}">`
+    : `<div class="gphoto"><span class="gphotoicon">${vid ? "&#127909;" : "&#128247;"}</span><span>${esc(m[2])}</span></div>`;
+  return pic + (m[3].trim() ? `<div class="gja">${esc(m[3].trim())}</div>` : "");
+}
+
+// spoken conversation: a transcript, deliberately not chat bubbles
+function renderIrlChat() {
+  const el = $("irlchat"); el.innerHTML = "";
+  bsControls(el, renderIrlChat);
+  const b = buckets("irl").find(x => x.key === HERKEY);
+  if (!b) {
+    const p = document.createElement("div"); p.className = "phonehint";
+    p.textContent = "(nothing said)"; el.appendChild(p);
+    return;
+  }
+  let lastDate = "";
+  for (const it of b.items) {
+    if (it.date && it.date !== lastDate) { lastDate = it.date;
+      const c = document.createElement("div"); c.className = "day";
+      c.innerHTML = `<span>${esc(it.date.slice(5))}</span>`; el.appendChild(c); }
+    const row = document.createElement("div");
+    row.className = "sline" + (it.me ? " me" : "") + (it.undone ? " future" : "");
+    row.innerHTML = `<div class="swho">${esc(it.me ? herName() : it.who)}</div>
+      <div class="sbody">${it.undone ? `<span class="futuretag">SCRIPTED - ${esc(it.t || "later")}</span> ` : ""}<div class="sja">${esc(it.ja || "")}</div>
+      ${!it.ja && it.text ? `<div class="sgloss">${esc(it.text)}</div>` : ""}</div>
+      <div class="stime">${esc(it.t || "")}</div>`;
+    el.appendChild(row);
+  }
+}
+
+// ================= composer / header =================
+$("send").onclick = () => {
+  const t = $("inp").value.trim();
+  if (!t || !CUR) return;
+  sendWS({type:"send", char:CUR, text:t});
+  $("inp").value = ""; $("inp").style.height = "auto";
+};
+$("inp").addEventListener("input", e => {
+  e.target.style.height = "auto";
+  e.target.style.height = Math.min(e.target.scrollHeight, 120) + "px";
+});
+$("back").onclick = () => history.back();
+$("menubtn").onclick = () => nav({v: "menu"});
+$("opssend").onclick = () => opsSend();
+$("opsin").addEventListener("keydown", e => { if (e.key === "Enter") opsSend(); });
+
+// ================= push =================
+let swReg = null, pushed = false;
+function notifState() {
+  if (!("Notification" in window) || !("PushManager" in window)) return "notifications: unsupported here";
+  if (Notification.permission === "denied") return "notifications: BLOCKED in browser settings";
+  if (Notification.permission === "granted" && pushed) return "notifications: ON - tap to send a test";
+  return "notifications: OFF - tap to enable";
+}
+async function notifTap() {
+  try {
+    if (!("Notification" in window) || !("PushManager" in window)) {
+      alert("this browser cannot do web push here"); return;
+    }
+    if (Notification.permission === "denied") {
+      alert("notifications are blocked for this site in the browser settings; allow them there, then tap again");
+      return;
+    }
+    if (Notification.permission !== "granted") {
+      const p = await Notification.requestPermission();
+      if (p !== "granted") { renderMenu(); return; }
+    }
+    await subscribe();
+    if (pushed) await post("/push/test", {});
+    renderMenu();
+  } catch(e) { alert("notifications failed: " + e.message); }
+}
+async function subscribe() {
+  if (!swReg) swReg = await navigator.serviceWorker.register("/sw.js");
+  await navigator.serviceWorker.ready;
+  const {key} = await api("/vapid");
+  if (!key) { alert("hub has no push key"); return; }
+  const raw = Uint8Array.from(atob(key.replace(/-/g,"+").replace(/_/g,"/")), c => c.charCodeAt(0));
+  const sub = await swReg.pushManager.subscribe({userVisibleOnly:true, applicationServerKey:raw});
+  const r = await post("/push/subscribe", sub.toJSON());
+  pushed = r.ok;
+}
+async function setupPush() {
+  try {
+    if (!("serviceWorker" in navigator) || !("PushManager" in window)) return;
+    swReg = await navigator.serviceWorker.register("/sw.js");
+    if (Notification.permission === "granted") await subscribe();
+  } catch(e) {}
+}
+
+// tap a photo (hers in the chat, or one in a friends' room) to see it full
+// size; tap anywhere to close. One overlay, delegated, no per-image handlers.
+const lb = document.createElement("div"); lb.id = "lightbox"; document.body.appendChild(lb);
+lb.onclick = () => { lb.classList.remove("open"); lb.innerHTML = ""; };
+document.addEventListener("click", e => {
+  const t = e.target;
+  if (t.tagName === "IMG" && (t.classList.contains("photo") || t.classList.contains("gphotoimg"))) {
+    lb.innerHTML = `<img src="${t.src}" alt="">`;
+    lb.classList.add("open");
+  }
+});
+
+$("vmodel").onclick = vmenuToggle;
+document.addEventListener("click", e => {
+  // anywhere else closes the model picker, the way the ops menus close
+  if (e.target !== $("vmodel") && !$("vmenu").contains(e.target)) $("vmenu").style.display = "none";
+});
+
+render({v: "home"}, false); connect(); verCheck(); setupPush();
+</script>
+</body>
+</html>

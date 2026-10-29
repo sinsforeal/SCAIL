@@ -1,0 +1,115 @@
+# sim\lore.py  (533 lines)
+
+DOCSTRING:
+What she happens to know, retrieved a few lines at a time.
+
+The persona dataset is 1,664 claims over 346 records and nothing read it. All
+of it is hers -- her own programme, the people in the booth, what she said on
+air about her flat and her family -- and none of it reached the running
+character, so she could be told the name of her own radio show and answer as
+though he had said "recordings of your voice".
+
+The design is `docs/yukarin-lorebook.md` §3.2 and the split it makes is the
+important part. **What is true of her every minute is not retrieved**: her
+register, her sentence endings, her mechanisms, the four people behind the
+booth glass. That lives in the bible, where it is always true. This is for the
+*occasional* -- the shoes somebody took by mistake, the ten-year-old tin of
+crab, the flat she used to check the listing for -- which is worth having only
+on the turn it comes up and is noise on every other.
+
+So the two things this module is really made of are both refusals:
+
+  * it retrieves nothing unless the conversation names something a record is
+    about, because a bucket that always fires is a character who always has a
+    fact to tell you; and
+  * a record it has offered is not offered again off her own words, because
+    the failure mode of every lorebook is an anecdote calcifying into a
+    catchphrase inside a week.
+
+**Who said the naming word decides whether an already-told record comes back.**
+The conversation is asked, not his newest message alone, and her own words
+count: she is often the one who raised the thing, and what she just said should
+be able to remind her of the rest of it. But she is also the one who just told
+it, and her telling stays in the window for the next few turns, so an anecdote
+she has already given him names its own record again on the next call and on
+the one after that. On 2026-09-02 she told the story about being stopped at
+Umeda station and denying who she was; the record was retrieved off her own
+telling at 15:37, 16:09, 16:14 and 16:21, she told it three turns running, and
+the continuity editor eventually threw away a whole drafted reply for repeating
+itself -- a paid call spent on what the suppression exists to stop one layer
+earlier. His messages never once named it.
+
+So the two sides of the conversation are kept apart. A record HE names is
+always reachable, at any distance, because a person asked twice about her own
+job answers twice -- that is what `lore.suppress_days` being 0 means and it is
+his decision. A record only HER OWN words name is held for
+`lore.own_words_days` once she has been offered it, because that is not the
+conversation reaching for something, it is the anecdote feeding itself.
+
+**A record is found by name, never by resemblance.** Every record carries a
+short list of phrases somebody would actually type when they mean it -- the
+programme's name, the character's name, the thing itself -- written by reading
+each record (`yukarin/persona/triggers.json`, `yukarin/tools/triggers.py`).
+Those phrases decide the match and nothing else does. Her own words stay the
+payload: once a record is chosen, what is rendered is her claim off the tape.
+
+The alternative was tried at length and cannot be made to work. Comparing his
+message against the record's text is comparing it against conversational
+speech, which is mostly grammar, and grammar collides with any sentence by
+accident. Weighting by how rare a fragment is in the record set makes it worse
+rather than better, because every record here is about the same person: her
+subject words -- 黒うさぎ, 矢野, 弟 -- are the COMMON ones and score low, while
+the character runs that happen to span a question's grammar are rare and score
+high. Asked the name of her own programme, the fragments that stood out were
+「ってどん」, 「どんな」, 「な番組」, 「組なの」; her programme's record shared none of
+them and a record about a witch won on 「どんな」. Five repairs were measured and
+all five failed the same way: dividing by the heaviest fragments only, an
+absolute floor on the shared weight, dropping the pure kana, requiring a
+distinctive fragment to be shared. A list of names has no grammar in it, so
+the fault is gone rather than tuned around.
+
+**`lore.era_gate` is off, by his decision, and with it off none of what
+follows runs**: nothing is withheld, nothing is cut back, and every claim of
+every record is reachable. The mechanism is kept because it works and because
+the flag is one line.
+
+Claims marked as coming from after the corpus ends are withheld while the gate
+is on. The first pass marked them on the largest year printed in the sentence
+rather than on when the thing described began, which shut the record of her own
+radio programme -- it opens in 2003 and the same sentence traces it to 2016 --
+along with her debut single and two roles she had been playing for years, and a
+character who cannot reach her own show reads as somebody with no career at
+all. That is why the flag went off. The verdicts have since been read again
+(`yukarin/audit/lore_gate.py`): 165 of the 178 are genuinely after her, and the
+13 that begin in her past and run on past the window carry `until_then`, the
+part of the bullet that had happened by then -- the bullet stays held and that
+part is what she may volunteer. So turning the gate on now costs her the
+sequels, the chart placings and the arena shows, and not her own programme. The
+one thing that opens the rest is him: when he watches a work she is in, the
+record for it is released and nothing else is (`sim/watching_him.py`), and with
+the gate off that mechanism has nothing to release and idles.
+
+DEFS:
+class Lore: 
+    __init__(config, store, clock): 
+    _contact(): The works he has brought her into contact with, written by `sim/watching_him.py` when he watches something she is in.
+    _phrases(): The phrases that let a record be found, by record id: the record file's own list and the memory file's, merged (`triggers_file`, `memory_triggers_file`).
+    _memories(phrases): Her seeded memories as records (`lore.memory_file`, yukarin/week/memory_records.py). His call: a line off the corpus is her record, not a memory she is carrying, so it is found by name like the rest and never rotated thr
+    _load(): 
+    _used(): 
+    _offered_within(days): The records offered inside the last `days`. At 0 the cutoff is the current moment and nothing is inside it, which is how `suppress_days` turns the hold off without being a special case.
+    _suppressed(): 
+    note_offered(ids): 
+    match(text): The records this text names, as (record, the line about it), with no side effects: nothing offered, nothing counted. For a reader that wants to know whether a title is hers (the glance) rather than to put a line in front
+    work_named(names, kinds): (record, the line about it) for a role-shaped record whose OWN title or tags are one of these names, or None.  The retrieval proper is by trigger phrase and by nothing else, and that rule stands: a phrase is what somebod
+    lines(cue_text, context_text, echo_text): At most `max_lines` things she knows that this moment named.  Returns tagged lines for the `lore` bucket, or nothing at all -- which is the common case and the point. A record scores only for the phrases of its own that 
+    _render(rec, hit): The part of the record that is about the phrase he used.  A record is several claims and only one of them is the answer: her programme's record opens with the dates and carries the segment names four bullets down. So the
+
+CONFIG SECTIONS: lore, lore.enabled, lore.suppress_days
+KV READ: lore_contact, lore_used
+KV WRITE: lore_used
+TABLES: 
+LOG TAGS: lore
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

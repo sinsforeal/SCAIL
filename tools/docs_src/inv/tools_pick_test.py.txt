@@ -1,0 +1,88 @@
+# tools\pick_test.py  (975 lines)
+
+DOCSTRING:
+A call whose answer is what to DO, replayed against what code actually did.
+
+The two runs in `docs/tool-calling.md` §§2-4 put tools inside her reply call,
+where the situation block has already fetched everything and the only decision
+left is what to say; she called none of them. This is the other test, the one
+§13 sets out: a call at a moment code already knows, where she is handed what
+a person with a phone has in front of her and picks what to do with it. That
+call does not exist in the running bot, so this builds it on a copy of her save
+and reads its picks beside the record.
+
+Two moments, two tool sets, one flash call each, no loop.
+
+*After a scroll.* Sixteen scroll ends over the last seven days: the posts the
+scroll saw as `Social._offer_line` renders them (author, text, what is in the
+picture), her taste sheet as it stood at that minute, and what the `social`
+role noticed. Tools: repost, like, send_to_him, unfollow, nothing. Beside each:
+the verdicts code allowed or held at that moment.
+
+*Phone in hand.* Thirty phone-free block starts over the same week: where she
+is and with whom, her gauge line, both clocks, his last message, whether he
+read hers and said nothing, how long he has been quiet, what her phone last
+showed of his machine, what is unread from her own people, and what she was
+carrying to say to him. Tools: nothing, text_him, open_group_chat,
+message_friend, look_at_his_machine, open_feed. Beside each: what happened in
+that block in the record, and the impulse function's own answer at that tick.
+
+    python tools/pick_test.py --out <step dir> --dry      # moments, prompts, estimate; spends nothing
+    python tools/pick_test.py --out <step dir> --scroll   # the sixteen scroll picks
+    python tools/pick_test.py --out <step dir> --phone     # the thirty phone picks
+    python tools/pick_test.py --out <step dir>            # both
+
+It reads the live save only through a `mode=ro` handle, copies it with SQLite's
+backup API, builds the first character on the copy with `tools/harness.py`, and
+refuses the network for the build. The paid calls go through
+`LLM.call_tools` -- the client's own new method, the same provider, the same
+pin, the same reasoning effort and the same receipts as any call -- so what
+this measures is the seam the bot would use, not a copy of it.
+
+What the replay cannot rewind: her stores. A pinned clock rewinds the clock,
+and the facts in each moment are read from the tables that carry a timestamp
+(messages, scenes, the state log, the digests, the schedules, the taste log),
+so those are true as of the moment. Anything that lives in one key-value row
+with no history -- what the initiative gate is holding, what the rhythm has
+learned -- is as the save has it now, and it is the same deviation for every
+moment.
+
+DEFS:
+def ro(path): 
+def build(tmp): 
+def _restore_network(): 
+def pin_clock(app, ts): 
+def refuse_model_calls(app): Nothing but the pick spends. The prompt build asks other roles when a section is stale; here it gets nothing and goes on, which is what those builders already do when a call fails.
+def taste_at(con, ts): Her taste sheet as it stood at `ts`, counted off the reaction log.  kv `x_taste` is the running total and has no history; kv `x_taste_log` is every reaction ever with its timestamp, which is what makes a taste line true 
+def taste_line(t): 
+def kv(con, key, default): 
+def _feed_rows(): 
+def _as_list(v): `media_urls` is written as the repr of a Python list.
+def picture_subjects(tagcon, urls): 
+def scroll_moments(con, app, limit): Every scroll end in the last `DAYS`, newest last.  The moment is the `social` event the read wrote -- the end of the scroll, after the model had said what she noticed. The posts are the feed rows the session harvested, c
+def scroll_prompt(app, m): The moment as the last user message. Addressed to her, in the language she writes in.
+def _ts_of(app, date_str, hm): 
+def phone_moments(con, app, limit): The start of every block the schedule gives her a free phone in, over the last `DAYS`, thinned to `limit` and spread across the days and the hours.
+def _cast_key(app, rec): 
+def phone_facts(con, app, c): The moment as it stood, off the tables that carry a timestamp.
+def gauge_line_at(app, gauges): Her gauge line as her own reader writes it, off the logged gauges.
+def phone_prompt(app, m): 
+def _log_sources(): Every session log of the last week, zipped runs and live ones.
+def log_lines(t0, t1, tags): The session-log lines carrying one of `tags` inside the window.  The log stamps machine local time with no date, so the window is matched on the clock time and the run directory's own date.
+def scroll_tools(): 
+def phone_tools(config): 
+def impulse_answers(app, moments): The impulse function's own answer at each phone moment.  A pure function of state, scene and history, so it can be asked again -- but it reads the record through the store, and the store on the copy holds everything that
+def prices(out_dir, slug, host): 
+def estimate(app, out_dir, system, scrolls, phones, slug, host, out_allowance): 
+def run_moments(app, out_dir, name, system, moments, tools, spent, budget): One call per moment, no loop. Every answer is written the moment it exists: a stop is a kill, and a paid answer held in a local is a paid answer lost.
+def moments_md(out_dir, scrolls, phones): 
+def main(): 
+
+CONFIG SECTIONS: character, impulse.threshold, json, model, raw, social.max_posts_per_read
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

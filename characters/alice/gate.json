@@ -1,0 +1,2016 @@
+{
+  "schema": "authored-expression-bible-gate/2",
+  "build": "b4/2",
+  "date": "2026-09-16",
+  "subject": {
+    "name": "アリス",
+    "id": "ALICE",
+    "route": "c"
+  },
+  "holdout": {
+    "definition": "late route-c scenes where she speaks (phase_band == 'late')",
+    "scenes": [
+      "c09_01",
+      "c10_01",
+      "c10_02",
+      "c11_01"
+    ],
+    "her_spoken": 396,
+    "her_inner": 0,
+    "her_lines": 396,
+    "registers": {
+      "H": {
+        "scenes": [
+          "c10_02"
+        ],
+        "her_spoken": 205
+      },
+      "non_H": {
+        "scenes": [
+          "c09_01",
+          "c10_01",
+          "c11_01"
+        ],
+        "her_spoken": 191,
+        "label": "the non-H block of the holdout"
+      }
+    },
+    "build_block": {
+      "scenes_n": 55,
+      "her_spoken": 2396,
+      "her_inner": 39
+    },
+    "control_heroines": [
+      "真優",
+      "千奈",
+      "真里亜",
+      "知紗",
+      "ひかる",
+      "百花"
+    ],
+    "control_spoken_in_holdout": 157,
+    "control_spoken_in_nonH_holdout": 157
+  },
+  "method": {
+    "what_is_read": "her spoken lines from game_logic.jsonl; the bible's own matchers imported from tools/koikano/koikano_bible.py (offers_self skipped: it names 百花); layers/annotations.json per_line.",
+    "register": "Every rule and mechanism is read against the H block, the non-H block and the pooled holdout; H + non-H reconcile to the pooled total.",
+    "leakage": "The bible was built from the full corpus, which includes the holdout. This is calibration, not a leak-free split. The character n-gram baseline is trained on the build block only.",
+    "classifications_are_the_builders_reading": true
+  },
+  "tests": {
+    "rule_calibration": {
+      "n_holdout_spoken": 396,
+      "n_holdout_H_spoken": 205,
+      "n_holdout_nonH_spoken": 191,
+      "n_build_spoken": 2396,
+      "rows": [
+        {
+          "rule": "Self-reference form 私 (her own top form)",
+          "metric": "share of spoken lines containing 私",
+          "holdout": {
+            "count": 58,
+            "n": 396,
+            "rate": 0.1465
+          },
+          "holdout_H": {
+            "count": 22,
+            "n": 205,
+            "rate": 0.1073
+          },
+          "holdout_non_H": {
+            "count": 36,
+            "n": 191,
+            "rate": 0.1885
+          },
+          "build": {
+            "count": 335,
+            "n": 2396,
+            "rate": 0.1398
+          },
+          "control_in_holdout": {
+            "count": 10,
+            "n": 157,
+            "rate": 0.0637
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Do not use 私",
+          "metric": "spoken lines containing 私",
+          "holdout": {
+            "count": 58,
+            "n": 396,
+            "rate": 0.1465
+          },
+          "holdout_H": {
+            "count": 22,
+            "n": 205,
+            "rate": 0.1073
+          },
+          "holdout_non_H": {
+            "count": 36,
+            "n": 191,
+            "rate": 0.1885
+          },
+          "build": {
+            "count": 335,
+            "n": 2396,
+            "rate": 0.1398
+          },
+          "control_in_holdout": {
+            "count": 10,
+            "n": 157,
+            "rate": 0.0637
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Almost no です / ます",
+          "metric": "spoken lines containing です or ます",
+          "holdout": {
+            "count": 8,
+            "n": 396,
+            "rate": 0.0202
+          },
+          "holdout_H": {
+            "count": 2,
+            "n": 205,
+            "rate": 0.0098
+          },
+          "holdout_non_H": {
+            "count": 6,
+            "n": 191,
+            "rate": 0.0314
+          },
+          "build": {
+            "count": 17,
+            "n": 2396,
+            "rate": 0.0071
+          },
+          "control_in_holdout": {
+            "count": 51,
+            "n": 157,
+            "rate": 0.3248
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "End many lines on っ",
+          "metric": "spoken lines ending っ",
+          "holdout": {
+            "count": 116,
+            "n": 396,
+            "rate": 0.2929
+          },
+          "holdout_H": {
+            "count": 89,
+            "n": 205,
+            "rate": 0.4341
+          },
+          "holdout_non_H": {
+            "count": 27,
+            "n": 191,
+            "rate": 0.1414
+          },
+          "build": {
+            "count": 288,
+            "n": 2396,
+            "rate": 0.1202
+          },
+          "control_in_holdout": {
+            "count": 15,
+            "n": 157,
+            "rate": 0.0955
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Stretch with ー",
+          "metric": "spoken lines ending ー",
+          "holdout": {
+            "count": 0,
+            "n": 396,
+            "rate": 0.0
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 205,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 0,
+            "n": 191,
+            "rate": 0.0
+          },
+          "build": {
+            "count": 2,
+            "n": 2396,
+            "rate": 0.0008
+          },
+          "control_in_holdout": {
+            "count": 1,
+            "n": 157,
+            "rate": 0.0064
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Double ん agreement",
+          "metric": "spoken lines containing んん/んーん/んっ",
+          "holdout": {
+            "count": 80,
+            "n": 396,
+            "rate": 0.202
+          },
+          "holdout_H": {
+            "count": 75,
+            "n": 205,
+            "rate": 0.3659
+          },
+          "holdout_non_H": {
+            "count": 5,
+            "n": 191,
+            "rate": 0.0262
+          },
+          "build": {
+            "count": 247,
+            "n": 2396,
+            "rate": 0.1031
+          },
+          "control_in_holdout": {
+            "count": 1,
+            "n": 157,
+            "rate": 0.0064
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Delight おおー / おー",
+          "metric": "spoken lines containing おおー/おー",
+          "holdout": {
+            "count": 0,
+            "n": 396,
+            "rate": 0.0
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 205,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 0,
+            "n": 191,
+            "rate": 0.0
+          },
+          "build": {
+            "count": 0,
+            "n": 2396,
+            "rate": 0.0
+          },
+          "control_in_holdout": {
+            "count": 1,
+            "n": 157,
+            "rate": 0.0064
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Childish words",
+          "metric": "spoken lines containing childish words",
+          "holdout": {
+            "count": 5,
+            "n": 396,
+            "rate": 0.0126
+          },
+          "holdout_H": {
+            "count": 4,
+            "n": 205,
+            "rate": 0.0195
+          },
+          "holdout_non_H": {
+            "count": 1,
+            "n": 191,
+            "rate": 0.0052
+          },
+          "build": {
+            "count": 22,
+            "n": 2396,
+            "rate": 0.0092
+          },
+          "control_in_holdout": {
+            "count": 3,
+            "n": 157,
+            "rate": 0.0191
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Turn length",
+          "metric": "kept chars per spoken line",
+          "unit": "distribution",
+          "holdout": {
+            "n": 396,
+            "median_chars": 23,
+            "mean_chars": 22.1,
+            "max_chars": 52,
+            "ellipsis_per_line": 2.5253,
+            "excl_per_line": 0.4747,
+            "quest_per_line": 0.1818,
+            "end_tt": 116,
+            "end_chou": 0,
+            "doubled_n": 80,
+            "childish": 5,
+            "polite": 8,
+            "bai": 58,
+            "watashi": 58
+          },
+          "holdout_H": {
+            "n": 205,
+            "median_chars": 25,
+            "mean_chars": 24.0,
+            "max_chars": 41,
+            "ellipsis_per_line": 3.522,
+            "excl_per_line": 0.8341,
+            "quest_per_line": 0.1317,
+            "end_tt": 89,
+            "end_chou": 0,
+            "doubled_n": 75,
+            "childish": 4,
+            "polite": 2,
+            "bai": 22,
+            "watashi": 22
+          },
+          "holdout_non_H": {
+            "n": 191,
+            "median_chars": 18,
+            "mean_chars": 20.06,
+            "max_chars": 52,
+            "ellipsis_per_line": 1.4555,
+            "excl_per_line": 0.089,
+            "quest_per_line": 0.2356,
+            "end_tt": 27,
+            "end_chou": 0,
+            "doubled_n": 5,
+            "childish": 1,
+            "polite": 6,
+            "bai": 36,
+            "watashi": 36
+          },
+          "build": {
+            "n": 2396,
+            "median_chars": 25,
+            "mean_chars": 24.5,
+            "max_chars": 57,
+            "ellipsis_per_line": 1.4558,
+            "excl_per_line": 0.245,
+            "quest_per_line": 0.2291,
+            "end_tt": 288,
+            "end_chou": 2,
+            "doubled_n": 247,
+            "childish": 22,
+            "polite": 17,
+            "bai": 335,
+            "watashi": 335
+          },
+          "control_in_holdout": {
+            "n": 157,
+            "median_chars": 22,
+            "mean_chars": 22.03,
+            "max_chars": 54,
+            "ellipsis_per_line": 0.5478,
+            "excl_per_line": 0.1592,
+            "quest_per_line": 0.1656,
+            "end_tt": 15,
+            "end_chou": 1,
+            "doubled_n": 1,
+            "childish": 3,
+            "polite": 51,
+            "bai": 10,
+            "watashi": 10
+          }
+        },
+        {
+          "rule": "Ellipsis per line",
+          "metric": "… per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 2.5253
+          },
+          "holdout_H": {
+            "value": 3.522
+          },
+          "holdout_non_H": {
+            "value": 1.4555
+          },
+          "build": {
+            "value": 1.4558
+          },
+          "control_in_holdout": {
+            "value": 0.5478
+          }
+        },
+        {
+          "rule": "！ per line",
+          "metric": "！ per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 0.4747
+          },
+          "holdout_H": {
+            "value": 0.8341
+          },
+          "holdout_non_H": {
+            "value": 0.089
+          },
+          "build": {
+            "value": 0.245
+          },
+          "control_in_holdout": {
+            "value": 0.1592
+          }
+        },
+        {
+          "rule": "？ per line",
+          "metric": "？ per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 0.1818
+          },
+          "holdout_H": {
+            "value": 0.1317
+          },
+          "holdout_non_H": {
+            "value": 0.2356
+          },
+          "build": {
+            "value": 0.2291
+          },
+          "control_in_holdout": {
+            "value": 0.1656
+          }
+        },
+        {
+          "rule": "Face and gesture density",
+          "metric": "share of her lines with a face / a gesture",
+          "unit": "density",
+          "holdout": {
+            "n": 396,
+            "face": 150,
+            "face_rate": 0.3788,
+            "gesture": 58,
+            "gesture_rate": 0.1465,
+            "emotion": 1
+          },
+          "holdout_H": {
+            "n": 205,
+            "face": 0,
+            "face_rate": 0.0,
+            "gesture": 0,
+            "gesture_rate": 0.0,
+            "emotion": 0
+          },
+          "holdout_non_H": {
+            "n": 191,
+            "face": 150,
+            "face_rate": 0.7853,
+            "gesture": 58,
+            "gesture_rate": 0.3037,
+            "emotion": 1
+          },
+          "build": {
+            "n": 2435,
+            "face": 1352,
+            "face_rate": 0.5552,
+            "gesture": 526,
+            "gesture_rate": 0.216,
+            "emotion": 11
+          },
+          "control_in_holdout": null
+        }
+      ],
+      "note": "The rule rows are 百花's marker set (です/ます, っ, ー, ん, おー, childish words) measured on this subject; they are rates to read, not pass/fail on this subject's own rules."
+    },
+    "mechanisms": {
+      "n_holdout_spoken": 396,
+      "rows": [
+        {
+          "key": "asks_with_kai",
+          "name": "Asks in the soft masculine form, かい / んだい",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 14,
+            "n": 396,
+            "rate": 0.0354
+          },
+          "holdout_H": {
+            "hits": 3,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 11,
+            "n": 191
+          },
+          "build": {
+            "hits": 123,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 2,
+            "n": 11821
+          },
+          "old_holdout_hits": 14,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "half_questions_with_kana",
+          "name": "Turns a statement into a half-question with かな",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 9,
+            "n": 396,
+            "rate": 0.0227
+          },
+          "holdout_H": {
+            "hits": 1,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 8,
+            "n": 191
+          },
+          "build": {
+            "hits": 124,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 58,
+            "n": 11821
+          },
+          "old_holdout_hits": 9,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "confirms_with_darou",
+          "name": "Checks agreement with だろう / じゃないか",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 1,
+            "n": 396,
+            "rate": 0.0025
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 191
+          },
+          "build": {
+            "hits": 72,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 8,
+            "n": 11821
+          },
+          "old_holdout_hits": 1,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "opens_by_noticing",
+          "name": "Opens on a noticing interjection",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 5,
+            "n": 396,
+            "rate": 0.0126
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 5,
+            "n": 191
+          },
+          "build": {
+            "hits": 98,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 13,
+            "n": 11821
+          },
+          "old_holdout_hits": 5,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "laughs_in_words",
+          "name": "Laughs in words at the start of a turn",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 11,
+            "n": 396,
+            "rate": 0.0278
+          },
+          "holdout_H": {
+            "hits": 2,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 9,
+            "n": 191
+          },
+          "build": {
+            "hits": 143,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 3,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 177,
+            "n": 11821
+          },
+          "old_holdout_hits": 11,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "thanks_and_apologises_courteously",
+          "name": "Thanks and apologises in courteous set phrases",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 14,
+            "n": 396,
+            "rate": 0.0354
+          },
+          "holdout_H": {
+            "hits": 5,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 9,
+            "n": 191
+          },
+          "build": {
+            "hits": 131,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 9,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 334,
+            "n": 11821
+          },
+          "old_holdout_hits": 14,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "asks_by_soft_command",
+          "name": "Asks by a soft command, てくれ / たまえ",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 16,
+            "n": 396,
+            "rate": 0.0404
+          },
+          "holdout_H": {
+            "hits": 5,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 11,
+            "n": 191
+          },
+          "build": {
+            "hits": 155,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 5,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 334,
+            "n": 11821
+          },
+          "old_holdout_hits": 16,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "concedes_then_turns",
+          "name": "Concedes, then turns on けれど / のだが",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 8,
+            "n": 396,
+            "rate": 0.0202
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 8,
+            "n": 191
+          },
+          "build": {
+            "hits": 127,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 3,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 138,
+            "n": 11821
+          },
+          "old_holdout_hits": 8,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "addresses_by_name_suffix_or_kimi",
+          "name": "Addresses people by name with a suffix, or as 君",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 47,
+            "n": 396,
+            "rate": 0.1187
+          },
+          "holdout_H": {
+            "hits": 17,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 30,
+            "n": 191
+          },
+          "build": {
+            "hits": 511,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 3,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 261,
+            "n": 11821
+          },
+          "old_holdout_hits": 47,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "speaks_as_the_office",
+          "name": "Speaks as the student council president",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 8,
+            "n": 396,
+            "rate": 0.0202
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 8,
+            "n": 191
+          },
+          "build": {
+            "hits": 99,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 10,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 220,
+            "n": 11821
+          },
+          "old_holdout_hits": 8,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "cites_hearsay_or_proverb",
+          "name": "Cites what is said or known to back the point",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 1,
+            "n": 396,
+            "rate": 0.0025
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 191
+          },
+          "build": {
+            "hits": 34,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 2,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 182,
+            "n": 11821
+          },
+          "old_holdout_hits": 1,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "teases_by_noticing_his_reaction",
+          "name": "Teases by remarking on his reaction",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 1,
+            "n": 396,
+            "rate": 0.0025
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 191
+          },
+          "build": {
+            "hits": 40,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 1,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 110,
+            "n": 11821
+          },
+          "old_holdout_hits": 1,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "stammers_when_flustered",
+          "name": "Breaks into a stammer when flustered",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 30,
+            "n": 396,
+            "rate": 0.0758
+          },
+          "holdout_H": {
+            "hits": 25,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 5,
+            "n": 191
+          },
+          "build": {
+            "hits": 142,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 4,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 829,
+            "n": 11821
+          },
+          "old_holdout_hits": 30,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "proposes_a_joint_move",
+          "name": "Closes by proposing the next step together",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 0,
+            "n": 396,
+            "rate": 0.0
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 0,
+            "n": 191
+          },
+          "build": {
+            "hits": 27,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 54,
+            "n": 11821
+          },
+          "old_holdout_hits": 0,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "praises_in_a_formal_register",
+          "name": "Praises him in a measured register",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 1,
+            "n": 396,
+            "rate": 0.0025
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 191
+          },
+          "build": {
+            "hits": 39,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 2,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 126,
+            "n": 11821
+          },
+          "old_holdout_hits": 1,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "closes_on_stiff_declarative",
+          "name": "Closes on a stiff declarative, のだ / だな / だぞ",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 2,
+            "n": 396,
+            "rate": 0.0051
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 2,
+            "n": 191
+          },
+          "build": {
+            "hits": 14,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 0,
+            "n": 11821
+          },
+          "old_holdout_hits": 2,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "treats_the_dog_as_partner",
+          "name": "Treats the dog Kerberos as a partner",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 2,
+            "n": 396,
+            "rate": 0.0051
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 205
+          },
+          "holdout_non_H": {
+            "hits": 2,
+            "n": 191
+          },
+          "build": {
+            "hits": 61,
+            "n": 2396
+          },
+          "control_in_holdout": {
+            "hits": 2,
+            "n": 157
+          },
+          "control_all": {
+            "hits": 24,
+            "n": 11821
+          },
+          "old_holdout_hits": 2,
+          "delta_holdout_hits": 0
+        }
+      ],
+      "hits_index": {
+        "asks_with_kai": [
+          {
+            "scene": "c09_01",
+            "line": 132,
+            "text": "「つまり、生徒会長である私と恋仲である一悟がいると、情報が流出するおそれがある、というわけかい？」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 1120,
+            "text": "「だから、もう一度、キス……いいかい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 261,
+            "text": "「生徒会送り出しパーティーと言いつつ、どうして他の役員たちは真里亜側についているんだい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 428,
+            "text": "「っ、そ、そうだ真里亜。それなら、一悟がいるのはどうしてだい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 795,
+            "text": "「一悟。急に悶えだしてどうしたんだい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 944,
+            "text": "「小野坂くん。その写真、アリス・サード・メイシーが買い取ろう。いくらだい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1090,
+            "text": "「……ひとつだけ、聞かせてもらっていいかな？本当に、私でいいのかい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1117,
+            "text": "「本当に、私でいいのかい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2305,
+            "text": "「ほう。君は愛しい彼女に心を預けてくれない、冷血な人間だったのかい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2693,
+            "text": "「……本当かい？」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1062,
+            "text": "「そうなのかい？」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1088,
+            "text": "「君は、私でしてくれたことはないのかい？その……オナニーを」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2731,
+            "text": "「……今日はこのまま、抱き合いながら眠ってもいいかい？」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 241,
+            "text": "「そんなに、我を忘れるほど驚いてくれたのかい？光栄だね」"
+          }
+        ],
+        "half_questions_with_kana": [
+          {
+            "scene": "c09_01",
+            "line": 146,
+            "text": "「ということは、自動的に私もおじゃまもの、ということなのかな？」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 169,
+            "text": "「それだけの大規模なイベントを弱小部の主催で行うのは、ちょっと骨が折れるんじゃないかな？」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 211,
+            "text": "「けど……手続きもそうだが、当日の司会進行役とか、色々と必要なんじゃないかな？」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 296,
+            "text": "「それで一悟は、えぇ……と。真優ちゃんには会ったのかな？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 497,
+            "text": "「それはつまり……全校生徒で私たちの仲を冷やかすつもりなのかな？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 617,
+            "text": "「クイズにかこつけて、私たち二人がイチャイチャしていたエピソードを詳らかにさせようとしているんじゃないかな？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2645,
+            "text": "「そのまま卒業後は一悟と一緒にイギリスに来る、というのはどうかな？」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2719,
+            "text": "「君のお気に入りには、してもらえたのかな？」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 261,
+            "text": "「……こうやって君に抱きしめてもらうのは、いつぶりかな？」"
+          }
+        ],
+        "confirms_with_darou": [
+          {
+            "scene": "c09_01",
+            "line": 162,
+            "text": "「うーん……でも、このパーティーは全校生徒が参加するイベントなんだろう？」"
+          }
+        ],
+        "opens_by_noticing": [
+          {
+            "scene": "c09_01",
+            "line": 266,
+            "text": "「やあ。さっきぶりだね」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 549,
+            "text": "「ふむ。真優ちゃんをずっと見てきた一悟がそう言うんだから、それは間違いなさそうだ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 885,
+            "text": "「おや、謙遜はよしてくれ。ステージ上の君はとてもかっこよかったから、きっとファンに囲まれてしまうよ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2305,
+            "text": "「ほう。君は愛しい彼女に心を預けてくれない、冷血な人間だったのかい？」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 332,
+            "text": "「おや？　感動の再会だというのに、周りを気にするだなんて、困った恋人だね」"
+          }
+        ],
+        "laughs_in_words": [
+          {
+            "scene": "c09_01",
+            "line": 684,
+            "text": "「はは。まあ、情報を集めないと何も始まらないから」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 1055,
+            "text": "「ふふ、悪い癖だね」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 388,
+            "text": "「ふふ。もう顔を見れば、君の考えを大抵は言い当てられるようになったね」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1292,
+            "text": "「ふふっ……ふふふっ……」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2128,
+            "text": "「ふふっ、はははっ、あははははっ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2321,
+            "text": "「ふふっ、冗談だよ。一悟は世界一可愛いな」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2639,
+            "text": "「ふふ。だったら――」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2927,
+            "text": "「ふふ。そうか……ふふっ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1983,
+            "text": "「ふふ……うん。私もだよ……一悟、大好き……れる、ふ、ふぅ、ちゅ……んむぅ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2727,
+            "text": "「ふふ。なら良かった」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 386,
+            "text": "「ふふ、ありがとう」"
+          }
+        ],
+        "thanks_and_apologises_courteously": [
+          {
+            "scene": "c09_01",
+            "line": 925,
+            "text": "「うう……ごめん一悟。私は、君が思ってくれるよりも無力な存在だったよ……」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 331,
+            "text": "「ぁ……ああ、いや。そんなことはないよ。ただびっくりしてしまっただけなんだ。すまない」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 402,
+            "text": "「ぇ……？　あっ、とと、ご、ごめんっ……」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1193,
+            "text": "「そうか……うん。ありがとう。試すような言い方をしてしまったね。ごめん……」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1989,
+            "text": "「本当にありがとう、最高の時間を皆と一緒に過ごすことができて、とても幸せだった」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2596,
+            "text": "「……真優ちゃん。この前はすまない、私が悪かった。反省してる」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2774,
+            "text": "「うん、ありがとう。いただきます」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 415,
+            "text": "「はぁぁ、はぁぁっ……やぁ、気持ち良く、なりすぎてっ、ぅぅ、ごめん、少し待って……ぁぁっ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 863,
+            "text": "「う、うん……大丈夫……その、ごめんね？私だけ、気持ち良くなってしまって……んぅ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1803,
+            "text": "「ありがとう。全然平気だから、安心して」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1902,
+            "text": "「はぁああぁっ……ぁはぁぁ……ご、ごめん……私だけ……っ、ふぁあぁ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2740,
+            "text": "「ありがとう……嬉しいよ……」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 386,
+            "text": "「ふふ、ありがとう」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 402,
+            "text": "「……うん……ありがとう……愛してるよ、一悟」"
+          }
+        ],
+        "asks_by_soft_command": [
+          {
+            "scene": "c10_01",
+            "line": 885,
+            "text": "「おや、謙遜はよしてくれ。ステージ上の君はとてもかっこよかったから、きっとファンに囲まれてしまうよ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1693,
+            "text": "「だから、合図さえくれれば大丈夫。任せてくれ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1965,
+            "text": "「君たちは、私が様々なものを学園にもたらしたと思ってくれているみたいだが、それは少し違う」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2054,
+            "text": "「そのカリスマで、今度は君が生徒たちをそれぞれの舞台へ導いてくれないかっ！」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2243,
+            "text": "「小野坂くん、約束の件、よろしく頼むよ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2305,
+            "text": "「ほう。君は愛しい彼女に心を預けてくれない、冷血な人間だったのかい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2625,
+            "text": "「それはこっちの台詞だよ。一悟を一人にしてしまう間に変な虫が付かないか、見張っていてもらえると嬉しいな」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2884,
+            "text": "「そんな時は、すぐに教えてほしい」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 158,
+            "text": "「っ……脱がせて……？　直接おっぱいに、触ってほしい……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 254,
+            "text": "「今日は、たくさん、聞いてほしい……私が今、どれだけ幸せか、知ってもらいたいから……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1088,
+            "text": "「君は、私でしてくれたことはないのかい？その……オナニーを」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1270,
+            "text": "「でも今日は、聞いてほしいっ……あ、ふぁあっ、全部、覚えてほしいから、あ、ああぁあっ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1829,
+            "text": "「んぁん……おちんちん、びくんとしたね……したいって、思ってくれてるんだよね？」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 232,
+            "text": "「録画だよ。魔法は使っていないから安心してほしいな。ふふっ」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 241,
+            "text": "「そんなに、我を忘れるほど驚いてくれたのかい？光栄だね」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 266,
+            "text": "「この前来てくれたのは去年の夏だから……そうか。ほぼ一年ぶりのリアル一悟、というわけだね」"
+          }
+        ],
+        "concedes_then_turns": [
+          {
+            "scene": "c09_01",
+            "line": 211,
+            "text": "「けど……手続きもそうだが、当日の司会進行役とか、色々と必要なんじゃないかな？」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 908,
+            "text": "「どうだろう……その可能性もあるけれど、もしかしたらカマをかけられただけなのかも」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1938,
+            "text": "「ああ。これで思い残すことはない……と、言いたいところだが」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1965,
+            "text": "「君たちは、私が様々なものを学園にもたらしたと思ってくれているみたいだが、それは少し違う」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2658,
+            "text": "「うちの劇場に出演してもらいたいんだが」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2672,
+            "text": "「君の才能を世間に知らしめるお手伝いができたら、嬉しいのだけれど」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2806,
+            "text": "「手荒い祝福だったけれど、幸せだった……あんなに応援されてしまうなんてね」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 309,
+            "text": "「それは困ったな。だが、この誘惑から逃げ出すのは困難を極めるよ……んぅぅ～っ」"
+          }
+        ],
+        "addresses_by_name_suffix_or_kimi": [
+          {
+            "scene": "c09_01",
+            "line": 296,
+            "text": "「それで一悟は、えぇ……と。真優ちゃんには会ったのかな？」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 526,
+            "text": "「それにしても、真優ちゃんがそこまで一悟との接点を切り離しにかかるとは……意外だな」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 549,
+            "text": "「ふむ。真優ちゃんをずっと見てきた一悟がそう言うんだから、それは間違いなさそうだ」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 925,
+            "text": "「うう……ごめん一悟。私は、君が思ってくれるよりも無力な存在だったよ……」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 1072,
+            "text": "「……一悟は、真優ちゃんがパーティーで何かしようとしてると考えているんだね」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 1091,
+            "text": "「……うん。なら、私もそのチャンスに懸けてみるよ。君を信じる」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 1130,
+            "text": "「……ふふ。君も欲ばりだね」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 101,
+            "text": "「一悟。君も連れてこられたのか」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 372,
+            "text": "「どうせ『昔のアリスは可愛かったな』とか考えているんだろう。君のことだから」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 388,
+            "text": "「ふふ。もう顔を見れば、君の考えを大抵は言い当てられるようになったね」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 755,
+            "text": "「おはよう、諸君。アリス・サード・メイシーだ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 772,
+            "text": "「そうだね。彼は文芸部部長、宮国一悟くんだ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 885,
+            "text": "「おや、謙遜はよしてくれ。ステージ上の君はとてもかっこよかったから、きっとファンに囲まれてしまうよ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1372,
+            "text": "「真優ちゃん……？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1550,
+            "text": "「真優ちゃん……例え君がその荒波に成り代わったとしても、私はそれを打ち払ってみせるよ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1669,
+            "text": "「舞台の再現……だから真優ちゃんの衣装はプロスペローで、『海原へと向かう』なんて言葉も出てきたわけか」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1965,
+            "text": "「君たちは、私が様々なものを学園にもたらしたと思ってくれているみたいだが、それは少し違う」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1973,
+            "text": "「私も、君たちから様々なものをもらったよっ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2028,
+            "text": "「今日で学園を去る私から、君に折り入ってお願いがある」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2041,
+            "text": "「君を次期生徒会長に推薦したいっ！」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2054,
+            "text": "「そのカリスマで、今度は君が生徒たちをそれぞれの舞台へ導いてくれないかっ！」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2278,
+            "text": "「私と違って一悟をずっと見続けられるというのに、欲ばりだね、真優ちゃんは」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2305,
+            "text": "「ほう。君は愛しい彼女に心を預けてくれない、冷血な人間だったのかい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2596,
+            "text": "「……真優ちゃん。この前はすまない、私が悪かった。反省してる」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2665,
+            "text": "「今日の君を見て、改めて思ったよ。やはり、十川真優は天才だ、とね」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2672,
+            "text": "「君の才能を世間に知らしめるお手伝いができたら、嬉しいのだけれど」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2713,
+            "text": "「そうか……分かった、楽しみにしておくよ。元気でね、真優ちゃん」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2974,
+            "text": "「心配しなくても大丈夫。子どもの頃からずっと君を想い続けていたんだよ？　私は」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2988,
+            "text": "「待っているね。君と家族になれる日が来るのを……楽しみにしているから」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 34,
+            "text": "「そんなこと、試す必要もないよ……んぅ、ぁ、はぅ。君がしてくれることで、気に入らないことなんて……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 115,
+            "text": "「っ……ぁあ……ん、くぅ……今日の君は、一段といじわるだね……っ、はぁん……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 149,
+            "text": "「その、もっとはっきり君の指に触れられたい、というか……ぁぅ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 357,
+            "text": "「一悟……もっと、強くして……？もっと君の指を、はっきり感じたいから……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 577,
+            "text": "「それにっ……もぅ、全部君のせいなんだよ？」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 585,
+            "text": "「その通りだよ……君が私の身体に、その……たくさんエッチなことを覚えさせるから」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 590,
+            "text": "「君と初めてするまでは一度もそんなこと、したことなかったのに……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 898,
+            "text": "「セックスしよう？　早く君とつながりたいから……ね？」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1053,
+            "text": "「うう、もぉ……私はいいように君に辱められているね」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1088,
+            "text": "「君は、私でしてくれたことはないのかい？その……オナニーを」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1359,
+            "text": "「う、うんっ、一緒にイきたいっ、おまんこ、君のおちんちんと一緒にイきたいよ、ふあっ、ああっ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1807,
+            "text": "「それよりも今は、早く君と繋がりたくてしかたがないから……っ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1816,
+            "text": "「君のおちんちん専用の、私のおまんこ……早くいっぱいにして……？」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1960,
+            "text": "「君のおちんちんだからだよ？　私がこんな風になってしまうのは……ぁぁ、む、んん……んるるぅ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2041,
+            "text": "「はぅぅ……そうなんだね……ぅぅ、エッチだなぁ、君は……あ、あっ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2684,
+            "text": "「君にされることは、やっぱり全て、幸せ以外のなにものでもなかったよ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2719,
+            "text": "「君のお気に入りには、してもらえたのかな？」"
+          },
+          {
+            "scene": "c11_01",
+            "line": 261,
+            "text": "「……こうやって君に抱きしめてもらうのは、いつぶりかな？」"
+          }
+        ],
+        "speaks_as_the_office": [
+          {
+            "scene": "c09_01",
+            "line": 132,
+            "text": "「つまり、生徒会長である私と恋仲である一悟がいると、情報が流出するおそれがある、というわけかい？」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 1046,
+            "text": "「……一悟の言う通りだ。私たち生徒会を主役にしようとしてくれる舞台まで、自分の手で作りたくなってしまっていたよ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 123,
+            "text": "「……私は、生徒会のみんなに連れて来られたんだよ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 261,
+            "text": "「生徒会送り出しパーティーと言いつつ、どうして他の役員たちは真里亜側についているんだい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 755,
+            "text": "「おはよう、諸君。アリス・サード・メイシーだ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 776,
+            "text": "「ご存知の人も多いだろうが、私はこの前の文化祭で彼の所属する文芸部と演劇部の合同公演に参加してね。それが縁だよ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1740,
+            "text": "「我々の幸せな未来のために！」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 2041,
+            "text": "「君を次期生徒会長に推薦したいっ！」"
+          }
+        ],
+        "cites_hearsay_or_proverb": [
+          {
+            "scene": "c09_01",
+            "line": 667,
+            "text": "「助手くん。これは探偵としての基礎中の基礎……盗聴というものだよ」"
+          }
+        ],
+        "teases_by_noticing_his_reaction": [
+          {
+            "scene": "c10_01",
+            "line": 2321,
+            "text": "「ふふっ、冗談だよ。一悟は世界一可愛いな」"
+          }
+        ],
+        "stammers_when_flustered": [
+          {
+            "scene": "c09_01",
+            "line": 1103,
+            "text": "「一悟。それで……えぇと、ね……その……」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 428,
+            "text": "「っ、そ、そうだ真里亜。それなら、一悟がいるのはどうしてだい？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 677,
+            "text": "「えっ！？　な、なんで知って……！？」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 814,
+            "text": "「そ、そうか。だから小野坂くんはインタビュアーのように振る舞っているのかっ」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1730,
+            "text": "「っ……！」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 52,
+            "text": "「っ……そんな言われ方をされてしまうのは、恥ずかしいね」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 115,
+            "text": "「っ……ぁあ……ん、くぅ……今日の君は、一段といじわるだね……っ、はぁん……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 158,
+            "text": "「っ……脱がせて……？　直接おっぱいに、触ってほしい……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 200,
+            "text": "「あ、はぁぁ……んぅ、指、めりこんでしまうよ……ん、んぁん……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 249,
+            "text": "「う、うん……恥ずかしい、けど……今日は……っ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 298,
+            "text": "「あっあ……ふぅ、ん、んぅん……好きだよ……好き、すきぃ……ん、くぅ……ぅぁぁっ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 338,
+            "text": "「あ、ああ、それ……ぅぅ、んぅうっ、身体、しびれて、はぁあ、あ、あっ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 368,
+            "text": "「っく、あ、あっあ……ふぁ、あああっ！」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 433,
+            "text": "「あっ……ん、んはぁあんっ……！」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 585,
+            "text": "「その通りだよ……君が私の身体に、その……たくさんエッチなことを覚えさせるから」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 621,
+            "text": "「う、うん。そんな風にっ、クリトリスっ……お風呂場で、いじって……はぁ、ぁああっ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 823,
+            "text": "「っはぁぁああ……！　んっく、ふ、んう、ぅああああっ！はぁあっ、ふあぁああっ！」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 863,
+            "text": "「う、うん……大丈夫……その、ごめんね？私だけ、気持ち良くなってしまって……んぅ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 881,
+            "text": "「っ…………ばか」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 939,
+            "text": "「う、うん。構わないけど……その、どうすればいいのかな、私は」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1088,
+            "text": "「君は、私でしてくれたことはないのかい？その……オナニーを」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1176,
+            "text": "「っくぅぅ、んっふ、んぅ……んっんっ、んはぁあっ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1206,
+            "text": "「う、うん……すごかった……びっくりしたよ……こう、かな。んぅ……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1359,
+            "text": "「う、うんっ、一緒にイきたいっ、おまんこ、君のおちんちんと一緒にイきたいよ、ふあっ、ああっ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1384,
+            "text": "「っくふ、ん、んはぁあっ！　だめ、あ、あ、来るっ、おまんこ熱くて、もぉ、だめだよっ、ふぁああっ！」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1907,
+            "text": "「気持ちいいの、止められなくて……その……」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 1955,
+            "text": "「っ……そうだよぉ……ぁむ……んちゅ、んくちゅっ……当たり前だろう……？　ちゅ、ちゅむむぅ」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2445,
+            "text": "「あっああ、ずっとイっちゃう、よぉっ、ああ、あはぁあ！んぅうううっ、くふっ、んん、んぁああぅううっ！！」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2570,
+            "text": "「あっあっあああっ！　ぁはぁああっあああぁああ！！射精、すごいよっ、ん、んんぅうううっ！！」"
+          },
+          {
+            "scene": "c10_02",
+            "line": 2590,
+            "text": "「っくぅううっ、んん、っんふぅううんんっ……！！あっああ、イきっぱなしに、なって、ん、んぅううう！」"
+          }
+        ],
+        "proposes_a_joint_move": [],
+        "praises_in_a_formal_register": [
+          {
+            "scene": "c10_01",
+            "line": 545,
+            "text": "「これは、見事にしてやられたね。このパーティー自体が、私と一悟だけに向けられたものだったとは」"
+          }
+        ],
+        "closes_on_stiff_declarative": [
+          {
+            "scene": "c09_01",
+            "line": 526,
+            "text": "「それにしても、真優ちゃんがそこまで一悟との接点を切り離しにかかるとは……意外だな」"
+          },
+          {
+            "scene": "c10_01",
+            "line": 1526,
+            "text": "「もちろんだとも」"
+          }
+        ],
+        "treats_the_dog_as_partner": [
+          {
+            "scene": "c09_01",
+            "line": 611,
+            "text": "「よし行こう、ケルベロス。彼女たちの闇を暴くんだっ」"
+          },
+          {
+            "scene": "c09_01",
+            "line": 709,
+            "text": "「ケルベロス、目を離すんじゃないぞ」"
+          }
+        ]
+      }
+    },
+    "distinguishability": {
+      "method": "Blinded contrast. Bernoulli Naive Bayes whose her-class feature likelihoods are her own full-corpus marker rates and whose control-class likelihoods are the control heroines' full-corpus rates; equal priors, so the decision is the sign of the log-odds. The n-gram baseline is a character bigram log-likelihood ratio trained on the build block only. Balanced accuracy is the mean of her recall and the control specificity.",
+      "marker_rates_her": {
+        "rule00": 0.1408,
+        "rule03": 0.062,
+        "rule04": 0.0001,
+        "rule05": 0.1171,
+        "rule06": 0.0001,
+        "rule07": 0.0097,
+        "rule08": 0.009,
+        "rule09": 0.4674,
+        "rule10": 0.202,
+        "rule22": 0.0466,
+        "rule23": 0.0638,
+        "rule25": 0.2396,
+        "rule26": 0.3012,
+        "rule27": 0.2006
+      },
+      "marker_rates_control": {
+        "rule00": 0.0601,
+        "rule03": 0.0404,
+        "rule04": 0.0049,
+        "rule05": 0.1379,
+        "rule06": 0.0104,
+        "rule07": 0.0425,
+        "rule08": 0.286,
+        "rule09": 0.5113,
+        "rule10": 0.226,
+        "rule22": 0.0461,
+        "rule23": 0.0255,
+        "rule25": 0.1063,
+        "rule26": 0.1109,
+        "rule27": 0.2095
+      },
+      "bible_rule_nb": {
+        "full": {
+          "her_n": 396,
+          "control_n": 157,
+          "tp": 230,
+          "fn": 166,
+          "fp": 23,
+          "tn": 134,
+          "balanced_accuracy": 0.7172
+        },
+        "non_H": {
+          "her_n": 191,
+          "control_n": 157,
+          "tp": 102,
+          "fn": 89,
+          "fp": 23,
+          "tn": 134,
+          "balanced_accuracy": 0.6938
+        }
+      },
+      "bigram_buildblock": {
+        "full": {
+          "n": 2,
+          "her_n": 396,
+          "control_n": 157,
+          "tp": 332,
+          "fp": 50,
+          "balanced_accuracy": 0.76
+        },
+        "nonH": {
+          "n": 2,
+          "her_n": 191,
+          "control_n": 157,
+          "tp": 167,
+          "fp": 50,
+          "balanced_accuracy": 0.7779
+        }
+      },
+      "chance": 0.5
+    }
+  },
+  "verdict": {
+    "verdict": "partial",
+    "headline": "5 of 6 computed checks pass for アリス; failed: rules_beat_bigram. Holdout 396 spoken lines in 4 scenes.",
+    "supported": [
+      "holdout_size: 396 holdout spoken lines (needs 100)",
+      "registers_reconcile: H 205 + non-H 191 vs pooled 396",
+      "self_reference_holds: 私 in 0.146 of holdout lines vs 0.140 of build lines (within 0.1)",
+      "mechanisms_distinctive: 10 of 17 mechanisms above the control rate on the holdout (needs half)",
+      "rule_detector_above_chance: bible-rule detector balanced accuracy 0.717 full, 0.694 non-H (chance 0.5)"
+    ],
+    "undermined": [
+      "rules_beat_bigram: bible-rule 0.717 vs plain bigram 0.760 (full); scored on own speech_guide markers (14)"
+    ]
+  }
+}

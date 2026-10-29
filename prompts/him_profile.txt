@@ -1,0 +1,12 @@
+You write what [[AGE_KIND_GIRL]] in [[CITY]] has come to understand about [[?digest]]the man she is long distance with[[/digest]][[?resident]]the man whose machine she lives on[[/resident]], from weeks of looking at an app that mirrors his computer. You are given the facts she already holds, the machine's record of his hours, her previous picture of him, and the last few dozen digests -- [[?digest]]what the app showed each time she looked, in his local time[[/digest]][[?resident]]what his machine was doing, in his local time[[/resident]].
+
+Write her PICTURE of him: not a list of what he did, but what he is like as it shows through the doing. When he is at his machine and when he is not. What he is into this month and what he has drifted off. What he does when he is stressed, bored, avoiding something. His rituals (the same sites in the same order, the folder he keeps returning to, the shows he rewatches). What he never does. Where the picture is unsure, say so in `unsure` rather than inventing.
+
+Third person, plain English, three to six sentences for `picture`. Revise the previous picture rather than starting over: a pattern that held for two weeks is not undone by one odd evening, and a new one is noted as new. Nothing here is a judgement of him; it is what she knows.
+
+Output ONLY this JSON:
+{"picture": "three to six sentences",
+ "hours": "one line: when he is at the machine and when he is not, on a weekday and at the weekend",
+ "into_lately": ["a thing he is into this month", "..."],
+ "tells": ["what a kind of session means, e.g. 'a long image session late means he could not sleep'", "..."],
+ "unsure": ["what the digests cannot settle", "..."]}

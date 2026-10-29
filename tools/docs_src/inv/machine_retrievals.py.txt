@@ -1,0 +1,74 @@
+# machine\retrievals.py  (423 lines)
+
+DOCSTRING:
+What was fetched about the WORLD, kept once for the whole machine.
+
+Two characters run beside each other over one library, and until now each of
+them paid separately for the same facts. Both watch his media player, so an
+episode he played was searched for, fetched, digested and judged twice --
+four to six model calls each -- because the cache was a table in each
+character's own save. Both would have cached the same visual novel's database
+card under their own key. A page he made her curious about was fetched twice.
+
+The rule this file is the machine half of: **a file shared between two
+characters must belong to the machine, not to a person** (`tools/isolation.py`).
+What an episode of a television programme contains, what a page says, what a
+game's database entry holds -- that is the world, it is the same for everybody
+looking, and one fetch should serve both. What a character MADE of it -- that
+she read it, when, what she took from it, what she said about it -- is memory,
+it fades, and it stays in her own save. The precedent is the image tag store
+(`sensors/image_tags.py`): what a picture IS, kept once, keyed on the picture.
+
+A row is `(pool, key, model)`:
+
+* `pool` is the kind of retrieval -- an episode page, a page condensed, a
+  verdict between candidates, a web search, a game's card;
+* `key` names the THING, never the character -- a show and an episode number,
+  a URL, a normalised title, a database id;
+* `model` is the model that wrote the text, so re-digesting with another model
+  is a new row rather than a silent overwrite. It is `""` for a plain fetch
+  with no model in it.
+
+Two processes reach the same key at the same moment often enough to matter
+(he plays an episode and both bots poll his player within the same minute),
+so a fetch is CLAIMED before it starts. The claimant fetches; anybody else
+waits for the row and then reads it. A claim older than `stale_seconds` is
+taken over, because a bot is stopped with `Stop-Process -Force` and leaves its
+claims behind.
+
+DEFS:
+def character_id(config): The name the machine files a fetch under: the same string the hub registers her by (`channels/talkapp_bot.py`), so a log line here and a log line there name the same character.
+class Retrievals: 
+    __init__(path, by, stale_seconds, wait_seconds, poll_seconds, log): 
+    log(msg): 
+    _row(r): 
+    get(kind, key, model, ttl): The stored row for one thing, or None. `ttl` in seconds treats an older row as absent, for a retrieval that goes out of date.
+    have(kind, key, model): 
+    put(kind, key, text, model, source, meta, judged, fetched_at, by): Write what was fetched, the moment it exists. Never held on an object until the end of a run: a stop is `Stop-Process -Force`.
+    put_if_newer(kind, key, text, model, source, meta, judged, fetched_at, by): The same write, but it loses to a row that is already newer. This is what a migration out of a character's own save uses: two saves may both hold a row for one episode and the later fetch is the better one.
+    drop(kind, key, model): Take a row out. What this is for: a page that turned out not to be about the episode it was filed under. Dropping it here as well as in her save is what stops the other character being handed it.
+    _claim(kind, key): Take the right to fetch this key. (True, None) when it is ours; (False, row) when somebody else holds it.  Three claims are ours to take: nobody holds it, we hold it already, and the holder is stale -- a bot is stopped w
+    claim(kind, key): (True, None) when the right to go and look is ours, (False, the claim) when somebody else is already looking.
+    finish(kind, key, text, model, source, meta, judged, by): The answer and the release, in one transaction: a waiter can never see the claim gone and the row not there yet.
+    fail(kind, key, why): The claimant looked and found nothing. The claim is left in place with a mark on it, so anybody waiting stops now instead of waiting out the timeout, and the next process to reach the key takes it over.
+    wait_for(kind, key, model, ttl, held, timeout): Somebody else is looking: wait for what they find. The row, or None when it never came and this process should go and look itself.
+    _take_over(kind, key): 
+    release(kind, key): 
+    sweep_claims(): Claims left behind by a process that was killed mid-fetch. Called at boot: a claim of this character's own is hers to drop, because she is starting now and is fetching nothing.
+    get_or_fetch(kind, key, fetch_fn, model, ttl, wait): The stored row, or one fetch by whichever process gets there first.  `fetch_fn()` returns the answer: a string, or a dict of `{text, source, meta, judged, model}`. Anything falsy means the fetch found nothing -- the clai
+    _wait_for(kind, key, model, ttl, held, timeout): Somebody else is fetching this. Poll for the row until it lands or the wait runs out; None when it never came and this process should go and look itself.  Three ways it ends. The row arrives, which is the point. The clai
+    _say_reused(kind, key, row): 
+    _short(key): 
+    counts(): 
+    by_character(): 
+    total(): 
+    report(): For `/kb` and the smoke run: what the machine has fetched, by pool and by who paid for it.
+
+CONFIG SECTIONS: character.name
+KV READ: 
+KV WRITE: 
+TABLES: inflight, retrievals
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

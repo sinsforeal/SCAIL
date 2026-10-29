@@ -1,0 +1,52 @@
+# tools\zeitgeist.py  (301 lines)
+
+DOCSTRING:
+What Japan is talking about right now, filtered to what would reach her.
+
+The entity floats free of the actual world unless the world keeps arriving:
+the calendar has the season and her wards' festivals, the hazards feed has
+the ground and the sky, and nothing had the rest -- what is on the news,
+what is trending, what somebody her age in her part of the city would have
+seen on her phone today. This pulls public Japanese feeds (no auth, no scraping beyond
+RSS) plus the X trends the look session already saw, and one small model
+call reads the pile the way her demographic would: most of it does not
+reach her at all, some of it is everywhere, a little of it is exactly her.
+
+    python tools/zeitgeist.py [--config config_<key>.json] fetch [--limit 80]
+    python tools/zeitgeist.py [--config config_<key>.json] report
+
+**Which character this is for is an argument, and the paths follow from her
+config.** The filtering is hers all the way down: how she is described to the
+role that judges the headlines (`sim/observer.py`), her declared taste, her
+calendar, her model, and how many days and headlines she keeps. This took no
+argument and loaded `config.json`, so when a second character in the same
+world ran it -- her own loop, her own four-hour tick -- the feed came back
+judged in the FIRST character's terms, was written to the first character's
+file, consumed the shared seen-set so those headlines would never be offered
+to the first character again, and left the file her own config names empty.
+The reader is `world.zeitgeist_file`; what has already been offered is a list
+beside it, so each character has her own.
+
+Feeds rot (the Yahoo RSS paths for trains all went 404); a dead feed is
+logged and skipped, never fatal.
+
+DEFS:
+def paths_for(cfg): (the feed she reads, the list of what she has already been offered).  The feed is `world.zeitgeist_file` -- the same key the reader in her process opens -- and the offered list sits beside it under the same stem, so a ch
+def _load(path, default): 
+def _save(path, data): 
+def _text(el): 
+def feed_items(url, log): (title, description, link) newest first; tolerant of RSS 2.0, RSS 1.0 and Atom.
+def gather(limit, log, seen_path): 
+def her_sheet(cfg): Her declared taste (data/taste.json, his to edit) as a block.
+def filter_call(cfg, llm, rows, trends, log): 
+def cmd_fetch(args): 
+def cmd_report(args): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: zeitgeist
+OPS COMMANDS: 

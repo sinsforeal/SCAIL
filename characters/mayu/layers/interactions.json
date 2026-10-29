@@ -1,0 +1,829 @@
+{
+  "her_address_terms_overall": {
+    "アリス": 7,
+    "ケル": 5,
+    "ケルベロス": 5,
+    "メイシー": 1,
+    "千奈": 68,
+    "榎本先生": 11,
+    "百花ちゃん": 23,
+    "真里亜さん": 3
+  },
+  "note": "One row per other speaker in her scenes. Turn counts include inner voice (a speaker's whole presence); the spoken/inner split is kept. Scene openings and exchange starts are counts, not attributions: 'exchange_they_start' pools every initiator that is not her.",
+  "relationships": {
+    "": {
+      "category": "unattributed",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 1,
+      "turns_spoken": 0,
+      "turns_total": 1
+    },
+    "ひかる": {
+      "category": "heroine",
+      "exchange_her_starts": 0,
+      "exchange_they_start": 24,
+      "her_address_terms": {},
+      "her_avg_turn_chars": 9.75,
+      "her_expression_mix": {
+        "smile": 1,
+        "surprise": 7,
+        "talk": 1
+      },
+      "her_gesture_mix": {
+        "@ううっ": 2,
+        "@おじぎ": 1,
+        "@ジャンプ": 3,
+        "@否定": 1,
+        "@噴飯２": 1
+      },
+      "her_lines_to_them": 12,
+      "her_spoken_turns": 12,
+      "scene_openings": 5,
+      "scenes_together": 37,
+      "turns_inner": 0,
+      "turns_spoken": 410,
+      "turns_total": 410
+    },
+    "アリス": {
+      "category": "heroine",
+      "exchange_her_starts": 0,
+      "exchange_they_start": 129,
+      "her_address_terms": {
+        "アリス": 7,
+        "メイシー": 1
+      },
+      "her_avg_turn_chars": 16.48,
+      "her_expression_mix": {
+        "angry": 9,
+        "excited": 7,
+        "laugh": 7,
+        "neutral": 22,
+        "sad": 28,
+        "smile": 23,
+        "surprise": 27,
+        "talk": 2,
+        "worried": 1
+      },
+      "her_gesture_mix": {
+        "@ううっ": 15,
+        "@おじぎ": 12,
+        "@ジャンプ": 18,
+        "@否定": 9,
+        "@噴飯２": 1,
+        "@居眠り横": 1,
+        "@抱きつき": 1,
+        "@身体眺め": 1
+      },
+      "her_lines_to_them": 151,
+      "her_spoken_turns": 135,
+      "scene_openings": 7,
+      "scenes_together": 51,
+      "turns_inner": 39,
+      "turns_spoken": 1719,
+      "turns_total": 1758
+    },
+    "ケルベロス": {
+      "category": "heroine",
+      "exchange_her_starts": 0,
+      "exchange_they_start": 12,
+      "her_address_terms": {
+        "ケル": 5,
+        "ケルベロス": 5
+      },
+      "her_avg_turn_chars": 15.72,
+      "her_expression_mix": {
+        "angry": 2,
+        "excited": 1,
+        "laugh": 2,
+        "neutral": 6,
+        "sad": 3,
+        "surprise": 10,
+        "worried": 2
+      },
+      "her_gesture_mix": {
+        "@ううっ": 6,
+        "@おじぎ": 1,
+        "@ジャンプ": 2,
+        "@噴飯２": 1,
+        "@息切れ": 1
+      },
+      "her_lines_to_them": 25,
+      "her_spoken_turns": 25,
+      "scene_openings": 1,
+      "scenes_together": 31,
+      "turns_inner": 0,
+      "turns_spoken": 155,
+      "turns_total": 155
+    },
+    "テニス部部員": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 2,
+      "turns_inner": 0,
+      "turns_spoken": 5,
+      "turns_total": 5
+    },
+    "一年生女子": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 3,
+      "turns_inner": 0,
+      "turns_spoken": 8,
+      "turns_total": 8
+    },
+    "一悟": {
+      "category": "protagonist",
+      "exchange_her_starts": 16,
+      "exchange_they_start": 466,
+      "her_address_terms": {},
+      "her_avg_turn_chars": 24.77,
+      "her_expression_mix": {
+        "angry": 128,
+        "excited": 133,
+        "laugh": 156,
+        "neutral": 181,
+        "sad": 300,
+        "smile": 426,
+        "surprise": 184,
+        "talk": 79,
+        "worried": 130
+      },
+      "her_gesture_mix": {
+        "@ううっ": 149,
+        "@おじぎ": 145,
+        "@なでなで": 2,
+        "@キス": 27,
+        "@キス止め": 10,
+        "@ジャンプ": 156,
+        "@否定": 92,
+        "@噴飯２": 8,
+        "@外から飛び出し": 2,
+        "@居眠り横": 7,
+        "@居眠り縦": 2,
+        "@息切れ": 2,
+        "@抱きつき": 7
+      },
+      "her_lines_to_them": 2632,
+      "her_spoken_turns": 2596,
+      "scene_openings": 26,
+      "scenes_together": 77,
+      "turns_inner": 10219,
+      "turns_spoken": 6013,
+      "turns_total": 16232
+    },
+    "三年生女子": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 3,
+      "turns_total": 3
+    },
+    "事務所の社長さん": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 19.6,
+      "her_expression_mix": {
+        "angry": 1,
+        "neutral": 1,
+        "sad": 3,
+        "smile": 17,
+        "surprise": 1,
+        "worried": 2
+      },
+      "her_gesture_mix": {
+        "@ううっ": 1,
+        "@否定": 1
+      },
+      "her_lines_to_them": 15,
+      "her_spoken_turns": 10,
+      "scene_openings": 0,
+      "scenes_together": 2,
+      "turns_inner": 0,
+      "turns_spoken": 9,
+      "turns_total": 9
+    },
+    "十川家の母": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 9,
+      "turns_total": 9
+    },
+    "十川家の父": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 23.75,
+      "her_expression_mix": {
+        "excited": 1,
+        "laugh": 1,
+        "smile": 5,
+        "talk": 1
+      },
+      "her_gesture_mix": {
+        "@おじぎ": 1
+      },
+      "her_lines_to_them": 4,
+      "her_spoken_turns": 4,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 8,
+      "turns_total": 8
+    },
+    "千奈": {
+      "category": "heroine",
+      "exchange_her_starts": 1,
+      "exchange_they_start": 107,
+      "her_address_terms": {
+        "千奈": 68
+      },
+      "her_avg_turn_chars": 22.02,
+      "her_expression_mix": {
+        "angry": 17,
+        "excited": 28,
+        "laugh": 10,
+        "neutral": 42,
+        "sad": 84,
+        "smile": 41,
+        "surprise": 61,
+        "talk": 14,
+        "worried": 14
+      },
+      "her_gesture_mix": {
+        "@ううっ": 36,
+        "@おじぎ": 32,
+        "@ジャンプ": 54,
+        "@否定": 17,
+        "@噴飯２": 3
+      },
+      "her_lines_to_them": 355,
+      "her_spoken_turns": 352,
+      "scene_openings": 8,
+      "scenes_together": 62,
+      "turns_inner": 400,
+      "turns_spoken": 2263,
+      "turns_total": 2663
+    },
+    "千奈＆アリス＆百花＆ひかる＆真里亜＆知紗": {
+      "category": "unison",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 24.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 1,
+      "her_spoken_turns": 1,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 1,
+      "turns_total": 1
+    },
+    "天文部部員": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 5,
+      "turns_inner": 0,
+      "turns_spoken": 30,
+      "turns_total": 30
+    },
+    "女性のお客さんＡ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 2,
+      "turns_inner": 0,
+      "turns_spoken": 2,
+      "turns_total": 2
+    },
+    "女性のお客さんＢ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 1.0,
+      "her_expression_mix": {
+        "laugh": 1,
+        "sad": 1
+      },
+      "her_gesture_mix": {
+        "@ううっ": 1
+      },
+      "her_lines_to_them": 1,
+      "her_spoken_turns": 1,
+      "scene_openings": 0,
+      "scenes_together": 2,
+      "turns_inner": 0,
+      "turns_spoken": 3,
+      "turns_total": 3
+    },
+    "女性の店員さん": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 4.0,
+      "her_expression_mix": {
+        "laugh": 1,
+        "surprise": 1
+      },
+      "her_gesture_mix": {
+        "@ううっ": 1
+      },
+      "her_lines_to_them": 1,
+      "her_spoken_turns": 1,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 2,
+      "turns_total": 2
+    },
+    "弱小部女子生徒Ａ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 5,
+      "turns_total": 5
+    },
+    "弱小部女子生徒Ｂ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 5,
+      "turns_total": 5
+    },
+    "文化祭実行委員": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 3,
+      "turns_inner": 0,
+      "turns_spoken": 6,
+      "turns_total": 6
+    },
+    "新聞部部長": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 5.0,
+      "her_expression_mix": {
+        "sad": 1
+      },
+      "her_gesture_mix": {
+        "@ううっ": 1
+      },
+      "her_lines_to_them": 3,
+      "her_spoken_turns": 1,
+      "scene_openings": 0,
+      "scenes_together": 3,
+      "turns_inner": 0,
+      "turns_spoken": 8,
+      "turns_total": 8
+    },
+    "映画研究部部長": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 3,
+      "turns_total": 3
+    },
+    "案内アナウンス": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 33.33,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 3,
+      "her_spoken_turns": 3,
+      "scene_openings": 2,
+      "scenes_together": 3,
+      "turns_inner": 0,
+      "turns_spoken": 8,
+      "turns_total": 8
+    },
+    "演劇部部員Ａ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 1,
+      "turns_total": 1
+    },
+    "演劇部部員Ｂ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 2,
+      "turns_total": 2
+    },
+    "演劇部部員Ｃ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 1,
+      "turns_total": 1
+    },
+    "百花": {
+      "category": "heroine",
+      "exchange_her_starts": 0,
+      "exchange_they_start": 64,
+      "her_address_terms": {
+        "百花ちゃん": 23
+      },
+      "her_avg_turn_chars": 19.43,
+      "her_expression_mix": {
+        "angry": 17,
+        "excited": 11,
+        "laugh": 4,
+        "neutral": 29,
+        "sad": 34,
+        "smile": 20,
+        "surprise": 36,
+        "talk": 7,
+        "worried": 11
+      },
+      "her_gesture_mix": {
+        "@ううっ": 35,
+        "@おじぎ": 8,
+        "@ジャンプ": 26,
+        "@否定": 19,
+        "@噴飯２": 3,
+        "@抱きつき": 1
+      },
+      "her_lines_to_them": 214,
+      "her_spoken_turns": 203,
+      "scene_openings": 9,
+      "scenes_together": 58,
+      "turns_inner": 164,
+      "turns_spoken": 1496,
+      "turns_total": 1660
+    },
+    "百花＆真里亜": {
+      "category": "unison",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 17.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {
+        "@ううっ": 1
+      },
+      "her_lines_to_them": 1,
+      "her_spoken_turns": 1,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 1,
+      "turns_total": 1
+    },
+    "真優＆千奈": {
+      "category": "unison",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 2,
+      "turns_inner": 0,
+      "turns_spoken": 2,
+      "turns_total": 2
+    },
+    "真優＆千奈＆一悟": {
+      "category": "unison",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 1,
+      "turns_total": 1
+    },
+    "真里亜": {
+      "category": "heroine",
+      "exchange_her_starts": 0,
+      "exchange_they_start": 5,
+      "her_address_terms": {
+        "真里亜さん": 3
+      },
+      "her_avg_turn_chars": 19.08,
+      "her_expression_mix": {
+        "angry": 10,
+        "excited": 4,
+        "laugh": 5,
+        "neutral": 13,
+        "sad": 28,
+        "smile": 9,
+        "surprise": 30,
+        "talk": 1,
+        "worried": 4
+      },
+      "her_gesture_mix": {
+        "@ううっ": 12,
+        "@おじぎ": 6,
+        "@ひざまずき": 1,
+        "@ジャンプ": 28,
+        "@否定": 5,
+        "@噴飯１": 2
+      },
+      "her_lines_to_them": 122,
+      "her_spoken_turns": 109,
+      "scene_openings": 1,
+      "scenes_together": 59,
+      "turns_inner": 0,
+      "turns_spoken": 889,
+      "turns_total": 889
+    },
+    "知紗": {
+      "category": "heroine",
+      "exchange_her_starts": 0,
+      "exchange_they_start": 6,
+      "her_address_terms": {
+        "榎本先生": 11
+      },
+      "her_avg_turn_chars": 19.75,
+      "her_expression_mix": {
+        "angry": 5,
+        "excited": 1,
+        "laugh": 2,
+        "neutral": 11,
+        "sad": 18,
+        "smile": 7,
+        "surprise": 10,
+        "talk": 1,
+        "worried": 10
+      },
+      "her_gesture_mix": {
+        "@ううっ": 5,
+        "@おじぎ": 2,
+        "@ジャンプ": 5,
+        "@否定": 10,
+        "@噴飯２": 1
+      },
+      "her_lines_to_them": 98,
+      "her_spoken_turns": 63,
+      "scene_openings": 0,
+      "scenes_together": 35,
+      "turns_inner": 0,
+      "turns_spoken": 381,
+      "turns_total": 381
+    },
+    "芸能レポーター": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 10.0,
+      "her_expression_mix": {
+        "sad": 1,
+        "smile": 1
+      },
+      "her_gesture_mix": {},
+      "her_lines_to_them": 1,
+      "her_spoken_turns": 1,
+      "scene_openings": 1,
+      "scenes_together": 2,
+      "turns_inner": 0,
+      "turns_spoken": 7,
+      "turns_total": 7
+    },
+    "芸能記者": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 14.67,
+      "her_expression_mix": {
+        "laugh": 3,
+        "neutral": 1,
+        "sad": 1,
+        "smile": 1,
+        "talk": 1,
+        "worried": 1
+      },
+      "her_gesture_mix": {
+        "@ううっ": 1
+      },
+      "her_lines_to_them": 6,
+      "her_spoken_turns": 6,
+      "scene_openings": 0,
+      "scenes_together": 3,
+      "turns_inner": 0,
+      "turns_spoken": 8,
+      "turns_total": 8
+    },
+    "見知らぬ女性Ａ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 3,
+      "turns_inner": 0,
+      "turns_spoken": 6,
+      "turns_total": 6
+    },
+    "見知らぬ女性Ｂ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 3,
+      "turns_inner": 0,
+      "turns_spoken": 6,
+      "turns_total": 6
+    },
+    "観客Ａ": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 1,
+      "turns_total": 1
+    },
+    "観客Ｂ": {
+      "category": "npc",
+      "exchange_her_starts": 0,
+      "exchange_they_start": 1,
+      "her_address_terms": {},
+      "her_avg_turn_chars": 10.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 2,
+      "her_spoken_turns": 2,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 1,
+      "turns_total": 1
+    },
+    "野村先生": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 1,
+      "scenes_together": 3,
+      "turns_inner": 0,
+      "turns_spoken": 7,
+      "turns_total": 7
+    },
+    "野球部部員": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 3,
+      "turns_total": 3
+    },
+    "ＡＶ女優": {
+      "category": "npc",
+      "her_address_terms": {},
+      "her_avg_turn_chars": 0.0,
+      "her_expression_mix": {},
+      "her_gesture_mix": {},
+      "her_lines_to_them": 0,
+      "her_spoken_turns": 0,
+      "scene_openings": 0,
+      "scenes_together": 1,
+      "turns_inner": 0,
+      "turns_spoken": 9,
+      "turns_total": 9
+    }
+  },
+  "reply_vs_initiation": {
+    "initiation": 17,
+    "reply": 2444,
+    "reply_rate": 0.9931,
+    "self_continuation": 1085
+  },
+  "scene_openers": {
+    "ひかる": 5,
+    "アリス": 7,
+    "ケルベロス": 1,
+    "一悟": 26,
+    "千奈": 8,
+    "案内アナウンス": 2,
+    "百花": 9,
+    "真優": 17,
+    "真里亜": 1,
+    "芸能レポーター": 1,
+    "野村先生": 1
+  },
+  "subject_lines_in_her_scenes": 3826,
+  "they_address_her": {
+    "十川": 3,
+    "十川さん": 87,
+    "十川先輩": 212,
+    "十川真優": 2,
+    "真優": 4,
+    "真優ちゃん": 289,
+    "真優先輩": 6,
+    "真優様": 71
+  }
+}

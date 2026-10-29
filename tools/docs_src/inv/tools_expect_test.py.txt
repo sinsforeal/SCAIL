@@ -1,0 +1,21 @@
+# tools\expect_test.py  (124 lines)
+
+DOCSTRING:
+Expectations of him without the model: a promise heard (stubbed call),
+kept off a message, missed past due, raised by her, foresight's risk
+scored off his mood, and a habit checked against the digests. On a copy
+of the save.
+
+    python tools/expect_test.py
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: habits_checked
+KV WRITE: expectations, foresight, habits_checked, habits_him, his_mood
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

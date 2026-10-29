@@ -1,0 +1,41 @@
+# tools\fork_merge.py  (112 lines)
+
+DOCSTRING:
+Fold one character's forked prompt back into the shared mechanism file.
+
+A fork exists because two characters needed different words from one role. Most
+of that difference is not the person and not a judgement -- it is her
+condition. She has no shared history with him, no body, no day, and she watches
+his machine rather than choosing to open an app. So the shared file can carry
+both, with the parts that only apply to one wrapped in a condition
+(`Config.fill`, `[[?no_history]]...[[/no_history]]`).
+
+This does the mechanical part of that fold and refuses to guess at the rest.
+It aligns the two files line by line and, for every place they differ:
+
+  the fork ADDS a line       -> wrapped in the condition you name and inserted
+  the fork REPLACES a line   -> both kept, each under its own side of the
+                                condition
+  the fork DROPS a line      -> left alone and reported, because deleting a
+                                rule from a live character's prompt is not
+                                something a script should decide
+
+Then both gates have to pass: `tools/neutral_gate.py` proves the first
+character's rendering is unchanged byte for byte, and `tools/fork_gate.py`
+proves the shared file still says everything the fork said.
+
+    python tools/fork_merge.py recall.txt --cond no_history
+    python tools/fork_merge.py state.txt --cond embodied --sense not
+
+DEFS:
+def wrap(cond, sense, body): `sense` is which way round: "is" keeps the body when the condition holds, "not" keeps it when it does not.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

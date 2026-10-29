@@ -1,0 +1,20 @@
+# tools\gaps_test.py  (121 lines)
+
+DOCSTRING:
+The 2026-08-26 midday layer, on a copy of the save, no LLM: blends,
+the reverse body-noise line, the body-settled correction, wet exposure,
+the surprise register, and facts about people with a curve.
+
+    python tools/gaps_test.py
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: state.gauges
+KV READ: exposure
+KV WRITE: body_noise_prev, body_settled_note
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

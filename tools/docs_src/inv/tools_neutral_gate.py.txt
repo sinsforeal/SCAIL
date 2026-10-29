@@ -1,0 +1,37 @@
+# tools\neutral_gate.py  (109 lines)
+
+DOCSTRING:
+A mechanism prompt with the person taken out must still be her prompt.
+
+`tomoe/prompts/showrunner.txt` opened by naming a fifteen-year-old in Nerima and
+listing her friends as the arcs to choose from. That is a mechanism file with a
+person pasted into it, and a second character invoking it is handed the first
+one's life. The fix is to leave the rule in the file and mark the person's place
+with a `{{TOKEN}}` that the character fills (`Config.fill`).
+
+**The rule that makes it safe to do this to a live character's prompts: a
+token's value for the character the prompt was written around is the exact span
+that came out of it.** Render her fills back into the tokenised file and you get
+the original file, byte for byte. If that holds, her behaviour cannot have
+changed, and the check is mechanical rather than a judgement about whether two
+wordings mean the same thing.
+
+This is that check. It compares every tokenised prompt, rendered with the first
+character's fills, against the copy taken before the change, and fails on one
+differing byte. It is not a style opinion and it cannot pass by accident.
+
+    python tools/neutral_gate.py            # against the newest retired snapshot
+    python tools/neutral_gate.py --baseline data/retired/<ts>_neutral/prompts
+
+DEFS:
+def newest_baseline(): The snapshot taken before the first prompt was tokenised. Named rather than guessed: the retired directory carries the reason in its name.
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

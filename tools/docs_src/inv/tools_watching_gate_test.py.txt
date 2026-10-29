@@ -1,0 +1,42 @@
+# tools\watching_gate_test.py  (219 lines)
+
+DOCSTRING:
+The gate on what he has actually watched (`sim/watching_him.py`).
+
+Nothing is fetched, digested, marked seen or told to a character until he has
+sat through `watching.min_watched_minutes` of the file -- unpaused seconds as
+the player counts them, never the position, because seeking to the last minute
+and closing the file leaves the same position as watching the whole thing.
+
+Four things are proved, on a scratch save, with a hand-written player history,
+state file and plays log and no network or model call anywhere:
+
+  * an open below the gate is HELD -- no fetch, not seen, and the hold is a
+    row in the save;
+  * the hold survives a restart and is not doubled;
+  * past the gate the episode is taken up and the hold is gone;
+  * a play that ENDED under the gate is a skim: no fetch, not seen, a row in
+    his own timeline saying so.
+
+DEFS:
+class FakeKB: His anime mirror, with one work in it. The gate is what is under test,
+    resolve_candidates(title, ep, kind): 
+    resolve_special(title): 
+    resolve_strict(title, ep, kind): 
+    entry(aid): 
+    japanese_title(aid): 
+def path_for(ep): 
+def rig(app, box): Point the module at the scratch player files and stop it fetching.
+def write_history(box, rows): 
+def write_now(box, opened, path, watched, pos, dur, playing): 
+def write_plays(box, rows): 
+def main(): 
+
+CONFIG SECTIONS: watching, watching.plays_timeline_path
+KV READ: watching_cursor, watching_held, watching_seen, watching_short
+KV WRITE: watching_cursor, watching_held, watching_seen, watching_short
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

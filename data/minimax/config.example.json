@@ -1,0 +1,18 @@
+{
+  "api_key": "",
+  "group_id": "",
+  "model_id": "speech-2.8-hd",
+  "lang": "ja_JP",
+  "voice_setting": {
+    "voice_id": "YOUR_VOICE_ID",
+    "speed": 1,
+    "vol": 1,
+    "pitch": 0
+  },
+  "audio_setting": {
+    "audio_sample_rate": 32000,
+    "bitrate": 128000,
+    "format": "flac",
+    "channel": 1
+  }
+}

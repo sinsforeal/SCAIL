@@ -1,0 +1,110 @@
+# tools\reactions.py  (1193 lines)
+
+DOCSTRING:
+Reaction images of one anime character, from her episodes, sorted by
+expression, curated by hand, read by SCAIL (sim/reactions.py) as her face
+in the app. Plug in a folder of videos and ~20 face crops; everything else
+is automatic, and one config per character under data/reactions/<name>/.
+
+THE RECIPE, for any character (GPU; ffmpeg on PATH; HF_TOKEN optional):
+
+    python tools/reactions.py init   NAME --refs DIR         # ~20 face crops of her, any size, faces only
+    python tools/reactions.py run    NAME --videos DIR       # every video in DIR; resumable; one run at a time (run.lock)
+    python tools/reactions.py dense  NAME --videos DIR       # second pass: +/-1.5 s at 6 fps around every kept frame,
+                                                             #   the same moment only, a sharper frame replaces in place
+    python tools/reactions.py merge  NAME                    # the replaced first-pass crops come back as siblings
+    python tools/reactions.py subs   NAME --videos DIR       # the subtitle line at each image's second (no model)
+    python tools/reactions.py review NAME                    # a contact sheet per bucket, for a first look
+    -- open data/reactions/NAME/merged/<bucket>/ and DELETE what you do not want, MOVE what is in the wrong bucket --
+    python tools/reactions.py prune  NAME                    # the table follows the folder: moves become labels, deletions delete
+    python tools/reactions.py stats  NAME                    # counts per bucket, per video
+    python tools/reactions.py spans  NAME                    # where she is on screen, per video (the appearance record)
+    python tools/reactions.py learn  NAME                    # optional: a classifier from the labels; only worth it past a few
+                                                             #   hundred corrections (measured 08-26: at 46 it does not beat the rules)
+    python tools/reactions.py verify NAME                    # the dense pass judged: before | after sheet and the numbers
+    python tools/reactions.py pairs  NAME                    # the same as files, pairs/<id>_1_first.jpg + _2_dense_...jpg
+    python tools/reactions.py sort   NAME [--rules]          # re-bucket after editing `buckets`; his labels always stand
+    python tools/reactions.py dedupe NAME                    # near-duplicates after the fact (sibling pairs are kept)
+    then in config.json: "reactions": {"character": "NAME", ...}  and restart the bot (SCAIL reads reactions.db directly)
+
+Every step is idempotent and cached; `run --redo` and `dense --redo` start
+a video or the second pass over. Buckets are the folder names (happy,
+flustered, angry, sad, surprised, nervous, smug, tired, neutral) and the
+`buckets` block of the character's config; SCAIL asks for those names.
+
+Stages of `run`, all cached under data/reactions/<name>/:
+  1. frames    ffmpeg, `fps` frames a second (1 by default) plus the shot
+               changes (scene filter), scaled to 1280 wide, with timestamps.
+  2. faces     deepghs anime face detector (YOLOv8, onnx, GPU), min size.
+  3. identity  CCIP (deepghs/ccip_onnx, anime character re-identification):
+               each face's 768-d feature against the reference crops; a
+               face is hers when its cosine distance to the nearest three
+               references averages under `id_threshold` (the model's
+               published threshold is 0.178). CLIP is the fallback only
+               if CCIP cannot load. The tagger does not know her name
+               (checked: no koga_tomoe in wd-vit-tagger-v3), so identity is
+               the references and nothing else. Every face that passes is
+               a row of `appearances` (video, t, box) before any other gate.
+  4. expression wd-vit-tagger-v3 on the framed crop: expression tags ->
+               a bucket by `buckets` in the config, scored on how far a
+               tag is above HER OWN baseline face (a design with permanent
+               blush shading would otherwise read flustered all day).
+  5. framing   a square around the face with room for chin and shoulders
+               (side = frame_scale x face size, centred a little below the
+               face centre), clamped to the frame, 512 px.
+  6. dedup     perceptual hash: dropped if within `dup_hamming` of a kept
+               image in the same video inside `dup_window_s`, CCIP feature
+               distance under `dup_feat_dist` in the same window, or phash
+               within `dup_hamming_global` (3/64, ~95%) of anything kept.
+  7. quality   face at least `min_face` px, Laplacian sharpness over
+               `min_sharp`, face not clipped by the frame edge.
+  8. store     reactions.db (sqlite) and merged/<bucket>/<id>.jpg; a
+               `videos` table makes a run resumable.
+
+DEFS:
+def log(msg): 
+def chardir(name): 
+def load_config(name): 
+def db(name): 
+def _cuda_dlls(): onnxruntime-gpu looks for cublas / cudnn / cufft DLLs on the DLL path; torch's nvidia wheels carry them under site-packages/nvidia/*/bin. Put those on the path before onnxruntime loads, or it falls back to the CPU withou
+class Models: Detector, identity and tagger, loaded once, GPU when onnxruntime has it.
+    __init__(cfg): 
+    faces(img_bgr, conf): [(x, y, w, h, score)] in image pixels.
+    feat(img_bgr): 
+    tags(img_bgr, threshold): 
+def expr_vector(models, img_bgr): Raw probability of every EXPR_TAGS entry the tagger knows, in order.
+def extract_frames(video, out_dir, fps, width, scene_thr): 1 fps plus shot changes, as jpgs named by their timestamp in ms.
+def frame_times(out_dir): 
+def sharpness(gray): 
+def framed(img, box, scale, down, out_size): A square around the face with chin and shoulders, clamped, resized.
+def bucket_of(tags, cfg, baseline): Buckets from how far a tag is above HER usual face: a character drawn with permanent blush shading has `blush` on every frame, so absolute probabilities would call her flustered all day. `baseline` is the per-tag median 
+def ref_features(name, cfg, models): Embed the reference crops (faces detected inside them when found).
+def id_distance(f, refs, topk): 
+def cmd_init(a): 
+def _pid_alive(pid): 
+def _take_lock(d, name): 
+def extract_window(video, out_dir, start, length, fps, width): Every frame at `fps` inside [start, start+length): the dense look around a hit. Timestamps are start + k / fps.
+def cmd_dense(a): The second pass: the first pass looked once a second, so a hit is a face somewhere near its best moment, not at it. For every kept image, look at every frame `dense_window_s` either side at `dense_fps`, and if a sharper 
+def cmd_verify(a): Was the second pass worth it: every replaced image before and after, side by side, with the sharpness and the time shift; and the numbers.
+def cmd_merge(a): His review layout: `merged/<bucket>/<id>.jpg`, with the first-pass crop of every dense replacement as its own row beside the replacement (`sibling_of`). He deletes what he does not like; `prune` makes the table follow.
+def cmd_pairs(a): The isolated test of the second pass: `pairs/<id>_1_first.jpg` and `<id>_2_dense.jpg` for every replacement that has both. Copies, for looking; the files that count are in the merged folder.
+def cmd_prune(a): The table follows the folder. A file he moved to another bucket folder is a label (`label` = that bucket); a file with no row is adopted (id from its name, tags recomputed); a row whose file is in no folder goes.
+def _srt_lines(video, cache_dir): The video's subtitle lines as (start, end, text), one extraction per video, cached beside the character. Japanese track first, else English.
+def cmd_subs(a): The subtitle line at every kept image's second, one extraction per video, no model: the words she says or hears are the cheapest emotion cue there is. Stored on the row (`line`), shown on the sheets.
+def cmd_learn(a): His folder placements are the labels; the tagger's expression probabilities (EXPR_TAGS) are the features; a logistic regression is the sorter. Reports cross-validated accuracy against the rules, and writes model.json for
+def cmd_dedupe(a): Near-duplicates after the fact: the sharpest of a pair stays. A pair is two images within `dup_hamming` (phash) in the same video inside `dup_window_s`, or within `dup_hamming_global` anywhere.
+def cmd_run(a): 
+def cmd_sort(a): Bucket every kept image against her own baseline face, and move the files into by_bucket accordingly. Re-runnable after editing `buckets`.
+def cmd_spans(a): Where she is, per video: the appearance record collapsed into spans (frames within `dup_window_s` of each other join).
+def cmd_stats(a): 
+def cmd_review(a): A contact sheet per bucket, so the sorting can be rated by eye.
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: appearances, reactions, videos
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

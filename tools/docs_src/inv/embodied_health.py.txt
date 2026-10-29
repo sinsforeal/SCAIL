@@ -1,0 +1,31 @@
+# embodied\health.py  (568 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Health: 
+    __init__(config, store, clock, state, weather, calendar): 
+    _days(): 
+    today(date_str): The day's state: {cold, cycle_day, period_day, bad_sleep, sleep, notes}.
+    _alarm_for(date_str): Minutes-into-the-day she has to be up by, from the earliest promise that names a time on that date, or None. The lead is `schedule.wake.commitment_lead_minutes` -- one owner for "how long before a thing she has to be awa
+    _about(text, words, name): Is this line about that morning? The counterparty's name is the strongest signal and often the only shared word -- "get the English page done with Aya tomorrow" and "do homework together at the library at 9" are the same
+    _pull_for(date_str): How much that morning is worth to her, before any body term: (pull, why), or (None, []) when nothing that day names an hour.  Duty is not the term. What moves her is wanting the morning, or being afraid of not being ther
+    _rising(date_str, is_school, hours, need_h): Does she actually get up when it goes off? Signed, in minutes: negative is up before the alarm, positive is snoozing past it.  Duty is not the term. School is compliance and has its own branch (up at the last minute, nev
+    _chat_alive(date_str): How much of the group chat was still going in the small hours before `date_str`, in turns, and who was still up.  Her own words are the whole of the mechanism: 「みんな起きてるのに私だけ 寝るなんて無理!」 -- she is not kept up by "her phone"
+    _sleep(d, row): Score the night that produces d's morning, 0-100, from concrete terms. Returns {score, quality, bad, bedtime, wake, hours, need_hours, factors, short_note, energy_target}.
+    night(date_str): The sleep dict for a date (draws the day if needed).
+    brief(date_str): 
+    sleep_brief(date_str): One line for the director / her situation: how she slept.
+    tags(): What she feels in her body, for her mood tags.
+    effects(): Targets the world terms pull toward, per hour: {gauge: (target, pull)}.  This method owns composition -- where two conditions want the same gauge it takes the worse of the two -- and the state loop moves toward whatever 
+    schedule_note(date_str): For the schedule model at 05:00: a sick day or a rough night changes the plan.
+
+CONFIG SECTIONS: environment, health, health.seed, health.sleep, schedule.wake
+KV READ: cast_chat, commitments, event_stances, exposure, goals, health_days, last_meal_ts
+KV WRITE: health_days
+TABLES: 
+LOG TAGS: health, sleep
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

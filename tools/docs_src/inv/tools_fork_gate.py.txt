@@ -1,0 +1,34 @@
+# tools\fork_gate.py  (92 lines)
+
+DOCSTRING:
+A fork may only be deleted when one shared file reproduces what it said.
+
+`tools/neutral_gate.py` proves the shared prompts still render to the first
+character's originals. This is the other half: before a second character's
+forked prompt is deleted, the shared file rendered with HER config has to carry
+every rule the fork carried. Otherwise collapsing a fork is quietly deleting
+whatever the fork had learned.
+
+It is deliberately not a byte comparison. A fork was written by hand and its
+wording drifts from the shared file in ways that do not matter -- "a simulated
+girl's" against "a simulated woman's" -- while the thing that does matter is
+whether a *rule* went missing. So it compares by line, ignoring lines that
+differ only where a hole now stands, and names every line of the fork that has
+no home in the rendered shared file. A line it names is either a rule to add
+back or a rule you meant to drop; both need a person to say which.
+
+    python tools/fork_gate.py --config config_yukarin.json --fork prompts_yukarin
+    python tools/fork_gate.py --config config_yukarin.json --fork prompts_yukarin --only state.txt
+
+DEFS:
+def norm(line): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

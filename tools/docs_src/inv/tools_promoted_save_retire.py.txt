@@ -1,0 +1,72 @@
+# tools\promoted_save_retire.py  (422 lines)
+
+DOCSTRING:
+Take the owner's interior out of a promoted character's save.
+
+A character promoted out of somebody else's cast starts from a copy of that
+character's save (`docs/shared-world.md` §7). What is copied is not only the
+world she is now in and may read: it is the other girl's household, the other
+girl's bonds with her own mother and brother, the pressures a showrunner wrote
+over the other girl's record, and the threads her director left open. On
+2026-09-07 the first character's promoted friend was running with a bond to
+herself under her own nickname, four arcs opened about a man she has no chat
+with and about her own name in the third person, and an open thread whose
+people were three girls she is one of.
+
+The rule is the roster (`sim/roster.py`): after her own row folds into her own
+entry and the world file's keeper becomes a person on it, the roster is the
+whole statement of who exists for her. This takes out of the save everything
+that names somebody it does not have, everything that names HER as though she
+were somebody else, and the day that was planned before her own fills were
+hers:
+
+  the bonds  -- a row that resolves to herself, a row naming somebody the
+                roster has never heard of, a row for a member of the OWNER's
+                household (her household is her own file's, and a mother in
+                the world's cast is the world owner's mother), and the row for
+                the man she has no chat with when her sheet says so;
+  the arcs   -- all of them: the writer of arcs is off for a character who
+                does not keep her world, so every arc in her save was written
+                by a run that predates the rule, over the other girl's record;
+  the threads-- a row whose people name her, or name somebody off the roster;
+  the day    -- the schedule and the scenes for today and after, when they
+                were written before this pass, because they were written under
+                fills that named another girl's ward, station and family; her
+                own boot plans the day again from her real ones;
+  the plan   -- what the day settled, filtered to lines her own circle could
+                know, and beats written for people who are not hers;
+  the orbit  -- relatives seeded out of the world's cast file by a register
+                that is switched off for her.
+
+Nothing is edited in place and nothing is deleted before it is written out:
+the rows go to a file under `data/retired/` first, whole, and a person can
+read them. `tomoe/app.py retire_owner_interior_once` runs this at her next
+boot behind kv `owner_interior_retired`. On a stopped save it is a command:
+
+    python tools/promoted_save_retire.py --config config_rena.json [--apply]
+
+Nobody is named here. Which character this is comes from the config it is
+pointed at.
+
+DEFS:
+def _decode(text): 
+def _kv(conn, key, default): 
+def _no_such_person(config, name): Does this name mean nobody on her roster? Generic words a `people` column uses for an empty room are not names and are not looked up.
+def bonds_to_drop(config, rels): (key, why) for every relationship row that is not hers to hold.
+def bonds_to_add(config, rels): (key, row) for everybody the roster has and the meters have not.  The other direction of the same reconciliation. The seed ran once, from the cast file read raw, and the girl whose world she reads is that file's KEEPER r
+def sentiments_to_drop(config, rels, sents): (key, why) for every sentiment row about somebody who is not in the meters.  What each person is to her is seeded once from the meters and moves with what happens; a row about somebody the meters no longer have is a feel
+def threads_to_drop(config, rows): 
+def collect(conn, config, today): Everything this pass would move, read and decided and not yet touched.
+def _clean_beats(config, rec): A day's plan with what her own circle cannot know taken out of it.  Every settled line, and a beat written for somebody who is not one of her own people. Every line, rather than only the ones that name a name, because th
+def retire(conn, config, out_path, today, apply, log): Move it all out. Returns a summary; writes `out_path` first.
+def reconcile_meters(conn, config, out_path, today, apply, log): The second pass: the meters, the sentiments and the days planned before her own material was hers.  The first pass took out what was the other girl's. This one settles what is left against the roster as it now resolves, 
+def main(argv): 
+
+CONFIG SECTIONS: character, orbit.enabled, sentiment
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

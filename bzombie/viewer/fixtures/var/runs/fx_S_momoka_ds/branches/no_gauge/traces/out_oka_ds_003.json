@@ -1,0 +1,78 @@
+{
+ "output_id": "out_oka_ds_003",
+ "arm": "S",
+ "run_id": "fx_S_momoka_ds",
+ "virtual_ts": "2026-11-02T13:01:00+09:00",
+ "text": "テスト返信: ダミーの独り言",
+ "final_call_id": "c-oka_ds-003-1",
+ "calls": [
+  {
+   "call_id": "c-oka_ds-003-0",
+   "role": "plan"
+  },
+  {
+   "call_id": "c-oka_ds-003-1",
+   "role": "speak"
+  }
+ ],
+ "inputs": [
+  {
+   "kind": "his_words",
+   "source": "tr:3",
+   "text": "テスト発言: おはよう（偽）"
+  },
+  {
+   "kind": "env_event",
+   "source": "env:3",
+   "text": "FAKE window title: dummy editor"
+  },
+  {
+   "kind": "memory",
+   "source": "mem:1",
+   "text": "FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory FAKE memory "
+  },
+  {
+   "kind": "state",
+   "source": "st:1",
+   "text": "FAKE state"
+  },
+  {
+   "kind": "persona",
+   "source": "persona",
+   "text": "FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona FAKE persona "
+  },
+  {
+   "kind": "own_past_line",
+   "source": "tr:2",
+   "text": "テスト返信: おはよう、ダミーだよ"
+  }
+ ],
+ "state_at_output": {
+  "mood": "fake"
+ },
+ "causal": {
+  "admitted": [
+   {
+    "text": "FAKE attention line a",
+    "weight": 0.6,
+    "constant": false
+   },
+   {
+    "text": "FAKE constant line",
+    "weight": 0.3,
+    "constant": true
+   },
+   {
+    "text": "FAKE attention line b",
+    "weight": 0.1,
+    "constant": false
+   }
+  ],
+  "gauges": {
+   "fatigue": 0.4
+  },
+  "stances": [
+   "warm"
+  ]
+ }
+}

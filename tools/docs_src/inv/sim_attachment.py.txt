@@ -1,0 +1,45 @@
+# sim\attachment.py  (587 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Attachment: 
+    __init__(config, store, clock, state, sentiments, ruptures, receipts, rhythm, self_model, self_memory, impulse): 
+    live(): 
+    strategy(): 
+    _save(row): 
+    _him(): 
+    threat(silent_hours): 0..1: how much the bond reads as under threat right now.  Every term is about him and her, and the whole thing is scaled by attachment -- a person you are not attached to cannot threaten you by going quiet, which is why 
+    _belief_pull(): Signed: + protest, - deactivate. Each belief pulls by what it says, weighted by how much she has seen it borne out, and discounted while it is under strain -- a belief she is currently finding reasons for is not one she 
+    _history_pull(): What the last episodes taught her. A strategy that worked is the one she reaches for; one that failed she reaches for less. This is the only memory the mechanism has and it is the point of it.
+    scores(): (protest, deactivate, notes). Both are positive quantities; the signed pulls split between them.
+    _pick(rng): 
+    tick(silent_hours): Every pass. Opens an episode when threat holds, switches strategy when the running one has failed, and closes on burn-out.
+    _open(t): 
+    _switch(row, to, why): 
+    note_test(kind, test): What she is checking him for, from the intent call, on the record of the episode: the tests are what a protest is made of.
+    observable_line(in_person): What a person near her could SEE of the stance -- never the stance itself, which is hers. Face to face it is the phone; over LINE it is the timing of her replies.
+    his_message(text): He said something. A message is not a resolution by itself -- one curt line into a protest does not end it -- but it is the only thing that can, the count is what the settle reads, and the stamp is where the exhaustion m
+    maybe_resolve(silent_hours): After his message has been read into the state: the threat has to have actually gone, not just been interrupted.
+    _close(row, outcome): 
+    _settle_beliefs(row): The strategies are bets on beliefs, so the end of an episode is evidence about them. Each strategy names, in config, which belief a resolved episode strains and which a failed one confirms; a rebound (cold that broke) st
+    impulse_bonus(): 
+    extra_streak(): Protest keeps pushing past the point a calm girl stops.
+    withhold_pressure(): 
+    delay_multiplier(): 
+    shape_bias(): 'curt' to collapse the draw (minimising), 'open' to keep it, ''.
+    register_line(ja): 
+    intent_line(): 
+    situation_line(ja): 
+    director_line(): 
+    report(): 
+
+CONFIG SECTIONS: attachment, attachment.protest_extra_streak, attachment.withhold_deactivate, character.name, raw.get, self_memory.enabled, sentiment.ceiling
+KV READ: attachment
+KV WRITE: attachment, attachment_log
+TABLES: 
+LOG TAGS: attach
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

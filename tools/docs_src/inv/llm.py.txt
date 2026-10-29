@@ -1,0 +1,51 @@
+# llm.py  (1314 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class RunawayAnswer: A streamed answer that had begun repeating itself word for word.
+class LLM: One provider, receipts on every call, and a failure is a failure.
+    __init__(config, store): 
+    _providers(): 
+    active_provider(): The one provider that answers: the pin if there is one, else `api.provider`.
+    _client(name): 
+    _payload(name, m, messages, max_tokens, tools, tool_choice): The request as this provider wants it. DeepSeek official: its `thinking` body and the API-maximum max_tokens (a low cap fails silently). OpenRouter: the slug the model name maps to, the host order (the pinned host first,
+    model_cmd(arg): `/model` -- what each role is on and what the provider can serve; `/model <name>` puts EVERY role on one model for this run (kv `model_override`); `/model auto` gives them back their config entries.  The pin is deliberat
+    voice_models(): The names the chat's toggle offers, cut to the ones the provider that is actually answering can serve. A name the provider has no slug for goes out as a literal and the host rejects it, so it is not offered.
+    voice_model_report(): What the control in the chat header draws itself from: the model her words are written on now, the names it may offer, and whether the one showing is a choice he made or her config's own.
+    voice_pin_line(): The boot line for a pin on the roles that write in her voice, or "".  `/voicemodel` writes kv `voice_model_override` on her own save, so a pin outlives the run it was set in and the next boot obeys it in silence. On 2026
+    effective_model(role): The model name this role would go out on right now: the voice toggle for a voice role, else the all-roles pin, else its config entry. This is what the chat header shows.
+    voice_model_cmd(arg): `/voicemodel` -- which model writes in her voice, where that comes from, and what the chat's toggle offers; `/voicemodel <name>` moves the nine voice roles for this run (kv `voice_model_override`); `/voicemodel auto` giv
+    _model_for(role, _model): The model entry this role goes out on right now, with both live pins applied. One reader, so a second entry point cannot answer on a different model from `call` while both say they are this role.
+    call(role, messages, max_tokens, _model, _provider, _json): 
+    _prefix_key(payload): (a key for the system half of this prompt, how many bytes it is).  The system prompt is the part that holds still for about a day (`persona/sections.py`), and it is the prefix the provider caches. Two calls of one role w
+    _hold_for_burst(role, payload): Wait, at most once per burst, so the rest of the burst can read the first call's cached prefix. Returns the seconds waited.  The rule: this call goes out inside the settle window of a call of the SAME role on the SAME sy
+    _note_burst(role, payload, in_tok, cached): What the gate reads next time: this call's prefix, when it finished, whether it came back cold, and whether the burst it belongs to has already paid its wait.
+    _call_on(name, role, m, messages, max_tokens, _json): One provider, the bot's own retries; returns the text, or None when the call is given up on.
+    call_tools(role, messages, tools, tool_choice, max_tokens, _model, _provider): One call that offers `tools` and hands back what the model picked.  The same provider, the same pin, the same reasoning effort and the same receipts as `call`; `call` itself is untouched and grows no loop, because what a
+    _call_tools_on(name, role, m, messages, tools, tool_choice, max_tokens): One provider, the bot's own retries; the answer as a dict, or None.  Always streamed, whatever `api.stream` says: the fragments a tool call arrives in only exist in a stream, and a non-streamed body would have to be read
+    _note_abandoned(name, role, payload, e, chunks, seconds, content, reasoning, usage, served): A stream that ended in anything but an answer, written to the run's record of model calls so the ledger and `/provider` count it.  The host has been generating for as long as this ran and bills for it. Nothing wrote it d
+    _stream(name, payload, role, tools_out): The answer read as it is written, chunk by chunk, so that a bad one announces itself instead of arriving as a shorter-than-usual body: a stream that ends with no finish reason was CUT OFF (the connection dropped, the hos
+    _stream_body(name, payload, req, role, tools_out, t0): The loop itself. What it has read so far is kept on `_partial` so that the caller above can write a row for a stream that never finished.
+    _track_cache(role, in_tok, cached, now, started): The provider's prompt cache as a measured thing. Per role: the last hit rate, how many calls came back warm and how many came back cold, the longest idle gap after which a call still came back warm, and the shortest and 
+    summary(): Calls this run: the last hour and the last day by role, seconds and tokens, empties and errors, and the last few calls.
+    provider_cmd(arg): `/provider` -- who answers and what each provider maps; `/provider <name>` pins one (kv provider_override); `/provider auto` clears the pin. A pin is a decision somebody takes; nothing is fallen to.
+    speed_probe(names): `/speed` -- one small call on every configured provider (the pinned host order as configured), seconds and tokens per second, who served it. Nothing is stored.
+    call_json(role, messages, max_tokens): 
+def _name_forms(config): Her name the ways her own sheet spells it, longer than one character.
+def reads_as_her(text, config): The reason this answer reads as the character, or "" if it does not.
+def _gap_words(seconds): An idle gap as a reader wants it: seconds while they still mean something, minutes once they do not. The cache table used to print every gap in whole minutes, so the seven-second gap the second character's two consecutiv
+def parse_json_block(text): 
+def _strip_trailing_commas(block): 
+def _str_end(s, i): Index of the quote that closes the string opening at s[i].
+def _join_split_strings(s): `"key": "one", "two", "three"` inside an object becomes one string with paragraph breaks. Only a string that follows a colon in an object is a candidate, and only a following string that is not itself a key (no colon aft
+
+CONFIG SECTIONS: api, api.json_retries, api.long_answer_warn, api.max_retries, model, py, raw, raw.get, roles_off
+KV READ: cache_track, missed_calls, model_override, provider_override, voice_model_override
+KV WRITE: cache_track, missed_calls, model_override, provider_override, voice_model_override
+TABLES: 
+LOG TAGS: llm
+PROMPTS: 
+LLM ROLES: probe
+OPS COMMANDS: 

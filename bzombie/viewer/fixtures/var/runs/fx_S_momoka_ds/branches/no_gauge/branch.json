@@ -1,0 +1,7 @@
+{
+ "branch_id": "no_gauge",
+ "from_snapshot": "day1_end",
+ "target": "gauge:fatigue",
+ "value": "off",
+ "replayed_from_virtual_ts": "2026-11-03T08:00:00+09:00"
+}

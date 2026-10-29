@@ -1,0 +1,61 @@
+# tools\character_leaks.py  (362 lines)
+
+DOCSTRING:
+Names in a character's run that are not in that character's record.
+
+Every fault of the second character's first boot was the same fault: a
+subsystem wrote content about somebody else's life, and it was found by a
+person reading the log. She was given a school day in a ward she does not live
+in, friends the roster has never heard of, gossip about a teacher at a school
+she does not attend. All of them share one property a machine can check --
+**they name a person or a place that is nowhere in her record.**
+
+`tools/prompt_leaks.py` does this for the prompts, before anything runs.
+This does it for what a run actually produced. Between them they cover the two
+ways one character's material reaches another: written into the instructions,
+and written into the output.
+
+What counts as hers: her sheet, her cast file, her roster, her beliefs, her
+neutral fills, her own prompt files, her save's own people, the peers her
+config names, and every name another character actually said to her (only
+their turns, never hers: she may repeat what she was told and may not know
+what she was not). Anything else
+that looks like a name -- a run of kanji, a capitalised word, a place suffix --
+is reported with the line it appeared in, for a person to judge. It is a flag,
+never a rewrite, and it is deliberately noisy in the direction of showing too
+much: a false positive costs a glance, a missed one costs a character.
+
+A run is not the only thing that produces text about a character. A prompt
+assembled by a harness, a reply regenerated off an old prompt, a persona card
+written from a corpus -- each is output about her, and each was written by
+somebody who had to reimplement this loop to check it, because the only way in
+was a run directory. `--text` and `--out` are that way in: the same record,
+the same two regexes, the same whole-name comparison, over a string or over
+the files of a directory instead of over `session.log`.
+
+    python tools/character_leaks.py                          # the newest run
+    python tools/character_leaks.py --config config_yukarin.json
+    python tools/character_leaks.py --log logs/2026-09-01_18-01-08
+    python tools/character_leaks.py --top 40
+    python tools/character_leaks.py --out asumin/harness/out/prompts/records_only
+    python tools/character_leaks.py --out reply.md --out notes.txt
+    python tools/character_leaks.py --text "the reply to check"
+
+DEFS:
+def _strings(o, out): 
+def _peer_said(cfg): Every message another character sent her, out of her own save, without opening it for writing.  A file copy of a live sqlite database returns a stale image, so this is a read-only URI connection on the save itself; a sav
+def known(cfg): Every name the character's own record contains.
+def newest_log(cfg): The newest run of THIS character.  Two bots write into one `logs/`, so "the newest directory" is whichever of them restarted last and reading it under the other one's record reports every name in it. A run says whose it 
+def from_log(path): The content lines of a run: the tagged lines, machinery skipped.  Returns the lines and how many came from each subsystem.
+def from_files(paths): The lines of files, or of every readable file under a directory.  No tag to skip and nothing to strip: a harness's prompt, a card, a regenerated reply and a report are all content by construction, which is the point of r
+def scan(lines, mine): Every name in these lines that is not in her record, with where it appeared. The comparison is whole-name against whole-name: `mine` is extracted from her record by these same two regexes. It was briefly `name in blob`, 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

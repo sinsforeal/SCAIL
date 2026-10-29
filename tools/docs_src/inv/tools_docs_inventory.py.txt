@@ -1,0 +1,18 @@
+# tools\docs_inventory.py  (77 lines)
+
+DOCSTRING:
+Inventory of the codebase for the PROJECT.md rewrite: one text block per
+module, from the code -- docstring, classes and defs (with their first
+docstring line), config sections read, kv keys read/written, tables,
+log tags, and the ops commands (scail.py). Plus the DEFAULTS tree.
+
+DEFS:
+
+CONFIG SECTIONS: py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

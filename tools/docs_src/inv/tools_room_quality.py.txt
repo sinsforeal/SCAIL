@@ -1,0 +1,63 @@
+# tools\room_quality.py  (310 lines)
+
+DOCSTRING:
+Is a room a conversation, or a loop? Eight measures, off the record.
+
+A group chat that reads wrong reads wrong for reasons that can be counted,
+and until this tool nothing counted them. The audit of 2026-09-07 read two
+rooms by eye and said one loops and the other plays the same beat twice on
+each side; these are the same faults as numbers, so the next room can be
+judged without reading it, and so a change to the writers can be shown to
+move something.
+
+What it measures, per room:
+
+  own repeats          a message that says again what the SAME person said
+                       earlier in the room (whole-message, the old test)
+  cross-speaker echoes a message more than half of whose sentences somebody
+                       ELSE has already said (`sim.textutil.echoed_by`)
+  semantic repeats     two turns by one person whose one-line summaries mean
+                       the same thing: the same conversational move twice
+  messages per minute  over the room's own span
+  bubble length        the mean per speaker, in characters
+  stale rounds         rounds the room's own record marked as adding nothing
+  arrangements         the share of turns that name a time, a place, or ask
+                       one: a chat that is only ever a committee
+  pocket used          how many of the day's concrete things to bring up
+                       actually reached a turn
+
+Where a room lives depends on who owns it. The character who keeps the world
+has every room she runs in her own save (kv `cast_chat`, and the one in
+flight in `exchange_live`) and copies every turn into the world file's
+`rooms` table. A character who only takes part keeps what she was sent (kv
+`peer_rooms`). All three are read here, all read-only.
+
+    python tools/room_quality.py --world data/worlds/tokyo/world.db --date 2026-09-06
+    python tools/room_quality.py --world data/worlds/tokyo/world.db         --date 2026-09-07 --room group --from 07:12 --to 07:30
+    python tools/room_quality.py --save data/world.db --date 2026-09-06
+    python tools/room_quality.py --save data/rena.db --peer-rooms
+
+Never opens a live save for writing and never copies one: a copy of an open
+database is a stale image, so every read here is `mode=ro` on the file
+itself.
+
+DEFS:
+def _ro(path): 
+def _kv(conn, key, default): 
+def _minutes(hm): 
+def _rooms_from_world(path, date, room, lo, hi): Every room in the world file, as the owner copied it: one row per turn, with who said it and when.
+def _rooms_from_save(path, date, room, lo, hi): The rooms this character RAN: her own record of each conversation, and the one still in flight.
+def _rooms_from_peer(path, date, room, lo, hi): The rooms this character is only a MEMBER of: what she was sent.
+def _pockets(path, date): (offered, used) over every person, for one day.
+def measure(room): 
+def show(room, res, verbose): 
+def main(argv): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

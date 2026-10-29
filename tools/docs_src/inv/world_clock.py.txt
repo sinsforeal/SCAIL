@@ -1,0 +1,42 @@
+# world\clock.py  (247 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class WorldClock: 
+    __init__(config): 
+    now_ts(): 
+    now(): 
+    user_now(): 
+    to_char(ts): 
+    to_user(ts): 
+    char_zone_word(): The place her clock is kept on, in one word: "Asia/Tokyo" -> "Tokyo". A label that carries two readings has to say which is which, and the clock is what decides her timezone, so the word for it belongs here -- no shared 
+    sleep(seconds): 
+    wall_seconds(char_seconds): 
+    date_str(ts): 
+    hm(ts): 
+    offset_hours(): 
+    stamp(ts): 
+    ts_of(date_str, hm, plus_days): The real instant of a date and a wall time on HER clock. What the record keeps is "2026-08-28" and "21:07", which is only a time if you already know whose clock it is; this turns it back into a moment, so it can be shown
+    season(ts, ja): Which of the four seasons it is on her clock.
+    time_of_year(ts, ja): Where in the season her clock is, for a line a model reads.
+    both(ts): 
+    both_daypart(ts): Both clocks, each with the part of the day it is in, and how far apart they are -- for any role that decides something about HIM.  `both` gives two clock readings and leaves the reader to work out whose morning 10:30 is.
+def daypart(hour, ja): Plain words for a clock hour, so nobody has to infer whether his 09:10 is his late night or his morning (she is many hours ahead; his morning is her late evening, and both she and the role that decides what she wants read 
+def season_of(month, ja): Which of the four, for a tag: what a photograph is stored against.
+def time_of_year(month, ja): What time of year it is, for a line somebody reads: "late summer", "early autumn", 晩夏, 初秋.
+def parse_hm(hm): 
+def minutes_of_day(dt): 
+def hm_to_minutes(hm, default): "HH:MM" as minutes of the day. Strict by default; with `default` a string that is not a clock reads as that instead (a promise with no time on it, a block the model wrote badly).
+def minutes_to_hm(m, wrap): Minutes of the day as "HH:MM". A schedule's day may end at "24:00" or later, so the hour is not wrapped unless asked; a clock reading is.
+def in_window(dt, start_hm, end_hm): 
+
+CONFIG SECTIONS: character.existence, clock.mode, clock.sim_speed, clock.sim_start, world
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,28 @@
+# sim\episodes.py  (25 lines)
+
+DOCSTRING:
+One episode log for the three gates that keep one.
+
+The withholding, the approach and the attachment each keep a list of the
+times they fired (kv `withholding_log`, `approaches`, `attachment_log`) and
+each carried the same three helpers over it. One mixin: `LOG_KEY` names the
+list, `_log()` reads it, `_today()` counts today's entries, `_last_ts()` is
+the newest timestamp, 0 when the list is empty. The store and the clock are
+the host's.
+
+(Her past as cards is `sim/cards.py`, not this.)
+
+DEFS:
+class EpisodeLog: 
+    _log(): 
+    _today(): 
+    _last_ts(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

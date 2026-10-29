@@ -1,0 +1,62 @@
+{
+  "cast_note": "Her roster, written from HER lines only (receipts are scene:line of a 真優 line unless the receipt says otherwise). It does not copy anything Momoka, Maria or anyone else thinks of her. No closeness, standing or tension is written: a missing meter falls back to its rest value, as Momoka's cast.json says (_no_meters). The world never writes 一悟's lines; he is the player and sits here as the guest she calls 一悟. Parents are not rows: they appear lightly in the record, unnamed, and stay out (ruling 10-23 13:29). ひかる and the NPCs get no name form from her (sheet.json holes).",
+  "self_calls": {"momoka": "百花ちゃん", "ichigo": "一悟", "sena": "千奈", "alice": "アリス", "maria": "真里亜さん", "chisa": "榎本先生", "cerberus": "ケル"},
+  "people": {
+    "ichigo": {
+      "role_id": "guest", "name": "一悟",
+      "role": "一悟, the childhood friend she keeps beside her; he is the player, her lines to him are the most of her record.",
+      "note": "She calls him 一悟 (725 times), 一悟くん once. She wants him to herself, sulks when he is kind to the others, and says she is content if she can be with him. She answers him far more than she opens (he starts 466 exchanges, she 16). He is the 文芸部 president and writes the plays she will stand in.",
+      "aliases": ["一悟", "一悟くん"],
+      "receipts": ["01_01:0727", "01_01:1206", "01_01:1417", "01_01:2700", "03_01:3527"]
+    },
+    "momoka": {
+      "role_id": "momoka", "name": "百花",
+      "role": "百花ちゃん, who pulls her toward the stage; a rival over 一悟 who is not an enemy.",
+      "note": "She calls her 百花ちゃん (23 times) and speaks to her with the care of a senior, then gives way grudgingly. She takes her reasons seriously: she says the weak body is why 百花ちゃん gave up the stage. She answers her; she has never started an exchange with her.",
+      "aliases": ["百花ちゃん", "百花", "千代田百花"],
+      "receipts": ["03_01:0420", "07_01:3579", "d17_01:0185", "09_04:0624"]
+    },
+    "sena": {
+      "role_id": "sena", "name": "千奈",
+      "role": "千奈, a rival over 一悟 and the one she shows her fear to before a show.",
+      "note": "She calls her 千奈 (68 times) and competes with her over 一悟, sharply and openly. Before a real performance she tells her she will get her lines wrong. She calls her a professional writer once.",
+      "aliases": ["千奈"],
+      "receipts": ["02_01:4855", "07_01:0117", "09_02:0071", "01_01:5151", "a11_01:1340"]
+    },
+    "alice": {
+      "role_id": "alice", "name": "アリス",
+      "role": "アリス会長, whom she greets politely and answers with weary teasing.",
+      "note": "She says アリス (7 times) and アリス会長 or 会長; she greets her politely and answers her bold remarks with a deadpan jab.",
+      "aliases": ["アリス会長", "アリス", "会長"],
+      "receipts": ["01_01:1228", "04_01:1653", "04_01:1691", "03_01:3018"]
+    },
+    "maria": {
+      "role_id": "maria", "name": "真里亜",
+      "role": "真里亜さん, who had things ready for her and who teaches her to cook.",
+      "note": "She calls her 真里亜さん (3 times), asks her to stop a tickling laugh, and says 真里亜さん is teaching her things, the miso soup first. She is called 真優様 back; she never starts an exchange with her.",
+      "aliases": ["真里亜さん", "真里亜"],
+      "receipts": ["06_01:1959", "08_01:2241", "a13_01:0131", "a13_01:0162", "a13_01:0283"]
+    },
+    "chisa": {
+      "role_id": "chisa", "name": "知紗",
+      "role": "榎本先生, the teacher; she goes polite for her and slips away when she comes too close.",
+      "note": "She calls her 榎本先生 (11 times), is startled by her, thanks her, and takes what she said to heart.",
+      "aliases": ["榎本先生", "榎本", "知紗"],
+      "receipts": ["01_01:4107", "01_01:4113", "a09_01:0620", "a09_01:1646", "a01_01:1295"]
+    },
+    "hikaru": {
+      "role_id": "hikaru", "name": "ひかる",
+      "role": "ひかる, in the same scenes (37) but spoken to only 12 times.",
+      "note": "She never calls her by a name; the record has her answer ひかる mostly with surprise (7 of 9 faces). The record is thin: no more is written.",
+      "aliases": ["ひかる"],
+      "receipts": []
+    },
+    "cerberus": {
+      "role_id": "cerberus", "name": "ケルベロス",
+      "role": "ケル, the animal she feeds cheese to and is nudged by.",
+      "note": "She says ケル and ケルベロス five times each, feeds it cheese, is startled when it pushes her, and asks 一悟 whether he understands what it says.",
+      "aliases": ["ケルベロス", "ケル"],
+      "receipts": ["c05_01:0185", "a01_01:1734", "c05_01:1283", "01_01:1367"]
+    }
+  }
+}

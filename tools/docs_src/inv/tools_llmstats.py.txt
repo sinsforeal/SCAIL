@@ -1,0 +1,33 @@
+# tools\llmstats.py  (175 lines)
+
+DOCSTRING:
+What the model work costs: calls, tokens and dollars by day and by role.
+
+Reads every `llm_calls.jsonl` under `logs/` (the zipped runs too) and prices
+each call. The host's own figure comes first: an OpenRouter answer carries
+`usage.cost` (USD, for that call, at whatever the serving host charged), and
+that is the truth for the call. A row without it is priced from the slug
+that answered (`model` on the row, since 2026-08-31) at OpenRouter's
+published per-token rates below; a row with neither -- the official DeepSeek
+endpoint before the move -- at DeepSeek's old list rates, off-peak.
+`python tools/llmstats.py [--days N] [--roles]`, or `/stats` from the ops bar.
+
+OPENROUTER is USD per 1M tokens (prompt, completion, cached prompt), read
+from https://openrouter.ai/api/v1/models on 2026-09-03. `python
+tools/llmstats.py --refresh` re-reads it and prints the table to paste in.
+
+DEFS:
+def _cost(row, usage): USD for one call: the host's figure, else the slug's rates, else legacy.
+def _files(): Every llm_calls.jsonl on disk, live or zipped, as (name, text stream).
+def gather(days): {day: {...}}, {role: {...}}, {model: {...}} over the last `days` machine-local days.
+def report(days, config, roles): 
+def refresh(): Read OpenRouter's public price list for the slugs in the table and print the table to paste in. No key needed.
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

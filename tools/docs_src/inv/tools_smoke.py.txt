@@ -1,0 +1,32 @@
+# tools\smoke.py  (1236 lines)
+
+DOCSTRING:
+Boot everything against a copy of the save and report, without touching the
+live bot.
+
+Written after a restart killed the running process on boot: `Goals.__init__`
+had gained a parameter at one call site and not at its definition, and nothing
+found out until the live process died and the log stopped after the telemetry
+line. Every subsystem is constructed in App.__init__, so simply constructing an
+App catches that whole class of failure in a few seconds.
+
+    python tools/smoke.py            # construct everything, print the reports
+    python tools/smoke.py --tick     # and run one director tick (costs calls)
+
+Console mode and a scratch copy of the database: it never reaches Telegram, X,
+the sensors or data/world.db. It writes its log under logs/dryrun/ like any
+other dry run, so the live run directories are left alone.
+
+DEFS:
+def _static_faults(root): Names referenced in a function and never bound in it, and `+` at the end of a line followed by `+` at the start of the next. Both are what a patch that lands half an edit leaves behind.
+def _build(cfgpath, dbpath): The App for one character, on a copy of her save, the way the loop builds it: scail's own parser, so this never drifts from the real flags.
+def main(): 
+
+CONFIG SECTIONS: character.writes_to_him, json, lore.enabled, py, world, world.event_lookahead_days
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

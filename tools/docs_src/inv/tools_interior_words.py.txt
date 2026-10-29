@@ -1,0 +1,42 @@
+# tools\interior_words.py  (206 lines)
+
+DOCSTRING:
+A role without her character sheet writes the record, never her interior.
+
+The role that read his notes over her shoulder was asked for "how it landed
+on her", and the paragraph it returned was stored as an event and read back
+to her as her own memory of having felt it. Nine more roles did the same in
+a smaller field. The rule that replaced them: a role with no `voice` row in
+`Config.ROLE_STANCE` writes what was there -- in plain terms, with the lines
+a reader would stop on quoted as they stand -- and a role WITH her sheet,
+reading that record, writes what it did to her.
+
+This is the check that holds it. Every prompt file belonging to a role with
+no `voice` row is read for the phrases that ask a model to be her: how it
+landed, she felt, it made her, her reaction, her register, in her voice, in
+her head, what she would say. A line that FORBIDS one of those ("not how she
+feels", "you do not write her reaction") is what a clean prompt looks like,
+so a negation within a few words of the phrase is skipped and printed.
+
+    python tools/interior_words.py          # exit 1 and the offending lines if any
+
+Run by tools/smoke.py, where a hit stops a restart. A legitimate sentence
+that trips it is allowed by naming the file AND the exact line in ALLOW
+below -- never a whole file, because the next edit to that file would then
+go unread.
+
+DEFS:
+def _as_script(): The working directory and the console encoding this tool needs when it is RUN.  Both were done at import time, which meant importing the phrase list from the running bot would move the bot's working directory. They happe
+def stance_table(): 
+def role_of_path(): {prompt path -> role}, from every character's model register.  A role's file is whatever her own config names, so the second character's override is read as the role it stands in for. The bundle copy under `characters/<k
+def hits(path, role): (line number, phrase, text) for every ask, and the skipped lines.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

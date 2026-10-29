@@ -1,0 +1,2942 @@
+
+[api]
+  "api": {
+  "base_url": "https://api.deepseek.com",
+  "api_key": "",
+  "max_retries": 3,
+  "long_answer_warn": 8000,
+  "json_retries": 2,
+  "request_timeout_seconds": 600,
+  "empty_retries": 1,
+  "stream": True,
+  "stream_stall_seconds": 240,
+  "repeat_guard_chars": 6000,
+  "repeat_guard_copies": 4,
+  "json_retry_max_chars": 8000,
+  "provider": "together",
+  "providers": {
+  "official": {"kind": "deepseek", "base_url": "https://api.deepseek.com",
+  "models": {"deepseek-v4-flash": "deepseek-v4-flash", "deepseek-v4-pro": "deepseek-v4-pro"}},
+  "together": {"kind": "openrouter",
+  "models": {"deepseek-v4-flash": "deepseek/deepseek-v4-flash-0731", "deepseek-v4-pro": "deepseek/deepseek-v4-pro",
+  "kimi-k3": "moonshotai/kimi-k3",
+  "sakana-namazu": "sakana/sakana-namazu",
+  "deepseek-v4-flash-0731": "deepseek/deepseek-v4-flash-0731",
+  "deepseek-v4-pro-0813": "deepseek/deepseek-v4-pro-0813",
+  "gemini-3.8-flash": "google/gemini-3.8-flash",
+  "glm-5.3-flash": "z-ai/glm-5.3-flash",
+  "glm-5.3": "z-ai/glm-5.3",},
+  "order": {"deepseek/deepseek-v4-flash-0731": ["together"],
+  "moonshotai/kimi-k3": ["together"],
+  "sakana/sakana-namazu": ["Sakana AI"],
+  "deepseek/deepseek-v4-pro": ["alibaba", "gmicloud", "coreweave"],
+  "deepseek/deepseek-v4-pro-0813": ["StreamLake", "Alibaba", "DeepSeek"],
+  "google/gemini-3.8-flash": ["Google AI Studio"],
+  "z-ai/glm-5.3-flash": ["Z.AI", "Novita", "GMICloud"],
+  "z-ai/glm-5.3": ["Z.AI", "Friendli", "AkashML"],}},
+  "qwen": {"kind": "openrouter",
+  "models": {"deepseek-v4-flash": "qwen/qwen3.8-flash", "deepseek-v4-pro": "deepseek/deepseek-v4-pro",
+  "kimi-k3": "moonshotai/kimi-k3", "sakana-namazu": "sakana/sakana-namazu",
+  "deepseek-v4-flash-0731": "deepseek/deepseek-v4-flash-0731",
+  "deepseek-v4-pro-0813": "deepseek/deepseek-v4-pro-0813",
+  "gemini-3.8-flash": "google/gemini-3.8-flash",
+  "glm-5.3-flash": "z-ai/glm-5.3-flash",
+  "glm-5.3": "z-ai/glm-5.3",},
+  "order": {"qwen/qwen3.8-flash": ["alibaba"],
+  "moonshotai/kimi-k3": ["alibaba"],
+  "sakana/sakana-namazu": ["Sakana AI"],
+  "deepseek/deepseek-v4-pro": ["alibaba", "gmicloud", "coreweave"],
+  "deepseek/deepseek-v4-flash-0731": ["together"],
+  "deepseek/deepseek-v4-pro-0813": ["StreamLake", "Alibaba", "DeepSeek"],
+  "google/gemini-3.8-flash": ["Google AI Studio"],
+  "z-ai/glm-5.3-flash": ["Z.AI", "Novita", "GMICloud"],
+  "z-ai/glm-5.3": ["Z.AI", "Friendli", "AkashML"],}}
+  "voice_models": ["kimi-k3", "deepseek-v4-flash-0731", "deepseek-v4-pro-0813",
+  "sakana-namazu", "gemini-3.8-flash", "glm-5.3-flash", "glm-5.3"],
+  "openrouter_key_file": "secerts/openrouter.txt",
+  "host_fallback": True,
+  "hosts_without_tools": ["Chutes", "Fireworks"],
+  "cache_settle_seconds": 15,
+  "cache_burst_hold": True,
+
+[models]
+  "models": {
+  "director": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 1.0, "effort": "low", "max_tokens": 393216, "prompt": "prompts/director.txt"},
+  "sleep": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 1.0, "effort": "low", "max_tokens": 393216, "prompt": "prompts/sleep.txt"},
+  "state": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.6, "effort": "low", "max_tokens": 393216, "prompt": "prompts/state.txt"},
+  "schedule": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/schedule.txt"},
+  "phone": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.7, "effort": "low", "max_tokens": 393216, "prompt": "prompts/phone.txt"},
+  "persona": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": ""},
+  "timeline": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.9, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/timeline.txt"},
+  "episode_cards": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.6, "effort": "low", "max_tokens": 393216, "prompt": "prompts/episode_cards.txt"},
+  "vault": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.7, "effort": "low", "max_tokens": 393216, "prompt": "prompts/vault.txt"},
+  "downloads": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.8, "effort": "low", "max_tokens": 393216, "prompt": "prompts/downloads.txt"},
+  "ick": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "prompts/ick.txt"},
+  "revise": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.9, "effort": "low", "max_tokens": 393216, "prompt": "prompts/revise.txt"},
+  "revise_self": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 0.9, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/revise_self.txt"},
+  "rupture": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "prompts/rupture.txt"},
+  "rupture_settle": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "prompts/rupture_settle.txt"},
+  "spiral": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/spiral.txt"},
+  "spiral_settle": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "prompts/spiral_settle.txt"},
+  "settle_beliefs": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "prompts/settle_beliefs.txt"},
+  "note_read": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.7, "effort": "low", "max_tokens": 393216, "prompt": "prompts/note_read.txt"},
+  "voice": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/voice.txt"},
+  "showrunner": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/showrunner.txt"},
+  "cast_arc": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/cast_arc.txt"},
+  "cast_evolve": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/cast_evolve.txt"},
+  "cast_reply": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/cast_reply.txt"},
+  "peer_reply": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/peer_reply.txt"},
+  "cast_turn": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/cast_turn.txt"},
+  "graph": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/graph.txt"},
+  "npc_moment": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/npc_moment.txt"},
+  "gloss": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.0, "effort": "low", "max_tokens": 393216, "prompt": "prompts/gloss.txt"},
+  "watching_digest": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.2, "effort": "low", "max_tokens": 393216, "prompt": "prompts/watching_digest.txt"},
+  "digest_judge": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.0, "effort": "low", "max_tokens": 393216, "prompt": "prompts/digest_judge.txt"},
+  "which_one": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.0, "effort": "low", "max_tokens": 393216, "prompt": "prompts/which_one.txt"},
+  "transcript_digest": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.0, "effort": "low", "max_tokens": 393216, "prompt": "prompts/transcript_digest.txt"},
+  "episode_account": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 0.2, "effort": "high", "max_tokens": 393216, "prompt": "prompts/episode_account.txt"},
+  "eroge_digest": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.2, "effort": "low", "max_tokens": 393216, "prompt": "prompts/eroge_digest.txt"},
+  "him_profile": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "prompts/him_profile.txt"},
+  "gossip": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/gossip.txt"},
+  "orbit": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/orbit.txt"},
+  "bond": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/bond.txt"},
+  "nudge": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "prompts/nudge.txt"},
+  "commit": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "prompts/commit.txt"},
+  "reflect_cast": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 1.0, "effort": "low", "max_tokens": 393216, "prompt": "prompts/reflect_cast.txt"},
+  "compare": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.9, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/compare.txt"},
+  "commit_him": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "prompts/commit_him.txt"},
+  "recall": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.6, "effort": "low", "max_tokens": 393216, "prompt": "prompts/recall.txt"},
+  "withhold": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.8, "effort": "low", "max_tokens": 393216, "prompt": "prompts/withhold.txt"},
+  "said_when": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.2, "effort": "low", "max_tokens": 393216, "prompt": "prompts/said_when.txt"},
+  "approach": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/approach.txt"},
+  "intent": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.9, "effort": "low", "max_tokens": 393216, "prompt": "prompts/intent.txt"},
+  "experience": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/experience.txt"},
+  "morning": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/morning.txt"},
+  "anticipation": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/anticipation.txt"},
+  "reflect": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/reflect.txt"},
+  "local_events": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.2, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/local_events.txt"},
+  "events": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.6, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/events.txt"},
+  "devoice": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "prompts/devoice.txt"},
+  "affection": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "prompts/affection.txt"},
+  "lookup": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.2, "effort": "low", "max_tokens": 393216, "prompt": "prompts/lookup.txt"},
+  "lookup_gist": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "prompts/lookup_gist.txt"},
+  "search_gist": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.3, "effort": "low", "max_tokens": 393216, "prompt": "prompts/search_gist.txt"},
+  "character_digest": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.2, "effort": "low", "max_tokens": 393216, "prompt": "prompts/character_digest.txt"},
+  "x_post": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/x_post.txt"},
+  "x_reply_judge": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.3, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/x_reply_judge.txt"},
+  "x_reply": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/x_reply.txt"},
+  "x_repost_judge": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.3, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/x_repost_judge.txt"},
+  "x_account": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "prompts/x_account.txt"},
+  "editor": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.2, "effort": "low", "max_tokens": 393216, "prompt": "prompts/editor.txt"},
+  "social": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 0.9, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/social.txt"},
+  "share_pick": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/share_pick.txt"},
+  "diary": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/diary.txt"},
+  "reconcile": {"model": "deepseek-v4-flash", "temperature": 0.2, "max_tokens": 393216, "prompt": "prompts/reconcile.txt"},
+  "weekly": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.9, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/weekly.txt"},
+  "cast_day": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/cast_day.txt"},
+  "cast_beat": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/cast_beat.txt"},
+  "cast_life": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.9, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/cast_life.txt"},
+  "foresee": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "low", "max_tokens": 393216, "prompt": "prompts/foresee.txt"},
+  "expect_him": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.3, "effort": "low", "max_tokens": 393216, "prompt": "prompts/expect_him.txt"},
+  "wonder": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 0.9, "effort": "medium", "max_tokens": 393216, "prompt": "prompts/wonder.txt"},
+  "wonder_answer": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.3, "effort": "low", "max_tokens": 393216, "prompt": "prompts/wonder_answer.txt"},
+  "scenery_judge": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.3, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/scenery_judge.txt"},
+  "habits_him": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.3, "effort": "low", "max_tokens": 393216, "prompt": "prompts/habits_him.txt"},
+  "zeitgeist": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.5, "effort": "medium", "max_tokens": 393216, "prompt": "tomoe/prompts/zeitgeist.txt"},
+  "taste": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.4, "effort": "low", "max_tokens": 393216, "prompt": "tomoe/prompts/taste.txt"},
+  "coherence": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.2, "effort": "low", "max_tokens": 393216, "prompt": "prompts/coherence.txt"},
+  "observer": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.3, "effort": "low", "max_tokens": 393216, "prompt": "prompts/observer.txt"},
+  "watch_pick": {"model": "deepseek-v4-flash", "thinking": False, "temperature": 0.8, "effort": "low", "max_tokens": 393216, "prompt": "prompts/watch_pick.txt"},
+  "pick": {"model": "deepseek-v4-flash", "thinking": True, "temperature": 1.0, "effort": "medium", "max_tokens": 393216, "prompt": ""}
+
+[peer_talk]
+  "peer_talk": {
+  "enabled": False,
+  "contacts": [],
+  "max_turns": 6,
+  "max_per_day": 12,
+  "min_gap_seconds": 90,
+  "min_gap_minutes": 45,
+  "open_p": 0.02,
+  "open_from_hm": "09:00",
+  "open_to_hm": "24:00",
+  "keep": 60,
+  "live_minutes": 120,
+  "room_keep": 60,
+  "room_max_per_day": 60
+
+[world_shared]
+  "world_shared": {
+  "enabled": False,
+  "id": "",
+  "owner": False,
+  "read_rows": 8,
+  "reader_writes_own_rows": True
+
+[character]
+  "character": {
+  "name": "",
+  "program": "tomoe",
+  "name_ja": "",
+  "reading_ja": "",
+  "user_name": "User",
+  "writes_to_him": "english",
+  "instructions": "auto",
+  "instruction_language": "english",
+  "style_prompt": "",
+  "style_ja_prompt": "",
+  "cast_file": "",
+  "cast_sheets_dir": "",
+  "own_cast_file": "",
+  "own_cast_sheets_dir": "",
+  "voice_rules_file": "",
+  "voice_flags_keep": 200,
+  "beliefs_file": "",
+  "self_beliefs_file": "",
+  "existence": {
+  "embodied": True,
+  "in_world": True,
+  "sees_him": "digest",
+  "with_him": "chat",
+  "has_account": True
+  "mal_person_id": "",
+  "neutral_file": "",
+  "timeline_file": "",
+  "memories_file": ""
+
+[language]
+  "language": {
+  "enabled": True,
+  "material_roles": ["anticipation", "approach", "commit", "commit_him", "diary", "downloads", "experience", "expect_him", "foresee", "habits_him", "him_profile", "ick", "lookup_gist", "morning", "note_
+
+[world]
+  "world": {
+  "character_timezone": "Asia/Tokyo",
+  "user_timezone": "local",
+  "weather_enabled": True,
+  "weather_latitude": 35.6895,
+  "weather_longitude": 139.6917,
+  "weather_refresh_minutes": 60,
+  "weather_cache_path": "data/weather_cache.json",
+  "holidays_file": "data/jp_holidays.json",
+  "school_calendar_file": "",
+  "geography_file": "",
+  "shared_dir": "data/worlds",
+  "household_file": "",
+  "character_file": "",
+  "local_events_file": "data/local_events.json",
+  "local_events_every_days": 3,
+  "zeitgeist_file": "",
+  "zeitgeist_every_hours": 4,
+  "zeitgeist_days": 7,
+  "zeitgeist_keep": 80,
+  "zeitgeist_max_per_fetch": 10,
+  "zeitgeist_in_prompt": 8,
+  "taste_file": "",
+  "home_file": "",
+  "places_file": "",
+  "event_lookahead_days": 10,
+  "calendar_describe_limit": 8,
+  "outing_words": ["festival", "matsuri", "hanabi", "fireworks", "bon odori",
+  "\u796d", "\u82b1\u706b", "\u76c6\u8e0a", "\u7e01\u65e5"]
+
+[reconcile]
+  "reconcile": {
+  "enabled": True,
+  "log_keep": 200
+
+[clock]
+  "clock": {
+  "mode": "real",
+  "sim_start": "",
+  "sim_speed": 60.0
+
+[director]
+  "director": {
+  "scene_source": "model",
+  "tick_minutes": 20,
+  "tick_min_minutes": 10,
+  "tick_max_minutes": 90,
+  "coast_when_asleep": True,
+  "sleep_keywords": ["asleep", "sleeping", "lights out"],
+  "recent_scenes_in_prompt": 6,
+  "recent_days_in_prompt": 2,
+  "max_open_threads": 8
+
+[threads]
+  "threads": {
+  "pressure_after_days": 0.75,
+  "pressure_per_day": 26,
+  "pressure_unsaid_ref": 45,
+  "pressure_per_unsaid": 0.9,
+  "pressure_threshold": 40,
+  "match_threshold": 0.5,
+  "dormant_after_days": 3,
+  "dormant_in_prompt": 5,
+  "resolved_in_prompt": 5
+
+[cast_defaults]
+  "cast_defaults": {
+  "closeness": 30, "standing": 50, "tension": 10, "max_people": 30
+
+[places]
+  "places": {"in_prompt": 12, "max_places": 60},
+
+[derive]
+  "derive": {
+  "enabled": True,
+  "gravity_enabled": True,
+  "gravity_every_hours": 6,
+  "gravity_closeness_per_day": 2.0,
+  "gravity_standing_per_day": 2.5,
+  "gravity_tension_per_day": 3.0,
+  "cold_closeness": 8, "cold_standing": 50, "cold_tension": 0,
+  "closeness_half_life_days": 45,
+  "closeness_days_ref": 9.0,      # this many good recent days ~ 63% of the ceiling
+  "closeness_ceiling": 72,
+  "day_depth_ref": 12,            # exchanged messages in a day for full depth
+  "day_floor": 0.35,              # a day where only one of them spoke still counts a little
+  "facts_ref": 30, "facts_ceiling": 22, "facts_max": 22,
+  "known_floor": 0.45, "known_half_life_days": 30,
+  "standing_span": 40,
+  "standing_starts_span": 34,
+  "standing_half_life_days": 6,      # how she has been treated lately, not on average
+  "standing_absent_from_days": 2, "standing_absent_per_day": 4.5, "standing_absent_max": 26,
+  "standing_per_wait_hour": 2.2, "standing_wait_max": 22,
+  "tension_per_quiet_day": 6, "tension_gap_max": 30,
+  "scar_from_days": 21, "scar_tension": 18, "scar_half_life_days": 10
+
+[social]
+  "social": {
+  "enabled": True,
+  "hours_start": "07:00",
+  "hours_end": "01:00",
+  "retry_after_minutes": 8,   # a failed look retries this soon, and does not count
+  "look_min_minutes": 90,
+  "max_looks_per_day": 4,
+  "base_probability": 0.35,
+  "boredom_weight": 0.6,
+  "share_enabled": True,
+  "share_hours": 24,
+  "share_cooldown_hours": 6,
+  "share_looks_per_day": 20,
+  "like_shared": True,
+  "repost_shared": True,
+  "repost_shared_p": 0.35,
+  "share_salience": 4,
+  "show_him_salience": 3,
+  "show_him_hours": 12,
+  "show_him_shows_max": 8,
+  "show_him_declines": 2,
+  "share_declines": 2,        # the same for the posts on offer, put away for share_cooldown_hours
+  "read_engagement": True,
+  "engagement_posts": 6,
+  "engagement_replies_max": 2,
+  "engagement_craving_relief": 4,
+  "engagement_pride": 3,
+  "share_max_items": 6,
+  "max_posts_per_read": 25,
+  "recent_hours": 2,
+  "peek_likes": True,
+  "likes_scrolls": 2,
+  "check_follows": True,
+  "check_followers": True,
+  "her_actions_in_prompt": 5,   # her own likes / follows / unfollows with reasons, in her prompt
+  "his_likes_hours": 24,
+  "discover_p": 0.5,
+  "discover_scrolls": 2,
+  "trends_p": 0.5
+
+[share_pick]
+  "share_pick": {
+  "enabled": True,
+  "max_attempts": 2
+
+[lore]
+  "lore": {
+  "enabled": False,
+  "file": "",
+  "era_gate": False,
+  "cue_exchanges": 3,
+  "standing_kinds": ["register", "mechanism"],
+  "triggers_file": "",
+  "memory_file": "",
+  "memory_triggers_file": "",
+  "min_score": 0.5,
+  "max_lines": 3,
+  "max_chars": 900,
+  "max_chars_per_line": 320,
+  "suppress_days": 0.0,
+  "own_words_days": 3.0,
+  "role_kinds": ["role", "career", "work"],
+  "pin_score": 1.0,
+  "pin_max": 1,
+
+[memory]
+  "memory": {
+  "enabled": True,
+  "half_life_days": [5, 14, 35, 120, 400],
+  "fact_min_score": 0.5,
+  "max_facts": 40,
+  "cast_facts_max": 6,
+  "max_recalled": 4,
+  "max_cosine_only": 2,
+  "duplicate_jaccard": 0.6,
+  "cast_age_days": 14,
+  "cast_forget_days": 45
+
+[context]
+  "context": {
+  "max_tokens": 256000,
+  "target_tokens": 200000,
+  "chars_per_token": 3.0
+
+[diet]
+  "diet": {
+  "enabled": True,
+  "keep": 120,
+  "things_days": 14,
+  "account_min_score": 2
+
+[money]
+  "money": {
+  "enabled": True,
+  "allowance_yen": 5000,
+  "allowance_day": 1,
+  "start_balance_yen": 2800,
+  "broke_ratio": 0.15,
+  "duplicate_minutes": 45,
+  "log_keep": 200
+
+[attachment]
+  "attachment": {
+  "enabled": True,
+  "silence_from_hours": 3.0,
+  "silence_full_hours": 14.0,
+  "silence_floor": 0.35,          # a silence at an hour he is never about still counts this much
+  "w_silence": 0.55,
+  "read_left_minutes": 45,
+  "w_read_left": 0.3,
+  "tension_from": 30.0,
+  "w_tension": 0.35,
+  "w_rupture": 0.3,
+  "rupture_hers_factor": 0.5,     # a break she caused threatens less than one he did
+  "scar_days": 14,
+  "w_scar": 0.08,
+  "w_scars_cap": 0.2,
+  "w_streak": 0.12,
+  "w_streak_cap": 0.3,
+  "attachment_floor": 0.4,        # scale at zero attachment
+  "engage_from": 0.5,
+  "engage_minutes": 30,           # threat must hold this long; no flapping
+  "release_below": 0.3,
+  "release_fraction": 0.6,        # or this far down from the episode's peak
+  "max_hours": 36.0,
+  "max_switches": 3,
+  "keep": 60,
+  "event_salience": 2,
+  "memory_weight": 3,
+  "base": 0.3,
+  "belief_floor": 0.3,            # a belief with no evidence still pulls this fraction
+  "strain_discount": 0.7,         # a belief under full strain pulls this much less
+  "belief_pulls": {"wont_stay_quiet": 0.5, "alone_is_shameful": 0.3,
+  "not_come_looking": -0.5, "slip_ends_it": -0.35,
+  "seen_undoes_me": -0.4, "mask_holds": -0.3},
+  "history_episodes": 4,
+  "history_weight": 0.35,
+  "history_half_life_days": 10.0,
+  "w_closeness": 0.4,
+  "w_tension_select": 0.5,
+  "w_attachment": 0.4,
+  "w_resentment": 0.5,
+  "w_anxiety": 0.6,
+  "w_anger": 0.4,
+  "w_shame": 0.7,
+  "w_sadness": 0.5,
+  "protest_exhaust_hours": 5.0,
+  "protest_streak_stop": 3,
+  "shame_switch": 60.0,
+  "rebound_min_hours": 4.0,
+  "rebound_from": 62.0,           # longing or craving
+  "rebound_p_base": 0.05,
+  "rebound_p_per_hour": 0.04,
+  "rebound_p_per_need": 0.5,
+  "rebound_p_cap": 0.6,
+  "sadness_on_give_up": 8.0,
+  "shame_on_break": 10.0,
+  "soft_cap": 85.0,
+  "resentment_on_burnout": 2.0,
+  "belief_tests": {
+  "protest": {"resolved": {"not_come_looking": -6.0, "wont_stay_quiet": 4.0},
+  "failed": {"not_come_looking": 5.0, "wont_stay_quiet": -3.0}},
+  "deactivate": {"resolved": {"not_come_looking": -8.0, "mask_holds": 3.0},
+  "failed": {"not_come_looking": 3.0, "mask_holds": 2.0}},
+  "rebound": {"mask_holds": -5.0, "seen_undoes_me": -3.0}
+  "impulse_protest": 22.0,
+  "impulse_deactivate": 30.0,
+  "protest_extra_streak": 2,
+  "withhold_deactivate": 0.3,
+  "delay_protest": 0.7,
+  "delay_deactivate": 1.6
+
+[commitments]
+  "commitments": {
+  "enabled": True,
+  "max_open": 6,
+  "max_new_per_day": 6,
+  "max_days_ahead": 14,
+  "similar_threshold": 0.4,
+  "attend_slack_minutes": 90,
+  "buy_match": 0.3,
+  "kept_regard": 4,
+  "kept_standing": 3,
+  "kept_pride": 8,
+  "broken_regard": 8,
+  "broken_irritation": 15,
+  "broken_standing": 8,
+  "broken_closeness": 4,
+  "broken_guilt": 18,
+  "broken_shame": 10,
+  "cancel_guilt": 5,
+  "cancel_irritation": 5,
+  "warn_within_minutes": 45,
+  "optimism_minutes": 8,
+  "knows_late_minutes": 12,
+  "knew_guilt_factor": 1.6,
+  "late_after_minutes": 15,
+  "late_regard": 1,           # instead of kept_regard
+  "late_pride": 2,            # instead of kept_pride
+  "late_irritation": 6,       # the person who was waiting
+  "late_guilt": 6,
+  "memory_weight_kept": 2,
+  "memory_weight_broken": 3,
+  "keep": 80,
+  "him_enabled": True,
+  "him_messages_shown": 12,
+  "him_settle_seconds": 90,
+  "him_max_new_per_day": 5
+
+[exchange]
+  "exchange": {
+  "hold_minutes": 20,
+  "stub_stamp_p": 0.5,
+  "chat_gap_marker_minutes": 20,
+  "enabled": True,
+  "kinds": ["line", "group", "call", "video", "in_person"],
+  "min_salience": 2,
+  "max_per_day": 12,
+  "late_reserved": 3,
+  "keep": 120,
+  "in_prompt": 20,          # exchanges of today + yesterday shown whole (two days run to ~12)
+  "group_full_recent": 2,
+  "pace_night": 2.4,          # 01:00-06:00
+  "pace_late": 1.6,           # 22:00-01:00
+  "pace_busy": 2.2,           # availability 0.15 (class, a fixture)
+  "pace_glance": 1.5,         # availability 0.5
+  "pace_photo_seconds": [20, 70],
+  "away_p": 0.22,
+  "him_messages_shown": 10,
+  "him_message_chars": 160,
+  "away_drag": 0.94,
+  "sleep_wake_hm": "07:10",
+  "sleep_wake_jitter_min": 40,
+  "interrupt_delay_seconds": 120,
+  "busy_window_minutes": 12,
+  "busy_max_pushbacks": 4,
+  "max_live_minutes": 45,
+  "max_rounds": 2,
+  "group_max_rounds": 12,
+  "group_continue_p": 0.87,
+  "group_without_her": 6,
+  "group_without_her_min": 2,
+  "alone_beats_per_day": 3,
+  "self_open_per_day": 1,
+  "self_open_quiet_minutes": 95,
+  "self_open_clear_minutes": 30,
+  "self_open_threshold": 26.0,
+  "self_open_weights": {"loneliness": 0.22, "boredom": 0.16,
+  "validation_craving": 0.14, "belonging_low": 0.30},
+  "no_repeat_own_turns": 6,
+  "repeat_min_chars": 12,
+  "repeat_window_turns": 20,
+  "moves_shown": 8,
+  "stale_drag": 0.5,
+  "group_bubble_chars": 90,
+  "no_repeat_hours": 12,
+  "reopen_after_nothing_minutes": 120,
+  "group_max_live_minutes": 180,
+  "continue_p": 0.6,
+  "group_jump_in_p": 0.7,
+  "group_max_speakers": 3,
+  "agent_turn_deadline_seconds": 180,
+  "agent_beat_deadline_seconds": 600,
+  "agent_context_turns": 12,
+  "reply_slow_minutes": 25,
+  "reply_slow_standing": 1.5,
+  "reply_miss_standing": 3.0,
+  "reply_slow_belonging": 2.0,
+  "behind_step": 1.0,
+  "behind_decay": 1.0,
+  "behind_max": 6.0,
+  "behind_compound": 0.35,
+  "slip_anger_from": 50,
+  "slip_energy_below": 54,
+  "slip_tension_from": 50,
+  "slip_with_roles": ["confidante"]
+
+[npc]
+  "npc": {
+  "enabled": True,
+  "seed": "scail",
+  "max_per_day": 4,
+  "gap_minutes": 45,
+  "check_minutes": 15,
+  "place_p": {
+  "konbini": 0.55, "school": 0.30, "commute": 0.16, "station": 0.16,
+  "shop": 0.22, "library": 0.14, "shotengai": 0.16, "museum": 0.14,
+  "city": 0.12, "park": 0.08, "shrine": 0.10, "home": 0.0,
+  "place_p_default": 0.08,
+  "alone_multiplier": 1.0,
+  "with_people_multiplier": 0.45,
+  "known_face_p": 0.55,
+  "name_after": 4,
+  "promote_after": 0,
+  "keep": 60,
+  "moments_keep": 120,
+
+[social_graph]
+  "social_graph": {
+  "enabled": True,
+  "max_updates_per_day": 5,
+  "regard_step": 8,
+  "irritation_step": 15,
+  "irritation_half_life_days": 5,
+  "view_max_chars": 220,
+  "in_prompt_edges": 6
+
+[episodes]
+  "episodes": {
+  "enabled": True,
+  "anchors_max": 3,
+  "max_lines_per_episode": 160,
+  "merge_gap_minutes": 120,
+  "min_lines": 3,
+  "anchors_days": 3
+
+[embed]
+  "embed": {
+  "enabled": True,
+  "model": "intfloat/multilingual-e5-small",
+  "batch_size": 32,
+  "min_cos": 0.82,
+  "top_cos": 0.90,
+  "cos_by_pool": {"fact": [0.80, 0.87], "selfmem": [0.80, 0.87]},
+  "weight": 3.0,
+  "calibrate": True,
+  "calibrate_pct": 90,
+  "calibrate_margin": 0.01,
+  "calibrate_sample": 400,
+  "calibrate_cues": 40,
+  "calibrate_min_rows": 5,
+  "calibrate_min_cues": 12,
+  "center_rows": True,
+  "require_shared_word": True
+
+[recall]
+  "recall": {
+  "enabled": True,
+  "trigger_regex": "remember|last time|you said|you told|back in|that time|when you|did you ever|the other day|last week|in may|before you|used to|first time|\\b\\d{1,2}/\\d{1,2}\\b",
+  "min_score_without_cue": 1.6,
+  "max_excerpts": 5,
+  "max_cosine_only": 2,
+  "events_min_salience": 2,
+  "events_scan": 1200,
+  "events_weight": 0.8,
+  "cross_script": True,
+  "require_grounding": True,
+  "subject_common_share": 0.02,
+  "max_per_day": 20,
+  "wait_seconds": 25,
+  "keep": 60
+
+[intent]
+  "intent": {
+  "enabled": True,
+  "shame_from": 45,
+  "anger_from": 40,
+  "guilt_from": 50,
+  "sadness_from": 45,
+  "pride_from": 60
+
+[experience]
+  "experience": {
+  "enabled": True,
+  "trigger_regex": "watch|episode|\\banime\\b|manga|reading|novel|listening|song|playlist|earphones|headphones|playing|switch|game|youtube|drama|movie|film",
+  "object_regex": "\\banime\\b|episode|\\bep\\s?\\d|manga|\\bnovel\\b|\\bbook\\b|youtube|\\bvideo\\b|\\bclips?\\b|\\bmusic\\b|\\bsong\\b|playlist|\\balbum\\b|\\bdrama\\b|\\bmovie\\b|\\bfilm\\b|\\bgame\\
+  "watch_regex": "watch|episode|\\banime\\b|drama|movie|film|\\bep\\s?\\d",
+  "max_per_day": 3,
+  "min_gap_minutes": 120
+
+[recap]
+  "recap": {
+  "enabled": True,
+  "headless": True,
+  "query_template": "{title} アニメ 第{ep}話 あらすじ 感想",
+  "series_suffix": "全話 あらすじ ネタバレ",
+  "overview_query": "{title} アニメ あらすじ 登場人物 どんな話",
+  "seiyuu_query": "{name} 声優 プロフィール 出演",
+  "work_query": "{title} ゲーム あらすじ 概要 登場人物",
+  "search_engines": ["https://www.bing.com/search?q={q}&setlang=ja",
+  "https://html.duckduckgo.com/html/?q={q}&kl=jp-jp"],
+  "candidates_max": 4,
+  "blocked_hosts": ["youtube.com", "amazon.co", "netflix.com", "twitter.com", "x.com",
+  "instagram.com", "booklive.jp", "dmm.co", "abema.tv", "filmarks.com",
+  "justwatch.com", "ja.wikipedia.org", "anidb.app", "anidb.net", "anizukan.com",
+  "anilist.co", "livechart.me", "annict.com", "shikimori",
+  "anime-planet.com", "bangumi.tv", "allcinema.net", "syobocal.jp",
+  "cal.syoboi.jp", "kitsu.io", "notic.me"],
+  "min_chars": 200,
+  "max_chars": 2200,
+  "page_timeout_seconds": 30,
+  "poll_seconds": 1.3,
+  "poll_max": 12,
+  "page_min_html": 25000,
+  "search_min_html": 15000,
+  "candidates_target": 4,
+  "anchor_max_chars": 300,
+  "anchor_min_chars": 200,
+  "index_entry_gap": 40,
+  "slice_min_sentences": 3,
+  "slice_min_chars": 600,
+  "poll_settle": 2,
+  "poll_min": 4,
+  "poll_min_html": 8000,
+  "fetch_workers": 4,
+  "http_timeout_seconds": 20,
+  "list_episode_url": "https://myanimelist.net/anime/{id}/_/episode/{ep}",
+  "list_episode_index_url": "https://myanimelist.net/anime/{id}/_/episode",
+  "wikipedia_api": "https://en.wikipedia.org/w/api.php",
+  "wikipedia_list_title": "List of {title} episodes",
+  "archive_dir": "data/recaps",
+  "archive_enabled": True,
+  "subtitles_enabled": True,
+  "subtitles_user_agent": "scail-recap/1.0",
+  "subtitles_mirror_tree": "https://api.github.com/repos/Ajatt-Tools/kitsunekko-mirror/git/trees/main:subtitles",
+  "subtitles_mirror_raw": "https://raw.githubusercontent.com/Ajatt-Tools/kitsunekko-mirror/main/subtitles",
+  "subtitles_archive_index": "https://jimaku.cc/",
+  "subtitles_archive_base": "https://jimaku.cc",
+  "subtitles_min_ja_share": 0.6,
+  "subtitles_min_lines": 40,
+  "subtitles_try_files": 3,
+  "subtitles_retry_hours": 24,
+  "transcript_prompt_chars": 90000,
+  "transcript_account_chars": 3000,
+  "account_enabled": True,
+  "account_candidates": 6,
+  "account_tried_max": 8,
+  "account_page_chars": 8000,
+  "account_max_chars": 4000,
+  "account_min_chars": 900,
+  "account_min_scenes": 3,
+  "account_thin_chars": 400,
+  "account_max_tries": 3,
+  "episodes_report_dir": "reports/episodes",
+  "transcripts_report": "reports/transcripts.md",
+  "local_subtitles_enabled": True,
+  "local_subtitle_suffixes": ["", ".ja", ".jp", ".jpn", ".jpn-ja", ".japanese",
+  ".ja-jp", ".jaJP", ".Japanese"],
+  "subtitles_local_mirror": "data/subtitles_mirror/kitsunekko",
+  "subtitles_local_refresh_hours": 24,
+  "animetosho_enabled": False,
+  "animetosho_json": "https://feed.animetosho.org/json",
+  "opensubtitles_enabled": False,
+  "opensubtitles_api": "https://api.opensubtitles.com/api/v1",
+  "opensubtitles_key": "",
+  "whisper_enabled": True,
+  "whisper_exe": "",
+  "whisper_args": ("--language Japanese --task transcribe --model large "
+  "--output_format srt --device cuda:0 --beep_off --check_files "
+  "--beam_size 15 --patience 2.0 --compute_type float16 "
+  "--vad_method pyannote_v3 --standard_asia --verbose=true"),
+  "whisper_max_per_day": 4,
+  "whisper_max_minutes": 40,
+  "whisper_min_watched_minutes": 0,
+  "whisper_timeout_seconds": 3600,
+  "ffprobe": "ffprobe",
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
+
+[household]
+  "household": {
+  "enabled": False,
+  "file": "",
+  "incidents_per_day": 2,
+  "situation_max_objects": 8
+
+[watching]
+  "watching": {
+  "enabled": False,
+  "player_history_path": "%APPDATA%/mpv/mpv_history.log",
+  "player_history_tail": 400,   # lines read per poll, newest last
+  "now_playing_path": "%APPDATA%/mpv/mpv_now.json",
+  "now_stale_seconds": 60,
+  "remember_episodes": 200,     # so a rewatch is not announced twice
+  "her_seiyuu_name": "",
+  "open_her_record": True,
+  "summary_max_chars": 1400,
+  "digest_max_chars": 600,
+  "account_in_prompt": True,
+  "account_recent": 2,
+  "account_recent_max_chars": 6000,
+  "min_minutes_in": 3.0,
+  "min_watched_minutes": 10.0,
+  "player_plays_path": "%APPDATA%/mpv/mpv_plays.log",
+  "plays_timeline_path": "reports/plays.md",
+  "rewatch_after_hours": 24.0,   # an episode he opens again after this long counts again, and she is told it is a rewatch
+  "confirm_minutes": 8.0,
+  "poll_minutes": 4,
+  "settle_minutes": 25,
+  "impulse_bonus_hers": 14.0,       # a show she is in
+  "impulse_bonus_finished": 7.0,    # he has just finished a series
+  "impulse_bonus_any": 3.0,
+  "fresh_hours": 6.0,
+  "discover_hours": 24.0,
+  "recent_works": 3,
+  "recent_max_chars": 1200,
+  "recent_keep": 24,
+  "max_fetches_per_day": 8,
+  "queue_max": 20
+
+[dossier]
+  "dossier": {
+  "enabled": True,
+  "dir": "reports/dossiers",          # one file per play, and the rolling one
+  "db_path": "data/dossiers.db",      # what has been built, and the two cached page reads
+  "last_n": 10,                       # how many plays `last-ten.md` carries
+  "per_cycle_cap": 3,
+  "min_watched_minutes": 10.0,
+  "hours_before": 6.0,
+  "hours_after": 6.0,
+  "cast_detail_cap": 9,
+  "actor_list_cap": 12,
+  "actor_fetch_cap": 3,
+  "premiere_fetch_cap": 2,
+  "fetch_delay_seconds": 1.5,      # between two page reads, so the source is not hammered
+  "fetch_ttl_days": 120,           # a cached page older than this is read again
+  "fetch_timeout_seconds": 25
+
+[role_check]
+  "role_check": {
+  "enabled": True,
+  "person_refresh_days": 30,
+  "fetch_on_miss": True,
+  "say_who_instead": True,
+  "editor_facts_max": 6,
+  "titles_from_draft": True
+
+[which_one]
+  "which_one": {
+  "enabled": True,
+  "min_confidence": 0.5,
+  "timeout_seconds": 30,
+  "max_candidates": 6
+
+[watchlist]
+  "watchlist": {
+  "seed": [],
+  "pick_enabled": True,
+  "keep_min": 2,
+  "max_open": 3,
+  "pick_every_days": 7,
+  "pick_tries": 4                 # picks refused for being on his list before giving up
+
+[morning]
+  "morning": {
+  "latest_hm": "13:00",
+  "enabled": True
+
+[replay]
+  "replay": {
+  "speed": 30,
+  "usd_per_tick": 0.003,
+  "cost_warn_usd": 0.5
+
+[downtime]
+  "downtime": {
+  "enabled": True,
+  "gap_after_minutes": 20,
+  "shutdown_on_no_credit": True,
+  "shutdown_command": "shutdown.cmd"
+
+[anticipation]
+  "anticipation": {
+  "enabled": True,
+  "before_minutes": 60,
+  "event_morning_from_minutes": 540,
+  "event_eve_from_minutes": 1200,
+  "hours_in_prompt": 3,
+  "gauges_it_may_move": ["mood", "anxiety", "validation_craving", "curiosity", "boredom", "loneliness"]
+
+[reflect]
+  "reflect": {
+  "enabled": True,
+  "alone_only": True,
+  "min_gap_minutes": 75,
+  "max_per_day": 5,
+  "curiosity_from": 70,
+  "jealousy_from": 60,
+  "guilt_from": 55,
+  "ignored_minutes": 60,
+  "keep": 60,
+  "in_prompt": 6,
+  "gauges_it_may_move": ["curiosity", "anxiety", "validation_craving", "loneliness", "unsaid", "jealousy", "guilt"],
+  "cast_enabled": True,
+  "cast_min_gap_minutes": 120,
+  "cast_max_per_day": 3,
+  "cast_score_from": 1.4,
+  "cast_gauges_it_may_move": ["anxiety", "loneliness", "unsaid", "anger", "sadness", "awkwardness", "validation_craving", "curiosity"]
+
+[affection]
+  "affection": {
+  "enabled": True,
+  "review_enabled": True,
+  "min_messages": 20,
+  "min_his": 3,
+  "window_messages": 250,
+  "context_seconds": 3600,
+  "neutral": 45,
+  "level_min": 5.0,
+  "level_max": 95.0,
+  "max_per_cycle": 200,
+  "half_life_hours": 48.0,
+  "full_weight_at": 4.0,
+  "max_weight": 0.5,
+  "keep_hours": 96,
+  "max_kept": 200
+
+[stress]
+  "stress": {
+  "enabled": True,
+  "susceptibility_base": 1.0,
+  "per_invested": 0.35,
+  "per_concentration": 0.60,
+  "per_anxiety_baseline": 0.25,
+  "susceptibility_min": 0.55,
+  "susceptibility_max": 1.60,
+  "load_weights": {
+  "unfinished": 0.16, "rupture": 0.20, "unspeakable": 0.16, "unsaid": 0.12,
+  "body": 0.14, "belonging": 0.10, "him": 0.12, "ahead": 0.08, "money": 0.05
+  "cost_full": 60.0,
+  "charge_full": 160.0,
+  "silence_full": 36.0,
+  "broke_below": 800,
+  "bad_night": 0.35,
+  "floor": 6.0,
+  "scale": 70.0,
+  "rise_per_hour": 9.0,
+  "fall_per_hour": 2.2,
+  "recovery_base": 0.5,
+  "recovery_alone": 0.35,
+  "recovery_comfortable": 0.2,
+  "recovery_slept": 0.7,
+  "exhaustion_from": 70.0,
+  "recovery_per_stress": 0.9,
+  "relief": {
+  "slept_well": 14.0, "bath": 6.0, "diary": 5.0, "post": 3.0, "cried": 8.0, "gave_up": 9.0,
+  "goal_got": 9.0, "rupture_mended": 16.0, "warm_exchange": 5.0,
+  "held_by_the_group": 7.0
+  "relief_gap_default": 90,
+  "relief_gap_minutes": {"slept_well": 600, "held_by_the_group": 600, "bath": 300},
+  "held_from": 12.0,
+  "compounds_from": 45.0,
+  "compound_cap": 1.9,
+  "compounds": {
+  "spiral": 0.7, "body_noise": 0.6, "delay": 0.45,
+  "sleep_cost": 0.8, "shame": 0.5, "withdraw": 0.6
+
+[hazards]
+  "hazards": {
+  "enabled": True,
+  "websocket": True,
+  "her_wards": [],
+  "her_area_names": [],
+  "felt_from": 20,
+  "news_from": 50,
+  "backfill_limit": 100,
+  "backfill_hours": 6,
+  "fresh_hours": 2,
+  "keep": 400,
+  "weather": True,
+  "jma_area": "130000",
+  "weather_poll_minutes": 20,
+  "warning_max_age_hours": 12,
+  "warning_from": 2,
+  "national": True,
+  "national_poll_hours": 6,
+  "national_shindo_from": 5,
+  "national_weather_rank_from": 5,
+  "national_memory_days": 45,
+  "national_keep": 40,
+  "national_in_prompt": 8,
+  "wake_from": 5,
+  "revision_step": 5,
+  "sequence_hours": 72,
+  "heavy_rain_mm": 4.0
+
+[trains]
+  "trains": {
+  "enabled": True,
+  "poll_minutes": 6,
+  "odpt_key": "",
+  "odpt_url": "https://api.odpt.org/api/v4",
+  "odpt_lines": {},
+  "odpt_challenge_key": "",
+  "odpt_challenge_url": "https://api-challenge.odpt.org/api/v4",
+  "odpt_challenge_lines": {},
+  "odpt_operator_lines": {},
+  "her_lines": [],
+  "her_salience": 4,
+  "nearby_lines": [],
+  "nearby_salience": 2
+
+[withholding]
+  "withholding": {
+  "enabled": True,
+  "tension_from": 25.0,
+  "weight_tension": 0.9,
+  "weight_anger": 0.7,
+  "weight_shame": 0.5,
+  "weight_sadness": 0.35,
+  "weight_resentment": 0.6,
+  "weight_rupture": 0.35,
+  "tit_for_tat_minutes": 40,
+  "weight_tit_for_tat": 0.25,
+  "cold_from": 30,
+  "weight_cold": 0.6,
+  "standing_secure_from": 50,
+  "weight_standing_low": 0.4,
+  "weight_standing_high": 0.2,
+  "threshold": 0.55,
+  "min_gap_hours": 5,
+  "max_per_day": 2,
+  "messages_shown": 10,
+  "min_minutes": 8,
+  "max_minutes": 240,
+  "charge_every_minutes": 20,
+  "unsaid_per_hour": 9.0,
+  "awkward_per_hour": 7.0,
+  "awkward_soft_cap": 85.0,
+  "guilt_per_hour": 6.0,
+  "guilt_soft_cap": 70.0,
+  "shame_on_cave": 7.0,
+  "shame_soft_cap": 70.0,
+  "resolve_base": 22.0,
+  "resolve_decay_per_hour": 4.0,
+  "resolve_decay_per_unnoticed_hour": 9.0,
+  "irk_after_hours": 1.0,
+  "irk_full_hours": 3.0,
+  "irk_craving_per_hour": 7.0,
+  "irk_tension_per_hour": 2.5,
+  "irk_soft_cap": 90.0,
+  "silence_from_empty_minutes": 90,
+  "silence_hands_back": True,
+  "always_breaks": ["sorry", "you ok", "you okay", "are you alright", "my fault"],
+  "breaks_if_words": 2,
+  "keep": 200
+
+[rhythm]
+  "rhythm": {
+  "enabled": True,
+  "messages_scanned": 600,
+  "half_life_days": 21.0,
+  "latency_cap_minutes": 720,
+  "min_samples": 3,
+  "neighbour_weight": 0.5,
+  "cache_seconds": 120,
+  "turns_scanned": 14,
+  "burst_minutes": 12,
+  "burst_full": 6,
+  "stale_minutes": 25,
+  "slow_minutes": 20,
+  "weight_latency": 0.5,
+  "weight_density": 0.3,
+  "weight_fresh": 0.2,
+  "one_sided_factor": 0.4,
+  "presence_read": 0.95,
+  "presence_read_half_min": 6.0,
+  "presence_active": 0.45,
+  "presence_spoke": 0.85,
+  "presence_spoke_half_min": 4.0,
+  "presence_quick": 0.9,
+  "quick_reply_minutes": 3.0,
+  "presence_prior": 0.35,
+  "enter_above": 0.55,
+  "stay_above": 0.35,
+  "notice_live_seconds": [4, 25],
+  "notice_glance_seconds": [90, 600],
+  "notice_idle_seconds": [40, 900],
+  "he_left_extra_seconds": [60, 240],
+  "notice_faster_ratio": 0.4,
+  "notice_slower_ratio": 2.5,
+  "tempo_from": 0.45,
+  "fast_seconds": [8, 45],
+  "glance_boost": 1.4,
+  "glance_ceiling": 0.6,
+  "delay_factor_cap": 1.15,
+  "quiet_hour_factor": 0.4,
+  "hear_enabled": True,
+  "said_trigger_words": ["break", "work", "shift", "busy", "free", "off in",
+  "back in", "home in", "asleep", "sleep", "leaving",
+  "driving", "meeting", "lunch", "hour", "minute", "min",
+  "later", "tonight", "tomorrow", "away", "up in", "on in"],
+  "said_min_chars": 8,
+  "said_min_confidence": 0.5,
+  "said_max_per_message": 2,
+  "said_max_hours": 16,
+  "said_dedupe_minutes": 20,
+  "said_half_life_hours": 6.0,
+  "said_weight": 0.85,
+  "said_line_from": 0.25,
+  "said_keep": 200,
+  "tempo_live_line": 0.6,
+  "quiet_line_below": 0.15,
+  "busy_line_above": 0.7
+
+[approach]
+  "approach": {
+  "enabled": True,
+  "min_live": 25.0,
+  "days_full": 6.0,
+  "weight_charge": 1.0,
+  "weight_age": 0.35,
+  "weight_unsaid": 0.4,
+  "weight_attachment": 0.3,
+  "threshold": 0.85,
+  "min_gap_hours": 20,
+  "max_per_day": 1,
+  "per_item_gap_days": 3.0,
+  "max_per_item": 3,
+  "unsaid_over_baseline": 25.0,
+  "shame_blocks_from": 55.0,
+  "discharge": 0.25,
+  "unsaid_relief_base": 6.0,
+  "unsaid_relief_per_charge": 0.12,
+  "unsaid_relief_max": 20.0,
+  "awkward_per_risk": 4.0,
+  "awkward_soft_cap": 85.0,
+  "risk_shame_from": 3,
+  "shame_on_close_call": 8.0,
+  "shame_soft_cap": 70.0,
+  "messages_shown": 10,
+  "keep": 200
+
+[events]
+  "events": {
+  "enabled": True,
+  "lookahead_days": 8,
+  "max_per_day": 10,
+  "keep": 24
+
+[lookup]
+  "lookup": {
+  "enabled": True,
+  "kb_trigger": True,
+  "kb_min_chars": 4,
+  "kb_max_candidates": 40,
+  "kb_api_max_candidates": 2,
+  "kb_api_min_chars": 5,
+  "trigger_regex": "watch|watching|watched|read|reading|listen|song|album|band|play|playing|played|game|anime|manga|movie|film|show|episode|\\bep\\s?\\d|series|season|book|novel|youtube|stream|finished|
+  "gate": "regex",
+  "max_per_day": 12,
+  "wait_seconds": 25,
+  "timeout_seconds": 12,
+  "keep": 80,
+  "fact_weight": 2,
+  "on_request": False,
+  "search_per_day": 8,
+  "search_known_hours": 6.0,
+  "character_pages": True,
+  "character_query": "site:dic.pixiv.net {show} {name}",
+  "character_hosts": ["dic.pixiv.net/a/"],
+  "character_max_chars": 600,
+  "situation_hours": 6.0,
+  "situation_max": 3,
+  "known_max_lines": 2,
+  "known_keep": 200,
+  "in_front_minutes": 30.0,
+  "anchor_turns": 3
+
+[posting]
+  "posting": {
+  "enabled": True,
+  "base_probability": 0.02,
+  "unsaid_weight": 0.5,
+  "mood_swing_weight": 0.4,
+  "boredom_weight": 0.3,
+  "loneliness_weight": 0.2,
+  "event_bonus": 0.08,
+  "event_salience": 4,
+  "cover_shame": 45,
+  "vent_anger": 42,
+  "vent_sadness": 45,
+  "bright_pride": 62,
+  "vent_unsaid": 55,
+  "vent_mood": 35,
+  "bright_mood": 75,
+  "bored_boredom": 65,
+  "unsaid_relief": 12,
+  "vent_unsaid_low_mood": 30,
+  "seen_weight": 3,
+  "into_weight": 2,
+  "bored_weight": 3,
+  "plain_weight": 2,
+  "seen_fresh_hours": 12,
+  "engagement_bonus": 0.05,
+  "recent_posts_shown": 10,
+  "hold_max_minutes": 90
+
+[taste]
+  "taste": {
+  "judge_batch": 40
+
+[curation]
+  "curation": {
+  "enabled": True,
+  "max_likes_per_day": 6,
+  "max_follows_per_day": 2,
+  "max_unfollows_per_day": 2,
+  "max_posts_per_24h": 2,
+  "post_min_gap_hours": 4,
+  "max_reposts_per_day": 1,        # the post whose photo she sent him
+  "post_max_chars": 140,
+  "follow_min_likes": 2,
+  "follow_min_likes_discovered": 1,
+  "drift_unfollows_per_day": 2,
+  "unfollow_min_dislikes": 3,
+  "follow_back": True,
+  "follow_back_per_day": 3,
+  "share_pick": True,
+  "share_pick_recent": 6
+
+[x]
+  "x": {
+  "enabled": True,
+  "replies_not_before": "2026-08-22",
+  "replies_max_per_day": 3,
+  "reply_cooldown_minutes": 45,
+  "reply_candidates_max": 6,
+  "reply_candidate_hours": 36,
+  "reply_max_chars": 140,
+  "followers_line_hours": 24
+
+[cast]
+  "cast": {
+  "plans_enabled": True,
+  "twist_p": 0.25,
+  "lives_enabled": True,
+  "lives_keep": 10,
+  "lives_shown": 4,
+  "pocket_items": 4,
+  "carry_about_her_max_streak": 1,
+  "enabled": True,
+  "seed": "scail",
+  "default_volatility": 0.6,
+  "late_from_hm": "23:00",
+  "night_floor_hm": "22:20",
+  "late_tail_min_lo": -100,
+  "late_tail_min_hi": 200,
+  "late_beats_min": 2,
+  "late_morning_ref_hm": "10:00",
+  "late_morning_pull": 0.55,
+  "idle_share": 0.34,
+  "presence_enabled": True,
+  "presence_gap_minutes": 25,
+  "presence_max_per_day": 5,
+  "quiet_pull_enabled": True,
+  "quiet_after_minutes": 95,
+  "quiet_pull_max_per_day": 2,
+  "reversion": 0.25,
+  "beats_base": 5,
+  "beats_per_attention": 3.5,
+  "beats_min": 2,
+  "beats_max": 20,
+  "interrupt_salience": 3,
+  "him_share_warn": 0.7,
+  "mechanisms_dir": "",
+  "mechanisms_max_chars": 3600,
+  "own_mechanisms_max_chars": 9000,
+  "types_file": ""
+
+[cast_arcs]
+  "cast_arcs": {
+  "enabled": True,
+  "weekday": 6,
+  "min_days_between": 6,
+  "arcs_per_person": 2,
+  "roles_focus": 4,
+  "beats_lookahead_days": 10,
+  "days_in_prompt": 7,
+  "keep_records": 40,
+  "arc_active_attention_bump": 18,
+  "evolve_enabled": True,
+  "evolve_probability": 0.35,
+  "evolve_min_days_between": 13,
+  "max_people": 12
+
+[environment]
+  "environment": {
+  "enabled": True,
+  "ac_from_feels": 28,
+  "heat_from_feels": 12,
+  "ac_feels": 27,
+  "heated_feels": 20,
+  "transit_feels": 26,
+  "bath_feels": 30,
+  "indoor_offset": 3,
+  "outdoor_keywords": ["street", "walk", "walking", "park", "outside", "balcony", "bike", "cycling", "shrine", "festival", "beach", "river", "bus stop", "platform", "courtyard", "schoolyard", "on the wa
+  "indoor_keywords": ["home", "room", "kitchen", "school", "class", "cafe", "house", "shop", "konbini", "store", "library", "mall", "karaoke", "restaurant", "gym", "hall", "apartment", "lobby", "clinic"
+  "transit_keywords": ["train", "seibu", "subway", "bus", "metro", "yamanote", "commute", "ride home"],
+  "bath_keywords": ["bath", "shower", "ofuro"]
+
+[needs]
+  "needs": {
+  "enabled": True,
+  "hunger_per_hour": 9,
+  "hunger_asleep_factor": 0.3,
+  "after_meal": 8,
+  "snack_drop": 25,
+  "meal_pull_per_hour": 80,
+  "hungry_from": 60,
+  "starving_from": 80,
+  "hunger_mood_per_hour": 2,
+  "hunger_comfort_per_hour": 3,
+  "heat_from_feels": 33,
+  "heat_energy_per_hour": 4,
+  "rain_mm_from": 0.5,
+  "red_hunger": 70,
+  "red_energy": 25,
+  "red_tick_minutes": 20,
+  "director_may_deviate": True,
+  "meal_keywords": ["breakfast", "lunch", "dinner", "supper", "eating", "eats", "bento", "curry", "ramen", "udon", "soba", "gyudon", "meal", "okonomiyaki", "yakisoba", "family restaurant", "saizeriya", 
+  "snack_keywords": ["snack", "konbini", "ice cream", "pocky", "crepe", "taiyaki", "onigiri", "jelly drink", "bread", "melon pan", "cafe", "starbucks", "parfait", "chips", "candy", "kakigori", "takoyaki
+
+[health]
+  "health": {
+  "enabled": True,
+  "seed": "scail",
+  "cold_p_per_day": 0.025,
+  "cold_days_min": 2,
+  "cold_days_max": 5,
+  "cycle_days": 28,
+  "cycle_start": "2026-08-03",
+  "period_days": 5,
+  "exposure_cold_p_per_hour": 0.02,
+  "wet_exposure_factor": 2.0,
+  "pull_per_hour": 6,
+  "cold_energy_target": 35,
+  "cold_comfort_target": 35,
+  "cold_unwell_target": 62,
+  "period_unwell_target": 48,
+  "rough_night_unwell_target": 30,
+  "period_comfort_target": 38,
+  "period_anxiety_target": 48,
+  "sleep": {
+  "enabled": True,
+  "planned_bed_free": "01:30",     # skeleton lights-out
+  "planned_bed_school": "00:50",
+  "need_hours_free": 8.5,           # what her body wants
+  "need_hours_school": 7.0,
+  "need_jitter_hours": 0.4,
+  "delay_base_min": 10,
+  "delay_jitter_min": 15,
+  "delay_ref": 55,                  # gauge value where anxiety/unsaid start to bite
+  "delay_per_anxiety": 0.6,         # extra minutes per point over ref
+  "delay_per_unsaid": 0.4,
+  "screen_ref": 60,                 # curiosity/boredom this high = on the phone late
+  "chat_alive_after_hm": "23:00",
+  "chat_alive_until_min": 150,
+  "chat_alive_per_turn_min": 6.0,
+  "chat_alive_max_min": 75.0,
+  "delay_screen_min": 20,
+  "delay_max_min": 120,
+  "early_bed_max_min": 60,     # the most she brings it forward
+  "early_bed_pull": 0.7,       # of the shortfall, at a full pull
+  "early_bed_note_min": 10,    # under this it is not a decision
+  "early_bed_knew_pull": 0.3,  # over this, staying up was one
+  "heat_feels_ok": 27,              # at/below this room feels-like the night is comfortable
+  "heat_pen_per_deg": 4.0,          # points per room-degree over ok
+  "heat_pen_max": 34,
+  "ac_struggle_from": 36,           # outdoor feels-like where the AC starts losing
+  "ac_struggle_leak": 0.3,          # room-degrees gained per outdoor-degree over that
+  "humid_ref": 80,                  # muggy (only counts on a warm room / AC off)
+  "humid_pen_per_pct": 0.4,
+  "humid_pen_max": 8,
+  "mind_ref": 55,
+  "anxiety_pen_per_pt": 0.5,
+  "unsaid_pen_per_pt": 0.35,
+  "mind_pen_max": 22,
+  "late_meal_hours": 2.0,           # ate within this many hours of bed
+  "late_meal_pen": 8,
+  "hungry_to_bed_ref": 60,
+  "hungry_pen_per_pt": 0.3,
+  "hungry_pen_max": 10,
+  "cramp_pen": 16,                  # period day 1-2
+  "cold_pen": 14,                   # a cold >=2 days deep
+  "short_pen_per_hour": 12,
+  "short_pen_max": 40,
+  "long_grog_from_hours": 10.5,
+  "long_grog_pen": 6,
+  "free_oversleep_per_10": 12,
+  "school_snooze_per_10": 4,
+  "oversleep_max_min": 60,
+  "wake_jitter_min": 6,
+  "free_wake_floor": "08:00",       # a backstop, not a shaper: on a free
+  "free_wake_ceil": "11:30",        # night bed ~01:40 + ~8.5h needs room
+  "school_alarm": "06:45",
+  "school_wake_ceil": "07:15",
+  "good_from": 74,
+  "ok_from": 55,
+  "poor_from": 36,                  # below this = 'rough'
+  "energy_target_good": 72,
+  "energy_target_ok": 62,
+  "energy_target_poor": 42,
+  "energy_target_rough": 28
+
+[diary]
+  "diary": {
+  "enabled": True,
+  "hours_start": "20:30",
+  "hours_end": "01:30",
+  "min_carried": 40,
+  "carried_weight": 0.5,
+  "min_day_events": 4,
+  "day_weight": 0.06,
+  "min_unsaid": 50,
+  "base_probability": 0.35,
+  "unsaid_weight": 1.2,
+  "relief": 30,
+  "relief_when_unasked": 10,
+  "max_chars": 2500,
+  "keep": 400,
+  "in_prompt": 2
+
+[agenda]
+  "agenda": {
+  "enabled": True,
+  "days": 7,
+  "max_items": 12,
+  "in_prompt": True
+
+[weekly]
+  "weekly": {
+  "enabled": True,
+  "weekday": 6,
+  "in_prompt": 1
+
+[anime_sense]
+  "anime_sense": {
+  "enabled": True,
+  "shelf_check_enabled": True,
+  "shelf_check_weekday": 5,        # Saturday (his time)
+  "shelf_check_min_days": 6,
+  "stale_days": 21,                # untouched this long = 'left hanging'
+  "nag_close_eps": 4,              # 'you are N eps from the end' when N <= this
+  "nag_cold_max": 3,
+  "habits_enabled": True,
+  "habits_every_days": 30,
+  "kb_enabled": True,
+  "situation_line": True,          # 'his anime right now: ...' in her situation
+  "nag_in_prompt": True,
+  "nag_shows_max": 10
+
+[showrunner]
+  "showrunner": {
+  "enabled": True,
+  "weekday": 6,
+  "min_days_between": 6,
+  "max_arcs": 4,
+  "days_in_prompt": 7,
+  "calendar_lookahead_days": 21
+
+[schedule]
+  "schedule": {
+  "generate_at": "05:00",
+  "replan_on_change": True,
+  "max_replans_per_day": 3,
+  "wake": {
+  "enabled": True,
+  "commitment_lead_minutes": 75,
+  "rising": {
+  "early_max_min": 25,        # the most she is up BEFORE it
+  "snooze_max_min": 45,       # the most she stretches past it
+  "want_pull": 1.0,           # an open `want` goal names this morning
+  "avoid_push": 0.9,          # an `avoid` goal does
+  "pusher_push": 0.8,         # somebody else decided it for her
+  "stance_going_pull": 0.5,
+  "stance_not_hers_push": 0.6,
+  "belonging_ref": 45,        # below this, absence is the danger
+  "belonging_pull": 1.2,      # per belonging-point below ref, /100
+  "short_sleep_push": 0.25,
+  "unwell_push": 0.012,       # per point of unwell
+  "early_needs_rest_hours": 1.5
+  "free_min": "08:00",
+  "free_max": "11:30",   # same backstop as health.sleep.free_wake_ceil; keep them equal
+  "school_min": "06:20",
+  "school_max": "07:15",
+  "round_to": 5,         # round the drawn wake to the nearest N minutes
+  "seed": 8123,
+  "free_base": "09:30",
+  "school_base": "06:45",
+  "free_jitter_min": 22,      # gaussian sigma, minutes
+  "school_jitter_min": 6,
+  "energy_ref": 45,           # energy below this pushes wake later
+  "energy_min_per_point": 0.7
+
+[primitives]
+  "primitives": {
+  "enabled": False,
+  "ceiling": 100.0,
+  "decay_per_hour": {
+  "attention_hers": 0.6,
+  "attention_his": 0.4,
+  "predictability_hers": 0.05,
+  "reciprocity": 0.06,
+  "cost_of_loss": 0.02,
+  "threat": 0.1
+  "attachment_gain": 1.0,
+  "withhold_needs_unshown": 15.0,
+  "withhold_needs_attention": 20.0,
+  "ick_needs_model": 25.0,
+  "rupture_needs_exposure": 30.0,
+  "admit_needs_exposure": 45.0,
+  "admit_needs_predictability": 40.0,
+  "fright_from": 25.0,
+  "fright_hard_from": 55.0,
+  "fright_anxiety": 0.35,
+  "fright_stress": 0.20,
+  "perform_needs_room": 20.0,
+  "private_step": 2.0,
+  "private_block_weight": 0.25,
+  "disclose_step": 0.9,
+  "disclose_share": 0.5,
+  "log_rows": 200,
+  "observe_step": 3.0,
+  "observe_floor": 0.15,
+  "message_attention": 6.0,
+  "message_attention_hers": 5.0,
+  "observe_attention_share": 0.5,
+  "cost_per_hour_at_full": 0.06,
+  "private_threat_share": 0.5,
+  "answered_predictability": 2.5,
+  "message_reciprocity": 4.0,
+  "gave_reciprocity": 7.0,
+  "owed_hours": 6.0,
+  "unanswered_reciprocity": 2.0,
+  "held_back_reciprocity": 1.5,
+  "told_anyway_reciprocity": 3.0,
+  "sure_from": 85.0,
+  "shock_from": 55.0,
+  "shock_predictability": 30.0,
+  "error_predictability": 0.25,
+  "demonstrated_threat": 20.0,
+  "disclose_min_words": 8,
+  "disclose_looks_back": 200,
+  "disclose_min_share": 0.5,
+  "close_act_weight": 0.9
+
+[state]
+  "state": {
+  "llm_on_quiet_ticks": False,
+  "sources": {"min_level": 30, "sentiment_from": 35},
+  "min_event_salience": 3,
+  "diminishing_returns": True,
+  "relationship_daily_budget": 8,
+  "world": {
+  "enabled": True,
+  "comfort_hot_from": 27,
+  "comfort_per_degree_hot": 3.0,
+  "comfort_cold_from": 10,
+  "comfort_per_degree_cold": 2.0,
+  "comfort_pull_per_hour": 6,
+  "sleep_energy_per_hour": 7,
+  "late_from": "23:30",
+  "late_energy_per_hour": 4,
+  "boredom_dull_per_hour": 4,
+  "boredom_social_per_hour": 6,
+  "dull_keywords": ["class", "homework", "worksheet", "commute", "train", "cleaning", "chores", "study", "cram"],
+  "social_keywords": ["friends", "group", "karaoke", "festival", "cafe", "purikura"],
+  "exam_days": 4,
+  "exam_anxiety_floor": 62,
+  "exam_anxiety_per_hour": 3,
+  "curiosity_silent_per_hour": 4,
+  "curiosity_busy_ignored_per_hour": 6,
+  "attention_curiosity_release": 15,
+  "ignored_craving_per_hour": 4,
+  "ignored_anxiety_per_hour": 2,
+  "attention_craving_release": 5,
+  "energy_alone_per_hour": 0.0,
+  "energy_alone_floor": 10.0,
+  "attention_energy_release": 0.0,
+  "attention_jealousy_release": 12,
+  "tension_ignored_after_minutes": 90,
+  "tension_ignored_per_hour": 3.5,
+  "tension_ignored_cap": 55,
+  "attention_tension_release": 6,
+  "attention_relief_bump": 14.0,
+  "attention_relief_soft_cap": 70
+  "gauges": {
+  "energy": {"baseline": 60, "decay_per_hour": 4, "kind": "body", "valence": 0, "arousal": 1},
+  "mood": {"baseline": 55, "decay_per_hour": 4, "kind": "derived", "valence": 1, "arousal": 0, "model_may_move": False},
+  "anxiety": {"baseline": 40, "decay_per_hour": 4, "kind": "emotion", "valence": -1, "arousal": 1},
+  "anger": {
+  "baseline": 8, "decay_per_hour": 7, "kind": "emotion", "valence": -1, "arousal": 1,
+  "tells": "a real temper under the manners, and mostly about unfairness rather than about him -- "
+  "somebody talked over, a rule applied to her and not to others, being made to look stupid. "
+  "She almost never shows it, so raise it for the thing that happened and expect it to come "
+  "out sideways",
+  "tags": [[45, "angry about something, and holding it in"], [25, "irritated under it"]]
+  "sadness": {
+  "baseline": 12, "decay_per_hour": 2, "kind": "emotion", "valence": -1, "arousal": -1,
+  "tells": "the flat kind, and not loneliness: something was lost, something she wanted did not "
+  "happen, somebody was unkind. Loneliness wants the phone; this wants nothing",
+  "tags": [[45, "sad in a way that has gone quiet rather than loud"], [28, "a bit down and not saying why"]]
+  "shame": {
+  "baseline": 5, "decay_per_hour": 3, "kind": "emotion", "valence": -1, "arousal": -1,
+  "tells": "not guilt. Guilt is having done a bad thing and wanting to fix it. This is having been "
+  "seen -- caught out, laughed at, the accent slipping in front of people, somebody reading "
+  "her properly -- and wanting to not exist for a while",
+  "tags": [[45, "mortified about something and wants to not be looked at"], [25, "small about something"]]
+  "pride": {
+  "baseline": 15, "decay_per_hour": 5, "kind": "emotion", "valence": 1, "arousal": 1,
+  "tells": "something of hers came off: she said the thing, she was asked along, she got the mark, "
+  "somebody copied her. She would not say it out loud",
+  "tags": [[60, "quietly pleased about it and would die before saying so"]]
+  "longing": {
+  "baseline": 6, "decay_per_hour": 5, "kind": "emotion", "valence": -1, "arousal": 0,
+  "model_may_move": False, "owner": "affection",
+  "tags": [[55, "missing him in a way that is taking up room"], [30, "missing him"]]
+  "belonging": {
+  "baseline": 45, "decay_per_hour": 4, "kind": "drive", "valence": 1, "arousal": -1,
+  "model_may_move": False,
+  "tags": [[62, "solid with the group at the moment"], [22, "on the outside of them lately, and it is sitting there"]]
+  "fondness": {
+  "baseline": 30, "decay_per_hour": 3, "kind": "emotion", "valence": 1, "arousal": 0,
+  "model_may_move": False, "owner": "cast_bond",
+  "tags": [[60, "warm toward her own people at the moment: whatever else the day was, one of them was good to her"],
+  "stress": {
+  "baseline": 12, "decay_per_hour": 0, "kind": "body", "valence": -1, "arousal": 1,
+  "model_may_move": False,
+  "tags": [[70, "wound up, running on nothing, everything is a bit much"],
+  "relief": {
+  "baseline": 8, "decay_per_hour": 9, "kind": "emotion", "valence": 1, "arousal": -1,
+  "tells": "a thing she was braced for did not happen, or the waiting ended. Code warms it when he "
+  "answers and when the record disproves something she had talked herself into, so raise it "
+  "only for a relief of your own",
+  "tags": [[45, "relieved, like something braced for did not happen"]]
+  "loneliness": {"baseline": 35, "decay_per_hour": 2, "kind": "drive", "valence": -1, "arousal": 0},
+  "boredom": {"baseline": 30, "decay_per_hour": 6, "kind": "drive", "valence": -1, "arousal": -1},
+  "validation_craving": {"baseline": 50, "decay_per_hour": 3, "kind": "drive", "valence": -1, "arousal": 1},
+  "physical_comfort": {"baseline": 60, "decay_per_hour": 6, "kind": "body", "valence": 1, "arousal": 0},
+  "unwell": {
+  "baseline": 4, "decay_per_hour": 3, "kind": "body", "valence": -1, "arousal": -1,
+  "model_may_move": False,
+  "tags": [[45, "physically rotten, wants to lie down"], [25, "a bit off physically"]]
+  "unsaid": {"baseline": 25, "decay_per_hour": 2, "kind": "drive", "valence": -1, "arousal": 1},
+  "hunger": {"baseline": 30, "decay_per_hour": 0, "kind": "body", "valence": -1, "arousal": 0, "model_may_move": False},
+  "curiosity": {"baseline": 40, "decay_per_hour": 3, "kind": "drive", "valence": 0, "arousal": 1},
+  "jealousy": {"baseline": 15, "decay_per_hour": 6, "kind": "emotion", "valence": -1, "arousal": 1},
+  "fatigue": {"baseline": 5, "decay_per_hour": 0, "kind": "body", "valence": -1, "arousal": -1, "model_may_move": False, "tells": "what the day has taken out of her body: walking in heat, a packed train
+  "affection": {"baseline": 45, "decay_per_hour": 0, "kind": "emotion", "valence": 1, "arousal": 0,
+  "owner": "affection",
+  "tags": [[70, "feeling warm and close to him, wants to reach out"], [58, "soft toward him right now"], [-30, "gone off him: cool, short, not interested in being close right now"], [-15, "cannot stand 
+  "model_may_move": False},
+  "guilt": {"baseline": 10, "decay_per_hour": 4, "kind": "emotion", "valence": -1, "arousal": 0},
+  "awkwardness": {
+  "baseline": 5, "decay_per_hour": 3.5, "kind": "emotion", "valence": -1, "arousal": 1,
+  "model_may_move": False,
+  "tags": [[40, "squirming about something that is not going to be brought up"]]
+  "surprise": {
+  "baseline": 5, "decay_per_hour": 25.0, "kind": "emotion", "valence": 0, "arousal": 1,
+  "model_may_move": False,
+  "tags": [[35, "caught off guard by something and still recalibrating; a beat of 'wait' before anything else"]]
+  "mood_from": {
+  "emotion_points": 14.0,
+  "body_points": 9.0,
+  "drive_points": 5.0,
+  "max_swing": 45.0,
+  "inertia_per_hour": 3.0,
+  "arousal_points": 12.0,
+  "arousal_swing": 45.0
+  "affection_from": {
+  "enabled": True,
+  "inertia_per_hour": 6.0,
+  "on_event_hours": 0.5,
+  "attachment": 0.45,
+  "attachment_rest": 40.0,
+  "closeness": 0.30,
+  "closeness_rest": 50.0,
+  "relief": 0.55,
+  "tension": -0.40,
+  "tension_rest": 15.0,
+  "resentment": -0.55,
+  "rupture_open": -12.0
+  "salient_from": 3,
+  "unsaid_per_salience": 2,
+  "unsaid_ignored_per_hour": 3,
+  "unsaid_social": 4,
+  "loneliness_per_silent_hour": 1.5,
+  "company": {
+  "enabled": True,
+  "family_factor": 0.6,
+  "loneliness_settle_per_hour": 6.0,
+  "talk_relief": 5.0
+  "habituation": {
+  "enabled": True,
+  "repeat_factor": 0.55,
+  "max_repeats": 5,
+  "reasons_shown": 3
+  "max_delta_per_update": 15,
+  "one_way_warn_from": 20,
+  "discharge": {
+  "enabled": True,
+  "cooldown_hours": 4,
+  "max_per_day": 4,
+  "keep": 60,
+  "rules": [
+  "gauge": "anger",
+  "at": 92,
+  "reset_to": 62,
+  "action": "say",
+  "cooldown_hours": 4,
+  "hint": "SHE HAS HIT THE END OF IT: the anger comes out at him, sharp and unedited, one or two lines, and then she stops -- no softening, no explanation, nothing else in the message",
+  "text": "she threw the phone onto the bed and stood in the middle of her room breathing",
+  "side": {
+  "unsaid": -15,
+  "relief": 6
+  "relieve": ""
+  "gauge": "unsaid",
+  "at": 92,
+  "reset_to": 45,
+  "action": "say",
+  "cooldown_hours": 4,
+  "hint": "THE THING SHE HAS BEEN NOT SAYING COMES OUT, badly worded, because she cannot hold it another minute; it is not planned and it shows",
+  "text": "she wrote the whole thing out in the notes app, read it twice, and did not send it",
+  "side": {
+  "relief": 8
+  "relieve": "diary"
+  "gauge": "loneliness",
+  "at": 93,
+  "reset_to": 58,
+  "action": "say",
+  "cooldown_hours": 5,
+  "hint": "she reaches out because she cannot stand it another minute, with no pretext at all, and it shows: short, a little naked, not clever",
+  "text": "she lay on the floor with the phone face-down and cried, not much, and felt stupid about it",
+  "side": {
+  "sadness": 5,
+  "relief": 4
+  "relieve": ""
+  "gauge": "sadness",
+  "at": 90,
+  "reset_to": 55,
+  "action": "act",
+  "cooldown_hours": 4,
+  "text": "she cried, properly, into the pillow, and came out of it emptier and a little lighter",
+  "side": {
+  "relief": 10,
+  "energy": -8
+  "relieve": "cried"
+  "gauge": "anxiety",
+  "at": 92,
+  "reset_to": 66,
+  "action": "spiral",
+  "cooldown_hours": 4,
+  "text": "her chest did the tight thing and she could not sit still; she paced the room and checked her phone four times",
+  "side": {
+  "energy": -6
+  "relieve": ""
+  "gauge": "validation_craving",
+  "at": 92,
+  "reset_to": 50,
+  "action": "say",
+  "cooldown_hours": 5,
+  "hint": "she fishes: a half-message that exists to be noticed -- a 'nothing', a sigh in text, a thing left hanging -- and she knows exactly what she is doing",
+  "text": "she took four photos of nothing in particular and posted none of them",
+  "side": {
+  "shame": 4
+  "relieve": ""
+  "gauge": "boredom",
+  "at": 92,
+  "reset_to": 40,
+  "action": "look",
+  "cooldown_hours": 3,
+  "text": "she rolled over and opened every app on her phone twice",
+  "side": {},
+  "relieve": ""
+  "gauge": "stress",
+  "at": 92,
+  "reset_to": 60,
+  "action": "act",
+  "cooldown_hours": 6,
+  "text": "she gave up on the day: lay down, phone on silent, did nothing for an hour and hated it",
+  "side": {
+  "energy": -10,
+  "relief": 6
+  "relieve": "gave_up"
+  "gauge": "shame",
+  "at": 90,
+  "reset_to": 55,
+  "action": "act",
+  "cooldown_hours": 4,
+  "text": "she went small: deleted the message she was drafting, turned the phone over, did not want to be looked at by anybody",
+  "side": {
+  "unsaid": 8
+  "relieve": ""
+  "gauge": "jealousy",
+  "at": 90,
+  "reset_to": 50,
+  "action": "look",
+  "cooldown_hours": 4,
+  "text": "she went through the account again looking for the thing she was afraid of and did not find it, which did not help",
+  "side": {
+  "anxiety": 5
+  "relieve": ""
+  "body_noise": {
+  "enabled": True,
+  "weights": {"hunger": 0.45, "energy": -0.45, "unwell": 0.5, "physical_comfort": -0.4},
+  "report_from": 0.25,
+  "reverse_body_under": 0.10,
+  "reverse_anxiety_over": 30,
+  "reverse_stress_over": 60,
+  "clear_below": 0.12,
+  "relief": 0.5,
+  "relief_gauges": ["anxiety", "anger", "sadness"],
+  "relief_cooldown_hours": 4
+  "blends": [
+  "felt_time": {
+  "enabled": True,
+  "weights": {"loneliness": 0.45, "validation_craving": 0.35, "anxiety": 0.25, "boredom": 0.20},
+  "min_factor": 0.6,
+  "max_factor": 2.2
+
+[ick]
+  "ick": {
+  "enabled": True,
+  "about_her_weight": 0.6,
+  "intimate_weight": 0.5,
+  "charge_ceiling": 3.2,
+  "strain_per_point": 22,
+  "circle_weight": 0.5,
+  "circle_anxiety_ref": 40,
+  "novelty_power": 0.85,
+  "novelty_floor": 0.15,
+  "kinds_in_prompt": 24,
+  "kind_jaccard": 0.5,
+  "max_kinds": 80,
+  "max_chars": 2000,
+  "message_min_chars": 25,
+  "digest_min_gap_minutes": 90,
+  "cast_in_prompt": 6,
+  "known_shown": 40,
+  "anxiety_weight": 0.5,
+  "jealousy_weight": 0.6,
+  "loneliness_weight": 0.3,
+  "tired_below": 30,
+  "tired_bonus": 0.1,
+  "max_state_multiplier": 1.6,
+  "min_charge": 8,
+  "awkwardness_per_charge": 0.9,
+  "surprise_per_charge": 0.35,
+  "surprise_soft_cap": 80,
+  "awkwardness_soft_cap": 85,
+  "unsaid_per_charge": 0.35,
+  "unsaid_soft_cap": 90,
+  "event_salience": 3,
+  "half_life_days": 9,
+  "carry_floor": 12,
+  "in_prompt": 3,
+  "max_items": 80,
+  "settled_after": 12,
+  "about_her_top": 4.5,
+  "settled_days": 1.0,
+  "settled_min": 3,
+  "settled_window": 12,
+  "teasable_after_seen": 2,
+  "teasable_in_prompt": 3,
+  "bar_jaccard": 0.35,
+  "source_words": {
+  "snoop": "she went through his things on the app; he does not know she looked, and she could not ask about it without admitting that",
+  "digest": "the app on her phone showed her while she was checking on him; he gave her that app, so she is allowed to have seen it",
+  "x": "she saw it on X, on his own account, where anyone could have seen it",
+  "photo": "he sent it to her himself",
+  "lookup": "he mentioned it and she quietly looked up what it actually was; he was not hiding it and she could admit she looked",
+  "told": "he told her himself, in a message, unprompted",
+  "seen": "it was on his screen in front of her; she lives on his machine and he knows it, so there is nothing to hide about having seen it"
+
+[beliefs]
+  "beliefs": {
+  "enabled": True,
+  "in_prompt": 8,
+  "strain_half_life_days": 11,
+  "straining_from": 30,
+  "revise_base": 45,
+  "revise_per_invested": 55,
+  "revise_per_evidence": 25,
+  "evidence_per_fit": 12,
+  "confidence_per_fit": 8,
+  "strain_relieved_per_fit": 9,
+  "confidence_lost": 20,
+  "invested_lost": 12,
+  "evidence_gained": 15,
+  "certain_from": 92,
+  "graduate_from": 85,
+  "shatter_min_strain": 12,
+  "event_salience": 3,
+  "settle_on_seed": True,
+  "settle_min_facts": 8,
+  "settle_strain_scale": 2.5,
+  "settle_max_straining": 3,
+  "settle_max_revisions": 4,
+  "settle_facts_shown": 60
+
+[contagion]
+  "contagion": {
+  "enabled": True,
+  "strength": 9.0,
+  "negative_bias": 1.35,
+  "default_susceptibility": 0.5,
+  "half_life_hours": 5.0,
+  "forget_below": 0.2,
+  "soft_cap": 88,
+  "valence_gauges": {"sadness": 1.0, "anxiety": 0.8},
+  "arousal_gauges": {"energy": 0.7, "boredom": -0.4}
+
+[compare]
+  "compare": {
+  "enabled": True,
+  "max_per_day": 2,
+  "cooldown_hours": 3,
+  "base_p": 0.12,
+  "weights": {"validation_craving": 0.45, "shame": 0.35, "anxiety": 0.25},
+  "belonging_weight": 0.3,
+  "dimensions": ["looks", "body", "clothes", "being_behind", "dating", "popularity", "grades", "money", "family", "other"],
+  "envy_gain": 14,
+  "shame_gain": 10,
+  "craving_gain": 8,
+  "anxiety_gain": 5,
+  "pride_gain": 8,
+  "strain_gain": 12,
+  "confirm_gain": 6,
+  "soft_cap": 85,
+  "keep": 80
+
+[sentiment]
+  "sentiment": {
+  "enabled": True,
+  "ceiling": 100.0,
+  "half_life_days": {"attachment": 70, "resentment": 45, "respect": 90, "contempt": 60, "envy": 40},
+  "seed_attachment_from_closeness": 0.9,
+  "seed_resentment_from_tension": 0.7,
+  "seed_respect_from_standing": 0.3,
+  "log_from": 0.5,
+  "prompt_from": 32,
+  "max_in_prompt": 4,
+  "longing_needs_attachment": 20,
+  "longing_full_hours": 16,
+  "longing_scale": 85,
+  "longing_per_hour": 9.0,
+  "family_roles": ["mother", "father", "sibling"],
+  "belonging_half_life_hours": 20.0,
+  "belonging_floor": 0.35,
+  "belonging_per_hour": 7.0,
+  "phone_debt_enabled": True,
+  "phone_debt_free": 4,
+  "phone_debt_per_message": 0.6,
+  "phone_debt_max": 4.0,
+  "contagion_floor": 0.15,
+  "impulse_attachment": 10.0,
+  "impulse_resentment": 16.0,
+  "delay_resentment": 0.5,
+  "mend_attachment": 2.2,
+  "mend_respect": 1.2,
+  "scar_resentment": 3.4,
+  "failed_bid_resentment": 1.6,
+  "attention_attachment": 0.45,
+  "compile_max_delta": 6.0
+
+[rupture]
+  "rupture": {
+  "expel_severity": 4,
+  "enabled": True,
+  "max_kept": 60,
+  "anger_weight": 1.0,
+  "guilt_weight": 1.0,
+  "shame_weight": 0.7,
+  "sadness_weight": 0.6,
+  "min_score": 9.0,
+  "messages_shown": 10,
+  "scars_shown": 5,
+  "scars_in_prompt": 3,
+  "tension_per_severity": 6.0,
+  "guilt_per_severity": 7.0,
+  "guilt_soft_cap": 75,
+  "scar_scale_per": 0.15,
+  "scar_scale_cap": 0.6,
+  "holds_gauges": ["guilt", "anger", "sadness"],
+  "hold_decay_factor": 0.3,      # a held gauge decays at this fraction of its rate...
+  "hold_floor": 25,              # ...toward baseline + this, never below it, until the rupture is settled or scarred
+  "closeness_on_mend": 2.2,
+  "tension_off_on_mend": 9.0,
+  "guilt_off_on_mend": 12.0,
+  "relief_on_mend": 28.0,
+  "relief_soft_cap": 80,
+  "memory_weight_mend": 4,
+  "shame_on_failed_bid": 16.0,
+  "shame_soft_cap": 80,
+  "sadness_on_failed_bid": 12.0,
+  "sadness_soft_cap": 75,
+  "tension_on_failed_bid": 5.0,
+  "anger_on_worse": 14.0,
+  "anger_soft_cap": 70,
+  "scar_after_hours": 40,
+  "closeness_on_scar": 1.8,
+  "memory_weight_scar": 4,
+  "event_salience": 3
+
+[spiral]
+  "spiral": {
+  "enabled": True,
+  "min_gap_minutes": 45,
+  "max_per_day": 3,
+  "max_kept": 60,
+  "steps_per_invested": 16.0,
+  "max_steps_hard": 7,
+  "start_base": 0.55,
+  "extend_base": 0.45,
+  "extend_per_step": 0.28,
+  "tension_weight": 0.65,
+  "standing_weight": 0.45,
+  "envy_weight": 0.4,         # someone she measures herself against can seed a chain
+  "standing_settled_at": 62,
+  "seed_min": 0.15,
+  "pressure_cap": 1.2,
+  "busy_factor": 0.35,
+  "min_energy": 25,
+  "anxiety_per_step": 7.0,
+  "arrived_anxiety": 12.0,
+  "anxiety_soft_cap": 88,
+  "pitch_per_step": 18,
+  "reassurance_relief": 9.0,
+  "fade_hours": 14,
+  "events_shown": 14,
+  "chat_shown": 8,
+  "in_prompt": 2,
+  "impulse_weight": 0.30,
+  "event_salience": 2,
+  "settle_min_steps": 2,
+  "borne_out_fit": 4.0,
+  "disconfirm_strain": 26.0,
+  "disconfirm_relief": 20.0,
+  "max_also_touches": 2,
+  "memory_weight": 3
+
+[goals]
+  "goals": {
+  "enabled": True,
+  "min_chars": 12,
+  "same_jaccard": 0.45,
+  "carry_to_standing": 2,
+  "max_kept": 60,
+  "fail_base": 8.0,
+  "fail_per_carried": 3.0,
+  "fail_per_invested": 10.0,
+  "fail_missed_scale": 1.0,
+  "fail_tried_scale": 0.5,
+  "fail_witnessed_scale": 1.6,
+  "witnessed_heat_spread": 0.4,
+  "got_fit": 3.0,
+  "tried_fit": 1.0,
+  "give_up_fit": 4.0,
+  "give_up_base": 18.0,
+  "give_up_per_invested": 70.0,
+  "give_up_strain_mult": 2.0,
+  "tiring_at": 0.6,
+  "pride_on_got": 16.0,
+  "pride_soft_cap": 80,
+  "sadness_per_fail": 9.0,
+  "sadness_on_give_up": 18.0,
+  "sadness_soft_cap": 75,
+  "shame_on_witnessed": 14.0,
+  "shame_soft_cap": 80,
+  "memory_weight_fail": 3,
+  "memory_weight_got": 2,
+  "memory_weight_given_up": 4,
+  "event_salience": 3
+
+[self_memory]
+  "self_memory": {
+  "enabled": True,
+  "half_life_days": [14, 45, 120, 400, 1200],
+  "min_score": 0.5,
+  "max_in_prompt": 8,
+  "max_recalled": 3,
+  "max_cosine_only": 1,
+  "standing_in_prompt": 8,
+  "duplicate_jaccard": 0.5,
+  "max_per_day": 5,
+  "compile_max_per_day": 2,
+  "moment_min_delta": 8,
+  "moment_min_total": 14,
+  "moment_max_per_day": 6,
+  "moment_npc_salience": 3,
+  "mood_congruent": True,
+  "congruence_weight": 0.6,
+  "congruence_floor": 0.45
+
+[care]
+  "care": {
+  "enabled": True,
+  "window_days": 7,
+  "min_window_hours": 12.0,
+  "reaches_full_per_day": 3.0,
+  "balance_full_ratio": 3.0,
+  "slow_minutes": 120.0,
+  "left_after_minutes": 360,
+  "checks_full_per_day": 8.0,
+  "snoop_weight": 2.0,
+  "weights": {"initiative": 1.0, "balance": 0.5, "responsiveness": 1.0, "not_left_on_read": 0.7, "attention": 1.0,
+  "head_share": 1.2, "attachment": 1.2, "affection": 0.8, "not_resentful": 0.5},
+  "silence_full_hours": 12.0,
+  "his_slow_minutes": 180.0,
+  "checks_base_per_day": 4.0,
+  "uncertainty_gain": 1.2,
+  "scale_checking": False
+
+[foresight]
+  "foresight": {
+  "enabled": True,
+  "keep": 60,
+  "stale_hours": 12,          # an open prediction past this is a silence
+  "window_slack": 1.5,        # answered inside reply_minutes x this counts as inside
+  "surprise_reply_p_under": 0.35,
+  "surprise_bump": 12,
+  "surprise_soft_cap": 70,
+  "refresh_hours": 3,         # while he is quiet, a fresh reading this often
+  "refresh_silent_from": 2,   # ... once he has been quiet this long
+  "impulse_weight": 8.0,      # reaching again inside her own window costs (1 - reply_p) x this
+  "risk_hours": 6,
+  "risk_guilt": 6,
+  "risk_shame": 4,
+  "risk_relief": 5
+
+[reactions]
+  "reactions": {
+  "enabled": True,
+  "character": "",
+  "sticker": True,
+  "active_minutes": 20,
+  "repeat_days": 7,                # never the same image twice inside this
+  "min_gap_minutes": 20,           # two crossings closer than this show one face
+  "surprise_from": 35,             # the surprise gauge over this is its own crossing
+  "anger_from": 55,
+  "sadness_from": 55,
+  "anxiety_from": 60,
+  "awkward_from": 50,
+  "tired_below": 30,
+  "fatigue_from": 60,
+
+[scenery]
+  "scenery": {
+  "enabled": True,
+  "harvest": False,
+  "queries": [],
+  "search_scrolls": 3,
+  "judge_per_session": 8,
+  "harvest_every_hours": 9,
+  "food_at": ["room", "home", "konbini", "cafe", "school"],
+  "food_hours": {"lunch": [11, 15], "dinner": [18, 22]},
+  "send_kinds": ["station", "train", "konbini", "park", "street", "shotengai", "cafe", "shop", "shrine", "river", "city", "food", "sky", "library", "museum"],
+  "regions_ok": ["unknown", "tokyo", "saitama", "kanagawa", "chiba", "kanto"],
+  "indoor_any_japan": True,
+  "kind_queries": {},
+  "searches_per_run": 2,
+  "event_target": 4,
+  "event_days": 2,
+  "gap_target": 6,
+  "gap_spread": 3,
+  "demand_days": 14,
+  "route_days": 2,
+  "said_minutes": 90,
+  "accounts_per_run": 6,
+  "user_scrolls": 1,
+  "harvest_per_run": 10,
+  "min_quality": 2,
+  "send_p": 0.35,
+  "send_max_per_day": 1,
+  "min_gap_hours": 20,
+  "max_used_per_author": 3,
+  "author_window_days": 30,
+  "like_sent": True,
+  "repost_sent": True,
+  "repost_sent_p": 0.35,
+  "redescribe_per_run": 12,
+  "local_kinds": [
+  "station",
+  "konbini",
+  "park",
+  "street",
+  "shotengai",
+  "school",
+  "room",
+  "home",
+  "library"
+  "local_names": [],
+  "place_map": {},
+
+[wonder]
+  "wonder": {
+  "enabled": True,
+  "max_per_day": 2,
+  "max_per_call": 3,
+  "max_open": 6,
+  "cooldown_hours": 6,
+  "curiosity_over": 15,
+  "candidates": 3,
+  "in_prompt": 2,
+  "answer_hours": 8,
+  "reask_hours": 48,
+  "confirm_gain": 8,
+  "strain_gain": 8,
+  "self_confirm_gain": 4,
+  "similar_attachment": 4,
+  "unlike_attachment": -2,
+  "dodged_curiosity": 8,
+  "dodged_charge": 10,
+  "keep": 60,
+  "voiced_min_words": 5,
+  "review_after_hours": 24,
+  "review_max_per_compile": 6,
+  "open_max_age_days": 7
+
+[expect]
+  "expect": {
+  "enabled": True,
+  "keep": 80,
+  "trigger_words": ["i'll", "ill ", "i will", "gonna", "going to", "will ", "later", "tonight", "tomorrow", "promise",
+  "send", "call", "watch", "read", "tell you", "let you know", "back in", "after work", "in a bit", "when i"],
+  "min_chars": 8,
+  "max_per_message": 3,
+  "min_confidence": 0.5,
+  "max_days_ahead": 3,
+  "grace_minutes": 45,
+  "around_belief": "would_defend",
+  "raise_for_hours": 48,
+  "kept_confirm": 6,
+  "kept_relief": 6,
+  "missed_strain": 10,
+  "missed_resentment": 4,
+  "missed_tension": 6,
+  "habits_enabled": True,
+  "habits_days": 7,
+  "habits_min_digests": 8,
+  "habits_max": 6,
+  "habit_grace_minutes": 60,
+  "habit_miss_curiosity": 8
+
+[family]
+  "family": {
+  "enabled": True,
+  "seed": 7,
+  "trip_p": 0.2,                 # a family day on a free Sunday / holiday / Saturday
+  "twist_p": 0.15,               # one thing off the timetable, some days
+  "dad_cutoff_hm": "23:30",      # past this he is in bed and not coming
+  "dad_willing_weeknight": 0.5,
+  "dad_willing_weekend": 0.85,
+  "far_minutes": 35,
+  "mom_daylight_from_hm": "08:00",
+  "mom_daylight_to_hm": "17:30",
+  "mom_far_minutes": 15
+
+[situation]
+  "situation": {
+  "enabled": True,
+  "delayed_minutes": 12,       # a train leg on a line reported delayed
+  "stopped_minutes": 30,       # ... or suspended
+  "packed_minutes": 3,         # the rush-hour Seibu is slower
+  "change_minutes": 6,
+  "late_event_from": 10,       # minutes late that become an event
+  "keep_journeys": 40,
+  "walk_per_hour": 14.0,
+  "packed_per_hour": 8.0,
+  "train_per_hour": 2.0,
+  "out_per_hour": 4.0,
+  "sitting_per_hour": 1.5,
+  "rest_per_hour": 8.0,
+  "bath_per_hour": 14.0,
+  "sleep_per_hour": 16.0,
+  "heat_free_feels": 28,
+  "heat_per_degree": 6.0,
+  "tired_from": 45,
+  "wiped_from": 70,
+  "fatigue_delay_weight": 0.6,   # delay x(1 + fatigue/100 * this)
+  "walking_delay": 1.6,
+  "packed_delay": 1.25,
+  "walk_tired": 1.1,
+  "walk_wiped": 1.3,
+  "walk_heat_per_degree": 0.02,
+  "walk_rain": 1.12,
+  "yukata_keywords": ["yukata", "festival", "matsuri", "bon odori", "fireworks", "hanabi"],
+  "yukata_walk": 1.35,
+  "yukata_sweat": 1.3,
+  "uniform_sweat": 1.15,
+  "school_bag_load": 1.12,
+  "shopping_keywords": ["shopping", "bags", "haul", "bought", "supermarket run", "errand for mom"],
+  "shopping_load": 1.15,
+  "hurry_tolerance_minutes": 4,
+  "run_time_factor": 0.72,
+  "run_fatigue_factor": 2.4,
+  "run_bump_factor": 3.0,
+  "run_sweat_factor": 1.8,
+  "car_keywords": ["car", "drive", "drives", "driving", "pick her up", "picks her up", "lift"],
+  "car_min_minutes": 8,
+  "car_factor": 0.6,
+  "bike_factor": 0.45,
+  "forget_umbrella_p": 0.25,
+  "sweat_from_feels": 30,
+  "sweat_comfort_per_hour": 22.0,
+  "sweat_event_from": 7.0,
+  "sweat_line_from": 4.0,
+  "p_bump": 0.012,
+  "p_found": 0.006,
+  "p_cat": 0.02,
+  "p_neighbour": 0.01,
+  "p_trip": 0.003,
+  "p_bike_chain": 0.01,
+  "p_seat": 0.06,
+  "p_close": 0.004,
+  "p_missed": 0.03,
+  "p_bag": 0.05,
+  "p_dog": 0.015,
+  "p_car_talk": 0.3,
+  "texting_window_minutes": 3,
+  "texting_bump_factor": 4.0,
+  "running_delay": 2.5
+
+[impulse]
+  "impulse": {
+  "weights": {"loneliness": 0.35, "boredom": 0.25, "validation_craving": 0.25, "anxiety": 0.10, "hunger": -0.12, "energy": 0.08, "curiosity": 0.10, "jealousy": 0.15, "affection": 0.20, "guilt": 0.18, "f
+  "shame": -0.30,
+  "anger": 0.12,
+  "sadness": -0.15,
+  "pride": 0.14,
+  "unwell": -0.10,
+  "longing": 0.32,
+  "belonging": -0.26},
+  "silence_hours_weight": 3.0,
+  "silence_hours_cap": 8,
+  "event_share_bonus": 25,
+  "threshold": 62,
+  "phone_access_factor": {"free": 1.0, "glance": 0.55, "none": 0.0},
+  "cooldown_minutes": 90,
+  "max_self_started_per_day": 6,
+  "max_unanswered_streak": 2,
+  "burst_gap_minutes": 10,
+  "presence_floor": 0.12,
+  "presence_weight": 0.35,
+  "min_sleep_gate_energy": 15,
+  "read_ignored_minutes": 45,
+  "withdraw_from": 30,          # below this it costs her nothing
+  "withdraw_weight": 45,        # full strength at tension 100
+  "withdraw_silent_from": 42,   # past this she simply does not reach out
+  "awkward_from": 25,
+  "awkward_weight": 20,
+  "read_ignored_bonus": 15,
+  "return_away_minutes": 45,      # gone this long before coming back is a return
+  "return_p_base": 0.10,
+  "return_p_per_hour": 0.05,      # per hour he was gone
+  "return_p_hours_cap": 8.0,
+  "return_p_unsaid": 0.25,        # x how far unsaid is over its rest (full at +60)
+  "return_p_max": 0.55,
+  "return_delay_minutes": [4, 25],  # she took it: she writes somewhere in here
+  "return_hold_minutes": 90,      # she did not: nothing self-started for this long
+  "backoff_minutes": [0, 45, 150, 420],
+  "backoff_read_factor": 1.5,     # he opened it and said nothing: that is an answer
+  "backoff_unseen_factor": 1.0,   # he has not looked: he may be away from the desk
+  "max_unanswered_per_day": 3,
+  "quiet_start_his": "23:00",
+  "quiet_end_his": "07:00"
+
+[pick]
+  "pick": {
+  "enabled": True,
+  "shadow": False,
+  "max_per_day": 30,
+  "min_gap_minutes": 25,
+  "moments": {"block": True, "scene": True, "beat": True, "inbound": True},
+  "later_default_minutes": 45,
+  "leave_it_minutes": 90
+
+[gossip]
+  "gossip": {
+  "enabled": True,
+  "every_hours": 20,
+  "new_per_run": 3,
+  "max_live": 5,          # how many the prompts are shown
+  "keep": 40,             # rows on file
+  "cool_per_day": 1.5,    # heat lost a day
+  "warm_on_use": 1.0,     # heat gained when somebody brings it up
+  "cold_below": 1.0,      # under this it is not going round any more
+  "shows_max": 3          # stated in her turn this many times unsaid, then it steps aside for the day
+
+[thread]
+  "thread": {
+  "verbatim_hours": 168,
+  "verbatim_min_hours": 36,
+  "max_age_hours": 720,
+  "recall_max": 2,
+  "recall_min_overlap": 2
+
+[stances]
+  "stances": {
+  "enabled": False,
+  "min_minutes": 12.0,
+  "hold_minutes": 25.0,
+  "expel_hours": 48.0,
+  "carrying_awkwardness": 45.0,
+  "settler_minutes": 30.0,
+  "sat_on_minutes": 60.0,
+  "name_it_once": False,
+  "unnoticed_below": 25.0,
+  "active_hours": 3.0,
+  "settled_from": 0.6,
+  "discretion_minutes": 30.0
+
+[nudge]
+  "nudge": {
+  "enabled": False,
+  "fire_on_unsaid": True,
+  "unsaid_min": 45,
+  "min_gap_minutes": 45,
+  "unsaid_relief": 12,
+  "unsaid_per_carried": 3,
+  "unsaid_soft_cap": 85,
+  "compare": True,
+  "mode": "live",
+  "friends": True,
+  "min_confidence": 0.5,
+  "max_chars": 360
+
+[attention]
+  "attention": {
+  "enabled": True,
+  "heavy_valence": -1,
+  "heavy_fresh_minutes": 30,
+  "cue_bonus": 0.3,               # a line that touches what he just said
+  "slot_min_weight": 0.5,
+  "foresight_veto_overlap": 2,
+  "section_default": {"her": 0.6, "him": 0.5, "day": 0.5, "phone": 0.4, "them": 0.6, "himf": 0.4},
+  "weights": {
+  "register": 0.8, "directed": 0.7, "attachment": 0.85, "withholding": 0.85, "unsent": 0.6,
+  "felt": 0.7, "receipts": 0.7, "rhythm": 0.5, "his_mood": 0.5, "foresight": 0.5,
+  "expectations": 0.6, "wonder": 0.4, "nag": 0.55, "gap_days": 0.7,
+  "body": 0.6, "around": 0.35, "today": 0.8, "goals": 0.6, "commitments": 0.55, "ledger": 0.85,
+  "travel": 0.3, "trip": 0.4, "money": 0.4, "shape_of_day": 0.6, "yesterday": 0.5,
+  "morning": 0.65, "anticipation": 0.5, "lore": 0.3,
+  "digest": 0.7, "digest_live": 0.5, "anime_list": 0.5, "x_recent": 0.5, "his_likes": 0.5, "his_follows": 0.4,
+  "her_actions": 0.35, "share": 0.35, "show_him": 0.6, "engagement": 0.6, "recall": 0.6,
+  "bond": 0.85, "behind": 0.6, "known": 0.5, "thought": 0.6, "promise": 0.65, "gossip": 0.45,
+  "owed_send": 0.8,
+  "said": 0.7, "threads": 0.5, "settled": 0.85, "him_last": 0.5
+  "covered_by": {"ledger": ["commitments", "money"], "settled": ["money"]},
+  "one_per_source": ["rhythm", "anime_list", "lookup"],
+  "tally_days": 14,
+  "unheard_days": 7,              # the window UNHEARD reads
+  "unheard_min_offers": 8,        # a source offered fewer times than this is too new to judge
+  "unheard_ok": ["travel", "lore"]
+
+[coherence]
+  "coherence": {
+  "enabled": True,
+  "max_seams": 12,                # kept per day from one reading
+  "keep": 200,                    # rows kept in kv coherence_flags
+  "absurd_days": 2,               # the window `/absurd` SEAMS reads
+  "context_days": 2
+
+[cast_bond]
+  "cast_bond": {
+  "enabled": True,
+  "min_turns": 2,                 # an exchange shorter than this is not read
+  "scar_after_hours": 48,
+  "tension_per_severity": 6,
+  "guilt_per_severity": 4,
+  "closeness_on_mend": 3,
+  "tension_off_on_mend": 8,
+  "guilt_off_on_mend": 6,
+  "closeness_on_scar": 4,
+  "mend_attachment": 3,
+  "mend_respect": 2,
+  "scar_resentment": 3,
+  "failed_bid_shame": 4,
+  "failed_bid_resentment": 2,
+  "promise_default_hours": 24,
+  "promise_grace_hours": 6,
+  "missed_resentment": 3,
+  "missed_tension": 4,
+  "kept_respect": 2,
+  "kept_relief": 4,
+  "mend_fondness": 3,          # per severity, a thing between them got sorted
+  "kept_fondness": 5,          # they did what they said they would
+  "confided_fondness": 3,      # she told one of them something real
+  "together_fondness": 2.5,    # an ordinary exchange with one of them that broke nothing
+  "fondness_soft_cap": 88,
+  "broke_fondness": 4,         # per severity, a new break with one of them
+  "failed_bid_fondness": 3,    # she reached to mend it and they did not take it
+  "missed_fondness": 4,        # they said they would and did not
+  "leave_threshold": 0.4,
+  "leave_max_per_day": 1,
+  "leave_min_gap_hours": 20,
+  "leave_tension_from": 35,
+  "leave_weight_tension": 0.6,
+  "leave_weight_resentment": 0.5,
+  "leave_weight_rupture": 0.3,
+  "leave_weight_low_mood": 0.3,
+  "leave_weight_fondness": 0.5,
+  "max_confidences": 12,
+  "event_salience": 3,
+  "memory_weight": 3
+
+[orbit]
+  "orbit": {
+  "enabled": True,
+  "max_people": 40,
+  "max_facts": 8
+
+[him_profile]
+  "him_profile": {
+  "enabled": True,
+  "every_hours": 24,
+  "digests": 40,
+  "min_digests": 8
+
+[afterthought]
+  "afterthought": {
+  "enabled": True,
+  "min_seconds": 45,
+  "window_minutes": 12,
+  "base_probability": 0.10,
+  "awkward_weight": 0.35,
+  "unsaid_weight": 0.25,
+  "craving_weight": 0.20,
+  "read_ignored_bonus": 0.20,
+  "read_silence_minutes": 4,
+  "ignored_window_minutes": 30,
+  "max_probability": 0.65,
+  "max_per_day": 2,
+  "max_bubbles": 2,
+  "phone_access_factor": {"free": 1.0, "glance": 0.4, "none": 0.0}
+
+[receipts]
+  "receipts": {
+  "enabled": True,
+  "telegram_process_names": ["Telegram.exe", "Unigram.exe", "LINE.exe"],
+  "idle_after_minutes": 20,
+  "read_min_seconds": 2
+
+[notes]
+  "notes": {
+  "enabled": True,
+  "skim_chars": 1800,
+  "skim_pieces": 5,
+  "index_in_prompt": 20,
+  "index_max": 200,
+  "director_max_per_day": 3
+
+[phone]
+  "phone": {
+  "digest_min_minutes": 8,
+  "look": {
+  "enabled": True,
+  "base_probability": 0.45,
+  "curiosity_weight": 0.8,
+  "boredom_weight": 0.3,
+  "loneliness_weight": 0.2,
+  "glance_factor": 0.35,
+  "with_people_factor": 0.3,
+  "sure_from_curiosity": 75,
+  "silence_weight": 0.45,
+  "ignored_weight": 0.70,
+  "silence_cap_hours": 6,
+  "sure_from_silence_hours": 10,
+  "look_relief": 15
+  "live_line": True,
+  "stale_minutes": 45,
+  "live_line_max_age_minutes": 45,
+  "vault_catalogue_items": 25,
+  "day_shape": True,
+  "max_raw_chars": 40000,
+  "max_entries_per_look": 12,
+  "max_entry_age_hours": 8,
+  "rolling_hours": 2,
+  "max_backlog_entries": 12,
+  "skip_unchanged": True
+
+[resident_sight]
+  "resident_sight": {
+  "enabled": True,
+  "poll_seconds": 10,
+  "glance_enabled": True,
+  "glance_dwell_seconds": 15,
+  "glance_settle_seconds": 45,
+  "glance_fresh_minutes": 25,
+  "glance_again_hours": 12,
+  "glance_impulse_bonus": 18.0,
+  "note_open_seconds": 20,
+  "note_max_chars": 6000,
+  "min_note_chars": 80,
+  "reread_after_seconds": 900,
+  "fresh_minutes": 30,
+  "sleep_after_idle_minutes": 40,
+  "night_start": "22:00",
+  "sleep_latest_start": "05:00",
+  "night_end": "11:00",
+
+[eroge]
+  "eroge": {
+  "enabled": False,
+  "cache_dir": "eroge/luna/cache/translation_record",
+  "userconfig_dir": "eroge/luna/userconfig",
+  "stale_minutes": 10.0,
+  "skip_lines_per_second": 1.0,
+  "max_raw_chars": 16000,
+  "min_new_lines": 20,
+  "max_chars": 600,
+  "card_max_chars": 600,
+
+[vault_snoop]
+  "vault_snoop": {
+  "enabled": True,
+  "base_probability": 0.035,
+  "anxiety_weight": 0.18,          # each gauge adds max(0, value - ITS baseline)/100
+  "loneliness_weight": 0.15,       # * weight -- unease only ever adds. Centring on a
+  "jealousy_weight": 0.18,         # flat 50 pinned p at zero (jealousy rests at 15),
+  "curiosity_weight": 0.09,        # and two-sided terms ate the base on her good days
+  "night_bonus": 0.05,             # added between night_start and night_end
+  "night_start": "23:00",
+  "night_end": "02:30",
+  "sure_from_anxiety": 85,         # this wound up: she just does it
+  "min_minutes_between": 180,      # spacing is the only cap; no per-day limit (his call)
+  "lying_awake_factor": 0.025,
+  "lying_awake_minutes": 90,
+  "daily_notes_only": True,
+  "daily_note_regex": r"^\d{4}-\d{2}-\d{2}",
+  "min_note_bytes": 200,           # skip the empty and one-line stubs
+  "recent_notes_pool": 20,         # draw from the newest N; 0 = all of them
+  "files_per_snoop": 2,
+  "skim_chars": 1200,
+  "skim_pieces": 4,
+  "downloads_enabled": True,
+  "downloads_window_days": 7,
+  "downloads_max_items": 12
+
+[talkapp]
+  "talkapp": {
+  "enabled": False,
+  "notify_burst_seconds": 45,
+  "host": "127.0.0.1",
+  "port": 8765,
+  "boot_wait_seconds": 120,
+  "token": "",
+  "push_enabled": True,
+  "typing_seconds": 9,
+  "log_keep": 3000,
+  "state_push_seconds": 20,
+  "peer_keep": 400
+
+[shape]
+  "shape": {
+  "enabled": True,
+  "tell_length": True,
+  "kinds": {
+  "curt": [1, 40],
+  "short": [1, 90],
+  "plain": [2, 220],
+  "full": [3, 420],
+  "spill": [6, 900]
+  "weights": {"curt": 6, "short": 34, "plain": 38, "full": 18, "spill": 4},
+  "upset_curt_from": 55,
+  "upset_short_from": 40,
+  "upset_sadness_weight": 0.6,
+  "upset_fade_hours": 36,
+  "tired_energy": 30,
+  "spill_pressure_from": 65,
+  "night_from": 22,
+  "question_full_bonus": 8,
+  "long_msg_chars": 240,
+  "engage_partial_p": 0.35,
+  "engage_upset_p": 0.75
+
+[situation_block]
+  "situation_block": {
+  "events_max": 4,
+  "noticed_min_gap_minutes": 60,
+  "primitives_numbers": True,   # "WHERE HE STANDS WITH YOU: he is on your mind 100; ..." -- the numbers line; the gate CONDITIONS stay either way
+  "habits_line": True,          # "his day, as you have it: in a program (18-23) ..." every message; a MISSED habit still shows
+  "ledger_preamble": True,      # the three-line explanation over the day's ledger; off, it is one word
+  "ledger_rest_of_day": 0,
+  "lore_preamble": "full",      # "full" or "short": what is said over the things she happens to know
+  "feel_tags_max": 0,           # feeling tags she is shown, strongest first; 0 = every one the state produces
+  "event_chars": 160,
+  "summary_chars": 420,
+  "unsent_hours": 6,
+  "unsent_chars": 220,
+  "live_hours": 1.5,
+  "digest_stale_weight": 0.25,
+  "own_phrases_from": 16,       # how many of her own last messages are read
+  "own_phrases_min": 4,         # how many of them a phrase must be in
+  "own_phrases_max": 5,         # how many phrases are named
+  "trip_lines": 2,
+  "trip_min_minutes": 12,
+
+[delivery]
+  "delivery": {
+  "editor_enabled": True,
+  "editor_gate": True,
+  "editor_recent_messages": 10,
+  "editor_lookback": True,
+  "editor_lookback_max": 5,        # at most this many older messages
+  "editor_lookback_scan": 1500,    # how far back the search itself reads
+  "editor_lookback_min_overlap": 2,  # words shared with the draft before a message counts
+  "editor_lookback_common_share": 0.02,
+  "language_flag": True,
+  "offline_wait_seconds": 900,   # hold a bubble this long for the network
+  "send_attempts": 3,
+  "send_retry_seconds": 4,
+  "compose_seconds": [6, 50],
+  "gap_marker_hours": 1.5,
+  "mood_delivery": {
+  "enabled": True,
+  "affection_cold_from": 30,
+  "affection_hate_from": 15,
+  "cold_weight": 0.8,
+  "standing_low": 35,
+  "standing_high": 70,
+  "tension_weight": 1.5,
+  "mood_weight": 0.8,
+  "craving_weight": 0.9,
+  "energy_weight": 0.5,
+  "comfort_weight": 0.5,
+  "min_factor": 0.4,
+  "max_factor": 3.0,
+  "cool_tension": 35,
+  "eager_craving": 70,
+  "shame_weight": 0.9,
+  "anger_weight": 0.35,
+  "awkward_weight": 0.8,
+  "sad_register": 45,
+  "shame_register": 45,
+  "anger_register": 40,
+  "awkward_register": 45,
+  "surprise_register": 35
+  "reply_retries": 2,
+  "no_repeat_recent": 12,
+  "recover_lost_reply_hours": 6,
+  "interruptible": True,
+  "busy_poll_seconds": 2,
+  "busy_poll_max_seconds": 180,
+  "typing_seconds_per_char": 0.045,
+  "typing_min_seconds": 4,
+  "typing_max_seconds": 45,
+  "read_delay_free_seconds": [20, 240],
+  "read_delay_glance_seconds": [120, 900],
+  "glance_reply_probability": 0.4,
+  "split_on_blank_lines": True
+
+[timeline]
+  "timeline": {
+  "compile_at": "23:55",
+  "compile_hold_for_chat": True,
+  "compile_quiet_by_hm": "04:00",
+  "narrative_min_chars": 900,
+  "narrative_min_scenes": 25,
+  "narrative_retries": 1
+
+[telegram]
+  "telegram": {
+  "bot_token": "",
+  "chat_id": "",
+  "max_message_length": 4096,
+  "poll_seconds": 5,
+  "flush_queue_on_start": False,
+  "console_only": False
+
+[sensors]
+  "sensors": {
+  "enabled": True,
+  "retrievals_db": "data/retrievals.db",
+  "retrievals_inflight_stale_seconds": 600,
+  "retrievals_inflight_wait_seconds": 120,
+  "retrievals_retry_after_minutes": 30,
+  "retrievals_max_retries": 2,
+  "telemetry_jsonl_path": "data/telemetry_feed.jsonl",
+  "telemetry_state_path": "data/telemetry_state.json",
+  "telemetry_pending_log_path": "data/telemetry_pending.txt",
+  "telemetry_poll_interval_seconds": 30,
+  "telemetry_heartbeat_interval_seconds": 300,
+  "telemetry_flush_threshold_chars": 18000,
+  "telemetry_flush_request_path": "data/telemetry_flush_request",
+  "telemetry_flush_wait_seconds": 4,
+  "collector_in_process": False,
+  "telemetry_now_path": "data/telemetry_now.json",
+  "telemetry_now_interval_seconds": 3,
+  "telemetry_now_stale_seconds": 30,
+  "system_monitor_enabled": True,
+  "system_monitor_poll_ms": 1000,
+  "window_title_blocklist": ["^[◐◑◒◓✳✴✻✽✶]", "Claude Code", "- Claude$", "^Claude$", "Claude Platform", "^claude\\.ai/", "^Administrator: +SCAIL ", "TALKAPP hub", "SCAIL"],
+  "window_title_blank_processes": ["WindowsTerminal.exe", "cmd.exe", "conhost.exe", "powershell.exe", "pwsh.exe", "OpenConsole.exe"],
+  "hidden_processes": ["WindowsTerminal.exe", "cmd.exe", "conhost.exe", "powershell.exe", "pwsh.exe",
+  "OpenConsole.exe", "python.exe", "pythonw.exe"],
+  "bands": {
+  "typing_hard_per_minute": 60.0,
+  "typing_steady_per_minute": 20.0,
+  "typing_light_per_minute": 4.0,
+  "burst_long_seconds": 30.0,
+  "uptime_long_days": 7.0,
+  "uptime_days_days": 2.0,
+  "uptime_today_days": 0.5,
+  "clicks_many": 60.0,
+  "clicks_some": 10.0,
+  "system_stats_interval_seconds": 60,
+  "typing_burst_gap_seconds": 3,
+  "image_viewer_processes": ["JPEGView.exe", "jpegview.exe", "JPEGView64.exe", "IrfanView.exe", "i_view64.exe"],
+  "chrome_process_names": ["chrome.exe"],
+  "chrome_history_path": "",
+  "chrome_max_raw_entries": 20000,
+  "chrome_idle_gap_threshold_minutes": 20,
+  "chrome_junk_filters": ["chrome-extension://", "chrome://", "accounts.google.com", "mail.google.com", "login", "signin", "oauth", "google.com/url?", "localhost", "127.0.0.1", "claude.ai", "claude.com"
+  "chrome_scrape_enabled": False,
+  "chrome_scrape_time_threshold_seconds": 120,
+  "chrome_scrape_interaction_threshold_keypresses": 5,
+  "chrome_scrape_max_text_length": 5000,
+  "chrome_cdp_port": 9222,
+  "image_window_gap_minutes": 5,
+  "image_window_summarize_min": 3,
+  "image_context_max_detailed": 6,
+  "image_max_age_hours": 4,
+  "image_max_windows_per_look": 3,
+  "scrape_log_path": "data/scrape_log.txt",
+  "firefox_enabled": True,
+  "firefox_history_path": "",
+  "firefox_junk_filters": ["about:", "moz-extension://", "view-source:", "file:///"],
+  "audacious_process_names": ["audacious.exe"],
+  "torrent_backup_dir": "",
+  "vault_path": "",
+  "vault_extensions": ["*.md", "*.txt"],
+  "vault_ignore_patterns": [".obsidian", ".trash", "yukarin-voice-models.md"],
+  "vault_read_time_threshold_seconds": 120,
+  "vault_max_file_length": 1500,
+  "vault_excerpt_chars": 700,
+  "gelbooru_enabled": False,
+  "gelbooru_api_key": "",
+  "gelbooru_user_id": "",
+  "gelbooru_ratings_json_path": "data/gelbooru/ratings.json",
+  "gelbooru_ground_truth_json_path": "data/gelbooru/ground_truth.json",
+  "gelbooru_cleaned_json_path": "data/gelbooru/cleaned_for_llm.json",
+  "gelbooru_request_delay": 0.1,
+  "gelbooru_cache_path": "data/gelbooru/gelbooru_cache.json",
+  "user_idle_seconds": 1200,
+  "mal_enabled": True,
+  "mal_username": "",
+  "mal_client_id": "",
+  "mal_poll_minutes": 30,
+  "mal_list_refresh_hours": 12,
+  "mal_list_path": "data/mal_list.json",
+  "mal_state_path": "data/mal_state.json",
+  "mal_shelf_watching_max": 10,
+  "mal_shelf_completed_max": 12,
+  "mal_history_enabled": True,
+  "mal_history_db": "data/mal_history.db",
+  "mal_history_max_events": 8,
+  "mal_notes_max_events": 5,
+  "mal_notes_max_chars": 400,
+  "x_enabled": True,
+  "x_profile_dir": "",
+  "x_tools_profile_dir": "",
+  "x_headless": True,
+  "x_images_db": "data/x_images.db",
+  "x_data_dir": "data/x",
+  "x_window_size": "1100,900",
+  "x_page_wait_seconds": 12,
+  "x_scroll_pause_min": 2.5,
+  "x_scroll_pause_max": 6.5,
+  "x_feed_scrolls_min": 3,
+  "x_feed_scrolls_max": 7,
+  "x_following_reloads": 4,
+  "x_followers_scrolls": 2,
+  "x_following_reload_wait_min": 20,
+  "x_following_reload_wait_max": 45,
+  "x_session_min_gap_minutes": 35,
+  "x_max_sessions_per_day": 10,
+  "x_actions_enabled": False,
+  "x_posting_enabled": False,
+  "chrome_extension_dir": "data/extensions/uBlock0.chromium"
+
+[vision]
+  "vision": {
+  "enabled": True,
+  "key_path": "secerts/project-7a56f373-e1de-4a94-9b8-bf340e6401b9.json",
+  "project_id": "",                # blank = take it from the key file
+  "region": "global",              # gemini-3.8-flash is global-only on this project
+  "model": "gemini-3.8-flash",
+  "temperature": 0.2,              # description, not invention
+  "thinking_budget": 0,
+  "max_output_tokens": 1200,
+  "timeout_seconds": 45,
+  "fetch_timeout_seconds": 15,
+  "max_image_bytes": 8000000,
+  "max_images_per_call": 4,
+  "max_calls_per_day": 80,
+  "backoff_seconds": 60,
+  "backoff_max_seconds": 1800,         # backstop; 4 looks x 8 = 32, plus his photos
+  "prompt_photo": "prompts/vision_photo.txt",
+  "prompt_x": "prompts/vision_x.txt",
+  "telegram_enabled": True,
+  "x_enabled": True,
+  "x_max_per_scroll": 8,       # measured: her sessions carry 5-17 eligible
+  "x_max_images_per_post": 2,
+  "x_max_output_tokens": 900
+
+[network]
+  "network": {
+  "down_after_failures": 3,     # consecutive failures before we call it down
+  "recheck_seconds": 30,
+  "skip_model_work": True,      # while down, do not burn LLM retries on a dead link
+  "resend_undelivered": True    # her bubbles wait for the network instead of vanishing
+
+[tts]
+  "tts": {
+  "no_repeat_recent": 8,
+  "enabled": True,
+  "always": False,
+  "aside_from_persona": False,
+  "on_demand": False,
+  "minimax_script_path": "",
+  "minimax_config_path": "",
+  "voice_id": "",
+  "mode": "sync",
+  "sync_endpoint": "https://api.minimax.io/v1/t2a_v2",
+  "sync_timeout_seconds": 45,
+  "recover_max_age_minutes": 30,
+  "ffmpeg": "ffmpeg",
+  "max_per_day": 200,
+  "cooldown_minutes": 0,
+  "require_alone": False,
+  "with_self_started": True,
+  "max_chars": 40,
+  "cache_dir": "data/voice"
+
+[logging]
+  "logging": {
+  "out_dir": "logs",
+  "dry_run_out_dir": "logs/dryrun",
+  "backup_dir": "data/backups",
+  "backup_keep": 21,
+  "db_path": "",
+  "console_status_interval_seconds": 30

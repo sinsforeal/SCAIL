@@ -1,0 +1,45 @@
+# tools\compile_audit.py  (376 lines)
+
+DOCSTRING:
+The nightly compile, run end to end on a copy of a save and checked
+against the record.
+
+    python tools/compile_audit.py --date 2026-09-03
+    python tools/compile_audit.py --date 2026-09-03 --config config_yukarin.json --db data/yukarin.db
+
+Builds the App the way the loop does (`tools/harness.build_on`), takes a
+census of everything the compile writes, calls `App.compile(date)` -- the
+whole path, backup and program hooks and all -- then takes the census again
+and prints one line per output with what it wrote. `--twice` runs the compile
+a second time on the same copy, which is what `/compile <date>` does, and
+reports what doubled.
+
+It spends: the day role, the cards role, the coherence role and whatever the
+settlers ask for. A few cents a character.
+
+DEFS:
+def _sql(app, q, args): 
+def census(app, date): Everything the compile can write, counted.
+def _has_col(app, table, col): 
+def _exposure(app): 
+def _norm(s): 
+def check_anchors(app, date): Every anchor of every card of the day, against the episode's own text.
+def check_language(app, memories): Her memories in the language she writes.
+def check_coverage(app, date, narrative): Does the narrative cover the day's scenes: the span of the record against the span the prose names, measured by the hours it mentions and by the locations of the first and last scene.
+def check_vectors(app, kind, refs): Which of these refs have a vector.
+def check_leaks(app): Nothing of the other character in this one's compile output.
+def diff(before, after, date): 
+def dupes(a, b): What the second run doubled.
+def gates(app): The two gates round the compile, read rather than assumed.
+def gate_run(config, db): The two gates, exercised rather than read: an App on a copy with its clock parked past the compile hour, `App.compile` replaced by a recorder so nothing is spent, and `exchange_live` forced. Prints one line per case.
+def main(): 
+def _new_fact_rids(app, before, after): 
+
+CONFIG SECTIONS: character, character.name, character.program, coherence.enabled, json, logging.backup_dir, timeline
+KV READ: compiled_dates
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: exchange_live
+OPS COMMANDS: 

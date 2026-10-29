@@ -1,0 +1,155 @@
+{
+  "source": "Mechanical: koikano_work/expression_labels_lines.jsonl, the label and pose the game's own lines carry when that face is on screen (2026-10-24, same method as characters/maria/expression_labels_unreviewed.json). Fills 30 of 真優's 61 unlabeled faces that appear in a line; the 79 faces already in koikano_work/inventory/expression_labels.json are not repeated here. Not visually reviewed. 31 faces are never on screen in a line and get no label: CA01A017 CA01A018 CA01A019 CA01A020 CA02A017 CA02A020 CA03A019 CA03A020 CA04A006 CA04A017 CA04A018 CA04A019 CA04A020 CA05A001 CA05A012 CA05A017 CA05A018 CA05A019 CA05A020 CA06A001 CA06A002 CA06A003 CA06A006 CA06A007 CA06A009 CA06A011 CA06A012 CA06A013 CA06A017 CA06A020 CA07A020. 6 labels come only from 'context' sprite sources (the weakest): CA01A004 CA01A005 CA05A004 CA06A004 CA06A005 CA07A004.",
+  "labels": {
+    "CA01A004": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA01A005": {
+      "expression": "angry",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA01A010": {
+      "expression": "neutral",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA02A018": {
+      "expression": "smile",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA02A019": {
+      "expression": "excited",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA03A013": {
+      "expression": "talk",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA04A002": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA04A010": {
+      "expression": "neutral",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA04A013": {
+      "expression": "talk",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA05A003": {
+      "expression": "talk",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA05A004": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA05A009": {
+      "expression": "sad",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA05A015": {
+      "expression": "surprise",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA06A004": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA06A005": {
+      "expression": "angry",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA06A008": {
+      "expression": "smile",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA06A010": {
+      "expression": "neutral",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA06A014": {
+      "expression": "laugh",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA06A015": {
+      "expression": "surprise",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA06A016": {
+      "expression": "sad",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA06A018": {
+      "expression": "smile",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA06A019": {
+      "expression": "excited",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA07A002": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA07A004": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CA07A009": {
+      "expression": "sad",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA07A010": {
+      "expression": "neutral",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA07A011": {
+      "expression": "smile",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA07A013": {
+      "expression": "talk",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA07A014": {
+      "expression": "laugh",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    },
+    "CA07A016": {
+      "expression": "sad",
+      "pose": "hands_clasped",
+      "confidence": "unreviewed"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+# tools\import_may.py  (202 lines)
+
+DOCSTRING:
+Bring the May 2026 era (SCAIL v2) into the v3 save file.
+
+Usage: python tools/import_may.py <retired_dir> [--db data/world.db]
+
+The old chat state and diary are not imported verbatim into her prompt: the
+old system had no wall between the fiction and the machinery. Direct messages
+go into the messages table for the record (they age out of her live prompt by
+delivery.history_max_age_hours), and each day is recompiled through the
+import_day prompt into a days row she can carry as memory. Facts about him are
+extracted from those recompiled days plus the old RAG table and filtered once
+more. A short backstory paragraph is stored under kv "backstory" and joins her
+system prompt.
+
+DEFS:
+def clean_user(content): 
+def leaks(text): 
+def scrub_narrative(llm, text, tries): 
+def _scrub_once(llm, text): 
+def main(): 
+
+CONFIG SECTIONS: logging.db_path, logging.out_dir, read_text
+KV READ: relationships
+KV WRITE: backstory, relationships
+TABLES: 
+LOG TAGS: import
+PROMPTS: 
+LLM ROLES: timeline
+OPS COMMANDS: 

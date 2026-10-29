@@ -1,0 +1,54 @@
+# sim\record_guard.py  (145 lines)
+
+DOCSTRING:
+Is this a record of what was in front of her, or something else?
+
+Three roles read a thing of his and write down what was there: the note open
+in front of her (`note_read`), his notes folder (`vault`) and his downloads
+(`downloads`). Each prompt asks for two to four sentences of record, in her
+language, with the lines a reader would stop on quoted as they stand and
+nothing at all about how it felt -- the record is put in front of her later
+and read back as her own memory, so a sentence about her feelings becomes her
+memory of having felt it.
+
+On 2026-09-07 the model holding those prompts on flash broke them three times
+in nine: 16:31:31 came back as his file pasted verbatim, 16:32:03 came back in
+feelings, and three came back in English. The prompt was right and the model
+did not hold it, which is the case a check exists for.
+
+Four refusals, in the order they are cheapest to test:
+
+  too long        the answer is more than `MAX_SHARE` of the skim it was
+                  handed. Only where the skim is long enough for that to mean
+                  anything: a 127-character skim was legitimately answered at
+                  355 and 412 characters on 2026-09-07, because two to four
+                  sentences of record about a short note is longer than the
+                  note itself.
+  a paste         the answer repeats a long run of his file word for word
+                  OUTSIDE anything it is quoting. A quotation is short and
+                  marked; a paste is neither.
+  wrong language  a character instructed in her own language whose prose --
+                  what is left once the quotations are out -- is more Latin
+                  than Japanese.
+  feelings        a phrase from `tools/interior_words.py`, which is the list
+                  the prompt checker holds every mechanism prompt to, plus
+                  the Japanese forms of the same ask.
+
+A refused answer is asked for once more with the reason appended to the user
+message. A second refusal keeps nothing: an event that is not a record is
+worse than no event, because it is read back to her as her own memory.
+
+DEFS:
+def _english_interior(): The English half of the phrase list: `tools/interior_words.py`'s own, which is what the prompt checker holds every mechanism prompt to, imported rather than copied so the two cannot drift. None if the tool cannot be impo
+def refusal(config, answer, skim, role): Why this answer is not a record, or "" if it is one.
+def _shared_run(answer, source, run): The first run of `run` characters the answer takes word for word out of the source, or "". Whitespace is squeezed on both sides first, so a paste that was re-wrapped on the way out is still a paste.
+def ask(llm, role, messages, config, skim, tag): Call a record role and hold it to writing a record.  One retry, with the reason it was refused appended to the user message -- the same shape as `LLM.call_json`'s retry for an answer that would not parse, and for the sam
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

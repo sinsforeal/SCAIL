@@ -1,0 +1,103 @@
+# embodied\situation.py  (915 lines)
+
+DOCSTRING:
+Where her body is, continuously, and what it costs her.
+
+His brief (2026-08-26): body state already reaches the gauges and some
+behaviour; extend it into a continuous low-level simulation -- location
+physics, fatigue accumulation, environmental affordances -- so that "I am
+tired and the room is hot and I still have to answer" is a persistent
+constraint on every action rather than a tag. Her commute and her trips
+should be modelled and events should happen to her from reality. Then
+(same day): walking speed from fatigue, weather, clothing and what she is
+carrying; sweat in summer; running when she is late, which costs more and
+bumps into people; rare positive and negative things on the way, or
+nothing; texting while walking is possible and not free of risk; the
+bike; her parents' car for a pickup or a family trip.
+
+Four objects, no LLM:
+
+**The place graph** (`data/places.json`): nodes she can be at and edges
+with a mode and minutes (walk, bike, train on a named line, a car). The
+free-text location the schedule or the director writes resolves to a node
+by keyword; a location that matches nothing leaves her where she was.
+
+**The journey.** When the block she is in wants her somewhere else, a
+journey starts from where she actually is: legs from the graph (BFS on the
+edges), each with its own minutes, mode and line. It runs on the clock,
+not on the director: the director is TOLD where she is on the way and how
+long is left, and may not put her at school before she has arrived.
+Reality lands on the legs: the train status feed on a train leg of hers
+(delayed adds minutes, suspended stops her with an event), the weather on
+a walk leg (rain she is in, heat she is walking in), the rush windows
+(the Seibu is packed), what she is wearing and carrying (the school bag,
+a yukata and geta, shopping), and whether she is late (she runs: faster,
+costlier, sweatier, likelier to bump into somebody). A finished journey
+is written to kv `journeys` with what happened on it.
+
+**Things that happen on the way.** Each leg rolls once, seeded by the
+journey so a restart does not re-roll, against a small table scaled by
+the conditions: a seat on a packed train, a dropped hairpin found, a cat
+on a wall, missing the express, a bump on the stairs, someone standing
+too close, a cracked screen. Most legs: nothing. Texting while walking is
+allowed and multiplies the bump chance while she is doing it.
+
+**Fatigue.** A code-owned body gauge (`fatigue`, rest 5, no decay of its
+own) that accumulates by what she is doing -- walking in heat, standing on
+a packed train, a day out, running -- and recovers only when she is
+resting (lying down, the bath, sleep). Energy is what sleep gives; fatigue
+is what the day takes. Readers: her read delay and composing (`State.
+delay_factor` via `delay_multiplier`), the impulse (a weight), the shape
+of her replies (`shape_bias`), her register, the tags, the director (HER
+BODY NOW), and her situation block. `/where` prints all of it.
+
+DEFS:
+def _family_words(config): The words a block's `with` may use for her family: the generic ones and the names of everyone on her roster whose role is a relative.
+def _stops_out(config): The stations on her way in, after her own, from her own map.  Empty for a character whose map has no commute in it, and then nothing in the table of what happens on a train names a place. Three sentences here used to nam
+class Situation: 
+    __init__(config, store, clock, weather, trains, body, state, calendar): 
+    _save(): 
+    resolve(location, activity): A node id for a free-text place, or None (unknown / in transit).
+    _neighbours(nid): 
+    route(a, b): Legs from a to b: BFS by hops. A place the map cannot reach gets the unknown-trip leg.
+    name(nid): 
+    travel_line(): The ways she can move, read off the map's own modes. She told him she would do her homework "on the bus"; there is no bus in the graph and never was. A model with no fact fills the gap itself, so the fact goes in the pro
+    trip_lines(texts, limit, min_minutes): Route lines for the places her day names. Each text is split into clauses first: a promises line lists three of them, and resolving the whole blob at once picks the longest keyword in it, which is how "the Pixar event to
+    minutes_to(node): How long getting there actually takes from where she is, in minutes, or None when it cannot be worked out. The honest figure -- what she BELIEVES about it is somebody else's business (`Commitments.running_late`).
+    trip_line(node, label, min_minutes): The real legs from where she is to a node. What a plan costs her in minutes and which line she is actually on is a fact she has; she should not have to guess it in front of him.
+    _rush(leg, ts): 
+    _line_status(line): (word, minutes_extra, stopped) for a train line from the feed.
+    _weather(): 
+    _outfit(blk, scene): What she is wearing and carrying, from the day and the block: a walk factor (>1 slower), a load factor on fatigue, and a sweat factor. Nothing here asks a model; the words in the schedule are enough.
+    _hurry(blk, nxt, eta_ts): Is she late? The next block's start against the plain eta.
+    _speed(leg, w, outfit, hurry): Minutes for a walk or bike leg as she actually moves them.
+    start(to, why, blk, nxt, scene, vehicle): A journey from where she is to `to`, now. `vehicle` may force "car" (a pickup, a family trip) or "bike".
+    pickup(why): Dad's car from wherever she is to home, when it is on offer.
+    _leg_txt(l): 
+    current_leg(ts): 
+    _roll(leg, i, seed, outfit, hurry): One roll per leg at departure, seeded, against the table for that mode. Most legs: nothing. The result sits on the leg until its minute comes.
+    _fire(leg, j): 
+    _texting_risk(leg, hours): Texting while walking: allowed, and it multiplies the bump chance for the minutes she is doing it. Read off her own messages.
+    _sweat(leg, hours, w): Summer in a uniform, on foot: comfort goes with the minutes in it.
+    _arrive(): 
+    tick(scene, blocks): Every loop pass. Moves her by the schedule and the director, runs the journey on the clock, accumulates fatigue. Returns events.
+    _pickup_offer(ts, leg): (ok, who, why): the family's answer when she is stranded. With no family object nobody can come: a character without one has nobody to ring.
+    _blocks(blocks): 
+    mode(): What her body is doing right now: walk / running / bike / packed_train / train / car / out / sitting / still / resting / bath / asleep.
+    _fatigue(hours, scene, blk): 
+    constraints(): 
+    delay_multiplier(): 
+    shape_bias(): 
+    register_line(): 
+    persona_line(): 
+    director_line(): 
+    report(): 
+
+CONFIG SECTIONS: conditions, environment, environment.transit_keywords, needs.heat_from_feels, needs.rain_mm_from, situation, situation.hurry_tolerance_minutes, situation.keep_journeys, situation.late_event_from, situation.sweat_event_from, situation.sweat_line_from, situation.tired_from, situation.wiped_from, state.gauges, world.places_file
+KV READ: journeys, situation, train_status
+KV WRITE: journeys, situation
+TABLES: 
+LOG TAGS: where
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

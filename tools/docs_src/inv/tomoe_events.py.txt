@@ -1,0 +1,24 @@
+# tomoe\events.py  (202 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Events: 
+    __init__(config, llm, store, clock, state, calendar, records, money, goals): 
+    upcoming(date): 
+    stances(): 
+    committed(): What she has said yes to, however unwillingly.
+    decide(date, force): One call, before the schedule is built, so the plan can honour it.
+    _when_from_the_promise(rows): A stance that is really one of her promises takes its day from the promise, not from the sentence. She agreed on Thursday to "the Pixar event tomorrow"; the commitment was dated Friday correctly, the words still said tom
+    brief(): For the schedule, which must honour it, and the director, which may deviate from it the way she would.
+    report(): 
+
+CONFIG SECTIONS: commitments, events, prompt_text
+KV READ: event_stances
+KV WRITE: event_stances
+TABLES: 
+LOG TAGS: events
+PROMPTS: events
+LLM ROLES: events
+OPS COMMANDS: 

@@ -1,0 +1,32 @@
+# tools\codebook_check.py  (256 lines)
+
+DOCSTRING:
+The mechanism codebook loads, every field is there, and nobody is named in it.
+
+The codebook (`data/codebook/v<version>.json`, `docs/codebook.md`) is the closed
+vocabulary a character's behaviour is coded against, and every `code` field
+written anywhere else points into it. This checks that it can still be pointed
+into: the schema of every entry, no duplicate id, no `excludes` naming a
+neighbour that is not in the book, an anchored entry that actually has anchors,
+a family inside the twenty, one version across the whole file, and no
+character's name anywhere in it -- the codebook is shared between every
+character and a person's name in an entry would make it one character's.
+
+    python tools/codebook_check.py         # exit 1 on a fault; run by smoke
+
+It reads the file and nothing else. No save, no model call.
+
+DEFS:
+def fail(problems, msg): 
+def check_entry(e, ids, problems): 
+def names_in(doc, problems): No character's name anywhere in the file.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

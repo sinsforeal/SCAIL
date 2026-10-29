@@ -1,0 +1,24 @@
+# tools\ready_test.py  (151 lines)
+
+DOCSTRING:
+What a character still needs before she can be run.
+
+`tools/character_test.py` asks whether a sheet is coherent. This asks a
+different question: if the loop were pointed at her tomorrow, what would it
+demand that does not exist? Every answer is a file that is missing, a prompt
+that is not ported, or a module that assumes something her sheet says is not
+true.
+
+    python tools/ready_test.py --sheet data/characters/yukarin.json
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

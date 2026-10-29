@@ -1,0 +1,114 @@
+# sim\pick.py  (1076 lines)
+
+DOCSTRING:
+What she does with the phone, asked as a call that picks a tool -- and acted on.
+
+Every decision to reach for him used to be a pure function (`sim/impulse.py`):
+a score over her gauges, the silence and his hours, against a threshold, with a
+roll on the edge. It can only answer one question -- does she write to him now
+-- so a moment that is wrong for him is a moment where nothing happens, and a
+promise to somebody who is not him has no term in it at all.
+
+This asks the other question, and what comes back is what happens. At a moment
+code already knows -- her plan gives her a free phone and something could be
+done -- she is handed what a person with a phone has in front of her (where she
+is, what has just happened, both clocks, the last of what the two of them said,
+what is unanswered in her own rooms, what she is carrying) and the tools she has
+a path to. The answer is what she DOES.
+
+**Code keeps every hard gate and decides every moment; she decides what.** The
+gates are listed in one place, `PhonePick.due`: her phone access off her own
+schedule, so there is no call at all when the phone is not in her hand; the
+frequency cap (`pick.min_gap_minutes`) and the day's cap (`pick.max_per_day`),
+which are the money; a live run, never a sim and never a replay; and what kind
+of thing she is, which decides the tools before the moment is built. A choice
+the world cannot honour -- a friend who is not hers to write to, a group chat
+that closed for the night -- is refused with the reason on the record and is
+NEVER rewritten into a different action.
+
+**The impulse function is the backup.** It still runs at the same tick and its
+answer is still recorded beside hers, because two mechanisms answering the same
+question is the only way to read either. What it no longer does is decide, so
+long as the pick answered: the loop acts on her choice, and falls back to the
+score and the roll when the pick is off for this character, was not due, came
+back malformed after `api.json_retries`, or was never answered at all. Every
+log line says which of the two decided.
+
+**The prompt is the persona's own daily half plus the tools.** The system
+message is `persona.system_for("him")` byte for byte -- the same string the
+reply path builds, so the provider's cached prefix is shared with it -- the
+tool definitions are constant bytes for a character and a kind of moment, and
+the moment itself is the last user message and the only part that moves, with
+`persona.carried_for()` in it so what she carries here is what she carries
+everywhere. Measured over the replay that earned this (`docs/tool-calling.md`
+§14): about 11k prompt tokens a call, 61% of them a cache hit, a tenth of a
+cent a pick. Nothing goes into her thread: a pick is not something anybody
+said (§10).
+
+**The wire.** Native tool calling where the host that serves her takes tools,
+and the same question as JSON in her text where it does not -- decided from the
+receipt of the last pick, which names the host that actually served it, and
+never from a guess about the pin (`api.hosts_without_tools`,
+`docs/tool-calling.md` §7). The JSON path goes through `LLM.call_json`, so an
+answer that does not parse is asked again `api.json_retries` times and the raw
+text is never stored as the decision.
+
+Three faults the replay found, all handled here: a tool name that was not
+offered (`dislike`, once), arguments that do not parse, and words coming back in
+the wrong language for a character who writes English to him. The first two are
+recorded as invalid, are never a pick, and leave the backup to decide; the third
+is why every argument that takes words asks for what she is reaching for and
+never for a message -- her words are still written by the call that writes her
+words.
+
+DEFS:
+class PhonePick: 
+    __init__(config, llm, store, clock, live): 
+    _t(): The one wording she is addressed in (`sim/lang.py`). Read per call so `/lang` moves it without a restart.
+    live_mode(): Is what she picks acted on. False is shadow: the call is made, the row is written, and the loop proceeds as it did before it existed.
+    _has_chat(): 
+    offered(trigger): The tool names this character has a path to at this kind of moment.  Fixed for a character and a kind of moment, and read from what she IS rather than from what this minute holds: a menu that changes with the minute cost
+    _rows(trigger): (name, what it is, what it costs her, arguments, required) for every tool of this kind of moment, in the source order.  Every description is addressed to HER, so both wordings live here side by side behind the language a
+    _own_people(): The people this character may open a room with, as the record names them. Empty for the character who keeps her world -- everybody in it is hers, and a list of the whole cast in every tool definition would cost her the c
+    _own_names_hint(): The names the option actually accepts, for a character who reads a world she does not keep.  She was offered the owner's whole cast as people she could write to and refused every time she picked one -- the partition rule
+    _own_only_line(): ...and the one sentence saying where the others are talked to.
+    _nothing_at(rows): Where the do-nothing option sits in the list today.  It is never first and it is not last every time. A tool that is always the last line reads as the fallback the others are alternatives to, and the replay's failure mod
+    tools(trigger): The tool definitions for this kind of moment, built once a day per kind: constant bytes behind the system half, which is what makes a pick a tenth of a cent.
+    moment(trigger, now, scene, digest, unread): The facts a person with a phone has in front of her, as the last user message of the call. No side effects and nothing drawn: the stances are entered by the reply path and a pick must not move one.
+    _opening(trigger, unread): The first line, and it says truthfully what this moment is. A moment described as a quiet one with nobody waiting, when he has just written, is a moment she is answering a question nobody asked.
+    _closing(trigger): 
+    _where(scene): Where she is and with whom, from the day's one truth: the scene the director wrote if there is one, else the block her plan settled (`sim/ledger.py`).
+    _him_lines(ts, digest): His side as the record has it: his last message, what her own last one has done since, how long he has been quiet, and what her sight of his machine last showed. The read-and-said-nothing sentence is `Receipts.line`, the
+    _said_lines(unread): The last few turns between the two of them, stamped on her clock.  The pick's system half is her daily one and carries no history at all, so without this she decides what to do about a conversation she cannot see. It is 
+    _room_lines(): What has been said in her own rooms that she has not answered.  Read through `sim/talks.py`, which is the record of her rooms without either engine behind it: a character with no cast and no peers simply has none, and no
+    _carrying(): What she carries into this moment: the one block both her rooms already place after the thread (`persona.carried_for`), plus the two things that are about to be said and have not been -- something off her own feed she me
+    block_key(schedule): Which block of her plan she is in, as one string. This is what "the same block" means across a restart.
+    scene_key(scene): Which scene she is in, as one string: what she is doing and where, so a director tick that rewrote the same activity is not a new moment.
+    due(trigger, access, schedule, scene): (ok, why, trigger). Every gate code keeps, in one place.  `access` is what her phone access reads right now -- the App's own answer, so a resident with no plan to be away from is judged by whether she is awake and a scho
+    standing(): Her own last answer, while it still stands.  A moment has ONE decider. Between one pick and the next, what she decided is what holds -- so the impulse function does not quietly write to him twenty minutes after she put t
+    holds(): Does her own last answer still stand at this tick, so code's own answer must not act over it.  It stands while the only reason she was not asked again is that this is the same moment or too soon after the last one. When 
+    ask(trigger, access, scene, digest, impulse, schedule, unread): One call, one answer, written to the save the moment it exists.  Returns the row, or None when this was not a moment to ask at, when the call was never answered, or when nothing that came back was a pick -- which are the
+    _ask_tools(system, moment, tools, again): Native tool calling: the answer is a call, and the client hands back what the model named without deciding what exists.  `again` is the one line added when the first answer carried no choice at all -- the same moment, as
+    _ask_json(system, moment, tools, again): The same question in her text, for a host that does not take tools.  `LLM.call_json` is the whole of the difference: an answer that does not parse is asked again `api.json_retries` times with the bad answer in the conver
+    _no_tools_hosts(): The hosts that take a request carrying tools and answer as if none were offered, as OpenRouter's own endpoint list has them (`docs/tool-calling.md` §7). Spelled as the RECEIPT spells them.
+    _transport(): Native tool calling, or the same question as text.  Decided from the receipt of the last pick -- which host actually served it -- and never from a guess about the pin, because the pinned host may fail through to another 
+    _write(row): 
+    note_acted(row, acted, why, fallback, fallback_why): What the seam did, written AFTER it did it.  The decision row goes to the save the moment the answer exists, with no claim about what happened; this fills that in once the action is on the record. Nothing here may be wri
+    decision(row): The one call that is acted on: the first valid one.  Several calls arrive in one answer even though `parallel_tool_calls` is never sent (`docs/tool-calling.md` §14.2). Acting on all of them would be two things happening 
+    validate(call, trigger): One returned call against the whitelist of offered names and that tool's own arguments. A name nobody offered and arguments that do not parse are recorded as invalid and are never a pick: the library hands back what the 
+    brief(picks): 
+    _impulse_brief(imp): 
+    rows(date): 
+    _outcome(row): What the record shows happened after the pick, in the same block: she sent something, a room opened, or nothing. Read off the store, so it says only what is on the record.
+    report(arg): `/pick [date]`: the day's moments -- how many she was offered, what she took, what was acted on, where the backup ran and why, and where she and the impulse function disagreed.
+    ops(): The operator payload's own entry: today's counts and the last pick.
+    boot_line(): 
+
+CONFIG SECTIONS: api, character, character.existence, pick, pick.enabled, pick.max_per_day, wonder.enabled
+KV READ: pick_aside, pick_block, pick_host, pick_last_ts, pick_scene, pick_standing, picks, x_show_pending
+KV WRITE: pick_aside, pick_block, pick_host, pick_last_ts, pick_scene, pick_standing, picks
+TABLES: 
+LOG TAGS: pick
+PROMPTS: 
+LLM ROLES: pick
+OPS COMMANDS: 

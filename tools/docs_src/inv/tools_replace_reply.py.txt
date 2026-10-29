@@ -1,0 +1,40 @@
+# tools\replace_reply.py  (117 lines)
+
+DOCSTRING:
+Replace one of her sent replies with new text -- in her store, on his phone,
+and in the voice note -- so the two records agree and the chat shows one
+message where it was.
+
+    python tools/replace_reply.py --message-id 141 --text-file new.txt
+    python tools/replace_reply.py --message-id 141 --text "..."          # short texts
+    python tools/replace_reply.py --message-id 141 --text-file new.txt --no-voice
+
+The usual source of the text is `tools/regen_reply.py`, which answers one of
+his messages again on a copy with the machinery as it is now. This puts that
+answer where the old one was. Three things happen, through the running bot
+and the hub, never by writing to the live save from outside:
+
+  1. `/context msg set <id> <text>` through the hub's ops queue rewrites the
+     row in her store (the bot does the write);
+  2. `POST /bot/edit` rewrites the same message on the hub, which the app
+     shows at once;
+  3. if that message carries a voice note, the new text is rendered through
+     her own `TTSQueue.render` (same synthesis, same cache, her voice) and
+     attached with `POST /bot/voice attach_to`, replacing the old note.
+
+To ADD a message instead, use the ops command `/send <text>`; to remove one,
+`/context msg drop <id>` (store and hub). The `[persona]` and `[sent]` log
+lines print only the first 80 characters of a message, so read the store,
+not the log, when checking what went out.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

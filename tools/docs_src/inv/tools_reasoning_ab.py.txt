@@ -1,0 +1,30 @@
+# tools\reasoning_ab.py  (135 lines)
+
+DOCSTRING:
+Re-run recorded voice-role calls with reasoning off, medium and high.
+
+The point is to see what thinking changes in a role that writes somebody's
+speech, on the exact bytes the bot sent. Every case names a run directory (or
+its zip) and a line number in `llm_calls.jsonl`; the `messages` from that
+record go back through the bot's own client, so the payload -- provider, host
+order, temperature, the JSON re-ask -- is what production sends. The only
+difference between conditions is `thinking` and `effort` on the role's model
+entry, set on the in-memory config of an App built over a COPY of the save;
+nothing on disk is touched.
+
+    python tools/reasoning_ab.py --out data/retired/<ts>_reasoning_ab
+
+The answers land in `answers.json` beside the report. Costs cents.
+
+DEFS:
+def record(src, line_no): 
+def main(): 
+
+CONFIG SECTIONS: raw
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

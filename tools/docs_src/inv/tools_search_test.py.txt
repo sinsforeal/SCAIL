@@ -1,0 +1,28 @@
+# tools\search_test.py  (106 lines)
+
+DOCSTRING:
+The two ways a search happens, on a copy of the live save.
+
+    python tools/search_test.py                       # the first character
+    python tools/search_test.py config_yukarin.json data/yukarin.db
+
+Three cases, in order: a draft that asks for a search is honoured and the
+marker never reaches him; a draft that asks while her day gives her no way
+to look is refused by code, with the refusal in the log; a thing the
+automatic lookup off his message already fetched is answered out of what she
+knows, with no web request and no model call. The first case spends one
+cheap call (`search_gist`) and one web request; the other two spend nothing,
+and the harness proves it by making every model call raise.
+
+DEFS:
+def line(s): 
+def main(): 
+
+CONFIG SECTIONS: json, lookup, lookup.on_request, lookup.search_per_day
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

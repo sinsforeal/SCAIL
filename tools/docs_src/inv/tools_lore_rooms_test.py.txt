@@ -1,0 +1,49 @@
+# tools\lore_rooms_test.py  (211 lines)
+
+DOCSTRING:
+Her own record reaches her in the rooms with her own people, and does not
+say the same thing twice.
+
+`tools/lore_test_rena.py` asks whether the retrieval finds the right record
+for a phrase. This asks the question one layer up: does a turn of hers in her
+own room actually CARRY that record's line into the prompt the model is sent.
+It did not until 2026-09-06 -- only her reply to him asked -- and a character
+whose past is in a record file remembered none of it where most of her words
+are written.
+
+Three cases, on the promoted character because she is the one with a record:
+
+  1. a friend names her brother: the record's own words are in her assembled
+     prompt, under the header that says knowing a thing is not being asked to
+     say it;
+  2. the next turn in the same room, where only HER own reply names him
+     again: nothing, because an anecdote she has just told feeding itself is
+     what `lore.own_words_days` exists to stop;
+  3. a room where nobody names anything of hers: no header and no line.
+
+Nothing here spends a model call or reaches the network, and it builds on a
+fresh save in a temporary directory, never on a live one.
+
+    python tools/lore_rooms_test.py
+
+Run by `tools/smoke.py`; a failure stops a restart.
+
+DEFS:
+class Captured: Her assembled request, caught on its way to the provider.
+    __init__(messages): 
+def cue_phrase(): 
+def build(tmp): 
+def a_friend(app): Somebody in her world to be talked to, from her own cast rather than written here.
+def prompt_for(app, who, kind, turns): The text of the request her room would send, without sending it.
+def record_texts(app): 
+def carried(prompt, texts, head): Is the record in this prompt, under its header?
+def main(): 
+
+CONFIG SECTIONS: character, character.name
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

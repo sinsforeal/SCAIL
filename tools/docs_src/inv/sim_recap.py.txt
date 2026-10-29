@@ -1,0 +1,92 @@
+# sim\recap.py  (2354 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Recap: 
+    __init__(config, store, clock): 
+    _ensure_table(): 
+    _pool_kind(kind, ep): What a row is filed under, never blank: an episode row is `anime` whether or not the caller said so, which is what lets one character's row be found by the other.
+    _shared_key(cls, kind, key, ep, aid, mtype): What the machine's store calls this thing. It names the THING and never the character: a show and an episode number, a person, a work.  **With an id it names the id and the edition** -- `anime|mal:1480|ova|ep1` -- becaus
+    _edition(aid, mtype): The edition a key is filed under, from one place: what the caller was told, else his own mirror. Two callers naming the same work must produce the same key, so this never guesses from a title.
+    _entry_titles(aid): What his own list calls this work: the romaji title and the English one. An archive files a show under whichever romanisation its uploader used, so a lookup that knows only one of them misses a show that is there. No net
+    _resolves_to(title, aid): Could a row filed under this title be about a work OTHER than the one asked for? Used on a row written before keys carried ids: it is read only when his own list holds exactly one entry of that name and that entry is the
+    _conf_of(row): How far a row may be trusted, for a row from either store. A row written before the column existed says only judged or not.
+    _local_row(key, ep, kind, aid): Her own row for (key, ep), or None.  With an id, a row that carries a DIFFERENT id is not this thing and is never returned; a row with none (written before the column, or by her own watchlist, which has no ids) still ans
+    _shared_row(key, ep, kind, aid, mtype): The machine's row for this thing, shaped like one of hers.  The id-aware key first. A row still under the plain-title key is read only when it cannot be about another edition -- when his list holds exactly one entry of t
+    _best(key, ep, kind, aid, mtype): Hers or the machine's, whichever is worth more: a row a judge chose beats one nobody judged, and between two of the same standing the later fetch wins.
+    _adopt(row, key, ep, kind, aid, mtype): The machine's copy answered and her save has no row for it: write one. Nothing is fetched -- the text is copied -- and the date is now, because now is when she was told.
+    _from_shared(key, ep, kind, aid, mtype): The machine's row for this episode, shaped like what `synopsis` returns, and written into her own record on the way past.  This is what a character who waited for somebody else's search gets back. She was told the same t
+    cached(key, ep, kind, aid, mtype): 
+    confidence(key, ep, kind, aid, mtype): What the cached row for (key, ep) is worth, in one word.  * `provisional` -- one candidate, or one no other candidate   corroborated, or a row from before any of this. Read once so an   episode is never blank, and refetc
+    judged(key, ep, kind, aid, mtype): Whether the cached page for (key, ep) may be trusted without being read again: judged among candidates, or anchored to a transcript.
+    row(key, ep, kind, aid, mtype): The whole cached row for (key, ep): the text, where it came from, what was decided and why. `None` if there is none in either store.
+    _store(entry, ep, text, source, judged, confidence, candidates, reason, anchor, scenes, archive, share): 
+    _share(entry, ep, text, source, judged, confidence, candidates, reason, anchor, scenes, archive): Write what was fetched into the machine's one store, so the other character never fetches it. A row a judge chose is never overwritten by one nobody judged.
+    _unshare(key, ep, kind, text, aid, mtype): Drop the machine's copy of a page that turned out not to be about this episode, so the other character is never handed it. Only when it is the same text: the other may have found a better page since.
+    episode_in(cls, text): The episode number he named in a message, or None. '4話', 'ep 8', 'S1E8', 'episode 12', '#3' -- not a bare number (too many false hits).
+    series_overview(title, ja): A fuller Japanese premise/overview of a whole series (its setup, who is in it, what it is about), cached at ep 0. For when HE mentions a series -- she should know more than the cast card. None on failure.
+    _wikipedia_intro(driver, ja, stops): The Japanese Wikipedia article's lead + premise, as its <p> paragraphs, before the character list / discography / staff. '' if the article is missing or a disambiguation. Works off the content region and paragraph tags, 
+    _kb_overview(kind, key, ja, wiki_stops, search_query, title): One path for a whole subject (a series, a seiyuu, an eroge): the Japanese Wikipedia lead first (its premise; official story pages are nav-heavy, and a direct fetch is not subject to blocked_hosts, which filters search re
+    person_overview(name, ja): A seiyuu's Japanese Wikipedia bio (who they are, career), for when he names a voice actor -- richer than the MAL role list.
+    work_overview(title, ja, kind): A Japanese overview of a game / visual novel / eroge, for when he names one or she snoops one -- its premise and what it is.
+    report(limit): The knowledge base she has built, for /kb: what has been fetched and cached, by kind, so repeat mentions are free.
+    recap_for(entry, ep, avoid, llm, anime_id, english): The あらすじ for (this show, this episode), from cache or the web. Returns the Japanese text, or None if nothing usable was found (the caller then lets the model do what it did before). Never raises.  `avoid` is a set of sou
+    recap_candidates(entry, ep, n, avoid, anime_id, english): Compatibility shape for a caller that wants only the text and the URL. `candidates` is the one with the verdicts on it.
+    candidates(entry, ep, n, avoid, anime_id, english, want, tried_max, page_chars): The candidate set for one episode: a fixed source list first, search second.  Each candidate is `{text, url, rank, source, anchor_only}`. Nothing is stored -- the caller digests each, judges them against each other and a
+    _search_pages(entry, ja, ep, want, avoid, tried_max): The Japanese search, unchanged in shape: [(sliced text, url, html)].  A page under `min_chars` is kept when it has a section for this episode -- that is the official blurb, and it is the anchor rather than a candidate.
+    remember(entry, ep, text, source, confidence, candidates, reason, anchor, scenes, show_key, archive): Store a synopsis a reader chose among several candidates, with what was decided and why, and drop any row for the same episode that this one is at least as good as -- so the choice is what the cache answers with rather t
+    digest_page(llm, name, ep, text): One page condensed by the `watching_digest` role: (digest, scenes).  The scenes list is one line per scene or sketch, in order, and comes out of the same call rather than a second one. The digest is what she reads; the s
+    _role_model(role): The model a role runs on, so a page digested by one model is never read as though another had written it.
+    _digest_call(llm, name, ep, text): The one paid call behind `digest_page`. None means it came back with nothing, and nothing is stored, so the next reader may try again.
+    judge_candidates(llm, ja, ep, scored, anchor, anchor_kind): Which candidate a viewer would trust, compared with each other and with the anchor: (index, why, corroborated).  `corroborated` is the list of other candidates the judge says agreed with the winner, and it is what makes 
+    _judge_result(row, scored): A stored verdict read back as (index, why, corroborated). No row means the call failed, and the first candidate is taken, which is what this did before there was a store.
+    _judge_call(llm, prompt, n): The one paid call behind `judge_candidates`.
+    synopsis(entry, ep, llm, anime_id, english, avoid, titles, video, watched_seconds): The whole path for one episode: cache, transcript, candidates, digests, one judge, one row.  Returns `{text, source, digest, scenes, confidence, reason, anchor, candidates}` or None. Both watching paths go through this -
+    account(entry, ep, aid, mtype): The stored account of one episode -- everything read about it, merged -- or None. Reads the machine's copy when her save has none and writes it into her save on the way past, the same as a page does.
+    _build_account(entry, ep, llm, digests, anchor_text, anchor_url, anchor_kind, anchor_row, show_key, ja, aid, mtype, english, ep_title): One account of the episode out of everything that was read for it.  Called at every exit of `_read_up` that has material, including the two where no web page survived: an episode whose only source is its own subtitle fil
+    _read_up(entry, ep, llm, anime_id, english, avoid, ja, aid, mtype, show_key, names, video, watched_seconds): The reading-up itself, under the claim: the episode's own subtitle file as the anchor, the ranked sources and the search as candidates, one digest each, one judge over all of them, and one stored row.  Split out of `syno
+    character_page(name, show, query_template, hosts): A fan-encyclopedia article about a character: (text, full name, url).  The URL of a pixiv dictionary article is its title, URL-encoded, so the full name comes free with the hit (丸井みつば from /a/%E4%B8%B8...). Cached in `re
+    _harvest(entry, ja, ep, avoid): 
+    _open(): 
+    _close(driver): quit() covers the clean path; then kill any Chrome/chromedriver still bound to THIS temp profile (headless Chrome orphans renderers, and a bot killed mid-fetch never runs quit at all), and remove the temp profile dir. Wi
+    sweep_orphans(log): Kill any recap Chrome left by a fetch that was killed before _close (a bot restart mid-fetch), and remove its temp dir. Reap on the way in: called from __init__ so a fresh bot owns a clean slate.
+    _http(url, limit, accept): 
+    _meta(html, prop): 
+    list_site_episode(anime_id, ep): The episode page on his own list's site: the synopsis is the page's own description meta tag, one regex and no container walk. English, and scene by scene on a multi-sketch show, which is the case every Japanese source h
+    page_heading(cls, html): What the page CALLS ITSELF: the social-card title, the document title and the first two headings, run together.  `_extract` returns the article container, and on every blog engine his search finds, the container starts u
+    cached_episode_titles(anime_id): `{episode: [subtitle, ...]}` for one series FROM WHAT IS ALREADY ON FILE, and nothing fetched.  The slice test runs inside a search loop and on the reply path, where a request nobody asked for would be a fetch the caller
+    slice_titles(anime_id, ja, ep): The subtitles the episode-slice test may recognise: the series' episode index as it is on file, and this episode's own title off the account of it, which is where a Japanese part title ends up for a series whose index ca
+    episode_titles(anime_id, entry): Every episode's English, romaji and Japanese subtitle for one series, from one request, cached under kind `eptitles`.  This is what answers the case nothing catches today: a page whose number matches and whose episode is
+    _wikitext(url): One article's wikitext, or '' when there is no such article.
+    _wiki_norm(s): A heading or a title reduced to what the two have in common: the year in brackets, the italics and the spacing go, the season marks (`!!`, `♪♪`, `2`) stay, because they are the difference between two series in one articl
+    _wiki_section(cls, body): {episode: summary} for one section of an episode-list article.
+    wikipedia_episodes(english_title, entry): English Wikipedia's `List of <show> episodes`, as {episode: summary}.  The article carries every episode, so one request serves a whole series and it is cached under kind `wikieps`. The summary column runs 60 to 120 word
+    _total_episodes(entry, anime_id): How many episodes this work has, from his own mirror: 0 when nobody knows. It is the one fact that makes a page's own numbering checkable.
+    past_the_end(cls, text, ep, total): True when a page names an episode this work does not have.  The existing guard (`wrong_episode`) only fires when a page names ANOTHER episode of the same entry by its subtitle, so a namesake's episode 1 passes it -- whic
+    wrong_episode(text, ep, titles): True when a page's number matches and its episode does not.  The page names an episode subtitle beside the number; if that subtitle belongs to a DIFFERENT episode of this series and this episode's own subtitle is nowhere
+    _search(driver, query): Bing first, then DuckDuckGo HTML; the organic result URLs in order.
+    _result_links(html): 
+    _page_source(driver, url, marker, need): 
+    _extract(html, url): 
+    _first_block(html, selector): A cheap container grab by class/id/tag (no live DOM: the html is a string we already have). class '.x' -> first element carrying x.
+    _strip(html): 
+    _running_order(cls, seg): True when the slice is the episode's running order rather than an account of it: three or more of a programme table's own headings and almost no sentences. Measured on the rows already fetched for one show -- the four bl
+    _flat(cls, text): 
+    _ep_markers(cls, text, ep_titles): [(start, end, episode number)] for every episode marker in the body, in order. A bare `2話` whose digit follows another digit is the tail of `第12話` and is not a marker of its own.  AN EPISODE'S OWN SUBTITLE IS A MARKER TO
+    _names_episode(cls, text, ep, subtitles): Which form says this text is about episode `ep`, or ''.  `第7話` was the whole test, and a 感想 post is titled `#07`, `７話`, `07話`, `Episode 7` or by the episode's own subtitle at least as often. On three readings of one epis
+    _season_page(cls, text, ep, total): A page carrying markers for most of a series rather than an account of one episode: an index, a nav strip, a season page. Reported so the answer is *slice it better*, not *skip it* -- the official あらすじ page for one episo
+    _episode_slice(text, ep, ep_titles, page_title): This episode's section of a page, or ''. `_slice_and_why` with the refusal thrown away, for the callers that only want the text.
+    _slice_and_why(text, ep, ep_titles, page_title): `(this episode's section of a page, why there is none)`.  **The first occurrence of the marker is usually the navigation.** A page for one episode of a 2010 show opens with a strip listing all thirteen episode titles, so
+    _end_at_chrome(seg): A blog post's body ends where its chrome begins. Without this a short post ran 2,200 characters into the author's profile, recent posts and comments, and the digest role read a baseball blog's sidebar as the episode. The
+    _by_heading(text, ep, own, page_title): `(the whole post, why not)` for a page whose BODY names no episode.  The page's own heading is asked instead, in every form a post writes its number in and by the episode's own subtitle. Two refusals stand over it: a bod
+
+CONFIG SECTIONS: model, prompt_text, py, recap, recap.max_chars, recap.min_chars, recap.overview_query, recap.page_timeout_seconds, recap.seiyuu_query, recap.user_agent, recap.work_query
+KV READ: 
+KV WRITE: 
+TABLES: recaps
+LOG TAGS: account, recap, resolver
+PROMPTS: digest_judge, watching_digest
+LLM ROLES: digest_judge, watching_digest
+OPS COMMANDS: 

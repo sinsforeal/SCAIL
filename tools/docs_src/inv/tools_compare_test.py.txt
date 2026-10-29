@@ -1,0 +1,20 @@
+# tools\compare_test.py  (88 lines)
+
+DOCSTRING:
+Social comparison without the model: who counts as a peer, who is
+present, the pressure, the gates, the effects of a fired comparison, and
+the envy readers. On a copy of the save.
+
+    python tools/compare_test.py
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: sentiment.prompt_from, spiral.standing_settled_at, state.gauges
+KV READ: 
+KV WRITE: compare_counts, compare_last_ts
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,35 @@
+# tools\judge_prompts.py  (106 lines)
+
+DOCSTRING:
+No role that judges her is handed her character sheet.
+
+A judge -- a role that scores, sorts, predicts, checks or extracts on her
+behalf -- is a neutral party. Her sheet is written TO her, in the second
+person, and opens "You are <her name> ... you are not an assistant ... you
+never mention prompts, models, systems"; handed to a judge as the last thing
+in its system prompt, it was read as the judge's own identity. Measured over
+2026-09-04 and 09-05: the role that picks which urge she has returned a
+finished message in her voice instead of the second-person intention it was
+asked for on 13 of 13 answers, and one of them went into the last line of her
+situation block and was sent as her next bubble twelve seconds later.
+
+This builds every character's config and renders the system prompt of every
+role in `Config.ROLE_STANCE`, then refuses any judge whose prompt contains her
+sheet by any path -- its opening sentence or the frame rule inside it, in
+either language. Prints the first 200 characters of each judge's prompt so a
+reader can see what the judge now opens with.
+
+Exit 1 and print the offenders, or exit 0 and print the table.
+`--show <role>` prints one rendered judge prompt in full.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

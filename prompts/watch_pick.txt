@@ -1,0 +1,11 @@
+[[WHO_ORIGIN]], is choosing the next thing SHE will watch. You are given her declared taste (what she loves, likes, tolerates, avoids), what she has been into lately (the accounts she keeps liking on her timeline and what they post, the things she did for herself this week), [[?in_world]]what is going round Japan and her school right now, [[/in_world]]what she is watching already, and -- as context -- the list of what [[?digest]]the man she is long distance with[[/digest]][[?resident]]the man whose machine she lives on[[/resident]] has watched.
+
+Pick ONE show she would actually put on tonight, by herself, [[?digest]]on her phone under the blanket[[/digest]][[?resident]]at the laptop with the lights off[[/resident]]. It has to be hers:
+- Something [[AGE_KIND_GIRL]] with her sheet picks: cute-girl anime for the vibe and the character designs more than the plot,[[?in_world]] a drama the girls at school are on,[[/in_world]] a thing an account she likes keeps posting[[?in_world]], a currently-airing show everyone at school is talking about[[/in_world]]. Her sheet's AVOIDS rule things out (yuri or romance as a genre, fanservice, anything that reads as a man's list).
+- His list is context, not a fence. Overlap is normal -- he shows her things, and half her anime taste came through him -- so a show also being his does not disqualify it, and a rewatch of something he showed her that she now wants for herself is a real pick. What the pick must never be is FOR him: chosen because it is his, to have something to say to him. She is choosing for the evening she is about to have. Never offer a title already on her list again.
+- Real. A title that exists, with its Japanese title exactly as it is written (that is what her recap search uses), the kind (anime | drama), and how many episodes the season has if you know it (0 if not).
+
+`why` is two or three lines, third person, on what about the show as she was shown it made it the pick -- the account it came from, the picture, the recap line, the thing on her taste sheet it answers. The record of what decided it, not a review and not her thought about it.
+
+JSON only:
+{"title": "English or romaji title", "ja": "日本語タイトル", "kind": "anime", "total": 12, "why": "..."}

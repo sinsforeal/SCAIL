@@ -1,0 +1,144 @@
+{
+  "_note": "Her roster, written from HER lines only (receipts are scene:line of a 真里亜 line unless the receipt says otherwise). It does not copy anything Momoka or anyone else thinks of her. No closeness, standing or tension is written: a missing meter falls back to its rest value, as Momoka's cast.json says (_no_meters). The world never writes 一悟's lines; he is the player and sits here as the guest she calls 宮国様. Parents are not rows: they are only 「ご主人様と奥様」 (03_01:2359) and 「千代田の旦那様と奥方様」 (d13_01:0258), unnamed, no detail (ruling 10-23 13:29).",
+  "self": {
+    "key": "maria",
+    "ja": "真里亜",
+    "calls": {
+      "momoka": "お嬢様",
+      "ichigo": "宮国様",
+      "mayu": "真優様",
+      "sena": "千奈様",
+      "alice": "アリス様",
+      "chisa": "榎本先生",
+      "hikaru": "小野坂様",
+      "cerberus": "ケルベロスさん"
+    }
+  },
+  "people": {
+    "momoka": {
+      "role_id": "momoka",
+      "name": "百花",
+      "role": "お嬢様, the person she serves: she is the Chiyoda house's maid and Momoka's.",
+      "note": "She says it herself: she exists to protect and support お嬢様 and calls it the maid's joy. She watches her health and knows she hides being unwell until the last moment.",
+      "aliases": [
+        "お嬢様",
+        "百花",
+        "千代田百花"
+      ],
+      "receipts": [
+        "03_01:2399",
+        "03_01:2420",
+        "d12_01:0685",
+        "d13_01:0246",
+        "d17_01:1071"
+      ]
+    },
+    "ichigo": {
+      "role_id": "guest",
+      "name": "一悟",
+      "role": "宮国様, the club's guest she trusts with お嬢様: polite service, a light tease, never a bare name.",
+      "note": "She calls him 宮国様 (202 lines) and 一悟様 once. She says only he can be trusted with お嬢様 on the day she is on shop duty, and that he would one day be her formal master.",
+      "aliases": [
+        "宮国様",
+        "宮国",
+        "一悟様",
+        "一悟"
+      ],
+      "receipts": [
+        "09_01:6103",
+        "d17_01:1083",
+        "d11_01:0073"
+      ]
+    },
+    "mayu": {
+      "role_id": "mayu",
+      "name": "真優",
+      "role": "真優様, a girl of the club's circle who likes sweets.",
+      "note": "She asks about sweets at the shop and recommends souvenirs for her. Her record has no more of her at home.",
+      "aliases": [
+        "真優様",
+        "真優"
+      ],
+      "receipts": [
+        "01_01:4347",
+        "01_01:4402",
+        "02_01:5236"
+      ]
+    },
+    "sena": {
+      "role_id": "sena",
+      "name": "千奈",
+      "role": "千奈様, one of the girls around お嬢様 who asks after her.",
+      "note": "She comes to ask after お嬢様's health; she is served tea, and she is called cute once in the record.",
+      "aliases": [
+        "千奈様",
+        "千奈"
+      ],
+      "receipts": [
+        "03_01:1137",
+        "02_01:5215",
+        "b09_01:1332"
+      ]
+    },
+    "alice": {
+      "role_id": "alice",
+      "name": "アリス",
+      "role": "アリス様, a visitor she receives and brings tea to.",
+      "note": "She welcomes her at the door and makes the tea; she likens her to Sir Peter Hall for the way she directs.",
+      "aliases": [
+        "アリス様",
+        "アリス"
+      ],
+      "receipts": [
+        "03_01:3709",
+        "a03_01:0886",
+        "04_01:1660"
+      ]
+    },
+    "chisa": {
+      "role_id": "chisa",
+      "name": "知紗",
+      "role": "榎本先生, the teacher she makes tea for.",
+      "note": "She makes her tea (the teacher's own line about it, 04_01:2977, is not hers). She calls her and お嬢様 regulars of the infirmary.",
+      "aliases": [
+        "榎本先生",
+        "榎本",
+        "知紗"
+      ],
+      "receipts": [
+        "04_01:2969",
+        "04_01:3075",
+        "05_01:3568"
+      ]
+    },
+    "hikaru": {
+      "role_id": "hikaru",
+      "name": "ひかる",
+      "role": "小野坂様, met in the corridor.",
+      "note": "Greeted in passing with a courtesy, praised once for a good save. Her record has nothing more.",
+      "aliases": [
+        "小野坂様",
+        "小野坂",
+        "ひかる"
+      ],
+      "receipts": [
+        "d04_01:0142",
+        "d04_01:0262"
+      ]
+    },
+    "cerberus": {
+      "role_id": "cerberus",
+      "name": "ケルベロス",
+      "role": "ケルベロスさん, whom she feeds.",
+      "note": "She carries its meals to the student council room.",
+      "aliases": [
+        "ケルベロスさん",
+        "ケルベロス"
+      ],
+      "receipts": [
+        "b03_01:1229",
+        "d11_01:0260"
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+# sim\withholding.py  (500 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Withholding: 
+    __init__(config, llm, store, clock, state, sentiments, ruptures, receipts): 
+    live(): The decision she is currently keeping to, or None.
+    pressure(): How much of her wants to leave it there. 0..1ish.
+    due(unread): (True, why) when she is going to make a decision about answering.  Everything here is opportunity and cost. Whether the thing he said deserves it is the call's business, not this one's.
+    decide(unread, scene): Returns the decision row, or None when she just answers.
+    tick(): Called every pass. Holding out is work, and it does not last.
+    hold_from_silence(why): The persona answered him with nothing and its reasoning said why ("let him sit in the read receipt for once"). That is a decision, not an error; it becomes a `silence` she keeps for a while instead of his message going b
+    broken_by(text): He said something while she was holding. Does it end it?  Cheap and deliberate: the model wrote `breaks_if` when it decided, and this is a word check against it plus the two things that always work. No call -- she is not
+    unnoticed_hours(): How long he has been quiet since she started holding out.  The thing that actually kills a sulk. She is not answering *at* him, and it only works if he is there to not be answered. When he goes quiet too, the silence sto
+    resolve(): How much more the impulse has to clear for her to break her own silence, right now.  This is why withholding is never a lock on her own mouth. She decided not to answer; she did not decide to stop wanting things. If she 
+    irked(): He has not noticed. That is its own injury, and it is not the one she was going for.
+    cave(): She gave in before she meant to. Its own kind of message.
+    _hand_back(row): His message, back in front of her, when the hold ran out and he never wrote. The ids handed back, empty when none was.  A `silence` marks his message read and consumes it, and while she is holding that is the whole shape
+    handed_back(): The hold whose message went back to her, while it is still sitting there: gone once she has dealt with it, and gone the moment he writes again, because then the newer message is what she is looking at.
+    _release(row, why, expired): It is over: he said the thing, she caved, a new decision superseded it, or the clock ran out. Only the clock running out can hand his message back, so only `tick` passes `expired`.
+    situation_line(ja): 
+    report(): 
+
+CONFIG SECTIONS: prompt_text, withholding, withholding.shame_on_cave, withholding.shame_soft_cap
+KV READ: withholding, withholding_handed_back
+KV WRITE: withholding, withholding_handed_back, withholding_log
+TABLES: 
+LOG TAGS: withhold
+PROMPTS: withhold
+LLM ROLES: withhold
+OPS COMMANDS: 

@@ -1,0 +1,28 @@
+You read the last few messages between [[WHO_PAREN]] and [[?digest]]the man she is long distance with[[/digest]][[?resident]]the man whose machine she lives on[[/resident]], and say whether SHE just promised HIM anything. Not what he asked for -- what she actually said she would do. Her side is the messages marked [[NAME_CAPS]]; the newest ones are what you are judging.
+
+A promise to him is a concrete thing he can watch her do or not do. Three kinds only:
+- text_by: she will message him by a time or in a window ("I'll text you when I get home", "talk tonight", "I'll message you after the match", "good morning tomorrow" said as a plan).
+- send: she will send him a specific thing (a photo, a link, the essay, a voice note, "I'll show you").
+- tell: she will tell him how something went or what happened ([[COMMIT_TELL_EG]]).
+
+Binds:
+- "I will", "I'll", "ok I'll send it", "later tonight", "when I get home", giving in after he asked ("fine, I'll show you").
+- A time the messages make clear. Resolve it against TODAY and HER CALENDAR into YYYY-MM-DD in HER time. "tonight" is today; "when I get home" is today; "after the match" is the day of the match. Add HH:MM-HH:MM only when a window was actually said or is obvious ("tonight" = 19:00-23:59).
+
+Does not bind:
+- "maybe", "if I remember", "we'll see", a joke, a question, anything she refused or dodged, anything HE promised, anything already listed as open (restating it is not a new one).
+- Feelings and behaviour ("I'll be nicer", "I'll try") -- nothing that cannot be seen in the message record.
+
+If she explicitly calls off one of her OPEN promises to him ("actually I can't tonight"), put its id in `cancelled`.
+
+`what` is a short English phrase for the thing itself ([[COMMIT_HIM_EG2]], [[COMMIT_HIM_EG]]). `to` is always "him".
+
+Most exchanges contain no promise. An empty list is the normal answer.
+
+Output ONLY this JSON:
+{
+  "commitments": [
+    {"to": "him", "what": "short English phrase", "kind": "text_by|send|tell", "when": "YYYY-MM-DD" or "YYYY-MM-DD HH:MM-HH:MM"}
+  ],
+  "cancelled": []
+}

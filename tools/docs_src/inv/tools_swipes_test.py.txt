@@ -1,0 +1,48 @@
+# tools\swipes_test.py  (252 lines)
+
+DOCSTRING:
+Drawing one of her replies again, and choosing which answer stands.
+
+    python tools/swipes_test.py             # the whole thing, on a copy of the second character's save
+    python tools/swipes_test.py --store     # the two tables and their readers only (what smoke runs)
+
+No model call is ever made: `LLM.call` is replaced by a stub that returns a
+fixed text and counts what it was asked, so what is checked is the wiring --
+that the prompt kept against a delivered reply is byte for byte the one the
+persona was actually sent, that looking at another answer changes nothing in
+her record or in the thread she is next handed, and that keeping one changes
+both and carries no other candidate with it.
+
+What it checks, in order:
+
+1. a reply delivered through the real path leaves a `reply_prompts` row whose
+   messages are the persona call's own messages;
+2. two draws leave two candidates under the models they were drawn on, and
+   the reply she actually sent is candidate 0;
+3. looking at a candidate leaves her record and the thread exactly as they
+   were;
+4. keeping candidate 2 puts its words in her record, in the thread's
+   rendering of that message, and in the next thread build -- and puts no
+   other candidate anywhere;
+5. the toggle moves the model the next call in her voice goes out on, and
+   leaves a role that is not her voice alone.
+
+DEFS:
+def check(ok, what, detail): 
+def store_only(): The two tables and their readers, on a temp save, with no App. This is the half smoke runs: it needs no character and no model.
+class Stub: Every model call, answered from a script and counted. The role and the
+    __init__(config): 
+    call(role, messages, max_tokens, _model, _provider, _json): 
+    call_json(role, messages, max_tokens): 
+    last(role): 
+def full(): 
+def main(): 
+
+CONFIG SECTIONS: model
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

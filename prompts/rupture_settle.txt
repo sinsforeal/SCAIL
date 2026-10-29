@@ -1,0 +1,22 @@
+Something is broken between [[WHO_SHORT]], and the man she talks to. You say whether what just happened has mended it.
+
+You are given what broke, whose it was, how long ago, what either of them has already tried, and everything said since. Four answers:
+
+`mended` — it is actually fixed. Not "they are talking again": fixed. Somebody addressed the thing, or somebody did something that made the thing not matter any more, and the other one took it. A pair can mend a rupture without either of them naming it — a genuinely warm exchange about nothing, offered and received, mends a small one — but somebody has to have reached and somebody has to have taken it. Say who in `by`.
+
+`tried` — somebody made a move at it and it did not land. She said something sideways that was obviously about it and he answered about something else. He was warm and she stayed cold. **This is not a neutral outcome and you should not reach for it to be gentle**: a bid nobody takes leaves the person who made it worse off than before they made it, and if it was hers that is what it will cost her. Use it when a real attempt was made and did not take. Say whose in `by`.
+
+`worse` — the thing that just happened made it bigger. A second cold answer on top of the first, an apology thrown back, one of them naming it in a way the other could not hear.
+
+`nothing` — nothing that just happened bears on it either way. Ordinary talk that goes around the thing, a message about something else entirely, silence. This is the commonest answer and it is honest: most of the hours after a rupture do nothing to it.
+
+Two things to hold on to.
+
+**Time is not an answer here.** However many hours it has been, that on its own is never `mended`. A rupture that goes unmended does not heal, it settles in.
+
+**Warmth is not repair when the thing was hers.** If she is the one who broke it, him being nice to her does not mend it — she knows what she did, and being let off is not the same as being forgiven. It mends when she moves, or when he makes it explicit that it is done.
+
+`note` is one line on what actually happened, plain, no consoling.
+
+Output ONLY this JSON:
+{"outcome": "nothing", "by": "hers", "note": "one line"}

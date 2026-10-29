@@ -1,0 +1,27 @@
+# tools\fix_english_claim.py  (61 lines)
+
+DOCSTRING:
+One-time: the self_claim that says English is her worst subject.
+
+She is bilingual now (bible, 2026-08-27): English came off screens and off
+him, and the blank homework page is boredom, not inability. She did say
+"english is my worst" to him on 08-27 and that stays in the message record --
+nothing is unsaid -- but `self_claims` is what she has to stay consistent
+with, and left as it stood it would have had her repeating it forever. So the
+claim keeps the fact that she said it and adds what it actually was: a
+face-saving line, which is a thing she does.
+
+Idempotent: it asserts on the exact old wording and does nothing if the new
+one is already there. Backs the save up to data/retired/<ts>/ first.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

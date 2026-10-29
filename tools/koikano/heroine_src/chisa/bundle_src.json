@@ -1,0 +1,17 @@
+{
+  "tone": ["知紗/ちさ", "榎本/えのもと", "百花/ももか", "一悟/いちご"],
+  "voice_prefix": "CHS",
+  "tts_note": "off until a MiniMax clone exists (docs/voice.md); her clips are CHS*.ogg (557 spoken lines carry a CHS id), tools/voice_index.py accepts MMK only",
+  "caps": {
+    "phrases": {"青春": 1, "先生": 2, "宮国君": 2, "十川さん": 2, "かしら": 1},
+    "doubled_group": 2,
+    "source": "her own marks (prompts/style.md 撒く量の物差し and tools/koikano/b3/chisa.py): 青春 (17 lines, share 0.0305, a catchphrase so one per draft), 先生 for herself (51 lines, 0.0916), the two student names she says most, 宮国君 (67 lines containing it) and 十川さん (47), and かしら (27 lines, 0.0485 against 0.0004 in the room); each capped per draft so none piles up"
+  },
+  "holes": [
+    "no lore records: the record has 0 inner lines, no diary and no memory entries beyond the lines; her register in her head is a LIBERTY (HEADVOICE fills built from her spoken register)",
+    "her places are world data (world/chisa_house.json), not household or home files: she does not own a world, she works at the school, and her own place ids (school, road, her_home) are not the bench's shared HOUSE ids; her home is a LIBERTY (the record has no home scene)",
+    "gauge baselines: none, no numbers; meter rows seed flat",
+    "voice off: clips are prefix CHS (557 spoken lines carry a voice id) but tools/voice_index.py accepts MMK only, and no clone sample exists",
+    "vn off: channels/vn_expression.py hard-codes the letter CD (lines 223, 238, 247, 288, 294); her letter is CF and her port is 8775 (8770 is Momoka's, 8771 Maria's, 8773 Sena's); her sprite folder CHISA_知紗 is checked in expression_labels_unreviewed.json"
+  ]
+}

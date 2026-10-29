@@ -1,0 +1,33 @@
+# sim\rupture.py  (376 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Ruptures: 
+    __init__(config, llm, store, clock, state, records, self_model, self_memory, sentiments): 
+    all(): 
+    save(rows): 
+    open_one(): 
+    scars(): 
+    check(deltas, his_message, her_message): Did something just break. Mechanical: a jump in the gauges that carry a break, in a tick that had something said in it. A rupture is not a bad mood -- it needs an exchange behind it.
+    name(score, his_message, her_message): One call: what broke, and whose it was.
+    _on_open(r): 
+    settle(trigger): Something happened that could have mended it. `trigger` says what: `his_message`, `her_message`, or `day`.
+    _on_mended(r, note): The payoff, and the reason the whole thing exists. Closeness ends up **above** where it was: a pair who have broken something and mended it are closer than a pair who never broke anything.
+    _on_failed(r, by, note): A bid nobody took. This is the one that has to hurt, or making one costs nothing and she would make them all day.
+    _on_worse(r, note): 
+    age(): What time actually does: it does not mend anything, it turns an open thing into a scar. Cast meters have no gravity, so what this takes off closeness stays off.
+    holds(): Gauges that must not decay while something is open. This is the whole of "time does not repair": without it a day of saying nothing files a row away as neatly as an apology does.
+    prompt_text(): 
+    intent_line(): 
+    report(): 
+
+CONFIG SECTIONS: prompt_text, rupture, rupture.max_kept, self_memory.enabled, sentiment, sentiment.failed_bid_resentment, sentiment.scar_resentment
+KV READ: ruptures
+KV WRITE: ruptures
+TABLES: 
+LOG TAGS: rupture
+PROMPTS: rupture, rupture_settle
+LLM ROLES: rupture, rupture_settle
+OPS COMMANDS: 

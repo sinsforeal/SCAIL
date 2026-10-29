@@ -1,0 +1,346 @@
+{
+  "_note": "Everything that is this character and nothing that is not. `tools/new_character.py compose momoka` writes her config, her prompt directory, her row in the register, her staged launcher and, when she has none, her save, from this directory and the library. `tools/new_character.py verify momoka` builds her on a scratch save and fails on a hole, a path outside her bundle, another character's material or an existence answer that disagrees with her sheet. Scope: the SCAIL resident shape (as asumin / yukari) with Tier 2 dropped -- no world, no cast, no schedule, no situation, no body. The player is him.",
+  "key": "momoka",
+  "name": "Chiyoda Momoka",
+  "hub_id": "momoka",
+  "config": "config_momoka.json",
+  "db": "data/momoka.db",
+  "program": "resident",
+  "launcher": "momoka.cmd",
+  "task": "SCAIL_momoka",
+  "match": "resident[\\\\/]run\\.py.*config_momoka|scail\\.py.*config_momoka",
+  "world": {
+    "id": "",
+    "owner": false
+  },
+  "prompts_dir": "prompts_momoka",
+  "prompts_generated": true,
+  "files": {
+    "character.cast_file": "cast.json",
+    "character.neutral_file": "fills.json",
+    "world.character_file": "sheet.json"
+  },
+  "holes": [
+    "A record of her own (`lore.file` and its three side files). Her material is her bible, her speech guide and her structured sheet; no records.json, triggers.json, memories.json or memory_triggers.json has been built from them, so `lore` is left at its default (off) and she retrieves nothing. This is the first thing to author before she is worth talking to for long.",
+    "Her household (`household.file`, the things in her flat), her home (`world.home_file`) and her own day beyond the resident fallback. Tier 2 drops the world, the schedule and the body, so these are deliberately absent: `resident/app.py:plan_day` falls back to the one-block resident day.",
+    "Her own people of any kind. Her record names 一悟 and the girls of her scenes, but they are people she remembers out of the game, not people in a day: she has no world, so they are not roster rows and no meter is seeded on them. The only person on her roster is him.",
+    "Her gauge baselines of her own (`temperament.gauge_baselines`). None is authored from her material yet; the library's defaults stand. Not a defect at boot, but her temperament is not yet hers."
+  ],
+  "blank": [
+    "hazards.her_area_names",
+    "hazards.her_wards",
+    "scenery.kind_queries",
+    "scenery.local_names",
+    "scenery.place_map",
+    "scenery.queries",
+    "sensors.x_actions_enabled",
+    "sensors.x_data_dir",
+    "sensors.x_enabled",
+    "sensors.x_images_db",
+    "sensors.x_posting_enabled",
+    "sensors.x_profile_dir",
+    "sensors.x_tools_profile_dir",
+    "trains.her_lines",
+    "trains.nearby_lines",
+    "trains.odpt_challenge_lines",
+    "trains.odpt_lines",
+    "trains.odpt_operator_lines",
+    "world.geography_file",
+    "world.holidays_file",
+    "world.household_file",
+    "world.local_events_every_days",
+    "world.local_events_file",
+    "world.outing_words",
+    "world.places_file",
+    "world.school_calendar_file",
+    "world.shared_dir",
+    "world.taste_file",
+    "world.zeitgeist_every_hours"
+  ],
+  "config_overrides": {
+    "embed": {"url": "http://127.0.0.1:18320/v1/embeddings"},
+    "models": {
+      "persona": {
+        "prompt": "prompts_momoka/bible.md",
+        "model": "glm-5.3-flash",
+        "thinking": true
+      },
+      "revise_self": {"model": "glm-5.3-flash", "thinking": true},
+      "spiral": {"model": "glm-5.3-flash", "thinking": true},
+      "approach": {"model": "glm-5.3-flash", "thinking": true},
+      "morning": {"model": "glm-5.3-flash", "thinking": true},
+      "anticipation": {"model": "glm-5.3-flash", "thinking": true},
+      "reflect": {"model": "glm-5.3-flash", "thinking": true},
+      "diary": {"model": "glm-5.3-flash", "thinking": true},
+      "wonder": {"model": "glm-5.3-flash", "thinking": true},
+      "peer_reply": {"model": "glm-5.3-flash", "thinking": true},
+      "quality_rewrite": {"model": "glm-5.3-flash", "thinking": true}
+    },
+    "character": {
+      "name": "Momoka",
+      "program": "resident",
+      "name_ja": "百花",
+      "reading_ja": "ももか",
+      "writes_to_him": "japanese",
+      "instruction_language": "japanese",
+      "style_prompt": "prompts_momoka/style.md",
+      "style_ja_prompt": "prompts_momoka/style.md",
+      "existence": {
+        "embodied": true,
+        "in_world": false,
+        "sees_him": "resident",
+        "has_account": false,
+        "with_him": "chat",
+        "player_driven": true
+      }
+    },
+    "reunion": {
+      "enabled": true
+    },
+    "afterthought": {
+      "enabled": false
+    },
+    "receipts": {
+      "enabled": false
+    },
+    "world": {
+      "weather_enabled": false
+    },
+    "director": {
+      "scene_source": "plan"
+    },
+    "lore": {
+      "enabled": true
+    },
+    "diet": {
+      "enabled": false
+    },
+    "money": {
+      "enabled": false
+    },
+    "environment": {
+      "enabled": false
+    },
+    "needs": {
+      "enabled": false
+    },
+    "health": {
+      "enabled": false
+    },
+    "situation": {
+      "enabled": false
+    },
+    "household": {
+      "enabled": false
+    },
+    "watching": {
+      "enabled": true
+    },
+    "reactions": {
+      "enabled": false
+    },
+    "vault_snoop": {
+      "enabled": false
+    },
+    "typesafe": {
+      "enabled": true,
+      "key_file": "secerts/typesafe.txt",
+      "model": "jev-1.13.0",
+      "timeout_seconds": 20,
+      "floor": 0.6,
+      "uses": {
+        "reconcile": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "sight_activity": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "emotion": {
+          "enabled": true,
+          "threshold": 0.35
+        },
+        "inbound_signals": {
+          "enabled": false,
+          "threshold": 0.5
+        },
+        "scene_director": {
+          "enabled": false,
+          "threshold": 0.3,
+          "music_threshold": 0.5,
+          "vocal_threshold": 0.6
+        },
+        "which_one": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "wonder_answer": {
+          "enabled": false,
+          "threshold": 0.5
+        },
+        "intent": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "foresee": {
+          "enabled": false,
+          "threshold": 0.3
+        },
+        "said_when": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "lookup": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "ick": {
+          "enabled": false,
+          "threshold": 0.3
+        },
+        "affection": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "wonder": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "rupture_settle": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "expect_him": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "habits_him": {
+          "enabled": true,
+          "threshold": 0.5
+        },
+        "state_appraisal": {
+          "enabled": true,
+          "threshold": 0.6
+        }
+      }
+    },
+    "primitives": {
+      "enabled": true
+    },
+    "pick": {
+      "enabled": true
+    },
+    "stances": {
+      "enabled": true
+    },
+    "eroge": {
+      "enabled": true
+    },
+    "shape": {
+      "tell_length": false
+    },
+    "tts": {
+      "enabled": true,
+      "on_demand": true,
+      "voice_mode": "exact",
+      "minimax_script_path": "minimax/minimax_tts.py",
+      "minimax_config_path": "minimax/config.json",
+      "voice_id": "YOUR_VOICE_ID",
+      "emotion_enabled": true,
+      "language_boost": "Japanese",
+      "pronunciation_dict": {"tone": ["百花/ももか", "一悟/いちご"]},
+      "interjection_tags": true
+    },
+    "vn": {
+      "enabled": true,
+      "host": "127.0.0.1",
+      "port": 8770,
+      "character_dir": "extracted_games/koikano/by_character/MOMOKA_百花",
+      "inventory": "extracted_games/koikano/koikano_work/inventory/expression_inventory.json",
+      "labels": "extracted_games/koikano/koikano_work/inventory/expression_labels.json",
+      "reviewed_labels": "characters/momoka/expression_labels_reviewed.json",
+      "sprite_dir": "png_sprites",
+      "face_dir": "png_faces",
+      "voice_dir": "voice",
+      "bgm_dir": "extracted_games/koikano/audio/bgm",
+      "default_bgm": "BGM03",
+      "view_dir": "view",
+      "out_dir": "data/vn",
+      "default_expression": "neutral",
+      "sprite_zoom": 1.55,
+      "idle_motion": true,
+      "idle_sway": false
+    },
+    "scene_director": {
+      "enabled": true,
+      "use_model": true,
+      "default_bg": "BG02a01",
+      "places": {}
+    },
+    "stage_manager": {
+      "enabled": true,
+      "history_turns": 20
+    },
+    "emotion": {
+      "enabled": true,
+      "use_model": true,
+      "default_label": "neutral"
+    },
+    "quality": {
+      "enabled": true,
+      "use_model": true,
+      "max_chars": 600,
+      "repeat_run": 16,
+      "recent_messages": 8,
+      "openers": true,
+      "forbidden": {},
+      "caps": {
+        "source": "bible:docs/koikano-bible-hyakka.md (speech guide + mechanisms, 2026-09-16)",
+        "phrases": {
+          "おおー": 1,
+          "おー": 1,
+          "んっ": 4,
+          "んーん": 2,
+          "えへへ": 1,
+          "百花": 3
+        },
+        "doubled_group": 2
+      }
+    },
+    "talkapp": {
+      "enabled": false
+    },
+    "delivery": {
+      "compose_seconds": [0, 0],
+      "read_delay_free_seconds": [0, 0],
+      "read_delay_glance_seconds": [0, 0],
+      "mood_delivery": {
+        "enabled": false
+      }
+    },
+    "rhythm": {
+      "notice_live_seconds": [0, 0],
+      "notice_glance_seconds": [0, 0],
+      "notice_idle_seconds": [0, 0],
+      "he_left_extra_seconds": [0, 0]
+    },
+    "logging": {
+      "db_path": "data/momoka.db"
+    },
+    "state": {
+      "gauges": {
+        "energy": {
+          "tags": [
+            [-30, "ねむい。低血圧のぼんやりが抜けなくて、からだがおもい。無理はしたくない"]
+          ]
+        },
+        "anxiety": {
+          "tags": [
+            [70, "心配で落ち着かない。悪いほうに考えてしまって、「やっぱり、百花には無理？」と彼に違うよと言ってほしい"]
+          ]
+        }
+      }
+    }
+  }
+}

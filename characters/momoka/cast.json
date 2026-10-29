@@ -1,0 +1,19 @@
+{
+  "_note": "Her roster. Role-first, like data/cast.json: role_id is the stable handle the machinery thinks in; name and note are the lore that fills it. It is also the source sim/roster.py builds its alias table from, so every form of a name a model might write belongs in `aliases`. It is needed even though the `cast` section is off (she has no world): `sim/state.py:State.__init__` reads `character.cast_file` for every character, and without a table her own name does not resolve to herself and her boot refuses the roster. The only person on it is him.",
+  "_no_world_cast": "She has no world and no cast of her own. The people in her record (一悟 and the girls of her scenes) are people she remembers out of the game, not people in a day, so they are NOT roster rows and no meter is seeded on them. This file stays small for that reason.",
+  "_no_meters": "Deliberately no closeness / standing / tension on him. Hand-written numbers nobody earned are not hers to carry at day zero; a missing meter falls back to its rest value in code, and until an event moves it the row stays unset.",
+  "people": {
+    "him": {
+      "role_id": "captor",
+      "name": "him",
+      "role": "the player. He is who she talks to and the only supply of anything outside her own record; what she comes to feel toward him has to be earned by something he does.",
+      "note": "She starts knowing nothing about him. He is the one on the other side of the screen.",
+      "aliases": [
+        "the user",
+        "the player",
+        "he",
+        "him"
+      ]
+    }
+  }
+}

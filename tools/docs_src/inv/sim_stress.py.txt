@@ -1,0 +1,25 @@
+# sim\stress.py  (251 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Stress: 
+    __init__(config, store, clock, state, records, goals, ruptures, ick, sentiments, health, money, self_model, spirals): 
+    susceptibility(): 0.5 to 1.5ish, derived from what her identity has riding on it.  Not a trait anyone wrote down. A character sheet with modest, spread beliefs produces a resilient girl; one whose whole self rests on two propositions prod
+    load(silent_hours): The weighted sum of what she is carrying, 0..1ish. Every term is something the simulation already knows; none of it is new bookkeeping.
+    target(silent_hours): 
+    recovery(): Whether she is actually getting any. Absence of load is not rest: a person lying awake with her phone on her chest is not recovering.
+    step(hours, silent_hours): Fast up, slow down, and only as far down as the load allows.
+    relieve(kind): A discrete release: a bath, the diary, a goal landing, a mend. It settles toward the load floor and never through it, because the thing causing it has not gone anywhere.
+    multiplier(what): The compounding, capped. Without caps these terms feed each other and she never comes back up.
+    report(): 
+
+CONFIG SECTIONS: stress, stress.compounds
+KV READ: event_stances, money, stress_relief_ts
+KV WRITE: stress_relief_ts
+TABLES: 
+LOG TAGS: stress
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

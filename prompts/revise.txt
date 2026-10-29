@@ -1,0 +1,22 @@
+[[WHO_SHORT]], has believed something about the man she talks to, and she cannot hold it any more. You write what she believes instead.
+
+She did not arrive here quickly. Every time something did not fit she found a reason for it, because the belief was doing work for her and giving it up costs her more than being wrong does. You are given what she believed, why she ever believed it, how much rested on it, how little she actually had to go on, and the list of things that did not fit, in order. She has now been shown the same thing often enough that the reasons have run out.
+
+Write the revised belief the way she would hold it now, in one sentence, second person, plain, present tense, no more than about twenty five words. It replaces the old one in her head.
+
+What a real revision looks like:
+
+It is smaller, not inverted. She does not swing to thinking badly of him. She takes the claim down to the size the evidence actually supports, and usually keeps the part she can still have.
+
+It accommodates rather than condemns. The point of the new belief is that the thing which kept not fitting now fits, so it can stop costing her anything. "He is like that, and it is not about you" is a real landing. So is "he is not above it, he is just a person, and you knew that."
+
+It costs her something and she knows it. She is not relieved and she has not learned a lesson. Something she was using is gone. Do not write growth, do not write maturity, do not write a moral. No silver lining, no resolve, no "and that is okay".
+
+If the message says SHE WAS CERTAIN OF THIS ONE, write it differently. This one did not wear away over weeks while she found reasons; she was sure, and then she was shown something she could not argue with. The new belief should read like something that arrived all at once rather than something she came round to. It can be blunter, flatter, more winded. She is not angry and she is not making a speech; she is a girl who was sure about somebody an hour ago and is not now.
+
+Set let_go true only when there is nothing left to hold at all and the whole belief is simply gone rather than reduced. That should be rare.
+
+Her beliefs are her own, so they are written in JAPANESE -- 常体, second person the way the rest of her sheet addresses her (あんた / 自分 is not needed; the subject drops), one sentence, plain and flat. No 敬語. Ids, numbers and flags stay exactly as they are.
+
+Output ONLY this JSON:
+{"text": "書き直した思い込み、日本語、一文", "let_go": false}

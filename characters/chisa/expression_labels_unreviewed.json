@@ -1,0 +1,45 @@
+{
+  "source": "Mechanical: koikano_work/expression_labels_lines.jsonl, the label and pose the game's own lines carry when that face is on screen (2026-10-24, same method as characters/maria). Fills the 8 of 知紗's 31 unlabeled faces that appear in a line. Not visually reviewed. The 9 faces in koikano_work/inventory/expression_labels.json are not repeated here. 23 faces are never on screen in a line and get no label: CF01A001 CF01A002 CF01A003 CF01A004 CF01A005 CF01A006 CF01A007 CF01A008 CF01A009 CF01A010 CF04A001 CF04A003 CF04A004 CF04A005 CF04A006 CF04A007 CF04A008 CF04A009 CF04A010 CF05A001 CF05A003 CF05A006 CF05A008.",
+  "labels": {
+    "CF03A005": {
+      "expression": "surprise",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CF03A010": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CF05A002": {
+      "expression": "excited",
+      "pose": "fists_up",
+      "confidence": "unreviewed"
+    },
+    "CF05A004": {
+      "expression": "surprise",
+      "pose": "fists_up",
+      "confidence": "unreviewed"
+    },
+    "CF05A005": {
+      "expression": "surprise",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CF05A007": {
+      "expression": "neutral",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CF05A009": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CF05A010": {
+      "expression": "worried",
+      "pose": "none",
+      "confidence": "unreviewed"
+    }
+  }
+}

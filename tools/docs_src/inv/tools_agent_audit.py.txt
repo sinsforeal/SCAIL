@@ -1,0 +1,82 @@
+# tools\agent_audit.py  (785 lines)
+
+DOCSTRING:
+Is a character who runs herself actually working, right now.
+
+    python tools/agent_audit.py rena
+    python tools/agent_audit.py rena --days 3 --verbose
+
+The read-only audit of a RUNNING character, as a tool. It was a day of hand
+work the first time (`data/retired/20260907_203328_rena_audit/REPORT.md`), and
+everything it found was runtime behaviour that three structural checks had
+passed. This asks the same questions of the same places every time, in about a
+second, so the second day of a promoted character costs a command rather than
+an afternoon.
+
+It reads and never writes. Live saves are opened through a
+`file:...?mode=ro` URI and never copied, because a file copy of an open
+database returns a stale image; her config is copied to a scratch file before
+a `Config` is built on it, because building one backfills the file it is
+given; the run directories are read where they lie, zipped ones through
+`zipfile`; nothing is started, nothing is stopped and no process is touched.
+
+What it reports, one line each:
+
+  the process, matched by her own row's command-line pattern; her
+  registration with the hub and whether his phone lists her; every ask the
+  owner's process sent her matched to the answer her process paid for;
+  the beats the owner planned per person per day, hers among them; how old
+  the newest row in her owner-side queue is; her record of a room against
+  the world file's own rows for the same turns; anything a switched-off
+  section has written into her save; her gauges against her config; what is
+  left in her save about a man she may have no chat with; a person the
+  owner's record has carried the same thing for three days running; a log
+  line repeating faster than anything real; tracebacks and error lines; and
+  what she has spent by role since her newest boot.
+
+`ok` is what it should be, `WARN` is worth a look, `FAIL` is broken. Exit 1 on
+any FAIL. What it cannot tell you is whether she is any good: every question
+here is mechanical, and whether her words are believable is a read
+(`docs/agent-character.md`, the limits at the end).
+
+DEFS:
+def row(state, what, detail): 
+def ok(what, detail): 
+def warn(what, detail): 
+def fail(what, detail): 
+def ro(path): A live save, opened read-only. Never a copy: a file copy of an open database returns whatever was flushed last, which is not what the process is running on.
+def kv(con, key, default): 
+def kv_keys(con): 
+def config_of(row_): Her config, built on a COPY. `Config` backfills the file it is handed, and an audit that wrote to her live config would be changing the thing it came to read.
+def runs_for(hub_id, limit): (name, [lines]) for every run directory belonging to this character, newest first. Two bots write into one `logs/`, and a run says whose it is in the line where it registers with the hub.
+def calls_for(hub_id, since_day): Every model call this character has paid for, newest run first, as the parsed rows of her own `llm_calls.jsonl`.
+def processes(): Every running command line on the machine. Read-only: the audit says what is up and touches none of it.
+def check_process(r, procs): 
+def check_hub(r, cfg): 
+def check_asks(r, owner_row, days): Every ask the owner sent her, matched to what her process did with it.  The owner's log says when it asked and when it gave up; hers says what she paid for and whether she chose to say nothing. Matched by the clock, beca
+def check_beats(r, owner_con, her_name_forms): How many beats the owner planned for each person, over the days its save still holds. A promoted character with none is the fault the audit found: the girl whose whole character is deciding where everybody goes had opene
+def check_queue(her_con, cfg): How old the newest row in her owner-side queue is. A row there is a turn waiting for the room's OWNER to file, and in her save it is a turn nothing will ever drain.
+def check_record(cfg, her_con, world_path, verbose): Her copy of a room against the world file's own rows for the same turns. The world file is the authority: the owner writes every turn of a room it keeps, and her record is the copy the relay left her.
+def _same_name(cfg, a, b): 
+def check_off_sections(cfg, her_con, since_ts): Anything a switched-off section has left in her save, and whether it is still being written.  Two different things live in one save and they need different answers. A row a section wrote BEFORE it was switched off is res
+def _newer_than(value, since_ts): Does this stored value carry a stamp later than `since_ts`.  A kv row is JSON of whatever shape its owner chose, so the stamp is looked for rather than read from a known field: a float that is a plausible epoch time, or 
+def check_gauges(cfg, her_con): 
+def check_him_residue(cfg, her_con): 
+def check_carry(owner_con, her_name_forms): A person the owner's record has carried the same thing for three days running. A carry is what somebody is still holding from yesterday, and the same sentence three days in a row is a day that is not moving.
+def check_spin(r, minutes, limit): A log line repeating faster than anything real. The presence-beat refusal ran once every five seconds for seven minutes with nobody at that table getting a turn, and nothing said so.
+def _owner_key_hub(): 
+def check_errors(r): 
+def check_cost(r, verbose): What she has spent, by role, since her newest boot. Priced the way `tools/llmstats.py` prices it: the host's own figure when the receipt carries one, the slug's rates otherwise.
+def audit(key, days, verbose): 
+def _booted_ts(r): When her newest run started, machine local. A run directory is named for the wall clock the process opened it at, sometimes with a letter after it when two started inside one second.
+def _name_forms(cfg, r): Every form of her name the owner's record might spell her by.
+def main(argv): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

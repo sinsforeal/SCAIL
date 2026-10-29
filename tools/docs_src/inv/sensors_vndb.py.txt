@@ -1,0 +1,20 @@
+# sensors\vndb.py  (152 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _post(path, body): One call, one retry. A transient connection reset happened about once in sixty calls when this was measured, and it is not a throttle.
+def plain(s): The database's own markup out: the spoiler blocks with their contents, the cross-links down to their text, the fan-translation credit line, and anything else in brackets.
+def _sentences(text, limit, count): The first sentences of the description, whole, inside `limit`.
+def fetch(vndb_id, limit): The card for one database id, as text, or "". Two calls, no cache.
+def card(retrievals, vndb_id, limit): The card for one game, fetched once for the MACHINE and read by both characters (`machine/retrievals.py`, kind `vn_card`).  A game's card is the same card whoever looks it up, so it is the world's and not hers; what she 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: vndb
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

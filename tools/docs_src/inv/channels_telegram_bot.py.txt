@@ -1,0 +1,31 @@
+# channels\telegram_bot.py  (270 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class TelegramInterface: 
+    _redact(e): Errors from requests carry the full URL, token included; never log it.
+    __init__(config, vision, clock, store): 
+    _download(file_id): Telegram file bytes for a file_id. Returns (mime, bytes) or None.
+    _look_at_photo(msg, caption): He sent a picture. She opens it and looks. Returns the line for her history, or None to fall back to the plain marker.
+    verify_connection(): 
+    flush_queue(): 
+    get_new_messages(): Returns list of (text, message_id).
+    send_typing(): 
+    send_message(text): 
+    delete_message(message_id): Remove one of her messages from his chat. Telegram allows this for about 48 hours. Returns True when it is gone.
+    edit_message(message_id, text): Rewrite one of her messages in place. Same 48 hour window.
+    send_document(path, caption): For the things too big to read in chunks of 4096: her whole prompt.
+    send_voice(ogg_path, attach_to): 
+    send_audio(audio_path): 
+    _split(text): 
+
+CONFIG SECTIONS: telegram
+KV READ: tg_last_update_id
+KV WRITE: tg_last_update_id
+TABLES: 
+LOG TAGS: telegram
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

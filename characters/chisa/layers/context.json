@@ -1,0 +1,636 @@
+{
+  "scenes": [
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM03",
+        "BGM08",
+        "BGM10",
+        "BGM19",
+        "BGM20",
+        "BGM21",
+        "BGM22",
+        "BGM23"
+      ],
+      "chapter": 1,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "01_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM03",
+        "BGM04",
+        "BGM09",
+        "BGM10",
+        "BGM16",
+        "BGM21",
+        "BGM23"
+      ],
+      "chapter": 2,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "02_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM14",
+        "BGM19",
+        "BGM22",
+        "BGM23",
+        "BGM24"
+      ],
+      "chapter": 3,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "03_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM02",
+        "BGM05",
+        "BGM08",
+        "BGM10",
+        "BGM21",
+        "BGM23"
+      ],
+      "chapter": 4,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "04_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM02",
+        "BGM03",
+        "BGM04",
+        "BGM08",
+        "BGM10",
+        "BGM22",
+        "BGM23"
+      ],
+      "chapter": 5,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "05_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM02",
+        "BGM04",
+        "BGM05",
+        "BGM06",
+        "BGM07",
+        "BGM08",
+        "BGM09",
+        "BGM15",
+        "BGM16",
+        "BGM22",
+        "BGM24"
+      ],
+      "chapter": 6,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "06_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM02",
+        "BGM03",
+        "BGM04",
+        "BGM05",
+        "BGM07",
+        "BGM11",
+        "BGM22",
+        "BGM23"
+      ],
+      "chapter": 7,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "07_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM02",
+        "BGM05",
+        "BGM07",
+        "BGM08",
+        "BGM09",
+        "BGM15",
+        "BGM23",
+        "BGM24"
+      ],
+      "chapter": 8,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "08_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM16",
+        "BGM25"
+      ],
+      "chapter": 8,
+      "h_scene": true,
+      "phase_band": "late",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "08_02"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM06",
+        "BGM07",
+        "BGM09",
+        "BGM12",
+        "BGM17",
+        "BGM18",
+        "BGM19",
+        "BGM20",
+        "BGM21",
+        "BGM22"
+      ],
+      "chapter": 9,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "common",
+      "route_character": "",
+      "route_group": "common",
+      "scene": "09_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM04",
+        "BGM06",
+        "BGM09",
+        "BGM11",
+        "BGM12",
+        "BGM17",
+        "BGM19"
+      ],
+      "chapter": 1,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "a",
+      "route_character": "真優",
+      "route_group": "other",
+      "scene": "a01_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM03",
+        "BGM13",
+        "BGM16",
+        "BGM19",
+        "BGM21",
+        "BGM23"
+      ],
+      "chapter": 2,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "a",
+      "route_character": "真優",
+      "route_group": "other",
+      "scene": "a02_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM03",
+        "BGM04",
+        "BGM19",
+        "BGM23",
+        "BGM24"
+      ],
+      "chapter": 3,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "a",
+      "route_character": "真優",
+      "route_group": "other",
+      "scene": "a03_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM03",
+        "BGM05",
+        "BGM08",
+        "BGM16",
+        "BGM19"
+      ],
+      "chapter": 5,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "a",
+      "route_character": "真優",
+      "route_group": "other",
+      "scene": "a05_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM03",
+        "BGM10",
+        "BGM11",
+        "BGM12",
+        "BGM13",
+        "BGM15"
+      ],
+      "chapter": 9,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "a",
+      "route_character": "真優",
+      "route_group": "other",
+      "scene": "a09_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM03",
+        "BGM04",
+        "BGM11",
+        "BGM16",
+        "BGM19",
+        "BGM23"
+      ],
+      "chapter": 10,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "a",
+      "route_character": "真優",
+      "route_group": "other",
+      "scene": "a10_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM06",
+        "BGM10",
+        "BGM14",
+        "BGM19"
+      ],
+      "chapter": 11,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "a",
+      "route_character": "真優",
+      "route_group": "other",
+      "scene": "a11_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM03",
+        "BGM11",
+        "BGM15",
+        "BGM19",
+        "BGM30"
+      ],
+      "chapter": 12,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "a",
+      "route_character": "真優",
+      "route_group": "other",
+      "scene": "a12_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM03",
+        "BGM04",
+        "BGM05",
+        "BGM06",
+        "BGM08",
+        "BGM11",
+        "BGM15"
+      ],
+      "chapter": 1,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "b",
+      "route_character": "千奈",
+      "route_group": "other",
+      "scene": "b01_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM03",
+        "BGM04",
+        "BGM05",
+        "BGM08",
+        "BGM20",
+        "BGM23"
+      ],
+      "chapter": 2,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "b",
+      "route_character": "千奈",
+      "route_group": "other",
+      "scene": "b02_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM04",
+        "BGM05",
+        "BGM08",
+        "BGM09",
+        "BGM20",
+        "BGM23"
+      ],
+      "chapter": 3,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "b",
+      "route_character": "千奈",
+      "route_group": "other",
+      "scene": "b03_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM04",
+        "BGM05",
+        "BGM08",
+        "BGM10",
+        "BGM14",
+        "BGM15",
+        "BGM17",
+        "BGM23",
+        "BGM24"
+      ],
+      "chapter": 6,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "b",
+      "route_character": "千奈",
+      "route_group": "other",
+      "scene": "b06_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM06",
+        "BGM09",
+        "BGM11",
+        "BGM15"
+      ],
+      "chapter": 11,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "b",
+      "route_character": "千奈",
+      "route_group": "other",
+      "scene": "b11_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM03",
+        "BGM04",
+        "BGM08",
+        "BGM21",
+        "BGM23"
+      ],
+      "chapter": 1,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "c",
+      "route_character": "アリス",
+      "route_group": "other",
+      "scene": "c01_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM03",
+        "BGM10",
+        "BGM23"
+      ],
+      "chapter": 5,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "c",
+      "route_character": "アリス",
+      "route_group": "other",
+      "scene": "c05_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM04",
+        "BGM05",
+        "BGM10",
+        "BGM11",
+        "BGM12",
+        "BGM14",
+        "BGM16"
+      ],
+      "chapter": 6,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "c",
+      "route_character": "アリス",
+      "route_group": "other",
+      "scene": "c06_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM03",
+        "BGM04",
+        "BGM23"
+      ],
+      "chapter": 7,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "c",
+      "route_character": "アリス",
+      "route_group": "other",
+      "scene": "c07_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM04",
+        "BGM06",
+        "BGM13",
+        "BGM15",
+        "BGM16",
+        "BGM30"
+      ],
+      "chapter": 10,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "c",
+      "route_character": "アリス",
+      "route_group": "other",
+      "scene": "c10_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM07",
+        "BGM22"
+      ],
+      "chapter": 1,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "d",
+      "route_character": "百花",
+      "route_group": "d",
+      "scene": "d01_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM03",
+        "BGM15",
+        "BGM22",
+        "BGM23",
+        "BGM24"
+      ],
+      "chapter": 5,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "d",
+      "route_character": "百花",
+      "route_group": "d",
+      "scene": "d05_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM02",
+        "BGM05",
+        "BGM07",
+        "BGM08"
+      ],
+      "chapter": 7,
+      "h_scene": false,
+      "phase_band": "early",
+      "route": "d",
+      "route_character": "百花",
+      "route_group": "d",
+      "scene": "d07_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM01",
+        "BGM03",
+        "BGM04",
+        "BGM14",
+        "BGM16",
+        "BGM21",
+        "BGM22"
+      ],
+      "chapter": 10,
+      "h_scene": false,
+      "phase_band": "mid",
+      "route": "d",
+      "route_character": "百花",
+      "route_group": "d",
+      "scene": "d10_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM03",
+        "BGM06"
+      ],
+      "chapter": 15,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "d",
+      "route_character": "百花",
+      "route_group": "d",
+      "scene": "d15_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM05",
+        "BGM22",
+        "BGM23"
+      ],
+      "chapter": 16,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "d",
+      "route_character": "百花",
+      "route_group": "d",
+      "scene": "d16_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM02",
+        "BGM05",
+        "BGM08"
+      ],
+      "chapter": 17,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "d",
+      "route_character": "百花",
+      "route_group": "d",
+      "scene": "d17_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM07",
+        "BGM13",
+        "BGM15",
+        "BGM16"
+      ],
+      "chapter": 18,
+      "h_scene": false,
+      "phase_band": "late",
+      "route": "d",
+      "route_character": "百花",
+      "route_group": "d",
+      "scene": "d18_01"
+    },
+    {
+      "bgm_tracks": [
+        "BGM14"
+      ],
+      "chapter": null,
+      "h_scene": false,
+      "phase_band": "unknown",
+      "route": "misc",
+      "route_character": "",
+      "route_group": "other",
+      "scene": "title"
+    }
+  ]
+}

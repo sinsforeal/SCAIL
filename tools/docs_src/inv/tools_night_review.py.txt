@@ -1,0 +1,41 @@
+# tools\night_review.py  (228 lines)
+
+DOCSTRING:
+What a night of the group chat actually costs, before it is run for real.
+
+The late stretch (`Cast._late_window` / `_fill_late`) and the paced exchange
+(`Exchange.tick`) between them decide how many messages there are, how far
+apart they land, and how many model calls with distinct contexts that takes.
+None of it was measurable without waiting a day per sample.
+
+This mirrors the real logic rather than guessing at it:
+
+  window      `_late_window` / `_group_morning` on the real cast file
+  the chat    `chat_project.one_exchange`, which drives the real `_gap`,
+              `_away`, `_sleeps`, `_awake_friends` and `_continue_p` -- the
+              rounds, the speakers, the absences and who falls asleep are
+              not modelled twice here
+
+Calls counted the way they are actually made: one `cast_day` for the plan, one
+`cast_beat` per beat (each with that person's sheet), one `cast_reply` per turn
+of hers, and one `cast_turn` per speaker per round of theirs. Read-only, no
+model, no store writes.
+
+    python tools/night_review.py                 # 14 nights
+    python tools/night_review.py --nights 60     # a longer sample
+    python tools/night_review.py --from 2026-09-01
+
+DEFS:
+def hm(m): 
+def overrun(r, start_min): How far past its own declared end the chat actually ran, in minutes. Both clocks are kept on the same side of midnight first -- the last light is often "02:13", which is 133 as a wall clock and 1573 as a time counted fro
+def one_night(cfg, cast, rng, date_str, draws): A night's late stretch, simulated turn by turn.
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

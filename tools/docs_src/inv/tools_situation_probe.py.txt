@@ -1,0 +1,33 @@
+# tools\situation_probe.py  (88 lines)
+
+DOCSTRING:
+The situation block she was actually handed at a moment on the record.
+
+`tools/gauge_ab.py` stages two invented gauge conditions and spends model
+calls; this is the same staging with neither. One copy of the save, the
+clock pinned to a message she answered, the record cut so the reply cannot
+know the future, the shape drawn once, and then the block printed. Nothing
+is sent: the model is refused.
+
+    python tools/situation_probe.py --moments 236 215 212 --out <dir>/before
+    python tools/situation_probe.py --moments 236 215 212 --out <dir>/after
+
+Per moment it writes `<id>.txt` (his message, the feeling line, the register
+clause, and the whole block) and prints a one-line summary, so a before and
+an after directory diff line for line. `--feel-only` prints just the feeling
+line and the register clause for each moment, which is the check that a
+gauge reaches the words at all.
+
+DEFS:
+def build(out, config, db): 
+def run(a): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: thread_window
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

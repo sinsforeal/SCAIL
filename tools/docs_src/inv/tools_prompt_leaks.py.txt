@@ -1,0 +1,30 @@
+# tools\prompt_leaks.py  (93 lines)
+
+DOCSTRING:
+Every role's prompt, rendered as this character, scanned for another one.
+
+`tools/leaks.py` reads the assembled persona prompt and asks whether it claims
+things her existence says she has not got. That is one role out of sixty. The
+other fifty-nine are the mechanism prompts, and until they were neutralised
+thirty-six of them named a fifteen-year-old in Nerima and listed her friends --
+so a second character invoking any of them was handed the first one's life,
+silently, with nothing checking.
+
+This renders every prompt her config points at, through `Config.fill`, and
+looks for the other character in the result. It is the wide check; `leaks.py`
+is the deep one on the single role that speaks in her voice.
+
+    python tools/prompt_leaks.py --config config_yukarin.json
+    python tools/prompt_leaks.py --config config.json --against yukarin
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

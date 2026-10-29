@@ -1,0 +1,30 @@
+# tools\set_model.py  (109 lines)
+
+DOCSTRING:
+Move a character's roles to one model, all together or not at all.
+
+    python tools/set_model.py --config config_yukarin.json                  # show
+    python tools/set_model.py --config config_yukarin.json --model kimi-k3  # every role
+    python tools/set_model.py --config config.json --model deepseek-v4-flash --roles persona,diary
+
+A model NAME as the provider's table keys it (`api.providers.<name>.models`),
+never a slug. The switch refuses a name the character's provider cannot
+resolve, because a name missing from the provider's map falls through to the
+host as a literal and the host rejects it. The previous config is copied to
+`data/retired/<stamp>_set_model/` first. `/model <name>` in the app pins
+every role for one run without touching the file; this makes it permanent.
+
+DEFS:
+def provider_of(cfg): 
+def resolvable(cfg, model_name): The slug the character's provider serves `model_name` as, or "".
+def show(cfg, path): 
+def main(): 
+
+CONFIG SECTIONS: json, py
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

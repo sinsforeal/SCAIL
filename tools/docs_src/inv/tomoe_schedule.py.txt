@@ -1,0 +1,32 @@
+# tomoe\schedule.py  (437 lines)
+
+DOCSTRING:
+The first character's day: a schoolgirl's timetable in Tokyo, coloured by
+a model. Hers alone -- the bells, the commute, the after-school block and the
+household at dinner are facts about her -- and the shared pieces it builds on
+(the wake, the validation, the contiguity rule) stay in `sim/schedule.py`.
+
+The skeleton is deterministic and depends only on the calendar. The LLM
+colors it (which friend, which place, what chore) and may shift times, but
+the day always has a spine even if the model call fails.
+
+DEFS:
+def _school_windows(t): The named parts of a school day in order, as (start, end, kind).  Built by sorting the timetable's own windows and filling every hole between them with a break, so the day cannot come out with a gap or an overlap however
+def _school_blocks(t, mates): The school day from the morning bell to the end of the last homeroom.  One block per lesson and one per break, because the block is the unit everything downstream works in: the phone rule is per block, the director write
+def _day_words(config): The wordings this character's day is built from, out of her own map.  The walk to the station, the after-school block, the Saturday and who is at breakfast and at dinner were written into the code below, so every embodie
+def skeleton(calendar, date, wake_hm, config): 
+def generate(config, llm, store, clock, calendar, weather, cast, date, records, health, state, events, family, cast_engine): 
+def _flat_school_day(calendar, date, blocks): Say out loud when a school day comes back with one phone rule all through.  The plan the model returns is the day she actually has, so this never rewrites it -- a school trip or an exam morning is legitimately one long s
+def _promises_kept(store, blocks, date_str): Say out loud when the plan does not cover a promise that names a time. The generator is told the windows and keeps them most of the time; when it does not, the commitment settles BROKEN a day later and nothing between th
+def replan(config, llm, store, clock, calendar, weather, cast, schedule, change, records): Something happened (the director's schedule_change): keep the day up to now as it was, ask the schedule model for the rest, save the new day. Returns the new schedule dict, or the old one if the model failed.
+def ensure(config, llm, store, clock, calendar, weather, cast, date, records, family): 
+def _friends(config): The names the skeleton seats beside her at school, from the roster.
+
+CONFIG SECTIONS: prompt_text, world
+KV READ: commitments, health_note_today, money_note_today, open_threads
+KV WRITE: 
+TABLES: 
+LOG TAGS: schedule
+PROMPTS: schedule
+LLM ROLES: schedule
+OPS COMMANDS: 

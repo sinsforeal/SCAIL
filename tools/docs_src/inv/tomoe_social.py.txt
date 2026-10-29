@@ -1,0 +1,67 @@
+# tomoe\social.py  (1212 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Social: 
+    __init__(config, llm, store, clock, state, records, vision): 
+    enabled(): 
+    busy(): 
+    may_look(scene): 
+    send_pending(scene): A like waits for her next look on purpose: she saw it on the timeline, and coming back minutes later to tap it is what a person does. A post is not that. She opened the composer because she had something to say, and it b
+    _take_profile(): One Chrome profile, three things that want it -- her look, her posting and the scenery harvester on its own thread. A second Chrome on a held `user-data-dir` kills the first, which is the InvalidSessionIdException that h
+    _drop_profile(): 
+    _send(): The short session: open, do what is queued, close. It writes no session record, so opening the app to post does not spend a scroll from her day's budget or push the next look 35 minutes out.
+    start_look(force): 
+    close(): At shutdown: a look in flight must not leave its window behind.
+    _run(force): The flag round the look (`sim/inflight.py`): minutes of browser work and a paid read, on a daemon thread.
+    _look(force): 
+    collect(scene): If a look finished, run the social model on it. Returns the result dict or None.
+    _engagement(driver, handle): Her posts' counts against last time, and the new replies' text. The first read is a baseline and reports nothing: everything a post had already drawn is not news.
+    engagement_line(): For her prompt: what her own posts drew, while it is fresh.
+    followers_line(): For her prompt: who has started following the account since she last looked. Nothing at all when nobody has -- an account's follower count standing in her situation every hour is a number, not news.
+    replies_line(): For her prompt: what is sitting unanswered under her own posts.
+    charge_show(): Counted only when the line held the slot she actually reads.
+    show_declined(n): The thing she wanted to show him held the one imperative line of her prompt and the reply did not say it. She retires it herself the moment she does say it (`_show_done_by`), so a second showing of the same line is a sec
+    share_declined(n): A post offered as the one thing on her mind and not sent. The same three posts rode two consecutive replies on 2026-09-04 and she declined both. After `social.share_declines` showings the posts on offer are put away for 
+    _put_away(ids): These posts do not come round again for `share_cooldown_hours` -- the same rest a post she actually sent already buys.  One owner for the two ways she can leave a post on offer: reading the offer in her reply prompt and 
+    share_pick_declined(ids, why): She was going to show him something and, asked which post, said she would rather not (`tomoe/share_pick.py`).  The thought goes, the way it goes when she reads the line twice and says nothing (`show_declined`), and the p
+    show_subject(): What the pending show-him item is ABOUT: the handles the noticing named. The attention gate matches them against what she is braced for, so the foresight can keep this out of the slot.
+    share_subject(): The same for the posts on offer: whose they are.
+    show_him_line(): The thing from her scroll she wanted to show him, riding her reply prompts until she does or it goes stale. The look already wrote the line she might say (`mention`); it only ever reached the impulse, at salience 4, and 
+    _offer_line(k): One post as she is offered it: who posted it, what it says, and what is in the picture. Never a bare id. On 2026-09-06 this slot offered her three nineteen-digit numbers and nothing else; she picked the first and sent hi
+    _pictures_text(k): What she saw on the post, in one line.
+    _bigrams(text): Japanese two-character runs, for comparing a Japanese line with another when neither splits into words.
+    _about_score(k, text): How much this post looks like the one that sentence is about: the account named in it counts most, then words (or Japanese bigrams) it shares with the post's text and with what is in its picture. Her sentence is English 
+    share_offer(about, limit): The posts on offer. The one the thought is ABOUT comes first and is never truncated away: the offer used to be `shareable()[-3:]`, which on 2026-09-06 cut the drone post her sentence was about and left three she had not 
+    _image_score(it, taste): How likely she is to stop and open this one. Her taste sheet is the real evidence of what she cares about, so an account she keeps liking outranks everything; after that, a post whose picture IS the post.
+    _look_at_images(items): She opens a few of the pictures. Returns {status_id: description}.  Capped at `vision.x_max_per_scroll` per look, because a scroll is a couple of minutes of thumb and she is not studying every frame. This runs BEFORE the
+    _tags(): The tag store, opened once per process and shared. It is not part of her save: an image is the same image whoever is looking.
+    _note_seen_image(it, url, subject, tags): That she saw it, which is hers and fades.
+    _read(items, scene, his_likes, his_follows, seen_images, engagement): 
+    _remember_shareable(items, noticed, acted): Keep the posts she stopped on (named in what she noticed, or liked) so she can send him one.
+    _see_share_images(rows): Every picture on a post she may send him is described here, and a post whose pictures could not be described is not offered at all (`shareable`, `[share] held:`).  This is not the scroll's look. That one opens `vision.x_
+    shareable(): Posts she could send him: recent, not already sent, and none at all inside `share_cooldown_hours` of the last one. On 2026-08-31 she sent the same cat post twice in fifteen minutes -- the list never learned it had been s
+    share_line(): The offer with no thought of hers behind it. One builder for both slots (`_offer_line`): whichever of the two wins the attention gate, she is told who posted it, what it says and what is in the picture. Nothing here whil
+    find_share(sid): The post she may share with this id, or None. A lookup and nothing else: the persona turns her [share: ID] into the URL with it, and what the URL going out means is recorded when it goes out (`note_sent`, asked by the de
+    note_sent(text): A bubble that has just left. If it is the URL of a post she could share and had not, this is the moment she sent it, and it is recorded now (`resolve_share`). Never before the send: the same URL in a draft the editor thr
+    _show_done_by(text): A bubble that has left says the thing she wanted to show him: the item is done. It used to retire only when she sent the post as a link (`resolve_share`), so an item with no post behind it -- a line about an account he f
+    resolve_share(sid): The post with this id is sent: the pending show-him is done, the post is recorded so it does not come round again, the account likes and reposts it.
+    _apply_reactions(reactions): 
+    taste_history(handle): Everything: her verdict on the account, then every reaction ever (kv x_taste_log); with no handle, the whole sheet unbounded.
+    taste_brief(limit): 
+    about_him_line(days, limit): What she noticed about HIM on the account lately -- his likes, his follows, as the scroll read them -- for the roles that think about him. The look wrote this on every read (kv `x_about_him`) and, until 2026-09-04, nothi
+    his_follows_line(): 
+    his_likes_line(): What he liked on the account lately, as she would have seen it on the Likes tab.
+    her_actions_line(n): What she has done on the account lately and why -- unfollows from the drift, likes and follows of her own. So that when he asks "why did you unfollow X" the reason she had is in front of her, and so the intent can turn h
+    recent_line(): 
+
+CONFIG SECTIONS: role_system, sensor_view, sensors, social, social.check_followers, social.check_follows, social.discover_p, social.discover_scrolls, social.enabled, social.likes_scrolls, social.look_min_minutes, social.max_posts_per_read, social.peek_likes, social.read_engagement, social.retry_after_minutes, social.show_him_salience, social.trends_p, vision.x_max_images_per_post
+KV READ: x_about_him, x_action_queue, x_engagement, x_engagement_recent, x_followers_recent, x_handle, x_japan, x_last_look_ts, x_last_noticed, x_last_noticed_ts, x_look_counts, x_share_declined, x_shareable, x_shared, x_show_pending, x_taste, x_taste_log
+KV WRITE: x_about_him, x_engagement, x_engagement_recent, x_followers_recent, x_japan, x_last_look_ts, x_last_noticed, x_last_noticed_ts, x_share_declined, x_shareable, x_shared, x_show_pending, x_taste, x_taste_log
+TABLES: 
+LOG TAGS: share, x
+PROMPTS: 
+LLM ROLES: social
+OPS COMMANDS: 

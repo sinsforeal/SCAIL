@@ -1,0 +1,35 @@
+# tools\context_sim.py  (166 lines)
+
+DOCSTRING:
+Rewind her clock over the record and watch the thread compact under a small target.
+
+The verbatim span is seven days and the cards reach back thirty, and at the
+live target (`context.target_tokens`, the one budget over her prompt) the
+verbatim span never has to shrink, so the shrinking would never be seen to
+work on the live bot. This builds the App on a COPY of a save, pins the clock to a start
+time in the past, hides everything after it, and steps forward: at every step
+the thread is built as a reply would build it and measured; at every midnight
+of her clock the day that ended is compiled into cards (the card call only by
+default; `--full-compile` runs the whole timeline compile too); and the two
+things that matter are printed as they happen -- where the verbatim cut sits
+and how many tokens the history holds, and whether the head of the thread
+changed between one build and the next (a cache miss) or only its tail grew.
+At the end a few recall probes are run against the cards.
+
+    python tools/context_sim.py --config config.json --db data/world.db --budget 6000         --start "2026-08-29 06:00" --end "2026-09-04 10:00" --step 180         --probe "remember the yukata" --probe "浴衣のこと"
+
+Spends model calls: one `episode_cards` call per simulated day (flash), and the
+compile per day with `--full-compile`. Never points at a live save: the db is
+copied first (tools/harness.build_on).
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: context.target_tokens, json, raw
+KV READ: context_last, thread_window
+KV WRITE: thread_window
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,66 @@
+# sim\initiative.py  (232 lines)
+
+DOCSTRING:
+Whether she may reach out first at all, before anything asks whether she
+wants to.
+
+The impulse score answers "does she feel like texting him". It was the only
+thing between her and a self-started message, and it answers a different
+question from the one a person actually asks, which is "is now a moment when
+somebody would send this". Three faults followed from that and this module is
+all three of them in one place.
+
+**She fired on his first touch.** For a character who is resident on his
+machine, him coming back after six hours away is an event of the loop: the
+sleep coasting ends, a director tick runs at once, and the impulse is asked
+with eight hours of silence behind it and every gauge at the top of its range.
+Once she was writing to him seconds after he touched the keyboard, with a score far over the threshold. That is not a girl
+noticing he is up; it is a doorbell. His return is now a *reason she might*
+write, with odds that rise with how long he was gone and how much she is
+holding, and a delay of minutes drawn from a range, so that a return often starts with him writing first.
+
+**She reached again into her own silence.** Nothing counted what her last
+self-started message had got back. `Impulse.unanswered_streak` capped the run
+at two, and between the first and the second there was nothing but the ordinary
+cooldown -- ninety minutes, the same as after a conversation. So the bar for
+reaching out a second time into no answer was the same as the bar for the
+first. It now rises with each unanswered message, minutes then hours, with a
+cap on how many of those a day may hold; and a message he has OPENED and left
+weighs heavier than one he has not looked at, because the first is an answer
+and the second may only be a man away from his desk.
+
+**Nothing was quiet at his night.** Her own sleep is his (`resident/sight.py`),
+but a night he spends at the machine is a night she may talk into, and the
+small hours of his day were worth no more than the middle of it.
+
+Two ways through: a gauge at its end (`sim/discharge.py`), and the two stances
+that enter without waiting -- having just been frightened of him, and having
+just been put outside (`sim/stances.py`). Both are logged as overrides.
+
+Everything is in the save (`initiative_*`), so a restart does not hand her a
+clean sheet: the backoff is read off the record of what she actually sent, and
+the pending return and the day's count are keys.
+
+DEFS:
+class Initiative: 
+    __init__(config, store, clock): 
+    c(): 
+    observe_away(away_seconds, state): How long he has been away from the machine, told by whoever can see it: a program whose character is inside the machine calls this every pass. Nobody calls it for a character who cannot see him that way, and then there i
+    urgent(): A stance that entered without waiting is a state in which a person does speak out of turn. Read off the row the last generation settled; deciding one here would enter a stance nothing is about to use.
+    _last_self_started(): 
+    _unanswered_today(): 
+    hold_reason(streak, read_state, urgent): "" when she may reach out first, else why not. Never asks whether she wants to: that is the impulse's question and it is asked after this one.  A gauge at its end and a stance that entered without waiting go through a cl
+    _closed(streak, read_state): 
+    _say(why): 
+    override(why): What went through a gate that was shut, and what the gate had said. It writes nothing: a message that actually goes clears the hold in `note_sent`, and one that does not should leave the hold where it is.
+    note_sent(streak): A self-started message has actually gone. The backoff itself is read off the record, so the only thing to write is the day's count of times she reached into a silence of her own making.
+    report(): 
+
+CONFIG SECTIONS: impulse
+KV READ: initiative_away_since, initiative_hold_until, initiative_return, initiative_unanswered_counts, stance
+KV WRITE: initiative_away_since, initiative_hold_until, initiative_return
+TABLES: 
+LOG TAGS: impulse
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

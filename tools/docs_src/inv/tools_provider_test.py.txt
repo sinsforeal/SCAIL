@@ -1,0 +1,48 @@
+# tools\provider_test.py  (228 lines)
+
+DOCSTRING:
+What a call costs is on the record even when the answer never arrives, and
+a burst of calls waits once so the calls behind the first can read its cached
+prefix.
+
+    python tools/provider_test.py      # in smoke; no network, no money, no save
+
+Nothing here reaches a host: the API client is replaced with one that hands
+back a scripted stream. Two behaviours are checked.
+
+A stream that is abandoned used to leave nothing behind. On 2026-09-07 at
+16:13:56 a cast-beat call streamed for its full ten-minute ceiling, produced
+13,235 chunks and no words, was retried inside the same call and answered;
+only the retry left a row in `llm_calls.jsonl`, so ten minutes of a paid
+model were invisible to the spend ledger and to `/provider`.
+
+And at the day boundary about fifteen calls of one role go out back to back,
+each inside the window in which the entry the one before wrote is not
+readable yet, so every one of them was billed at the uncached rate. The gate
+waits out that window ONCE per burst.
+
+DEFS:
+def check(ok, what, detail): 
+def fake_config(): Everything `LLM` reads and nothing else.
+class _Stream: 
+    __init__(chunks, pause): 
+    __enter__(): 
+    __exit__(): 
+    __iter__(): 
+class FakeClient: Hands out the scripted streams in order.
+    __init__(streams): 
+    _create(): 
+def _thinking_chunk(): 
+def _answer(text): 
+def abandoned_checks(tmp): 
+def burst_checks(): 
+def main(): 
+
+CONFIG SECTIONS: api.cache_burst_hold
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

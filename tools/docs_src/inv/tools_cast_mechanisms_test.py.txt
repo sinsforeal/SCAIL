@@ -1,0 +1,38 @@
+# tools\cast_mechanisms_test.py  (266 lines)
+
+DOCSTRING:
+The mechanisms loader, the renderer and the two checks, on fixtures.
+
+No save, no network and no model call: everything here is a JSON file under
+`tools/fixtures/cast_mechanisms/` and the config's list of roles. Three
+fixture directories, one claim each -- a sound file, a file with a mechanism
+no call renders, and a file carrying one of every fault the validator
+exists to catch.
+
+What it proves:
+
+- a sound file validates, and the block it renders is the Japanese and
+  nothing else: no id, no `name`, no `class`, no `tier` reaches a prompt;
+- a secret reaches the two calls where that person is speaking for herself
+  and never the day planner, which writes for everybody at once;
+- the byte cap drops the rarest mechanism first and keeps the one that
+  fires every day;
+- a mechanism whose `readers` name a role no call asks a block for is
+  reported DEAD, the way a gauge nothing acts on is;
+- a real roster person with no file renders no block at all, so the calls
+  go out exactly as they did before anyone wrote a file.
+
+    python tools/cast_mechanisms_test.py
+
+DEFS:
+def check(label, ok, detail): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

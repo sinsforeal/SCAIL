@@ -1,0 +1,29 @@
+{
+  "_note": "a fixture: one mechanism read by a role that never asks for a block. tools/cast_mechanisms_test.py only.",
+  "who": "fixture-dead",
+  "mechanisms": [
+    {"id": "fixture.dead.never-read", "name": "a mechanism nothing renders",
+     "trigger": "never checked, because no call asks for it",
+     "suppressor": "-",
+     "function": "nothing, which is the point of the fixture",
+     "variation": [],
+     "frequency": "high",
+     "class": "hers",
+     "tier": "authored",
+     "ja": {"trigger": "誰も読まない条件", "response": "誰も読まない反応。", "unless": ""},
+     "readers": ["cast_evolve"]},
+
+    {"id": "fixture.dead.read-by-a-real-call", "name": "a mechanism a call does render",
+     "trigger": "somebody asks her what she is doing",
+     "suppressor": "-",
+     "function": "the control: this one is alive, so the check names one and not both",
+     "variation": [],
+     "frequency": "high",
+     "class": "hers",
+     "tier": "authored",
+     "ja": {"trigger": "何してるの、と訊かれたとき", "response": "実際にしていることを短く返す。", "unless": ""},
+     "readers": ["cast_turn"]}
+  ],
+  "drivers": [],
+  "secrets": []
+}

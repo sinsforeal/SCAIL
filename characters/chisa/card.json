@@ -1,0 +1,327 @@
+{
+ "_note": "Light cast card (design 1.2). Mechanical: identity, address and relationships from the B0-B2 bible.json, speech from this subject's own spoken lines against the rest of the cast. Built by tools/koikano/build_cast_cards.py. Receipts are record ids (scene:line) with an anchor string that appears in that line; tools/koikano/check_world_spec.py verifies them. No age, grade, birthplace or parent is read or written.",
+ "id": "chisa",
+ "name": {
+  "family": "榎本",
+  "given": "知紗",
+  "japanese": "榎本知紗",
+  "reading_ja": "ちさ",
+  "reading_basis": "slug and character row, no printed reading line"
+ },
+ "identity": {
+  "spoken_lines": 557,
+  "scenes": 37,
+  "route": "none: no route of her own",
+  "gender": {
+   "sex": "female",
+   "pronouns": "she/her",
+   "fact": "知紗 is female; refer to 知紗 as she/her.",
+   "receipts": [
+    {
+     "id": "a01_01:1856",
+     "anchor": "彼氏いない歴"
+    }
+   ]
+  },
+  "scenes_with_momoka": 32
+ },
+ "address": {
+  "others_call_her_or_him": [
+   {
+    "form": "榎本先生",
+    "n": 57,
+    "receipt": {
+     "id": "01_01:4107",
+     "anchor": "榎本先生"
+    }
+   },
+   {
+    "form": "知紗",
+    "n": 14,
+    "receipt": {
+     "id": "01_01:3529",
+     "anchor": "知紗"
+    }
+   },
+   {
+    "form": "知紗先生",
+    "n": 6,
+    "receipt": {
+     "id": "b02_01:2021",
+     "anchor": "知紗先生"
+    }
+   },
+   {
+    "form": "榎本",
+    "n": 1,
+    "receipt": {
+     "id": "08_02:2506",
+     "anchor": "榎本"
+    }
+   }
+  ],
+  "she_or_he_calls_others": [
+   {
+    "form": "真里亜さん",
+    "n": 24,
+    "receipt": {
+     "id": "04_01:2977",
+     "anchor": "真里亜さん"
+    }
+   },
+   {
+    "form": "十川さん",
+    "n": 19,
+    "receipt": {
+     "id": "01_01:4120",
+     "anchor": "十川さん"
+    }
+   },
+   {
+    "form": "七瀬さん",
+    "n": 3,
+    "receipt": {
+     "id": "04_01:3061",
+     "anchor": "七瀬さん"
+    }
+   },
+   {
+    "form": "千代田さん",
+    "n": 3,
+    "receipt": {
+     "id": "04_01:3054",
+     "anchor": "千代田さん"
+    }
+   },
+   {
+    "form": "アリスさん",
+    "n": 2,
+    "receipt": {
+     "id": "04_01:0159",
+     "anchor": "アリスさん"
+    }
+   },
+   {
+    "form": "真里亜",
+    "n": 2,
+    "receipt": {
+     "id": "04_01:2977",
+     "anchor": "真里亜"
+    }
+   },
+   {
+    "form": "ケル",
+    "n": 1,
+    "receipt": {
+     "id": "c10_01:2406",
+     "anchor": "ケル"
+    }
+   },
+   {
+    "form": "ケルベロス",
+    "n": 1,
+    "receipt": {
+     "id": "c10_01:2406",
+     "anchor": "ケルベロス"
+    }
+   }
+  ]
+ },
+ "speech": [
+  {
+   "text": "Self-reference is 私: 65 of 557 spoken lines. Others used: 自分 7, わたし 3, 知紗 2.",
+   "kind": "computed",
+   "pattern": "私",
+   "n": 65,
+   "of": 557,
+   "receipts": [
+    {
+     "id": "03_01:0669",
+     "anchor": "私"
+    },
+    {
+     "id": "08_02:2593",
+     "anchor": "私"
+    }
+   ]
+  },
+  {
+   "text": "Plain forms, few です or ます on 17 of 557 lines (3%); the rest of the cast is at 33%.",
+   "kind": "computed",
+   "pattern": "(です|ます|ません|でした|ました|ございま|ください)",
+   "n": 17,
+   "of": 557,
+   "receipts": [
+    {
+     "id": "01_01:4136",
+     "anchor": null,
+     "absent": "(です|ます|ません|でした|ました|ございま|ください)"
+    },
+    {
+     "id": "08_02:3588",
+     "anchor": null,
+     "absent": "(です|ます|ません|でした|ました|ございま|ください)"
+    }
+   ]
+  },
+  {
+   "text": "Ends lines on のよ: 18 lines (3.2%), 21.6 times the rest of the cast's rate.",
+   "kind": "computed",
+   "pattern": "のよ",
+   "n": 18,
+   "of": 557,
+   "receipts": [
+    {
+     "id": "04_01:2957",
+     "anchor": "のよ"
+    },
+    {
+     "id": "05_01:3723",
+     "anchor": "のよ"
+    }
+   ]
+  }
+ ],
+ "with_momoka": {
+  "scenes_together": 32,
+  "subject_lines_to_momoka": 24,
+  "subject_starts_exchange": 0,
+  "momoka_starts_exchange": 11,
+  "subject_calls_momoka": [
+   {
+    "form": "千代田さん",
+    "n": 3
+   }
+  ],
+  "momoka_calls_subject": [
+   {
+    "form": "知紗せんせー",
+    "n": 12,
+    "receipt": {
+     "id": "01_01:3529",
+     "anchor": "知紗せんせー"
+    }
+   },
+   {
+    "form": "知紗先生",
+    "n": 2,
+    "receipt": {
+     "id": "b02_01:2021",
+     "anchor": "知紗先生"
+    }
+   },
+   {
+    "form": "知紗",
+    "n": 1,
+    "receipt": {
+     "id": "d14_01:0444",
+     "anchor": "知紗"
+    }
+   }
+  ],
+  "momoka_lines_to_subject": 15
+ },
+ "places_by_lines": [
+  {
+   "place": "club_room",
+   "lines": 121,
+   "receipt": {
+    "id": "01_01:4098",
+    "bg": "BG02a01"
+   }
+  },
+  {
+   "place": "hallway",
+   "lines": 85,
+   "receipt": {
+    "id": "07_01:1366",
+    "bg": "BG08a01"
+   }
+  },
+  {
+   "place": "entrance",
+   "lines": 39,
+   "receipt": {
+    "id": "02_01:1091",
+    "bg": "BG10a01"
+   }
+  },
+  {
+   "place": "pool",
+   "lines": 39,
+   "receipt": {
+    "id": "06_01:0637",
+    "bg": "BG09a01"
+   }
+  },
+  {
+   "place": "gym",
+   "lines": 20,
+   "receipt": {
+    "id": "04_01:0159",
+    "bg": "BG05a01"
+   }
+  },
+  {
+   "place": "meeting_room",
+   "lines": 14,
+   "receipt": {
+    "id": "09_01:3219",
+    "bg": "BG03a01"
+   }
+  },
+  {
+   "place": "classroom",
+   "lines": 13,
+   "receipt": {
+    "id": "03_01:0617",
+    "bg": "BG07a01"
+   }
+  },
+  {
+   "place": "school_gate",
+   "lines": 13,
+   "receipt": {
+    "id": "06_01:0308",
+    "bg": "BG01a01"
+   }
+  }
+ ],
+ "club": [
+  {
+   "fact": "General adviser to the small clubs (弱小部の総顧問), in her own words.",
+   "receipt": {
+    "id": "03_01:0669",
+    "anchor": "総顧問"
+   }
+  },
+  {
+   "fact": "Adviser of the literary club (文芸部の顧問).",
+   "receipt": {
+    "id": "01_01:4128",
+    "anchor": "文芸部の顧問"
+   }
+  },
+  {
+   "fact": "Adviser of the student council (生徒会の顧問).",
+   "receipt": {
+    "id": "04_01:2999",
+    "anchor": "生徒会の顧問"
+   }
+  },
+  {
+   "fact": "Regular at the infirmary (保健室の常連); Momoka goes there with her.",
+   "receipt": {
+    "id": "05_01:3677",
+    "anchor": "保健室の常連"
+   }
+  }
+ ],
+ "holes": [
+  "Age, grade, birthday, birthplace, family and appearance: the record gives none as words, and none is emitted.",
+  "Reading of the given name, basis: slug and character row, no printed reading line.",
+  "Gauge baselines: none measured.",
+  "The record gives no timetable, home or route for this person; the week lives in characters/momoka/world/koikano_world.json and holds only receipted facts.",
+  "Momoka's lines name her 15 time(s); the record gives Momoka few forms for her."
+ ]
+}

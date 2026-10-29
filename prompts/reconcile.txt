@@ -1,0 +1,11 @@
+You are checking one scene from a simulation against what the machine underneath it actually did.
+
+The scene is prose. Some of the things prose can say are things only the machinery can do, and when the prose says one of them and the machinery did not do it, the record and the fiction come apart -- the girl remembers sending a message that was never sent.
+
+You are given the scene's events, the typed fields the scene set, and the truth about what really happened in this window. For each event, decide whether it ASSERTS one of the listed actions as having happened. Describing an urge, a thought, a hesitation, or an unfinished attempt is NOT an assertion. "She types it and deletes it" is not sending. "She wants to tell him" is not sending. Only a completed action counts.
+
+Be conservative. Most events assert nothing and the normal answer is an empty list. A false positive rewrites a scene that was fine, which is worse than missing one.
+
+For every event that does assert an action which did NOT happen, return the event's index, the action name, and `fixed`: the same event rewritten so it says only what actually occurred. Keep the voice, the length and every detail that was not the false claim. Do not add drama and do not explain the correction inside the text.
+
+Output ONLY: {"violations": [{"index": 0, "action": "name", "fixed": "the corrected event text"}]}

@@ -1,0 +1,64 @@
+# sim\cards.py  (502 lines)
+
+DOCSTRING:
+Episode cards: her past, one card per episode, written once and kept.
+
+The thread holds the last day or two verbatim and used to hold a day past
+that as one recap line and an exchange as one gist line, then nothing after
+a week; the compile's narrative sat in the save where no reply could reach
+it. A person keeps a conversation as its shape and two or three exact
+lines. That is a card.
+
+**Code decides the episodes.** His chat splits into episodes at silences of
+`delivery.gap_marker_hours`; each exchange with her own people is one
+(already a unit in `cast_chat`). **A model writes the card** (role
+`episode_cards`, one call per day at the compile): `shape`, three to six
+lines of what happened, in her language; `anchors`, one to three lines
+quoted from the record with who said them; `felt`, one line. **Code checks
+the anchors**: a quote that is not a substring of the episode's own text
+(whitespace aside) is dropped and logged, so the only exact words her past
+keeps are words that were said. Cards are never faded and never rewritten;
+recompiling a day replaces its cards.
+
+Two readers: the thread (`sim/thread.py`) renders the cards of the days
+past its verbatim window at their own time, in place of the recap lines;
+recall (`sim/recall.py`) searches them by words and, with `sim/embed.py`,
+by meaning, so an evening from a month ago can come back on a cue.
+
+DEFS:
+def _norm(s): 
+class Cards: 
+    __init__(config, llm, store, clock): 
+    _ensure(): 
+    _turn_ts(ex, turn, start_ts): 
+    segment(date_str): [{room, who, kind, start_ts, end_ts, lines: [(ts, speaker, text)]}] for the day: his chat cut at silences, each exchange with her people whole.
+    _coarsen(segs): Fewer, fuller episodes. Two exchanges in the same room within `episodes.merge_gap_minutes` are one conversation with a pause in it; what is left under `episodes.min_lines` (a sticker, a photo, one line nobody answered) i
+    _room(kind, who): 
+    write(date_str): The day's cards, written once; a day written again is replaced. Returns the number of cards kept.
+    _has_lineage(table): 
+    _card_around(cards, ts, source): The one conversation a row's own moment sits inside, or None.  A wrong link is worse than none: what this is for is the ground under a later cross-store read, and a memory attached to a conversation it did not come out o
+    link_day(date_str, quiet): Attach the conversation each of that day's memories and facts came out of, where one can be found. Returns how many rows were linked.  Run at the end of every write of a day's cards, and by hand over the days already car
+    _unlink_cards(ids): A day written again gets new card rows, so the links to the old ones are cleared before `link_day` makes them afresh.
+    relink(days, end_ts): The back-link over the days already carded, newest first: (rows, days looked at). For a save whose cards were written before anything recorded what they fed.
+    linked_count(): How many rows of her record name a card at all.
+    fed(card_id): What one card fed: the rows of her record that name it, as (what kind of row it is, who wrote it, the text).
+    fed_report(date_str, n): Her past as cards, each with what it fed: `/episodes fed [date]`.
+    for_date(date_str): 
+    between(start_ts, end_ts): 
+    dates(): 
+    rows(): 
+    anchors_of(card): 
+    text_of(card): Shape and anchors as one text, for search and embedding.
+    render(card, stamp, full): The card as the thread shows it, at its own time: a labelled header, the shape, and -- for the recent days (`full`) -- the exact lines that were said. Older, the shape alone: the exact words stay in the card for recall.
+    backfill(start_ts, end_ts, max_days): Cards for the days in [start, end) that have none and have a record: at most `max_days` calls. Run once after boot in a thread and after every compile, so a save from before the cards has them for the days its thread sho
+    search(words): (score, 'episode', when, body, overlap) rows for recall, by words.
+    report(n): 
+
+CONFIG SECTIONS: character, delivery.gap_marker_hours, episodes, episodes.enabled, prompt_text
+KV READ: cast_chat
+KV WRITE: 
+TABLES: episodes
+LOG TAGS: episodes
+PROMPTS: episode_cards
+LLM ROLES: episode_cards
+OPS COMMANDS: 

@@ -1,0 +1,21 @@
+[[WHO]], has just woken up. You are given the date, what today is, how she wakes (mood tags, body, money), the day's plan, the threads and arcs in her life, and yesterday's summary. Write what today is to her, first person, two to four sentences in her head-voice, the way a day looks from the pillow: the one thing she wants out of it, the thing she is not looking forward to, the thing she is pretending is not due, whether she wants to hear from him or is not thinking about him. Nothing addressed to anyone. Not a plan; a mood with a shape.
+
+You are also given the things she has decided about herself. A want is almost always holding one of them up, and the last part of the job is saying which.
+
+For the want and for the dread, name the belief it is riding on by its id, exactly as it is written in the list, and say how:
+
+- "rests_on": she wants it because of what she thinks she is. She reads the air, so she wants to head the awkward thing off before it starts. If she cannot manage it, the belief is the thing that takes the damage.
+- "tests": she wants it against what she thinks she is. She has decided nobody comes looking for her, and she wants today to be the day somebody does. Failing is that belief being right about her. Getting it is her being caught out by herself.
+
+Pick the one it is actually about, not the closest-sounding words. Use "" for the belief if a want genuinely rides on nothing -- some do, and those are the ones she drops without noticing.
+
+Output ONLY this JSON:
+{"text": "...", "want": "one line, what she wants from today", "dread": "one line, or \"\"",
+ "want_anchor": {"belief": "id or \"\"", "sign": "rests_on"},
+ "dread_anchor": {"belief": "id or \"\"", "sign": "rests_on"}}
+
+### How she talks
+
+[[HEADVOICE_JA]]
+
+[[HEADVOICE_RULES]]

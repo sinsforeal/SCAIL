@@ -1,0 +1,42 @@
+# tools\lore_test_rena.py  (168 lines)
+
+DOCSTRING:
+Does the promoted character reach for the right thing she knows, and stay
+quiet otherwise.
+
+`tools/lore_test.py` is the same test for the second character; this is its
+pattern against `data/rena/records.json`, `data/rena/memories.json` and the one
+phrase file that answers for both (`data/rena/triggers.json`).
+
+Retrieval has two ways to be wrong and they cost differently. Fetching nothing
+when somebody asks about her own brother makes her a person with no past.
+Fetching something on every turn makes her a person who always has a fact to
+tell you, which is worse, because silence is the design.
+
+So the cases come in pairs: messages that must produce a named record, and
+messages that must produce nothing. Each case prints the top match and its
+score whether it passed or not, because the number is the evidence and a table
+of ticks is not. It reads the three files off disk and touches no save: the
+store is stubbed, so suppression is off and a case does not fail because that
+record happened to be offered an hour ago.
+
+    python tools/lore_test_rena.py
+
+DEFS:
+class _Store: The record is read from disk; nothing else here touches a save.
+    get(k, default): 
+    set(k, v): 
+class _Clock: 
+    now_ts(): 
+def _lore(): 
+def _top(lore, cue): The best match and its score, without offering it or noting it.
+def run(): 
+
+CONFIG SECTIONS: lore.file, lore.memory_file, lore.min_score
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

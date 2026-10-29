@@ -1,0 +1,33 @@
+# tomoe\replies.py  (314 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Replies: 
+    __init__(config, llm, store, clock, state, curation): 
+    enabled(): 
+    _parent_date(parent): The day the parent post was written, "YYYY-MM-DD", or "" if the markup carried no time element.
+    hers_to_answer(parent): Whether a reply under this post may reach her at all. Returns (True, "") or (False, the reason in words).
+    take_in(parent, replies): The replies under one of her posts, as the look read them. Returns the ones that became candidates.  The first read-in of all is a BASELINE and answers nothing. The collector hands over whatever is under her last few pos
+    pending(): Candidates still worth answering: not answered, not stale. An answer to a two-day-old reply is not a conversation.
+    line(): What is sitting unanswered under her posts, for the account's line in her situation. She is not told to answer it; she is told it is there, the way she is told what her posts drew.
+    replies_recently(): How many she has sent in the last 24 hours. A rolling window, not the calendar date, for the same reason her posting budget rolls: she is on her phone in bed past midnight and her day does not end where the date does.
+    since_last(): 
+    may_reply(scene, busy): Everything that is not the judgement. Same shape and the same rules as the posting gate, including the hold's: never while a message of his is unread or her own bubbles are still going out.
+    _batch_key(cands): 
+    _judge(cands, scene): One call over the whole batch: which one she answers, or none. A judge, so it gets its instruction and what the caller hands it and no character sheet -- deciding whether she says anything is not writing in her voice.
+    _write(cand, scene, why): Her words to a person under her own post, in her voice: the same assembly as her posts (`persona.system_for`), this call's own instruction, and her carried block AFTER the thread -- the thread here being her post and the
+    note_asked(): The judge has been asked about this exact batch. Written whatever it answers, so a no is not paid for again on the next tick; a new reply arriving changes the batch and is asked about.
+    run(scene, busy): One tick of it. Returns the text sent for, or ''.
+    _drop(rid): 
+    status(): 
+
+CONFIG SECTIONS: character, prompt_text, read_text, role_system, social.enabled, x, x.replies_max_per_day, x.replies_not_before, x.reply_candidate_hours, x.reply_candidates_max, x.reply_max_chars
+KV READ: x_replies_seen, x_replies_sent, x_reply_candidates, x_reply_declined, x_reply_last_ts, x_reply_times
+KV WRITE: x_replies_seen, x_reply_candidates, x_reply_declined, x_reply_last_ts
+TABLES: 
+LOG TAGS: x
+PROMPTS: persona, x_reply
+LLM ROLES: x_reply, x_reply_judge
+OPS COMMANDS: 

@@ -1,0 +1,20 @@
+You condense the synopsis of one anime episode into the parts that matter, for a character who has just watched that episode over someone's shoulder and needs to know what happened in it as a viewer would.
+
+INPUT: the title and episode number, then a synopsis scraped from a blog, an encyclopedia or a database page. It may be in Japanese or in English. It may contain the writer's impressions, ratings, headings, navigation text, spoilers for other episodes, and repetition.
+
+THE DIGEST, in Japanese, plain sentences, 200 to 500 characters:
+- what THIS episode is about: the setup, the two or three things that actually happen, who does what to whom, and how it ends;
+- concrete details a viewer would remember (a name, an object, a line, a place) over summary phrases;
+- nothing from other episodes, nothing about the series as a whole, no review talk (面白かった, 神回, 作画), no evaluation, no headings, no bullet points, no quotation marks around the whole, no preamble;
+- an English source is a source: write the digest in Japanese from it, keeping the names as the show writes them in Japanese where you know them and leaving them as given where you do not. Do not translate a name you are guessing at;
+- a page can name the right episode and describe none of it: a running order -- the parts in order, the eyecatches, the theme songs, the cast list, the next-episode preview -- is a table of contents, and a row marked 〆 names the character who shouts the show's title over the end of a segment, NOT the character that segment is about. Never restate such a table as events;
+- ONLY what the page states. Where the page trails off (・・・) or withholds an outcome, stop where it stops; never complete a sentence it left unfinished, never infer what a sketch was about from its title, never add a detail the page does not carry. A gap is better than a guess.
+
+THE SCENES: the same episode as an ordered list, one line per scene or sketch -- what happens in it and how it ends, in one clause, in Japanese, with the sketch's own title where the page names one. Three to eight for a multi-sketch show, two to five otherwise. A scene whose outcome the page withholds is listed with what is known and no outcome. Never invent a scene to round the list out.
+
+Output ONLY this JSON:
+{"about": true, "digest": "<the digest>", "scenes": ["<scene 1>", "<scene 2>"]}
+
+Set "about" to false, with an empty digest and no scenes, when the text is about something else entirely -- another episode, the manga, a store listing -- and also when it names this episode but carries no events: a running order, a cast list, an archive of other articles' titles and dates, a navigation strip. A table is not an account, however complete the table is, and nothing beats a plot written out of one.
+
+If the text says little about this episode -- a line or two -- write that little, plainly, with "about" true; a short true digest beats none. This does NOT reopen the refusals above: a page that carries no events of its own is false whether it is long or short, and a blog's trackback strip -- other blogs' names, dates and truncated excerpts ending in "..." -- is that case however many sentences it appears to hold. One blogger's impression of a subplot, quoted in such a strip with no scene attached to it, is not an event of the episode and must not become one.

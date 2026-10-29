@@ -1,0 +1,57 @@
+# sim\nudge.py  (283 lines)
+
+DOCSTRING:
+The nudge: a second reader of everything she carries, who is not her.
+
+The attention gate ranks lines by number and cannot judge timing or tone
+-- it would slot the anime nag straight after he said something sad, or
+let a flea-market plan outrank the four hours he was gone. This role says
+one thing: which of the lines the machinery put in front of her she would
+actually be caught by right now, and what would be off. Code places that
+in the one slot she reads. It never writes her words, never adds a fact,
+never sets her length.
+
+**It carries her situation block and nothing else of hers** (his call).
+Its system prompt is its own instruction file, through
+`Config.role_system` with a `judge` row, so her sheet cannot reach it by
+any path; its user message opens on the situation block as she is being
+sent it this minute (`Persona.judge_situation`), and carries the
+conversation, every line the gate let through this turn with its marks --
+never one it suppressed as already said or as a repeat, and never an
+action the weight floor or the foresight kept out of the slot -- and the
+gate's own pick. It used to be handed her whole assembly, bible and
+carrying block included, with "YOU ARE NOT HER" appended after it, which
+is the arrangement a judge reads as its own identity.
+
+Two modes. `live`: its `attend` replaces the gate's mechanical pick in the
+slot when its confidence clears `min_confidence`. `shadow`: it runs, is
+logged beside the gate's pick with an agreement estimate, and changes
+nothing -- the way in, so the disagreement rate can be read before it is
+trusted. `friends`: the same reader on her turns with her own people
+(`exchange._her_turns`), where the prompt is smaller and had no arbiter
+at all. kv `nudge_last`; `/nudge`.
+
+DEFS:
+def _notes(text, limit): What the nudge wrote, with anything she could send taken out: a quoted span is a line offered to her, and on 2026-08-31 'needed something soft right now' went to him in her voice word for word.
+def _agree(a, b): 
+class Nudge: 
+    __init__(config, llm, store, clock): 
+    level(): 
+    due(channel): Does it fire now? `unsaid` at or over `unsaid_min`, off the gap. With `fire_on_unsaid` off it fires on every call, as it first did.
+    carried(n): Things she carries warm `unsaid` while they wait -- the nag, a post to show him, a promise due. Called once per reply to him with the count of action lines in front of her.
+    released(): It came out: the gauge settles toward rest, never past it.
+    _tag(value): A source tag as the answer may have written it: the brackets, a trailing mark and any words after it taken off.
+    _offered(value, offered): The line the answer named, exactly as she was offered it.  Asked what she is caught by in its own words, this role composed a sentence about her and code put it in the one slot she reads, so a role with no character shee
+    enabled(channel): 
+    run(situation, history, candidates_text, gate_pick, channel, who, allowed, level, offered): Returns the text for the slot, or '' to leave the gate's pick. `situation` is her situation block, headed, as she is being sent it this minute and with nothing else of hers in it (`Persona.judge_situation`); `history` th
+    ab_report(n): The ongoing test: each live reply beside the reply she would have sent with the gate's line in the slot instead.
+    report(): 
+
+CONFIG SECTIONS: nudge, nudge.compare, nudge.max_chars, role_system
+KV READ: nudge_ab, nudge_fired_ts, nudge_log
+KV WRITE: nudge_fired_ts, nudge_last, nudge_log
+TABLES: 
+LOG TAGS: nudge
+PROMPTS: 
+LLM ROLES: nudge
+OPS COMMANDS: 

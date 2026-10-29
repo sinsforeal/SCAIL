@@ -1,0 +1,57 @@
+# tools\seed_self_memory.py  (192 lines)
+
+DOCSTRING:
+The things she was already carrying before the record started.
+
+`self_memories` began on 2026-08-21 and her whole life before it was a
+495-character paragraph in which HE is the subject of every clause. She is
+fifteen with four months of conversation with him and nine days of being a
+person, and that asymmetry is the first thing she would find if she ever looked
+at her own head honestly.
+
+The cast got their floor the same way (`tools/seed_cast_memory.py`). This is
+hers, and the rule is the same: **nothing is invented.** Every line here comes
+from `prompts/bible.md`, `tomoe_data/tomoe dialogue.md` (her canon dialogue) or
+`data/cast.json`, and where the source says a thing plainly this says the same
+thing in her own register. Where it says nothing -- what she did on a Tuesday
+in Fukuoka, what her grandmother is like -- there is nothing here.
+
+Fourteen memories, which is a floor and not a biography. The compile writes one
+or two a day (`self_memory.max_per_day` 5) and will build on these rather than
+inventing from an empty table.
+
+`ts` AND `last_seen` are both when it happened, so the fade runs from the
+event. The cast facts were seeded the other way round on purpose: a fact about
+her mother's job is re-encountered every time her mother goes to work, and a
+remembered afternoon is not -- it fades unless something brings it back, and
+`for_prompt(cue)` is what brings it back. Against the fade
+(`half_life_days` [14, 45, 120, 400, 1200] by weight, floor `min_score` 0.5)
+the formative ones stand for years and nothing here is below weight 3, because
+a weight-2 memory from April would already be gone and a memory that has faded
+out of her by the time it is written is not a floor.
+
+These are written under the source `backstory`, and NOT under `seed`, which in
+`sim/self_memory.py` now means a memory that never fades at all -- what a
+character is made of rather than a day she lived through. These fourteen are
+days she lived through: they are a floor and not a biography, and the whole
+paragraph above is an argument for letting them fade. The second character's
+252 are the other kind and carry `seed`.
+
+`feeling` and `valence` are how it sits with her NOW, not how it felt at the
+time -- the schema's own rule, and the reason the salon is +1 and the drilling
+is 0.
+
+    python tools/seed_self_memory.py            # what it would write
+    python tools/seed_self_memory.py --apply    # write it, after a backup
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,81 @@
+# --- secrets: never commit ---
+/secerts/*
+!/secerts/README.md
+*.key
+*.secret
+*key*.txt
+*token*.txt
+
+# --- logs, caches, python ---
+/logs/
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# --- runtime state, saves, locks ---
+*.db
+*.db-wal
+*.db-shm
+*.db.lock
+*.lock
+pending_*.json
+*.cmd.next
+
+# --- data is runtime state; keep the codebook, the TTS config and the
+# --- built voice index (a reviewable artifact derived from the read-only
+# --- koikano record by tools/voice_index.py) ---
+/data/*
+!/data/codebook/
+!/data/minimax/
+/data/minimax/config.json
+!/data/vn/
+/data/vn/*
+!/data/vn/voice_index.json
+
+# --- media the fork must not carry ---
+*.wav
+*.flac
+*.mp4
+*.mkv
+*.ass
+*.zip
+
+# --- editor/os ---
+.DS_Store
+Thumbs.db
+
+# --- android/app build output ---
+*.apk
+*.aab
+*.dex
+/talkapp/android/app/build/
+/talkapp/android/.gradle/
+/talkapp/android/local.properties
+/talkapp/android/emulator.log
+
+# --- orchestrator (10-22): disk-only rules, local settings, runtime state ---
+/CLAUDE.md
+/.claude/settings.local.json
+/var/*
+!/var/handoffs/
+/var/handoffs/*
+!/var/handoffs/.gitkeep
+
+# --- his viewing history: runtime output, never committed ---
+/reports/plays.md
+/reports/transcripts.md
+/reports/dossiers/
+/reports/episodes/
+
+# --- root junk from redirect mishaps / scratch (2026-10-22 scout) ---
+/NUL
+/nul
+/awaiting
+/is
+/_voice_short.txt
+/claude_prompts/
+
+# legacy V3 template, carries keys locally
+/config.json

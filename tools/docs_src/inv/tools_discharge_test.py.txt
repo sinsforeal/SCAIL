@@ -1,0 +1,22 @@
+# tools\discharge_test.py  (85 lines)
+
+DOCSTRING:
+A gauge at its end does something and resets, without the model: the
+rules fire at their levels, reset to a level not to rest, hold a
+cooldown and a daily cap, an `act` writes an event with side effects and
+a stress release, and the next tick is handed the event. On a copy of
+the save.
+
+    python tools/discharge_test.py
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: state.discharge, state.gauges
+KV READ: discharges
+KV WRITE: discharge_counts, discharge_last, discharges
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

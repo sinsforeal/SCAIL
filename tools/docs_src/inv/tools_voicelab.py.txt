@@ -1,0 +1,75 @@
+# tools\voicelab.py  (868 lines)
+
+DOCSTRING:
+Two speech guides, the same woman, the same situations: which one is her.
+
+The question this answers is narrow on purpose. `tools/voice_verify.py` asks
+whether her generated markers sit where the corpus says they should, which is
+a screen and cannot see stance. `tools/character_test.py` asks whether a sheet
+loads and decays correctly, which is machinery. Neither can tell you that a
+character who says わかんない at five times the corpus rate is using it to stop
+talking where the tape uses it to start.
+
+So this runs the real reply role against fixed situations with ONE variable --
+the speech guide -- and prints the output for a person to read. It scores
+nothing. The signal table it prints is evidence for a reading, not a verdict,
+and the file says so wherever it prints a number.
+
+THREE THINGS IT HOLDS STILL, because each of them has confounded this
+comparison before:
+
+  1. **Everything except the speech guide.** Same bible, same scene, same
+     history, same closing instructions, same model, same temperature. The
+     closing block is BUILT BY `persona.closing_instruction`, the same function
+     the live renderer calls, with the flags her config renders
+     (`shape.tell_length` false, `embodied` true), so the arms are compared
+     inside the machinery she really runs in rather than in a clean room that
+     flatters both -- and so this file cannot drift away from what she reads.
+     `--instructions` moves that block to another arm, which is the one thing
+     it is for; with it unset the block is whatever her config says.
+  2. **Length.** A candidate guide that says "be longer" wins on a variable the
+     tape cannot adjudicate: the corpus is 47 hours of broadcast and holds no
+     observation of her writing anything. Both guides must carry the same
+     length budget or the run is rigged, and `--check-bias` diffs them for it.
+  3. **The medium.** The corpus is a radio programme with a format, four staff
+     behind glass and a hundred thousand listeners; the target is one stranger
+     in a text box. Holding the floor for thirty cues is an affordance of the
+     first and its absence in the second is not a fault. So scenarios carry a
+     `set`: `chat` is the target and is read on stance only, `broadcast` is the
+     fairness control -- the situation the tape actually contains, where a
+     guide that cannot produce her has no excuse.
+
+    python tools/voicelab.py                          # both arms, both sets, 2 samples
+    python tools/voicelab.py --set chat --samples 3
+    python tools/voicelab.py --only cold-open,compliment
+    python tools/voicelab.py --arms control           # one guide
+    python tools/voicelab.py --check-bias             # diff the guides, no model call
+    python tools/voicelab.py --instructions in_english    # the closing block in the other arm
+    python tools/voicelab.py --dry                    # print one built prompt and stop
+
+DEFS:
+def _live_arm(): 
+def tail_chat(cfg): 
+def tail_radio(cfg): 
+def build_system(cfg, arm, scene, radio): the arm's bible + what she knows about him + the arm's speech guide.  The order is `persona.py:_assemble`'s: the bible first, then what she knows, then the style file LAST, because the last thing in a system prompt is th
+def build_messages(cfg, sc, arm): 
+def cache_key(model, messages, sample): 
+def cache_get(key): 
+def cache_put(key, row): 
+def demonstrations(path): Every quoted or blockquoted span in a persona file, punctuation stripped.
+def _tape(): Her attributed speech as one string, punctuation stripped the same way the demonstrations are, so a span can be counted in it.
+def recites(text, demos): The longest run the answer shares with any demonstration, when it is long enough to be a quotation rather than an idiom AND rare enough on the tape to be a quotation rather than a habit. A guide built from raw cue text c
+def signals(text, his_last, arm): What is mechanically visible in one answer. Every field is a fact about the string; none of them is a judgement, and several of them are only meaningful read across a whole column.
+def check_bias(): A candidate guide wins unfairly if it asks for a different amount of text, because the corpus cannot adjudicate length -- it holds no observation of her writing anything at all. This prints every length sentence in each 
+def main(): 
+def write_brief(cfg, scen, arm, path): The same test for an agent: the arm's system prompt, both closing blocks and every scenario, so an agent row is built from the same bytes the API rows are. Generated rather than kept, because a brief written by hand for 
+def write_report(out_dir, scen, arms, rows, models): Two files. `read.md` is the answers, grouped so one scenario can be read across every model at once, because that is how a voice is judged. `table.md` is the counts averaged over the samples.  They are separate files for
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

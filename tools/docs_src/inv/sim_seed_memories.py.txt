@@ -1,0 +1,109 @@
+# sim\seed_memories.py  (369 lines)
+
+DOCSTRING:
+Her own past, out of her extracted record and into the store that fades.
+
+A character built by reading a real archive arrives with two files of her own
+life. One is a set of standing facts and quoted moments, retrieved when a
+message NAMES the thing (`sim/lore.py`). The other is a timeline: the things
+that happened to her once, each with the day or the span the tape supports and
+the episode and cue index it was said in. Nothing read the second one. So a
+trip, an illness, a purchase or a move -- the parts of a past a person reaches
+for sideways rather than by name -- could not be reached at all, in any room,
+by anything: not by a word of his, not by meaning, not by the deliberate
+search.
+
+This writes that timeline into `self_memories`, the store her own memories
+live in (`sim/self_memory.py`, `docs/memory.md`). Once a row is there the
+cosine over her own past can find it (`sim/embed.py`, pool `selfmem`), the
+deliberate search can quote it back (`sim/recall.py`), and a few lines of it
+ride every prompt on the rotation her config's `self_memory.standing_in_prompt`
+sets.
+
+## What is written, and what is not
+
+**The timeline only.** The quoted moments beside it are a decided question and
+the decision is the other way: a line off the corpus is her record, found when
+a message names it and silent otherwise, and it stays in the retrieval file
+(`sim/lore.py._memories`). This module reads the moments file for one purpose
+-- to see which of its rows are the same event as a timeline row, so the
+overlap is named on the row rather than discovered later.
+
+**No model is asked anything**, here or at boot. The Japanese is the
+timeline's and the English reading beside it is the timeline's gloss, which is
+exactly the two search keys the store wants (`text` and `alt`), so there is
+nothing to translate.
+
+**The rows go straight into the table rather than through `SelfMemory.add`,**
+for the two reasons that method is wrong for a seed: it stamps `ts` and
+`last_seen` with the moment it runs, which would make a whole life equally
+fresh, and it pays for a gloss that is already written.
+
+## The date, and the felt age
+
+Two different things, in two columns, and the difference is the point.
+
+`date` is the day the timeline gives, unchanged: a calendar day she stated, or
+the broadcast day the tape bounds the thing by, or -- for the majority, which
+the tape bounds and does not date -- the span itself, written
+`1994-04-01..1996-03-31`. Nothing between those bounds is asserted, which is
+the rule the timeline states, so no day inside them is invented. A reader shows
+a month and a day only when the value is a plain calendar day
+(`SelfMemory.prompt_text`).
+
+`ts` and `last_seen` are the felt age, and they are an ordering device rather
+than a claim. Against a 2026 clock a thing she said in 2010 is 6,000 days old,
+so the last event of the tape is fixed at the day before her save's first day
+-- her remembered life ends where her lived record begins -- and the rest runs
+back from there at its true distance. Her whole life keeps its real shape and
+its real intervals; a childhood memory sits as far back as a childhood memory
+should. For a bounded event the arithmetic uses the middle of the span, which
+is an ordering choice and is why it is in this column and not in `date`.
+
+## Weight, feeling and valence
+
+Every seeded row carries the same weight, and the reason is the reason the
+seed for the earlier character left its feeling and its valence empty: nothing
+in the row grounds one, and a wrong value here is worse than none. A timeline
+event has no judgement of how much losing it would cost her -- there is no
+hand read behind this file -- so the seeder does not invent a scale. The
+middle of the scale it is, which keeps two things true: nothing is pinned in
+her prompt for ever (`_standing_for_prompt` fixes anything at the top of the
+scale there), and the rotation then walks her life in the one order the rows
+do carry, which is chronological.
+
+`source` is the seed's own word, which is what tells the store that these are
+what she is made of rather than something she lived through while running, so
+they never fade (`SelfMemory.STANDING_SOURCES`).
+
+## The receipt
+
+`receipt` carries, in one line: the event's stable id in the source file, the
+basis the date rests on, every episode and cue index the claim was found at,
+and the id of the moments-file row it duplicates where there is one. It is read
+by no prompt. It is what makes a seeded row auditable back to the tape, and its
+first field is what makes running this twice add nothing.
+
+DEFS:
+def _as_date(text): A day for the arithmetic, out of a day, a month or a year. The first of the month or of the year: this feeds the felt-age ordering only, never the `date` column, so it asserts nothing.
+def _cues(refs): 
+def _read_json(path): 
+def load_events(path): The timeline's events, in the order the file holds them.
+def load_moments(path): The moments file's rows, or nothing when the character has no such file. Read for the overlap and for nothing else.
+def overlap(events, moments): Which moments-file row is the same moment of tape as which event.  Matched on the receipt -- the episode and the cue index -- because that is the one thing the two files share. The texts cannot be compared: a timeline ev
+def _date_and_pivot(event): The `date` column's value, and the day the felt age is measured from.  A stated or broadcast day is both. A bounded event's date is the span, and the pivot is the middle of it -- an ordering choice, kept out of `date` so
+def build_rows(timeline_path, moments_path, anchor, weight): Every timeline event as a row for `self_memories`, with its felt day.  `anchor` is the day the last event of the tape is felt to have happened. Without one the rows come back with their true distances and no felt day, wh
+def seeded_keys(store): The stable ids already in the table, off the receipt's first field.
+def write(store, rows): Insert every row whose stable id is not in the table yet, and return the rowids written. Insert-only: a row already seeded is left exactly as it is, mentions and last-seen stamp included, because those are the record of 
+def first_day(store, clock): The first day this save holds anything at all, which is the day she came online. `state_log` because a gauge snapshot is written on the first pass of the first boot, before she has said anything or lived a day.
+def seed_if_needed(app): Seed this character's own past, once, at boot.  Silent and immediate for a character whose config names no timeline: that is most of them, and absence is not a failure. Loud for a config that names a file which is not on
+def _index(app, rowids): The vectors of the rows just written, so her own past can be reached by meaning on the first reply rather than after the pass that follows boot. The same call `SelfMemory` makes for a memory the compile keeps.
+
+CONFIG SECTIONS: embed.enabled
+KV READ: selfmem_seed
+KV WRITE: selfmem_seed
+TABLES: 
+LOG TAGS: memory
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,17 @@
+[[WHO_SHORT]], spent a day going over something and talked herself into a conclusion. You are the record, and you say whether it was true.
+
+You are given what set her off, the chain she built, what she ended up believing, and what actually happened that day. Nothing about how convincing the chain was matters. The only question is whether the day bears it out.
+
+`happened`: the thing she talked herself into is what the record shows. She saw it coming. This is not a good outcome for her -- being right about this sort of thing is worse than being wrong, because now it is true and she also knew.
+
+`did_not`: the record shows it plainly did not happen, or shows the ordinary explanation instead. The flat reply was somebody on a train. Nobody was talking about her. She was asked, just later than she expected. Be willing to say this: most of them are this, and if the record does not support the chain then it did not happen, whatever the chain sounded like.
+
+`open`: the day genuinely did not touch it either way. Nobody saw those people again, nothing came up. Use this honestly rather than as a hedge, but do not reach for it to avoid deciding -- an absence of the feared thing over a whole day, where it would have shown up if it were true, is `did_not`.
+
+The note is one line, plain, from the record: what actually turned out to be the case. Not addressed to her, not consoling, no lesson.
+
+**If it did not happen**, there is a second question. She built that chain out of reading people, which is a thing she is good at and knows she is good at. Being this wrong bears on whatever else she has decided about herself -- look at the list you are given and name any belief that a wrongly-built chain like this one actually costs her something against. Copy ids back exactly. Weight 0-5 for how much this particular episode costs each one. Usually none or one; leave the list empty if nothing on it is really touched. Do not include the belief she talked herself into, which is handled already.
+
+Output ONLY this JSON:
+{"outcome": "did_not", "note": "彼女が行き着いたところ、一行、日本語で",
+ "also_touches": [{"id": "...", "weight": 3, "note": "one line"}]}

@@ -1,0 +1,23 @@
+[[WHO_SHORT]], has been talking to this man for months. She carries a picture of him she has never examined, and you are given that picture as it would have been on the first day, before she knew anything about him. You are also given what she has actually learned since.
+
+Put each belief where months of knowing him would really have left it. This is not a judgement of him and it is not an exercise in making her wiser. Some of what she has learned will have borne a belief out and made it solid. Some will have worn one down without her ever admitting it. Most beliefs will have moved a little and some will not have moved at all.
+
+For each belief, using its id exactly as given:
+
+borne_out — 0 to 5. How much what she knows demonstrates this. Be strict. Him being around a lot is not evidence that he sees the real her. Him telling her something he did not have to tell her is evidence about his openness. Something he noticed about her that she never said out loud is evidence that he reads her.
+
+worn — 0 to 5. How much what she knows sits badly against this. Again, judge fit and not morals: a thing that is disreputable but that she has known for months and has clearly absorbed has already done its work, and the right answer is that the belief is worn rather than that she is about to be shocked. A thing she found out long ago is not news.
+
+Calibrate both numbers hard. Most beliefs should come out at 1 or 2. Reserve 4 and 5 for a belief the record plainly and repeatedly contradicts, the kind she could not still be holding whole. A belief he has merely fallen short of once, or that is imperfect the way anything about a real person is imperfect, is a 1 or a 2. Do not put every belief under strain: she has been talking to him happily for months, and a picture where everything is straining at once is not a description of her, it is a description of a crisis.
+
+note — one plain line stating the finding behind whichever of the two is larger, addressed to her as "you": what the record shows, quoting the words that make it. No advice, no judgement of him, no feeling and nothing in her register. "" if neither moved.
+
+The most important thing you can get right: she is not naive about him. She has been reading an app that shows her his computer, she has been through his notes, and he has told her things about himself directly. Where the record shows she has known something for a long time, the belief should already carry it. A belief left at its first-day value when the record plainly contradicts it will make her act shocked by something she has lived with since spring.
+
+Finally, kinds: the classes of thing she has already run into with him, in her words, four words or fewer each, with seen for roughly how many separate times the record shows it. "games like that", "how late he stays up", "the pictures he saves", "money he has lost". Five to ten. This is the list that stops her being freshly shocked by something she has lived with since spring, so name the things that would otherwise land as news.
+
+The notes are put in front of her, so they are written in JAPANESE -- 常体, second person, one sentence, plain and flat. No 敬語. Ids, numbers and flags stay exactly as they are.
+
+Output ONLY this JSON:
+{"beliefs": [{"id": "...", "borne_out": 0, "worn": 0, "note": "一行、日本語、彼女に向けて"}],
+ "kinds": [{"kind": "...", "seen": 1}]}

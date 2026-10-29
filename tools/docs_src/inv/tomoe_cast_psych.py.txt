@@ -1,0 +1,58 @@
+# tomoe\cast_psych.py  (444 lines)
+
+DOCSTRING:
+What she holds with the people around her -- the part the him-side
+machinery never covered.
+
+Rupture and repair (`sim/rupture.py`), expectations (`sim/expectations.py`)
+and withholding (`sim/withholding.py`) are keyed to him: a fight with Rena
+healed by the clock, "Rena said she'd send the photo" came due nowhere, and
+she could not once decide to leave Hinako on read. This module is the
+same four mechanics turned toward the cast, plus the one only friendships
+have -- confidences: who she has told what, and who therefore does not know.
+
+Code decides when: an exchange finishing is the moment (one `bond` call
+reads it), the day boundary ages what is open (an unmended thing scars; a
+promise past due is missed), and leaving somebody on read is a roll off
+her standing with them. The model decides what: whether that exchange was
+a break, a repair, a promise, a thing told in confidence. Numbers move by
+clamped steps through code; sentiments (`sim/sentiment.py`) carry what
+lasts; memories are written by the moment (`source="bond"`).
+
+kv `cast_bonds`: {roster key: {ruptures: [...], promises: [...],
+confidences: [...], left: [...]}}. Readers: her turn prompt and theirs
+(`line_for_her`, `line_for_them`), her own prompt (`prompt_text`), the
+planner (`brief`), `/bonds`.
+
+DEFS:
+class CastPsych: 
+    __init__(config, llm, store, clock, state, sentiments, self_memory): 
+    _rec(): 
+    _save(rec): 
+    _key(who): 
+    _name(key): 
+    bond(rec, key): 
+    open_rupture(key, rec): 
+    _rel(key): 
+    _meter(key, name, amount, lo, hi): 
+    _senti(key, kind, amount, why): 
+    _fond(amount): Warmth toward her own people, up or down.  This section owns `state.gauges.fondness` and is the only thing that moves it (PROJECT 16.1, one owner per gauge). A character with no circle does not have the gauge at all -- t
+    _remember(text, feeling, weight): 
+    after_exchange(out): 
+    leave_it(who, kind): Does she look at their message and choose to leave it there. Opportunity and cost are code's; nothing here reads the words.
+    age(date_str): 
+    _hours(ts): 
+    line_for_her(who): What sits between her and this person, for her turn with them.
+    line_for_them(who): What this person holds with her, for their turn.
+    brief(): For the planner: who is cross with whom, and what is owed.
+    prompt_text(): Her own prompt: what is not right with the people around her.
+    report(): 
+
+CONFIG SECTIONS: cast_bond, cast_bond.enabled, cast_bond.fondness_soft_cap, prompt_text
+KV READ: cast_bonds
+KV WRITE: cast_bonds
+TABLES: 
+LOG TAGS: bond
+PROMPTS: bond
+LLM ROLES: bond
+OPS COMMANDS: 

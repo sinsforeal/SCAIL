@@ -1,0 +1,35 @@
+# tools\stress_test.py  (155 lines)
+
+DOCSTRING:
+Does every end of stress actually reach something.
+
+Six compounds and eight relief kinds. A compound nothing reads and a relief
+nothing calls are the same fault as a gauge nothing reads, and the only way to
+know is to move the gauge and watch something else change. This moves stress
+between 10 and 90 and asserts that each of the six named readers answers
+differently, then fires each of the eight releases twice in a row and asserts
+the second one does nothing.
+
+It needs no LLM and no prompts, and it runs against a copy of the save.
+
+    python tools/stress_test.py
+
+Written after the wiring was found half-done: the integrator had been running
+in State.decay since the day stress shipped, and not one of the fourteen ends
+had a caller. Two things it caught immediately are the reason it exists --
+`relief_gap_minutes` was a Section rather than a dict, so relieve() raised on
+its first call, and the sleep_cost multiplier was being applied underneath
+mind_pen_max, where a night stressful enough to matter had already saturated
+the cap and the reader could not change the score.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: health_days, stress_relief_ts
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

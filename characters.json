@@ -1,0 +1,27 @@
+{
+  "_note": "Every character that runs as a process of her own. This is the operator's list, read by tools/restart.ps1, tools/character_names.py and tools/registry.py -- and NEVER by a bot. In SCAILV4 there is one character: 百花 (Momoka). The other SCAILV3 characters (tomoe, yukari, asumin, rena) were not copied into this fork.",
+  "_fields": {
+    "key": "what the operator calls her at a command line (restart.cmd <key>)",
+    "name": "her full name, for the output",
+    "hub_id": "how she registers with the hub: her config name lowercased with the spaces out",
+    "config": "her config file",
+    "db": "her save",
+    "program": "the package whose app.py builds the rest of her (character.program)",
+    "launcher": "the .cmd the scheduled task runs",
+    "task": "the scheduled task's name",
+    "match": "the exact command-line regex her process is found by. Written by hand and kept here rather than derived: the restarter KILLS what it matches, and a derived pattern that drifts kills the wrong thing."
+  },
+  "characters": [
+    {
+      "key": "momoka",
+      "name": "Chiyoda Momoka",
+      "hub_id": "momoka",
+      "config": "config_momoka.json",
+      "db": "data/momoka.db",
+      "program": "resident",
+      "launcher": "momoka.cmd",
+      "task": "SCAIL_momoka",
+      "match": "resident[\\\\/]run\\.py.*config_momoka|scail\\.py.*config_momoka"
+    }
+  ]
+}

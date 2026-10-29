@@ -1,0 +1,30 @@
+# tools\strip_gloss.py  (101 lines)
+
+DOCSTRING:
+Take the English field out of her record for good.
+
+Every turn and every beat is Japanese now (`tools/ja_backfill.py` put the old
+ones back), and nothing writes a gloss any more, so `text` and `rendered_only`
+are dead weight sitting in the save with English still in them. This removes
+them.
+
+The one exception is a beat of kind `ignored` -- being left on read is an event
+rather than something said, and its `text` is the note about it, which the app
+renders as a note and not as anybody's words.
+
+Refuses to run if any turn is still English-only: those want translating
+(`ja_backfill.py`), not deleting. Idempotent, backs the save up first.
+
+    python tools/strip_gloss.py [--db data/world.db]
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

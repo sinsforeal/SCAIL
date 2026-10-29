@@ -1,0 +1,35 @@
+# sim\him_profile.py  (118 lines)
+
+DOCSTRING:
+What she has come to know about him, from weeks of looking.
+
+The phone digest is a transcript of one look; `user_facts` are one-liners.
+Nothing read the digests back over time, so she knew what he did at 10:04
+and not what he is like -- when he is at his machine, what he is into this
+month, what he does when he is stressed -- which is the model of him the
+bible assumes she has ("you know his hours"). `Rhythm` learns the hours;
+this learns the rest, once a day (`him_profile.every_hours`), from the last
+`him_profile.digests` digests and the facts, into kv `him_profile`.
+
+Read by her own reply (the persona system prompt, beside her beliefs about
+him) and by the digest writer, so a look can say "as usual" or "not like
+him" instead of narrating every session as news.
+
+DEFS:
+class HimProfile: 
+    __init__(config, store, clock, rhythm): 
+    current(): 
+    due(): 
+    maybe(llm): 
+    refresh(llm): 
+    prompt_text(): For her own reply: the picture, as something she holds rather than recites.
+    digest_line(): For the digest writer: what is usual, so a look can say what is not.
+
+CONFIG SECTIONS: him_profile, prompt_text
+KV READ: him_profile
+KV WRITE: him_profile
+TABLES: 
+LOG TAGS: him
+PROMPTS: him_profile
+LLM ROLES: him_profile
+OPS COMMANDS: 

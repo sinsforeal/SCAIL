@@ -1,0 +1,59 @@
+# sim\transcripts.py  (340 lines)
+
+DOCSTRING:
+The episode's transcript, and the account of it the judge measures against.
+
+A downloaded subtitle file (`sim/subtitles.py`) is what was said, in order.
+It is not a synopsis: twenty-four minutes is three to five hundred lines of
+speech with no stage directions, and a model asked to summarise that writes a
+plot out of dialogue and gets the visual gags wrong. So the file is turned
+into a **scenes-in-order account** by one cheap call (`transcript_digest`),
+and that account is what the judge holds the web candidates against -- and the
+fallback digest when no web candidate survives.
+
+Table `transcripts`, keyed on (show, episode), beside `recaps`:
+
+    ja, show, ep, source, provenance, n_lines, lines (json), account,
+    scenes (json), quotes (json), status, fetched_at, archive, origin,
+    gpu_seconds
+
+`status` is `ok` when a file was parsed, `miss` when the archives have none.
+A miss is a row too, so a show with no file is not looked for on every tick;
+`provenance` records whether the file was a broadcast caption rip, a
+streaming rip or a fan listening transcript, and a caption rip always
+outranks the rest. `origin` is a different fact and the one a person asks
+first: whether the file was already beside his video, came out of the clone
+of the archive on this machine, was fetched, or was made here by the
+transcriber -- and `gpu_seconds` is what the last of those cost.
+
+**And all of it is readable outside SQL.** Every attempt that resolves is one
+line in `recap.transcripts_report` (`reports/transcripts.md`, append-only, the
+machine's), and each save's own rows are caught up into it once at
+construction, because the file did not exist while every transcript so far was
+made.
+
+spec: docs/recap.md
+
+DEFS:
+class Transcripts: 
+    __init__(config, store, clock, subtitles, archive, llm): 
+    _c(key, default): 
+    _ensure_table(): 
+    row(ja, ep): 
+    _save(ja, show, ep): 
+    render(lines, max_chars): The transcript as a prompt reads it: `[mm:ss] speaker: line`, cut at a ceiling from the END rather than the start, so the episode's ending -- the outcome a wrong digest invents -- is never the part dropped.
+    account(ja, ep, lines, provenance, llm): One `transcript_digest` call: the scenes in the order they happen, each with its outcome, from what was said. Returns (account, scenes, quotes).  The model client is a PARAMETER, never an attribute set after the fact: th
+    anchor(entry, ep, titles, show_key, anime_id, llm, video, watched_seconds, transcribe, retrievals, shared_key): The transcript's account for this episode, finding the file the first time and reusing it forever after. Returns the row, or None.  `video` is the file he opened: a subtitle already beside it is the first thing looked at
+    _note(row): One attempt in the readable log (`recap.transcripts_report`).
+    _catch_up_log(): Everything her own table already holds, into the readable log, once per save at construction.  The log did not exist while every transcript so far was made and the answers are all still in the saves, so waiting for the n
+    _all_rows(): Every attempt her own table holds, oldest first, without the lines -- the log wants the count and the last timestamp, not the dialogue.
+    report(limit): 
+
+CONFIG SECTIONS: character, prompt_text, recap
+KV READ: transcripts_report_caught_up
+KV WRITE: transcripts_report_caught_up
+TABLES: transcripts
+LOG TAGS: subs, transcript
+PROMPTS: transcript_digest
+LLM ROLES: transcript_digest
+OPS COMMANDS: 

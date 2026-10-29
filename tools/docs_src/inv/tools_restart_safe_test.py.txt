@@ -1,0 +1,37 @@
+# tools\restart_safe_test.py  (177 lines)
+
+DOCSTRING:
+What a restart must not lose: build the App, set the state, build again.
+
+Both bots are stopped and started several times in an evening, and a stop is
+`Stop-Process -Force`: no `finally`, no `atexit`. Anything a module holds on
+itself and writes nowhere is gone, and anything written only on the way out
+was never written at all. This asserts, for the state that was found holding
+its value only in memory, that a second App built on the same save reads back
+what the first one set.
+
+It is a rebuild, not a kill: the first App object is dropped and a second is
+constructed on the same file. That is the strongest thing a test can do
+without a subprocess, and it is enough -- everything under test here is a
+`store.set` at the moment of change against a read in a constructor, and the
+constructor is what runs again.
+
+    python tools/restart_safe_test.py                  # both characters
+    python tools/restart_safe_test.py --config config_yukarin.json --db data/yukarin.db
+
+No model calls: every App built here is refused (`harness.refuse_model`).
+
+DEFS:
+def check(name, ok, detail): 
+def _build(): A run directory is named to the second, so two Apps cannot be built inside one.
+def run(config, db, label): 
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: resident_asleep, resident_notes_since
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,76 @@
+# sim\rooms.py  (433 lines)
+
+DOCSTRING:
+A room, as a thing people are in and can leave.
+
+Until this file a room was a string on a turn. The exchange wrote `group`, or
+`line:<somebody>`, into the shared world beside every line spoken, and who was
+in the room was re-derived from the roster at each write. That is enough while
+one process speaks for everybody in it.
+
+It stops being enough the moment one of those people runs as her own process.
+Then a turn has to be *delivered*, and only to the people who were actually in
+the room when it was said: somebody who joined at nine did not see what was
+said at eight, and somebody who left at ten does not hear what came after. So a
+room gets a membership, with the moment each person joined and the moment she
+left.
+
+**Where it lives.** The truth is a row in the owning character's own save (kv
+`rooms`), like every other fact she keeps. A copy goes into the shared world's
+`members` table the instant a join or a leave happens, so a second process can
+read who is in a room without opening anybody's save (docs/shared-world.md: the
+world file is a copy, never the truth).
+
+**How a turn travels.** Every turn spoken in a room is offered to each member
+who runs her own process, except the speaker, and only if she was in the room
+at the moment of that turn. When the room actually wants HER words -- her turn
+in a conversation, or the thing the day's plan has her open with -- the same
+message goes with `asking` set, carrying what she has not been sent, the moves
+the conversation has already made, and how long the room will wait. What comes
+back is one more turn in the room and one line of what it came to, appended
+where it lands.
+
+**The hub is the only wire.** This module never speaks to the network: it
+writes what it wants sent to kv `room_out`, and the one object in the process
+that holds a hub connection (`sim/peers.py`) empties that queue on its own
+pass. Written to the save the moment it exists, so a stop mid-pass loses
+nothing, and the character's process needs no second connection.
+
+Nobody is named here. A room is a string, a member is a roster key, and who
+runs herself is the `agent` field on her roster row (`sim/roster.py`).
+
+DEFS:
+def name_for(kind, key): What the record calls this room.  The group chat is one room everybody in it shares. Anything else -- a LINE thread, a call, the kitchen -- is the two ends of it, and is named after the person who is not the character wh
+def moves_block(moves, config, limit): The moves this conversation has already made, one line each.  A room kept every word anybody had said and no record of what those words were FOR, so each call re-derived a speaker's next turn from roughly the same state 
+def members_for(config, kind, other_key, relationships, me_key): Who is in this room, from the roster and the character's own meters.  The group chat is her and every friend who is not dormant and not family; anything else is the two ends of it. One rule, in one place, because the mem
+class Rooms: The rooms this character's process owns, and who is in each.
+    __init__(config, store, clock, channel, world_shared): 
+    _all(): 
+    members(room): {roster key: the membership row} for one room, joined and left.
+    present(room, at_ts): The roster keys of everybody in the room -- now, or at a moment.
+    in_room(room, key, at_ts): 
+    agents_present(room, at_ts): [(roster key, hub id)] for the members who run their own process and were in the room at that moment.
+    join(room, key, at_ts): One person is in this room from now on. Said out loud, because a room quietly gaining a member is a room whose transcript nobody can account for.
+    leave(room, key, at_ts): One person is out of this room. Her rows stay -- who was in the room when a thing was said is what the membership is FOR -- and nothing said after this moment is sent to her.
+    settle(room, keys, at_ts): The room's membership as the roster now has it: everybody in `keys` who is not in the room joins, everybody in the room who is not in `keys` leaves. A diff, so an unchanged room writes nothing at all.
+    _to_world(room, key, row): The copy another process reads. Guarded where the write is, not at the call site (world/shared.py), so a world that is off or broken costs the join nothing.
+    _sent(): 
+    _mark_sent(room, key, ts): 
+    _unsent(room, key, turns, limit): The turns of this room she has not been sent: nothing from before she joined, nothing she has already had, and nothing she said.
+    _queue(to, text, envelope): One message to another process, written to the save now and put on the hub by whoever holds the connection, on its own pass.
+    _envelope(room, kind, date, hm, asking, turns, present, cue, about, beat_id, wait_s, silent, moves, gist, said_today): 
+    post_turn(room, kind, date, turn, speaker_key): One turn, out to every member of the room who writes her own words -- except whoever just spoke, and except anybody who was not in the room at the moment it was said.
+    ask(room, kind, date, key, turns, cue, about, beat_id, wait_s, hm, limit, moves, said_today): The room is waiting for this person's own words.  Carries what she has not been sent, who is in the room with her, the moves the conversation has already made, the moment, and how long the room will wait before going on 
+    put(key, envelope, text, who): A turn written by another process, filed for the room's owner to append on its next pass. Written to the save the moment it arrives: the process that appends it is not the one that received it.
+    take(about, room, beat_id): The arrived turns of one kind, removed from the queue. A reader takes what is its own and leaves the rest: the beat path and the exchange path drain the same queue.  `beat_id` narrows it to the answer to one particular b
+    flush(channel): Everything waiting for the hub, sent once. A message that does not go is logged and dropped rather than retried: the hub answers `known` false when nobody is there, and a queue that retries is a queue that floods a mailb
+    report(): 
+
+CONFIG SECTIONS: 
+KV READ: room_in, room_out, room_sent, rooms
+KV WRITE: room_in, room_out, room_sent, rooms
+TABLES: 
+LOG TAGS: room
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

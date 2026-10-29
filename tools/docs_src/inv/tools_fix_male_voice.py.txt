@@ -1,0 +1,33 @@
+# tools\fix_male_voice.py  (85 lines)
+
+DOCSTRING:
+The two men in her house were written in a woman's register.
+
+Their sheets now pin it (`prompts/cast/dad.md`, `kaito.md`), but the record is
+what the next call reads, so the lines already stored teach it. Every one of
+these was found by reading all forty of their turns, and each rewrite keeps the
+sentence and changes only the ending:
+
+Kenji, 46, her father, six lines with a mother's endings -- 〜なよ, 〜ないでね,
+〜からね, 〜てあげる, 〜の？ -- which is Yumi's register, not his. Plus 錢, which
+is not the Japanese character for money at all.
+
+Kaito, 11, her brother, calling his older sister 君 and あんた. A boy of eleven
+says 姉ちゃん. He also writes オレ once where he writes 俺 everywhere else, and
+calls his mother ママ where this house says お母さん.
+
+Idempotent, backs the save up, and prints every change it makes.
+
+    python tools/fix_male_voice.py [--db data/world.db] [--dry]
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

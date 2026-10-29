@@ -1,0 +1,165 @@
+{
+  "source": "Mechanical: koikano_work/expression_labels_lines.jsonl, the label and pose the game's own lines carry when that face is on screen (2026-10-24, same method as characters/maria). Fills the 32 of 千奈's 92 unlabeled faces that appear in a line. Not visually reviewed. The 68 faces in koikano_work/inventory/expression_labels.json are not repeated here. 60 faces are never on screen in a line and get no label: CB01A001 CB01A002 CB01A004 CB01A005 CB01A007 CB01A008 CB01A009 CB01A014 CB02B001 CB02B007 CB02B008 CB02B011 CB02B012 CB02B013 CB03B001 CB03B010 CB03B013 CB04A004 CB04B001 CB04B003 CB04B007 CB04B008 CB04B010 CB04B012 CB04B013 CB04B016 CB05A001 CB05A007 CB05A012 CB06A001 CB06A002 CB06A003 CB06A004 CB06A005 CB06A006 CB06A007 CB06A008 CB06A009 CB06A010 CB06A011 CB06A012 CB06A013 CB06A014 CB06A016 CB06B001 CB06B002 CB06B003 CB06B004 CB06B005 CB06B006 CB06B007 CB06B008 CB06B009 CB06B010 CB06B011 CB06B012 CB06B013 CB06B014 CB06B015 CB06B016.",
+  "labels": {
+    "CB02B002": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB02B003": {
+      "expression": "worried",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB02B004": {
+      "expression": "surprise",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB02B005": {
+      "expression": "smile",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB02B006": {
+      "expression": "serious",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB02B009": {
+      "expression": "shy",
+      "pose": "hand_at_chest",
+      "confidence": "unreviewed"
+    },
+    "CB02B010": {
+      "expression": "surprise",
+      "pose": "hand_at_chest",
+      "confidence": "unreviewed"
+    },
+    "CB02B014": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB02B015": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB02B016": {
+      "expression": "worried",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB03A013": {
+      "expression": "talk",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB03B009": {
+      "expression": "shy",
+      "pose": "hand_at_chest",
+      "confidence": "unreviewed"
+    },
+    "CB04A003": {
+      "expression": "talk",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB04A005": {
+      "expression": "laugh",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB04A008": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB04A011": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB04B002": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB04B004": {
+      "expression": "surprise",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB04B005": {
+      "expression": "smile",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB04B006": {
+      "expression": "serious",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB04B009": {
+      "expression": "shy",
+      "pose": "hand_at_chest",
+      "confidence": "unreviewed"
+    },
+    "CB04B011": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB04B014": {
+      "expression": "sad",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB04B015": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB05A002": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB05A005": {
+      "expression": "laugh",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB05A006": {
+      "expression": "neutral",
+      "pose": "none",
+      "confidence": "unreviewed"
+    },
+    "CB05A008": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB05A009": {
+      "expression": "smile",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB05A010": {
+      "expression": "surprise",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB05A011": {
+      "expression": "talk",
+      "pose": "hand_at_face",
+      "confidence": "unreviewed"
+    },
+    "CB05A013": {
+      "expression": "talk",
+      "pose": "none",
+      "confidence": "unreviewed"
+    }
+  }
+}

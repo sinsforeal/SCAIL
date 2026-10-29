@@ -1,0 +1,36 @@
+# tools\initiative_test.py  (236 lines)
+
+DOCSTRING:
+The gate on reaching out first, on a copy of a save, spending nothing.
+
+    python tools/initiative_test.py                       # the second character
+    python tools/initiative_test.py config.json data/world.db
+
+Four things, in order: his coming back is rolled and often not taken; a run of
+unanswered messages raises the bar and then stops her for the day; a discharge
+and a stance that entered without waiting go through anyway and say so; and
+what the gate is holding survives a rebuild of the App on the same file.
+
+Every model call raises (`harness.refuse_model`), and the clock is driven by
+hand so a whole day can be walked in a second.
+
+DEFS:
+def drive(clock): The clock reads NOW[0]. Everything else on it -- her date, his hour, the stamps -- is derived from `now_ts`, so this is the only override.
+def at(clock, hh, mm, day): 
+def clear(app): 
+def send(app, ts, text, self_started, read): A message of hers on the record, exactly as delivery writes one.
+def heard(app, ts, text): 
+def his_return(app, trials): 
+def ignored(app): 
+def overrides(app): 
+def restart(app, tmp, config, db): 
+def main(): 
+
+CONFIG SECTIONS: character.name, impulse.max_unanswered_per_day, json
+KV READ: initiative_away_since, initiative_hold_until, initiative_return, initiative_unanswered_counts
+KV WRITE: initiative_unanswered_counts, stance
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

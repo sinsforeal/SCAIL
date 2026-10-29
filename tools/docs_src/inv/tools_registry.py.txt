@@ -1,0 +1,34 @@
+# tools\registry.py  (113 lines)
+
+DOCSTRING:
+Who runs as a process, read from one list.
+
+`characters.json` at the project root is the operator's register of
+characters: one row each, with her config, her save, her program, her
+launcher, her scheduled task and the exact command line her process is found
+by. Before it, the restarter held a hand-written table of exactly two bots
+whose first row matched the first character as "`scail.py` NOT followed by the
+second one's config" -- so a third character launched with her own config
+would have been matched as the first one and killed by `restart.cmd tomoe`.
+
+**A bot never reads this.** A character that could read the register could
+read another character's config and save; what she may know of a peer is her
+own `peer_talk.contacts` and the words that actually arrive
+(`docs/peer-talk.md`). This module is for the tools.
+
+    python tools/registry.py            # the table, and what is missing
+
+DEFS:
+def characters(path): [{key, name, hub_id, config, db, program, launcher, task, match}], in the order the file lists them, which is the order they are started in. A row missing a field is returned with it empty rather than dropped: a half-wri
+def bundles(path): key -> her manifest, for every registered character who has a bundle.  The register is a PROJECTION of the manifests: every field of a row is also in `characters/<key>/bundle.json`, which is where the rest of what she is
+def programs(path): The program packages the register names. What `tools/character_names.py` must not read as a person: a package directory is named after the character it runs, and a path into it is a file of hers.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

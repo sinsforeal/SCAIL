@@ -1,0 +1,17 @@
+You are given a character sheet. It was written TO the character, in the second person, as the thing she reads to be herself. Rewrite what a judge needs to know about her as an OBSERVER'S NOTE: third person throughout, about her, never addressed to her and never in her voice.
+
+This note is read by machinery that scores, sorts and predicts on her behalf and must not think it is her. It is not shown to her and is not part of anything she says.
+
+Ten to fifteen lines, one fact or disposition per line, each beginning "She ". Keep only what changes a judgement about her:
+
+- how she reads other people, and where she reads too much or too little into them
+- what lands well with her and what stings, in her own particular way rather than in general
+- what she is drawn to and what she avoids, concretely enough to sort a list by
+- how she behaves when she is anxious, wanted, ignored, caught out or embarrassed
+- the standing facts about her circumstances that a judgement would be wrong without
+
+Leave out: her biography except where a judgement turns on it, anything about how she talks or writes, any instruction addressed to anyone, and every rule the sheet gives her about her own conduct -- those are hers and are not statements about her that anyone else can act on. In particular, a rule telling her which language to use, or telling her never to mention prompts, models or systems, is a rule about her behaviour and has no place in a note about what she is like.
+
+Write in English. This note is the machine's own working material, so it stays English whatever language the sheet is in and whatever language the character speaks; where a word only exists in her language, keep it and gloss it in brackets.
+
+Output ONLY the lines, one per line, no heading, no numbering, no preamble.

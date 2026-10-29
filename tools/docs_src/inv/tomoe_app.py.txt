@@ -1,0 +1,71 @@
+# tomoe\app.py  (1247 lines)
+
+DOCSTRING:
+The first character's program: everything the runtime runs for her and for
+nobody else.
+
+`scail.App` builds the mind, the body and his machine, then asks the program
+named in `character.program` to build the rest. This one builds her world
+(weather feeds are the body's; the trains, the hazards, the ward calendar and
+what Japan is on about are hers), her cast and their exchanges, her account,
+her phone-app sight, her borrowed eyes, and wires them onto the shared
+objects that carry a slot for them. The loop then calls the hooks below at
+fixed points; a hook the program does not need is simply absent, and the
+runtime asks `hasattr` before calling.
+
+The rule this file exists for: nothing under `sim/`, `persona/`, `embodied/`,
+`world/` or `scail.py` constructs, imports or names anything in here. A
+character whose sheet says she has no world never has these objects, rather
+than having them switched off.
+
+DEFS:
+def build(app): Construct her world and wire it. Runs after every shared object exists.
+def plan_day(app, d): Today's plan: the skeleton until `schedule.generate_at`, the model's day after.
+def generate(app): The model's day, from everything the day is made of.
+def before_generate(app): Before the plan, not after it: what she has agreed to (and who decided it for her) is an input to the day, not a comment on a day already built.
+def replan(app, change): 
+def day_planned(app, s, d): The day boundary, once the plan exists: the people roll over and plan theirs, and a character who lives in a world she does not keep says where she is in it.
+def day_line(app): 
+def on_his_message(app, text): 
+def before_reply(app, reason): A reply of hers is about to be written, and it is the reply that would carry the offer from her scroll. If she is sitting on a thing she wanted to show him, this is the moment she decides WHICH post goes with it (`tomoe/
+def after_phone_look(app, digest): She has opened the app. What it holds that is not in the digest.  An episode he played while she was not looking has already been noticed and read up on in the background; this is the moment it is in front of her, and ev
+def every_pass(app): Every pass of the loop, awake or not, before the reply.
+def loop_pass(app): After the reply and the afterthought: somebody reaches into her day.
+def pick_act(app, name, args, scene): A tool she picked that belongs to her world or her account, done.  The runtime carries out the tools that are the mind's and the relationship's -- put the phone down, write to him first, look at what he has been doing --
+def after_situation(app): The conversation she is in, one side at a time on the clock; when it ends it is a thing that happened to her.
+def on_talk(app, out): 
+def asleep_pass(app, asleep): She is under by the schedule. Returns True if something woke her.
+def tick_events(app): The ground moved, or the sky did. Straight into the tick as events, because this is not something she hears about later -- she was in it.
+def after_scene(app, scene): A peer in the room is a ruler; code decides whether she picks it up.
+def after_tick(app, scene, digest): After the director tick and the impulse: her phone-app snoop, a photograph, the account.
+def after_reflection(app, scene): The last thing in the ticking branch: whether she posts.  A yes she cannot act on is held rather than dropped (his call): the roll is the impulse and it happened, so it waits in the save for the next tick with his side o
+def late_pass(app): The end of every pass: the feeds, the account's queue, the trains.
+def sent_with_media(app, media, bubbles): A photo went out with her words: the pool learns it was hers.
+def start(app): 
+def shutdown(app): 
+def compile_hold(app, d, now_m): Whether the day's compile must wait: a live conversation, or the group not turned in yet tonight.
+def exchange_live(app): 
+def compile(app, d, stage): The stages of the day's compile that are hers: `open` before the record is told, `told` after it, `settled` after the promises, `end` last.
+def compile_to_world(app, d): The day's public record into the world file (`world/shared.py`): what each of them holds about the others, the people in their own lives, what is going round, and what the day's record says happened.  Read out of each mo
+def watch_sources(app): Her corner, for the watch pick: the sheet, what she keeps liking, what is going round -- and nothing of his.
+def maybe_snoop(app, lying_awake, forced): Her look through his things, and everything that follows from it.  `forced` is the operator's `/snoop`: the roll for whether she feels like it is skipped, because he has decided she looks, and nothing else is. What it co
+def _lying_awake(app, asleep_block): True only in the first lying_awake_minutes of the night's sleep block.
+def maybe_scenery_harvest(app): The harvester's own session, on its own clock, never inside her look. Machinery: nothing of it reaches her record.
+def maybe_scenery(app, scene, digest): A real photograph becomes one she just took (tomoe/scenery.py).
+def collect_social(app): A finished X look becomes what she noticed; salient enough, it can prompt a text.
+def maybe_zeitgeist(app): What Japan is on about, every few hours, on a thread: public feeds plus the trends the look session saw, one filter call. The reader picks the file up when it lands.  **Which character the fetch is for is an argument.** 
+def maybe_local_events(app): What her wards have actually announced, every few days, on a thread. Network and a handful of small calls, so it never runs on the main loop; the calendar picks the file up on its own when it lands.  **What a ward has an
+def close_festival_once(app): One-shot (his call, 2026-09-04): the festival happened on 29 August and her plan kept carrying it as tomorrow; the promises, their promises, the bond events that called them broken and the carried lines are closed on the
+def close_festival_tail_once(app): The second half of the same one-shot (his call, 2026-09-04): the rows that were the phantom festival with the word taken out -- meeting dad at the station, the obi, waking up on time -- which no rule about the word "fest
+def retire_second_world_once(app): For a character who is in this world and does not keep it: the world her own process wrote in her own save, moved out of it.  The rule is `docs/shared-world.md` §8 -- one writer per world, and a reader runs none of the m
+def retire_owner_interior_once(app): For a character promoted out of somebody else's cast: the other girl's inner life, taken out of the save she was started from.  Promotion copies a save (`docs/shared-world.md` §7), and what is in it is not only a world s
+def reconcile_meters_once(app): The second pass over a promoted save: her meters, what each person is to her, and the days planned before her own material was hers.  Separate from the pass above, and behind its own marker, because that one had already 
+
+CONFIG SECTIONS: curation.enabled, json, logging.db_path, path, posting.enabled, scenery, social, timeline, vault_snoop.lying_awake_minutes, world
+KV READ: festival_closed, festival_tail_closed, local_events_last_ts, meters_reconciled, owner_interior_retired, relationships, second_world_retired, x_japan, x_last_refusal, zeitgeist_last_ts
+KV WRITE: festival_closed, festival_tail_closed, local_events_last_ts, meters_reconciled, owner_interior_retired, second_world_retired, x_last_refusal, zeitgeist_last_ts
+TABLES: 
+LOG TAGS: bond, cast, cast_arc, compare, events, exchange, festival, gossip, graph, hazards, japan, local, npc, promoted, reflect, scenery, share, shared world, snoop, trains, world, x
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

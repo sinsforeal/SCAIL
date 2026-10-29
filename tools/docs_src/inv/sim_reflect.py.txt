@@ -1,0 +1,29 @@
+# sim\reflect.py  (331 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Reflection: 
+    __init__(config, llm, store, clock, state, phone, social, notes, receipts): 
+    _count(): 
+    _cast_count(): 
+    _him_key(): 
+    cast_subject(scene): (who, why) for the person most worth turning over, or ("", why).  Pressure, not a rota: an exchange today she has not thought about yet, weighted by the tension and the standing she carries with that person; a person she
+    due(scene): (ok, why, subject): a quiet moment, something to turn over (or enough pressure), caps and gaps. Subject is him or a cast name.
+    after_reading(scene, why, record): Her reaction to something of his she has just read.  The record is handed to the call rather than left to be found among the day's events: it is the thing this thought is about, and the events list holds a dozen other ro
+    run(scene, why, subject, record): 
+    run_cast(scene, who, why): One private thought about a person in her own life, from the record of what was said. No app, no digest: the evidence is the exchange.
+    _yesterday(): 
+    prompt_text(): The last few private thoughts, for her system prompt.
+    inner_hint(about): Today's latest thought, for the director (any subject) or the intent (about him only -- a thought about Rena is not what she is carrying toward HIM).
+    about(who, days): What she has privately thought about this person lately, for the call that writes her next words to them.
+
+CONFIG SECTIONS: prompt_text, reflect, role_system
+KV READ: cast_chat, reflect_cast_counts, reflect_cast_last, reflect_counts, reflect_last_digest_ts, reflect_last_ts, reflections
+KV WRITE: reflect_cast_last, reflect_last_digest_ts, reflect_last_ts, reflections
+TABLES: 
+LOG TAGS: reflect
+PROMPTS: reflect
+LLM ROLES: reflect, reflect_cast
+OPS COMMANDS: 

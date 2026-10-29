@@ -1,0 +1,43 @@
+# tomoe\carried.py  (164 lines)
+
+DOCSTRING:
+What she is carrying from the other room.
+
+Her chat with him and her chat with her friends are two different rooms, and
+each was represented in the other by a keyhole of raw messages: the cast calls
+got `recent_messages(4)` cut to 80 characters, laid out exactly like the chat
+she was actually in. That is wrong twice over. It is too little -- her friends
+ask her about him and she was answering from four lines -- and it is the wrong
+KIND of thing, because a transcript in the prompt reads as a conversation to
+answer, and the one place she must never be confused is which conversation she
+is in.
+
+So neither side gets a transcript of the other. It gets a corpus: where things
+stand, what she knows about him with the fade already applied
+(`Memory.facts_for_prompt`), what is open between them, what it left her, and
+only then the last few things that were actually said -- labelled as a record
+and written as the past. Available information that weighs on her, in her own
+words the way a memory is, never a live thread with a reply due.
+
+The reverse is the same shape: when she is talking to HIM, the group is a
+thing she is carrying -- what it has been about, where she stands in it, who
+is still up -- and only the conversation actually in flight is marked as
+happening now.
+
+No model call. Everything here is assembled from what the record already holds.
+
+DEFS:
+def _ago(seconds): 
+class Carried: 
+    __init__(config, store, clock, state, memory, records, exchange, sentiments): 
+    him(cue_text): The block a friend's conversation gets about the man she texts.  `cue_text` is what is being said around her: a faded fact that shares a word with it comes back, which is the same rule her own prompt uses.
+    circle(): The mirror: what her own people are, while she is talking to him.
+
+CONFIG SECTIONS: exchange
+KV READ: behind, cast_asleep, cast_chat
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

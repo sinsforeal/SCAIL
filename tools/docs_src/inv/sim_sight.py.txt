@@ -1,0 +1,31 @@
+# sim\sight.py  (61 lines)
+
+DOCSTRING:
+How she comes to know what he does on his machine -- the words for it.
+
+The mind library never says "the app on her phone" or "what she saw on his
+machine": which of those is true is a property of the program running her,
+not of the mind. Each program registers its table (`tomoe/words.py`,
+`resident/words.py`) and the library asks `w(config, key)` for a phrase or
+`w2(config, key)` for the English and Japanese pair the persona's `t()` takes.
+A key nobody registered raises at first use, in smoke, rather than rendering
+a hole. `tools/sight_words.py` (in smoke) fails on a shared file that names
+the app itself, which is how the wording is kept out of the library for good.
+
+The first character's table is the wording the library carried before this,
+byte for byte, so nothing she reads changed when it moved.
+
+DEFS:
+def register(program, table): 
+def _table(config): 
+def w(config, key): 
+def w2(config, key): 
+
+CONFIG SECTIONS: character, resident
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

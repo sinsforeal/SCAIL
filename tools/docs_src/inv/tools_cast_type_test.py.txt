@@ -1,0 +1,50 @@
+# tools\cast_type_test.py  (247 lines)
+
+DOCSTRING:
+Does the behaviour the author meant actually turn up in what these people say?
+
+Each person on the roster was written from a personality type, and the type
+was never told to any model: it was translated into mechanisms, and the
+mechanisms into observable markers. This counts the markers in the record of
+that person's own turns and prints, per person and per axis, how the two
+poles' counts fall.
+
+No model call, no network, and the save is a copy (`tools/harness.py`, which
+goes through SQLite's own backup). The type file is `cast.types_file`, and
+**this tool is the only thing in the tree allowed to open it** -- `tools/
+smoke.py` fails if anything under `sim/`, `persona/`, `tomoe/`, `resident/`,
+`scail.py` or a prompt reads it.
+
+WHAT THIS CAN SHOW: whether the behaviour the author described appears, and
+roughly at the rate meant -- a person written to open rooms who opens none
+in a hundred turns is a mechanism that did not land, and that is worth
+knowing and is fixable in her file.
+
+WHAT THIS CANNOT SHOW: that anybody "is" a type. A marker count is not a
+type. The markers are the author's own operationalisation, counted on his
+own material, so the count agrees with the author by construction and could
+not do otherwise; there is one coder and no second one, so there is no
+agreement figure; the poles are not scaled against each other, so "favours
+E" means only "more of the markers listed under E than under I", not a
+position on a dimension; and no published norm applies to invented teenagers
+in a simulated chat, so none is cited. This is a check that a described
+behaviour is present, and nothing beyond it.
+
+    python tools/cast_type_test.py
+    python tools/cast_type_test.py --types tools/fixtures/cast_types_fixture.json
+
+DEFS:
+def load_types(path): The types file: per roster key, or wrapped under `types` beside a `_note` (the shape the content was written in).
+def axes_of(entry): The axes of one person's entry, whichever of the two shapes it uses: `axes: {EI: {behaviour, markers: {E: [...], I: [...]}}}`, or a top-level `markers: {EI: {E: [...], I: [...]}}` beside the lines.
+def turns_of(store, config): key -> [(text, context)] for every turn in the record, by speaker.  The context is what a structural marker needs and a substring does not: where the turn sat in its exchange, and how many of that person's turns ran toge
+def count(marker, turns, unknown): Turns that show this marker, or None when nothing here can count it.  A marker in the fixture's English vocabulary is a rule in STRUCTURAL. A Japanese marker counts by the forms quoted inside it (any of them in the turn)
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,1424 @@
+{
+  "schema": "authored-expression-bible-gate/2",
+  "build": "b4/2",
+  "date": "2026-09-16",
+  "subject": {
+    "name": "真優",
+    "id": "MAYU",
+    "route": "a"
+  },
+  "holdout": {
+    "definition": "late route-a scenes where she speaks (phase_band == 'late')",
+    "scenes": [
+      "a11_01",
+      "a12_01",
+      "a12_02",
+      "a13_01",
+      "a14_01"
+    ],
+    "her_spoken": 340,
+    "her_inner": 0,
+    "her_lines": 340,
+    "registers": {
+      "H": {
+        "scenes": [
+          "a12_02"
+        ],
+        "her_spoken": 218
+      },
+      "non_H": {
+        "scenes": [
+          "a11_01",
+          "a12_01",
+          "a13_01",
+          "a14_01"
+        ],
+        "her_spoken": 122,
+        "label": "the non-H block of the holdout"
+      }
+    },
+    "build_block": {
+      "scenes_n": 73,
+      "her_spoken": 3206,
+      "her_inner": 280
+    },
+    "control_heroines": [
+      "千奈",
+      "真里亜",
+      "アリス",
+      "知紗",
+      "ひかる",
+      "百花"
+    ],
+    "control_spoken_in_holdout": 113,
+    "control_spoken_in_nonH_holdout": 113
+  },
+  "method": {
+    "what_is_read": "her spoken lines from game_logic.jsonl; the bible's own matchers imported from tools/koikano/koikano_bible.py (offers_self skipped: it names 百花); layers/annotations.json per_line.",
+    "register": "Every rule and mechanism is read against the H block, the non-H block and the pooled holdout; H + non-H reconcile to the pooled total.",
+    "leakage": "The bible was built from the full corpus, which includes the holdout. This is calibration, not a leak-free split. The character n-gram baseline is trained on the build block only.",
+    "classifications_are_the_builders_reading": true
+  },
+  "tests": {
+    "rule_calibration": {
+      "n_holdout_spoken": 340,
+      "n_holdout_H_spoken": 218,
+      "n_holdout_nonH_spoken": 122,
+      "n_build_spoken": 3206,
+      "rows": [
+        {
+          "rule": "Self-reference form わたし (her own top form)",
+          "metric": "share of spoken lines containing わたし",
+          "holdout": {
+            "count": 32,
+            "n": 340,
+            "rate": 0.0941
+          },
+          "holdout_H": {
+            "count": 14,
+            "n": 218,
+            "rate": 0.0642
+          },
+          "holdout_non_H": {
+            "count": 18,
+            "n": 122,
+            "rate": 0.1475
+          },
+          "build": {
+            "count": 551,
+            "n": 3206,
+            "rate": 0.1719
+          },
+          "control_in_holdout": {
+            "count": 0,
+            "n": 113,
+            "rate": 0.0
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Do not use 私",
+          "metric": "spoken lines containing 私",
+          "holdout": {
+            "count": 4,
+            "n": 340,
+            "rate": 0.0118
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 218,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 4,
+            "n": 122,
+            "rate": 0.0328
+          },
+          "build": {
+            "count": 18,
+            "n": 3206,
+            "rate": 0.0056
+          },
+          "control_in_holdout": {
+            "count": 9,
+            "n": 113,
+            "rate": 0.0796
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Almost no です / ます",
+          "metric": "spoken lines containing です or ます",
+          "holdout": {
+            "count": 7,
+            "n": 340,
+            "rate": 0.0206
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 218,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 7,
+            "n": 122,
+            "rate": 0.0574
+          },
+          "build": {
+            "count": 58,
+            "n": 3206,
+            "rate": 0.0181
+          },
+          "control_in_holdout": {
+            "count": 33,
+            "n": 113,
+            "rate": 0.292
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "End many lines on っ",
+          "metric": "spoken lines ending っ",
+          "holdout": {
+            "count": 113,
+            "n": 340,
+            "rate": 0.3324
+          },
+          "holdout_H": {
+            "count": 106,
+            "n": 218,
+            "rate": 0.4862
+          },
+          "holdout_non_H": {
+            "count": 7,
+            "n": 122,
+            "rate": 0.0574
+          },
+          "build": {
+            "count": 506,
+            "n": 3206,
+            "rate": 0.1578
+          },
+          "control_in_holdout": {
+            "count": 1,
+            "n": 113,
+            "rate": 0.0088
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Stretch with ー",
+          "metric": "spoken lines ending ー",
+          "holdout": {
+            "count": 1,
+            "n": 340,
+            "rate": 0.0029
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 218,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 1,
+            "n": 122,
+            "rate": 0.0082
+          },
+          "build": {
+            "count": 53,
+            "n": 3206,
+            "rate": 0.0165
+          },
+          "control_in_holdout": {
+            "count": 0,
+            "n": 113,
+            "rate": 0.0
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Double ん agreement",
+          "metric": "spoken lines containing んん/んーん/んっ",
+          "holdout": {
+            "count": 130,
+            "n": 340,
+            "rate": 0.3824
+          },
+          "holdout_H": {
+            "count": 120,
+            "n": 218,
+            "rate": 0.5505
+          },
+          "holdout_non_H": {
+            "count": 10,
+            "n": 122,
+            "rate": 0.082
+          },
+          "build": {
+            "count": 393,
+            "n": 3206,
+            "rate": 0.1226
+          },
+          "control_in_holdout": {
+            "count": 0,
+            "n": 113,
+            "rate": 0.0
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Delight おおー / おー",
+          "metric": "spoken lines containing おおー/おー",
+          "holdout": {
+            "count": 0,
+            "n": 340,
+            "rate": 0.0
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 218,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 0,
+            "n": 122,
+            "rate": 0.0
+          },
+          "build": {
+            "count": 0,
+            "n": 3206,
+            "rate": 0.0
+          },
+          "control_in_holdout": {
+            "count": 3,
+            "n": 113,
+            "rate": 0.0265
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Childish words",
+          "metric": "spoken lines containing childish words",
+          "holdout": {
+            "count": 41,
+            "n": 340,
+            "rate": 0.1206
+          },
+          "holdout_H": {
+            "count": 29,
+            "n": 218,
+            "rate": 0.133
+          },
+          "holdout_non_H": {
+            "count": 12,
+            "n": 122,
+            "rate": 0.0984
+          },
+          "build": {
+            "count": 214,
+            "n": 3206,
+            "rate": 0.0667
+          },
+          "control_in_holdout": {
+            "count": 2,
+            "n": 113,
+            "rate": 0.0177
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Turn length",
+          "metric": "kept chars per spoken line",
+          "unit": "distribution",
+          "holdout": {
+            "n": 340,
+            "median_chars": 30,
+            "mean_chars": 27.94,
+            "max_chars": 44,
+            "ellipsis_per_line": 4.2529,
+            "excl_per_line": 0.5794,
+            "quest_per_line": 0.1824,
+            "end_tt": 113,
+            "end_chou": 1,
+            "doubled_n": 130,
+            "childish": 41,
+            "polite": 7,
+            "bai": 32,
+            "watashi": 4
+          },
+          "holdout_H": {
+            "n": 218,
+            "median_chars": 33,
+            "mean_chars": 30.83,
+            "max_chars": 44,
+            "ellipsis_per_line": 5.7431,
+            "excl_per_line": 0.8211,
+            "quest_per_line": 0.1514,
+            "end_tt": 106,
+            "end_chou": 0,
+            "doubled_n": 120,
+            "childish": 29,
+            "polite": 0,
+            "bai": 14,
+            "watashi": 0
+          },
+          "holdout_non_H": {
+            "n": 122,
+            "median_chars": 23,
+            "mean_chars": 22.76,
+            "max_chars": 44,
+            "ellipsis_per_line": 1.5902,
+            "excl_per_line": 0.1475,
+            "quest_per_line": 0.2377,
+            "end_tt": 7,
+            "end_chou": 1,
+            "doubled_n": 10,
+            "childish": 12,
+            "polite": 7,
+            "bai": 18,
+            "watashi": 4
+          },
+          "build": {
+            "n": 3206,
+            "median_chars": 23,
+            "mean_chars": 22.92,
+            "max_chars": 51,
+            "ellipsis_per_line": 2.0721,
+            "excl_per_line": 0.378,
+            "quest_per_line": 0.3185,
+            "end_tt": 506,
+            "end_chou": 53,
+            "doubled_n": 393,
+            "childish": 214,
+            "polite": 58,
+            "bai": 551,
+            "watashi": 18
+          },
+          "control_in_holdout": {
+            "n": 113,
+            "median_chars": 29,
+            "mean_chars": 28.04,
+            "max_chars": 52,
+            "ellipsis_per_line": 0.3009,
+            "excl_per_line": 0.0442,
+            "quest_per_line": 0.1947,
+            "end_tt": 1,
+            "end_chou": 0,
+            "doubled_n": 0,
+            "childish": 2,
+            "polite": 33,
+            "bai": 0,
+            "watashi": 9
+          }
+        },
+        {
+          "rule": "Ellipsis per line",
+          "metric": "… per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 4.2529
+          },
+          "holdout_H": {
+            "value": 5.7431
+          },
+          "holdout_non_H": {
+            "value": 1.5902
+          },
+          "build": {
+            "value": 2.0721
+          },
+          "control_in_holdout": {
+            "value": 0.3009
+          }
+        },
+        {
+          "rule": "！ per line",
+          "metric": "！ per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 0.5794
+          },
+          "holdout_H": {
+            "value": 0.8211
+          },
+          "holdout_non_H": {
+            "value": 0.1475
+          },
+          "build": {
+            "value": 0.378
+          },
+          "control_in_holdout": {
+            "value": 0.0442
+          }
+        },
+        {
+          "rule": "？ per line",
+          "metric": "？ per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 0.1824
+          },
+          "holdout_H": {
+            "value": 0.1514
+          },
+          "holdout_non_H": {
+            "value": 0.2377
+          },
+          "build": {
+            "value": 0.3185
+          },
+          "control_in_holdout": {
+            "value": 0.1947
+          }
+        },
+        {
+          "rule": "Face and gesture density",
+          "metric": "share of her lines with a face / a gesture",
+          "unit": "density",
+          "holdout": {
+            "n": 340,
+            "face": 104,
+            "face_rate": 0.3059,
+            "gesture": 31,
+            "gesture_rate": 0.0912,
+            "emotion": 1
+          },
+          "holdout_H": {
+            "n": 218,
+            "face": 0,
+            "face_rate": 0.0,
+            "gesture": 4,
+            "gesture_rate": 0.0183,
+            "emotion": 0
+          },
+          "holdout_non_H": {
+            "n": 122,
+            "face": 104,
+            "face_rate": 0.8525,
+            "gesture": 27,
+            "gesture_rate": 0.2213,
+            "emotion": 1
+          },
+          "build": {
+            "n": 3486,
+            "face": 1982,
+            "face_rate": 0.5686,
+            "gesture": 957,
+            "gesture_rate": 0.2745,
+            "emotion": 22
+          },
+          "control_in_holdout": null
+        }
+      ],
+      "note": "The rule rows are 百花's marker set (です/ます, っ, ー, ん, おー, childish words) measured on this subject; they are rates to read, not pass/fail on this subject's own rules."
+    },
+    "mechanisms": {
+      "n_holdout_spoken": 340,
+      "rows": [
+        {
+          "key": "justifies_with_mon",
+          "name": "Justifies herself with a sentence-final もん",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 6,
+            "n": 340,
+            "rate": 0.0176
+          },
+          "holdout_H": {
+            "hits": 4,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 2,
+            "n": 122
+          },
+          "build": {
+            "hits": 125,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 1,
+            "n": 11067
+          },
+          "old_holdout_hits": 6,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "opens_with_datte",
+          "name": "Opens a reason with だって",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 1,
+            "n": 340,
+            "rate": 0.0029
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 122
+          },
+          "build": {
+            "hits": 43,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 26,
+            "n": 11067
+          },
+          "old_holdout_hits": 1,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "laughs_ehehe",
+          "name": "Laughs the えへへ",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 28,
+            "n": 340,
+            "rate": 0.0824
+          },
+          "holdout_H": {
+            "hits": 16,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 12,
+            "n": 122
+          },
+          "build": {
+            "hits": 141,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 84,
+            "n": 11067
+          },
+          "old_holdout_hits": 28,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "sets_herself_beside_ichigo",
+          "name": "Puts herself next to 一悟 in one sentence",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 3,
+            "n": 340,
+            "rate": 0.0088
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 3,
+            "n": 122
+          },
+          "build": {
+            "hits": 60,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 0,
+            "n": 11067
+          },
+          "old_holdout_hits": 3,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "names_momoka_with_chan",
+          "name": "Speaks of 百花ちゃん by name",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 1,
+            "n": 340,
+            "rate": 0.0029
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 122
+          },
+          "build": {
+            "hits": 82,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 0,
+            "n": 11067
+          },
+          "old_holdout_hits": 1,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "offers_to_do_for_him",
+          "name": "Offers to do it for him",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 1,
+            "n": 340,
+            "rate": 0.0029
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 122
+          },
+          "build": {
+            "hits": 71,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 63,
+            "n": 11067
+          },
+          "old_holdout_hits": 1,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "closes_on_his_name",
+          "name": "Closes the line on 一悟",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 8,
+            "n": 340,
+            "rate": 0.0235
+          },
+          "holdout_H": {
+            "hits": 4,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 4,
+            "n": 122
+          },
+          "build": {
+            "hits": 74,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 1,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 61,
+            "n": 11067
+          },
+          "old_holdout_hits": 8,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "rebuts_with_nai_yo",
+          "name": "Rebuts with ないよ / じゃないよ",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 3,
+            "n": 340,
+            "rate": 0.0088
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 3,
+            "n": 122
+          },
+          "build": {
+            "hits": 30,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 8,
+            "n": 11067
+          },
+          "old_holdout_hits": 3,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "presses_with_desho",
+          "name": "Presses a point with でしょ",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 3,
+            "n": 340,
+            "rate": 0.0088
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 3,
+            "n": 122
+          },
+          "build": {
+            "hits": 73,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 15,
+            "n": 11067
+          },
+          "old_holdout_hits": 3,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "opens_with_nee",
+          "name": "Calls for his attention with ねえ",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 2,
+            "n": 340,
+            "rate": 0.0059
+          },
+          "holdout_H": {
+            "hits": 2,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 0,
+            "n": 122
+          },
+          "build": {
+            "hits": 21,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 6,
+            "n": 11067
+          },
+          "old_holdout_hits": 2,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "says_suki_outright",
+          "name": "Says 好き outright",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 18,
+            "n": 340,
+            "rate": 0.0529
+          },
+          "holdout_H": {
+            "hits": 11,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 7,
+            "n": 122
+          },
+          "build": {
+            "hits": 82,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 1,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 184,
+            "n": 11067
+          },
+          "old_holdout_hits": 18,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "whimpers_u_u",
+          "name": "Whimpers the う、うう beat",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 0,
+            "n": 340,
+            "rate": 0.0
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 0,
+            "n": 122
+          },
+          "build": {
+            "hits": 51,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 65,
+            "n": 11067
+          },
+          "old_holdout_hits": 0,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "stammers_first_sound",
+          "name": "Stammers on the first sound",
+          "tier_bible": "weak",
+          "holdout": {
+            "hits": 5,
+            "n": 340,
+            "rate": 0.0147
+          },
+          "holdout_H": {
+            "hits": 4,
+            "n": 218
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 122
+          },
+          "build": {
+            "hits": 97,
+            "n": 3206
+          },
+          "control_in_holdout": {
+            "hits": 3,
+            "n": 113
+          },
+          "control_all": {
+            "hits": 524,
+            "n": 11067
+          },
+          "old_holdout_hits": 5,
+          "delta_holdout_hits": 0
+        }
+      ],
+      "hits_index": {
+        "justifies_with_mon": [
+          {
+            "scene": "a11_01",
+            "line": 745,
+            "text": "「かっこつけるためのシーンじゃないよ、ここ。一悟の書きたいことが、一番溢れてるシーンだもん」"
+          },
+          {
+            "scene": "a11_01",
+            "line": 1585,
+            "text": "「一悟と一緒に頑張るって決めたもん」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 117,
+            "text": "「さっきまで遠まわしに言ってたの！　一悟、知らんぷりするんだもん……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1208,
+            "text": "「さっき、一悟だって……言葉だけでわたしのこと、イかせたくせに……えへへ、お返しだもん……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1747,
+            "text": "「うれしい……いいよ、しようよ……わたしも、もっとエッチしたいもん……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2772,
+            "text": "「誰にも邪魔されたくないでしょ？　せっかくの、婚約したあとの夜なんだもん」"
+          }
+        ],
+        "opens_with_datte": [
+          {
+            "scene": "a13_01",
+            "line": 813,
+            "text": "「だって一悟と一緒なんだもん。一悟と一生一緒にいたいんだもん。だから、頑張ろうって思えるの」"
+          }
+        ],
+        "laughs_ehehe": [
+          {
+            "scene": "a11_01",
+            "line": 921,
+            "text": "「えへ……ちゅっ、れる……んっ……はぷ……ちゅっ……約束、ね……ちゅっ……絶対また、書いてね……」"
+          },
+          {
+            "scene": "a11_01",
+            "line": 1298,
+            "text": "「えへへ……うん。ありがと、一悟」"
+          },
+          {
+            "scene": "a11_01",
+            "line": 1703,
+            "text": "「えへへ……うん。一悟とわたしの、息ぴったりのラブラブっぷりもね」"
+          },
+          {
+            "scene": "a12_01",
+            "line": 334,
+            "text": "「えへへ……そうだね。登校の日数が足りないと、一悟と進級できなくなっちゃうもん」"
+          },
+          {
+            "scene": "a12_01",
+            "line": 1303,
+            "text": "「えへへ、一悟。ね？　わたしたち、ずっとずっと一緒だもんね？」"
+          },
+          {
+            "scene": "a12_01",
+            "line": 1338,
+            "text": "「えへへへへ、嬉しい、一悟！　大好きだよ！」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 142,
+            "text": "「えへへ、そうなんだ？　照れちゃってるんだ、一悟？もう何回もエッチしてるのに」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 157,
+            "text": "「えへへ、一悟可愛い。それに、素直にがっつかないとことか、紳士的でかっこいいよ」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 402,
+            "text": "「はぁ……はぁ、ぅう……あんっ、あっ……ン……そっかぁ……えへへ、うれしい……んぅっ……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 496,
+            "text": "「えへへ……優しい彼氏くん、大好き……いっぱいくにゅくにゅって、洗って……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 932,
+            "text": "「えへへっ、紳士だ……さすが一悟……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 989,
+            "text": "「一悟がいっぱい、エッチに洗ってくれたから……えへへ、石けんの匂いがする？」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1003,
+            "text": "「んっ……えへ……恥ずかしい……恥ずかしいから、一悟のおちんちんの匂いにして……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1179,
+            "text": "「えへへ……うれしい……想像しただけで、おまんこキュンってしちゃう、はぁ、あっ……んふぅ……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1194,
+            "text": "「一悟専用のおまんこに、なってってるの……えへへ、はぁ……あん……だから、入ってると、安心するの……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1208,
+            "text": "「さっき、一悟だって……言葉だけでわたしのこと、イかせたくせに……えへへ、お返しだもん……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1591,
+            "text": "「えへへ……未来の旦那さまの精液、いっぱい膣内に注がれちゃった……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1734,
+            "text": "「あ……一悟、まだ硬い……えへへぇ……もっとしたいんだ？」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1804,
+            "text": "「はぁ、あっ……あっ……この体勢、好き、好き……顔、よく見えるね……えへへ、うれしい……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2161,
+            "text": "「えへへ……びっくりするくらい、わたしのことが好きってことだよね、嬉しい……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2710,
+            "text": "「えへへ、うれしい……一悟の顔、本当に幸せそうにとろーんってしてる」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2835,
+            "text": "「えへへ、おやすみなさい、一悟」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 63,
+            "text": "「んーん……えへへ……おはよ、いちごぉ……」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 81,
+            "text": "「えへへ……そうかな？　汗の匂いしない？」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 283,
+            "text": "「えへへ、真里亜さんに、一悟の胃袋がメロメロになるレシピを教えてもらってるからね」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 770,
+            "text": "「えへへ、そうだよ。だって本当のことでしょう？」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 937,
+            "text": "「えへへ……一悟、大好き」"
+          },
+          {
+            "scene": "a14_01",
+            "line": 114,
+            "text": "『本当っ！？　えへへっ、大好き。ありがとっ』"
+          }
+        ],
+        "sets_herself_beside_ichigo": [
+          {
+            "scene": "a12_01",
+            "line": 1273,
+            "text": "「わたしと一悟は将来を誓い合った仲で……深くて濃くて、あまぁぁぁい男女交際をしていますから！！」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 91,
+            "text": "「わたしも、一悟の汗の匂い好き……んぅ……すんすん……ずーっとこうしてたい……」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 842,
+            "text": "「でも、わたしは一悟と一緒だもん。大丈夫だよ」"
+          }
+        ],
+        "names_momoka_with_chan": [
+          {
+            "scene": "a13_01",
+            "line": 506,
+            "text": "「今からでも遅くないよ？　百花ちゃん、この衣装作ってたし、着てあげる……一悟の前でだけね」"
+          }
+        ],
+        "offers_to_do_for_him": [
+          {
+            "scene": "a13_01",
+            "line": 506,
+            "text": "「今からでも遅くないよ？　百花ちゃん、この衣装作ってたし、着てあげる……一悟の前でだけね」"
+          }
+        ],
+        "closes_on_his_name": [
+          {
+            "scene": "a11_01",
+            "line": 1298,
+            "text": "「えへへ……うん。ありがと、一悟」"
+          },
+          {
+            "scene": "a11_01",
+            "line": 1675,
+            "text": "「んぅっ……一悟？」"
+          },
+          {
+            "scene": "a12_01",
+            "line": 197,
+            "text": "「ありがと、一悟」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 613,
+            "text": "「あぅ、あっ、あっ……！　一悟、一悟ぉっ……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 932,
+            "text": "「えへへっ、紳士だ……さすが一悟……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1309,
+            "text": "「うんっ……ゆっくりも、好きだけど……いっぱいかき混ぜられるのも、大好きだよ……動いて、一悟……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2835,
+            "text": "「えへへ、おやすみなさい、一悟」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 48,
+            "text": "「んっ……んぅ……一悟……？」"
+          }
+        ],
+        "rebuts_with_nai_yo": [
+          {
+            "scene": "a11_01",
+            "line": 745,
+            "text": "「かっこつけるためのシーンじゃないよ、ここ。一悟の書きたいことが、一番溢れてるシーンだもん」"
+          },
+          {
+            "scene": "a11_01",
+            "line": 832,
+            "text": "「ヤキモチだけじゃないよ。一悟の台詞のが合ってたって思ってるのも本当！」"
+          },
+          {
+            "scene": "a12_01",
+            "line": 285,
+            "text": "「焦ってるんじゃないよ。ただ、安心してるだけ」"
+          }
+        ],
+        "presses_with_desho": [
+          {
+            "scene": "a11_01",
+            "line": 693,
+            "text": "「……ねえ一悟、ここの台詞、千奈に任せたでしょ？」"
+          },
+          {
+            "scene": "a11_01",
+            "line": 713,
+            "text": "「分かるよ。わたし、一悟の書く物語が好きだって言ってるでしょ」"
+          },
+          {
+            "scene": "a11_01",
+            "line": 1620,
+            "text": "「うん。それに……先生たちも無理言ってきてるんでしょ」"
+          }
+        ],
+        "opens_with_nee": [
+          {
+            "scene": "a12_02",
+            "line": 450,
+            "text": "「ねえ、一悟ぉ……こっちも、切ないの……お願い、触って……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 576,
+            "text": "「ね、ねえっ……奥ぅ……奥も、洗ってぇ……はぁ、あっ、指で、泡押し込んでぇっ……」"
+          }
+        ],
+        "says_suki_outright": [
+          {
+            "scene": "a11_01",
+            "line": 713,
+            "text": "「分かるよ。わたし、一悟の書く物語が好きだって言ってるでしょ」"
+          },
+          {
+            "scene": "a12_01",
+            "line": 1338,
+            "text": "「えへへへへ、嬉しい、一悟！　大好きだよ！」"
+          },
+          {
+            "scene": "a12_01",
+            "line": 1349,
+            "text": "「ちゅっ……んん、ちゅっ！　大好き、好きっ……好き好き、ちゅっ、大好きぃ……っ！」"
+          },
+          {
+            "scene": "a12_01",
+            "line": 1406,
+            "text": "「うんっ……一悟、大好きだよっ……！！」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 200,
+            "text": "「でも、一悟にいっぱい好きって伝えたいから、エッチなことしたいの。してほしいの……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 496,
+            "text": "「えへへ……優しい彼氏くん、大好き……いっぱいくにゅくにゅって、洗って……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 595,
+            "text": "「でも、エッチになるのは、旦那さまが好きだから、なの……エッチなのは、旦那さまの前でだけ、だからぁ……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1026,
+            "text": "「いいよ、いつでも……奥まで全部、好きにして……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1309,
+            "text": "「うんっ……ゆっくりも、好きだけど……いっぱいかき混ぜられるのも、大好きだよ……動いて、一悟……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1804,
+            "text": "「はぁ、あっ……あっ……この体勢、好き、好き……顔、よく見えるね……えへへ、うれしい……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2161,
+            "text": "「えへへ……びっくりするくらい、わたしのことが好きってことだよね、嬉しい……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2175,
+            "text": "「いいよ。もっとして、一悟ぉ……いっぱいセックスして、大好きだって感じさせて……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2401,
+            "text": "「ぅんっ、うんっ！　あぁっ、すき、すきぃっ……だいすき、んんっ、ふあぁあぁ、だいすき、すきっ！」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2845,
+            "text": "「大好きだよ……ずっとずっと、大好き……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2860,
+            "text": "「んっ……ちゅっ……ちゅぅ、すき、ちゅぅ、んんっ……だいすき、ちゅぅぅ……れぅ、ちゅ……だいすきぃ……」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 91,
+            "text": "「わたしも、一悟の汗の匂い好き……んぅ……すんすん……ずーっとこうしてたい……」"
+          },
+          {
+            "scene": "a13_01",
+            "line": 937,
+            "text": "「えへへ……一悟、大好き」"
+          },
+          {
+            "scene": "a14_01",
+            "line": 114,
+            "text": "『本当っ！？　えへへっ、大好き。ありがとっ』"
+          }
+        ],
+        "whimpers_u_u": [],
+        "stammers_first_sound": [
+          {
+            "scene": "a12_01",
+            "line": 453,
+            "text": "「そ、それはもういいの。おかげで一悟はわたしにメロメロになったんだから」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 312,
+            "text": "「あ、あ、あっ……気持ち、いいっ、ぁぁ……あっ、一悟の手、おっきくて……はぁ、あんっ、んっ……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 576,
+            "text": "「ね、ねえっ……奥ぅ……奥も、洗ってぇ……はぁ、あっ、指で、泡押し込んでぇっ……」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 1320,
+            "text": "「ん、んぅぅううう……あっあっ、んぁん……ふぁぁ、はぅ、んっ、んっんっ……はぁぅ、んんっ！」"
+          },
+          {
+            "scene": "a12_02",
+            "line": 2002,
+            "text": "「あ、あっ、ひっ、きゃぁんっ！　おちんちん、はげしいっ……なかであばれて、んふぅぅっ、はぅっ！」"
+          }
+        ]
+      }
+    },
+    "distinguishability": {
+      "method": "Blinded contrast. Bernoulli Naive Bayes whose her-class feature likelihoods are her own full-corpus marker rates and whose control-class likelihoods are the control heroines' full-corpus rates; equal priors, so the decision is the sign of the log-odds. The n-gram baseline is a character bigram log-likelihood ratio trained on the build block only. Balanced accuracy is the mean of her recall and the control specificity.",
+      "marker_rates_her": {
+        "rule00": 0.1644,
+        "rule01": 0.2803,
+        "rule03": 0.0001,
+        "rule04": 0.0001,
+        "rule05": 0.1469,
+        "rule06": 0.0006,
+        "rule07": 0.0739,
+        "rule08": 0.022,
+        "rule09": 0.5169,
+        "rule10": 0.2262,
+        "rule21": 0.0006,
+        "rule22": 0.033,
+        "rule24": 0.0001
+      },
+      "marker_rates_control": {
+        "rule00": 0.0028,
+        "rule01": 0.2348,
+        "rule03": 0.0001,
+        "rule04": 0.0001,
+        "rule05": 0.1235,
+        "rule06": 0.0127,
+        "rule07": 0.0257,
+        "rule08": 0.3407,
+        "rule09": 0.4984,
+        "rule10": 0.1772,
+        "rule21": 0.0001,
+        "rule22": 0.022,
+        "rule24": 0.0001
+      },
+      "bible_rule_nb": {
+        "full": {
+          "her_n": 340,
+          "control_n": 113,
+          "tp": 295,
+          "fn": 45,
+          "fp": 32,
+          "tn": 81,
+          "balanced_accuracy": 0.7922
+        },
+        "non_H": {
+          "her_n": 122,
+          "control_n": 113,
+          "tp": 83,
+          "fn": 39,
+          "fp": 32,
+          "tn": 81,
+          "balanced_accuracy": 0.6986
+        }
+      },
+      "bigram_buildblock": {
+        "full": {
+          "n": 2,
+          "her_n": 340,
+          "control_n": 113,
+          "tp": 227,
+          "fp": 25,
+          "balanced_accuracy": 0.7232
+        },
+        "nonH": {
+          "n": 2,
+          "her_n": 122,
+          "control_n": 113,
+          "tp": 104,
+          "fp": 25,
+          "balanced_accuracy": 0.8156
+        }
+      },
+      "chance": 0.5
+    }
+  },
+  "verdict": {
+    "verdict": "pass",
+    "headline": "6 of 6 computed checks pass for 真優; failed: none. Holdout 340 spoken lines in 5 scenes.",
+    "supported": [
+      "holdout_size: 340 holdout spoken lines (needs 100)",
+      "registers_reconcile: H 218 + non-H 122 vs pooled 340",
+      "self_reference_holds: わたし in 0.094 of holdout lines vs 0.172 of build lines (within 0.1)",
+      "mechanisms_distinctive: 11 of 13 mechanisms above the control rate on the holdout (needs half)",
+      "rule_detector_above_chance: bible-rule detector balanced accuracy 0.792 full, 0.699 non-H (chance 0.5)",
+      "rules_beat_bigram: bible-rule 0.792 vs plain bigram 0.723 (full); scored on own speech_guide markers (13)"
+    ],
+    "undermined": []
+  }
+}

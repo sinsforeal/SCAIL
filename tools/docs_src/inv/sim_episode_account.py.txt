@@ -1,0 +1,75 @@
+# sim\episode_account.py  (625 lines)
+
+DOCSTRING:
+The EPISODE ACCOUNT: what somebody who watched the episode would know.
+
+The pipeline in `sim/recap.py` reads several pages about one episode, condenses
+each into a digest, and keeps the ONE a judge picked. That winner is a
+synopsis: a few hundred characters, one writer's reading of the episode, and by
+the time it reaches a character it has been cut again to
+`watching.digest_max_chars` -- 600 characters of a single fan post. It answers
+"what was that episode about". It cannot answer "what did she say when she
+dropped the cup", because the individual jokes are exactly what a 600-character
+paraphrase drops.
+
+So the losers are no longer thrown away. Everything read about the episode --
+every surviving digest with its scene list, the episode's own subtitle file
+read as an account of its scenes, and the official blurb -- goes to ONE role
+(`episode_account`, `prompts/episode_account.txt`) which merges them into a
+single Japanese account: every scene in order with how it comes out, the named
+parts, the running gags, the lines worth remembering, what the episode points
+at, and what no source settled. That account is the record.
+
+**Three things follow from it being a record rather than a line she reads.**
+
+- It is the MACHINE's. An episode of a television programme is the same episode
+  whoever watched it, so the account is written once, into
+  `machine/retrievals.py` under the pool below and under the same key the
+  fetched page uses, and every character on the machine reads it without
+  fetching or paying for anything. Her own save keeps her copy in
+  `episode_accounts`, which is her record of having been told it.
+- It is not cut to 600 characters. A separate short digest already exists for
+  the opener and the impulse; the account is the whole thing, and what it
+  costs is a longer cached prompt.
+- It is never rebuilt once it is COMPLETE. `level` says how complete it came
+  out and `sources` says what it was built from, so a rebuild is a decision
+  somebody can make ("this one came out thin") rather than something that
+  happens on every read. `docs/recap.md` section 3e.
+
+Nothing here holds a model client: `Recap` has none either, and every paid call
+in this file takes the client as an argument from whichever module holds one.
+
+spec: docs/recap.md section 3e
+
+DEFS:
+class EpisodeAccount: 
+    __init__(config, store, clock, archive): 
+    _c(key, default): 
+    enabled(): 
+    _ensure_table(): 
+    _local(ja, ep, aid): Her own row for this episode, or None. A row that names a DIFFERENT work's id is not this episode: two entries of his list share the Japanese title エグザンプル, which is the same reason the fetched page's key carries an id.
+    _shape(d): A stored row read back: the JSON columns as lists, and `references` under the name the prompt and the report use. The column is `refs` because `references` is a reserved word in SQLite's grammar and an unquoted one fails
+    standing(row): How much of the episode an account is: how complete it came out first, then how much of it there is.  ONE MEASURE FOR BOTH STORES AND THE BUILD. Comparing the completeness word alone let a shorter merge replace a longer 
+    _save(row): 
+    _shared(retrievals, shared_key): 
+    _share(retrievals, shared_key, row): Write the account into the machine's one store, so no other character pays for it. A COMPLETE account is never overwritten by a thinner one: a second character reaching the episode with a worse candidate set must not cos
+    row(ja, ep, aid, retrievals, shared_key, adopt): The account for one episode: hers, else the machine's, and the machine's is copied into her save on the way past -- nothing is fetched to do it, and being told a thing is what her own record is for. `None` when neither s
+    complete(row): Whether this account is at the standard the whole of this exists for, and therefore never rebuilt on its own.
+    situation_text(row, ja): The account as it goes into a prompt: the prose, then the scenes in order, then the parts, the gags, the lines and what the episode points at. Not cut -- an account cut in half is a synopsis again, which is what this rep
+    _level(chars, scenes, used_web, anchored): How complete an account came out, from what went into it and not from how it reads. Two ways to reach the top: more than one person's account of the episode agreeing, or the episode's own dialogue behind it. One source a
+    build(entry, ep, llm, digests, anchor_text, anchor_url, anchor_kind, transcript, show_key, retrievals, shared_key, ep_title, english): Merge everything read about one episode into one account, store it, and write its page. Returns the row, or None.  `digests` is every surviving candidate -- `{url, source, digest, scenes}` -- and not only the one the jud
+    _lines(rows, n, cap): 
+    _model(): 
+    _material(ja, ep, digests, anchor_text, anchor_url, anchor_kind, transcript, ep_title, prior): What the merge role is shown, and the record of what went into it.  The transcript first because it settles contradictions, then the anchor, then every digest numbered. A source with nothing in it is listed as read and n
+    _call(llm, ja, ep, material): The one paid call. It is NOT put through the machine's get-or-fetch: the account is already shared under its own key by `_share`, and a second key on the exact bytes of the material would only save the case where two cha
+    write_report(row): The episode's own page under `recap.episodes_report_dir`, and the index over all of them. The MACHINE's, like the archive it names.
+    report(limit): 
+
+CONFIG SECTIONS: model, prompt_text, recap
+KV READ: 
+KV WRITE: 
+TABLES: episode_accounts
+LOG TAGS: account
+PROMPTS: episode_account
+LLM ROLES: episode_account
+OPS COMMANDS: 

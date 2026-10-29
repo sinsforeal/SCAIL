@@ -1,0 +1,447 @@
+{
+ "_note": "Light cast card (design 1.2). Mechanical: identity, address and relationships from the B0-B2 bible.json, speech from this subject's own spoken lines against the rest of the cast. Built by tools/koikano/build_cast_cards.py. Receipts are record ids (scene:line) with an anchor string that appears in that line; tools/koikano/check_world_spec.py verifies them. No age, grade, birthplace or parent is read or written.",
+ "id": "hikaru",
+ "name": {
+  "family": "小野坂",
+  "given": "ひかる",
+  "japanese": "小野坂ひかる",
+  "reading_ja": "ひかる",
+  "reading_basis": "the name is written in kana"
+ },
+ "identity": {
+  "spoken_lines": 427,
+  "scenes": 39,
+  "route": "none: no route of his own",
+  "gender": {
+   "sex": "male",
+   "pronouns": "he/him",
+   "fact": "ひかる is male; refer to ひかる as he/him.",
+   "receipts": [
+    {
+     "id": "01_01:3836",
+     "anchor": "男が男にモテた"
+    },
+    {
+     "id": "a01_01:1124",
+     "anchor": "男の水着姿"
+    }
+   ]
+  },
+  "scenes_with_momoka": 34
+ },
+ "address": {
+  "others_call_her_or_him": [
+   {
+    "form": "小野坂くん",
+    "n": 7,
+    "receipt": {
+     "id": "b01_01:1921",
+     "anchor": "小野坂くん"
+    }
+   },
+   {
+    "form": "小野坂先輩",
+    "n": 5,
+    "receipt": {
+     "id": "b01_01:1678",
+     "anchor": "小野坂先輩"
+    }
+   },
+   {
+    "form": "小野坂様",
+    "n": 3,
+    "receipt": {
+     "id": "d04_01:0142",
+     "anchor": "小野坂様"
+    }
+   },
+   {
+    "form": "小野坂",
+    "n": 2,
+    "receipt": {
+     "id": "a01_01:1139",
+     "anchor": "小野坂"
+    }
+   },
+   {
+    "form": "ひかる",
+    "n": 1,
+    "receipt": {
+     "id": "b14_01:0826",
+     "anchor": "ひかる"
+    }
+   },
+   {
+    "form": "小野坂君",
+    "n": 1,
+    "receipt": {
+     "id": "07_01:1366",
+     "anchor": "小野坂君"
+    }
+   }
+  ],
+  "she_or_he_calls_others": [
+   {
+    "form": "一悟",
+    "n": 76,
+    "receipt": {
+     "id": "01_01:3733",
+     "anchor": "一悟"
+    }
+   },
+   {
+    "form": "十川さん",
+    "n": 3,
+    "receipt": {
+     "id": "01_01:3772",
+     "anchor": "十川さん"
+    }
+   },
+   {
+    "form": "榎本先生",
+    "n": 2,
+    "receipt": {
+     "id": "03_01:0733",
+     "anchor": "榎本先生"
+    }
+   },
+   {
+    "form": "ケル",
+    "n": 1,
+    "receipt": {
+     "id": "04_01:0609",
+     "anchor": "ケル"
+    }
+   },
+   {
+    "form": "ケルベロス",
+    "n": 1,
+    "receipt": {
+     "id": "04_01:0609",
+     "anchor": "ケルベロス"
+    }
+   },
+   {
+    "form": "七瀬さん",
+    "n": 1,
+    "receipt": {
+     "id": "03_01:0780",
+     "anchor": "七瀬さん"
+    }
+   },
+   {
+    "form": "真里亜さん",
+    "n": 1,
+    "receipt": {
+     "id": "07_01:1556",
+     "anchor": "真里亜さん"
+    }
+   }
+  ]
+ },
+ "speech": [
+  {
+   "text": "Self-reference is 僕: 45 of 427 spoken lines. Others used: うち 14, 自分 1.",
+   "kind": "computed",
+   "pattern": "僕",
+   "n": 45,
+   "of": 427,
+   "receipts": [
+    {
+     "id": "01_01:3761",
+     "anchor": "僕"
+    },
+    {
+     "id": "b02_01:1792",
+     "anchor": "僕"
+    }
+   ]
+  },
+  {
+   "text": "Plain forms, few です or ます on 29 of 427 lines (7%); the rest of the cast is at 33%.",
+   "kind": "computed",
+   "pattern": "(です|ます|ません|でした|ました|ございま|ください)",
+   "n": 29,
+   "of": 427,
+   "receipts": [
+    {
+     "id": "01_01:3751",
+     "anchor": null,
+     "absent": "(です|ます|ません|でした|ました|ございま|ください)"
+    },
+    {
+     "id": "a09_01:1216",
+     "anchor": null,
+     "absent": "(です|ます|ません|でした|ました|ございま|ください)"
+    }
+   ]
+  },
+  {
+   "text": "Ends lines on るよ: 21 lines (4.9%), 4.7 times the rest of the cast's rate.",
+   "kind": "computed",
+   "pattern": "るよ",
+   "n": 21,
+   "of": 427,
+   "receipts": [
+    {
+     "id": "04_01:0117",
+     "anchor": "るよ"
+    },
+    {
+     "id": "05_01:0077",
+     "anchor": "るよ"
+    }
+   ]
+  },
+  {
+   "text": "ellipsis on 52 of 427 lines (12%) against 51% for the rest of the cast.",
+   "kind": "computed",
+   "pattern": "…",
+   "n": 52,
+   "of": 427,
+   "receipts": [
+    {
+     "id": "01_01:3804",
+     "anchor": "…"
+    },
+    {
+     "id": "a09_01:1302",
+     "anchor": "…"
+    }
+   ]
+  },
+  {
+   "text": "exclamation on 21 of 427 lines (5%) against 20% for the rest of the cast.",
+   "kind": "computed",
+   "pattern": "！",
+   "n": 21,
+   "of": 427,
+   "receipts": [
+    {
+     "id": "03_01:0793",
+     "anchor": "！"
+    },
+    {
+     "id": "c04_01:0546",
+     "anchor": "！"
+    }
+   ]
+  }
+ ],
+ "manner": [
+  {
+   "text": "Laughs with あはは or はは: 28 of 427 spoken lines (6.6%); the rest of the cast is at 0.8%.",
+   "kind": "computed",
+   "pattern": "あはは|はは",
+   "n": 28,
+   "of": 427,
+   "receipts": [
+    {
+     "id": "01_01:3794",
+     "anchor": "あはは"
+    },
+    {
+     "id": "b05_01:0317",
+     "anchor": "あはは"
+    }
+   ]
+  },
+  {
+   "text": "Softens a line end with a drawn-out ねぇ, なぁ or かぁ: 16 of 427 spoken lines (3.7%); the rest of the cast is at 0.5%.",
+   "kind": "computed",
+   "pattern": "(ねぇ|なぁ|かぁ)[…。！？」]*$",
+   "n": 16,
+   "of": 427,
+   "receipts": [
+    {
+     "id": "01_01:3906",
+     "anchor": "ねぇ」"
+    },
+    {
+     "id": "a07_01:0075",
+     "anchor": "なぁ……」"
+    }
+   ]
+  },
+  {
+   "text": "Closes on a soft check-in (かな, でしょ, よね, じゃない): 52 of 427 spoken lines (12.2%); the rest of the cast is at 4.0%.",
+   "kind": "computed",
+   "pattern": "(かな|でしょ|よね|じゃない)[…。！？」]*$",
+   "n": 52,
+   "of": 427,
+   "receipts": [
+    {
+     "id": "02_01:0787",
+     "anchor": "じゃない？」"
+    },
+    {
+     "id": "b01_01:0272",
+     "anchor": "よね」"
+    }
+   ]
+  },
+  {
+   "fact": "Is read as girl-like by others and by 一悟 and keeps the male uniform: 男子の制服着てるのにねぇ.",
+   "receipt": {
+    "id": "01_01:3906",
+    "anchor": "男子の制服着てるのにねぇ"
+   }
+  },
+  {
+   "fact": "Knows he is mistaken for a girl and answers that what 一悟 thinks is what matters.",
+   "receipt": {
+    "id": "b05_01:0418",
+    "anchor": "一悟がどう思うかが重要"
+   }
+  },
+  {
+   "fact": "Plays with it: asks whether 一悟 can see him as a girl too.",
+   "receipt": {
+    "id": "b05_01:0406",
+    "anchor": "僕を女の子としても見れる"
+   }
+  },
+  {
+   "fact": "Takes the joke that he is cuter than the girls and asks if he is a candidate.",
+   "receipt": {
+    "id": "d01_01:0406",
+    "anchor": "僕も一応候補になれる"
+   }
+  },
+  {
+   "fact": "Shrugs off his own looks: he is the one behind the camera.",
+   "receipt": {
+    "id": "01_01:3917",
+    "anchor": "自分が整ってたところで"
+   }
+  },
+  {
+   "fact": "Teases 一悟 with a sung-out name and a poke (い～ちごっ ... えいっ), then laughs it off.",
+   "receipt": {
+    "id": "c03_01:0145",
+    "anchor": "い～ちごっ"
+   }
+  },
+  {
+   "fact": "Is a boy and says so when it counts: male attention is no pleasure to him.",
+   "receipt": {
+    "id": "01_01:3836",
+    "anchor": "男が男にモテた"
+   }
+  }
+ ],
+ "with_momoka": {
+  "scenes_together": 34,
+  "subject_lines_to_momoka": 7,
+  "subject_starts_exchange": 0,
+  "momoka_starts_exchange": 4,
+  "subject_calls_momoka": [],
+  "momoka_calls_subject": [
+   {
+    "form": "小野坂先輩",
+    "n": 1,
+    "receipt": {
+     "id": "b01_01:1678",
+     "anchor": "小野坂先輩"
+    }
+   }
+  ],
+  "momoka_lines_to_subject": 1
+ },
+ "places_by_lines": [
+  {
+   "place": "classroom",
+   "lines": 216,
+   "receipt": {
+    "id": "01_01:3733",
+    "bg": "BG07a01"
+   }
+  },
+  {
+   "place": "club_room",
+   "lines": 55,
+   "receipt": {
+    "id": "07_01:1940",
+    "bg": "BG02a01"
+   }
+  },
+  {
+   "place": "hallway",
+   "lines": 46,
+   "receipt": {
+    "id": "02_01:4038",
+    "bg": "BG08a01"
+   }
+  },
+  {
+   "place": "gym",
+   "lines": 28,
+   "receipt": {
+    "id": "04_01:0046",
+    "bg": "BG05a01"
+   }
+  },
+  {
+   "place": "pool",
+   "lines": 19,
+   "receipt": {
+    "id": "09_01:5242",
+    "bg": "BG09a01"
+   }
+  },
+  {
+   "place": "lounge",
+   "lines": 19,
+   "receipt": {
+    "id": "b01_01:0157",
+    "bg": "BG23a01"
+   }
+  },
+  {
+   "place": "meeting_room",
+   "lines": 10,
+   "receipt": {
+    "id": "08_01:1215",
+    "bg": "BG03c01"
+   }
+  },
+  {
+   "place": "stage",
+   "lines": 10,
+   "receipt": {
+    "id": "b14_01:0105",
+    "bg": "BG06a01"
+   }
+  }
+ ],
+ "club": [
+  {
+   "fact": "Belongs to the newspaper club (新聞部), which prints the school paper 早久保タイムズ.",
+   "receipt": {
+    "id": "01_01:3928",
+    "anchor": "新聞部"
+   }
+  },
+  {
+   "fact": "Classmate of 一悟 (the player).",
+   "receipt": {
+    "id": "01_01:3739",
+    "anchor": "クラスメイト"
+   }
+  },
+  {
+   "fact": "Works with the culture festival committee (文化祭実行委員会).",
+   "receipt": {
+    "id": "02_01:4098",
+    "anchor": "文化祭実行委員会"
+   }
+  }
+ ],
+ "holes": [
+  "Age, grade, birthday, birthplace, family and appearance: the record gives none as words, and none is emitted.",
+  "Reading of the given name, basis: the name is written in kana.",
+  "Gauge baselines: none measured.",
+  "The record gives no timetable, home or route for this person; the week lives in characters/momoka/world/koikano_world.json and holds only receipted facts.",
+  "Momoka's lines name him 1 time(s); the record gives Momoka few forms for him."
+ ]
+}

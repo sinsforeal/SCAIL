@@ -1,0 +1,30 @@
+# tomoe/world\zeitgeist.py  (105 lines)
+
+DOCSTRING:
+What is going on in Japan right now, as it reaches her.
+
+`tools/zeitgeist.py` fetches and filters; this reads the file it writes
+(`world.zeitgeist_file`), reloading when the file changes, the way the
+calendar picks up local events. Readers: her system prompt (what she has
+seen on her phone or heard this week), the director (a scene can have it
+on the TV or in the group chat), the beat writer (the group talks about
+what everyone is talking about), the social read (her X reactions know the
+week), the diary and her posts.
+
+DEFS:
+class Zeitgeist: 
+    __init__(config): 
+    _reload(): 
+    items(today, limit): Current items, newest first, each still inside its own `days`.
+    _hook(it): Why it reaches her, or nothing when the reason names a railway she does not ride.  The check is at the fetch as well (`tools/zeitgeist.py`), which is where a bad reason should die. This is the second one, and it earns it
+    brief(limit, today): One line per item: the Japanese as she met it, the gloss, and why it reaches her. Empty string when nothing is current.
+    short(limit, today): 
+
+CONFIG SECTIONS: world.zeitgeist_file, world.zeitgeist_in_prompt
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: japan
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,109 @@
+# sim\works.py  (966 lines)
+
+DOCSTRING:
+What a work is, and who answers about it -- one path, whatever named it.
+
+A work reaches her three ways: he types its name, he opens its page, or her
+own sight lands on it. Each of those used to resolve it for itself, and on
+2026-09-03 all three failed on the same title in the same evening: the page
+in front of him was filed as a person and never asked about, the automatic
+lookup spent a web search and came back with an unrelated 1967 show, and the
+one place that had the answer -- her own record, and the roles the knowledge
+base lists for her -- was asked by nobody. She denied a part she had played.
+
+So the question "what is this thing, and was she in it" is answered here,
+once, in one order, and the answer is written to one record.
+
+**The order is cheapest-and-surest first.** Every step but the last is local
+sqlite or a file already in memory, so the whole resolution costs
+milliseconds and no model call:
+
+  1. what she already knows by name (`sim/known.py`) -- and if a record
+     answers, NOTHING is fetched: that record is the answer, which is what
+     stops the same title being bought twice from two directions;
+  2. his own list, for the canonical title and the MyAnimeList id (a title
+     he has watched is a work, whatever the page's brackets say);
+  3. the roles the knowledge base lists for her (`AnimeKB.roles_of`), matched
+     on the work's title, the page's English alias, the id, and the
+     character's name -- so a character's page for a part she played
+     resolves as hers too;
+  4. her own record (`sim/lore.py`), which is the authority on what a part
+     meant to her and carries the work's Japanese name in its own tags --
+     which is how a romaji page title reaches a record written in Japanese
+     without a network call;
+  5. a person or a character the knowledge base knows by that name: not a
+     work, and never searched;
+  6. a web search -- only when the thing is a work, nothing above knew it,
+     and the caller allows one.
+
+**Whoever answers decides what kind of thing it is.** A page's brackets
+cannot: on MyAnimeList "B-gata H-kei (Yamada's First Time: B Gata H Kei)" is
+a work and "Mitsuba Marui (Mitsudomoe)" is a character, and they are the same
+shape. So the shape may say "unknown" and the knowledge base settles it.
+
+**"Was she in it" has THREE answers, not two.** `hers` was a boolean, so
+"she is in it" and "nothing here knew" were the same value, and on 2026-09-04
+the second character told him she played a part in a work she has never been
+in -- with no cast information of any kind in front of the model to contradict
+it. `her_part_verdict` answers yes, no or not-checked, and **a flat no is only
+said when two independent local tables agree**: her own mirrored filmography
+has no row for the work, AND the work's own cast is mirrored and does not name
+her. Where the second is missing the answer is not-checked, and not-checked
+says nothing at all -- 222 of his 701 titles have no mirrored cast, and works
+she really is in are among them, so a check built on the cast table alone
+would have answered "not yours" about her own parts. Her filmography is the
+authority; the cast is the second witness. Everything is read from the
+machine's mirror (`data/mal_history.db`), read-only, no fetch: a verdict costs
+two indexed sqlite reads and no model call, and a missing table is silence
+rather than a guess.
+
+**Who she is on that list is an id** (`character.mal_person_id`), never a
+name: her given name alone matches nine other people in the cast rows by
+substring. The id is also the switch -- a character with none never reads the
+mirror and never gets a line.
+
+**One record.** Whatever is found is written once, to `known_things`, with
+who wanted it (`asked_by`), whether it is hers, the part, the verdict, the id,
+and when it was last in front of him. Her sight's `glance_last`, the situation line the
+persona pins, the automatic lookup's idea of what is open in front of him and
+the lore retrieval's offered set all read that one row, so nothing here can
+name a stale show while another part of the same tick names the right one.
+
+DEFS:
+def norm(s): A name with the punctuation taken out, for comparing two spellings of one title: the same rule `AnimeKB` uses, so an id resolved there and a name matched here cannot disagree.
+def _tokens(s): The words of a name, for a person written either way round: a page says "Mitsuba Marui" and a cast row says "Marui Mitsuba".
+def _clean(names): 
+def _near(a, b): One name inside the other, when both are long enough for that to mean something: "bocchitherock" in "bocchitherockmovie" and never "girl" in "girlshigh".
+def his_title(anime_kb, names): (anime_id, title) for the first of these names that is a title in his own list. Local, strict, no network: this decides that a thing is a WORK when the page's brackets cannot.  The RANKED answer (`AnimeKB.resolve_strict`
+def her_role(config, anime_kb, names, aid): The role the knowledge base lists for HER in this work, as (anime_id, anime, character), or None.  Matched four ways, because a page names a work four ways: the id when the window carried one, the work's title, the page'
+def her_person_id(config): Which person on MyAnimeList this character IS, as a string, or "".  Empty is the honest answer for somebody who has never been in anything, and it is what switches the whole check off: `Config.REQUIRES` turns an empty id
+def role_check_on(config): Is the check live for this character: the section on AND an id to be.
+def _name_tokens(who): Her own name as words, from the mirror's row for her id rather than from anything spelled in shared code.
+def _near_name(cast, mine): The part whose name most resembles hers, and who really plays it: (character, actress). This is the specific correction the 2026-09-04 incident needed -- the work she claimed has a main character who shares her given nam
+def her_part_verdict(config, anime_kb, names, aid): Is this work hers? A dict whose `verdict` is "yes", "no" or "unknown".  yes -- her mirrored filmography has a row for it, matched the four ways a   page names a work: the id, the work's title, the page's English alias,  
+def verdict_line(config, v, name, t): The one line she reads about it, in her language, or "" for silence.  The wording is the program's (`sim/sight.py`), so a character who lives on his machine and one who is told by an app each say it as she would. Nothing
+def _person(name): A name off the mirror, family-given with the comma out, which is how he thinks of a Japanese name and so how she says it.
+def _billed(ch, billing, en): A part and how it was billed, in one language: "Tsukishima Shiori (a supporting part)" or "Tsukishima Shiori（脇役）". A billing MyAnimeList does not give (it writes "?") renders as the name alone.
+def _year(year): The year as a string, or "" when the credit predates the year column on his mirror. A zero is never printed: "0年の" is worse than silence.
+def _name_forms(name): The ways somebody would type this title: whole, and the part before the first separator.  An OVA is recorded as "ゆゆ式 こまらせたり、こまらされたり" and typed as "ゆゆ式のOVA". The lead has to be long enough to be a name rather than a word 
+def _names_here(names, text): The form of one of these names that appears in this text, or "".
+def editor_facts(config, store, texts, extra, max_n): The works named here, each marked hers or not hers, for the continuity editor. English: this is machinery talking to itself.  The editor had twelve labelled blocks of evidence and none of them named a work of hers, which
+def named_in(config, store, text, extra): Does this text name a work a verdict exists for? The reason string for the continuity editor's gate, or "".  The gate skips the editor call unless the draft carries a number, a run shared with a recent message, or a word
+def title_phrases(text, limit): The title-shaped phrases in a sentence about a work, longest first.  Three shapes, because a verdict names a work the way a person does: in brackets or quotes, as the words in front of a word like "anime" ("the smoking c
+def his_list_holds(anime_kb, phrases): Does his own list hold any of these titles? (verdict, title, why), the verdict being "yes", "no" or "unknown".  Local and read-only, through the same ranked resolution the resolver uses (`AnimeKB.resolve_candidates`, `do
+def list_claim_check(config, anime_kb, problem, draft, seen): Does a continuity verdict rest on what his list holds, and does it?  `problem` is the checker's own sentence, `draft` what she wrote, `seen` what she has actually been SHOWN of him (his list as she reads it, the notes sh
+def her_record(lore, names): (record, the line about it) from her own record for a work these names name, or None -- role-shaped records only, matched by name.  Two ways in, and both are the record's own words rather than a resemblance: the trigger 
+def a_person(anime_kb, names): The name of a person or a character the knowledge base knows, exactly -- not a work, and not a thing to search for. Exact only: `find_person` is generous by substring on purpose for a name he typed, and a page title is n
+def identify(names, config, store, clock, known, anime_kb, lore, search, site, mal_id, shape, why, allow_search, access, asked_by, in_front): What this thing is, and who answered. Returns the one record, or None when the names are not worth a record at all.  `shape` is what whatever named it could already tell: "work" (a page that says so, or a term he called 
+def _her_name(config): Her name as a search would have to spell it, for the one question a search is ever asked here: was she in this.
+def _plain(names, part): The record's text when nothing wrote prose: the work and the part.
+def in_front_of_him(store, clock, config, within_minutes): The work last resolved as being on his screen, while it is still there: the one record, read by the automatic lookup so its context names what is actually open rather than the last thing a player touched.
+
+CONFIG SECTIONS: role_check
+KV READ: known_things
+KV WRITE: 
+TABLES: 
+LOG TAGS: resolver, roles, works
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

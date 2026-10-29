@@ -1,0 +1,102 @@
+# world\shared.py  (766 lines)
+
+DOCSTRING:
+One world, on disk, that more than one process may read.
+
+Everything a character knows about the world she lives in is in HER save: the
+people's days, where each of them is, what the day settled, the group chat and
+every exchange, who thinks what of whom, the pool of what is going round. A
+second process running one of those people as a character of her own has no
+way to reach any of it, and would plan a Saturday the first process never had.
+
+So the world gets a file of its own. One sqlite file per world, under
+`<world.shared_dir>/<world_shared.id>/world.db`, with **one writer** -- the
+character whose config says `world_shared.owner` -- and any number of readers,
+who open it through a `mode=ro` URI. A reader never copies it: a copy of an
+open save is a stale image, and this file is written a row at a time while
+other processes are reading it.
+
+One writer for everything the owner owns, and a PARTITION for everybody else.
+A character who only lives in this world writes the rows that are about
+HERSELF -- the windows her own day planner puts her in, the rooms she is in,
+the lines her own plan settled -- under her own id and a source naming her own
+planner, and nothing else: a row about anybody else, or into any other table,
+is refused and the refusal is logged. Two writers cannot land on one row
+because the natural keys already carry the person and the source, and the
+`world`, `owner` and `written` keys of `meta` stay the owner's -- a reader
+records herself under `writers` instead, because opening the file to write a
+row about oneself is not claiming the world.
+
+It is a COPY, not the truth. Each fact still has exactly one owner in the
+owner's own save, and every write here sits beside the write that already
+records the thing: the plan writes the day's whereabouts, the ledger writes a
+settled line, the exchange writes a turn as it is spoken, the compile writes
+the edges, the orbit and the pool. Nothing reads this file to decide anything
+in the owner's process. If the two ever disagree, the owner's save is right
+and this one has a missing write.
+
+Every row is written the moment the thing exists, never held to the end of a
+tick, and every write is guarded: a world write that fails is logged by
+exception type and the pass goes on.
+
+Nobody is named here. What a person is called arrives as an argument.
+
+    python world/shared.py --id <world id>       # the tables, and the last row of each
+
+DEFS:
+def _span(row): One whereabouts row's window, with the ends a missing value implies.
+def _prefer_own(rows): The whereabouts rows with each person's own rows preferred.  The owner's planner draws a day for everybody on her roster, including a character who runs her own process, and that character's own day planner is the one th
+def stamp(): Machine local time, which is the clock every record in this tree is stamped with. A world holds two processes on two character clocks and one machine; the machine's is the only one both of them agree about.
+def _guard(fn): A world write never takes a tick down with it. The guard is here rather than at each of the ten call sites: a caller that has to remember to wrap it is a caller that will one day forget, and the failure of a copy is neve
+def _js(v): A dict or a list into the one text column that holds it.
+class SharedWorld: One character's handle on the world file: a writer if her config says
+    __init__(config, char_id, me): 
+    _fault(line): Said once per shape of failure: a world write runs on every turn, and a broken file would otherwise fill the log with one line a minute.
+    _open_writer(): Opened on the first write, not at construction: a harness that builds the App and never plans a day must leave no file behind, and `tools/smoke.py` builds every character on every restart.
+    _read_con(): A read-only connection, for a process that does not own the world. Never a copy: a file copy of a database being written is a torn image, and `mode=ro` is the same answer `tools/dbcopy.py` gives.
+    _writer(table, about, source): The connection this write goes through, or None when the write is not this character's to make.
+    _write(sql, args, table, about, source): 
+    close(): 
+    _me(): What the world's record calls this character.  A character promoted out of somebody else's cast still has a row in that cast, and the handle it is keyed by is what every shared record about her uses -- not the name in he
+    _is_me(who): Is this row about the character writing it? Her key, her Japanese name, her reading and every nickname the others call her by all resolve to herself on her own roster, so the question is asked there; the name she was bui
+    writes_own(who): May this character write a row about this person?  True only for a character who does not own the world, whose own rows are switched on, about herself. A caller asks it to say what it means -- the copy of a room, of a da
+    _may_write(table, about, source): The partition, for a character who does not own the world: the rows about HERSELF in three tables, each saying which of her own planners wrote it. Everything else is refused with the fault logged, because a second answer
+    _note_writer(force): Who besides the owner has written into this world, and when each of them last did: `meta`'s `writers`, a JSON list. Once a minute at most -- a day of her own is a handful of rows, and the stamp is for a person reading th
+    put_person(key, name, ja, role_id, calls, week): One cast row a reader may know. What they are called and when their week has them somewhere -- never what they think of anybody.
+    put_whereabouts(date, person, from_hm, to_hm, place, with_who, reach, source): Where one person is between two times, and how reachable they are.
+    put_settled(date, line, source): One thing the day fixed, in the plan's own words.
+    put_turn(date, room, who, hm, ja, gloss, witnessed_by): One turn, the moment it is spoken. The room is the group chat or the two ends of an exchange, written the way the owner's record names it; `witnessed_by` is who else was in it, comma separated.
+    put_member(room, member, joined, joined_ts, left, left_ts, agent): That one person is in one room, and since when -- or that she has left it, and when.  Written the moment the join or the leave happens, by the process that owns the room, so a second process can see who is in a room with
+    put_edge(holder, about, regard, irritation, view): What one person holds about another, as the owner's compile settled it.
+    put_orbit(owner, relation, name, note): Somebody in one of the cast's own lives who is not on the roster.
+    put_gossip(item_id, text, heat, knows): One thing going round, with how warm it still is and who has heard it.
+    put_event(date, kind, text, salience): One thing that happened, at the salience the owner filed it under.
+    put_own_day(date, person, rows): Where this character is today, as her own day planner settled it.  The whole day in one transaction, replacing what she wrote for that date before: the natural key is the person and the window, so a block that MOVED in a
+    rows(table, where, args, limit): A table, oldest first. The owner reads through her own connection, anybody else through a read-only one opened for the call: a reader is a different process and holds nothing open between looks.
+    roster(): 
+    whereabouts(date): Where the day has each person, with each person's own rows preferred over the owner's draw of her week (`_prefer_own`).
+    their_own_whereabouts(date): Only the rows a character wrote about HERSELF, for the owner's planner: her own draw of a week stands for everybody else, and these are the windows that outrank it.  Kept for as long as the file is untouched. The planner
+    settled(date): 
+    turns(date, room): 
+    events(date): 
+    gossip(limit): What is going round, warmest first. A reader whose own pool is switched off (she is in a world she does not keep) has this and nothing else.
+    orbit(owner, limit): The people around the people: whose brother, whose coach.
+    graph(about, limit): What each of them privately holds about another, as the owner's compile settled it. `about` narrows it to what they hold about one person -- which for a reader is usually herself.
+    whereabouts_lines(date, limit): Where the day has each person, one line per person.
+    gossip_lines(limit): 
+    orbit_lines(limit): 
+    settled_lines(date, limit): 
+    members(room): Who is in a room, or everybody in every room. A row with `left` set is somebody who WAS in it: the row is kept, because who was in the room when a thing was said is the question this table answers.
+    counts(): Row count per table, for the operator and for a reader deciding whether the world has been written yet.  A table this build knows and the file does not is counted as nothing rather than taking the whole count down: a wor
+    report(): `/sweep` and the operator: what the world holds, and who wrote it.
+def _last(w, table): 
+def main(): 
+
+CONFIG SECTIONS: character.name, world
+KV READ: 
+KV WRITE: 
+TABLES: events, gossip, graph, members, meta, orbit, rooms, roster, settled, whereabouts
+LOG TAGS: shared world
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

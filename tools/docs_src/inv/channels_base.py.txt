@@ -1,0 +1,40 @@
+# channels\base.py  (60 lines)
+
+DOCSTRING:
+What the runtime may ask of a channel, and what a channel need not do.
+
+The runtime talks to her chat through one object, `App.tg`, and there are
+two of them: TALKAPP (`talkapp_bot.py`) and Telegram (`telegram_bot.py`).
+They share the nine methods every message needs, and TALKAPP has more -- a
+photo, a sticker, a voice note attached to a bubble, the lines he tapped to
+hear, the ops commands -- which the runtime used to ask for with `hasattr`
+in six places, and got one signature wrong (a voice note with `attach_to`
+on a channel whose `send_voice` took none). Here the extras are methods
+that do nothing, and every channel has them: a channel that cannot send a
+photo says so by returning False, and the runtime reads the answer instead
+of the type.
+
+The wires (`sim/wiring.py`) are declared here for both: the social graph
+for the backstage view, the ops view, and her face for the app's header.
+Telegram has nowhere to show them and leaves them unread.
+
+DEFS:
+class Channel: 
+    send_photo(path): A photo of hers before the bubbles that caption it. False: it did not go, and the delivery says so.
+    send_sticker(path, bucket, ts, quiet, auto): A reaction of hers, a frame of her the size of a sticker.
+    send_voice(ogg_path, attach_to): A voice note; `attach_to` names the bubble it belongs to, and a channel with no notion of that ignores it.
+    send_audio(audio_path): 
+    speak_requests(): Lines he has tapped to hear her say: [{id, text}].
+    get_ops_commands(): Operator commands typed into the app's ops view.
+    post_ops_result(cmd, text): 
+    peer_send(to_id, text): Hand a message to another character, by her hub id. Returns the channel's own id for it, or False. A channel with no other characters on it says so here.
+    peer_updates(after): What other characters have said to her since `after`: [{id, from, name, text, ts}]. The cursor is the caller's.
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,26 @@
+# tools\role_stance.py  (76 lines)
+
+DOCSTRING:
+Every module that asks for her character sheet has been decided about.
+
+`Config.role_system` stops the process on a role with no row in
+`Config.ROLE_STANCE`, but only when that role actually fires -- and a role
+that runs once a week fires long after the edit that added it. This is the
+same check made statically: find every `role_system("<role>")` call site in
+the tree and refuse a role the table does not name.
+
+Exit 1 and print the offenders, or exit 0 and print the tally. In
+`tools/smoke.py`, so it fails at build time.
+
+DEFS:
+def call_sites(root): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

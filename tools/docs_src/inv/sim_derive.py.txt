@@ -1,0 +1,19 @@
+# sim\derive.py  (176 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _half_life_weight(age_days, half_life): 
+def quiet_days_for_standing(msgs, now_ts): 
+def derive_him(config, store, now_ts): (closeness, standing, tension, why) from the message record alone.
+def apply_if_new(config, store, clock, relationships): Set his meters from the record, once, unless they were derived already or someone has set them by hand. Returns True if it wrote.
+
+CONFIG SECTIONS: derive, derive.enabled
+KV READ: relationship_derived
+KV WRITE: relationship_derived, relationships
+TABLES: 
+LOG TAGS: derive
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

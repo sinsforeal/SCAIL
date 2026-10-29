@@ -1,0 +1,96 @@
+# sim\subtitles.py  (643 lines)
+
+DOCSTRING:
+The episode's own subtitle file, downloaded and turned into lines.
+
+Ranked above every synopsis on the web and not a synopsis at all: the file is
+what was said, in order, with timestamps, and for a broadcast or streaming
+caption rip with the speaker attached. It is the anchor a web candidate is
+checked against, never the thing she reads.
+
+Sources, in this order, and the first three cost no network at all:
+
+* **the file already beside his video** -- same directory, same stem, one of
+  the subtitle extensions, with or without a language suffix
+  (`Show - S01E26 - The Future.srt`, `... .ja.srt`), and the same in a
+  `Subs/` folder beside it. It was being ignored: a Japanese subtitle of 339
+  lines sits next to an episode he played, and the fetcher was asking the
+  internet for it;
+* **the archive mirror cloned onto this machine** (`subtitles_local_mirror`),
+  walked as directories on disk. The repository is 3.71 GB with its history,
+  so it is cloned shallow, one branch, sparse to the three folders this walks;
+  `refresh_mirror` pulls it at most once a day and belongs to the machine's
+  own clock, never to a character's thread;
+* **the same mirror through the GitHub tree API**, the fallback for a machine
+  that has not cloned it. Rate-limited, and it was the first network hop of
+  every miss;
+* **the fan archive's own site**, whose download path needs no account (only
+  its JSON API does). Its index is one server-rendered page of every entry, so
+  the catalogue is greppable in one request and cached for the day.
+
+When every one of them misses, the episode is transcribed from the file he
+played (`sim/transcribe.py`). Three of five episodes in a fortnight came away
+with nothing here, and not because of a bad match: neither archive carries
+those works at all, under any name.
+
+Three checks, each of which a file has failed in the wild:
+
+* a file in a folder marked Japanese is not always a Japanese transcript --
+  one show's files are a Chinese group's listening script, and one of those is
+  dual-language with the Japanese layer under half the lines. The share of
+  lines carrying Japanese script is measured on the file, not assumed from
+  where it sat;
+* a bitmap subtitle (`.sup`) is images of text and would need optical
+  recognition. Refused, with every archive format that has to be unpacked;
+* a track translated from English is not a transcript of what was said.
+  Refused by name, and outranked in any case by a caption rip.
+
+One fetch attempt per show and episode per day, hit or miss, and a miss is
+recorded so a show with no file is not looked for on every tick.
+
+spec: docs/recap.md
+
+DEFS:
+def _has_ja(s): 
+def japanese_share(lines): The share of dialogue lines carrying Japanese script. A dual-language script whose Japanese layer is a third of the file reads well under 0.6.
+def _clean(s): 
+def _t_srt(s): 
+def _t_ass(s): 
+def parse(text, name): A subtitle file as [{start, end, speaker, text}], in time order.  `.srt` and `.vtt` are cue blocks; `.ass`/`.ssa` are `Dialogue:` rows whose fourth field is the style and whose tenth is the text. Speaker labels a broadca
+def provenance(name): broadcast / streaming / fan, from the filename. A caption rip off the air or off a service carries speaker labels; a fan listening transcript does not, and its wording is somebody's guess at what was said.
+def _ep_of(name): The episode number a subtitle filename claims, or None.
+def acceptable(name): Whether the file is worth downloading at all, on its name: a text subtitle, not Chinese, not dual-language, not translated from English.
+def rank(name): Lower is better: a caption rip over a fan transcript, `.srt` over `.ass` (fewer style rows to walk past).
+def local_counts(root): (shows, files) in a clone of the archive on this machine.
+def refresh_local_mirror(root, hours, log): Bring the clone of the archive up to date, at most once a day.  **The MACHINE's job, not a character's.** It runs from the list mirror's own daemon, which is where this project's machine-owned periodic fetches live, and 
+class Subtitles: Finds one episode's Japanese subtitle file: beside his video, in the
+    __init__(config, store, clock, archive): 
+    _c(key, default): 
+    enabled(): 
+    _get(url, limit): 
+    _get_json(url): 
+    _read_ref(ref): The bytes of a candidate, whether it is a URL or a path on disk.
+    sidecar(video, ep): The subtitle sitting next to the file he opened: (name, path) or None. Read-only, and the video itself is never opened.  The stem is the video's, with or without a language suffix, and a `Subs` folder beside it is looked
+    local_root(): The cloned mirror's `subtitles/` directory, or "" when there is none. The clone belongs to the machine, like the episode archive.
+    _local_dirs(folder): 
+    _local_files(folder, show_dir): 
+    refresh_mirror(log): Bring the clone up to date. See `refresh_local_mirror`; this is the form for a caller that holds a config.
+    _local_counts(): 
+    _mirror_dirs(folder): Every show directory under one folder of the mirror, cached for the run: 3,500 names in one request.
+    _match_dir(names, titles): The show directory for one of these titles: an exact match first, then a case-folded one, then a containment both ways long enough not to fire on a common word.
+    _mirror_files(folder, show_dir): 
+    _mirror_candidates(titles, ep): The archive mirror's files for this episode: from the clone on this machine when there is one, and from the tree API when there is not.  The clone is preferred because reading it is free and instant, and because the API 
+    _archive_index(): The whole entry index, one server-rendered page, cached for a day in the save rather than re-fetched per episode.
+    _archive_candidates(titles, ep): 
+    _attempted_today(key): 
+    _mark_attempt(key): 
+    fetch(titles, ep, show_key, show, ja, video): The best acceptable subtitle file for this episode, parsed.  Returns `{lines, source, provenance, file, ja_share, origin}` or None. One attempt per show and episode per day whatever the answer, so a show with no file cos
+
+CONFIG SECTIONS: recap
+KV READ: subs_attempts, subs_index
+KV WRITE: subs_attempts, subs_index
+TABLES: 
+LOG TAGS: subs
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

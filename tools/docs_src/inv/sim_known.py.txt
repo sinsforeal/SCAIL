@@ -1,0 +1,52 @@
+# sim\known.py  (221 lines)
+
+DOCSTRING:
+Things she has looked up or watched, kept as things she knows, found again
+by name.
+
+A lookup used to reach exactly one reply -- the one that followed his
+message -- and then survive as a 160-character fact about him under the
+forgetting curve. The 600-character digest of who 丸井みつば is went into a
+list only the `/lookups` command ever read, so a mention of her the next day
+started from nothing. An episode he watched stayed in the room for
+`watching.fresh_hours` and then left her context for good.
+
+So a thing she has read up on is stored here with its NAMES -- as he typed
+it, as the page spells it, and the aliases the page gives (みつば, 丸井みつば,
+みっちゃん) -- and any later message of his that carries one of those names
+brings the whole digest back into her situation, pinned, free, with no
+window. Her own record works the same way (`sim/lore.py`: phrases decide the
+match); this is the same idea for the things she learned from him.
+
+kv `known_things`: [{key, names, kind, text, source, show, ts, hits}], newest
+last, capped at `lookup.known_keep`. Substring match on names of two
+characters or more, longest name first, at most `lookup.known_max_lines` per
+message. The substring trap (`sim/lore.py` learned it: a two-character name
+fires inside a longer word) is accepted here for the same reason it is there:
+these are proper names he chose to type, and the alternative is a tokeniser
+that is not installed.
+
+DEFS:
+class KnownThings: 
+    __init__(config, store, clock): 
+    _all(): 
+    add(key, names, kind, text, source, show, extra): Keep (or replace) one thing. `names` are what he might type.  `extra` is the rest of what the resolution found -- whether it is hers, the part, the MyAnimeList id, when it was last on his screen -- written in the same br
+    merge(key, names, kind, label, part, source, show, max_parts): Add one labelled part to a thing, keeping the others: a show gathers its episodes (第7話, 第8話, 第9話...) rather than forgetting all but the last. The newest `max_parts` are kept and the text is their join, so a mention of th
+    mark(key, fields): Write fields onto a thing already kept. One owner for the write: the lookup patched the store itself and so did the sight.
+    seen_now(key): This thing is on his screen at this moment. What is in front of him is a property of the thing, not a second store: the automatic lookup's context and her sight's line read the same row, so they cannot name two different
+    get(key): 
+    drop(key): Forget one thing, by key. For a record that should never have been kept -- a person's name answered with a random show, before results were judged. `/known drop <key>`.
+    remove_part(key, label): Take one labelled part off a thing (an episode that did not really get watched); the thing stays if parts remain.
+    keys(): 
+    listing(): 
+    recall(text, exclude, count, bare): The things his text names, longest name first, capped.  A BARE row is a work the resolution could name and had nothing to say about -- a title off a page in front of him that neither her record nor the knowledge base nor
+    situation_line(rec, t, config): One pinned line in her language. `t(en, jp)` is the persona's.  A row may also carry the verdict on whether the work is HERS, written by the one resolution (`sim/works.py`). When it says the work is not hers, that is sai
+
+CONFIG SECTIONS: lookup
+KV READ: known_things
+KV WRITE: known_things
+TABLES: 
+LOG TAGS: known
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

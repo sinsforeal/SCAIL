@@ -1,0 +1,53 @@
+# tools\chat_project.py  (225 lines)
+
+DOCSTRING:
+What the group chat will produce, from the dials as they stand.
+
+Not a reading of the record -- the record is from before the mechanics
+changed. This DRIVES THE REAL CODE (`Exchange._gap`, `_away`, `_sleeps`,
+`_awake_friends`, `_continue_p`) with a stub store and clock and counts what
+comes out, so the answer moves when the dials move and cannot drift away from
+what the bot actually does. Only the model calls are stubbed: a call returns
+one to four messages, which is what `cast_turn` and `cast_reply` ask for.
+
+The chain, in the order it binds:
+
+    beats        beats_base + beats_per_attention * sum(attention)/100, capped
+                 beats_max; plus idle_share and late_beats_min, then re-capped
+    exchanges    a beat becomes one only if `wants()` lets it: exchange
+                 .max_per_day, plus exchange.late_reserved for the late group
+                 ones, and nobody who has fallen asleep opens anything
+    rounds       it ends on group_max_rounds, on a failed group_continue_p
+                 draw -- dragged down by away_drag for every absence so far --
+                 or when everybody who was in it has gone to sleep
+    speakers     the opener, plus each other AWAKE friend on
+                 min(0.9, group_jump_in_p * attention/50), capped
+                 group_max_speakers
+
+    python tools/chat_project.py
+    python tools/chat_project.py --group-exchanges 6 --nights 500
+
+DEFS:
+class _Store: 
+    __init__(): 
+    get(k, d): 
+    set(k, v): 
+class _Clock: 
+    __init__(ts): 
+    now_ts(): 
+    now(): 
+    to_char(ts): 
+    hm(ts): 
+    date_str(ts): 
+def _past(hm, last_hm): The night's last light, the way `Exchange._past_last_light` reads it: the small hours belong to the evening they came out of, and only the six hours after it count as an overrun.
+def one_exchange(cfg, seed, start_hm, store, last_hm): One group exchange, played out on the real gap and continue code.
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

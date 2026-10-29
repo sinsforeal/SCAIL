@@ -1,0 +1,23 @@
+# sim\schedule.py  (249 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def check_people(config, blocks, date_str): Drop a name from a block's `with` that nobody on the roster owns.  A name here is a claim that a person is in the room, and every mechanism downstream keys on the roster: `role_of` returns nothing for a stranger, so a bo
+def wake_time(config, store, date, is_school, health, state): When she actually wakes. With the health sleep model on, the wake falls out of the night (bedtime + how long she slept + how rough it was); this only clamps it to the skeleton's structural window and rounds it. With heal
+def _apply_wake(blocks, wake_hm): Move the end of the night's asleep block to wake_hm and let the morning absorb the difference. A later wake pushes the blocks after it forward until one is long enough to swallow the shift; a block the morning ran over e
+def validate(blocks): 
+def presence_label(config, block): One phrase for the messenger: where she is, or how reachable she is.  Her whereabouts come first and the phone rule is the fallback, so a lesson reads as a lesson rather than as silence. Both are the program's words (`si
+def is_sleep_block(block, sleep_keywords): Is this block her asleep? The phone is off and the words say so.  `director.asleep_block` is the one caller, and it is the one answer to whether she is up: her phone being off through the night is what the posting gate r
+def block_at(blocks, dt): 
+def describe(schedule): 
+
+CONFIG SECTIONS: health, health.sleep, schedule.wake
+KV READ: commitments, wake_days
+KV WRITE: wake_days
+TABLES: 
+LOG TAGS: schedule, wake
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

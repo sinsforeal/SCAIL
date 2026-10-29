@@ -1,0 +1,68 @@
+# sim\wonder.py  (395 lines)
+
+DOCSTRING:
+Questions she is curious about, and what his answers do to her picture.
+
+His ask (2026-08-26): "she forms theories about me already, should be able
+to test and confirm. comparison to herself as well." The beliefs
+(`model_of_him.py`) were, by their own prompt text, "never tested" -- they
+strained or confirmed only off what the app and the snoop turned up. She
+never once asked him a thing to find out. And nothing held "is he like me
+on this" as a question at all.
+
+A question is an object: what she wants to know, in her own words to
+herself; what kind (test_him: it would test one of her beliefs about him;
+compare_self: whether he is like her on something she believes about
+herself; understand: a thing she has seen and cannot place -- a habit, a
+window title, a like); which belief it bears on and what a yes or a no
+would do to it; a charge; and whether she would ask it straight.
+
+Code decides when one forms (`due`: curiosity over its rest, or something
+just seen -- a look, a snoop, a discovery -- a cooldown, a daily cap, a
+cap on open questions). The `wonder` call decides what. The intent is
+handed the open questions by id and may pick one when the urge is `ask`;
+the persona puts it in her words; the send marks it asked. His next
+message inside `answer_hours` is judged by `wonder_answer` (confirmed /
+disconfirmed / dodged / unclear, and what she learned). Effects are code:
+a test_him question confirms or strains the belief it bore on; a
+compare_self question moves attachment (he is like her: closer; he is
+not: a little distance) and can confirm or strain the self-belief it
+bore on; dodged warms curiosity and leaves the question standing to be
+asked again later; what she learned becomes a fact about him.
+
+Readers: her situation block (the two she is turning over, unasked), the
+intent (candidates), `/wonder [now]`.
+
+DEFS:
+class Wonder: 
+    __init__(config, llm, store, clock, state, model_of_him, model_of_her, memory, sentiments): 
+    rows(): 
+    _save(rows): 
+    _count(): 
+    _him(): 
+    open(): 
+    seed(why): Something just reached her (a look, a snoop, a discovery): the next pass may form a question about it without waiting on curiosity.
+    due(scene): 
+    pull(): What curiosity alone says: the last gate of `due`, and the sweep's reader for the gauge (`sim/sweep.py`).
+    maybe(scene, force): 
+    run(scene, why): 
+    candidates(n): 
+    intent_line(): 
+    find(qid): 
+    note_asked(qid, line): 
+    _run(a, b): Longest run of consecutive content words the two texts share.
+    voiced(bubbles): A reply of hers that says an open question in its own words marks it asked -- the self-start path did this through the intent; the reply path never did, so `does he ever wonder about me...` was asked at 03:23 on 2026-08-
+    review(date_str): At the compile: an open question he has answered on his own is settled from the day's chat, the way an asked one is settled from his next message; nothing judged open questions before this, and five sat open from 08-26 w
+    on_his_message(text): 
+    _apply(q, verdict, fact): 
+    situation_line(ja): 
+    report(): 
+
+CONFIG SECTIONS: prompt_text, role_system, state.gauges, wonder, wonder.keep, wonder.max_per_day
+KV READ: habits_him, questions, wonder_counts, wonder_last_ts, wonder_seed
+KV WRITE: questions, wonder_last_ts, wonder_seed
+TABLES: 
+LOG TAGS: wonder
+PROMPTS: wonder_answer
+LLM ROLES: wonder, wonder_answer
+OPS COMMANDS: 

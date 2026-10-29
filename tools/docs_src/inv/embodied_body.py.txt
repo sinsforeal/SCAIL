@@ -1,0 +1,29 @@
+# embodied\body.py  (256 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def indoor_ambient(e, out_feels): Room feels-like for an indoor space given the outdoor feels-like, AC on automatically once it is hot enough to run it. One source of truth for what a room holds: used by the live comfort model here and by the sleep model
+class Body: 
+    __init__(config, store, clock, weather): 
+    _classify(location, activity): The location decides when it can; the activity only when the location says nothing.
+    setting(scene, block, scene_fresh): Returns {setting, ambient_feels, outside_feels, outside_temp, humidity, place, line}.
+    _line(s, ambient, out_temp, out_feels, humidity, sky): 
+    persona_line(ja): What she would notice about the air, for her situation block.  Nothing at all for a character with no body to feel it in. This tested whether a `Body` object existed rather than whether she has one, and the object is bui
+    note_wet(hours, soaked): A walk in the rain counts as exposure whatever the scene's setting says, and getting soaked counts `health.wet_exposure_factor` times over. Before this only a scene stamped `outdoors` during the tick counted, so a rain l
+    note_exposure(hours): Hours outdoors in heat or rain, per date (kv exposure); health reads yesterday's.
+    red(gauges): Which needs are red right now: ['hungry', 'exhausted'].
+    meal_kind(scene, block, scene_fresh): 'meal' / 'snack' / '' from the director's `ate` or the words of the scene / block.
+    note_meal(kind, gauges): Apply a meal to hunger at once (the director said she ate).  Nothing at all for a character with no hunger to satisfy. The caller guards on this object existing, which it does for everybody, and the line below indexes `g
+    hunger_tags(gauges): 
+    needs_line(gauges): For the director: hunger with when she last ate; rest as energy.  Empty for a character who has no physical needs modelled, for the same reason as `persona_line` above: the object exists for everybody and the flag is wha
+
+CONFIG SECTIONS: environment, environment.ac_from_feels, environment.heat_from_feels, health.wet_exposure_factor, needs
+KV READ: exposure, last_meal_ts
+KV WRITE: exposure, last_meal_ts
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

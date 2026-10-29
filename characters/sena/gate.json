@@ -1,0 +1,2949 @@
+{
+  "schema": "authored-expression-bible-gate/2",
+  "build": "b4/2",
+  "date": "2026-09-16",
+  "subject": {
+    "name": "千奈",
+    "id": "SENA",
+    "route": "b"
+  },
+  "holdout": {
+    "definition": "late route-b scenes where she speaks (phase_band == 'late')",
+    "scenes": [
+      "b11_01",
+      "b12_01",
+      "b12_02",
+      "b13_01",
+      "b14_01",
+      "b15_01",
+      "b15_02",
+      "b15_03"
+    ],
+    "her_spoken": 514,
+    "her_inner": 0,
+    "her_lines": 514,
+    "registers": {
+      "H": {
+        "scenes": [
+          "b12_02",
+          "b15_02"
+        ],
+        "her_spoken": 306
+      },
+      "non_H": {
+        "scenes": [
+          "b11_01",
+          "b12_01",
+          "b13_01",
+          "b14_01",
+          "b15_01",
+          "b15_03"
+        ],
+        "her_spoken": 208,
+        "label": "the non-H block of the holdout"
+      }
+    },
+    "build_block": {
+      "scenes_n": 64,
+      "her_spoken": 2979,
+      "her_inner": 449
+    },
+    "control_heroines": [
+      "真優",
+      "真里亜",
+      "アリス",
+      "知紗",
+      "ひかる",
+      "百花"
+    ],
+    "control_spoken_in_holdout": 187,
+    "control_spoken_in_nonH_holdout": 187
+  },
+  "method": {
+    "what_is_read": "her spoken lines from game_logic.jsonl; the bible's own matchers imported from tools/koikano/koikano_bible.py (offers_self skipped: it names 百花); layers/annotations.json per_line.",
+    "register": "Every rule and mechanism is read against the H block, the non-H block and the pooled holdout; H + non-H reconcile to the pooled total.",
+    "leakage": "The bible was built from the full corpus, which includes the holdout. This is calibration, not a leak-free split. The character n-gram baseline is trained on the build block only.",
+    "classifications_are_the_builders_reading": true
+  },
+  "tests": {
+    "rule_calibration": {
+      "n_holdout_spoken": 514,
+      "n_holdout_H_spoken": 306,
+      "n_holdout_nonH_spoken": 208,
+      "n_build_spoken": 2979,
+      "rows": [
+        {
+          "rule": "Self-reference form 私 (her own top form)",
+          "metric": "share of spoken lines containing 私",
+          "holdout": {
+            "count": 59,
+            "n": 514,
+            "rate": 0.1148
+          },
+          "holdout_H": {
+            "count": 31,
+            "n": 306,
+            "rate": 0.1013
+          },
+          "holdout_non_H": {
+            "count": 28,
+            "n": 208,
+            "rate": 0.1346
+          },
+          "build": {
+            "count": 407,
+            "n": 2979,
+            "rate": 0.1366
+          },
+          "control_in_holdout": {
+            "count": 11,
+            "n": 187,
+            "rate": 0.0588
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Do not use 私",
+          "metric": "spoken lines containing 私",
+          "holdout": {
+            "count": 59,
+            "n": 514,
+            "rate": 0.1148
+          },
+          "holdout_H": {
+            "count": 31,
+            "n": 306,
+            "rate": 0.1013
+          },
+          "holdout_non_H": {
+            "count": 28,
+            "n": 208,
+            "rate": 0.1346
+          },
+          "build": {
+            "count": 407,
+            "n": 2979,
+            "rate": 0.1366
+          },
+          "control_in_holdout": {
+            "count": 11,
+            "n": 187,
+            "rate": 0.0588
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Almost no です / ます",
+          "metric": "spoken lines containing です or ます",
+          "holdout": {
+            "count": 312,
+            "n": 514,
+            "rate": 0.607
+          },
+          "holdout_H": {
+            "count": 175,
+            "n": 306,
+            "rate": 0.5719
+          },
+          "holdout_non_H": {
+            "count": 137,
+            "n": 208,
+            "rate": 0.6587
+          },
+          "build": {
+            "count": 2028,
+            "n": 2979,
+            "rate": 0.6808
+          },
+          "control_in_holdout": {
+            "count": 19,
+            "n": 187,
+            "rate": 0.1016
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "End many lines on っ",
+          "metric": "spoken lines ending っ",
+          "holdout": {
+            "count": 179,
+            "n": 514,
+            "rate": 0.3482
+          },
+          "holdout_H": {
+            "count": 168,
+            "n": 306,
+            "rate": 0.549
+          },
+          "holdout_non_H": {
+            "count": 11,
+            "n": 208,
+            "rate": 0.0529
+          },
+          "build": {
+            "count": 591,
+            "n": 2979,
+            "rate": 0.1984
+          },
+          "control_in_holdout": {
+            "count": 2,
+            "n": 187,
+            "rate": 0.0107
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Stretch with ー",
+          "metric": "spoken lines ending ー",
+          "holdout": {
+            "count": 1,
+            "n": 514,
+            "rate": 0.0019
+          },
+          "holdout_H": {
+            "count": 1,
+            "n": 306,
+            "rate": 0.0033
+          },
+          "holdout_non_H": {
+            "count": 0,
+            "n": 208,
+            "rate": 0.0
+          },
+          "build": {
+            "count": 10,
+            "n": 2979,
+            "rate": 0.0034
+          },
+          "control_in_holdout": {
+            "count": 1,
+            "n": 187,
+            "rate": 0.0053
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Double ん agreement",
+          "metric": "spoken lines containing んん/んーん/んっ",
+          "holdout": {
+            "count": 133,
+            "n": 514,
+            "rate": 0.2588
+          },
+          "holdout_H": {
+            "count": 129,
+            "n": 306,
+            "rate": 0.4216
+          },
+          "holdout_non_H": {
+            "count": 4,
+            "n": 208,
+            "rate": 0.0192
+          },
+          "build": {
+            "count": 339,
+            "n": 2979,
+            "rate": 0.1138
+          },
+          "control_in_holdout": {
+            "count": 0,
+            "n": 187,
+            "rate": 0.0
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Delight おおー / おー",
+          "metric": "spoken lines containing おおー/おー",
+          "holdout": {
+            "count": 0,
+            "n": 514,
+            "rate": 0.0
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 306,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 0,
+            "n": 208,
+            "rate": 0.0
+          },
+          "build": {
+            "count": 0,
+            "n": 2979,
+            "rate": 0.0
+          },
+          "control_in_holdout": {
+            "count": 4,
+            "n": 187,
+            "rate": 0.0214
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Childish words",
+          "metric": "spoken lines containing childish words",
+          "holdout": {
+            "count": 6,
+            "n": 514,
+            "rate": 0.0117
+          },
+          "holdout_H": {
+            "count": 5,
+            "n": 306,
+            "rate": 0.0163
+          },
+          "holdout_non_H": {
+            "count": 1,
+            "n": 208,
+            "rate": 0.0048
+          },
+          "build": {
+            "count": 15,
+            "n": 2979,
+            "rate": 0.005
+          },
+          "control_in_holdout": {
+            "count": 0,
+            "n": 187,
+            "rate": 0.0
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Turn length",
+          "metric": "kept chars per spoken line",
+          "unit": "distribution",
+          "holdout": {
+            "n": 514,
+            "median_chars": 30,
+            "mean_chars": 27.11,
+            "max_chars": 46,
+            "ellipsis_per_line": 4.0039,
+            "excl_per_line": 0.6732,
+            "quest_per_line": 0.2938,
+            "end_tt": 179,
+            "end_chou": 1,
+            "doubled_n": 133,
+            "childish": 6,
+            "polite": 312,
+            "bai": 59,
+            "watashi": 59
+          },
+          "holdout_H": {
+            "n": 306,
+            "median_chars": 32,
+            "mean_chars": 29.86,
+            "max_chars": 44,
+            "ellipsis_per_line": 5.4118,
+            "excl_per_line": 0.9739,
+            "quest_per_line": 0.2288,
+            "end_tt": 168,
+            "end_chou": 1,
+            "doubled_n": 129,
+            "childish": 5,
+            "polite": 175,
+            "bai": 31,
+            "watashi": 31
+          },
+          "holdout_non_H": {
+            "n": 208,
+            "median_chars": 21,
+            "mean_chars": 23.06,
+            "max_chars": 46,
+            "ellipsis_per_line": 1.9327,
+            "excl_per_line": 0.2308,
+            "quest_per_line": 0.3894,
+            "end_tt": 11,
+            "end_chou": 0,
+            "doubled_n": 4,
+            "childish": 1,
+            "polite": 137,
+            "bai": 28,
+            "watashi": 28
+          },
+          "build": {
+            "n": 2979,
+            "median_chars": 27,
+            "mean_chars": 25.39,
+            "max_chars": 62,
+            "ellipsis_per_line": 2.6415,
+            "excl_per_line": 0.4095,
+            "quest_per_line": 0.28,
+            "end_tt": 591,
+            "end_chou": 10,
+            "doubled_n": 339,
+            "childish": 15,
+            "polite": 2028,
+            "bai": 407,
+            "watashi": 407
+          },
+          "control_in_holdout": {
+            "n": 187,
+            "median_chars": 29,
+            "mean_chars": 27.35,
+            "max_chars": 51,
+            "ellipsis_per_line": 0.4492,
+            "excl_per_line": 0.1818,
+            "quest_per_line": 0.3048,
+            "end_tt": 2,
+            "end_chou": 1,
+            "doubled_n": 0,
+            "childish": 0,
+            "polite": 19,
+            "bai": 11,
+            "watashi": 11
+          }
+        },
+        {
+          "rule": "Ellipsis per line",
+          "metric": "… per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 4.0039
+          },
+          "holdout_H": {
+            "value": 5.4118
+          },
+          "holdout_non_H": {
+            "value": 1.9327
+          },
+          "build": {
+            "value": 2.6415
+          },
+          "control_in_holdout": {
+            "value": 0.4492
+          }
+        },
+        {
+          "rule": "！ per line",
+          "metric": "！ per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 0.6732
+          },
+          "holdout_H": {
+            "value": 0.9739
+          },
+          "holdout_non_H": {
+            "value": 0.2308
+          },
+          "build": {
+            "value": 0.4095
+          },
+          "control_in_holdout": {
+            "value": 0.1818
+          }
+        },
+        {
+          "rule": "？ per line",
+          "metric": "？ per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 0.2938
+          },
+          "holdout_H": {
+            "value": 0.2288
+          },
+          "holdout_non_H": {
+            "value": 0.3894
+          },
+          "build": {
+            "value": 0.28
+          },
+          "control_in_holdout": {
+            "value": 0.3048
+          }
+        },
+        {
+          "rule": "Face and gesture density",
+          "metric": "share of her lines with a face / a gesture",
+          "unit": "density",
+          "holdout": {
+            "n": 514,
+            "face": 157,
+            "face_rate": 0.3054,
+            "gesture": 73,
+            "gesture_rate": 0.142,
+            "emotion": 2
+          },
+          "holdout_H": {
+            "n": 306,
+            "face": 0,
+            "face_rate": 0.0,
+            "gesture": 1,
+            "gesture_rate": 0.0033,
+            "emotion": 0
+          },
+          "holdout_non_H": {
+            "n": 208,
+            "face": 157,
+            "face_rate": 0.7548,
+            "gesture": 72,
+            "gesture_rate": 0.3462,
+            "emotion": 2
+          },
+          "build": {
+            "n": 3428,
+            "face": 1805,
+            "face_rate": 0.5265,
+            "gesture": 897,
+            "gesture_rate": 0.2617,
+            "emotion": 20
+          },
+          "control_in_holdout": null
+        }
+      ],
+      "note": "The rule rows are 百花's marker set (です/ます, っ, ー, ん, おー, childish words) measured on this subject; they are rates to read, not pass/fail on this subject's own rules."
+    },
+    "mechanisms": {
+      "n_holdout_spoken": 514,
+      "rows": [
+        {
+          "key": "stammers_the_first_syllable",
+          "name": "Stammers the first syllable of a word",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 129,
+            "n": 514,
+            "rate": 0.251
+          },
+          "holdout_H": {
+            "hits": 88,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 41,
+            "n": 208
+          },
+          "build": {
+            "hits": 641,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 6,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 864,
+            "n": 11120
+          },
+          "old_holdout_hits": 129,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "addresses_him_by_title",
+          "name": "Addresses the other person by 先輩 as a call",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 99,
+            "n": 514,
+            "rate": 0.1926
+          },
+          "holdout_H": {
+            "hits": 73,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 26,
+            "n": 208
+          },
+          "build": {
+            "hits": 346,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 0,
+            "n": 11120
+          },
+          "old_holdout_hits": 99,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "presses_with_ndesu_ka",
+          "name": "Presses for an account with んですか",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 38,
+            "n": 514,
+            "rate": 0.0739
+          },
+          "holdout_H": {
+            "hits": 14,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 24,
+            "n": 208
+          },
+          "build": {
+            "hits": 281,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 10,
+            "n": 11120
+          },
+          "old_holdout_hits": 38,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "explains_with_ndesu",
+          "name": "Explains or justifies herself with んです",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 43,
+            "n": 514,
+            "rate": 0.0837
+          },
+          "holdout_H": {
+            "hits": 15,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 28,
+            "n": 208
+          },
+          "build": {
+            "hits": 387,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 1,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 39,
+            "n": 11120
+          },
+          "old_holdout_hits": 43,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "snaps_a_polite_ending_shut",
+          "name": "Snaps a polite ending shut with っ",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 16,
+            "n": 514,
+            "rate": 0.0311
+          },
+          "holdout_H": {
+            "hits": 16,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 0,
+            "n": 208
+          },
+          "build": {
+            "hits": 74,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 1,
+            "n": 11120
+          },
+          "old_holdout_hits": 16,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "scolds_improper_conduct",
+          "name": "Scolds improper conduct with a prim word",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 8,
+            "n": 514,
+            "rate": 0.0156
+          },
+          "holdout_H": {
+            "hits": 8,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 0,
+            "n": 208
+          },
+          "build": {
+            "hits": 66,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 1,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 23,
+            "n": 11120
+          },
+          "old_holdout_hits": 8,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "denies_with_chigaimasu",
+          "name": "Denies with 違います",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 1,
+            "n": 514,
+            "rate": 0.0019
+          },
+          "holdout_H": {
+            "hits": 1,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 0,
+            "n": 208
+          },
+          "build": {
+            "hits": 60,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 11,
+            "n": 11120
+          },
+          "old_holdout_hits": 1,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "stops_him_with_a_polite_prohibition",
+          "name": "Stops him with a polite prohibition",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 13,
+            "n": 514,
+            "rate": 0.0253
+          },
+          "holdout_H": {
+            "hits": 8,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 5,
+            "n": 208
+          },
+          "build": {
+            "hits": 94,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 48,
+            "n": 11120
+          },
+          "old_holdout_hits": 13,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "squeaks_before_the_words",
+          "name": "Squeaks before the words come",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 46,
+            "n": 514,
+            "rate": 0.0895
+          },
+          "holdout_H": {
+            "hits": 35,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 11,
+            "n": 208
+          },
+          "build": {
+            "hits": 141,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 224,
+            "n": 11120
+          },
+          "old_holdout_hits": 46,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "talks_shop_as_a_writer",
+          "name": "Talks shop as a novelist, and guards it",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 11,
+            "n": 514,
+            "rate": 0.0214
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 306
+          },
+          "holdout_non_H": {
+            "hits": 11,
+            "n": 208
+          },
+          "build": {
+            "hits": 83,
+            "n": 2979
+          },
+          "control_in_holdout": {
+            "hits": 9,
+            "n": 187
+          },
+          "control_all": {
+            "hits": 49,
+            "n": 11120
+          },
+          "old_holdout_hits": 11,
+          "delta_holdout_hits": 0
+        }
+      ],
+      "hits_index": {
+        "stammers_the_first_syllable": [
+          {
+            "scene": "b11_01",
+            "line": 48,
+            "text": "「そ、そうです。原稿の方はひと段落してますけど、プロットの方はまだ作成中なんですよ」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 59,
+            "text": "「あ、あう……そんな聞き方、ずるいですよぅ……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 181,
+            "text": "「あ、ありがとうございます。ええと……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 216,
+            "text": "「な、なるほど……さすが元役者さんですね……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 343,
+            "text": "「そ、そんなことありません……百花の歌声の方が何倍もすごかったです」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 390,
+            "text": "「はうぅっ……またそんなことを……わ、私だってみゃー先輩の歌は、ま、また聞きたいですけど……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 555,
+            "text": "「で、ですがっ、その、ああ、あの……ふざけて歌っていたわけでは……ないん、です、よね……？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 628,
+            "text": "「ぇ、あ……は、はい。その……独特な歌声だからなんですね」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 766,
+            "text": "「あ……え、ええと……それは……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 871,
+            "text": "「なっ……そ、それはどういう意味ですか？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 955,
+            "text": "「せ、先輩は私の恋人なんです……ず、ずっとずっと私の恋人なんですから……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 1127,
+            "text": "「そ、そうです。上演するとなったら、大勢を巻き込んでしまいます」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 241,
+            "text": "「そ、それは確かに、そうできれば嬉しいですけど……」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 465,
+            "text": "「あ、あの……今日のこと、十川先輩には話したんですか？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 477,
+            "text": "「ふぇっ！？　ど、どうだったんですか！？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 678,
+            "text": "「…………あ、あの、一悟先輩、お待たせしました」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 727,
+            "text": "「に、匂っ……ああっ、も、もしかして、お、オナニーした時の匂いが……すぐにちゃんと洗ったのに！？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 755,
+            "text": "「ふぇう！？　そ、そうなんですかっ！？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 779,
+            "text": "「あ、あの、お風呂場でしたのは初めてなんですよ……？先輩が先に入ったんだって思ったら……その……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 15,
+            "text": "「あ、あぁっ……誤解しないでください！　ちゃんと着替えましたよ……おろしたてのショーツです……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 86,
+            "text": "「えっ！？　そ、その音、もしかして……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 148,
+            "text": "「そ、そう……ですね。シックスナインって、実際にしてみると……すごく恥ずかしい体勢ですね」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 176,
+            "text": "「ふぁっ！？　あ、あぁっ！　はぅん、先輩、ぁぁ……先輩も、直接……ですかっ……あぁぁんっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 190,
+            "text": "「ああんっ……はぁ、あぁっ……んぁ、あ、あぅ、はぅ、あぁん……先輩……あ、あぁぁ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 279,
+            "text": "「ん、んぅ……！　ま、またそんな、あっさり認めて……先輩の、へ、変態……変態ですよぅ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 292,
+            "text": "「んふ……ぅ、れろ……れる、れるちゅ……れるっ……わ、わたしも……れろ……その、あ、あのぅ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 310,
+            "text": "「あっ……も、もうっ、逃げちゃだめれす……ちゅっ、れるる……ん、れろ……ちゅっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 318,
+            "text": "「れるろっ……あぁむ……はぷ、れろちゅ、れるぷ、ん、んくぅ……はむ、ん、んんっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 405,
+            "text": "「ひゃあああっ！？　あんっ、ああっ！　せ、先輩、んくぅぅっ……あ、あ、あ、ふぁぁぁぁっ！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 425,
+            "text": "「はぁっ、はぁっ……ああっ……大丈夫です……で、でも、はぅ……びっくりしたんです……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 434,
+            "text": "「く、クリトリスの皮をむくって、どういうことか分かってなかったんです……で、でも……でも、今……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 443,
+            "text": "「っっっ……！　や、やっぱり……すごく、びっくりしました……はぁ、はぁ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 495,
+            "text": "「剥きクリトリスっ、刺激強すぎですっ……！　あ、あ、こんなに気持ちいいなんて、知らない、ですっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 516,
+            "text": "「ああぁんっ！　や、やぁっ……先輩、はげしいです、んぅう、はげしすぎ、ますっ、あ、あ、あっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 667,
+            "text": "「ふゃっ！？　ら、らめっ……！　せんぱい、んんっ、らめらめ、らめれすっ、あぁぁ、そんな、一人でっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 744,
+            "text": "「いっしょ、いっしょがいいんれす……じゅっ、ちゅく、れるる、ん、んん、んっんっんっ！！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 810,
+            "text": "「ご、ごめんなさい……はぁ、はぁ……飲みきれません、でした……けほっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 975,
+            "text": "「こ、こんなにすんなり挿入るなんて……ああぁ……っ、恥ずかしいです……んっんっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1002,
+            "text": "「あっ……先輩、ま、まって……ください、あの……い、いいんですか？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1035,
+            "text": "「あっ……は、はやくキスしてください！　おかしなこと口走っちゃう前に、はやくっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1149,
+            "text": "「んむっ……！？　ん、んちゅ、れじゅる……れる……はぅぅ、はふ……っ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1226,
+            "text": "「うぅ、わ、分かりませんっ……！　ん、んっ、全部ぅ、ぜんぶきもちいい、ですっ、はぁっ、ああんっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1275,
+            "text": "「あっ、あー……ぁああ……！　ああっ、身体中が熱くて、も、もう、感覚、痺れて、分からな……ぁぁっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1282,
+            "text": "「気持ちいいっ……気持ちいいです、先輩、先輩っ！おマンコ、と、とけちゃいます、はぁ、ひゃうううっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1296,
+            "text": "「ああっ、ふぁぁ……ああっあっ……！　先輩、もう、はぁぁぅっ、気持ちよすぎて、わ、わたし、わたしっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1303,
+            "text": "「先輩、せんぱいだめ、も、もう、わたし、もうだめ、ですっ……あぁぁ、イく、イきます、せんぱいっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1389,
+            "text": "「ふぁぇっ！？　な、なにを言ってるんですか、先輩……わ、私、そんなにいやらしい子じゃないですっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1403,
+            "text": "「た、ただあの、この前も三回射精してくれましたし……先輩も、射精し足りませんよね……？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1431,
+            "text": "「ひゃんんっ！？　あっあっ……先輩ったらもうこんなに勃起して……あ、あぁ……奥までゴリゴリ掘ってますっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1512,
+            "text": "「きもち、よすぎてぇっ、ふやぁぁぁぁぁぁ、も、もうっ、もうらめ、らめれす、頭、真っ白になりますぅ……っ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1579,
+            "text": "「ああぁぁっ、先輩せんぱいせんぱいっ！　あぁんっ、あ、あ、あ……らめ、らめぇっ……もう、あっ、あああああっ！！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1604,
+            "text": "「あぁぁぁっ、あんっ、な、なかっ、なかだし、すごいですっ、しきゅうにびしゃびしゃあたって、あぁぁっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1657,
+            "text": "「はいっ、ま、また身体で、受け止めるんですね……！んっ……んんっんっんっ！　わかり、ましたぁっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1677,
+            "text": "「きゃうぅうっ！　あんっ、あんっ……！　せ、せんっ、先輩っ……あぁあぁっ！　イきます、私もイくっ！！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1688,
+            "text": "「ひやぁぁぁああ、ああああああっ！　ふぁあ、ああんっ、あ、あ、あ、ふぁぁぁぁぁぁぁぁぁぁ……！！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1763,
+            "text": "「ふぇ……あ、あっ……ちゅっ……せんぱ……ちゅ、れる、んんっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1802,
+            "text": "「だ、だってっ……先輩が教えてくれたんじゃないですか、心の余裕を持つ、大切さ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1828,
+            "text": "「そ、そうです……世の中には、お昼寝制度のある国だってあるわけですし……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1847,
+            "text": "「あ、あの……少し話しませんか？　頭もすっきりしましたし……それに……」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 353,
+            "text": "「あ、あの……皆さんもう着替え終わっています。百花が送ってくれるそうなので、帰りましょう」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 232,
+            "text": "「わ、わわっ、私が！？　どうしてですか！？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 310,
+            "text": "「で、でも……あっ、衣装もないですし」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 347,
+            "text": "「せ、先輩まで……あ、あう……でも……」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 537,
+            "text": "「なっ……！？　そ、そしたら、全編成年マーク付きになってしまいますよ！？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 730,
+            "text": "「そ、そう……ですね。頑張ります……っ」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1259,
+            "text": "「あ、あぅっ……でも、過去の話ですよね？　確かに今日の歌はすごかったですけど、で、でもっ……」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1372,
+            "text": "「さ、させませんっ！　作家としては私の方が先輩なんですから、小説で魅了するのは私の特権です！」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1638,
+            "text": "「や、やっぱりやめた方がいいでしょうか？　軽蔑されてしまいますよね……」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1732,
+            "text": "「そ、それに……彼氏を支えるのは、彼女の役割ですから」"
+          },
+          {
+            "scene": "b15_01",
+            "line": 265,
+            "text": "「ふぁっ！？　い、いえ、他意はないんです、結婚すると食の好みが重要になると聞いたからとかじゃなくて！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 34,
+            "text": "「はぅっ……！？　そ、それはその、少しは……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 67,
+            "text": "「で、でも私は、考えてただけですっ！　先輩みたいに、こうして実力行使はしてませんから……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 146,
+            "text": "「はぅぅっ……や、やぁっ……胸揉みながらささやくなんて、ずるい……いじわるです……んんっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 265,
+            "text": "「や、だ、だってだって、先輩も興奮してるんですよね？私としたくなって、抱きしめたんですよね……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 270,
+            "text": "「う、うぅ……胸、こんなに揉んで、いやらしい気分にさせておいて……最後まで、してくれないんですか？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 302,
+            "text": "「んっ……そ、そう……ですね……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 310,
+            "text": "「ふぇぇっ……！？　な、なに言ってるんですか、そんな、おねだりするみたいなことっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 320,
+            "text": "「う、うぅぅぅぅ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 358,
+            "text": "「先輩……ちゃんと見せましたよ……？　だから、あ、あの……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 374,
+            "text": "「あ、ありがとうございます……でも、あの、褒めるだけじゃなくって――んんっ！？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 458,
+            "text": "「やっ……あぁっ、あんっ……だ、だからって、いきなり入れるなんて、い、いじわるですっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 483,
+            "text": "「はぁぅぅ……はぁぁ……ん、んっ……先輩……せんぱい、指、優しい……焦らされてるみたい……ですぅ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 493,
+            "text": "「ど、どちらでも……先輩の好きにしてください……ん、んん……そのぅ、わ、私……わたしは……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 578,
+            "text": "「先輩……あっあっ……先輩の指、気持ちいいです……も、もっと……もっとじゅぽじゅぽ、してください……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 661,
+            "text": "「あぁぁっ……ふぁ、やっ……ああぁぁ……い、いきなり、触るの……はぁ、はぁ……反則、です……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 698,
+            "text": "「ふぇぁ、そ、それは、そのっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 710,
+            "text": "「ふぁぁっ！？　あ、あんっ……ああぁっ！　せ、先輩、クリトリス、弱いんですっ、ふ、あぁっぁんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 715,
+            "text": "「そんな、きゅぅって摘ままれたら……あんっ、んっ、ま、またすぐイっちゃいます、あんっ！　ぁぁぁっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 757,
+            "text": "「ああぁぁっ、先輩せんぱい、ふぁぁぁ、やふゃぁっ、あっ、イくっ！　ま、またイくっ、イきそぅですっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 813,
+            "text": "「ひゃ……ううっ！　ぁぁぁっ、指、せんぱいのゆびっ、ま、まだなかでうごいて、あぁぁ、あぁあんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 864,
+            "text": "「あ、ああっ……！　先輩……私のお尻に当たってますよ……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 916,
+            "text": "「ふゃっ……！？　い、いくら私でも、学園でオナニーしたりしませんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 936,
+            "text": "「ショーツを取り換える前に、トイレットペーパーで拭いたりしていると……そ、そのぅ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 946,
+            "text": "「け、軽蔑しますか……？　い、いやらしい子だって、思いますか……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 994,
+            "text": "「はうっ、んっんっ！　先輩、ぁぁっ、そんなに、あっ、は、はげしく、されたらぁっ……立ってられな……っ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1059,
+            "text": "「あんっ、あっ……先輩、せんぱい、あぁぁっ、あっ！せ、せんぱい、気持ちいい、ですっ、あっあっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1274,
+            "text": "「ふぁぁっ……！？　あ、後ろ……にぃっ……あんっ、先輩っ……う、うそ、本当に入れてっ……！？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1288,
+            "text": "「あ、あっ……嘘……っ！？　先輩だめぇっ……だめです、そんなところ使うなんて、そんな、あぁっ、あああっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1303,
+            "text": "「やっ……はぁ、ああぁぁぁっ……はいって、ますぅ……あ、あなる、あなるにぺにすが、ぁ、あぁっぁ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1351,
+            "text": "「ぇ、あっ……んんっ！　先輩……あ、あ……でも、今、動かれたらぁ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1364,
+            "text": "「んぃぃぃぃっ……！？　ふあぁぁぁあ、あああっ！？え、えぐっ……あぁぁぁんっ！！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1379,
+            "text": "「あ、ああぁっ、抜けてく時の、感覚……お、おかしいです、身体がめくれるみたいにっ……なってぇ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1429,
+            "text": "「ひぅぅ……あ、あぁ……はぁ……あんっあんっ……だめっ……こんな、初めてなのに……なのにぃっ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1443,
+            "text": "「す、少しっ……でも、なんだか……お、お腹が熱くなっていって……はぁ、あぁぁんっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1461,
+            "text": "「だ、だって、こんなので感じるなんて……はぅ……は、恥ずかしいんですっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1466,
+            "text": "「お、お尻でも感じちゃうなんて……はぁ、ああっ……私も変態、です……ううぅ……はぁ、ああんっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1502,
+            "text": "「ひゃんっ！　あ、あぁぁっあっ……感じてますっ……本当は、ペニスでアナル擦られて、感じますっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1571,
+            "text": "「だから私、い、いやらしくなっちゃったんです！いやらしいのは、先輩のせいなんですぅぅっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1607,
+            "text": "「先輩のっ……で、奥でコツコツして欲しくて、ん、んんぅっ、勝手におねだりしちゃうんです……っ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1645,
+            "text": "「あぁぁんっ、せん、ぱいっ……！　わ、わたし、変、ですっ……いっぱい恥ずかしい穴、ずぽずぽされて、うずいてますっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1673,
+            "text": "「ひゃぁぁぁっあああっ、そん、なっ……だ、だめ、はずかし、ですっ、お尻でイくなんて、んっんぅう！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1700,
+            "text": "「あぁぁぁっ、ペニスびくびくしてます、あ、あなるでびくびく、かんじながら、あぁぁ、イくっ、イきますっ！！！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1762,
+            "text": "「はぁ……あぁぁ……ひぅぅ……え、えう……はぁ、はぁ、はぁ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1767,
+            "text": "「ま、まさか……イくなんて……それに、は、初めてのアナルセックスで、中出しなんて……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1811,
+            "text": "「はぁ、あぁぁ……イっちゃいました……お、おしり、ずぽずぽされて……ふぁぁ……はぁ、はぁ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1848,
+            "text": "「あ、あの感覚、すごくて……や、病みつきになりそうです……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1883,
+            "text": "「も、もう！　それなら……仕方ないですね。前祝いとして、受け取っておきます」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1915,
+            "text": "「あっ……そ、そうですね、急ぎましょう」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 73,
+            "text": "「あっ……あれの匂いに決まってるじゃないですか！せ、せっ…………セックスの匂いです……」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 87,
+            "text": "「先輩、ど、どうですか……？　匂い、残ってないですよね……？」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 117,
+            "text": "「はぅっ……！？　も、もう！　感想までは聞いてません」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 180,
+            "text": "「わ、わざわざ嗅がないでください、百花」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 305,
+            "text": "「あ、ありがとうございます……！」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 333,
+            "text": "「は、はぅっ……もう、先輩……」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 381,
+            "text": "「えぅっ……そ、そう、です、ね……」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 428,
+            "text": "「あ、あう……一悟先輩がそう言うならサインしますけど、昔のことは掘り返さないでください」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 454,
+            "text": "「えっ……そ、そうなんですか？　わざわざ、そんな……出版社からも送られてくるのに」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 567,
+            "text": "「ま、また真優先輩は性懲りもなくそんなことを……っ！」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 624,
+            "text": "「ふぇっ！？　あ、そ、その……そう、ですね。私も今日は機嫌が良いですから、構いませんよ」"
+          }
+        ],
+        "addresses_him_by_title": [
+          {
+            "scene": "b11_01",
+            "line": 814,
+            "text": "「ひゃうっ！？　と、十川先輩？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 1384,
+            "text": "「先輩、戯曲を勉強してるんですよね？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 641,
+            "text": "「そんなことっ……もしかして先輩、残り湯をペロペロしたり、いかがわしい毛を探したりしたいんですか？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 678,
+            "text": "「…………あ、あの、一悟先輩、お待たせしました」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 705,
+            "text": "「先輩……そんなにじっと見て、どうしたんですか？わ、私の格好、どこかおかしいですか？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 807,
+            "text": "「先輩……脚本の確認は、もうほとんど終わってますよね？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 845,
+            "text": "「はい、先輩……一緒に、休憩しましょう……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 30,
+            "text": "「ぬ、濡れてることを真っ先に指摘するなんて……先輩、やっぱり変態です……ううぅ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 55,
+            "text": "「んぅう……先輩、いつもいつも、こんな時ばかり正直になって……ずるいです……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 129,
+            "text": "「んちゅっ、ちゅっ、ちゅれぅ、れぅぅ……先輩ったら、舐めるたびにピクピク震えてます……ちゅ、ちゅっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 134,
+            "text": "「気持ちいいんですか……れる……先輩……ちょっと舐めただけで、こんなにギンギンにして……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 176,
+            "text": "「ふぁっ！？　あ、あぁっ！　はぅん、先輩、ぁぁ……先輩も、直接……ですかっ……あぁぁんっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 190,
+            "text": "「ああんっ……はぁ、あぁっ……んぁ、あ、あぅ、はぅ、あぁん……先輩……あ、あぁぁ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 205,
+            "text": "「やっ……んっ、やぁっ、先輩、せんぱい……！　前も後ろもなんて、欲張らないで……あぁ、あぁっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 265,
+            "text": "「先輩っ……んっんっ……れぅ、れろっ……私のおマンコ、いじるの楽しいんですか……びくんびくんって跳ねてますよ？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 351,
+            "text": "「先輩……ちゅっ、ちゅく……ちゅっ、れろ、んれく……ろう、れすか……私の口……？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 405,
+            "text": "「ひゃあああっ！？　あんっ、ああっ！　せ、先輩、んくぅぅっ……あ、あ、あ、ふぁぁぁぁっ！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 471,
+            "text": "「はぁっ、あっあっ……先輩っ……クリトリスばかり、んっんっ……はあっ……んぁぁんっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 516,
+            "text": "「ああぁんっ！　や、やぁっ……先輩、はげしいです、んぅう、はげしすぎ、ますっ、あ、あ、あっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 531,
+            "text": "「あんんっ……先輩……はぁ、ああんっ……！　先輩、先輩せんぱいせんぱい……いぁぁ、ああっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 598,
+            "text": "「先輩っ……じゅるるっ、激しく痙攣してます、んんじゅ、れちゅっ、ちゅっ、ちゅっ……イって、イって……っ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 629,
+            "text": "「ああっ、先輩、はぅ、じゅるるっ、そんにゃに、されたらぁっ……な、舐めてられませ……あぁ、あっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 652,
+            "text": "「ふゃぁぁぁぁぁっ、あっあっ！　だめ、だめです先輩っ、ああぁっ、そこは、そこはだめぇっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 658,
+            "text": "「先輩、イくっ……もうイき、ますぅ……ふぁぁ、んっ、んんくぅ……先輩、せんぱい、イく、イくっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 887,
+            "text": "「はぁ、はぁ……先輩……精液で、顔がぬるぬるに……なっちゃいました……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 901,
+            "text": "「はぁ、はぁっ……先輩、せんぱぁい……精液こんなにかけられたら、興奮……おさまらないですよぉ……っ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 919,
+            "text": "「先輩……ふぁぁ……先輩も興奮したままですか……？ちゅっ……れろっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 932,
+            "text": "「はいっ……もちろんです、先輩……ちゅっ、ちゅ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 970,
+            "text": "「あっ……ああぁんっ……！　先輩、先輩っ……！中にどんどん入って、ふあぁ、ああっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1002,
+            "text": "「あっ……先輩、ま、まって……ください、あの……い、いいんですか？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1113,
+            "text": "「キスの次は、乳首ですか……っ？　先輩、やらしい……こんなにたくさん、快感ばかり与えてきて……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1118,
+            "text": "「先輩ったら、どんどんやらしくなってます……私の身体、気持ちいいことたくさん覚えちゃいます……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1180,
+            "text": "「ふぁぁ……先輩、キスしてる間も、ペニスのビクビク、止まりませんでしたよ……？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1193,
+            "text": "「先輩……キスもですけど……私の奥が寂しがってますので……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1239,
+            "text": "「んぅっ、あんっ！　ぁぁぁっ……先輩……！　ああっ、先輩のペニスで、おマンコ開かれちゃってますぅ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1282,
+            "text": "「気持ちいいっ……気持ちいいです、先輩、先輩っ！おマンコ、と、とけちゃいます、はぁ、ひゃうううっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1296,
+            "text": "「ああっ、ふぁぁ……ああっあっ……！　先輩、もう、はぁぁぅっ、気持ちよすぎて、わ、わたし、わたしっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1303,
+            "text": "「先輩、せんぱいだめ、も、もう、わたし、もうだめ、ですっ……あぁぁ、イく、イきます、せんぱいっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1366,
+            "text": "「先輩……はぁ、はぁ……中に出しても良かったのに……断りもなく、外へ出すなんて……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1389,
+            "text": "「ふぁぇっ！？　な、なにを言ってるんですか、先輩……わ、私、そんなにいやらしい子じゃないですっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1431,
+            "text": "「ひゃんんっ！？　あっあっ……先輩ったらもうこんなに勃起して……あ、あぁ……奥までゴリゴリ掘ってますっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1441,
+            "text": "「ああっ……んく、あぁぁっ、先輩、気持ちいいです、んっんっ、絶頂したばかりの膣内、ずんずん突かれて……っ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1471,
+            "text": "「先輩、せんぱいっ……ああっ、ペニスの振動、全身に伝わって、あぁぁっ！　全身犯されてるみたいですっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1486,
+            "text": "「ふああぁぁぁぁっ！　んくう、うううっ！　先輩、あぁ……先輩、気持ちいいです、あぁんっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1527,
+            "text": "「もうだめ、もうっ……あああっ！　先輩、ぁぁぁっ！先輩、せん、せんぱぁい……あっあっあっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1677,
+            "text": "「きゃうぅうっ！　あんっ、あんっ……！　せ、せんっ、先輩っ……あぁあぁっ！　イきます、私もイくっ！！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1743,
+            "text": "「はぁっ……はー……はぁ……先輩……今日も三回、でしたね……ふふ、すごかった……です……っ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1781,
+            "text": "「はぁ、はぁ……気持ち、良かったですね……先輩……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1880,
+            "text": "「あ……えっと、先輩……あ、明日の朝、朝ごはんの、あの、リクエストはありますか？」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 245,
+            "text": "「はい。分かってます、先輩」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 285,
+            "text": "「はい……ありがとうございます、先輩」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 338,
+            "text": "「先輩、大丈夫ですか？」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 536,
+            "text": "「ひゃっ……！？　せ、先輩っ、ここ、部室ですよっ……」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 434,
+            "text": "「一悟先輩……」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 573,
+            "text": "「はいっ、先輩」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 862,
+            "text": "「先輩、すごいです……まさか、こんな短期間で……」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1437,
+            "text": "「と、十川……真優先輩っ！　言い逃げはずるいです！」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1470,
+            "text": "「真優先輩……」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1607,
+            "text": "「それじゃあ……先輩、あの……ひとつ、いいですか？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1654,
+            "text": "「先輩……あの、私……上手く言えないと思うんです。だから……助けてくれますか？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1752,
+            "text": "「はいっ、先輩……止まっている暇はありませんよね」"
+          },
+          {
+            "scene": "b15_01",
+            "line": 185,
+            "text": "「一悟先輩、朝ごはんはもう食べましたか？」"
+          },
+          {
+            "scene": "b15_01",
+            "line": 230,
+            "text": "「はい。先輩、目玉焼きは固焼き派ですか、半熟派ですか？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 8,
+            "text": "「ゃんっ……っ、先輩……っ！？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 21,
+            "text": "「先輩、どうしたんですか？　もしかして……先輩も新婚さんプレイのことを考えてたんですか……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 81,
+            "text": "「もしかして、朝から元気になっちゃったんですか、先輩……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 108,
+            "text": "「んっ、んっ……先輩……胸触るなんて……やっぱり、朝から興奮しちゃったんですね……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 176,
+            "text": "「んっんっ……先輩……やらしい……乳首、すぐに見つけちゃうなんて……はぁ、ああんっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 224,
+            "text": "「はぁ、んっ……もしかして、制服だから……はぁ、興奮してるんじゃないですか、先輩……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 358,
+            "text": "「先輩……ちゃんと見せましたよ……？　だから、あ、あの……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 483,
+            "text": "「はぁぅぅ……はぁぁ……ん、んっ……先輩……せんぱい、指、優しい……焦らされてるみたい……ですぅ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 514,
+            "text": "「あっあっ……ひゃんっ！　先輩、せんぱい……あぁ、指……ぬぷぬぷって、音……立てて……っ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 561,
+            "text": "「あっあっあっ……先輩……！　んくっ、ひゃ、あうっ、先輩、指、激しくなってきました、ああっあっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 578,
+            "text": "「先輩……あっあっ……先輩の指、気持ちいいです……も、もっと……もっとじゅぽじゅぽ、してください……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 683,
+            "text": "「あっ、あぁっ、はぁっ、んっ、んっ先輩、はぁっ、愛液が、太もも……伝ってぇ……はぁ、あんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 710,
+            "text": "「ふぁぁっ！？　あ、あんっ……ああぁっ！　せ、先輩、クリトリス、弱いんですっ、ふ、あぁっぁんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 736,
+            "text": "「ひぅぅぅぅ……！　ぁぁぁっ、あんっ、んっ！先輩、だめ、いじめすぎですよぉ、あぁっ、うううっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 838,
+            "text": "「はっ……はい……はぁ、はぁ……先輩……んっんっ……気持ち良かった、です……ふぁぁ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 864,
+            "text": "「あ、ああっ……！　先輩……私のお尻に当たってますよ……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 994,
+            "text": "「はうっ、んっんっ！　先輩、ぁぁっ、そんなに、あっ、は、はげしく、されたらぁっ……立ってられな……っ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1008,
+            "text": "「はぁ、はぁんっ！　先輩、せんぱいが、私の膣内で大きくなりました、ぁぁっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1059,
+            "text": "「あんっ、あっ……先輩、せんぱい、あぁぁっ、あっ！せ、せんぱい、気持ちいい、ですっ、あっあっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1143,
+            "text": "「あぁぁぁっ……先輩、んぅぅぅっ……はぁっあっ……先輩、イきっぱなしに、あっはぁ、はぁっあああんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1172,
+            "text": "「んっ……んん……先輩……？　どうしたんですか、ハァハァって、呼吸が荒いままですよ……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1186,
+            "text": "「ゃんっ……まだ収まってないんですね、先輩ったら……やらしいです、朝からそんなに元気だなんて」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1200,
+            "text": "「んんっ……時間なら、まだ大丈夫ですよ、先輩……ちゃんと射精しておかないと、きっと辛いです……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1227,
+            "text": "「はい、先輩……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1245,
+            "text": "「……先輩？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1274,
+            "text": "「ふぁぁっ……！？　あ、後ろ……にぃっ……あんっ、先輩っ……う、うそ、本当に入れてっ……！？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1351,
+            "text": "「ぇ、あっ……んんっ！　先輩……あ、あ……でも、今、動かれたらぁ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1516,
+            "text": "「あっ……ああっあっ……！　先輩、んんっ！　もっと、もっと、ゴリゴリ擦ってください……っ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1628,
+            "text": "「先輩、んっんっ……ああぁっ……！　せん、ぱいっ……ふゃぁぁぁ……あっあっ……んくっ……ううぁ……んっ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1806,
+            "text": "「あああっ……はぁっ……はぁぅぅ……っ！　先輩っ……はぁっ、はぁっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1941,
+            "text": "「先輩、行きましょう。忘れ物はないですか？」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 23,
+            "text": "「せ、先輩、待ってください！」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 87,
+            "text": "「先輩、ど、どうですか……？　匂い、残ってないですよね……？」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 333,
+            "text": "「は、はぅっ……もう、先輩……」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 462,
+            "text": "「もう、先輩……ありがとうございます」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 636,
+            "text": "「せ、先輩っ……先輩とも、一緒に歌っていいですか？」"
+          }
+        ],
+        "presses_with_ndesu_ka": [
+          {
+            "scene": "b11_01",
+            "line": 302,
+            "text": "「お二人でなんの話をしてるんですか？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 325,
+            "text": "「どうして慌ててるんですか？　……怪しいですね」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 535,
+            "text": "「よ、良くなっていてあれなんですか！？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 646,
+            "text": "「それなのに、どうしてよりによってカラオケでの打ち上げに参加したんですか……？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 948,
+            "text": "「ちょっと待ってください！　なに勝手に決めてるんですか！？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 955,
+            "text": "「せ、先輩は私の恋人なんです……ず、ずっとずっと私の恋人なんですから……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 984,
+            "text": "「わ、私と恋人だと、先輩は幸せになれないっていうんですか？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 1055,
+            "text": "「みゃー先輩が掛かっているなら、引くことなんてできません！　先輩は私の恋人なんですから」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 188,
+            "text": "「スパイなんですね。十川先輩たちこそ、毎日熱心に練習しているそうですけど、どうなんですか？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 450,
+            "text": "「気にしないでください。今日は、私が急にお誘いしたんですから」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 465,
+            "text": "「あ、あの……今日のこと、十川先輩には話したんですか？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 477,
+            "text": "「ふぇっ！？　ど、どうだったんですか！？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 506,
+            "text": "「わ、私の家がどれだけ広いと思ってるんですか！？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 641,
+            "text": "「そんなことっ……もしかして先輩、残り湯をペロペロしたり、いかがわしい毛を探したりしたいんですか？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 705,
+            "text": "「先輩……そんなにじっと見て、どうしたんですか？わ、私の格好、どこかおかしいですか？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 755,
+            "text": "「ふぇう！？　そ、そうなんですかっ！？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 134,
+            "text": "「気持ちいいんですか……れる……先輩……ちょっと舐めただけで、こんなにギンギンにして……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 265,
+            "text": "「先輩っ……んっんっ……れぅ、れろっ……私のおマンコ、いじるの楽しいんですか……びくんびくんって跳ねてますよ？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1002,
+            "text": "「あっ……先輩、ま、まって……ください、あの……い、いいんですか？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1389,
+            "text": "「ふぁぇっ！？　な、なにを言ってるんですか、先輩……わ、私、そんなにいやらしい子じゃないですっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1540,
+            "text": "「こっ、こんどはどっちですか！？　なかと、そとっ、どちらに出してくれるんですか、せんぱいっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1627,
+            "text": "「今度は中出しでしたね……はぁ、あ……やっぱり中に出すのが好き……なんですか……？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1731,
+            "text": "「二回目も外出しなんて……先輩は、女の子を精液まみれにするのが、趣味なんですか……？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 363,
+            "text": "「あっ……き、気付いてたんですか？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 715,
+            "text": "「どうして、そう言い切れるんですか？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1176,
+            "text": "「そうなんですか？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1305,
+            "text": "「ええっ！？　引き分けってアリなんですか！？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1372,
+            "text": "「さ、させませんっ！　作家としては私の方が先輩なんですから、小説で魅了するのは私の特権です！」"
+          },
+          {
+            "scene": "b15_01",
+            "line": 242,
+            "text": "「もう、先輩の好みを知りたいんですから、ちゃんと教えてください……そうじゃないと、将来困ります……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 21,
+            "text": "「先輩、どうしたんですか？　もしかして……先輩も新婚さんプレイのことを考えてたんですか……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 81,
+            "text": "「もしかして、朝から元気になっちゃったんですか、先輩……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 270,
+            "text": "「う、うぅ……胸、こんなに揉んで、いやらしい気分にさせておいて……最後まで、してくれないんですか？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 310,
+            "text": "「ふぇぇっ……！？　な、なに言ってるんですか、そんな、おねだりするみたいなことっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 409,
+            "text": "「あんっ……んん……さっき、分かってて焦らしたんですか……？　先輩のいじわる……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1172,
+            "text": "「んっ……んん……先輩……？　どうしたんですか、ハァハァって、呼吸が荒いままですよ……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1870,
+            "text": "「テンションが……？　なにか悪いものでも食べたんですか？」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 454,
+            "text": "「えっ……そ、そうなんですか？　わざわざ、そんな……出版社からも送られてくるのに」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 501,
+            "text": "「あっ……！？　き、気付いたんですか、アリス会長っ」"
+          }
+        ],
+        "explains_with_ndesu": [
+          {
+            "scene": "b11_01",
+            "line": 48,
+            "text": "「そ、そうです。原稿の方はひと段落してますけど、プロットの方はまだ作成中なんですよ」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 216,
+            "text": "「な、なるほど……さすが元役者さんですね……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 628,
+            "text": "「ぇ、あ……は、はい。その……独特な歌声だからなんですね」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 725,
+            "text": "「…………やっぱり、そうなんですね」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 740,
+            "text": "「でも、どうしたらいいのか分からないんです……ずっと、そういう書き方しか、してきませんでしたから……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 955,
+            "text": "「せ、先輩は私の恋人なんです……ず、ずっとずっと私の恋人なんですから……」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 1011,
+            "text": "「私がスランプなのが不満なんですよね？　それなら証明なんて、どうすれば……？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 1154,
+            "text": "「じゃ、じゃあ条件は、十川先輩が歌う場面が入っているもの……なんですね？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 1189,
+            "text": "「私も構いません。きらきら星を織り交ぜた脚本を作ればいいんですね」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 1384,
+            "text": "「先輩、戯曲を勉強してるんですよね？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 144,
+            "text": "「一番重要な題材を『星の王子様』にしたのは先輩の提案なんですよ？　初めから先輩のお力を借りてます」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 188,
+            "text": "「スパイなんですね。十川先輩たちこそ、毎日熱心に練習しているそうですけど、どうなんですか？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 341,
+            "text": "「その、脚本が心配だったので、部活があるからって私は断ったんです。だから、一人で留守番の予定で……」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 552,
+            "text": "「はい。早速、歌の入れ方で相談したいところがあるんです」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 779,
+            "text": "「あ、あの、お風呂場でしたのは初めてなんですよ……？先輩が先に入ったんだって思ったら……その……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 425,
+            "text": "「はぁっ、はぁっ……ああっ……大丈夫です……で、でも、はぅ……びっくりしたんです……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 434,
+            "text": "「く、クリトリスの皮をむくって、どういうことか分かってなかったんです……で、でも……でも、今……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 932,
+            "text": "「はいっ……もちろんです、先輩……ちゅっ、ちゅ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1657,
+            "text": "「はいっ、ま、また身体で、受け止めるんですね……！んっ……んんっんっんっ！　わかり、ましたぁっ……」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 269,
+            "text": "「いち……みゃー先輩が提案してくれたんですよ。私では思いつきませんでした」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 382,
+            "text": "「私、その部誌、持ってるんですよ」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 392,
+            "text": "「買ったんですよ、文化祭で」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 506,
+            "text": "「先輩と共作したり、アドバイスをもらいながら小説を書いたり……私、すごく嬉しいんですよ」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1349,
+            "text": "「ななっ、なっ！？　せ、先輩は文芸部なんですよ？演劇部に寝返るつもりですか？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1538,
+            "text": "「いいものが書きたいんです……読んだ人が興奮してくれるような、そんな小説を」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1551,
+            "text": "「男性向けの作品の、性欲をかき立てることに全力を注ぐ文化……現代にも、脈々と受け継がれているんです」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1559,
+            "text": "「幾億という作家が、官能を刺激して満たすために表現を研ぎ澄ませてきたんです」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1617,
+            "text": "「百花の家で晩ごはんを食べる時……その席で、私の仕事のことを話したいんです」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1654,
+            "text": "「先輩……あの、私……上手く言えないと思うんです。だから……助けてくれますか？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1688,
+            "text": "「きっと、悩んでいる暇なんてないんですね。勉強して、勉強して……努力し続けていれば……」"
+          },
+          {
+            "scene": "b15_01",
+            "line": 265,
+            "text": "「ふぁっ！？　い、いえ、他意はないんです、結婚すると食の好みが重要になると聞いたからとかじゃなくて！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 108,
+            "text": "「んっ、んっ……先輩……胸触るなんて……やっぱり、朝から興奮しちゃったんですね……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 199,
+            "text": "「もどかしいような……はんっ……でも、気持ちよくて……先輩の手の熱が、じわぁって伝わってくるんです……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 265,
+            "text": "「や、だ、だってだって、先輩も興奮してるんですよね？私としたくなって、抱きしめたんですよね……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 498,
+            "text": "「先輩にされることなら……全部気持ちいいんです……だから……だから、先輩のお好きなように……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 592,
+            "text": "「はぁぁ、先輩の指、だからぁ……先輩の指だから、感じちゃうんですっ！　あぁぁ、あああんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 710,
+            "text": "「ふぁぁっ！？　あ、あんっ……ああぁっ！　せ、先輩、クリトリス、弱いんですっ、ふ、あぁっぁんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1186,
+            "text": "「ゃんっ……まだ収まってないんですね、先輩ったら……やらしいです、朝からそんなに元気だなんて」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1461,
+            "text": "「だ、だって、こんなので感じるなんて……はぅ……は、恥ずかしいんですっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1488,
+            "text": "「じゃ、じゃあ……私も、あ、素直に……あ、アナルで感じてもいいんですね……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1571,
+            "text": "「だから私、い、いやらしくなっちゃったんです！いやらしいのは、先輩のせいなんですぅぅっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1607,
+            "text": "「先輩のっ……で、奥でコツコツして欲しくて、ん、んんぅっ、勝手におねだりしちゃうんです……っ」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 351,
+            "text": "「私の小説が良くなった理由を担当さんに聞かれたので、恋人が協力してくれたって言ったんです」"
+          }
+        ],
+        "snaps_a_polite_ending_shut": [
+          {
+            "scene": "b12_02",
+            "line": 495,
+            "text": "「剥きクリトリスっ、刺激強すぎですっ……！　あ、あ、こんなに気持ちいいなんて、知らない、ですっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 500,
+            "text": "「あ、アナルはっ……そこはだめ、れすっ……じんじんしびれてきて……おかしくなっちゃいますっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1389,
+            "text": "「ふぁぇっ！？　な、なにを言ってるんですか、先輩……わ、私、そんなにいやらしい子じゃないですっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1431,
+            "text": "「ひゃんんっ！？　あっあっ……先輩ったらもうこんなに勃起して……あ、あぁ……奥までゴリゴリ掘ってますっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1449,
+            "text": "「奥まで……子宮まで届いてっ……突いてます、あぁぁっ、気持ちいい、ですっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1471,
+            "text": "「先輩、せんぱいっ……ああっ、ペニスの振動、全身に伝わって、あぁぁっ！　全身犯されてるみたいですっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1703,
+            "text": "「ああぁっ、せいえきあついっ……せいえきいっぱいかかってます、ぁぁぁっ二回も濃いの出されてますっ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 132,
+            "text": "「でもっ……でもでもっ、実行したりはしてません……だから、ぎゅうってしてきた先輩の方がやらしいですっ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 458,
+            "text": "「やっ……あぁっ、あんっ……だ、だからって、いきなり入れるなんて、い、いじわるですっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 757,
+            "text": "「ああぁぁっ、先輩せんぱい、ふぁぁぁ、やふゃぁっ、あっ、イくっ！　ま、またイくっ、イきそぅですっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 774,
+            "text": "「ひんっ、あぁっあっあっ！　先輩せんぱい、せんぱい、あぁぁっ！　クリトリス、おかしくなりますっ！！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1461,
+            "text": "「だ、だって、こんなので感じるなんて……はぅ……は、恥ずかしいんですっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1502,
+            "text": "「ひゃんっ！　あ、あぁぁっあっ……感じてますっ……本当は、ペニスでアナル擦られて、感じますっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1583,
+            "text": "「あぁ、あ、アナルの中っ……たくさんえぐられるのが……あぁぁっ、気持ちいいっ……気持ちいいですっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1645,
+            "text": "「あぁぁんっ、せん、ぱいっ……！　わ、わたし、変、ですっ……いっぱい恥ずかしい穴、ずぽずぽされて、うずいてますっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1700,
+            "text": "「あぁぁぁっ、ペニスびくびくしてます、あ、あなるでびくびく、かんじながら、あぁぁ、イくっ、イきますっ！！！」"
+          }
+        ],
+        "scolds_improper_conduct": [
+          {
+            "scene": "b12_02",
+            "line": 60,
+            "text": "「わ、私も……いやらしいこと、正直に言わないと……彼女失格かもって……思っちゃいます……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1389,
+            "text": "「ふぁぇっ！？　な、なにを言ってるんですか、先輩……わ、私、そんなにいやらしい子じゃないですっ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 152,
+            "text": "「はぁ、はぁ……先輩のいやらしい声、聞いたらぁ……あぁぁ……身体が熱くなってきちゃいますよぅ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 270,
+            "text": "「う、うぅ……胸、こんなに揉んで、いやらしい気分にさせておいて……最後まで、してくれないんですか？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 612,
+            "text": "「あんっ、はぅう、あぁぁ、んっ、んっ、んっ！あぁぁ、はずかしくて、いやらしい音してますぅっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 946,
+            "text": "「け、軽蔑しますか……？　い、いやらしい子だって、思いますか……？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1566,
+            "text": "「本でしか知らなかったこと、いやらしいこと……たくさん実践されちゃって……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1571,
+            "text": "「だから私、い、いやらしくなっちゃったんです！いやらしいのは、先輩のせいなんですぅぅっ……！」"
+          }
+        ],
+        "denies_with_chigaimasu": [
+          {
+            "scene": "b15_02",
+            "line": 931,
+            "text": "「あっあっ、ち、違います、違いますっ……が、学校で先輩とキスしたりすると……その、濡れてしまってっ」"
+          }
+        ],
+        "stops_him_with_a_polite_prohibition": [
+          {
+            "scene": "b11_01",
+            "line": 1069,
+            "text": "「十川先輩こそ……！　私の書いたものが面白いと感じたら、もう先輩を誘惑したりしないでくださいね」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 450,
+            "text": "「気にしないでください。今日は、私が急にお誘いしたんですから」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 15,
+            "text": "「あ、あぁっ……誤解しないでください！　ちゃんと着替えましたよ……おろしたてのショーツです……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 219,
+            "text": "「あきゅぅ……んんっ、んぅぅ……恥ずかしいです、じろじろ見ちゃだめです……だめぇ……っ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 652,
+            "text": "「ふゃぁぁぁぁぁっ、あっあっ！　だめ、だめです先輩っ、ああぁっ、そこは、そこはだめぇっ……！」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 47,
+            "text": "「無理したら駄目ですよ。先輩は劇にも出演するのに、ケガをしたら大変です」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 851,
+            "text": "「あ、やぁっ……言わないでください……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1097,
+            "text": "「ふゃぁぁっっ、もうだめ、だめですぅぅ！　あぁっ、あっ！　イく、イっちゃいます、ぅぅ、ぅぅぅぅっ！！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1288,
+            "text": "「あ、あっ……嘘……っ！？　先輩だめぇっ……だめです、そんなところ使うなんて、そんな、あぁっ、あああっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1429,
+            "text": "「ひぅぅ……あ、あぁ……はぁ……あんっあんっ……だめっ……こんな、初めてなのに……なのにぃっ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1653,
+            "text": "「ぁっぁぁぁっ、だめっ、イ、イきそうになってます、あああっ、こんなの、はじめてなのにっ！」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 180,
+            "text": "「わ、わざわざ嗅がないでください、百花」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 428,
+            "text": "「あ、あう……一悟先輩がそう言うならサインしますけど、昔のことは掘り返さないでください」"
+          }
+        ],
+        "squeaks_before_the_words": [
+          {
+            "scene": "b11_01",
+            "line": 241,
+            "text": "「ひゃっ！？」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 814,
+            "text": "「ひゃうっ！？　と、十川先輩？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 477,
+            "text": "「ふぇっ！？　ど、どうだったんですか！？」"
+          },
+          {
+            "scene": "b12_01",
+            "line": 755,
+            "text": "「ふぇう！？　そ、そうなんですかっ！？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 176,
+            "text": "「ふぁっ！？　あ、あぁっ！　はぅん、先輩、ぁぁ……先輩も、直接……ですかっ……あぁぁんっ……！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 405,
+            "text": "「ひゃあああっ！？　あんっ、ああっ！　せ、先輩、んくぅぅっ……あ、あ、あ、ふぁぁぁぁっ！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 481,
+            "text": "「きゃううぅぅっ！？　ど、同時に……あんっ、んっ！穴も、クリトリスもっ……！？　あんっ、あっあっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 614,
+            "text": "「はぅううっ！？　んうううっ、あっあっあっ！　はう、ひゃぁっ……んくうううううううっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 677,
+            "text": "「ふぁぅっ？　あぁあぁっ、クリ、トリスぅ……！くりとりす、らめ、らめれす、そんなのされたらっ……」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1104,
+            "text": "「ひゃんんっ……！？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1180,
+            "text": "「ふぁぁ……先輩、キスしてる間も、ペニスのビクビク、止まりませんでしたよ……？」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1333,
+            "text": "「ふぁぁぁぁぁ、あああぁぁぁああああああーーーーっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1389,
+            "text": "「ふぁぇっ！？　な、なにを言ってるんですか、先輩……わ、私、そんなにいやらしい子じゃないですっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1431,
+            "text": "「ひゃんんっ！？　あっあっ……先輩ったらもうこんなに勃起して……あ、あぁ……奥までゴリゴリ掘ってますっ」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1462,
+            "text": "「はぅぅぅっ！　んくっ、んぅうううくっ、はううっ！んあああっ、激しいっ……はげしいですぅっ！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1677,
+            "text": "「きゃうぅうっ！　あんっ、あんっ……！　せ、せんっ、先輩っ……あぁあぁっ！　イきます、私もイくっ！！！」"
+          },
+          {
+            "scene": "b12_02",
+            "line": 1763,
+            "text": "「ふぇ……あ、あっ……ちゅっ……せんぱ……ちゅ、れる、んんっ……」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 536,
+            "text": "「ひゃっ……！？　せ、先輩っ、ここ、部室ですよっ……」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 177,
+            "text": "「ふぇっ……私ですか？」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1667,
+            "text": "「ふぇっ！？　ぼ、暴走なんてしませんよ！？」"
+          },
+          {
+            "scene": "b15_01",
+            "line": 265,
+            "text": "「ふぁっ！？　い、いえ、他意はないんです、結婚すると食の好みが重要になると聞いたからとかじゃなくて！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 34,
+            "text": "「はぅっ……！？　そ、それはその、少しは……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 146,
+            "text": "「はぅぅっ……や、やぁっ……胸揉みながらささやくなんて、ずるい……いじわるです……んんっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 167,
+            "text": "「ひゃっ……！？　あっ……ああんっ……！　んっ、んぅ……はぁ、あぁぁっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 310,
+            "text": "「ふぇぇっ……！？　な、なに言ってるんですか、そんな、おねだりするみたいなことっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 391,
+            "text": "「ひゃっ……あんっ……下着の上から、撫でられると……んん、んっ……なんだか、焦らされてるみたいで……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 444,
+            "text": "「ひゃぁうっ！？　んっんっ……あぁぁぁっ……ゆ、指……指がどんどん、私の膣内に挿入って……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 468,
+            "text": "「はぅんっ……！？　ぁうっ、や、ぁぁぁっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 698,
+            "text": "「ふぇぁ、そ、それは、そのっ……」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 710,
+            "text": "「ふぁぁっ！？　あ、あんっ……ああぁっ！　せ、先輩、クリトリス、弱いんですっ、ふ、あぁっぁんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 736,
+            "text": "「ひぅぅぅぅ……！　ぁぁぁっ、あんっ、んっ！先輩、だめ、いじめすぎですよぉ、あぁっ、うううっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 813,
+            "text": "「ひゃ……ううっ！　ぁぁぁっ、指、せんぱいのゆびっ、ま、まだなかでうごいて、あぁぁ、あぁあんっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 977,
+            "text": "「ひゃううっ、あんっ、あぁっ！　はげしい、です、んっんっ、すごく、熱いっ……あついですぅっ！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1121,
+            "text": "「きゃぅうぅぅぅぅぅっ！　ああっ、あっ、あぁぁぁぁっ、んくううううーーーーっ！！！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1136,
+            "text": "「ひゃぅんっ、あっあっあっ、中っ！　中で出てますっ、んくぅう！　あぁぁっ、ふぁぁぁ、ああああっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1261,
+            "text": "「ふぇぇっ、あっ……ああぁあぁぁ……っ！？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1274,
+            "text": "「ふぁぁっ……！？　あ、後ろ……にぃっ……あんっ、先輩っ……う、うそ、本当に入れてっ……！？」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1414,
+            "text": "「ひぅ……んっ！　ぁぁ……あっ……あぐっ……んっんっ、ふゃぁぁぁ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1429,
+            "text": "「ひぅぅ……あ、あぁ……はぁ……あんっあんっ……だめっ……こんな、初めてなのに……なのにぃっ」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1502,
+            "text": "「ひゃんっ！　あ、あぁぁっあっ……感じてますっ……本当は、ペニスでアナル擦られて、感じますっ……！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1673,
+            "text": "「ひゃぁぁぁっあああっ、そん、なっ……だ、だめ、はずかし、ですっ、お尻でイくなんて、んっんぅう！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1724,
+            "text": "「ふぁぁぁぁぁぁぁっ、ああああああっ、んくぅううう！あぁぁぁっ！　あっあっ、あーーっ！！！」"
+          },
+          {
+            "scene": "b15_02",
+            "line": 1746,
+            "text": "「ひゃうぅぅぅんっ！　だめ、だめぇぇっ！　こんなにいっぱい射精されたら、あぁっぁんっ！　ぁぁぁぁっ！」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 117,
+            "text": "「はぅっ……！？　も、もう！　感想までは聞いてません」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 206,
+            "text": "「ひゃっ！？　お祝いって……」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 624,
+            "text": "「ふぇっ！？　あ、そ、その……そう、ですね。私も今日は機嫌が良いですから、構いませんよ」"
+          }
+        ],
+        "talks_shop_as_a_writer": [
+          {
+            "scene": "b11_01",
+            "line": 48,
+            "text": "「そ、そうです。原稿の方はひと段落してますけど、プロットの方はまだ作成中なんですよ」"
+          },
+          {
+            "scene": "b11_01",
+            "line": 785,
+            "text": "「急いでいたのは原稿の方で、そっちは昨晩のうちに済みましたから……プロットはもうしばらく大丈夫です」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 419,
+            "text": "「その部誌に載ってる、先輩の小説……私、何度も読み返しました」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 440,
+            "text": "「その小説を書いた人に会ってみたくて、この学園に合格したら文芸部に入ろうって決めていました」"
+          },
+          {
+            "scene": "b13_01",
+            "line": 506,
+            "text": "「先輩と共作したり、アドバイスをもらいながら小説を書いたり……私、すごく嬉しいんですよ」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1372,
+            "text": "「さ、させませんっ！　作家としては私の方が先輩なんですから、小説で魅了するのは私の特権です！」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1538,
+            "text": "「いいものが書きたいんです……読んだ人が興奮してくれるような、そんな小説を」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1559,
+            "text": "「幾億という作家が、官能を刺激して満たすために表現を研ぎ澄ませてきたんです」"
+          },
+          {
+            "scene": "b14_01",
+            "line": 1592,
+            "text": "「が、頑張ります。小説では、真優先輩に引けをとるわけにもいきませんから」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 351,
+            "text": "「私の小説が良くなった理由を担当さんに聞かれたので、恋人が協力してくれたって言ったんです」"
+          },
+          {
+            "scene": "b15_03",
+            "line": 578,
+            "text": "「わ、私と一悟先輩はもう一心同体ですから……っ！この小説を読んでもらえれば分かります」"
+          }
+        ]
+      }
+    },
+    "distinguishability": {
+      "method": "Blinded contrast. Bernoulli Naive Bayes whose her-class feature likelihoods are her own full-corpus marker rates and whose control-class likelihoods are the control heroines' full-corpus rates; equal priors, so the decision is the sign of the log-odds. The n-gram baseline is a character bigram log-likelihood ratio trained on the build block only. Balanced accuracy is the mean of her recall and the control specificity.",
+      "marker_rates_her": {
+        "rule00": 0.1334,
+        "rule03": 0.2196,
+        "rule04": 0.0031,
+        "rule05": 0.1351,
+        "rule06": 0.0006,
+        "rule07": 0.006,
+        "rule08": 0.6699,
+        "rule09": 0.6605,
+        "rule10": 0.4286,
+        "rule22": 0.0344
+      },
+      "marker_rates_control": {
+        "rule00": 0.0573,
+        "rule03": 0.1322,
+        "rule04": 0.0104,
+        "rule05": 0.1273,
+        "rule06": 0.0127,
+        "rule07": 0.0457,
+        "rule08": 0.0959,
+        "rule09": 0.4534,
+        "rule10": 0.3467,
+        "rule22": 0.0155
+      },
+      "bible_rule_nb": {
+        "full": {
+          "her_n": 514,
+          "control_n": 187,
+          "tp": 384,
+          "fn": 130,
+          "fp": 21,
+          "tn": 166,
+          "balanced_accuracy": 0.8174
+        },
+        "non_H": {
+          "her_n": 208,
+          "control_n": 187,
+          "tp": 139,
+          "fn": 69,
+          "fp": 21,
+          "tn": 166,
+          "balanced_accuracy": 0.778
+        }
+      },
+      "bigram_buildblock": {
+        "full": {
+          "n": 2,
+          "her_n": 514,
+          "control_n": 187,
+          "tp": 421,
+          "fp": 27,
+          "balanced_accuracy": 0.8373
+        },
+        "nonH": {
+          "n": 2,
+          "her_n": 208,
+          "control_n": 187,
+          "tp": 185,
+          "fp": 27,
+          "balanced_accuracy": 0.8725
+        }
+      },
+      "chance": 0.5
+    }
+  },
+  "verdict": {
+    "verdict": "partial",
+    "headline": "5 of 6 computed checks pass for 千奈; failed: rules_beat_bigram. Holdout 514 spoken lines in 8 scenes.",
+    "supported": [
+      "holdout_size: 514 holdout spoken lines (needs 100)",
+      "registers_reconcile: H 306 + non-H 208 vs pooled 514",
+      "self_reference_holds: 私 in 0.115 of holdout lines vs 0.137 of build lines (within 0.1)",
+      "mechanisms_distinctive: 9 of 10 mechanisms above the control rate on the holdout (needs half)",
+      "rule_detector_above_chance: bible-rule detector balanced accuracy 0.817 full, 0.778 non-H (chance 0.5)"
+    ],
+    "undermined": [
+      "rules_beat_bigram: bible-rule 0.817 vs plain bigram 0.837 (full); scored on own speech_guide markers (10)"
+    ]
+  }
+}

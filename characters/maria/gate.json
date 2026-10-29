@@ -1,0 +1,3886 @@
+{
+  "schema": "authored-expression-bible-gate/2",
+  "build": "b4/2",
+  "date": "2026-09-16",
+  "subject": {
+    "name": "真里亜",
+    "id": "MARIA",
+    "route": ""
+  },
+  "holdout": {
+    "definition": "no own route: the last third (min 5) of the scenes where she speaks",
+    "scenes": [
+      "d02_01",
+      "d03_01",
+      "d04_01",
+      "d05_01",
+      "d06_01",
+      "d07_01",
+      "d08_01",
+      "d09_01",
+      "d10_01",
+      "d10_02",
+      "d10_03",
+      "d11_01",
+      "d12_01",
+      "d13_01",
+      "d14_01",
+      "d15_01",
+      "d16_01",
+      "d17_01",
+      "d18_01",
+      "d20_01",
+      "title"
+    ],
+    "her_spoken": 377,
+    "her_inner": 0,
+    "her_lines": 377,
+    "registers": {
+      "H": {
+        "scenes": [
+          "d10_02"
+        ],
+        "her_spoken": 115
+      },
+      "non_H": {
+        "scenes": [
+          "d02_01",
+          "d03_01",
+          "d04_01",
+          "d05_01",
+          "d06_01",
+          "d07_01",
+          "d08_01",
+          "d09_01",
+          "d10_01",
+          "d10_03",
+          "d11_01",
+          "d12_01",
+          "d13_01",
+          "d14_01",
+          "d15_01",
+          "d16_01",
+          "d17_01",
+          "d18_01",
+          "d20_01",
+          "title"
+        ],
+        "her_spoken": 262,
+        "label": "the non-H block of the holdout"
+      }
+    },
+    "build_block": {
+      "scenes_n": 44,
+      "her_spoken": 851,
+      "her_inner": 0
+    },
+    "control_heroines": [
+      "真優",
+      "千奈",
+      "アリス",
+      "知紗",
+      "ひかる",
+      "百花"
+    ],
+    "control_spoken_in_holdout": 1484,
+    "control_spoken_in_nonH_holdout": 1325
+  },
+  "method": {
+    "what_is_read": "her spoken lines from game_logic.jsonl; the bible's own matchers imported from tools/koikano/koikano_bible.py (offers_self skipped: it names 百花); layers/annotations.json per_line.",
+    "register": "Every rule and mechanism is read against the H block, the non-H block and the pooled holdout; H + non-H reconcile to the pooled total.",
+    "leakage": "The bible was built from the full corpus, which includes the holdout. This is calibration, not a leak-free split. The character n-gram baseline is trained on the build block only.",
+    "classifications_are_the_builders_reading": true
+  },
+  "tests": {
+    "rule_calibration": {
+      "n_holdout_spoken": 377,
+      "n_holdout_H_spoken": 115,
+      "n_holdout_nonH_spoken": 262,
+      "n_build_spoken": 851,
+      "rows": [
+        {
+          "rule": "Self-reference form 私 (her own top form)",
+          "metric": "share of spoken lines containing 私",
+          "holdout": {
+            "count": 44,
+            "n": 377,
+            "rate": 0.1167
+          },
+          "holdout_H": {
+            "count": 9,
+            "n": 115,
+            "rate": 0.0783
+          },
+          "holdout_non_H": {
+            "count": 35,
+            "n": 262,
+            "rate": 0.1336
+          },
+          "build": {
+            "count": 112,
+            "n": 851,
+            "rate": 0.1316
+          },
+          "control_in_holdout": {
+            "count": 49,
+            "n": 1484,
+            "rate": 0.033
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Do not use 私",
+          "metric": "spoken lines containing 私",
+          "holdout": {
+            "count": 44,
+            "n": 377,
+            "rate": 0.1167
+          },
+          "holdout_H": {
+            "count": 9,
+            "n": 115,
+            "rate": 0.0783
+          },
+          "holdout_non_H": {
+            "count": 35,
+            "n": 262,
+            "rate": 0.1336
+          },
+          "build": {
+            "count": 112,
+            "n": 851,
+            "rate": 0.1316
+          },
+          "control_in_holdout": {
+            "count": 49,
+            "n": 1484,
+            "rate": 0.033
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Almost no です / ます",
+          "metric": "spoken lines containing です or ます",
+          "holdout": {
+            "count": 275,
+            "n": 377,
+            "rate": 0.7294
+          },
+          "holdout_H": {
+            "count": 82,
+            "n": 115,
+            "rate": 0.713
+          },
+          "holdout_non_H": {
+            "count": 193,
+            "n": 262,
+            "rate": 0.7366
+          },
+          "build": {
+            "count": 619,
+            "n": 851,
+            "rate": 0.7274
+          },
+          "control_in_holdout": {
+            "count": 161,
+            "n": 1484,
+            "rate": 0.1085
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "End many lines on っ",
+          "metric": "spoken lines ending っ",
+          "holdout": {
+            "count": 16,
+            "n": 377,
+            "rate": 0.0424
+          },
+          "holdout_H": {
+            "count": 14,
+            "n": 115,
+            "rate": 0.1217
+          },
+          "holdout_non_H": {
+            "count": 2,
+            "n": 262,
+            "rate": 0.0076
+          },
+          "build": {
+            "count": 68,
+            "n": 851,
+            "rate": 0.0799
+          },
+          "control_in_holdout": {
+            "count": 64,
+            "n": 1484,
+            "rate": 0.0431
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Stretch with ー",
+          "metric": "spoken lines ending ー",
+          "holdout": {
+            "count": 0,
+            "n": 377,
+            "rate": 0.0
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 115,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 0,
+            "n": 262,
+            "rate": 0.0
+          },
+          "build": {
+            "count": 0,
+            "n": 851,
+            "rate": 0.0
+          },
+          "control_in_holdout": {
+            "count": 23,
+            "n": 1484,
+            "rate": 0.0155
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Double ん agreement",
+          "metric": "spoken lines containing んん/んーん/んっ",
+          "holdout": {
+            "count": 15,
+            "n": 377,
+            "rate": 0.0398
+          },
+          "holdout_H": {
+            "count": 15,
+            "n": 115,
+            "rate": 0.1304
+          },
+          "holdout_non_H": {
+            "count": 0,
+            "n": 262,
+            "rate": 0.0
+          },
+          "build": {
+            "count": 50,
+            "n": 851,
+            "rate": 0.0588
+          },
+          "control_in_holdout": {
+            "count": 118,
+            "n": 1484,
+            "rate": 0.0795
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Delight おおー / おー",
+          "metric": "spoken lines containing おおー/おー",
+          "holdout": {
+            "count": 1,
+            "n": 377,
+            "rate": 0.0027
+          },
+          "holdout_H": {
+            "count": 0,
+            "n": 115,
+            "rate": 0.0
+          },
+          "holdout_non_H": {
+            "count": 1,
+            "n": 262,
+            "rate": 0.0038
+          },
+          "build": {
+            "count": 0,
+            "n": 851,
+            "rate": 0.0
+          },
+          "control_in_holdout": {
+            "count": 44,
+            "n": 1484,
+            "rate": 0.0296
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Childish words",
+          "metric": "spoken lines containing childish words",
+          "holdout": {
+            "count": 1,
+            "n": 377,
+            "rate": 0.0027
+          },
+          "holdout_H": {
+            "count": 1,
+            "n": 115,
+            "rate": 0.0087
+          },
+          "holdout_non_H": {
+            "count": 0,
+            "n": 262,
+            "rate": 0.0
+          },
+          "build": {
+            "count": 5,
+            "n": 851,
+            "rate": 0.0059
+          },
+          "control_in_holdout": {
+            "count": 68,
+            "n": 1484,
+            "rate": 0.0458
+          },
+          "unit": "rate"
+        },
+        {
+          "rule": "Turn length",
+          "metric": "kept chars per spoken line",
+          "unit": "distribution",
+          "holdout": {
+            "n": 377,
+            "median_chars": 29,
+            "mean_chars": 28.6,
+            "max_chars": 50,
+            "ellipsis_per_line": 1.756,
+            "excl_per_line": 0.0584,
+            "quest_per_line": 0.1273,
+            "end_tt": 16,
+            "end_chou": 0,
+            "doubled_n": 15,
+            "childish": 1,
+            "polite": 275,
+            "bai": 44,
+            "watashi": 44
+          },
+          "holdout_H": {
+            "n": 115,
+            "median_chars": 32,
+            "mean_chars": 31.21,
+            "max_chars": 48,
+            "ellipsis_per_line": 3.9652,
+            "excl_per_line": 0.1304,
+            "quest_per_line": 0.2087,
+            "end_tt": 14,
+            "end_chou": 0,
+            "doubled_n": 15,
+            "childish": 1,
+            "polite": 82,
+            "bai": 9,
+            "watashi": 9
+          },
+          "holdout_non_H": {
+            "n": 262,
+            "median_chars": 28,
+            "mean_chars": 27.46,
+            "max_chars": 50,
+            "ellipsis_per_line": 0.7863,
+            "excl_per_line": 0.0267,
+            "quest_per_line": 0.0916,
+            "end_tt": 2,
+            "end_chou": 0,
+            "doubled_n": 0,
+            "childish": 0,
+            "polite": 193,
+            "bai": 35,
+            "watashi": 35
+          },
+          "build": {
+            "n": 851,
+            "median_chars": 29,
+            "mean_chars": 27.75,
+            "max_chars": 60,
+            "ellipsis_per_line": 1.262,
+            "excl_per_line": 0.0917,
+            "quest_per_line": 0.1457,
+            "end_tt": 68,
+            "end_chou": 0,
+            "doubled_n": 50,
+            "childish": 5,
+            "polite": 619,
+            "bai": 112,
+            "watashi": 112
+          },
+          "control_in_holdout": {
+            "n": 1484,
+            "median_chars": 23,
+            "mean_chars": 23.23,
+            "max_chars": 63,
+            "ellipsis_per_line": 1.7601,
+            "excl_per_line": 0.1685,
+            "quest_per_line": 0.3154,
+            "end_tt": 64,
+            "end_chou": 23,
+            "doubled_n": 118,
+            "childish": 68,
+            "polite": 161,
+            "bai": 49,
+            "watashi": 49
+          }
+        },
+        {
+          "rule": "Ellipsis per line",
+          "metric": "… per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 1.756
+          },
+          "holdout_H": {
+            "value": 3.9652
+          },
+          "holdout_non_H": {
+            "value": 0.7863
+          },
+          "build": {
+            "value": 1.262
+          },
+          "control_in_holdout": {
+            "value": 1.7601
+          }
+        },
+        {
+          "rule": "！ per line",
+          "metric": "！ per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 0.0584
+          },
+          "holdout_H": {
+            "value": 0.1304
+          },
+          "holdout_non_H": {
+            "value": 0.0267
+          },
+          "build": {
+            "value": 0.0917
+          },
+          "control_in_holdout": {
+            "value": 0.1685
+          }
+        },
+        {
+          "rule": "？ per line",
+          "metric": "？ per spoken line",
+          "unit": "per_line",
+          "holdout": {
+            "value": 0.1273
+          },
+          "holdout_H": {
+            "value": 0.2087
+          },
+          "holdout_non_H": {
+            "value": 0.0916
+          },
+          "build": {
+            "value": 0.1457
+          },
+          "control_in_holdout": {
+            "value": 0.3154
+          }
+        },
+        {
+          "rule": "Face and gesture density",
+          "metric": "share of her lines with a face / a gesture",
+          "unit": "density",
+          "holdout": {
+            "n": 377,
+            "face": 138,
+            "face_rate": 0.366,
+            "gesture": 83,
+            "gesture_rate": 0.2202,
+            "emotion": 3
+          },
+          "holdout_H": {
+            "n": 115,
+            "face": 0,
+            "face_rate": 0.0,
+            "gesture": 0,
+            "gesture_rate": 0.0,
+            "emotion": 0
+          },
+          "holdout_non_H": {
+            "n": 262,
+            "face": 138,
+            "face_rate": 0.5267,
+            "gesture": 83,
+            "gesture_rate": 0.3168,
+            "emotion": 3
+          },
+          "build": {
+            "n": 851,
+            "face": 577,
+            "face_rate": 0.678,
+            "gesture": 247,
+            "gesture_rate": 0.2902,
+            "emotion": 2
+          },
+          "control_in_holdout": null
+        }
+      ],
+      "note": "The rule rows are 百花's marker set (です/ます, っ, ー, ん, おー, childish words) measured on this subject; they are rates to read, not pass/fail on this subject's own rules."
+    },
+    "mechanisms": {
+      "n_holdout_spoken": 377,
+      "rows": [
+        {
+          "key": "frames_a_turn_with_a_title",
+          "name": "Frames the turn with the listener's title",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 178,
+            "n": 377,
+            "rate": 0.4721
+          },
+          "holdout_H": {
+            "hits": 54,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 124,
+            "n": 262
+          },
+          "build": {
+            "hits": 295,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 4,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 24,
+            "n": 13385
+          },
+          "old_holdout_hits": 178,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "uses_service_formulas",
+          "name": "Uses fixed service formulas",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 20,
+            "n": 377,
+            "rate": 0.0531
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 20,
+            "n": 262
+          },
+          "build": {
+            "hits": 60,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 2,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 13,
+            "n": 13385
+          },
+          "old_holdout_hits": 20,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "offers_to_do_it_for_them",
+          "name": "Offers to do or carry it",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 13,
+            "n": 377,
+            "rate": 0.0345
+          },
+          "holdout_H": {
+            "hits": 2,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 11,
+            "n": 262
+          },
+          "build": {
+            "hits": 39,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 4,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 13,
+            "n": 13385
+          },
+          "old_holdout_hits": 13,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "closes_the_clause_with_wa",
+          "name": "Closes the clause with わ",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 148,
+            "n": 377,
+            "rate": 0.3926
+          },
+          "holdout_H": {
+            "hits": 56,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 92,
+            "n": 262
+          },
+          "build": {
+            "hits": 221,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 18,
+            "n": 13385
+          },
+          "old_holdout_hits": 148,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "opens_with_aara",
+          "name": "Opens with あら / まあ",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 21,
+            "n": 377,
+            "rate": 0.0557
+          },
+          "holdout_H": {
+            "hits": 10,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 11,
+            "n": 262
+          },
+          "build": {
+            "hits": 74,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 2,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 39,
+            "n": 13385
+          },
+          "old_holdout_hits": 21,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "laughs_softly",
+          "name": "Laughs softly in the text",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 74,
+            "n": 377,
+            "rate": 0.1963
+          },
+          "holdout_H": {
+            "hits": 38,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 36,
+            "n": 262
+          },
+          "build": {
+            "hits": 157,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 14,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 309,
+            "n": 13385
+          },
+          "old_holdout_hits": 74,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "reminds_them_of_what_was_said",
+          "name": "Reminds them of what was said or arranged",
+          "tier_bible": "weak",
+          "holdout": {
+            "hits": 0,
+            "n": 377,
+            "rate": 0.0
+          },
+          "holdout_H": {
+            "hits": 0,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 0,
+            "n": 262
+          },
+          "build": {
+            "hits": 6,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 1,
+            "n": 13385
+          },
+          "old_holdout_hits": 0,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "frames_herself_as_the_maid",
+          "name": "Frames herself as the maid",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 7,
+            "n": 377,
+            "rate": 0.0186
+          },
+          "holdout_H": {
+            "hits": 1,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 6,
+            "n": 262
+          },
+          "build": {
+            "hits": 24,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 3,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 4,
+            "n": 13385
+          },
+          "old_holdout_hits": 7,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "directs_with_kudasaimase",
+          "name": "Directs with くださいませ / てください",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 46,
+            "n": 377,
+            "rate": 0.122
+          },
+          "holdout_H": {
+            "hits": 20,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 26,
+            "n": 262
+          },
+          "build": {
+            "hits": 82,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 9,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 131,
+            "n": 13385
+          },
+          "old_holdout_hits": 46,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "hedges_an_opinion_politely",
+          "name": "Gives an opinion hedged and polite",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 8,
+            "n": 377,
+            "rate": 0.0212
+          },
+          "holdout_H": {
+            "hits": 2,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 6,
+            "n": 262
+          },
+          "build": {
+            "hits": 35,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 4,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 30,
+            "n": 13385
+          },
+          "old_holdout_hits": 8,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "praises_a_person",
+          "name": "Praises a person",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 17,
+            "n": 377,
+            "rate": 0.0451
+          },
+          "holdout_H": {
+            "hits": 6,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 11,
+            "n": 262
+          },
+          "build": {
+            "hits": 28,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 28,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 127,
+            "n": 13385
+          },
+          "old_holdout_hits": 17,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "blames_herself_formally",
+          "name": "Blames herself in set terms",
+          "tier_bible": "thin",
+          "holdout": {
+            "hits": 7,
+            "n": 377,
+            "rate": 0.0186
+          },
+          "holdout_H": {
+            "hits": 1,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 6,
+            "n": 262
+          },
+          "build": {
+            "hits": 10,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 3,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 25,
+            "n": 13385
+          },
+          "old_holdout_hits": 7,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "teases_gently",
+          "name": "Teases gently",
+          "tier_bible": "weak",
+          "holdout": {
+            "hits": 2,
+            "n": 377,
+            "rate": 0.0053
+          },
+          "holdout_H": {
+            "hits": 1,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 1,
+            "n": 262
+          },
+          "build": {
+            "hits": 4,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 0,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 56,
+            "n": 13385
+          },
+          "old_holdout_hits": 2,
+          "delta_holdout_hits": 0
+        },
+        {
+          "key": "answers_yes_or_no_first",
+          "name": "Answers yes or no first",
+          "tier_bible": "firm",
+          "holdout": {
+            "hits": 19,
+            "n": 377,
+            "rate": 0.0504
+          },
+          "holdout_H": {
+            "hits": 3,
+            "n": 115
+          },
+          "holdout_non_H": {
+            "hits": 16,
+            "n": 262
+          },
+          "build": {
+            "hits": 56,
+            "n": 851
+          },
+          "control_in_holdout": {
+            "hits": 12,
+            "n": 1484
+          },
+          "control_all": {
+            "hits": 136,
+            "n": 13385
+          },
+          "old_holdout_hits": 19,
+          "delta_holdout_hits": 0
+        }
+      ],
+      "hits_index": {
+        "frames_a_turn_with_a_title": [
+          {
+            "scene": "d02_01",
+            "line": 569,
+            "text": "「ただいま戻りました、お嬢様。力不足のメイドをお許しくださいませ」"
+          },
+          {
+            "scene": "d02_01",
+            "line": 584,
+            "text": "「ありがとうございました、宮国様」"
+          },
+          {
+            "scene": "d02_01",
+            "line": 602,
+            "text": "「ありがとうございます。さすがですわ、宮国様」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 53,
+            "text": "「それでは、お嬢様のお部屋へご案内いたしますわ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 86,
+            "text": "「お嬢様、アリス様がお帰りになりました。それから、文芸部の皆さまが、お見舞いに来てくださいました」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 265,
+            "text": "「お嬢様、調子に乗ってはいけませんわ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 293,
+            "text": "「お嬢様、謝る必要はございません。気が付かなかった私めを罰してくださいませ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 300,
+            "text": "「先日は宮国様にお嬢様を助けていただくような失態も犯してしまいました。私はメイド失格です」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 314,
+            "text": "「……そうですわね。大変申し訳ありません、お嬢様」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 328,
+            "text": "「お嬢様……ありがとうございます」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 587,
+            "text": "「そのお話、お嬢様の口からお聞きになったのですわね、宮国様」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 605,
+            "text": "「お嬢様は……心から宮国様のことを信頼なさっているご様子です……」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 620,
+            "text": "「ふふふ……うふふふふ。問い返すのは野暮というものですわ、宮国様」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 858,
+            "text": "「私もですわ。宮国様の文才は、文化祭の演劇でしっかり示されていますから」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 142,
+            "text": "「ご機嫌よう宮国様、小野坂様。移動教室ですか？」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 165,
+            "text": "「うふふ。お嬢様のことが気になりますか？」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 187,
+            "text": "「お待ちくださいませ、小野坂様。私がせっかちだったのです」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 200,
+            "text": "「コホン。宮国様、お嬢様の体調は良くなっておいでです」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 262,
+            "text": "「ナイスフォローですわ、小野坂様」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 289,
+            "text": "「宮国様さえよろしければ、本日お越しくださいませんか？お嬢様もきっとお喜びになると思います」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 318,
+            "text": "「真優様の送迎は、千代田家にお任せくださいませ。責任を持って、お家までお送りいたしますから」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 15,
+            "text": "「お嬢様、僭越ながら今はお昼休みでございます」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 78,
+            "text": "「お嬢様、徹夜は身体に障ります。間違いなくベッドに逆戻りですわ」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 494,
+            "text": "「お嬢様……お嬢様……」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 567,
+            "text": "「お嬢様……」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 670,
+            "text": "「お嬢様、よろしいでしょうか？」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1549,
+            "text": "「お帰りなさいませ、お嬢様。宮国様」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1582,
+            "text": "「うふふ、そうですわね。さすが宮国様です、頼りになりますわ」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1599,
+            "text": "「宮国様、もしよろしければ車でお送りいたします」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1618,
+            "text": "「もちろんですわ、お嬢様。車はすでに用意を……」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1286,
+            "text": "「おはようございます、宮国様、真優様」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1308,
+            "text": "「お嬢様が、この道を通りたいと仰いましたので……もしかしたら、お二人に会えるかもしれないとのことで」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1357,
+            "text": "「ああ、お嬢様……不憫でございますわ……ですが、ですが……とっても可愛らしいです……！」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1406,
+            "text": "「いいえ、お嬢様。昨晩、食事の最中話題に上がりましたわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1439,
+            "text": "「まあ、宮国様。つれないことを仰らないでくださいませ。ぜひともご一緒いたしましょう」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1469,
+            "text": "「寛大なご対応に感謝いたしますわ、真優様」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1483,
+            "text": "「うふふ……真優様も微笑ましく見守ってくださいますと幸いに思いますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2244,
+            "text": "「お嬢様、お迎えにあがりました。部室へ参りましょう」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2329,
+            "text": "「もちろんですわ、お嬢様。お嬢様の幸せが、私の幸せですから」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2366,
+            "text": "「アリス様、少々よろしいでしょうか？」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2379,
+            "text": "「さすが、アリス様ですわ。お察しの通りでございます」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2385,
+            "text": "「お嬢様が、宮国様への恋心に悩んでいらっしゃるようなのです」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2400,
+            "text": "「それでも、宮国様はお嬢様と二人きりの時間を持とうとされているようなのですわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2415,
+            "text": "「ええ……お嬢様のメイドとして、なにか手助けができれば良いのですが……」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2534,
+            "text": "「はい。お休みなさいませ、アリス様」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 294,
+            "text": "「“ケーキはいかがでございますか？”という意味ですわ、お嬢様」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 309,
+            "text": "「かしこまりました、お嬢様」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 536,
+            "text": "「お嬢様、教科書のこのページをご一読くださいませ」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 550,
+            "text": "「それはですね、お嬢様。ここの部分にあります通り……」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 731,
+            "text": "「うふふ。お嬢様、褒めて伸ばすという言葉がありますわ。皆さまのお言葉を栄養に、しっかり伸びましょうね」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 806,
+            "text": "「アリス様の仰る通りですわ。そろそろ合宿を提案しなければ、あとがありませんものね」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 828,
+            "text": "「ですが、お嬢様は努力していらっしゃるのです。ただ、これまで学園に通う日数が少なく……」"
+          },
+          {
+            "scene": "d08_01",
+            "line": 124,
+            "text": "「アリス様はケルベロスさんと散歩に出られています。お二人は早速お勉強されますか？」"
+          },
+          {
+            "scene": "d08_01",
+            "line": 188,
+            "text": "「うふふ……ふふふっ……素晴らしいですわ、宮国様」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 141,
+            "text": "「宮国様、こんにちは」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 260,
+            "text": "「私は、お嬢様を迎えに行って参ります。また後ほど、文芸部室へお伺いいたしますわ」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 366,
+            "text": "「お嬢様も、とても真面目に採点を進めていらっしゃいますわね。うふふふふ……」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 976,
+            "text": "「申し訳ありません、お嬢様。それくらい、我が事のように嬉しいのですわ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1415,
+            "text": "「宮国様、おはようございます」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1894,
+            "text": "「いいえ、お嬢様の身体はとても魅力的ですわ！」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1922,
+            "text": "「それよりもお嬢様、自信を持ってくださいませ。お嬢様は誰よりも魅力的でございます」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1951,
+            "text": "「宮国様は誠実な方ですから……真優様があれほど無防備でいられたのも、その誠実さゆえかと」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2013,
+            "text": "「お嬢様……ここは、私にお任せくださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2049,
+            "text": "「もちろんですわ、お嬢様。仰せのままに……うふふふふ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2065,
+            "text": "「あら？　うふふ……気のせいですわ、千奈様」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2495,
+            "text": "「鞄をお預かりいたしますわ、宮国様。どうぞこちらへ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2553,
+            "text": "「宮国様……据え膳喰わぬは男の恥と言いますわ。ぜひ、お嬢様の処女を受け取ってくださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2729,
+            "text": "「大丈夫ですわ、宮国様。誰でも初めては不安なものです」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2741,
+            "text": "「お嬢様と宮国様の幸せのため、私もひと肌脱がせていただきますから……ご安心くださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2763,
+            "text": "「さあ……宮国様は、こちらへ横になってくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 22,
+            "text": "「お嬢様が初めてセックスを経験なさるのですから、お付きのメイドとしては、一番側で見ていたいのですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 32,
+            "text": "「まあ、バレてしまいましたか。さすが宮国様ですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 50,
+            "text": "「あら、いけませんわ……お嬢様、どうぞ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 139,
+            "text": "「それにしても、宮国様……恋人であるお嬢様の身体を見ても反応なさらないなんて、私は不思議でなりません」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 159,
+            "text": "「これはおそらく……お嬢様という恋人がいながら、オナニーで性欲処理をしていることが原因かと」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 168,
+            "text": "「あら、宮国様はオナニーをしない派なのですか？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 194,
+            "text": "「うふふ……つまり、宮国様は緊張なさっているようですわ。お嬢様の魅力で、ほぐして差し上げないと」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 215,
+            "text": "「それではお嬢様、まずは睾丸の愛撫からはじめましょう」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 237,
+            "text": "「お嬢様は『たまたま』の方が呼びやすいでしょう。その方が可愛らしくもありますから」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 257,
+            "text": "「お嬢様、根元の方もゆっくり撫でてくださいませ……こう、血液を先端へ送るように扱きたてるのですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 284,
+            "text": "「お嬢様、これが勃起ですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 307,
+            "text": "「さあ、お嬢様。おちんちんに、お胸を押し付けてみてくださいませ……もっと身体を前に倒して……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 328,
+            "text": "「あら……そんなこと、些細なことですわ。ねぇ、宮国様？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 374,
+            "text": "「はぁん……んふっ……いかがですか？　巨乳パイズリ……気持ちいいでしょう、宮国様……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 416,
+            "text": "「お嬢様、そういう時はおちんちんにつばを垂らしてみてくださいませ。潤滑油になりますから」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 442,
+            "text": "「あ……はぁん……お嬢様のつば、とっても熱いですわ……私のおっぱいも濡らすほどの量……さすがお嬢様です」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 503,
+            "text": "「お嬢様、その先走り液をお口に受け入れて差し上げれば、きっともっと喜んでいただけますわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 531,
+            "text": "「お嬢様、先走り液を吸うように、亀頭……先っぽを吸ってみてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 580,
+            "text": "「うふふ、さすがお嬢様ですわ。吸うときも強弱を付けると、もっと気持ちいいかと思います」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 652,
+            "text": "「うふふ……私も、お嬢様の乳首が擦れて気持ちいいですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 657,
+            "text": "「お嬢様……おちんちんにも、乳首を擦り付けてあげてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 687,
+            "text": "「お嬢様の乳首を触るのは初めてなのですわよね……？それでは、しっかりと感じてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 715,
+            "text": "「お嬢様、男性の性感帯はおちんちんに集中していますが、そこだけを刺激すればいいというものではありません」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 864,
+            "text": "「ふふっ、お嬢様に見つめられただけで……ぁん、おちんちんがびくっと脈動して……ふふ、可愛いです」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 899,
+            "text": "「射精が近いのですわ、お嬢様。もうすぐ愛の証が見られますわよ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 921,
+            "text": "「宮国様、お嬢様が待ち望んでおいでですわ……私も、もちろん射精を見てみたいですから……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 997,
+            "text": "「んっんっ……宮国様、そろそろ射精しそうでしょう？ふふっ……我慢せずに、射精してくださいませ……っ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1141,
+            "text": "「うふふ、では今度は、お嬢様も気持ちよくなる番……ですわね」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1174,
+            "text": "「宮国様……お嬢様のおまんこ、見えていますか？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1195,
+            "text": "「お嬢様、見てもらわなければいけません。お嬢様の処女おまんこをしっかり覚えておいてもらいませんと」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1224,
+            "text": "「お嬢様のおまんこに触れてみてください。破瓜の痛みが少なくなるよう、しっかり解してあげてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1271,
+            "text": "「お嬢様のおまんこ、綺麗でしょう……？　まだ誰にも許されたことがない場所なのですよ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1313,
+            "text": "「まあ……正解ですわ、お嬢様……女性は子宮で考えて、子宮で感じるのですから。ですが、よくご存じで……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1341,
+            "text": "「お嬢様……きっと宮国様は、お嬢様のおねだりをお待ちですわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1401,
+            "text": "「そう……ですわ、宮国様。ゆっくりと……お嬢様と呼吸を合わせながら……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1441,
+            "text": "「宮国様、もしかして……？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1508,
+            "text": "「お嬢様、落ち着いてください。ゆっくりと深呼吸です。吸って……吐いて……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1629,
+            "text": "「宮国様……このまま終えられては、お嬢様の初体験が痛みの記憶になってしまいますわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1687,
+            "text": "「お嬢様、深呼吸ですわ……力を抜いて……ほら、おっぱいも気持ちよくしてさしあげますから……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1753,
+            "text": "「お嬢様、お顔がとろけてきていますわね……ふふ、気持ちいいですか？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1820,
+            "text": "「お嬢様、おちんちんの感触……お分かりになりますか？パイズリの時のように、膣内で跳ねているでしょう？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1948,
+            "text": "「ああ、お嬢様……こんなに汗をかいて、よだれを垂らして……もうそろそろ、でしょうか……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1957,
+            "text": "「うふふっ……宮国様も、そろそろ限界では……？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1984,
+            "text": "「大丈夫ですわ、お嬢様……宮国様に、全て委ねて……快楽に正直になってくださいませ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2133,
+            "text": "「まあ！　こういう時、謝るのはマナー違反ですわ。ねえ、お嬢様？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2275,
+            "text": "「たくさん頑張りましたわね、お嬢様……とっても立派でしたわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2298,
+            "text": "「さあ、お嬢様……最後は、頑張ってくださったおちんちんを、お掃除してさしあげましょうね」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2335,
+            "text": "「お嬢様の愛液と、精液の混ざった匂いがしますわ……ふふっ、なんていやらしいんでしょう……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2508,
+            "text": "「えぇ……そうですわ、お嬢様……その調子です……んっ、んっ……ちゅっ……れるる……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2646,
+            "text": "「うふふ……お嬢様のお口の中は、いかがですか……？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2754,
+            "text": "「お嬢様……お口の内側に、おちんちんを擦り付けてみてください。きっと喜んでくださいますわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2839,
+            "text": "「あら……お嬢様のお口が……んれぅ、気持ちいいから、ですわよ……ちゅぴっ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2990,
+            "text": "「お嬢様、濃くて……喉に絡みついてしまいそうな、精液を……んん、飲むには、コツがありますわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3262,
+            "text": "「全て私にお任せくださいませ、宮国様」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 215,
+            "text": "「本日はありがとうございました、宮国様」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 333,
+            "text": "「ふふ……そんなことを言っていただけたのは初めてですわ。宮国様、ありがとうございます」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 345,
+            "text": "「ですが、先ほども言った通りです。私の人生においての幸福は、お嬢様と宮国様、お二人の幸せなのです」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 352,
+            "text": "「ですから、宮国様がお気にするようなことは、なにもありません」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 370,
+            "text": "「お嬢様も、私が宮国様を横取りするような心配はしていらっしゃいませんよ」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 408,
+            "text": "「お嬢様、男性が浮気できないようにする手練手管を記した書物、カーマ・スートラをご存知ですか？」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 435,
+            "text": "「一緒に勉強いたしましょうね、お嬢様」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 465,
+            "text": "「もちろんですわ、宮国様。ほどほどにご支援させていただきます」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 17,
+            "text": "「真優様のお菓子用ということでしたら、新商品がひとつありますわ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 29,
+            "text": "「かしこまりました。宮国様に限り、商品を一点お買い上げごとにおまけを一つプレゼント中ですわ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 48,
+            "text": "「どれになさいますか、宮国様？」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 61,
+            "text": "「ですが、商品をご購入された宮国様だけの特典ですから」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 132,
+            "text": "「お嬢様、ありがとうございます。私から伺えずに申し訳ありません」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 186,
+            "text": "「妬けてしまいますわ、宮国様。お嬢様の優先順位がどんどん塗り替えられていきます……よよよ……」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 312,
+            "text": "「はっ……！　な、なるほど……！　さすがアリス様ですわ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 401,
+            "text": "「つまり――カラオケに行きましょう、真優様、千奈様」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 441,
+            "text": "「お二人が親睦を深めている間に、私たちも仲良くしませんか……ねえ、真優様？」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 499,
+            "text": "「アリス様とも、昇降口で待ち合わせをしております。さあ参りましょう、今すぐに」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 516,
+            "text": "「宮国様を全面的に信頼しておりますわ。お嬢様のことをよろしくお願いいたします」"
+          },
+          {
+            "scene": "d12_01",
+            "line": 644,
+            "text": "「お嬢様は、朝早くからとてもはりきっておいででした。服を何着も着替えたり、髪型を色々研究したりと……」"
+          },
+          {
+            "scene": "d12_01",
+            "line": 685,
+            "text": "「お嬢様は体調の悪さをギリギリまで隠して『大丈夫』と誤魔化すことが、どんどんお上手になって……」"
+          },
+          {
+            "scene": "d12_01",
+            "line": 733,
+            "text": "「宮国様以上の適任はいらっしゃいませんわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 113,
+            "text": "「いらっしゃいませ、宮国様。真優様のためのお菓子でしたら、今朝入荷した新商品がございますわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 153,
+            "text": "「大丈夫ですわ。お嬢様と宮国様のことは、全てにおいて優先されますから」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 246,
+            "text": "「そうですね……お嬢様は、ご自分の体調で迷惑を掛けることを嫌うお方です」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 351,
+            "text": "「宮国様と協力できれば、きっとすぐに解決してしまうことかもしれませんが……」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 358,
+            "text": "「お嬢様のためを思って、宮国様が考え抜くこと……きっと、それが一番重要なことなのだと思いますわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 387,
+            "text": "「戻りましょうか。宮国様がお昼ごはんを食べる時間がなくなってしまいます」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 508,
+            "text": "「お嬢様、ほんのメイドジョークですわ。出過ぎた真似をしてしまい、失礼しました」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 136,
+            "text": "「健気ですわ、お嬢様」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 264,
+            "text": "「ご立派ですわ、お嬢様……！　素晴らしいご決断です」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 328,
+            "text": "「問題ありませんわ。お嬢様にとっては、演劇部の活動の一環でもありますから……」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 365,
+            "text": "「行ってらっしゃいませ、お嬢様」"
+          },
+          {
+            "scene": "d15_01",
+            "line": 427,
+            "text": "「こちらですね、宮国様」"
+          },
+          {
+            "scene": "d15_01",
+            "line": 463,
+            "text": "「いいえ、お嬢様は諳んじられるほどこの脚本を読んでいらっしゃいますから、すぐに見つかりましたわ」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 88,
+            "text": "「申し訳ありません、お嬢様。色々と準備が必要な事情がございまして……」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 752,
+            "text": "「こんばんは、宮国様。ようこそいらっしゃいました」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 764,
+            "text": "「最近、お嬢様はプールで体力作りに励んでいらっしゃるのですわ」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 807,
+            "text": "「それでは宮国様、お嬢様をよろしくお願いいたします。私は、車で待機しておりますので」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 982,
+            "text": "「宮国様、よろしければこちらをお貼りください」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1054,
+            "text": "「いいえ、他ならぬお嬢様のためですもの。当然ですわ」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1071,
+            "text": "「私の一生を捧げるご主人様ですから」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1083,
+            "text": "「うふふ、それでは宮国様も、ゆくゆくは私の正式なご主人様になられるのですね」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1167,
+            "text": "「宮国様と出会ってから、お嬢様は本当に明るく、幸せそうに毎日を過ごしていらっしゃいます」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1174,
+            "text": "「これからもお嬢様のことを、よろしくお願いします」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 74,
+            "text": "「うふふ、いけませんわアリス様。お嬢様の可愛らしい表情を、もう少し眺めていたかったですのに」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 694,
+            "text": "「お嬢様、大丈夫ですか？」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 994,
+            "text": "「私もおりますわ、お嬢様。お忘れなく」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1414,
+            "text": "「千奈様、小説の題材にするには、質問が漠然としすぎているかと」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1713,
+            "text": "「それでは、お嬢様。今夜は全て宮国様にお預けさせていただきたいと思うのですが、いかがでしょう？」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1754,
+            "text": "「うふふ、お気遣いありがとうございます。宮国様もお楽しみくださいませ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 409,
+            "text": "「お帰りなさいませ、お嬢様。いらっしゃいませ、宮国様」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 686,
+            "text": "「ふふ……宮国様、とても素敵な笑顔ですわ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 702,
+            "text": "「お嬢様が、どんどん眩しくなっていくのがとても……とっても嬉しいんです……」"
+          }
+        ],
+        "uses_service_formulas": [
+          {
+            "scene": "d03_01",
+            "line": 53,
+            "text": "「それでは、お嬢様のお部屋へご案内いたしますわ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 101,
+            "text": "「失礼いたします」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 352,
+            "text": "「かしこまりました。それでは、お嬢様のことをよろしくお願いいたします」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 15,
+            "text": "「お嬢様、僭越ながら今はお昼休みでございます」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 326,
+            "text": "「入部に際して祖語が無いよう、これから演劇部の説明をさせていただきます。その上で入部をご検討ください」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 813,
+            "text": "「ご迷惑をおかけする代わりに、千代田家で送迎させていただきたいと思うのですが、いかがでしょうか？」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1694,
+            "text": "「それでは、車はこちらです。ご案内いたしますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2465,
+            "text": "「僭越ながら……今度の中間テストを利用できないかと考えておりますわ」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 309,
+            "text": "「かしこまりました、お嬢様」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 237,
+            "text": "「私は、お二人が幸せになれるように陰日向からお手伝いをしたいのです」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 465,
+            "text": "「もちろんですわ、宮国様。ほどほどにご支援させていただきます」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 29,
+            "text": "「かしこまりました。宮国様に限り、商品を一点お買い上げごとにおまけを一つプレゼント中ですわ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 260,
+            "text": "「失礼いたします。ケルベロスさんのごはんをお届けに参りました」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 470,
+            "text": "「うふふ……恐縮ですわ。そんな誤解をしてくださるなんて」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 528,
+            "text": "「かしこまりました。見繕って、お持ちいたしますわ」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 17,
+            "text": "「失礼いたします」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1294,
+            "text": "「それは素敵ですわね。私と千奈様もご一緒させていただきましょうか」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1315,
+            "text": "「かしこまりました。それではお嬢様をお送りする際、パジャマを持参いたします」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1337,
+            "text": "「それでは僭越ながら、ご両親への説明の際には私も付き添いますわ。パジャマも用意できて、一石二鳥です」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1713,
+            "text": "「それでは、お嬢様。今夜は全て宮国様にお預けさせていただきたいと思うのですが、いかがでしょう？」"
+          }
+        ],
+        "offers_to_do_it_for_them": [
+          {
+            "scene": "d03_01",
+            "line": 53,
+            "text": "「それでは、お嬢様のお部屋へご案内いたしますわ」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 318,
+            "text": "「真優様の送迎は、千代田家にお任せくださいませ。責任を持って、お家までお送りいたしますから」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1694,
+            "text": "「それでは、車はこちらです。ご案内いたしますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1469,
+            "text": "「寛大なご対応に感謝いたしますわ、真優様」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2278,
+            "text": "「うふふ、恋愛マスターの千奈様にお任せした方がよろしいのかと思いましたわ」"
+          },
+          {
+            "scene": "d08_01",
+            "line": 224,
+            "text": "「はい。千代田家でお部屋をご用意いたしますので、もしよろしければ、合宿はいかがでしょう？」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 260,
+            "text": "「私は、お嬢様を迎えに行って参ります。また後ほど、文芸部室へお伺いいたしますわ」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 989,
+            "text": "「うふふ……良かったです、お嬢様。宮国様なら安心してお任せすることができますわ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2013,
+            "text": "「お嬢様……ここは、私にお任せくださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2495,
+            "text": "「鞄をお預かりいたしますわ、宮国様。どうぞこちらへ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3021,
+            "text": "「はぁっ……絞りたての精液は……ンっ……独特の味がいたしますわね……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3262,
+            "text": "「全て私にお任せくださいませ、宮国様」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 528,
+            "text": "「かしこまりました。見繕って、お持ちいたしますわ」"
+          }
+        ],
+        "closes_the_clause_with_wa": [
+          {
+            "scene": "d02_01",
+            "line": 602,
+            "text": "「ありがとうございます。さすがですわ、宮国様」"
+          },
+          {
+            "scene": "d02_01",
+            "line": 666,
+            "text": "「あら、お顔を赤くされて、どうしたのですか？　ただの世間話ですわ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 53,
+            "text": "「それでは、お嬢様のお部屋へご案内いたしますわ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 265,
+            "text": "「お嬢様、調子に乗ってはいけませんわ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 620,
+            "text": "「ふふふ……うふふふふ。問い返すのは野暮というものですわ、宮国様」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 858,
+            "text": "「私もですわ。宮国様の文才は、文化祭の演劇でしっかり示されていますから」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 226,
+            "text": "「そうかもしれませんわ……唯一、宮国様とメール交換をしている時だけは楽しそうにしておられますが……」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 262,
+            "text": "「ナイスフォローですわ、小野坂様」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 336,
+            "text": "「ええ、ぜひお一人で。放課後お迎えにあがりますわ」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 78,
+            "text": "「お嬢様、徹夜は身体に障ります。間違いなくベッドに逆戻りですわ」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 725,
+            "text": "「ありがとうございます。助かりますわ。今度お礼に、絆創膏を三割増量しておきますね」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1569,
+            "text": "「いいえ、当然のことですわ。ご無事でなによりです」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1582,
+            "text": "「うふふ、そうですわね。さすが宮国様です、頼りになりますわ」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1618,
+            "text": "「もちろんですわ、お嬢様。車はすでに用意を……」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1694,
+            "text": "「それでは、車はこちらです。ご案内いたしますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1357,
+            "text": "「ああ、お嬢様……不憫でございますわ……ですが、ですが……とっても可愛らしいです……！」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1406,
+            "text": "「いいえ、お嬢様。昨晩、食事の最中話題に上がりましたわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1469,
+            "text": "「寛大なご対応に感謝いたしますわ、真優様」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1483,
+            "text": "「うふふ……真優様も微笑ましく見守ってくださいますと幸いに思いますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2278,
+            "text": "「うふふ、恋愛マスターの千奈様にお任せした方がよろしいのかと思いましたわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2329,
+            "text": "「もちろんですわ、お嬢様。お嬢様の幸せが、私の幸せですから」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2379,
+            "text": "「さすが、アリス様ですわ。お察しの通りでございます」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2400,
+            "text": "「それでも、宮国様はお嬢様と二人きりの時間を持とうとされているようなのですわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2430,
+            "text": "「ええ、メイドとしてですわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2465,
+            "text": "「僭越ながら……今度の中間テストを利用できないかと考えておりますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2520,
+            "text": "「ありがとうございます。不自然にならないよう外堀を埋めるため、ご助力いただければ幸いですわ」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 294,
+            "text": "「“ケーキはいかがでございますか？”という意味ですわ、お嬢様」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 597,
+            "text": "「『ペルシア人』がありますわ。『女の平和』も。それから……」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 731,
+            "text": "「うふふ。お嬢様、褒めて伸ばすという言葉がありますわ。皆さまのお言葉を栄養に、しっかり伸びましょうね」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 806,
+            "text": "「アリス様の仰る通りですわ。そろそろ合宿を提案しなければ、あとがありませんものね」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 821,
+            "text": "「……分かっております。分かっておりますわ、アリス様。私がお嬢様を甘やかしてしまっていることも……」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 856,
+            "text": "「ご褒美作戦や睡眠学習、催眠、呪術、神頼み……ありとあらゆる方法を試しましたわ」"
+          },
+          {
+            "scene": "d08_01",
+            "line": 188,
+            "text": "「うふふ……ふふふっ……素晴らしいですわ、宮国様」"
+          },
+          {
+            "scene": "d08_01",
+            "line": 204,
+            "text": "「実は、私が保存していた過去問が見つかったのですわ。一年生と二年生のもの、両方ございます」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 260,
+            "text": "「私は、お嬢様を迎えに行って参ります。また後ほど、文芸部室へお伺いいたしますわ」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 504,
+            "text": "「素晴らしいですわ。とてもよく頑張っていらっしゃいましたものね」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 950,
+            "text": "「私は、テスト前の告白の件もお聞きしていましたわ。そのことが気になってそわそわしているお二人が可愛らしくて……」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 976,
+            "text": "「申し訳ありません、お嬢様。それくらい、我が事のように嬉しいのですわ」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 989,
+            "text": "「うふふ……良かったです、お嬢様。宮国様なら安心してお任せすることができますわ」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 1002,
+            "text": "「うふふ……恋人とメイドの役割は、全くの別物ですわ。宮国様には、宮国様にしかできないことがございます」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1894,
+            "text": "「いいえ、お嬢様の身体はとても魅力的ですわ！」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1916,
+            "text": "「うふふ、秘密ですわ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2049,
+            "text": "「もちろんですわ、お嬢様。仰せのままに……うふふふふ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2065,
+            "text": "「あら？　うふふ……気のせいですわ、千奈様」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2495,
+            "text": "「鞄をお預かりいたしますわ、宮国様。どうぞこちらへ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2553,
+            "text": "「宮国様……据え膳喰わぬは男の恥と言いますわ。ぜひ、お嬢様の処女を受け取ってくださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2649,
+            "text": "「ですが、身体を触れ合わせることで伝わる愛もありますわ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2729,
+            "text": "「大丈夫ですわ、宮国様。誰でも初めては不安なものです」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 22,
+            "text": "「お嬢様が初めてセックスを経験なさるのですから、お付きのメイドとしては、一番側で見ていたいのですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 32,
+            "text": "「まあ、バレてしまいましたか。さすが宮国様ですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 40,
+            "text": "「とにもかくにも、年貢の納め時ですわ、宮国様。男らしく観念してくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 50,
+            "text": "「あら、いけませんわ……お嬢様、どうぞ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 125,
+            "text": "「それは良かったですわ。私のあずかり知らぬところで、お嬢様の処女が散っていたらどうしようかと思いました」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 194,
+            "text": "「うふふ……つまり、宮国様は緊張なさっているようですわ。お嬢様の魅力で、ほぐして差し上げないと」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 257,
+            "text": "「お嬢様、根元の方もゆっくり撫でてくださいませ……こう、血液を先端へ送るように扱きたてるのですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 284,
+            "text": "「お嬢様、これが勃起ですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 288,
+            "text": "「そしてここからが、フェラチオの本番ですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 328,
+            "text": "「あら……そんなこと、些細なことですわ。ねぇ、宮国様？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 351,
+            "text": "「ですが、快感は精神論では語れませんわ、お嬢様。巨乳に負けないよう、貧乳の戦い方を身に付けてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 442,
+            "text": "「あ……はぁん……お嬢様のつば、とっても熱いですわ……私のおっぱいも濡らすほどの量……さすがお嬢様です」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 483,
+            "text": "「カウパー氏腺液というものですわ。我慢汁や先走り液とも言って、男性が気持ち良くなると出るのです」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 503,
+            "text": "「お嬢様、その先走り液をお口に受け入れて差し上げれば、きっともっと喜んでいただけますわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 580,
+            "text": "「うふふ、さすがお嬢様ですわ。吸うときも強弱を付けると、もっと気持ちいいかと思います」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 611,
+            "text": "「うふふっ、よほど気持ちいいのですね、宮国様。おちんちんがぴくんぴくんと跳ねていますわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 652,
+            "text": "「うふふ……私も、お嬢様の乳首が擦れて気持ちいいですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 745,
+            "text": "「ふふっ……くすぐったさも快感のうちなのですわ……ほら、おちんちんが跳ねているでしょう？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 772,
+            "text": "「うふふ、男性の象徴ですもの。王様待遇で当然ですわ……そうですわよね？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 798,
+            "text": "「ふふっ、おちんちんも喜んでいらっしゃいますわ……次々と、先走り液が溢れて……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 817,
+            "text": "「あら……うふふ、余分な力が入っていますわ、宮国様……もっと思うままに感じてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 836,
+            "text": "「こんなにも頑張って愛撫しているのに……我慢するなんて、つれないですわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 879,
+            "text": "「ええ……とってもいやらしい音ですわ……お嬢様のつばと、私たちの汗と、先走り液が混ざって……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 899,
+            "text": "「射精が近いのですわ、お嬢様。もうすぐ愛の証が見られますわよ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 921,
+            "text": "「宮国様、お嬢様が待ち望んでおいでですわ……私も、もちろん射精を見てみたいですから……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 946,
+            "text": "「まあ……楽しみですわ……うふふ、ここまでは本の通りでしたけれど……射精の詳細までは、知りませんもの」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 960,
+            "text": "「ええ。実践は初めてですわ……お嬢様のため、こうして勉強していた甲斐がありました」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1089,
+            "text": "「ぁんっ！　あぁんっ！　うふふっ……はぁんっ、こんなにいっぱい……熱いですわ……っ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1313,
+            "text": "「まあ……正解ですわ、お嬢様……女性は子宮で考えて、子宮で感じるのですから。ですが、よくご存じで……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1341,
+            "text": "「お嬢様……きっと宮国様は、お嬢様のおねだりをお待ちですわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1401,
+            "text": "「そう……ですわ、宮国様。ゆっくりと……お嬢様と呼吸を合わせながら……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1553,
+            "text": "「よく頑張りましたわね、お嬢様……偉いですわ。いい子いい子……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1629,
+            "text": "「宮国様……このまま終えられては、お嬢様の初体験が痛みの記憶になってしまいますわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1687,
+            "text": "「お嬢様、深呼吸ですわ……力を抜いて……ほら、おっぱいも気持ちよくしてさしあげますから……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1984,
+            "text": "「大丈夫ですわ、お嬢様……宮国様に、全て委ねて……快楽に正直になってくださいませ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2133,
+            "text": "「まあ！　こういう時、謝るのはマナー違反ですわ。ねえ、お嬢様？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2243,
+            "text": "「あ……んっ……ふふ、すごい匂いですわ……栗の花の匂いともまた違う……もっといやらしい匂いですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2275,
+            "text": "「たくさん頑張りましたわね、お嬢様……とっても立派でしたわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2335,
+            "text": "「お嬢様の愛液と、精液の混ざった匂いがしますわ……ふふっ、なんていやらしいんでしょう……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2361,
+            "text": "「うふふ……おちんちんのお掃除を想像して……ときめいていらっしゃるんですわ……ねぇ？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2378,
+            "text": "「それでは始めましょうか、お嬢様……まずは、先っぽからですわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2462,
+            "text": "「うふふ……申し訳ありません、お嬢様。ですが、おちんちんにはたくさん精液と愛液が付いていますわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2508,
+            "text": "「えぇ……そうですわ、お嬢様……その調子です……んっ、んっ……ちゅっ……れるる……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2518,
+            "text": "「うふふ……セックスの味……ですわ、お嬢様……れるっ、お嬢様の愛液の味も、混ざっていますから……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2539,
+            "text": "「んっ……れる……ちゅっ……くちゅ……おちんちん、反り返って……はぁ……んちゅ……ますわ……れるっ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2582,
+            "text": "「うふふ。つばのことですわ……お嬢様と私のつばが混ざって……ああ、いやらしい音がします……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2597,
+            "text": "「こうなれば……限界まで吸うしかありませんわ。お嬢様、しっかり咥えてさしあげてください」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2683,
+            "text": "「あら……本当ですわね……おちんちんが、真っ赤になって……睾丸もひくひくしていますわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2754,
+            "text": "「お嬢様……お口の内側に、おちんちんを擦り付けてみてください。きっと喜んでくださいますわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2800,
+            "text": "「ああっ……違いますね、好きな人のおちんちんだから……ですわね……ふふ……愛ですわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2829,
+            "text": "「れろっ、れるる……ん、おちんちん……そんなに跳ねさせたら……舐められませんわ、ふふっ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2990,
+            "text": "「お嬢様、濃くて……喉に絡みついてしまいそうな、精液を……んん、飲むには、コツがありますわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3077,
+            "text": "「はんっ……あぁん、あはぁっ……あつい、ですわ……精液、とっても濃くて……あん、ぁぁっ……！！」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3098,
+            "text": "「はぁ……あぅん……はぁっ……どろどろで、とってもエッチな匂いがしますわ……ああん……っ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3126,
+            "text": "「うふふ……本当ですわね。とってもお肌によさそうですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3142,
+            "text": "「三回目でも、こんなに濃くて、量も多いなんて……素晴らしい体力ですわ」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 333,
+            "text": "「ふふ……そんなことを言っていただけたのは初めてですわ。宮国様、ありがとうございます」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 421,
+            "text": "「……の、由来となった書物ですわ。千奈様もご参考にされているともなれば、信頼のおける書物でしょう」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 465,
+            "text": "「もちろんですわ、宮国様。ほどほどにご支援させていただきます」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 17,
+            "text": "「真優様のお菓子用ということでしたら、新商品がひとつありますわ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 29,
+            "text": "「かしこまりました。宮国様に限り、商品を一点お買い上げごとにおまけを一つプレゼント中ですわ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 89,
+            "text": "「ですが、お二人の幸せのために尽力するともお話ししましたから……有言実行でございますわ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 101,
+            "text": "「こちらの味付きローションは最新作なのだそうですわ。豊富なフレーバーラインナップを全て取り寄せました」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 186,
+            "text": "「妬けてしまいますわ、宮国様。お嬢様の優先順位がどんどん塗り替えられていきます……よよよ……」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 312,
+            "text": "「はっ……！　な、なるほど……！　さすがアリス様ですわ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 483,
+            "text": "「まあ……お二人の秘密があるのですね。私、とても気になりますわ……うふふ」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 516,
+            "text": "「宮国様を全面的に信頼しておりますわ。お嬢様のことをよろしくお願いいたします」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 558,
+            "text": "「ええ、もちろんですわ。それでは行って参ります」"
+          },
+          {
+            "scene": "d12_01",
+            "line": 674,
+            "text": "「気に病むことはありませんわ、宮国様。先ほども言いましたが、適切なご判断でした」"
+          },
+          {
+            "scene": "d12_01",
+            "line": 702,
+            "text": "「きっと、今がとっても楽しいからなのだと思いますわ。宮国様との時間を、特に大切にしたいのでしょう」"
+          },
+          {
+            "scene": "d12_01",
+            "line": 733,
+            "text": "「宮国様以上の適任はいらっしゃいませんわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 113,
+            "text": "「いらっしゃいませ、宮国様。真優様のためのお菓子でしたら、今朝入荷した新商品がございますわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 153,
+            "text": "「大丈夫ですわ。お嬢様と宮国様のことは、全てにおいて優先されますから」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 190,
+            "text": "「体調の方は問題ありませんわ。ただ、デートの途中で帰ることになったことをとても悔やんでおいででした」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 202,
+            "text": "「気に病まないでくださいませ。お二人のどちらとも、落ち度はありませんわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 358,
+            "text": "「お嬢様のためを思って、宮国様が考え抜くこと……きっと、それが一番重要なことなのだと思いますわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 403,
+            "text": "「いえいえ。ご健闘をお祈りしていますわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 470,
+            "text": "「うふふ……恐縮ですわ。そんな誤解をしてくださるなんて」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 508,
+            "text": "「お嬢様、ほんのメイドジョークですわ。出過ぎた真似をしてしまい、失礼しました」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 528,
+            "text": "「かしこまりました。見繕って、お持ちいたしますわ」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 136,
+            "text": "「健気ですわ、お嬢様」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 264,
+            "text": "「ご立派ですわ、お嬢様……！　素晴らしいご決断です」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 328,
+            "text": "「問題ありませんわ。お嬢様にとっては、演劇部の活動の一環でもありますから……」"
+          },
+          {
+            "scene": "d15_01",
+            "line": 182,
+            "text": "「演劇部の部室にいらっしゃいますわ。ケルベロスさんが付き添ってくださっています」"
+          },
+          {
+            "scene": "d15_01",
+            "line": 463,
+            "text": "「いいえ、お嬢様は諳んじられるほどこの脚本を読んでいらっしゃいますから、すぐに見つかりましたわ」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 764,
+            "text": "「最近、お嬢様はプールで体力作りに励んでいらっしゃるのですわ」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 821,
+            "text": "「あら、そんな不躾なことはいたしませんわ。なにかありましたら、ご連絡くださいませ」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1054,
+            "text": "「いいえ、他ならぬお嬢様のためですもの。当然ですわ」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1094,
+            "text": "「ええ。とてもとても楽しみですわ」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1150,
+            "text": "「できましたわ。これで大丈夫です」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1234,
+            "text": "「うふふふふ、そうですね。えいえいおー、ですわ」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 74,
+            "text": "「うふふ、いけませんわアリス様。お嬢様の可愛らしい表情を、もう少し眺めていたかったですのに」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 994,
+            "text": "「私もおりますわ、お嬢様。お忘れなく」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1181,
+            "text": "「もちろんですわ」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1337,
+            "text": "「それでは僭越ながら、ご両親への説明の際には私も付き添いますわ。パジャマも用意できて、一石二鳥です」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1358,
+            "text": "「うふふ、腕が鳴りますわ」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1385,
+            "text": "「ありがとうございます。お言葉に甘えますわ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 492,
+            "text": "「ええ。マスコットキャラクターとして、それはもう多大な愛情をそそがれていますわ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 499,
+            "text": "「部活の無い日でも自主的にここへやって来るくらい熱心な子たちが多いですし……やり甲斐がありますわ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 686,
+            "text": "「ふふ……宮国様、とても素敵な笑顔ですわ」"
+          }
+        ],
+        "opens_with_aara": [
+          {
+            "scene": "d02_01",
+            "line": 666,
+            "text": "「あら、お顔を赤くされて、どうしたのですか？　ただの世間話ですわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1439,
+            "text": "「まあ、宮国様。つれないことを仰らないでくださいませ。ぜひともご一緒いたしましょう」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 561,
+            "text": "「あら……まあ……」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 776,
+            "text": "「まあぁ……うふふ。うふふふふ……っ！」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 1050,
+            "text": "「あらあら、まあまあ……もうお二人は、秘密を共有する仲なのですわね」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1438,
+            "text": "「あら、私のことは気になさらないでくださいませ。見て見ぬふりを貫き通しますから」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2065,
+            "text": "「あら？　うふふ……気のせいですわ、千奈様」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 32,
+            "text": "「まあ、バレてしまいましたか。さすが宮国様ですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 50,
+            "text": "「あら、いけませんわ……お嬢様、どうぞ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 168,
+            "text": "「あら、宮国様はオナニーをしない派なのですか？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 328,
+            "text": "「あら……そんなこと、些細なことですわ。ねぇ、宮国様？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 817,
+            "text": "「あら……うふふ、余分な力が入っていますわ、宮国様……もっと思うままに感じてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 946,
+            "text": "「まあ……楽しみですわ……うふふ、ここまでは本の通りでしたけれど……射精の詳細までは、知りませんもの」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1313,
+            "text": "「まあ……正解ですわ、お嬢様……女性は子宮で考えて、子宮で感じるのですから。ですが、よくご存じで……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2133,
+            "text": "「まあ！　こういう時、謝るのはマナー違反ですわ。ねえ、お嬢様？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2683,
+            "text": "「あら……本当ですわね……おちんちんが、真っ赤になって……睾丸もひくひくしていますわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2839,
+            "text": "「あら……お嬢様のお口が……んれぅ、気持ちいいから、ですわよ……ちゅぴっ……」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 327,
+            "text": "「まあっ……！」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 393,
+            "text": "「あらあら、まあまあ……うふふ、見られてしまいましたか」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 483,
+            "text": "「まあ……お二人の秘密があるのですね。私、とても気になりますわ……うふふ」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 821,
+            "text": "「あら、そんな不躾なことはいたしませんわ。なにかありましたら、ご連絡くださいませ」"
+          }
+        ],
+        "laughs_softly": [
+          {
+            "scene": "d02_01",
+            "line": 648,
+            "text": "「うふふ。本当ですわね、お嬢様。将来の伴侶に選ぶならば、やはり頼りになる男性でなくては」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 620,
+            "text": "「ふふふ……うふふふふ。問い返すのは野暮というものですわ、宮国様」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 912,
+            "text": "「うふふ……やはりお二人は……」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 165,
+            "text": "「うふふ。お嬢様のことが気になりますか？」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 225,
+            "text": "「うふふ……なんでしょうね」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 246,
+            "text": "「うふふふふ……」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1582,
+            "text": "「うふふ、そうですわね。さすが宮国様です、頼りになりますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1483,
+            "text": "「うふふ……真優様も微笑ましく見守ってくださいますと幸いに思いますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2278,
+            "text": "「うふふ、恋愛マスターの千奈様にお任せした方がよろしいのかと思いましたわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2452,
+            "text": "「うふふふふ……」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 731,
+            "text": "「うふふ。お嬢様、褒めて伸ばすという言葉がありますわ。皆さまのお言葉を栄養に、しっかり伸びましょうね」"
+          },
+          {
+            "scene": "d08_01",
+            "line": 188,
+            "text": "「うふふ……ふふふっ……素晴らしいですわ、宮国様」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 217,
+            "text": "「うふふ、そうですわね。成績が分かった“あと”のことの方が、気がかりですわよね……」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 366,
+            "text": "「お嬢様も、とても真面目に採点を進めていらっしゃいますわね。うふふふふ……」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 776,
+            "text": "「まあぁ……うふふ。うふふふふ……っ！」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 962,
+            "text": "「会わずとも眺める方法はいくらでもありますから……うふふふふ」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 989,
+            "text": "「うふふ……良かったです、お嬢様。宮国様なら安心してお任せすることができますわ」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 1002,
+            "text": "「うふふ……恋人とメイドの役割は、全くの別物ですわ。宮国様には、宮国様にしかできないことがございます」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1916,
+            "text": "「うふふ、秘密ですわ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2049,
+            "text": "「もちろんですわ、お嬢様。仰せのままに……うふふふふ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2065,
+            "text": "「あら？　うふふ……気のせいですわ、千奈様」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 194,
+            "text": "「うふふ……つまり、宮国様は緊張なさっているようですわ。お嬢様の魅力で、ほぐして差し上げないと」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 580,
+            "text": "「うふふ、さすがお嬢様ですわ。吸うときも強弱を付けると、もっと気持ちいいかと思います」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 611,
+            "text": "「うふふっ、よほど気持ちいいのですね、宮国様。おちんちんがぴくんぴくんと跳ねていますわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 652,
+            "text": "「うふふ……私も、お嬢様の乳首が擦れて気持ちいいですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 745,
+            "text": "「ふふっ……くすぐったさも快感のうちなのですわ……ほら、おちんちんが跳ねているでしょう？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 772,
+            "text": "「うふふ、男性の象徴ですもの。王様待遇で当然ですわ……そうですわよね？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 798,
+            "text": "「ふふっ、おちんちんも喜んでいらっしゃいますわ……次々と、先走り液が溢れて……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 817,
+            "text": "「あら……うふふ、余分な力が入っていますわ、宮国様……もっと思うままに感じてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 864,
+            "text": "「ふふっ、お嬢様に見つめられただけで……ぁん、おちんちんがびくっと脈動して……ふふ、可愛いです」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 946,
+            "text": "「まあ……楽しみですわ……うふふ、ここまでは本の通りでしたけれど……射精の詳細までは、知りませんもの」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 997,
+            "text": "「んっんっ……宮国様、そろそろ射精しそうでしょう？ふふっ……我慢せずに、射精してくださいませ……っ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1042,
+            "text": "「ええっ、射精……射精してくださいませ、ふふっ、ガチガチのおちんちんから、たくさん射精してくださいっ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1089,
+            "text": "「ぁんっ！　あぁんっ！　うふふっ……はぁんっ、こんなにいっぱい……熱いですわ……っ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1119,
+            "text": "「ふふっ……もうそろそろ、落ち着かれましたか……？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1141,
+            "text": "「うふふ、では今度は、お嬢様も気持ちよくなる番……ですわね」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1253,
+            "text": "「ふふ……おっぱいで一生懸命おちんちんを擦ってましたもの……気持ちよくなってしまったんですよね？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1753,
+            "text": "「お嬢様、お顔がとろけてきていますわね……ふふ、気持ちいいですか？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1795,
+            "text": "「ふふっ……今度は、お二人で気持ちよくならないといけませんから……射精、我慢して下さいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1957,
+            "text": "「うふふっ……宮国様も、そろそろ限界では……？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2120,
+            "text": "「初めてで、中出しだなんて……うふふ、とっても大胆ですわね……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2243,
+            "text": "「あ……んっ……ふふ、すごい匂いですわ……栗の花の匂いともまた違う……もっといやらしい匂いですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2335,
+            "text": "「お嬢様の愛液と、精液の混ざった匂いがしますわ……ふふっ、なんていやらしいんでしょう……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2361,
+            "text": "「うふふ……おちんちんのお掃除を想像して……ときめいていらっしゃるんですわ……ねぇ？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2462,
+            "text": "「うふふ……申し訳ありません、お嬢様。ですが、おちんちんにはたくさん精液と愛液が付いていますわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2483,
+            "text": "「れぅん……はぁ……ふふ……ちゅぢゅる……れぢゅんっ、ちゅ……ちゅくぅ……ちゅぱ……れじゅんっ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2518,
+            "text": "「うふふ……セックスの味……ですわ、お嬢様……れるっ、お嬢様の愛液の味も、混ざっていますから……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2582,
+            "text": "「うふふ。つばのことですわ……お嬢様と私のつばが混ざって……ああ、いやらしい音がします……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2646,
+            "text": "「うふふ……お嬢様のお口の中は、いかがですか……？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2708,
+            "text": "「ふふっ……お掃除なのに、こんなに、先走り液を垂らして……お嬢様の恋人様は、エッチですわね……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2800,
+            "text": "「ああっ……違いますね、好きな人のおちんちんだから……ですわね……ふふ……愛ですわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2814,
+            "text": "「ふふっ……お掃除なのに、こんなに先走り液を垂らして……とっても元気なおちんちん……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2829,
+            "text": "「れろっ、れるる……ん、おちんちん……そんなに跳ねさせたら……舐められませんわ、ふふっ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2880,
+            "text": "「射精ですね……お掃除フェラで、射精してしまうんですわね……ふふっ、たくさん出してくださいませっ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2935,
+            "text": "「ふふっ、お口に射精、んん、なさるん、ですね……っはちゅぅ……ぷあ、んはあっ……！！」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3126,
+            "text": "「うふふ……本当ですわね。とってもお肌によさそうですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3181,
+            "text": "「うふふっ……このままだと、いつまででもできてしまいそうですわね」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3211,
+            "text": "「うふふ……まさか私の頭まで撫でてくださるなんて……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3243,
+            "text": "「うふふ……お二人のセックス……とても激しかったですもの……」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 333,
+            "text": "「ふふ……そんなことを言っていただけたのは初めてですわ。宮国様、ありがとうございます」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 393,
+            "text": "「あらあら、まあまあ……うふふ、見られてしまいましたか」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 229,
+            "text": "「“まだ”……ですか。うふふ……これは、期待しても良いということですわね」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 483,
+            "text": "「まあ……お二人の秘密があるのですね。私、とても気になりますわ……うふふ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 470,
+            "text": "「うふふ……恐縮ですわ。そんな誤解をしてくださるなんて」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1083,
+            "text": "「うふふ、それでは宮国様も、ゆくゆくは私の正式なご主人様になられるのですね」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1234,
+            "text": "「うふふふふ、そうですね。えいえいおー、ですわ」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 74,
+            "text": "「うふふ、いけませんわアリス様。お嬢様の可愛らしい表情を、もう少し眺めていたかったですのに」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1358,
+            "text": "「うふふ、腕が鳴りますわ」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1739,
+            "text": "「ふふ、ありがとうございます。私は、真優様が健やかに楽しく過ごせるよう、最善を尽くしますわね」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1754,
+            "text": "「うふふ、お気遣いありがとうございます。宮国様もお楽しみくださいませ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 421,
+            "text": "「うふふ、とっても順調に――……」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 686,
+            "text": "「ふふ……宮国様、とても素敵な笑顔ですわ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 696,
+            "text": "「うふふ……だって、とっても嬉しいんですもの」"
+          },
+          {
+            "scene": "title",
+            "line": 160,
+            "text": "「うふふ、皆さまの幸せなお気持ちが伝わってきますわね」"
+          }
+        ],
+        "reminds_them_of_what_was_said": [],
+        "frames_herself_as_the_maid": [
+          {
+            "scene": "d02_01",
+            "line": 569,
+            "text": "「ただいま戻りました、お嬢様。力不足のメイドをお許しくださいませ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 300,
+            "text": "「先日は宮国様にお嬢様を助けていただくような失態も犯してしまいました。私はメイド失格です」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2415,
+            "text": "「ええ……お嬢様のメイドとして、なにか手助けができれば良いのですが……」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2430,
+            "text": "「ええ、メイドとしてですわ」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 1002,
+            "text": "「うふふ……恋人とメイドの役割は、全くの別物ですわ。宮国様には、宮国様にしかできないことがございます」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 22,
+            "text": "「お嬢様が初めてセックスを経験なさるのですから、お付きのメイドとしては、一番側で見ていたいのですわ」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 508,
+            "text": "「お嬢様、ほんのメイドジョークですわ。出過ぎた真似をしてしまい、失礼しました」"
+          }
+        ],
+        "directs_with_kudasaimase": [
+          {
+            "scene": "d02_01",
+            "line": 569,
+            "text": "「ただいま戻りました、お嬢様。力不足のメイドをお許しくださいませ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 86,
+            "text": "「お嬢様、アリス様がお帰りになりました。それから、文芸部の皆さまが、お見舞いに来てくださいました」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 293,
+            "text": "「お嬢様、謝る必要はございません。気が付かなかった私めを罰してくださいませ」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 605,
+            "text": "「お嬢様は……心から宮国様のことを信頼なさっているご様子です……」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 187,
+            "text": "「お待ちくださいませ、小野坂様。私がせっかちだったのです」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 289,
+            "text": "「宮国様さえよろしければ、本日お越しくださいませんか？お嬢様もきっとお喜びになると思います」"
+          },
+          {
+            "scene": "d04_01",
+            "line": 318,
+            "text": "「真優様の送迎は、千代田家にお任せくださいませ。責任を持って、お家までお送りいたしますから」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 52,
+            "text": "「安全運転で参りましたので、ご安心くださいませ」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 696,
+            "text": "「部活終了時刻には迎えを寄越します。なにかございましたら、ご連絡くださいませ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1439,
+            "text": "「まあ、宮国様。つれないことを仰らないでくださいませ。ぜひともご一緒いたしましょう」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1483,
+            "text": "「うふふ……真優様も微笑ましく見守ってくださいますと幸いに思いますわ」"
+          },
+          {
+            "scene": "d07_01",
+            "line": 536,
+            "text": "「お嬢様、教科書のこのページをご一読くださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1438,
+            "text": "「あら、私のことは気になさらないでくださいませ。見て見ぬふりを貫き通しますから」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1922,
+            "text": "「それよりもお嬢様、自信を持ってくださいませ。お嬢様は誰よりも魅力的でございます」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2013,
+            "text": "「お嬢様……ここは、私にお任せくださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2553,
+            "text": "「宮国様……据え膳喰わぬは男の恥と言いますわ。ぜひ、お嬢様の処女を受け取ってくださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2741,
+            "text": "「お嬢様と宮国様の幸せのため、私もひと肌脱がせていただきますから……ご安心くださいませ」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 2763,
+            "text": "「さあ……宮国様は、こちらへ横になってくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 40,
+            "text": "「とにもかくにも、年貢の納め時ですわ、宮国様。男らしく観念してくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 194,
+            "text": "「うふふ……つまり、宮国様は緊張なさっているようですわ。お嬢様の魅力で、ほぐして差し上げないと」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 257,
+            "text": "「お嬢様、根元の方もゆっくり撫でてくださいませ……こう、血液を先端へ送るように扱きたてるのですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 307,
+            "text": "「さあ、お嬢様。おちんちんに、お胸を押し付けてみてくださいませ……もっと身体を前に倒して……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 351,
+            "text": "「ですが、快感は精神論では語れませんわ、お嬢様。巨乳に負けないよう、貧乳の戦い方を身に付けてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 416,
+            "text": "「お嬢様、そういう時はおちんちんにつばを垂らしてみてくださいませ。潤滑油になりますから」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 531,
+            "text": "「お嬢様、先走り液を吸うように、亀頭……先っぽを吸ってみてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 657,
+            "text": "「お嬢様……おちんちんにも、乳首を擦り付けてあげてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 687,
+            "text": "「お嬢様の乳首を触るのは初めてなのですわよね……？それでは、しっかりと感じてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 817,
+            "text": "「あら……うふふ、余分な力が入っていますわ、宮国様……もっと思うままに感じてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 997,
+            "text": "「んっんっ……宮国様、そろそろ射精しそうでしょう？ふふっ……我慢せずに、射精してくださいませ……っ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1042,
+            "text": "「ええっ、射精……射精してくださいませ、ふふっ、ガチガチのおちんちんから、たくさん射精してくださいっ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1224,
+            "text": "「お嬢様のおまんこに触れてみてください。破瓜の痛みが少なくなるよう、しっかり解してあげてくださいませ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1508,
+            "text": "「お嬢様、落ち着いてください。ゆっくりと深呼吸です。吸って……吐いて……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1984,
+            "text": "「大丈夫ですわ、お嬢様……宮国様に、全て委ねて……快楽に正直になってくださいませ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2597,
+            "text": "「こうなれば……限界まで吸うしかありませんわ。お嬢様、しっかり咥えてさしあげてください」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2754,
+            "text": "「お嬢様……お口の内側に、おちんちんを擦り付けてみてください。きっと喜んでくださいますわ……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2880,
+            "text": "「射精ですね……お掃除フェラで、射精してしまうんですわね……ふふっ、たくさん出してくださいませっ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3000,
+            "text": "「お口の中で、つばと混ぜて……ん、んく……はぁ……薄めてみてください……これなら、飲めますでしょう？」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3262,
+            "text": "「全て私にお任せくださいませ、宮国様」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 333,
+            "text": "「ふふ……そんなことを言っていただけたのは初めてですわ。宮国様、ありがとうございます」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 73,
+            "text": "「ご安心くださいませ、私のアルバイト代でございます」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 209,
+            "text": "「慰めてくださるのですね、宮国様。それでは、言葉より行動で私の努力を認めてくださいませ」"
+          },
+          {
+            "scene": "d12_01",
+            "line": 722,
+            "text": "「私は、色々と連絡するところもありますので……宮国様はお嬢様に付き添っていただけますか？」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 141,
+            "text": "「少々お待ちくださいませ。もうすぐ、おばさまと交代できますから」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 202,
+            "text": "「気に病まないでくださいませ。お二人のどちらとも、落ち度はありませんわ」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 821,
+            "text": "「あら、そんな不躾なことはいたしませんわ。なにかありましたら、ご連絡くださいませ」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1754,
+            "text": "「うふふ、お気遣いありがとうございます。宮国様もお楽しみくださいませ」"
+          }
+        ],
+        "hedges_an_opinion_politely": [
+          {
+            "scene": "d04_01",
+            "line": 226,
+            "text": "「そうかもしれませんわ……唯一、宮国様とメール交換をしている時だけは楽しそうにしておられますが……」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 875,
+            "text": "「俗に言う、見せつけられているという状況なのではないでしょうか」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 1341,
+            "text": "「私は、特に問題ないかと思いますが……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 580,
+            "text": "「うふふ、さすがお嬢様ですわ。吸うときも強弱を付けると、もっと気持ちいいかと思います」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 1326,
+            "text": "「良い音がしてきましたわね……そろそろ解れてきたのではないでしょうか？」"
+          },
+          {
+            "scene": "d12_01",
+            "line": 702,
+            "text": "「きっと、今がとっても楽しいからなのだと思いますわ。宮国様との時間を、特に大切にしたいのでしょう」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 351,
+            "text": "「宮国様と協力できれば、きっとすぐに解決してしまうことかもしれませんが……」"
+          },
+          {
+            "scene": "d13_01",
+            "line": 358,
+            "text": "「お嬢様のためを思って、宮国様が考え抜くこと……きっと、それが一番重要なことなのだと思いますわ」"
+          }
+        ],
+        "praises_a_person": [
+          {
+            "scene": "d02_01",
+            "line": 602,
+            "text": "「ありがとうございます。さすがですわ、宮国様」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1582,
+            "text": "「うふふ、そうですわね。さすが宮国様です、頼りになりますわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2264,
+            "text": "「お二人が素敵なお話しをされていたので、お邪魔してはいけないと思いまして」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2379,
+            "text": "「さすが、アリス様ですわ。お察しの通りでございます」"
+          },
+          {
+            "scene": "d08_01",
+            "line": 188,
+            "text": "「うふふ……ふふふっ……素晴らしいですわ、宮国様」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 504,
+            "text": "「素晴らしいですわ。とてもよく頑張っていらっしゃいましたものね」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 32,
+            "text": "「まあ、バレてしまいましたか。さすが宮国様ですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 442,
+            "text": "「あ……はぁん……お嬢様のつば、とっても熱いですわ……私のおっぱいも濡らすほどの量……さすがお嬢様です」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 580,
+            "text": "「うふふ、さすがお嬢様ですわ。吸うときも強弱を付けると、もっと気持ちいいかと思います」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2275,
+            "text": "「たくさん頑張りましたわね、お嬢様……とっても立派でしたわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3142,
+            "text": "「三回目でも、こんなに濃くて、量も多いなんて……素晴らしい体力ですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 3152,
+            "text": "「エッチで体力を……？　お嬢様、とても大胆なお誘いです……が、とても素晴らしいアイディアです」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 312,
+            "text": "「はっ……！　な、なるほど……！　さすがアリス様ですわ」"
+          },
+          {
+            "scene": "d14_01",
+            "line": 264,
+            "text": "「ご立派ですわ、お嬢様……！　素晴らしいご決断です」"
+          },
+          {
+            "scene": "d18_01",
+            "line": 1294,
+            "text": "「それは素敵ですわね。私と千奈様もご一緒させていただきましょうか」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 686,
+            "text": "「ふふ……宮国様、とても素敵な笑顔ですわ」"
+          },
+          {
+            "scene": "title",
+            "line": 174,
+            "text": "「文化祭前後の期間で、とても素敵な経験ができたということですわね」"
+          }
+        ],
+        "blames_herself_formally": [
+          {
+            "scene": "d03_01",
+            "line": 300,
+            "text": "「先日は宮国様にお嬢様を助けていただくような失態も犯してしまいました。私はメイド失格です」"
+          },
+          {
+            "scene": "d03_01",
+            "line": 314,
+            "text": "「……そうですわね。大変申し訳ありません、お嬢様」"
+          },
+          {
+            "scene": "d09_01",
+            "line": 976,
+            "text": "「申し訳ありません、お嬢様。それくらい、我が事のように嬉しいのですわ」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2462,
+            "text": "「うふふ……申し訳ありません、お嬢様。ですが、おちんちんにはたくさん精液と愛液が付いていますわ」"
+          },
+          {
+            "scene": "d10_03",
+            "line": 289,
+            "text": "「……申し訳ありません、宮国様。強引に物事を運び過ぎてしまいました」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 132,
+            "text": "「お嬢様、ありがとうございます。私から伺えずに申し訳ありません」"
+          },
+          {
+            "scene": "d16_01",
+            "line": 88,
+            "text": "「申し訳ありません、お嬢様。色々と準備が必要な事情がございまして……」"
+          }
+        ],
+        "teases_gently": [
+          {
+            "scene": "d06_01",
+            "line": 1439,
+            "text": "「まあ、宮国様。つれないことを仰らないでくださいませ。ぜひともご一緒いたしましょう」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 836,
+            "text": "「こんなにも頑張って愛撫しているのに……我慢するなんて、つれないですわ……」"
+          }
+        ],
+        "answers_yes_or_no_first": [
+          {
+            "scene": "d04_01",
+            "line": 336,
+            "text": "「ええ、ぜひお一人で。放課後お迎えにあがりますわ」"
+          },
+          {
+            "scene": "d05_01",
+            "line": 1569,
+            "text": "「いいえ、当然のことですわ。ご無事でなによりです」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 1406,
+            "text": "「いいえ、お嬢様。昨晩、食事の最中話題に上がりましたわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2415,
+            "text": "「ええ……お嬢様のメイドとして、なにか手助けができれば良いのですが……」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2430,
+            "text": "「ええ、メイドとしてですわ」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2478,
+            "text": "「いいえ。まずは文芸部と演劇部での勉強会を重ねたいと考えています」"
+          },
+          {
+            "scene": "d06_01",
+            "line": 2534,
+            "text": "「はい。お休みなさいませ、アリス様」"
+          },
+          {
+            "scene": "d08_01",
+            "line": 224,
+            "text": "「はい。千代田家でお部屋をご用意いたしますので、もしよろしければ、合宿はいかがでしょう？」"
+          },
+          {
+            "scene": "d10_01",
+            "line": 1894,
+            "text": "「いいえ、お嬢様の身体はとても魅力的ですわ！」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 879,
+            "text": "「ええ……とってもいやらしい音ですわ……お嬢様のつばと、私たちの汗と、先走り液が混ざって……」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 960,
+            "text": "「ええ。実践は初めてですわ……お嬢様のため、こうして勉強していた甲斐がありました」"
+          },
+          {
+            "scene": "d10_02",
+            "line": 2563,
+            "text": "「ええ……セックスの体液は、ぬぐえているようです……けれど……」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 289,
+            "text": "「はい。お二人の時間をとても楽しんでいらっしゃいます」"
+          },
+          {
+            "scene": "d11_01",
+            "line": 558,
+            "text": "「ええ、もちろんですわ。それでは行って参ります」"
+          },
+          {
+            "scene": "d15_01",
+            "line": 463,
+            "text": "「いいえ、お嬢様は諳んじられるほどこの脚本を読んでいらっしゃいますから、すぐに見つかりましたわ」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1054,
+            "text": "「いいえ、他ならぬお嬢様のためですもの。当然ですわ」"
+          },
+          {
+            "scene": "d17_01",
+            "line": 1094,
+            "text": "「ええ。とてもとても楽しみですわ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 492,
+            "text": "「ええ。マスコットキャラクターとして、それはもう多大な愛情をそそがれていますわ」"
+          },
+          {
+            "scene": "d20_01",
+            "line": 618,
+            "text": "「はい、ありがとうございます」"
+          }
+        ]
+      }
+    },
+    "distinguishability": {
+      "method": "Blinded contrast. Bernoulli Naive Bayes whose her-class feature likelihoods are her own full-corpus marker rates and whose control-class likelihoods are the control heroines' full-corpus rates; equal priors, so the decision is the sign of the log-odds. The n-gram baseline is a character bigram log-likelihood ratio trained on the build block only. Balanced accuracy is the mean of her recall and the control specificity.",
+      "marker_rates_her": {
+        "rule00": 0.127,
+        "rule03": 0.0684,
+        "rule05": 0.0529,
+        "rule08": 0.728,
+        "rule09": 0.3632,
+        "rule10": 0.1368,
+        "rule22": 0.0366,
+        "rule24": 0.6132
+      },
+      "marker_rates_control": {
+        "rule00": 0.0708,
+        "rule03": 0.1613,
+        "rule05": 0.1362,
+        "rule08": 0.1877,
+        "rule09": 0.5157,
+        "rule10": 0.2292,
+        "rule22": 0.0372,
+        "rule24": 0.0194
+      },
+      "bible_rule_nb": {
+        "full": {
+          "her_n": 377,
+          "control_n": 1484,
+          "tp": 336,
+          "fn": 41,
+          "fp": 148,
+          "tn": 1336,
+          "balanced_accuracy": 0.8958
+        },
+        "non_H": {
+          "her_n": 262,
+          "control_n": 1325,
+          "tp": 233,
+          "fn": 29,
+          "fp": 148,
+          "tn": 1177,
+          "balanced_accuracy": 0.8888
+        }
+      },
+      "bigram_buildblock": {
+        "full": {
+          "n": 2,
+          "her_n": 377,
+          "control_n": 1484,
+          "tp": 345,
+          "fp": 181,
+          "balanced_accuracy": 0.8966
+        },
+        "nonH": {
+          "n": 2,
+          "her_n": 262,
+          "control_n": 1325,
+          "tp": 250,
+          "fp": 180,
+          "balanced_accuracy": 0.9092
+        }
+      },
+      "chance": 0.5
+    }
+  },
+  "verdict": {
+    "verdict": "partial",
+    "headline": "5 of 6 computed checks pass for 真里亜; failed: rules_beat_bigram. Holdout 377 spoken lines in 21 scenes.",
+    "supported": [
+      "holdout_size: 377 holdout spoken lines (needs 100)",
+      "registers_reconcile: H 115 + non-H 262 vs pooled 377",
+      "self_reference_holds: 私 in 0.117 of holdout lines vs 0.132 of build lines (within 0.1)",
+      "mechanisms_distinctive: 13 of 14 mechanisms above the control rate on the holdout (needs half)",
+      "rule_detector_above_chance: bible-rule detector balanced accuracy 0.896 full, 0.889 non-H (chance 0.5)"
+    ],
+    "undermined": [
+      "rules_beat_bigram: bible-rule 0.896 vs plain bigram 0.897 (full); scored on own speech_guide markers (8)"
+    ]
+  }
+}

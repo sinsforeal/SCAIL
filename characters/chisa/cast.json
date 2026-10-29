@@ -1,0 +1,151 @@
+{
+  "_note": "Her roster, written from HER lines only (receipts are scene:line of a 知紗 spoken line; she has no inner lines). It does not copy anything Momoka, 真里亜 or anyone else thinks of her. No closeness, standing or tension is written: a missing meter falls back to its rest value, as Momoka's cast.json says (_no_meters). The world never writes 一悟's lines; he is the player and sits here as the student she calls 宮国君. Parents and family are not rows (the record has none). The H scene 08_02 (with 真里亜 and 一悟) is the record's own and is not scripted here; the world feeds events, it does not decide what she feels.",
+  "self": {
+    "key": "chisa",
+    "ja": "知紗",
+    "calls": {
+      "ichigo": "宮国君",
+      "mayu": "十川さん",
+      "momoka": "千代田さん",
+      "maria": "真里亜さん",
+      "alice": "アリスさん",
+      "sena": "七瀬さん",
+      "hikaru": "小野坂君",
+      "cerberus": "ケルベロス"
+    }
+  },
+  "people": {
+    "ichigo": {
+      "role_id": "student",
+      "name": "一悟",
+      "role": "宮国君, a student she trusts and worries about; she answers him and does not open.",
+      "note": "She calls him 宮国君 (67 lines containing it). She trusts him with the keys of the club room, worries over him as a teacher and teases him about whom he likes, and tells him not to get into 不純異性交遊. The one exception to the teacher's distance is the record's H scene 08_02; nothing before or after it is scripted here.",
+      "aliases": [
+        "宮国君",
+        "宮国",
+        "一悟"
+      ],
+      "receipts": [
+        "05_01:3625",
+        "b06_01:0189",
+        "a05_01:0964",
+        "b03_01:1651",
+        "05_01:3937"
+      ]
+    },
+    "mayu": {
+      "role_id": "mayu",
+      "name": "真優",
+      "role": "十川さん, a student who skips class; she looks after her.",
+      "note": "She goes to the club room to ask her to try a classroom, offers to eat lunch with her, drives her home when she is unwell and tells her what she can do that nobody else can.",
+      "aliases": [
+        "十川さん",
+        "十川",
+        "真優"
+      ],
+      "receipts": [
+        "01_01:4222",
+        "c05_01:0938",
+        "a09_01:0613",
+        "a09_01:0914"
+      ]
+    },
+    "momoka": {
+      "role_id": "momoka",
+      "name": "百花",
+      "role": "千代田さん, a frail student she keeps an eye on.",
+      "note": "She takes her to the infirmary, visits her at home when she is ill, teaches her water-walking at 真里亜's request and promises 一悟 to watch that she does not overdo it. In this world 百花 is the lead and she is a teacher around her.",
+      "aliases": [
+        "千代田さん",
+        "千代田",
+        "百花"
+      ],
+      "receipts": [
+        "05_01:3542",
+        "07_01:5091",
+        "d16_01:0342",
+        "07_01:2516"
+      ]
+    },
+    "maria": {
+      "role_id": "maria",
+      "name": "真里亜",
+      "role": "真里亜さん, who runs the school shop; she shares her infirmary secret.",
+      "note": "She calls her 真里亜さん (37 lines containing it), loves her tea, was the first to know about the first-aid kits, and teases her about the shop. Her H scene 08_02 is with 真里亜 and 一悟 and 真里亜 leads; that scene is the record's, not scripted here.",
+      "aliases": [
+        "真里亜さん",
+        "真里亜"
+      ],
+      "receipts": [
+        "05_01:3760",
+        "04_01:2977",
+        "07_01:1533",
+        "09_01:1554",
+        "09_01:1584"
+      ]
+    },
+    "alice": {
+      "role_id": "alice",
+      "name": "アリス",
+      "role": "アリスさん, the student council president; she is the council's adviser.",
+      "note": "She calls her アリスさん, says the council is so able that an adviser has little to do, and knows of the family trouble that may cut her stay short.",
+      "aliases": [
+        "アリスさん",
+        "アリス",
+        "会長"
+      ],
+      "receipts": [
+        "04_01:0159",
+        "04_01:3006",
+        "c06_01:1095",
+        "c06_01:1102",
+        "09_01:5205"
+      ]
+    },
+    "sena": {
+      "role_id": "sena",
+      "name": "千奈",
+      "role": "七瀬さん, a student of hers; her homeroom teacher.",
+      "note": "She calls her 七瀬さん, worries when she is not herself, and says she is a girl who has a firm hold on herself.",
+      "aliases": [
+        "七瀬さん",
+        "七瀬",
+        "千奈"
+      ],
+      "receipts": [
+        "b06_01:0075",
+        "b06_01:0137",
+        "b06_01:0189",
+        "07_01:1969"
+      ]
+    },
+    "hikaru": {
+      "role_id": "hikaru",
+      "name": "ひかる",
+      "role": "小野坂君, a boy of the theatre club who called her over at the costume fitting.",
+      "note": "She calls him 小野坂君 and 'he' is the pronoun. Her one line about him is that he stopped her at the costume fitting.",
+      "aliases": [
+        "小野坂君",
+        "小野坂",
+        "ひかる"
+      ],
+      "receipts": [
+        "07_01:1366"
+      ]
+    },
+    "cerberus": {
+      "role_id": "cerberus",
+      "name": "ケルベロス",
+      "role": "the dog, who pulls at her.",
+      "note": "She says its name and is flustered when it tugs at her.",
+      "aliases": [
+        "ケルベロス",
+        "ケル"
+      ],
+      "receipts": [
+        "c10_01:2406",
+        "c10_01:2418"
+      ]
+    }
+  }
+}

@@ -1,0 +1,32 @@
+# tools\fix_library_commitment.py  (87 lines)
+
+DOCSTRING:
+One-time: the plan with Aya that the day's cap ate.
+
+At her 20:05 on 2026-08-27 Aya wrote 「明日の朝、9時から図書館でやらない？」and Tomoe
+answered 「あや、9時でいいよ」. It is in `cast_chat` and it never became a
+commitment: `Commitments.from_exchange` returns before it calls the model once
+`commitments.max_new_per_day` is spent, and all three of that day's slots had
+gone in one 23:40 batch. So `schedule_lines` had nothing to hand the 05:00
+generator, and she went on telling him about a plan the machine did not hold.
+
+The cap is raised now, so this will not recur. Re-running the call on the old
+exchange is NOT the way to recover this one: the model resolves 明日 against
+today, and today is already the 28th, so it binds the library for the 29th.
+The row is therefore written out here with the date she actually agreed to,
+in the shape `_bind` produces.
+
+Idempotent, and backs the save up to data/retired/<ts>/ first. Run it once,
+before the 05:00 (her time) schedule generation, or it is pointless.
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

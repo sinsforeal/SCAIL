@@ -1,0 +1,81 @@
+# tools\absurd.py  (1194 lines)
+
+DOCSTRING:
+The absurdity audit: is anything here impossible for a fifteen-year-old?
+
+`tools/smoke.py` proves the machine is well formed -- no dead config keys, no
+unbound names, every prompt file present. It cannot tell you that the ringleader
+of her friendship group sent five messages a day, that a gate was set below a
+value the data never reaches, or that she went seven hours unable to speak to
+the girl sitting across the table from her. Every one of those was live on
+2026-08-27, every one was structurally valid, and every one was obvious the
+moment somebody looked at the number.
+
+So this looks at the numbers. Each check states what would be ABSURD in plain
+words, measures it, and reports OK / ODD / ABSURD. It reads the save read-only
+and runs no model, so it is safe against the running bot.
+
+    python tools/absurd.py             # everything
+    python tools/absurd.py --verbose   # with the measured value on every check
+
+The checks are grouped by the KIND of absurdity, because the kinds recur:
+
+  DEAD GATE      a threshold the data never reaches, so the branch never runs
+  FROZEN         a state that has been true implausibly long
+  NEVER FIRED    a mechanism that has never once happened
+  UNREACHED      a field code reads that is empty for everybody
+  VOLUME         a rate no human would produce
+  SILENCE        a gap in her day nobody would leave
+  ONE VOICE      the cast writing in one voice, the agents collapsing back
+  PARROT         a phrase of hers turning into a stuck record
+  GHOST PLACE    a place in her mouth that her world does not have
+  MONEY          money spent that the log never saw
+  DROPPED        somebody on the roster her life stopped touching
+  REPEAT BEAT    the planner writing the same day twice
+  UNSAVED        a model call whose answer reaches nothing that outlives today
+  UNHEARD        a line she is handed every call and never once admitted
+  SEAMS          the day read as one story does not hold together
+
+Adding a check is a function returning (level, headline, detail) and a line in
+CHECKS. Keep the headline a plain sentence about HER, not about the code.
+
+DEFS:
+class Save: Read-only view of the save, so a check cannot damage what it audits.
+    __init__(path): 
+    kv(key, default): 
+    rows(sql, args): 
+def dead_gauge_gates(cfg, s): A gate on a gauge that the gauge has never reached is a branch that has never run. `slip_energy_below` was 30 against a floor of 45.
+def frozen_unread(cfg, s): A message of his sitting unread for hours is usually the design working -- she was asleep, or in class, or at a desk with her phone face down. It is only absurd when her phone is in her hand and free and she still has no
+def frozen_exchange(cfg, s): An exchange deferred over and over is the attention model eating her social life: this is what ran for 453 minutes.
+def never_fired(cfg, s): A mechanism that has never happened is either impossible or unwired -- the dialect rules flagged 0 of 319 turns for weeks. But a thing built this afternoon has not had a chance yet, and calling that absurd is noise. Each
+def unreached_fields(cfg, s): A field the code reads that is empty for every single person. `week` was read by two callers and present for nobody.
+def message_volume(cfg, s): Nobody her age sends five messages a day to their closest friends.
+def one_sided(cfg, s): An 'exchange' where only one person ever spoke is not an exchange.
+def waking_silence(cfg, s): A teenager does not go eight WAKING hours with nobody reaching her.  Waking is the word that matters. Measured across the whole clock this check calls every night an absurdity: the first run after a replan cried ABSURD o
+def one_voice(cfg, s): Four agents, four sheets, one call each -- and nothing checks that they come out sounding like four people. The failure this catches is the cast collapsing back into a single writer, which is what the whole multi-agent s
+def parrot(cfg, s): A tic is character; the same eight characters in a quarter of everything she says is a stuck record. Measured on HER lines only, over every day in the record, so a phrase that is merely today's mood does not count.
+def ghost_place(cfg, s): Her body stands on a node in `places.json`. A scene whose location matches nothing there is a place her world does not have -- which is not cosmetic: it is how "at Aya's" resolved to nothing for weeks and left her body w
+def money_sense(cfg, s): Fifteen-year-olds have a fixed allowance and no overdraft. Two of the same purchase twenty minutes apart is the machine writing twice, and a balance below zero is not a mood, it is a bug.
+def dropped_person(cfg, s): Somebody on the roster, not marked dormant, whom nothing has touched for a week. Either her life quietly stopped including them -- which is a thing that happens and should be MARKED, not silent -- or a beat budget is sta
+def repeat_beat(cfg, s): The planner writing the same day twice. Two beats that are the same thing, today and yesterday or twice in one day, means her friends are on a loop -- the most boring way a simulated life dies.
+def _calls_today(days): Roles that ran, from the run logs -- the only record of a call made.
+def unsaved_calls(cfg, s): A model call whose answer reaches nothing that outlives the day.  This is the check that would have caught `cast_beat`: nobody had ever asked where a beat's words went, and the answer was kv `cast_beats`, which tomorrow'
+def register_check(cfg, s): Do the friends still sound like themselves, and like different people in different rooms. Reads `tools/register.py` over the stored turns: a speaker whose group and one-to-one registers are the same (distance under `flat
+def provenance(cfg, s): Where her memories of the last three days came from. The compile writes from the record and has invented (memory 78: a classmate and a rumour in no event); the mechanisms that lived a thing -- commitments, scenery, ruptu
+def ledger_check(cfg, s): Does the day contradict its own ledger: an absent person still in a schedule block's `with`, a promise KEPT to somebody who was absent, a `with` name the roster does not know. Today's plan day and the day before, because
+def strangers(cfg, s): The people who are not her friends, and the ways that goes wrong.  Five things, all of which have happened or nearly did while this was being built: a face standing somewhere that kind of place cannot hold, the same pers
+def repeats(cfg, s): Anybody saying the same thing twice.  This is the most persistent fault in the project and every instance of it has been found BY HAND: Aya sending the same three-bubble block four times in twenty minutes, the afterthoug
+def group_quality(cfg, s): Is the group chat a group of teenagers or a committee?  `one_sided` catches a conversation nobody answered and VOLUME catches one that is too quiet. Neither catches the thing that was actually wrong on 2026-08-28: fifty-
+def dual_keys(cfg, s): Can a memory be found from a cue in the other language?  `self_memories.alt` is the second search key, and three things can go wrong with it quietly. It can be MISSING, and a store where only some rows are dual-keyed fav
+def unheard(cfg, s): Forty statuses compete for sixteen lines. A source the gate is offered every call and admits in none is a mechanism alive in the store and absent from her -- a dead line with a config block. The tally is kept by `Attenti
+def seams(cfg, s): The day read as one story (`sim/coherence.py`, at the compile): a contradiction, an invented thing, a repeat. Flag only; a seam is a signal about a prompt or a mechanism, and this is where it is read.
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

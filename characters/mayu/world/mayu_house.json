@@ -1,0 +1,176 @@
+{
+  "_note": "真優's view of her own places, for the bench's event feed. She does not own a world and does not read this as a file (existence in_world false). Unlike 真里亜, who lives in the shared 千代田 house, 真優 has a home of her own, so this file gives her own rooms (own_places) and lists the shared house (place_ids: house) only as somewhere she visits. In a shared bench world she is a visitor: every row that is outside the shared house carries place ''. Each fact has a receipt or says the record is silent. No age, no grade, no named parent, nothing in 一悟's mouth.",
+  "frame": "真優's own life around the school: her house, the 文芸部 club room, the stage, a shop on the way home. The record's own setting (user ruling 10-23 13:29).",
+  "house_id": "togawa_home",
+  "place_ids": [
+    "house"
+  ],
+  "place_ids_note": "the bench's shared HOUSE id 'house' (bz/two_minds bzombie/arms/s/make_run.py): the only shared id she ever stands in, as a visitor of the 千代田 house. Her own places below are not in that HOUSE; a peer branch must add them to the House `outside` list or the other minds hear nothing when she is out.",
+  "own_places": {
+    "her_home": "真優's house",
+    "club_room": "the 文芸部 club room",
+    "school": "the school",
+    "town": "the street and shops on the way home"
+  },
+  "house": {
+    "her_home": {
+      "place": "",
+      "at": "her_home",
+      "facts": [
+        {
+          "text": "Her house has a living room that joins 一悟's room by the balcony: she says they can go back and forth between the two.",
+          "receipts": [
+            "01_01:2700"
+          ]
+        },
+        {
+          "text": "The record is silent on the rest of it: her own room, the other rooms, the street, the district. LIBERTY: for the bench she has a plain home with only the living room and balcony described.",
+          "receipts": []
+        }
+      ]
+    },
+    "club_room": {
+      "place": "",
+      "at": "club_room",
+      "facts": [
+        {
+          "text": "The 文芸部 club room is her stronghold (根城): she says she would stay the night in it if she had to, and she is the reason it is open during the exam period because she comes to school through it.",
+          "receipts": [
+            "07_01:4499",
+            "a05_01:0769"
+          ]
+        },
+        {
+          "text": "She would lose a hideout if the 文芸部 ended.",
+          "receipts": [
+            "02_01:3295"
+          ]
+        }
+      ]
+    },
+    "school": {
+      "place": "",
+      "at": "school",
+      "facts": [
+        {
+          "text": "She is hard to get to school in the morning and says so; the school is where the 演劇部 and the 文芸部 share a stage at the culture festival.",
+          "receipts": [
+            "01_01:0143",
+            "08_01:3626",
+            "d18_01:1000"
+          ]
+        }
+      ]
+    },
+    "town": {
+      "place": "",
+      "at": "town",
+      "facts": [
+        {
+          "text": "She wants to stop at the shop なないち on the way home, a detour she rarely asks for.",
+          "receipts": [
+            "a08_01:2238"
+          ]
+        },
+        {
+          "text": "Her stage work has an office with a president who once sent her for voice training; her record does not say where it is.",
+          "receipts": [
+            "b14_01:1149"
+          ]
+        }
+      ]
+    },
+    "chiyoda_visit": {
+      "place": "house",
+      "facts": [
+        {
+          "text": "She has been to 百花ちゃん's house, the big one, and says it is an amazing house.",
+          "receipts": [
+            "06_01:4098"
+          ]
+        }
+      ]
+    }
+  },
+  "week": [
+    {
+      "text": "She is hard to wake and loath to go out; she blames a dream of the old days.",
+      "receipts": [
+        "01_01:0129",
+        "01_01:0143",
+        "01_01:0192"
+      ],
+      "slot": "morning",
+      "place": "",
+      "at": "her_home"
+    },
+    {
+      "text": "She goes to school and spends the school day around the club room; she calls it her stronghold.",
+      "receipts": [
+        "07_01:4499",
+        "a05_01:0769"
+      ],
+      "slot": "school_day",
+      "place": "",
+      "at": "club_room"
+    },
+    {
+      "text": "After school she wants 一悟 in the club room and asks him to be there.",
+      "receipts": [
+        "a03_01:1424"
+      ],
+      "slot": "after_school",
+      "place": "",
+      "at": "club_room"
+    },
+    {
+      "text": "She eats snacks, gets sleepy and dozes, mostly beside 一悟.",
+      "receipts": [
+        "a05_01:1757",
+        "03_01:1383"
+      ],
+      "slot": "after_school",
+      "place": "",
+      "at": "club_room"
+    },
+    {
+      "text": "On the way home she may stop at なないち.",
+      "receipts": [
+        "a08_01:2238"
+      ],
+      "slot": "evening",
+      "place": "",
+      "at": "town"
+    },
+    {
+      "text": "When a stage date is near she works at it; she says she will do the stage well if 一悟 stays with her through the festival.",
+      "receipts": [
+        "08_01:3747",
+        "09_02:0135"
+      ],
+      "slot": "stage_days",
+      "place": "",
+      "at": "school"
+    },
+    {
+      "text": "She visits 百花ちゃん's house now and then.",
+      "receipts": [
+        "06_01:4098"
+      ],
+      "slot": "visit",
+      "place": "house"
+    }
+  ],
+  "silent": [
+    "Where she sleeps, her routine of morning and night beyond the lines above, any weekend or day off.",
+    "The street and district of her house, and any room of it beyond the living room and the balcony.",
+    "Her parents beyond a light mention (kept out of every value, ruling 10-23 13:29), any age or grade of hers or anyone's."
+  ],
+  "places": {
+    "house": "the main part of the house",
+    "her_home": "真優's house",
+    "club_room": "the 文芸部 club room",
+    "school": "the school",
+    "town": "the street and shops on the way home"
+  }
+}

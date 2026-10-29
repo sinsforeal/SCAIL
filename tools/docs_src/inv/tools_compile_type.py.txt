@@ -1,0 +1,67 @@
+# tools\compile_type.py  (484 lines)
+
+DOCSTRING:
+Compile a person's private prior into the mechanisms a call actually reads.
+
+    python tools/compile_type.py <key> [--dry-run] [--health typical] [--all]
+
+The prior is four letters, a stack, a health setting and the contradictions
+the record forces (`docs/type-compile.md` section 1). It lives in
+`data/characters/types/<key>.json` for a character and in the author's type
+file for somebody on the roster, and **no prompt ever reads either**. This
+tool reads it with the compile table (`data/codebook/compile_v0.1.json`) and
+writes three things:
+
+- the DERIVED layer of her mechanisms file: one instance per code of her
+  four cells, with the cell's trigger and suppressor, the frequency band the
+  health setting leaves it at, and the wordings in the language the call
+  that renders it is written in. The hand-written instances already in the
+  file are kept exactly as they are and gain a `code` field from the loss
+  ledger, or `code: null` with the ledger's reason;
+- the two stress modes, as instances carrying the gauge reading that starts
+  them -- one that begins when a gauge has sat above a line for a span of
+  hours, one that begins when a gauge reaches its end;
+- her gauge baselines with a line each saying where the number came from,
+  and the markers block in her type file.
+
+**The four letters, the function names and the position words go into no
+output.** Every string this writes into a mechanisms file or a type file's
+markers is behavioural; `tools/cast_mechanisms_test.py` greps for the
+vocabulary and fails on a hit.
+
+It refuses when the compile table's version and the codebook's differ, and
+when a person's stack reaches a cell the table has no wordings for: an empty
+line rendered into somebody's prompt is worse than a refusal that names the
+cell.
+
+No model call, no save, no network.
+
+DEFS:
+def load(path): 
+def save(path, doc): 
+def band_step(band, steps): A band moved `steps` places toward the frequent end; the ends hold.
+def phrase(code): The id's own phrase, in words, for a human reading the file. Never rendered into a call: the `name` field is the author's.
+class Compiler: 
+    __init__(config): 
+    prior_for(key): (prior, where it came from, whether she has a sheet of her own).
+    stack_of(prior): 
+    cells_for(stack): 
+    renderable(cell): 
+    instance(who, cell, row, health, readers): 
+    mode_instance(who, cell, health, readers): The loop or the grip: one instance carrying the gauge reading that starts it. The renderer turns a gauge reading into a conditional in the block, and puts the mode's own line in front of the call only while the reading h
+    baselines(stack, health_name, sheet): Her gauge baselines with a line each saying where the number came from. The deltas belong to the dominant function; a healthy setting moves the same gauges half as far the other way. A person with no sheet gets the delta
+    markers(stack): Per axis, per pole, from the first two cells her stack selects.  Only the first two, and the first letter from the first alone. The four letters are a name for the top two of the stack: what the third and the fourth do i
+    code_for_authored(m): The code a hand-written instance binds to, from the loss ledger and never from the file itself: the ledger is where the mapping from a real mechanism to an entry lives, so a re-compile after the ledger moves picks the mo
+    run(key, health_name, dry): 
+    write_markers(key, has_sheet, marks): Into her type file, beside the author's own markers rather than over them: a hand-written marker is the author's operationalisation and this adds to it.
+    _merge_markers(have, new): 
+def main(): 
+
+CONFIG SECTIONS: cast, json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

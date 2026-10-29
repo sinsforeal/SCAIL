@@ -1,0 +1,50 @@
+# sim\reactions.py  (351 lines)
+
+DOCSTRING:
+Her face in the app: a reaction image from the episodes, changed when
+her mood crosses a band.
+
+The images come from `tools/reactions.py` (PROJECT 5.96): frames of her from
+the actual anime, framed, sorted by expression into buckets, and curated by
+hand -- a row whose file he deleted is gone, a row he moved carries his
+bucket as `label`. This module only reads that database.
+
+Rule (his, 2026-08-26): one reaction each time her mood crosses a threshold.
+Mood valence is the same number `State.mood_state` reads (the mood gauge
+against its baseline over `state.mood_from.max_swing`), cut into five bands
+at -0.45 / -0.15 / 0.15 / 0.45. When the band changes since the last tick,
+one image goes out; which bucket is decided by what is up at that moment
+(anger, sadness, anxiety, awkwardness, fatigue, surprise), the band alone
+otherwise. A surprise crossing (`surprise` gauge over `surprise_from`) is
+its own threshold. Never the same image twice inside `repeat_days`.
+
+The image is copied to data/talkapp/reactions/ and the hub serves it as her
+icon (`/reaction/<file>`); the app swaps the header avatar and notes the
+bucket beside the presence line. It is not a message: nothing enters her
+chat, nothing is said. `/reaction [now|BUCKET|off]` from the ops bar.
+
+DEFS:
+class Reactions: 
+    __init__(config, store, clock, state): 
+    valence(): 
+    band(v): 
+    bucket_for(band): What is up decides the face; the band alone otherwise.
+    rows(bucket): 
+    counts(): 
+    pick(bucket, learned): One image of that face not shown inside `repeat_days`; a bucket with nothing left falls back to neutral, then to anything.  `learned` weights the draw by how often she has reached for that picture for that feeling before
+    chosen(bucket, why): A sticker SHE chose, in a reply to him -- not the automatic one the mood band produces.  His rule (2026-08-27): a sticker is how she expresses a mood, it is not a favourite, and it is not something he places. Putting one
+    buckets(): 
+    tick(force_bucket, why): Called every loop. One reaction when the band changed since the last tick (or a surprise crossing); nothing otherwise.
+    backfill(hours): The crossings of the last `hours`, from the recorded states (`state_log`, written when something happened), each given a face and a sticker at its own time. Once; a crossing already in the log is skipped.
+    clear(): 
+    current(): What the app should show: the last reaction, or nothing.
+    report(): 
+
+CONFIG SECTIONS: reactions, state.gauges, state.mood_from
+KV READ: reaction_band, reaction_last, reactions_log, sticker_weight
+KV WRITE: reaction_band, reaction_last, reactions_log, sticker_weight
+TABLES: 
+LOG TAGS: reaction, sticker
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

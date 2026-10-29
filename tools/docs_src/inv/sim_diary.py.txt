@@ -1,0 +1,25 @@
+# sim\diary.py  (262 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Diary: 
+    __init__(config, llm, store, clock, state, records, social): 
+    day_weight(): How much of a day she has behind her, as the count of things that happened worth writing about.  The pressure gauge (`unsaid`) is the measure for a character who has somebody to say things to and does not: three of its f
+    entries(n): 
+    date_for_now(): The day an entry written at this moment is ABOUT.  Her diary is an evening, and the evening does not end where the date does: the window runs 20:30 to 01:30 and she is still on her phone in bed for the last hour of it. K
+    wrote_tonight(): Has the evening she is in already been written? Not "is there an entry dated today", which is the question that latched.
+    _refused(why): Say once, for this evening, why she is not writing. The gate had no voice at all: two evenings of a character who has never written one left nothing in the log to read, and the answer was in a gauge nobody had thought to
+    may_write(scene): 
+    write(scene, reason): 
+    prompt_text(): 
+
+CONFIG SECTIONS: character.name, diary, role_system, state
+KV READ: diary
+KV WRITE: diary
+TABLES: 
+LOG TAGS: diary, primitives
+PROMPTS: 
+LLM ROLES: diary
+OPS COMMANDS: 

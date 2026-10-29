@@ -1,0 +1,14 @@
+{
+ "run_id": "{run_id}",
+ "arm": "S",
+ "character": "tomoe",
+ "lang": "en",
+ "model": "deepseek-v4.1-flash-1017",
+ "cap_usd": 0.5,
+ "claude_cap_usd": 3,
+ "sim_days": 1,
+ "clock_start": "2026-10-26T07:00:00",
+ "seed": 1,
+ "him_timezone": "Etc/GMT+4",
+ "arm_cmd": ["C:\\Python314\\python.exe", "-m", "bzombie.harness.s_launcher", "--s-root", "F:\\REPS2\\SCAILV4\\tmp\\wt_bz_s", "--port", "{port}"]
+}

@@ -1,0 +1,49 @@
+# tools\work_resolve_test.py  (254 lines)
+
+DOCSTRING:
+One resolution path for a work: the window titles, the order, one fetch.
+
+    python tools/work_resolve_test.py            # the whole thing
+    python tools/work_resolve_test.py --shape    # the title table only (no db)
+
+Three things are checked and each of them was broken on 2026-09-03, the
+evening he mentioned a 2010 lead of hers and she denied it.
+
+**The title table.** Every row is a real window title out of
+`data/telemetry_feed.jsonl`, with what the SHAPE of it may claim: "work" when
+the brackets or the bar prove it, "name" when the shape settles the subject,
+"unknown" for the many it cannot, and None for a window that is not a page
+about a thing at all. "B-gata H-kei (Yamada's First Time: B Gata H Kei)" and
+"Mitsuba Marui (Mitsudomoe)" are the same shape and one is a work and one a
+character, which is why the shape is not allowed to guess and the knowledge
+base settles it.
+
+**The order.** Her own record and the roles the knowledge base lists for her
+are asked first and locally: the exact case resolves to hers, with the part
+named, with every network call made to raise. A search is the last resort and
+does not run when something local answered.
+
+**One fetch.** The record the resolution writes is the record every other
+path reads: asked a second time, nothing is fetched; her sight's line, the
+automatic lookup's idea of what is open in front of him and her situation's
+recall all come off that one row.
+
+DEFS:
+def shape_table(): 
+def _no_network(): Every HTTP request raises: this case must be answered out of her own record and the local knowledge base, and a test that quietly reached the MyAnimeList API would pass for the wrong reason.
+class Screen: His machine, with one window on it: the shape `monitor.right_now`
+    __init__(title, proc, seconds): 
+    right_now(): 
+    seconds_since_input(): 
+def resolution(): 
+def _ja(s): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: glance_last, known_things
+KV WRITE: glance_last, glance_seen
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

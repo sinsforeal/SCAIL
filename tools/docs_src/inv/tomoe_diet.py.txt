@@ -1,0 +1,23 @@
+# tomoe\diet.py  (91 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class MediaDiet: 
+    __init__(config, store, clock): 
+    add_things(things, date_str): From the day compile: 0-3 one-liners of what she did for herself today.  A day recompiled replaces its own rows rather than adding a second set. `/compile <date>` run twice used to leave her with the same episode watched
+    liked_accounts(limit): Accounts her taste keeps liking, with their card's kind: her corner of the timeline.
+    disliked_accounts(limit): 
+    things_recent(days): 
+    brief(): For her system prompt: what she is into lately, in her own terms.
+    short(): One line for the director / social read.
+
+CONFIG SECTIONS: diet.account_min_score, diet.keep, diet.things_days, sensor_view
+KV READ: media_diet, x_taste
+KV WRITE: media_diet
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

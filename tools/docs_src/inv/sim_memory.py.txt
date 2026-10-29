@@ -1,0 +1,38 @@
+# sim\memory.py  (462 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Memory: 
+    __init__(config, store, clock): 
+    _migrate(): 
+    half_life_days(weight): 
+    score(row, now): 
+    rows(): 
+    facts_for_prompt(cue_text): Facts she has in front of her now: the ones above the fade line by score, plus faded ones the moment just cued -- by a word of it, or by meaning, so a Japanese line can reach an English fact and a paraphrase can reach an
+    search_items(min_latin): Every fact as one row of the retrieval: what to embed it as, the label the searcher gives it, the body it quotes back, its word keys and the weight a fact carries against a day narrative. One place, so the word search an
+    _embed_row(rid, text): The vector of a row just written, written with it. The persona reads stored vectors only, so a fact learned at tonight's compile has to be embedded by whoever wrote it to be reachable by meaning from the next reply on. O
+    add_fact(fact, weight, source, date): A new fact from the compile; a near-duplicate of an existing one reinforces it instead.  `source` names the mechanism that learned it and `date` the day it is about, both kept on the row: three rows from one evening -- a
+    facts_report(): 
+    who_key(name): One key per person, through the roster -- the table the rest of the machinery is already keyed by.  This used to fold honorifics and lowercase, and its own docstring said `mom` and `Yumi` are not resolved here. That was 
+    cast_fact_rows(who): 
+    add_cast_fact(who, fact, weight, source, date): `source` and `date` are the row's lineage, as on the facts about him: which mechanism learned it and which day it is about.
+    cast_facts_for(who, cue_text, limit): What she has in front of her about one person: above the fade line by score, plus faded ones a word in `cue_text` brings back.
+    cast_facts_report(): 
+    cast_lines(relationships): People around her for her own prompt: recent situations plain, older ones dated, stale ones gone.
+    ratio(): chars per token, calibrated from the model's own count.
+    tokens(text): 
+    calibrate(chars, prompt_tokens): 
+    fit(sections, history, situation): Measure her prompt against the one budget, `context.target_tokens`. Nothing is trimmed here.  The thread's verbatim window fits itself to what is left of the target after the parts that ride whole (`sim/thread.py _window
+    measure(sections, history, situation, notes): sections: {name: text}. Logs and stores the shape of her prompt in tokens: the four parts of it against the one target.  The system half and what she carries are counted apart because they are charged apart -- the system
+    report(): 
+
+CONFIG SECTIONS: context, context.chars_per_token, memory, memory.duplicate_jaccard, memory.fact_min_score, memory.half_life_days
+KV READ: context_last, context_ratio, thread_window
+KV WRITE: context_last, context_ratio
+TABLES: cast_facts
+LOG TAGS: context, memory
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

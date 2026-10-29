@@ -1,0 +1,39 @@
+# tools\atomic_test.py  (156 lines)
+
+DOCSTRING:
+A file replaced under a reader is never seen half written.
+
+    python tools/atomic_test.py        # in smoke; temp files only
+
+On 2026-09-07 a patch script rewrote `data/cast.json` in place while three
+bot processes were reading it, and two of them logged 364 parse failures
+between them in 31 seconds. `atomic.replace` writes beside the destination,
+fsyncs, and renames over it, which is one operation as far as a reader is
+concerned.
+
+What the rename does NOT promise on Windows is that the file can be opened at
+every instant: CPython opens a file for reading without sharing delete, so a
+read that lands exactly while the name is moving gets a sharing violation.
+That is a different failure and a much better one -- nothing is torn, the
+read simply has to be tried again -- and `atomic.read_json` is what tries it.
+Both are checked here, and so is the reader that used to log one line per
+failed read.
+
+DEFS:
+def check(ok, what, detail): 
+def _document(n): About the size of the cast roster: some tens of kilobytes of nested JSON with Japanese in it.
+def _reader(path, out, stop, careful): Reads as fast as it can, either plainly or through `atomic.read_json`.
+def one(path, writer, label, careful): 
+def _in_place(path, doc): 
+def write_checks(tmp): 
+def suppression_checks(): 
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

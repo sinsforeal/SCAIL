@@ -1,0 +1,44 @@
+# tools\world_reader_test.py  (398 lines)
+
+DOCSTRING:
+A character in a world she does not keep reads it and writes none of it.
+
+    python tools/world_reader_test.py        # exit 1 on any failure; run by smoke
+
+One world has one writer (`docs/shared-world.md`). Everything that WRITES the
+world -- the people's own week and the pressures behind it, what is going
+round, what the day's record says happened, the people around the people, the
+strangers, and measuring herself against the room -- is switched off for
+anybody else in that world by the existence table (`Config.REQUIRES`, the
+`world_owner` property), and what stays on reads the owner's rows instead.
+
+Two builds, both on copies, both with every model call and every network
+connection refused, sharing one scratch world directory:
+
+  the OWNER, from `config.json`, who plans a day and writes it into a scratch
+  world file through the live writers;
+
+  the READER, from a config that names the same world and does not own it,
+  who is asserted to build none of the machinery that writes it, to refuse
+  every opening that would have put words in somebody else's mouth, and to
+  carry the owner's settled lines, absences, whereabouts, pool and orbit in
+  her own prompt and her own day's one truth.
+
+Nothing live is opened for writing: both saves are `tools/dbcopy.copy_db`
+copies and the world directory is under the temp directory
+(`tools/harness.scratch_config`).
+
+DEFS:
+def _norm(s): 
+def check(ok, what, detail): 
+def _seeded_day(app, today, absent_who): A day fixed by the owner: one settled line and the people her plan removed.  Two of them, because a reader has to come out of this with one and not the other. The owner's process plans a day for the promoted girl's row t
+def main(): 
+
+CONFIG SECTIONS: boot_notes, character.cast_file, character.name, character.name_ja, json, social_graph.enabled, world_reader, world_shared.id
+KV READ: social_graph
+KV WRITE: cast_beats, gossip, orbit
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,62 @@
+{
+  "cast_note": "Her roster, written from HER lines only (receipts are scene:line of a 千奈 line, spoken or inner, unless the receipt says otherwise). It does not copy anything Momoka, 真里亜 or anyone else thinks of her. No closeness, standing or tension is written: a missing meter falls back to its rest value, as Momoka's cast.json says (_no_meters). The world never writes 一悟's lines; he is the player and sits here as the senpai she calls みゃー先輩. Parents and family are not rows and are not named anywhere (ruling 10-23 13:29). Her route-b lines (一悟先輩, kisses) are the record's own route and are not scripted here; the world feeds events, it does not decide what she feels.",
+  "self_calls": {"ichigo": "みゃー先輩", "mayu": "十川先輩", "momoka": "百花", "maria": "真里亜さん", "alice": "会長", "chisa": "榎本先生", "hikaru": "小野坂先輩", "cerberus": "ケルちゃん"},
+  "people": {
+    "ichigo": {
+      "role_id": "senpai", "name": "一悟",
+      "role": "みゃー先輩, the club head she came to on the day she joined; she answers him and is flustered first.",
+      "note": "She named him みゃー先輩 back from 宮国's みや (288 lines); 一悟先輩 only on her own route b. She read his novel and chose the club for it, and she trusts him with her secret.",
+      "aliases": ["みゃー先輩", "一悟先輩", "宮国先輩", "宮国", "一悟"],
+      "receipts": ["01_01:2516", "02_01:4799", "05_01:4805", "b01_01:3252", "b06_01:3326"]
+    },
+    "mayu": {
+      "role_id": "mayu", "name": "真優",
+      "role": "十川先輩, the club girl who teases her; she answers in protest.",
+      "note": "She calls her 十川先輩 (170 lines), is teased, and bristles. She admits her bite is partly hunger when offered breakfast.",
+      "aliases": ["十川先輩", "十川", "真優先輩", "真優"],
+      "receipts": ["01_01:2716", "01_01:2214", "01_01:3013"]
+    },
+    "momoka": {
+      "role_id": "momoka", "name": "百花",
+      "role": "百花, her childhood friend; no ちゃん, and her polite speech loosens with her.",
+      "note": "She calls her 百花 (53 lines), tells her not to hope too hard and still helps persuade for her, knows she was frail as a child, and listens to her romantic worries. In this world 百花 is the lead and she is the friend.",
+      "aliases": ["百花", "千代田百花"],
+      "receipts": ["03_01:0985", "03_01:1050", "03_01:1064", "d06_01:1205", "d10_01:0923"]
+    },
+    "maria": {
+      "role_id": "maria", "name": "真里亜",
+      "role": "真里亜さん, the girl of the school shop and of 百花's house, whom she meets around school.",
+      "note": "She greets her in the morning, asks her to stop the others when they get out of hand, and buys from the shop through her. She goes flustered at her teasing.",
+      "aliases": ["真里亜さん", "真里亜"],
+      "receipts": ["01_01:3453", "02_01:5195", "05_01:2253", "a08_01:0190", "09_01:4721"]
+    },
+    "alice": {
+      "role_id": "alice", "name": "アリス",
+      "role": "会長, the student council president; she is formal and polite with her.",
+      "note": "She calls her 会長 (26 lines) and says by name only twice. She speaks of her as someone with standing and who plays no favourites.",
+      "aliases": ["会長", "生徒会長", "アリス会長", "アリス"],
+      "receipts": ["02_01:2668", "02_01:4353", "03_01:1307"]
+    },
+    "chisa": {
+      "role_id": "chisa", "name": "知紗",
+      "role": "榎本先生, the teacher; she apologises when told off.",
+      "note": "She calls her 先生 and once 榎本先生. She says sorry when she learns she frightened her, and teases her as the tea-drinking adviser.",
+      "aliases": ["榎本先生", "先生", "榎本", "知紗"],
+      "receipts": ["04_01:3090", "04_01:3024", "b03_01:1743"]
+    },
+    "hikaru": {
+      "role_id": "hikaru", "name": "ひかる",
+      "role": "小野坂先輩, an older girl who gave her photographs.",
+      "note": "She calls her 小野坂先輩 (once to her face). In her inner lines 小野坂先輩 handed her photographs of みゃー先輩.",
+      "aliases": ["小野坂先輩", "小野坂", "ひかる"],
+      "receipts": ["b02_01:1283", "b02_01:2739", "b06_01:0686"]
+    },
+    "cerberus": {
+      "role_id": "cerberus", "name": "ケルベロス",
+      "role": "ケルちゃん, the dog she likes and gives treats to.",
+      "note": "She is knocked about by it and says stop, flustered; she once bought it a treat when it seemed hungry.",
+      "aliases": ["ケルちゃん", "ケルベロス"],
+      "receipts": ["01_01:1699", "01_01:2069"]
+    }
+  }
+}

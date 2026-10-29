@@ -1,0 +1,27 @@
+# tools\boot_her.py  (105 lines)
+
+DOCSTRING:
+Construct the whole App as HER and report what breaks.
+
+`tools/smoke.py` does this for the character the machinery was written around.
+This does it for a second one, so "which modules have to be gated on
+`existence`" stops being a list I reasoned out from module names and becomes a
+list of things that actually failed.
+
+It never touches a live save: her database is created fresh in a temp file,
+`--console` and `--no-sensors` are forced, and nothing reaches Telegram, the
+app or the sensors.
+
+    python tools/boot_her.py --config config_yukarin.json
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

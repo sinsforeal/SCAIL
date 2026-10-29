@@ -1,0 +1,50 @@
+# tools\flush_test.py  (257 lines)
+
+DOCSTRING:
+The machine writes what it is holding when a reply asks for it.
+
+    python tools/flush_test.py
+
+The collector buffers what it sees of his machine and writes the feed on a
+character count or on its heartbeat, so anything he did inside the current
+window was invisible to a reply built during it: he opened twenty-four
+pictures four minutes before a message and the tags were still in the buffer
+(2026-09-04). A bot asks by touching `sensors.telemetry_flush_request_path`.
+
+The collector's side is checked on a temp feed and a temp request file, with
+the sources switched off so nothing of his machine is read and no thread of
+the collector's own runs: a request over a buffer with something in it writes
+one entry whose `flush_reason` is `requested` and clears the file; a request
+over an empty buffer writes no entry and clears the file anyway; a request
+with no file present does nothing; and the file being removed underneath the
+collector is not an error.
+
+The bot's side (`App.request_flush`) is checked against a stand-in for the
+collector, on an App object built without its save or its wiring: it returns
+True when an entry reaches the feed, returns quietly when the request is
+served with nothing to write, and when nobody is listening it gives up after
+the wait and says so once an hour rather than once a reply.
+
+`tools/smoke.py` runs this. No model call, no save, nothing of his machine.
+
+DEFS:
+def check(ok, what, detail): 
+class Quiet: The collector with its sources and its own thread switched off.
+    _poll_sources(): 
+    _run_loop(): 
+def feed_entries(path): 
+def build(tmp): 
+def ask(sv): 
+def run(tmp): 
+def after(delay, fn): 
+def run_bot_side(tmp): The other half: the bot asking, with a stand-in for the collector.  The App is made without its constructor -- no save, no wiring, no model -- because what is under test is the ask itself: the file it writes, what it wai
+def main(): 
+
+CONFIG SECTIONS: json
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>百花</title>
+  <link rel="stylesheet" href="/view/style.css" />
+</head>
+<body>
+  <div id="bg"></div>
+  <div id="bg-prev" hidden></div>
+  <div id="transition-overlay" hidden></div>
+  <div id="weather" hidden></div>
+  <img id="overlay" alt="" />
+  <div id="stage">
+    <div id="sprite-wrap">
+      <canvas id="sprite" width="720" height="1280"></canvas>
+      <canvas id="sprite-prev" width="720" height="1280" aria-hidden="true"></canvas>
+    </div>
+  </div>
+  <div id="controls" aria-label="設定">
+    <div class="panel-head"><span>設定 <small>Preferences</small></span><button id="options-close" type="button" aria-label="閉じる">×</button></div>
+    <div class="opt-group">
+      <div class="opt-title">音</div>
+      <label><input type="checkbox" id="voice-auto" /> 音声</label>
+      <label title="合成のみ / 録音の完全一致 / 録音の近似">音源 <select id="voice-mode">
+        <option value="tts">合成のみ</option>
+        <option value="exact">録音（一致）</option>
+        <option value="approximate">録音（近似）</option>
+      </select></label>
+      <label title="声の大きさ">声 <input type="range" id="voice-vol" min="0" max="1" step="0.05" value="1" /></label>
+      <label><input type="checkbox" id="bgm-on" checked /> 音楽</label>
+      <label title="音楽の大きさ">曲 <input type="range" id="bgm-vol" min="0" max="1" step="0.05" value="0.5" /></label>
+      <label><input type="checkbox" id="se-on" checked /> 効果音</label>
+      <label>曲目 <select id="track-pick" title="BGM"></select></label>
+      <label>言葉 <select id="model-pick" title="彼女の言葉を書くモデル（声の役割）"></select></label>
+      <label>舞台 <select id="model-stage-pick" title="舞台の役割（内部の処理）のモデル"></select></label>
+    </div>
+    <div class="opt-group">
+      <div class="opt-title">表示</div>
+      <label><input type="checkbox" id="idle-motion" checked /> 動き</label>
+      <label><input type="checkbox" id="idle-sway" /> 揺れ</label>
+      <button id="fullscreen-toggle" type="button">全画面にする</button>
+    </div>
+    <div class="opt-group">
+      <div class="opt-title">その他</div>
+      <label><input type="checkbox" id="quality-on" /> 検品</label>
+      <label>背景 <select id="scene-pick" title="背景"></select></label>
+      <label>衣装 <select id="outfit-pick" title="衣装"></select></label>
+    </div>
+  </div>
+  <div id="save-dialog" hidden aria-label="セーブとロード">
+    <div class="save-panel">
+      <div class="panel-head"><span id="save-title">セーブ <small>Save</small></span><button id="save-close" type="button" aria-label="閉じる">×</button></div>
+      <div class="save-tabs"><button id="save-tab" type="button">セーブ</button><button id="load-tab" type="button">ロード</button></div>
+      <div id="save-lead"></div>
+      <button id="save-create" type="button">現在の場面を新しいスロットに保存</button>
+      <div id="save-list" aria-live="polite"></div>
+    </div>
+  </div>
+  <div id="load-confirm" hidden aria-label="ロードの確認">
+    <div class="confirm-card"><strong id="load-confirm-title">この場面へ戻りますか？</strong><p id="load-confirm-text">現在の進行は復旧用に保存されます。ロード後、画面を再読み込みします。</p><div class="confirm-actions"><button id="load-cancel" type="button">キャンセル</button><button id="load-accept" type="button">ロード</button></div></div>
+  </div>
+  <div id="backlog" aria-label="backlog"></div>
+  <div id="history-indicator" hidden><span>履歴を表示中 · 現在の進行は変わりません</span><button id="history-change" type="button">この返信を変える</button><button id="history-return" type="button">現在へ戻る</button></div>
+  <div id="reply-dialog" hidden aria-label="返信を変える">
+    <div class="confirm-card"><div class="panel-head"><span>返信を変える <small>Alternate reply</small></span><button id="reply-close" type="button">×</button></div><p>この行の時点で一時停止中です。元の質問から別の返事を描き、選んで続けられます。</p><button id="reply-draw" type="button">別の返事を作る</button><div id="reply-candidates"></div><button id="reply-continue" type="button">元の返事で続ける</button></div>
+  </div>
+  <div id="advance" title="つづける">▼</div>
+  <div id="hud">
+    <img id="face" alt="百花" />
+    <div id="dialogue-content">
+      <div id="name">百花<span id="voice-badge"></span><button id="voice-replay" type="button" title="この台詞をもう一度きく" aria-label="この台詞をもう一度きく">♪</button></div>
+      <div id="text">……</div>
+      <div id="mood"></div>
+    </div>
+    <button id="reply-open" type="button" hidden>返事を書く <span aria-hidden="true">↗</span></button>
+    <form id="say" hidden>
+      <label for="input">一悟の返事</label>
+      <div class="reply-fields"><input id="input" type="text" autocomplete="off" placeholder="話しかける…" />
+      <button id="send" type="submit">送信</button></div>
+    </form>
+  </div>
+  <nav id="toolbar" aria-label="ゲーム操作">
+    <button id="quick-save" type="button" title="クイックセーブ">Q セーブ</button>
+    <button id="quick-load" type="button" title="クイックロード">Q ロード</button>
+    <button id="save-open" type="button">セーブ</button>
+    <button id="load-open" type="button">ロード</button>
+    <button id="options-open" type="button">設定</button>
+    <button id="auto-toggle" type="button" aria-pressed="false">オート</button>
+    <button id="skip-reply" type="button">スキップ</button>
+    <button id="log-open" type="button">ログ</button>
+    <button id="back-line" type="button">戻る</button>
+    <button id="director-open" type="button" title="舞台係に場面を相談">舞台相談</button>
+    <button id="gauge-open" type="button" title="ゲージの推移を見る">グラフ</button>
+  </nav>
+  <audio id="audio" preload="auto"></audio>
+  <audio id="bgm" loop preload="auto"></audio>
+  <div id="status"></div>
+  <div id="director" hidden>
+    <div id="director-head">
+      <span>舞台相談</span>
+      <button id="director-close" type="button" title="閉じる">×</button>
+    </div>
+    <div id="director-scene"></div>
+    <div id="director-log"></div>
+    <div id="director-proposal" hidden></div>
+    <form id="director-form">
+      <input id="director-input" type="text" autocomplete="off" placeholder="舞台係に場面を相談する…" />
+      <button id="director-send" type="submit">送る</button>
+    </form>
+  </div>
+  <div id="gauge-panel" class="gauge-panel" hidden aria-label="ゲージ履歴">
+    <div class="gauge-panel-card">
+      <div class="panel-head"><span>ゲージ履歴 <small>Gauge History</small></span><button id="gauge-close" type="button" aria-label="閉じる">×</button></div>
+      <div class="gauge-legend" id="gauge-legend"></div>
+      <canvas id="gauge-canvas" class="gauge-chart-canvas" width="880" height="320"></canvas>
+    </div>
+  </div>
+  <script src="/view/app.js"></script>
+</body>
+</html>

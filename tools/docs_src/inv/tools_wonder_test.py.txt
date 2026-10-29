@@ -1,0 +1,20 @@
+# tools\wonder_test.py  (107 lines)
+
+DOCSTRING:
+Questions about him without the model: the gates, forming (stubbed
+call), the intent's candidates, asking, and what his answer does to a
+belief / to attachment / to curiosity. On a copy of the save.
+
+    python tools/wonder_test.py
+
+DEFS:
+def main(): 
+
+CONFIG SECTIONS: state.gauges
+KV READ: 
+KV WRITE: questions, wonder_counts, wonder_last_ts, wonder_seed
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

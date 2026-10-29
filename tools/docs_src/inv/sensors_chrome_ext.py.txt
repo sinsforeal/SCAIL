@@ -1,0 +1,18 @@
+# sensors\chrome_ext.py  (90 lines)
+
+DOCSTRING:
+
+
+DEFS:
+def _enable_developer_mode(profile_dir): Set extensions.ui.developer_mode in the profile. No-op if the profile has not been created yet (Chrome would overwrite it on first run).
+def apply(options, ext_dir, profile_dir, log): Add the extension to a ChromeOptions. Returns True if it was applied. Call before the driver is created, while Chrome is not holding the profile. Any failure is non-fatal: the scrape just runs without it.
+def settle(driver, log): Close anything the browser opened for itself and leave exactly one tab.  The first launch after an extension becomes enabled opens its own pages -- uBlock showed three tabs on that launch and one on every launch after. T
+
+CONFIG SECTIONS: 
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: 
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

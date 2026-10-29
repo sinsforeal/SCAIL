@@ -1,0 +1,29 @@
+# sensors\vision.py  (328 lines)
+
+DOCSTRING:
+
+
+DEFS:
+class Vision: 
+    __init__(config, store): 
+    _token(): A live access token, refreshed when it is within a minute of expiry.
+    _budget_ok(date_str): A hard daily ceiling on calls, so a runaway loop cannot bill the day away.
+    _spent(date_str): Calls made on `date_str` so far: from the save when there is one.
+    _charge(date_str): One call made: written to the save the moment it happens.
+    _back_off(why): Wait longer each time, up to `backoff_max_seconds`, and say so once rather than on every attempt.
+    _recovered(): 
+    available(date_str, reason): Is a call worth making at all? The harvest asks before it opens a browser and downloads images it has no way to describe.  `reason="share"` is the one exemption: a picture that is about to be handed to another person is 
+    fetch_image(url): Download one image. Returns (mime, bytes) or None. Used for X media, which is public on pbs.twimg.com and needs no session.
+    look(images, instruction, date_str, label, max_tokens, reason, about, _retry): images: list of (mime, bytes). Returns the model's text, or None.  Gemini 3.x always spends some tokens thinking, so max_output_tokens has to cover thinking AND the answer or the answer comes back empty -- the same trap 
+    describe_photo(image, caption, date_str): A picture he sent her over Telegram. One or two sentences of what is in it, written as what she sees, not as an image-captioning exercise.
+    tag_post_images(images, text, author, date_str, reason, about): What the picture IS, as tags rather than a sentence.  Prose was fine for one read and useless afterwards: it could not be counted, compared, or matched against his own image activity, which is already classified in booru
+    describe_post_images(images, text, author, date_str): The pictures on one X post she stopped at.
+
+CONFIG SECTIONS: read_text, vision
+KV READ: 
+KV WRITE: 
+TABLES: 
+LOG TAGS: vision
+PROMPTS: 
+LLM ROLES: 
+OPS COMMANDS: 

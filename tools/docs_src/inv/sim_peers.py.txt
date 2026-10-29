@@ -1,0 +1,109 @@
+# sim\peers.py  (884 lines)
+
+DOCSTRING:
+Two running characters, talking to each other.
+
+Each character is her own process with her own save and her own model, and
+the hub they both register with is the relay: `Channel.peer_send` puts a
+message in the other one's mailbox, `Channel.peer_updates` reads what has
+been put in hers. Nothing here knows anything about the other process --
+not her config, not her save, not her schedule, not whether she is awake.
+What arrives is words and a hub id, and that is deliberately all: a
+character learns a peer the way she learns him, by being told.
+
+**This is not the path his messages take.** `App.poll_inbound` runs the
+relationship with him -- attachment, the primitives, foresight, the
+expectations of him, the questions she asked him, whether she was holding
+out, the state of a rupture -- and none of that is true of somebody else's
+message. A peer message reaches her mind through exactly two doors: her
+history (`sim/thread.py`, as a room of its own) and, once, the company a
+conversation is (`State.talk_relief` at the close).
+
+**Code decides when, the model decides what.** Four bounds, all hers, all
+deterministic, so two bots cannot run away with each other and neither has
+to trust the other to stop: her turns in one conversation (`max_turns`),
+what she sends in a day (`max_per_day`), a floor under two sends of hers
+(`min_gap_seconds`) on top of a reading-and-typing delay taken from the
+length of what she is answering, and a window with her phone access
+(`open_from_hm`..`open_to_hm`, and the scene's `phone_access`).
+
+Nobody is named here. The contacts are `peer_talk.contacts` in her own
+config: the peer's hub id, what THIS character calls her, and the language
+of the room. Config, never code, for the same reason
+`character.writes_to_him` is (docs/peer-talk.md).
+
+The store:
+
+  kv `peer_live`     the conversation in flight, or None
+  kv `peer_chat`     the closed ones, newest last, capped at `keep`
+  kv `peer_last_id`  the hub cursor, so nothing is delivered twice
+  kv `peer_counts`   {date: what she sent that day}
+  kv `peer_rooms`    the rooms she is a member of but does not own, and the
+                     turns of each she has been sent
+
+**Her record of a room has three readers.** The call that writes her next turn
+in it (below), her own history (`sim/thread.py _records`, so a room she took
+part in is still there between rounds rather than only inside the one call),
+and the group view on his phone (`channels/talkapp_bot.py _group`, so what he
+sees of her friends' chat is what she has actually been shown). Until
+2026-09-06 it had one, and her six turns in the group chat that evening left no
+trace in her history and drew nothing on his screen.
+
+**A message may be a room rather than a conversation.** The same mailbox
+carries turns in a room two or more of them are in -- the group chat, or a
+two-person exchange -- which is how somebody who used to be written by
+another process comes to say her own words (`sim/rooms.py`,
+docs/peer-talk.md). One rule tells the two apart and it is on the message:
+a message carrying a `room` is a turn in that room, and everything else is
+one character writing to another. A room needs no contact row, because the
+people in it are people in her world rather than somebody she was told
+about.
+
+DEFS:
+class Peers: Her side of it. One instance per character, built by the runtime for
+    __init__(config, llm, store, clock, channel, state, persona, thread, ledger): 
+    c(): 
+    on(): 
+    reads_mailbox(): Whether the mailbox is looked at this pass at all.  Peer talk being on is one reason. The other is that somebody in her own world runs as her own process: her turns come back through this same mailbox and she is not a co
+    contacts(): [{id, name, language}] from her own config, malformed rows dropped.
+    contact(cid): 
+    live(): 
+    _me(): 
+    _mine(rec): 
+    _sent_today(): 
+    _read_delay(text): She read it and then typed. The same shape the cast exchange uses: the length of what she is answering, plus a pause.
+    _open_record(who, ts): 
+    poll(): What another character has said to her since the last look. Each message is written to the save before the cursor moves past it: a message counted and then lost is a message nobody can see was lost.
+    _receive(who, text, ts): 
+    _in_window(): 
+    _phone_away(scene): 
+    _cannot_send(scene, rec): Why she cannot send anything this pass, or "" when she can.
+    _quiet_for(): Minutes since the last peer message in EITHER direction.
+    tick(scene): Once per pass: put on the hub whatever a room has waiting, read the mailbox, answer if it is her turn and she can, otherwise consider opening one.  The room queue is emptied whether or not she has a peer to write to: thi
+    _maybe_open(scene): 
+    _system(who, cue): ONE assembly for every call that writes her words (`persona.system_for`): the friend arm -- the same person she is with him, byte for byte, without `style.md`, which is how she writes to HIM -- and then this call's own t
+    _user(who, rec, opening, scene): 
+    _write(rec, scene, opening): 
+    _room_message(m, env): 
+    _rooms_seen(): 
+    _rooms_today(): What she has said today in rooms somebody else owns. Its own counter: the peer conversation's day budget is for conversations she has of her own, and a room is not one of those.
+    _pocket_block(): (the lines, the ids): things of her OWN she could bring up today.  Built once a day from her own material and never from anybody else's roster (`sim/pocket.py`): in a world she does not keep, the people are not hers and 
+    _pocket_used(ids): Marked after the call came back with words, never before it.
+    _room_silent(frm, env, why): The room asked and she is saying nothing. Handed back at once, with the reason in her own log, so the room settles rather than waiting out its deadline for an answer that has already been given (`sim/rooms.SILENT`). A ga
+    _room_file(env, m, turns): What she has been told of a room she is in. Only this: the words, who said them, when, and on which day. No plan, no record of anybody's, no graph -- she learns a room the way she learns him, by what arrives.  Every row 
+    _room_reply(m, env): The room is waiting for her words. Her own persona writes them -- the same assembly as every other call that writes her words, the friend arm -- and they go back to whoever asked, as one more turn in that room.
+    _room_user(env, rec, m): What she is told about the room: where she is, who is in it with her, what has been said, and what is being waited for. Her own carried block rides after the thread, as it does in every other room.
+    _finish(rec, why): 
+    flush(): The day is being told: a conversation still open is part of it.
+    _rooms_report(): The rooms she is in that somebody else owns, and the ones this process owns with somebody in them who writes her own turns.
+    _pocket_report(): 
+    report(): 
+
+CONFIG SECTIONS: character, peer_talk, prompt_text, read_text
+KV READ: peer_chat, peer_counts, peer_last_id, peer_live, peer_rooms, room_counts
+KV WRITE: peer_chat, peer_last_id, peer_live, peer_rooms
+TABLES: 
+LOG TAGS: peer, pocket, room, said
+PROMPTS: peer_reply, persona
+LLM ROLES: peer_reply
+OPS COMMANDS: 
