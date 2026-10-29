@@ -1,0 +1,445 @@
+{
+  "made": "2026-10-29T15:44:37",
+  "total_bytes": 10655605,
+  "packaging": "bzombie/seeds/ in the repo",
+  "files": [
+    {
+      "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/S/start/save.db",
+      "size": 135168,
+      "sha256": "685c451c014c27d7891dcf0c7d06a354f5084ef3304c86b84e63d2cd03be8d41",
+      "tier": "A",
+      "source": "var/runs/gr2_b_s3_momoka/snapshots/S/start/save.db",
+      "run": "gr2_b_s3_momoka",
+      "snapshot": "start",
+      "provenance": "fresh compose: make_run.build writes config and prompts and no save (make_run.py:282-441, db_path line 441); the arm boots an empty save.db; harness 'start' snapshot = sqlite backup of it (control.py:656). 0 messages, 13 default kv rows.",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s3.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 0,
+        "bench_seed_marker": false,
+        "predictability_hers": null,
+        "msg_ts_range": [
+          "1969-12-31T19:00",
+          "1969-12-31T19:00"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 0,
+        "scene_branches": 0,
+        "scratch_br_folders": 0
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/S/start/arm.json",
+          "size": 64,
+          "sha256": "1278b51e3d3a851124dcf0ab080dcd01328912011e71df58fb41660005173ef5",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/harness/start.json",
+          "size": 113,
+          "sha256": "ea95717338290c4f0714b0b2d8c6c71b0990e2a550a91a06ddc0d8eb9058044c",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/S/day1_end/save.db",
+      "size": 1048576,
+      "sha256": "44ad7f194c488104431dde1eee4f3f6d1923a84e09bf3d54af514ebf052e4ff7",
+      "tier": "B",
+      "source": "var/runs/gr2_b_s3_momoka/snapshots/S/day1_end/save.db",
+      "run": "gr2_b_s3_momoka",
+      "snapshot": "day1_end",
+      "provenance": "synthetic sim days on a fresh compose save: base run gr2_b_s3_momoka (new --like cl3v2_s*_momoka copies config only, cli.py:58-98), his lines scripted verbatim from gr_s3.jsonl (a deepseek sim-him transcript, style profile only, sim_him/him.py), env events written by a Claude call per day (env/writer.py), her lines from the arm. Snapshot day-end by control.py:656. No bench-seed primitives (predictability_hers 0.0, bench_seed.py applies to branch copies only).",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s3.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 69,
+        "bench_seed_marker": false,
+        "predictability_hers": 0.0,
+        "msg_ts_range": [
+          "2026-10-25T18:00",
+          "2026-10-26T10:20"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 167,
+        "scene_branches": 1,
+        "scratch_br_folders": 167
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/S/day1_end/arm.json",
+          "size": 65,
+          "sha256": "26cf471c32063e4c93584cc305679bbc51913fd612705c1905b2500460cf814a",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/harness/day1_end.json",
+          "size": 134,
+          "sha256": "85653315215af8dabad526c7160a6065ef0de7f7bd69f50632b9157d164eca15",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/S/day2_end/save.db",
+      "size": 2207744,
+      "sha256": "6eb7f3840055690c221125038a9bfb60b1aad8c11d0b98c3fcda101b22b65863",
+      "tier": "B",
+      "source": "var/runs/gr2_b_s3_momoka/snapshots/S/day2_end/save.db",
+      "run": "gr2_b_s3_momoka",
+      "snapshot": "day2_end",
+      "provenance": "synthetic sim days on a fresh compose save: base run gr2_b_s3_momoka (new --like cl3v2_s*_momoka copies config only, cli.py:58-98), his lines scripted verbatim from gr_s3.jsonl (a deepseek sim-him transcript, style profile only, sim_him/him.py), env events written by a Claude call per day (env/writer.py), her lines from the arm. Snapshot day-end by control.py:656. No bench-seed primitives (predictability_hers 0.0, bench_seed.py applies to branch copies only).",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s3.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 152,
+        "bench_seed_marker": false,
+        "predictability_hers": 0.0,
+        "msg_ts_range": [
+          "2026-10-25T18:00",
+          "2026-10-27T10:55"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 153,
+        "scene_branches": 0,
+        "scratch_br_folders": 153
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/S/day2_end/arm.json",
+          "size": 66,
+          "sha256": "c7bd72fef224d94827f8c6278552cc9ba487665492eeb03b32767bf032a3fc95",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr2_b_s3_momoka/snapshots/harness/day2_end.json",
+          "size": 135,
+          "sha256": "fc42de2fd59679ad80078704c9ebfb85655456e6e710ea9ebff9cfad58fcf533",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/S/start/save.db",
+      "size": 135168,
+      "sha256": "685c451c014c27d7891dcf0c7d06a354f5084ef3304c86b84e63d2cd03be8d41",
+      "tier": "A",
+      "source": "var/runs/gr2_b_s4_momoka/snapshots/S/start/save.db",
+      "run": "gr2_b_s4_momoka",
+      "snapshot": "start",
+      "provenance": "fresh compose: make_run.build writes config and prompts and no save (make_run.py:282-441, db_path line 441); the arm boots an empty save.db; harness 'start' snapshot = sqlite backup of it (control.py:656). 0 messages, 13 default kv rows.",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s4.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 0,
+        "bench_seed_marker": false,
+        "predictability_hers": null,
+        "msg_ts_range": [
+          "1969-12-31T19:00",
+          "1969-12-31T19:00"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 0,
+        "scene_branches": 0,
+        "scratch_br_folders": 0
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/S/start/arm.json",
+          "size": 64,
+          "sha256": "1278b51e3d3a851124dcf0ab080dcd01328912011e71df58fb41660005173ef5",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/harness/start.json",
+          "size": 113,
+          "sha256": "ea95717338290c4f0714b0b2d8c6c71b0990e2a550a91a06ddc0d8eb9058044c",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/S/day1_end/save.db",
+      "size": 1253376,
+      "sha256": "ff3f0760689568cf739052b53f312acdd0d9c3e536f5e3ea8b56ed0da9026e09",
+      "tier": "B",
+      "source": "var/runs/gr2_b_s4_momoka/snapshots/S/day1_end/save.db",
+      "run": "gr2_b_s4_momoka",
+      "snapshot": "day1_end",
+      "provenance": "synthetic sim days on a fresh compose save: base run gr2_b_s4_momoka (new --like cl3v2_s*_momoka copies config only, cli.py:58-98), his lines scripted verbatim from gr_s4.jsonl (a deepseek sim-him transcript, style profile only, sim_him/him.py), env events written by a Claude call per day (env/writer.py), her lines from the arm. Snapshot day-end by control.py:656. No bench-seed primitives (predictability_hers 0.0, bench_seed.py applies to branch copies only).",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s4.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 95,
+        "bench_seed_marker": false,
+        "predictability_hers": 0.0,
+        "msg_ts_range": [
+          "2026-10-25T18:00",
+          "2026-10-26T10:50"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 157,
+        "scene_branches": 0,
+        "scratch_br_folders": 162
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/S/day1_end/arm.json",
+          "size": 65,
+          "sha256": "05c9bd6743bedc2fd3d8af6ed03c2afd082026d222c09dbda41997c51e2fa126",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/harness/day1_end.json",
+          "size": 135,
+          "sha256": "7aed2428c24c5651948dc20ae35224e6a8c051d64e0861678d69d194b945809c",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/S/day2_end/save.db",
+      "size": 2408448,
+      "sha256": "950f9bdd637b5657b6f47f816550da133243f731f3bc784943f3e6efd9cbc8fd",
+      "tier": "B",
+      "source": "var/runs/gr2_b_s4_momoka/snapshots/S/day2_end/save.db",
+      "run": "gr2_b_s4_momoka",
+      "snapshot": "day2_end",
+      "provenance": "synthetic sim days on a fresh compose save: base run gr2_b_s4_momoka (new --like cl3v2_s*_momoka copies config only, cli.py:58-98), his lines scripted verbatim from gr_s4.jsonl (a deepseek sim-him transcript, style profile only, sim_him/him.py), env events written by a Claude call per day (env/writer.py), her lines from the arm. Snapshot day-end by control.py:656. No bench-seed primitives (predictability_hers 0.0, bench_seed.py applies to branch copies only).",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s4.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 164,
+        "bench_seed_marker": false,
+        "predictability_hers": 0.0,
+        "msg_ts_range": [
+          "2026-10-25T18:00",
+          "2026-10-27T10:45"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 153,
+        "scene_branches": 0,
+        "scratch_br_folders": 153
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/S/day2_end/arm.json",
+          "size": 66,
+          "sha256": "447adb808005fe52e726dac5682187990f078dec6883a5e0ad685e4e809dcedb",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr2_b_s4_momoka/snapshots/harness/day2_end.json",
+          "size": 135,
+          "sha256": "40c0dbdc66b6fe37dbe3a54ccb7cac1171d54c47f327732702e0356c533b0f4b",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/S/start/save.db",
+      "size": 135168,
+      "sha256": "685c451c014c27d7891dcf0c7d06a354f5084ef3304c86b84e63d2cd03be8d41",
+      "tier": "A",
+      "source": "var/runs/gr_b_s5_momoka/snapshots/S/start/save.db",
+      "run": "gr_b_s5_momoka",
+      "snapshot": "start",
+      "provenance": "fresh compose: make_run.build writes config and prompts and no save (make_run.py:282-441, db_path line 441); the arm boots an empty save.db; harness 'start' snapshot = sqlite backup of it (control.py:656). 0 messages, 13 default kv rows.",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s5.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 0,
+        "bench_seed_marker": false,
+        "predictability_hers": null,
+        "msg_ts_range": [
+          "1969-12-31T19:00",
+          "1969-12-31T19:00"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 0,
+        "scene_branches": 0,
+        "scratch_br_folders": 0
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/S/start/arm.json",
+          "size": 64,
+          "sha256": "1278b51e3d3a851124dcf0ab080dcd01328912011e71df58fb41660005173ef5",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/harness/start.json",
+          "size": 113,
+          "sha256": "ea95717338290c4f0714b0b2d8c6c71b0990e2a550a91a06ddc0d8eb9058044c",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/S/day1_end/save.db",
+      "size": 1097728,
+      "sha256": "cfa1a1336f5b91d2d53aa23bbce0ab44caad7b96ef3cd2e3f30c67343bc3bac9",
+      "tier": "B",
+      "source": "var/runs/gr_b_s5_momoka/snapshots/S/day1_end/save.db",
+      "run": "gr_b_s5_momoka",
+      "snapshot": "day1_end",
+      "provenance": "synthetic sim days on a fresh compose save: base run gr_b_s5_momoka (new --like cl3v2_s*_momoka copies config only, cli.py:58-98), his lines scripted verbatim from gr_s5.jsonl (a deepseek sim-him transcript, style profile only, sim_him/him.py), env events written by a Claude call per day (env/writer.py), her lines from the arm. Snapshot day-end by control.py:656. No bench-seed primitives (predictability_hers 0.0, bench_seed.py applies to branch copies only).",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s5.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 81,
+        "bench_seed_marker": false,
+        "predictability_hers": 0.0,
+        "msg_ts_range": [
+          "2026-10-25T18:00",
+          "2026-10-26T10:30"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 157,
+        "scene_branches": 0,
+        "scratch_br_folders": 158
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/S/day1_end/arm.json",
+          "size": 65,
+          "sha256": "6483e5c975b0463b40655d1629267561c42bd7751cdaba789459690ac034b934",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/harness/day1_end.json",
+          "size": 134,
+          "sha256": "d6622e551bb45cb1ce1c33c02a30e07408cecd51fe250a9384ecbc8537d5850e",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/S/day2_end/save.db",
+      "size": 2097152,
+      "sha256": "782b982927a3088148ab13952e445402c7e0916be9fdf4e535caff7209783310",
+      "tier": "B",
+      "source": "var/runs/gr_b_s5_momoka/snapshots/S/day2_end/save.db",
+      "run": "gr_b_s5_momoka",
+      "snapshot": "day2_end",
+      "provenance": "synthetic sim days on a fresh compose save: base run gr_b_s5_momoka (new --like cl3v2_s*_momoka copies config only, cli.py:58-98), his lines scripted verbatim from gr_s5.jsonl (a deepseek sim-him transcript, style profile only, sim_him/him.py), env events written by a Claude call per day (env/writer.py), her lines from the arm. Snapshot day-end by control.py:656. No bench-seed primitives (predictability_hers 0.0, bench_seed.py applies to branch copies only).",
+      "facts": {
+        "him_via": "script",
+        "him_script": "gr_s5.jsonl",
+        "character": "momoka",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 141,
+        "bench_seed_marker": false,
+        "predictability_hers": 0.0,
+        "msg_ts_range": [
+          "2026-10-25T18:00",
+          "2026-10-27T08:52"
+        ]
+      },
+      "used_by": {
+        "branches_in_base_run": 153,
+        "scene_branches": 0,
+        "scratch_br_folders": 153
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/S/day2_end/arm.json",
+          "size": 66,
+          "sha256": "8fce97848d728dfc935c9e3b2c699789a5a67210176dc820192e381a37741804",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/gr_b_s5_momoka/snapshots/harness/day2_end.json",
+          "size": 135,
+          "sha256": "1588840d76ca27140897d8d7cae373ae1bede869b702a3dc6a069097825f1e42",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    },
+    {
+      "path": "bzombie/seeds/cl3v2_s_tomoe/snapshots/S/start/save.db",
+      "size": 135168,
+      "sha256": "5d0a9b6256c786a931d2c2bdc46723948ef518d6e323e5621ca3b22fb3dfa8c8",
+      "tier": "A",
+      "source": "var/runs/cl3v2_s_tomoe/snapshots/S/start/save.db",
+      "run": "cl3v2_s_tomoe",
+      "snapshot": "start",
+      "provenance": "fresh compose: make_run.build writes config and prompts and no save (make_run.py:282-441, db_path line 441); the arm boots an empty save.db; harness 'start' snapshot = sqlite backup of it (control.py:656). 0 messages, 13 default kv rows.",
+      "facts": {
+        "him_via": "gateway",
+        "him_script": null,
+        "character": "tomoe",
+        "clock_start": "2026-10-26T07:00:00",
+        "messages": 0,
+        "bench_seed_marker": false,
+        "predictability_hers": null,
+        "msg_ts_range": [
+          "1969-12-31T19:00",
+          "1969-12-31T19:00"
+        ]
+      },
+      "used_by": {
+        "note": "no batch branches from a Tomoe run"
+      },
+      "sidecars": [
+        {
+          "path": "bzombie/seeds/cl3v2_s_tomoe/snapshots/S/start/arm.json",
+          "size": 64,
+          "sha256": "1278b51e3d3a851124dcf0ab080dcd01328912011e71df58fb41660005173ef5",
+          "needle_hits": 0
+        },
+        {
+          "path": "bzombie/seeds/cl3v2_s_tomoe/snapshots/harness/start.json",
+          "size": 113,
+          "sha256": "ea95717338290c4f0714b0b2d8c6c71b0990e2a550a91a06ddc0d8eb9058044c",
+          "needle_hits": 0
+        }
+      ],
+      "leak_hits": 0,
+      "problems": []
+    }
+  ]
+}
